@@ -27,6 +27,15 @@ External API
 	BackEnd
 	
 	Views/GUI
+	
+Internal API
+
+	BackEnd
+	
+	Views/GUI
+	
+How the two will communicate? 
+
 
 ### API Example Code 
 
