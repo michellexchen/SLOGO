@@ -186,14 +186,15 @@ public class Grid {
 
 Simulation
 	Internal
-		The internal API for the Simulation sub-part is largely made up of getters/setters to fetch and 		change information about the status of each of the cells or agents on the board. We imagine that 		this information is required by other methods within the simulations to determine the next state of 		each cell. Along with determining the next state of each cell, it is important for each 		simulation to have an updateCellState() method that can be used internally to implement setting 		each cell's next state. Other internal methods are used to perform discrete functions on the 		grid, such as removing a neighbor, cloning a neighbor, or determining a specific relationship 		between cells.
+		The internal API for the Simulation sub-part is largely made up of getters/setters to fetch and change information about the status of each of the cells or agents on the board. We imagine that this information is required by other methods within the simulations to determine the next state of each cell. Along with determining the next state of each cell, it is important for each 		simulation to have an updateCellState() method that can be used internally to implement setting each cell's next state. Other internal methods are used to perform discrete functions on the grid, such as removing a neighbor, cloning a neighbor, or determining a specific relationship between cells.
 	External
-		The external API for the Simulation sub-part is limited to those methods that communicate grid 		states with the visualization classes, so that they can be displayed. The distinction that we drew 		between internal and external simulation methods were those that dealt with changing individual 		cells or agents and those that passed the current status of large sets of cells, respectively. 		Some of these external methods were populateCellToActorMap() and returnTitle().
+		The external API for the Simulation sub-part is limited to those methods that communicate grid states with the visualization classes, so that they can be displayed. The distinction that we drew between internal and external simulation methods were those that dealt with changing individual cells or agents and those that passed the current status of large sets of cells, respectively. Some of these external methods were populateCellToActorMap() and returnTitle().
 
 Configuration
 	Internal
-		
+		The internal API for the configuration sub-part consists only of methods responsible for parsing the information within 	the XML document into usable formats. 
 	External
+		The external API for the configuration sub-part consists of methods used to pass the appropriate formatted XML parameters to the simulation and visualizations sub-parts for each to access.
 
 Visualization
 	Internal
