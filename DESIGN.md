@@ -34,8 +34,13 @@ External API
 	
 Internal API
 
-	BackEnd
-*Turtle object needs:
+BackEnd
+
+* LogoPiece
+
+	This will be an abstract class that must be extended by each of our piece. This will have a .animate() method that the object calls on itself so that there is no need for a middle man or Graphics class. This way we are decreasing what needs to go on in the front with regards to the backend.
+
+*Turtle object needs (extends our LogoPiece):
 
 	1. It's direction
 	2. towardsXY turns the turtle to face the xy coordinate
