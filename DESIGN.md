@@ -26,11 +26,13 @@ External API
 	
 	BackEnd 
 *Back end sees an exception with the command and sends the Exception back to the GUI
+
 	
 	Views/GUI
-*Takes a list of objects
+*Takes a list of objects passed from the back end
 *Each object will be drawn on the GUI and it contains flags and variables that determine what the object is and what it looks like
 *The view takes a list of objects so that it doesn't matter what or how many objects get passed to the graphics, it can read them regardless 
+*.update() --> takes the intermediary steps between the beginning state and the end state
 	
 Internal API
 
