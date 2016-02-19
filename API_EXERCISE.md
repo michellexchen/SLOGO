@@ -1,3 +1,34 @@
+API Critique - Team 18 (18FEB16)
+===================
+
+Fundamentals of API Design
+External/Internal
+Access modifier (public, private, protected, and package)
+
+----------
+Use of Generic Return Types
+-----------------------
+When passing in/returning objects, APIs want to make them as generic as possible.
+
+ - In a number of instances, we noticed that public methods return HashMap and ArrayList. A better design conforming to the principles discussed in class would be Collections.
+
+
+
+Methods that could be hidden
+-----------------------
+There were a few methods that you want to keep hidden inside classes that are not to be used by outer classes/methods.
+
+ - Under MainDriver, there were three methods that run Animation, and those methods could have been made private.
+
+
+6 APIs analyzed
+-------------------
+1-3) public void playAnimation () method: This method runs the Animation inside the class so we feel that it would have been better private.
+
+4-6) public void pauseAnimation () method: This method pauses the given Animation object and it would have been better if it was made private.
+
+
+
 Aaron Newman
 Michelle Chen
 Hunter Lee
