@@ -1,5 +1,11 @@
 API Critique - Team 18 (18FEB16)
 ===================
+Aaron Newman
+Michelle Chen
+Hunter Lee
+Mario Oliver
+Adam Tache
+
 
 Fundamentals of API Design
 External/Internal
@@ -29,13 +35,8 @@ There were a few methods that you want to keep hidden inside classes that are no
 
 
 
-Aaron Newman
-Michelle Chen
-Hunter Lee
-Mario Oliver
-Adam Tache
 
-API Exercise - 2/18/16
+
 
 package src.controller;
 public class CellIterator implements Iterable<Cell> { 
