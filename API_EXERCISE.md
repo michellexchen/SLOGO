@@ -6,6 +6,7 @@ Adam Tache
 
 API Exercise - 2/18/16
 
+```java
 package src.controller;
 public class CellIterator implements Iterable<Cell> { 
     public CellIterator(Grid grid) 
@@ -13,6 +14,7 @@ public class CellIterator implements Iterable<Cell> {
     public boolean hasNext() 
    	public Cell next() 
 }
+```
  
 package src.controller;
  public interface EventListener {
@@ -183,6 +185,7 @@ public class Grid {
     public void draw(Canvas canvas, HashMap<Integer, Color> myColorMap) p
     public String toString() p
 }
+```
 
 Simulation
 	Internal
