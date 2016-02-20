@@ -233,5 +233,7 @@ Configuration
 
 Visualization
 	Internal
+		Internally we see that the Grid class has a closed action method that probably uses some of the getters and setters  in order to draw the grid on the GUI. This method is however repeated in Display class. It seems that some of the methods should not be public that are public.
 	External
+		The way that the software communicates with the Visualization API's is through a bunch of getters and setters. 
  
