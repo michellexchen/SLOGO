@@ -23,7 +23,7 @@ User Interface
 -------------------
 When the user runs the program, the first screen they see will have a dropdown menu for them to choose their language, and a button for them to upload their turtle image. 
 
-![firstscreen](https://lh3.googleusercontent.com/-DyZAk5ID44o/Vsol7HHxAaI/AAAAAAAABys/RaWrU5YPAsY/s0/IMG_0357.JPG "select")
+![startscreen](https://lh3.googleusercontent.com/-r3kpd8pERO0/VspMSY9Mb2I/AAAAAAAAB0E/cz8HANkJa3c/s0/12443923_10209178229038072_1817189894_o.jpg "startscreen")
 
 Once they've selected a language and uploaded their turtle image, they are taken to GUI. They can select the project that they're working on from the dropdown menu (all others are hidden), see their command history, click the help button to direct them to an HTML page with a resource guide, and enter in their command. Once they hit run the program will interpret their command and draw on the screen. To the left of the screen the user will be able to track his/her variables, and customize their environment (background color, pen color).
 
