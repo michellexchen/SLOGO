@@ -96,3 +96,6 @@ Filler
 Team Responsibilities
 -----------------
 For Front-End, Hunter will be building View and Projects. View is the master-view class where projects, and additional visualization features are housed. The Project class contains turtles, canvas, history, and possibly new commands. Michelle will be in charge of creating subclass elements such as Turtle, Canvas, History, HTML Help, and Languages.
+
+Aaron is a member of the back-end subteam. His responsibilities will primarily relate to using the parsed command trees, developed by Adam, to update the state of the turtle (internal API). Additionally, he will be responsible for communicating the updated state of the objects on the screen to the front-end (external API) in a ready-to-use format, such as a list of character objects. The classes that correspond to these responsibilities include character, turtle and state.
+
