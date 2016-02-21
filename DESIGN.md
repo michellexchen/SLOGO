@@ -10,7 +10,7 @@ Filler (Michelle)
 
 Design Overview
 -----------------------
-![UML Diagram](https://github.com/duke-compsci308-spring2016/slogo_team08/blob/master/UML_frontend.png?raw=true)
+![UML Diagram](https://github.com/duke-compsci308-spring2016/slogo_team18/blob/master/UML_frontend.png?raw=true)
 
 View is the master-view that keeps track of a list of projects. Projects are like workspaces—different projects that the user can work on. It is named after Eclipse IDE’s projects. A project contains a list of Turtles, a Canvas object, and History, and customCommands and possibly more. myTurtles variable is actually a List<Turtle>--UML Lab program was buggy so it’s shown as of Turtle. The back-end and the front-end communicate through the list of Turtles.
 
