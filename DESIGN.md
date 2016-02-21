@@ -1,3 +1,65 @@
+SLogo: Design Document (Team 18)
+===================
+
+
+----------
+Introduction
+-----------------------
+Filler (Michelle)
+
+
+Design Overview
+-----------------------
+Filler
+
+
+User Interface
+-------------------
+Filler
+
+API Details
+--------------
+Filler
+
+
+API Example Code
+-------------------
+Filler
+
+Design Considerations 
+--------------
+Filler
+
+
+Team Responsibilities
+-----------------
+Filler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------
 # slogo
 Duke CompSci 308 Cell Society Project
 
