@@ -18,7 +18,15 @@ View is the master-view that keeps track of a list of projects. Projects are lik
 
 User Interface
 -------------------
-Filler
+When the user runs the program, the first screen they see will have a dropdown menu for them to choose their language, and a button for them to upload their turtle image. 
+
+![firstscreen](https://lh3.googleusercontent.com/-DyZAk5ID44o/Vsol7HHxAaI/AAAAAAAABys/RaWrU5YPAsY/s0/IMG_0357.JPG "select")
+
+Once they've selected a language and uploaded their turtle image, they are taken to GUI. They can select the project that they're working on from the dropdown menu (all others are hidden), see their command history, click the help button to direct them to an HTML page with a resource guide, and enter in their command. Once they hit run the program will interpret their command and draw on the screen. To the left of the screen the user will be able to track his/her variables, and customize their environment (background color, pen color).
+
+![UI](https://lh3.googleusercontent.com/-YX-AUE2tDiY/Vsok9Fac7PI/AAAAAAAAByU/QZDjQ_GdrqM/s0/IMG_0356.JPG "UI")
+
+In the case that the user enters a command that cannot be interpreted, a popup will show up notifying the user of their faulty input. The command will be saved in the command history and displayed in red text, and the user will be able to edit their command. The UI protects against empty data as the "Run" button will not be clickable until there is text in the command box.
 
 API Details
 --------------
