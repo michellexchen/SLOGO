@@ -37,23 +37,18 @@ Another API that the front-end is going to build is the History API. This API wo
 
 API Example Code
 -------------------
-The following is the HistoryViewer interface.
+The following is the HistoryViewer interface:
 ```
 public interface HistoryViewer<E> {
-
 	   public Region getPane();
-	   
 	   public <E> void getHistory(List<E> history);
-	   
 	   public String getClickedCommand(ActionEvent e);
 }
 ```
-And the following is a class that implements this interface.
+And the following is a class that implements this interface:
 ```
 public class CommandHistoryViewer<E> implements HistoryViewer {
-	
 	List<E> myHistory;
-
 
 	public Region getPane() {
 
@@ -76,8 +71,6 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 		return newCommand;
 	}
 
-
-
 	@Override
 	public void getHistory(List history) {
 		// TODO Auto-generated method stub
@@ -91,6 +84,8 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 		return null;
 	}}
 ```
+And this snippet of code demonstrates how each command, when parsed and processed, gets added to command history.
+
 
 Design Considerations 
 --------------
