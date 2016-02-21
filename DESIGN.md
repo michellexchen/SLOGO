@@ -34,21 +34,32 @@ API Details
 --------------
 Another API that the front-end is going to build is the History API. This API would be classified as an external API because it interacts with both the front-end and the back-end. This API supports the specification that the SLogo IDE should enable the user to see commands previously run in the environment (even better, make them directly clickable to execute). The resources it is going to use, which will be a parameter to this API, is a list of nodes (command objects) from the back-end. It returns a pane that has JavaFX Text elements inside it so that each line of test could be clicked to generate an ActionEvent that executes the same command again by sending the same command to the back-end. Because the main feature of this API is to visualize a list of things and to take in mouse click ActionEvents to notify the back-end, other additions that want to use this feature can easily extend this API. This API belongs to the front-end, and it satisfies one of our key goals of separating the back-end and the front-end. This abstracts out the idea of taking what the back-end has in data and turning it into visual JavaFX elements. Also, it aims to emulate the black-box model of hiding how things are implemented in the inside. Because it fulfills a simple purpose, it is hard to misuse, easy to use, and sufficiently powerful. So this API follows the principles of abstraction, encapsulation, and possibly inheritance (this functionality could be used by others).
 
+![umlturtle](https://lh3.googleusercontent.com/-rmL-sTkgWcs/VsoyqZqKlMI/AAAAAAAABzs/EqPcv4SP9Yk/s0/IMG_0361.jpg "uml")
+
+
+The Turtle class has five instance variables: boolean isPenDown, Image myImage Color myPenColor, double myX, double myY, double orientation. myX and myY represent turtle coordinates, and orientation is a number from [0, 2pi) corresponding to the turtle's orientation, described by an angle counterclockwise from the positive x-axis. When isPenDown is true, the turtle leaves a trail, when pen is false, it doesn't. Turtle class needs get and set methods for each instance variable.
+
+The Turtle class will have constructors and move, rotate, and togglePen functions. The goal of this API is to have an object that takes in parsed information and physically moves/updates the location of the turtle. The turtle object will start in the center of the screen but its image will be user uploaded at the launch of the program.
 
 API Example Code
 -------------------
-The following is the HistoryViewer interface:
+The following is the HistoryViewer interface.
 ```
 public interface HistoryViewer<E> {
+
 	   public Region getPane();
+	   
 	   public <E> void getHistory(List<E> history);
+	   
 	   public String getClickedCommand(ActionEvent e);
 }
 ```
-And the following is a class that implements this interface:
+And the following is a class that implements this interface.
 ```
 public class CommandHistoryViewer<E> implements HistoryViewer {
+	
 	List<E> myHistory;
+
 
 	public Region getPane() {
 
@@ -71,6 +82,8 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 		return newCommand;
 	}
 
+
+
 	@Override
 	public void getHistory(List history) {
 		// TODO Auto-generated method stub
@@ -84,8 +97,6 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 		return null;
 	}}
 ```
-And this snippet of code demonstrates how each command, when parsed and processed, gets added to command history.
-
 
 Design Considerations 
 --------------
