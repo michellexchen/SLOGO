@@ -37,7 +37,60 @@ Another API that the front-end is going to build is the History API. This API wo
 
 API Example Code
 -------------------
-Filler
+The following is the HistoryViewer interface.
+```
+public interface HistoryViewer<E> {
+
+	   public Region getPane();
+	   
+	   public <E> void getHistory(List<E> history);
+	   
+	   public String getClickedCommand(ActionEvent e);
+}
+```
+And the following is a class that implements this interface.
+```
+public class CommandHistoryViewer<E> implements HistoryViewer {
+	
+	List<E> myHistory;
+
+
+	public Region getPane() {
+
+		ScrollPane scrollDisplay = new ScrollPane();
+		Pane innerDisplay = new Pane();
+		scrollDisplay.setContent(innerDisplay);
+
+		innerDisplay.setStyle("-fx-background-color: white;");
+
+		for (E node : myHistory) {
+			innerDisplay.getChildren().add(createText(node));
+		}
+		Scene scene = new Scene(innerDisplay, 200,200);
+		return scrollDisplay;
+	}
+
+	private Text createText(E commandNode) {
+		Text newCommand = new Text(commandNode.toString());
+		// Code for ActionEvent when clicked
+		return newCommand;
+	}
+
+
+
+	@Override
+	public void getHistory(List history) {
+		// TODO Auto-generated method stub
+		myHistory = history;
+		
+	}
+
+	@Override
+	public String getClickedCommand(ActionEvent e) {
+		// TODO Auto-generated method stub
+		return null;
+	}}
+```
 
 Design Considerations 
 --------------
