@@ -5,7 +5,7 @@ SLogo: Design Document (Team 18)
 ----------
 Introduction
 -----------------------
-Filler (Michelle)
+Our team is creating an integrated development environment (IDE) that supports SLogo programs. SLogo is a simplified version of Logo, a computer programming language designed to teach programming to children. SLogo programs consist of command line prompts and user-defined functions. In this program, commands will be interpreted and executed through a graphical user interface (GUI) containing a command history and a display ground. The display ground will create a design and "draw" the user commands by moving a turtle, and the command history will display commands already run and results from executions. The primary goals of this project are to interpret/parse user commands, and execute these commands to display the results through a user interface. In terms of architecture, our program can be easily extended through adding new commands and creating user-defined functions that make new designs to be drawn by the turtle. Parsing previously defined commands, command window prints, and other menus within the program will be closed. Menus and windows can be extended but will be closed to changing previously implemented functionalities.
 
 
 Design Overview
