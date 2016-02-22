@@ -18,4 +18,34 @@ public class Turtle implements Character{
 		return myState;
 	}
 
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void rotate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void penDown() {
+		// TODO Auto-generated method stub
+	}
+
+	public void penUp() {
+		// TODO Auto-generated method stub
+	}
+
+	public void setTurtleImage() {
+		// TODO Auto-generated method stub
+	}
+
+	public void setPenColor() {
+		// TODO Auto-generated method stub
+	}
+
+	public String getName() {
+		return myName;
+	}
+
 }
