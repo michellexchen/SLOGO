@@ -1,4 +1,5 @@
 package View;
+
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -8,9 +9,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 
 public class CommandHistoryViewer<E> implements HistoryViewer {
-	
-	List<E> myHistory;
 
+	List<E> myHistory;
 
 	public Region getPane() {
 
@@ -23,7 +23,7 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 		for (E node : myHistory) {
 			innerDisplay.getChildren().add(createText(node));
 		}
-		Scene scene = new Scene(innerDisplay, 200,200);
+		Scene scene = new Scene(innerDisplay, 200, 200);
 		return scrollDisplay;
 	}
 
@@ -33,17 +33,16 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 		return newCommand;
 	}
 
-
-
 	@Override
 	public void getHistory(List history) {
 		// TODO Auto-generated method stub
 		myHistory = history;
-		
+
 	}
 
 	@Override
 	public String getClickedCommand(ActionEvent e) {
 		// TODO Auto-generated method stub
 		return null;
-	}}
+	}
+}
