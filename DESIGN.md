@@ -229,6 +229,8 @@ In order to animate the movement of the turtle such that a path could be traced 
 
 Another back-end design consideration we made was with regards to when we wanted to update the actual movement of the turtle and its states/tracing. When we learned that there was a "clear" functionality that back-end was responsible for, we had to reconsider how we were going to previously pass the updated turtle state. Previously, we were going to pass the new turtle state at the end of the command executions, but we decided to update the turtle after every execution. This way, traces can be created more efficiently to be cleared and accessed individually for the front-end.
 
+A final design consideration was made with regards to States. In order to compensate for future flexibility for future project characters, we decided to make State an interface and to implement specific States. These specific states would support possible functionality additions for different Characters to account for differences in how the states may be stored.
+
 Team Responsibilities
 -----------------
 For Front-End, Hunter will be building View and Projects. View is the master-view class where projects, and additional visualization features are housed. The Project class contains turtles, canvas, history, and possibly new commands. Michelle will be in charge of creating subclass elements such as Turtle, Canvas, History, HTML Help, and Languages.
