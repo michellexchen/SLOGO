@@ -95,6 +95,8 @@ The following is the Character interfact:
 
 ```
 public interface Character {
+	public abstract Character step(CharacterState myState);
+	public abstract CharacterState getState();
 	public abstract void move();
 	public abstract void rotate();
 	public abstract void penDown();
@@ -103,7 +105,117 @@ public interface Character {
 	public abstract void setPenColor();
 }
 ```
+And the following is a class that implements this interface:
 
+```
+public class Turtle implements Character{
+	
+	private TurtleState myState;
+	private String myName;
+	
+	public Turtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden){
+		this.myState = new TurtleState(xCoor, yCoor, penDown, direction, isHidden);
+		this.myName = myName;
+	}
+
+	public Character step(CharacterState myState) {
+		return this;
+	}
+
+	public CharacterState getState() {
+		return myState;
+	}
+
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void rotate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void penDown() {
+		// TODO Auto-generated method stub
+	}
+
+	public void penUp() {
+		// TODO Auto-generated method stub
+	}
+
+	public void setTurtleImage() {
+		// TODO Auto-generated method stub
+	}
+
+	public void setPenColor() {
+		// TODO Auto-generated method stub
+	}
+
+}
+```
+
+The following is the CharacterState interface:
+
+```
+public interface CharacterState {
+	public abstract double getXCoor();
+	public abstract double getYCoor();
+	public abstract double getDirection();
+	public abstract boolean getPenDown();
+	public abstract boolean getHidden();
+}
+```
+
+And the following is an example of a class implementing the CharacterState interface:
+
+```
+package Model;
+
+public class TurtleState implements CharacterState{
+	private double xCoor;
+	private double yCoor;
+	private boolean penDown;
+	private double direction;
+	private boolean isHidden;
+	
+	public TurtleState(double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden){
+		this.xCoor = xCoor;
+		this.yCoor = yCoor;
+		this.penDown = penDown;
+		this.direction = direction;
+		this.isHidden = isHidden;
+	}
+	
+	public void updateState(TurtleState newState){
+		xCoor = newState.getXCoor();
+		yCoor = newState.getYCoor();
+		penDown = newState.getPenDown();
+		direction = newState.getDirection();
+		isHidden = newState.getHidden();
+	}
+	
+	public double getXCoor(){
+		return xCoor;
+	}
+	
+	public double getYCoor(){
+		return yCoor;
+	}
+	
+	public boolean getPenDown(){
+		return penDown;
+	}
+	
+	public double getDirection(){
+		return direction;
+	}
+	
+	public boolean getHidden(){
+		return isHidden;
+	}
+}
+```
 
 Design Considerations 
 --------------
@@ -118,6 +230,8 @@ Because there is such an extensive list of commands that must be implemented in 
 In order to animate the movement of the turtle such that a path could be traced showing each step the turtle makes, it is necessary to split compound commands into increments. This division would avoid having to base the path solely off of the overall starting and ending positions of the object, which could be the same even for complex commands. Initially, we considered having a step() method in the back-end turtle class that would be called many times per second from the front-end using a KeyFrame class. This strategy was an intuitive first solution as many of the group members had implemented a similar algorithm for the first project. The advantage of time-based increments over command-based increments is that the object on the screen would move more fluidly across the screen. We determined that the added implementation complexity of KeyFrame animation, especially in terms of communication between the front-end and back-end, was not worth fluid motion, since we do not anticipate this being a requirement. Incrementing based on individual commands also became a clearer alternative after deciding that all commands would be broken down into their individual components. In this way, tracing out a circle could be accomplished through tracing each of the incremental forward-turn commands that make up the overall motion. This strategy requires minimal additional implementation details.
 
 Another back-end design consideration we made was with regards to when we wanted to update the actual movement of the turtle and its states/tracing. When we learned that there was a "clear" functionality that back-end was responsible for, we had to reconsider how we were going to previously pass the updated turtle state. Previously, we were going to pass the new turtle state at the end of the command executions, but we decided to update the turtle after every execution. This way, traces can be created more efficiently to be cleared and accessed individually for the front-end.
+
+A final design consideration was made with regards to States. In order to compensate for future flexibility for future project characters, we decided to make State an interface and to implement specific States. These specific states would support possible functionality additions for different Characters to account for differences in how the states may be stored.
 
 Team Responsibilities
 -----------------
