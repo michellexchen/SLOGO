@@ -84,7 +84,8 @@ public class CommandHistoryViewer<E> implements HistoryViewer {
 	public String getClickedCommand(ActionEvent e) {
 		// TODO Auto-generated method stub
 		return null;
-	}}
+	}
+}
 ```
 And this snippet of code demonstrates how each command, when parsed and processed, gets added to command history.
 
