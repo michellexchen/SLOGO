@@ -39,5 +39,6 @@ public class MainDriver extends Application {
 
 	private void createBackend() {
 		Turtle ogTurt = new Turtle("OG", VIEW_WIDTH / 2, VIEW_HEIGHT / 2, true, 0, false);
+		myRoot.getChildren().add(ogTurt.getTurtle());
 	}
 }

@@ -1,5 +1,8 @@
 package Model;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 public class Turtle implements Character {
 
 	private TurtleState myState;
@@ -9,6 +12,7 @@ public class Turtle implements Character {
 	private double yCoor;
 	private double direction;
 	private boolean isHidden;
+	private static final int TURTSIZE = 50;
 
 	public Turtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) {
 		this.myState = new TurtleState(xCoor, yCoor, penDown, direction, isHidden);
@@ -62,6 +66,12 @@ public class Turtle implements Character {
 
 	public String getName() {
 		return myName;
+	}
+
+	public Rectangle getTurtle() {
+		Rectangle rec = new Rectangle(xCoor, yCoor, TURTSIZE, TURTSIZE);
+		rec.setFill(Color.BLACK);
+		return rec;
 	}
 
 }
