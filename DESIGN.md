@@ -104,3 +104,4 @@ For Front-End, Hunter will be building View and Projects. View is the master-vie
 
 Aaron is a member of the back-end subteam. His responsibilities will primarily relate to using the parsed command trees, developed by Adam, to update the state of the turtle (internal API). Additionally, he will be responsible for communicating the updated state of the objects on the screen to the front-end (external API) in a ready-to-use format, such as a list of character objects. The classes that correspond to these responsibilities include character, turtle and state.
 
+Adam is also a member of the back-end subteam and is working toward the creation of the Command tree, parsing the text commands, and interpreting and executing the commands. He is responsible for working with classes such as MainDriver, CommandTree, and individual command classes.
