@@ -95,6 +95,8 @@ The following is the Character interfact:
 
 ```
 public interface Character {
+	public abstract Character step(CharacterState myState);
+	public abstract CharacterState getState();
 	public abstract void move();
 	public abstract void rotate();
 	public abstract void penDown();
@@ -157,11 +159,11 @@ The following is the CharacterState interface:
 
 ```
 public interface CharacterState {
-	public double getXCoor();
-	public double getYCoor();
-	public double getDirection();
-	public boolean getPenDown();
-	public boolean getHidden();
+	public abstract double getXCoor();
+	public abstract double getYCoor();
+	public abstract double getDirection();
+	public abstract boolean getPenDown();
+	public abstract boolean getHidden();
 }
 ```
 
