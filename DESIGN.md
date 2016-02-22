@@ -96,6 +96,7 @@ Design Considerations
 --------------
 A big external design decision that we made was to use a CharacterContainer class that contains a list of Character interfaces. Turtle implements the Character interface, so if there happened to be different kinds of objects, they could be included in the list (polymorphism). The CharacterContainer is unique to each Project and will provide a getter method so that both front-end and back-end could access the list. This defines the interaction between front and back-ends. Alternate designs include passing a list of states back and forth.
 
+Another design consideration we had was with error checking. We initially had the user pressing the enter key to send the command to the backend, but then switched over to pressing a "run" button that isn't clickable until the user has typed something into the console to avoid sending the backend several empty strings.
 
 Team Responsibilities
 -----------------
