@@ -10,17 +10,20 @@ Our team is creating an integrated development environment (IDE) that supports S
 
 Design Overview
 -----------------------
+Front-End:
 ![UML Diagram](https://github.com/duke-compsci308-spring2016/slogo_team18/blob/master/UML_frontend.png?raw=true)
 
 View is the master-view that keeps track of a list of projects. Projects are like workspaces—different projects that the user can work on. It is named after Eclipse IDE’s projects. A project contains a list of Turtles, a Canvas object, and History, and customCommands and possibly more. myTurtles variable is actually a List<Turtle>--UML Lab program was buggy so it’s shown as of Turtle. The back-end and the front-end communicate through the list of Turtles.
 
+Back-End:
+![UML Diagram](https://github.com/duke-compsci308-spring2016/slogo_team18/blob/master/UML_backend.png?raw=true)
 
 
 User Interface
 -------------------
 When the user runs the program, the first screen they see will have a dropdown menu for them to choose their language, and a button for them to upload their turtle image. 
 
-![firstscreen](https://lh3.googleusercontent.com/-DyZAk5ID44o/Vsol7HHxAaI/AAAAAAAABys/RaWrU5YPAsY/s0/IMG_0357.JPG "select")
+![startscreen](https://lh3.googleusercontent.com/-r3kpd8pERO0/VspMSY9Mb2I/AAAAAAAAB0E/cz8HANkJa3c/s0/12443923_10209178229038072_1817189894_o.jpg "startscreen")
 
 Once they've selected a language and uploaded their turtle image, they are taken to GUI. They can select the project that they're working on from the dropdown menu (all others are hidden), see their command history, click the help button to direct them to an HTML page with a resource guide, and enter in their command. Once they hit run the program will interpret their command and draw on the screen. To the left of the screen the user will be able to track his/her variables, and customize their environment (background color, pen color).
 
@@ -32,16 +35,68 @@ API Details
 --------------
 Another API that the front-end is going to build is the History API. This API would be classified as an external API because it interacts with both the front-end and the back-end. This API supports the specification that the SLogo IDE should enable the user to see commands previously run in the environment (even better, make them directly clickable to execute). The resources it is going to use, which will be a parameter to this API, is a list of nodes (command objects) from the back-end. It returns a pane that has JavaFX Text elements inside it so that each line of test could be clicked to generate an ActionEvent that executes the same command again by sending the same command to the back-end. Because the main feature of this API is to visualize a list of things and to take in mouse click ActionEvents to notify the back-end, other additions that want to use this feature can easily extend this API. This API belongs to the front-end, and it satisfies one of our key goals of separating the back-end and the front-end. This abstracts out the idea of taking what the back-end has in data and turning it into visual JavaFX elements. Also, it aims to emulate the black-box model of hiding how things are implemented in the inside. Because it fulfills a simple purpose, it is hard to misuse, easy to use, and sufficiently powerful. So this API follows the principles of abstraction, encapsulation, and possibly inheritance (this functionality could be used by others).
 
+The frontend will also be building the Character API, which is an internal API as it interacts with the front-end. This API supports the specification that the SLogo IDE should see the results of the turtle executing commands displayed visually. The resources it will use is a list of character interfaces. It doesn't return anything, but there will a trail from the movement of the turtle. The goal of this API is to have an object that takes in parsed information and physically moves/updates the location of the turtle using visual JavaFX elements. It further follows principles of encapsulation by hiding how things are implemented on the inside. The Turtle class has five instance variables: boolean isPenDown, Image myImage Color myPenColor, double myX, double myY, double orientation. myX and myY represent turtle coordinates, and orientation is a number from [0, 2pi) corresponding to the turtle's orientation, described by an angle counterclockwise from the positive x-axis. When isPenDown is true, the turtle leaves a trail, when pen is false, it doesn't. Turtle class needs get and set methods for each instance variable. The Turtle class will have constructors and move, rotate, and togglePen functions. The turtle object will start in the center of the screen but its image will be user uploaded at the launch of the program. 
 
 API Example Code
 -------------------
-Filler
+The following is the HistoryViewer interface:
+```
+public interface HistoryViewer<E> {
+	   public Region getPane();
+	   public <E> void getHistory(List<E> history);
+	   public String getClickedCommand(ActionEvent e);
+}
+```
+And the following is a class that implements this interface:
+```
+public class CommandHistoryViewer<E> implements HistoryViewer {
+	List<E> myHistory;
+
+	public Region getPane() {
+
+		ScrollPane scrollDisplay = new ScrollPane();
+		Pane innerDisplay = new Pane();
+		scrollDisplay.setContent(innerDisplay);
+
+		innerDisplay.setStyle("-fx-background-color: white;");
+
+		for (E node : myHistory) {
+			innerDisplay.getChildren().add(createText(node));
+		}
+		Scene scene = new Scene(innerDisplay, 200,200);
+		return scrollDisplay;
+	}
+
+	private Text createText(E commandNode) {
+		Text newCommand = new Text(commandNode.toString());
+		// Code for ActionEvent when clicked
+		return newCommand;
+	}
+
+	@Override
+	public void getHistory(List history) {
+		// TODO Auto-generated method stub
+		myHistory = history;
+		
+	}
+
+	@Override
+	public String getClickedCommand(ActionEvent e) {
+		// TODO Auto-generated method stub
+		return null;
+	}}
+```
+And this snippet of code demonstrates how each command, when parsed and processed, gets added to command history.
+
 
 Design Considerations 
 --------------
-Filler
+A big external design decision that we made was to use a CharacterContainer class that contains a list of Character interfaces. Turtle implements the Character interface, so if there happened to be different kinds of objects, they could be included in the list (polymorphism). The CharacterContainer is unique to each Project and will provide a getter method so that both front-end and back-end could access the list. This defines the interaction between front and back-ends. Alternate designs include passing a list of states back and forth.
 
 
 Team Responsibilities
 -----------------
 For Front-End, Hunter will be building View and Projects. View is the master-view class where projects, and additional visualization features are housed. The Project class contains turtles, canvas, history, and possibly new commands. Michelle will be in charge of creating subclass elements such as Turtle, Canvas, History, HTML Help, and Languages.
+
+Aaron is a member of the back-end subteam. His responsibilities will primarily relate to using the parsed command trees, developed by Adam, to update the state of the turtle (internal API). Additionally, he will be responsible for communicating the updated state of the objects on the screen to the front-end (external API) in a ready-to-use format, such as a list of character objects. The classes that correspond to these responsibilities include character, turtle and state.
+
