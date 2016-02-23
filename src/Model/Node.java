@@ -1,7 +1,7 @@
 package Model;
 
 
-public class Node extends CommandNode {
+public class Node implements CommandNode {
 
 	String commandType;
 	String commandName;
@@ -26,13 +26,6 @@ public class Node extends CommandNode {
 	public void intermediateCanvasUpdate() {
 		// TODO Auto-generated method stub
 
-	}
-
-
-	@Override
-	public Node grabNode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -1,6 +1,6 @@
 package Model;
 
-public class MathCommand extends CommandNode {
+public class MathCommand implements CommandNode {
 
 	public MathCommand(int noOfArgs) {
 		createThisCommandsSubNodes(noOfArgs);
@@ -22,10 +22,5 @@ public class MathCommand extends CommandNode {
 
 	}
 
-	@Override
-	public Node grabNode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
