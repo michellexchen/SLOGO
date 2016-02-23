@@ -4,15 +4,15 @@ public class TurtleCommand extends CommandNode {
 
 	Node thisCommandsTree;
 	private static final String NODETYPE = "command";
-	
+
 	public TurtleCommand(int noOfArgs, String command) {
 		createThisCommandsSubNodes(noOfArgs, command);
 	}
-	
-	public void createThisCommandsSubNodes(int noOfArgs, String command){
+
+	public void createThisCommandsSubNodes(int noOfArgs, String command) {
 		thisCommandsTree = new Node(NODETYPE, command, noOfArgs);
 	}
-	
+
 	@Override
 	public void evaluate(String myCommand) {
 		// TODO Auto-generated method stub
@@ -22,7 +22,7 @@ public class TurtleCommand extends CommandNode {
 	@Override
 	public void intermediateCanvasUpdate() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

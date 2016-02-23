@@ -15,16 +15,17 @@ public class CommandTree {
 
 	public CommandTree() {
 		commandsClass = new CommandsDataStruct();
-		//creates a root node that should no by using noOfCommands how many set of commands it needs to execute
+		// creates a root node that should no by using noOfCommands how many set
+		// of commands it needs to execute
 		root = new Node(NODETYPE, NODETYPE, noOfCommands());
 	}
-	
-	public String determineType(String command){
+
+	public String determineType(String command) {
 		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
 		return noOfArgsNType.substring(0, noOfArgsNType.indexOf(":"));
 	}
-	
-	public int determineArgs(String command){
+
+	public int determineArgs(String command) {
 		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
 		return Integer.parseInt(noOfArgsNType.substring(noOfArgsNType.indexOf(":"), noOfArgsNType.length()));
 	}
@@ -39,21 +40,22 @@ public class CommandTree {
 			String type = determineType(eachCommand);
 			int args = determineArgs(eachCommand);
 			/* get rid of if statements */
-			if(type.equals("command")){
+			if (type.equals("command")) {
 				root = new TurtleCommand(args, eachCommand);
 			}
 		}
 	}
-	
+
 	private int noOfCommands() {
 		int count = 0;
-		for(String eachCommand : currCommands) {
-			if(!isNumeric(eachCommand)) count++;
+		for (String eachCommand : currCommands) {
+			if (!isNumeric(eachCommand))
+				count++;
 		}
 		return count;
 	}
-	
-	private boolean isNumeric(String s) {  
-	    return s.matches("[-+]?\\d*\\.?\\d+");  
-	}  
+
+	private boolean isNumeric(String s) {
+		return s.matches("[-+]?\\d*\\.?\\d+");
+	}
 }

@@ -1,13 +1,13 @@
 package Model;
 
 public class TurtleQuery extends CommandNode {
-	
+
 	public TurtleQuery(int noOfArgs) {
 		createThisCommandsSubNodes(noOfArgs);
 	}
 
 	public void createThisCommandsSubNodes(int noOfArgs) {
-		
+
 	}
 
 	@Override

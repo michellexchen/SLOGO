@@ -6,15 +6,13 @@ import java.util.TreeMap;
 
 public abstract class CommandNode {
 
-	public CommandNode(){
-		
+	public CommandNode() {
+
 	}
-	
+
 	public abstract void evaluate(String myCommand);
-	
+
 	public abstract void intermediateCanvasUpdate();
 
-
-	
 	public abstract Node grabNode();
 }
