@@ -1,6 +1,6 @@
 package Model;
 
-public class TurtleCommand extends CommandNode {
+public class TurtleCommand implements CommandNode {
 
 	Node thisCommandsTree;
 	private static final String NODETYPE = "command";
@@ -25,9 +25,5 @@ public class TurtleCommand extends CommandNode {
 
 	}
 
-	@Override
-	public Node grabNode() {
-		return thisCommandsTree;
-	}
 
 }
