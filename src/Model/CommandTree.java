@@ -13,14 +13,14 @@ public class CommandTree {
 	public CommandTree(CommandNode root) {
 		this.root = root;
 	}
-	
+
 	public void traverse() {
 
 	}
-	
+
 	public void createTree(String[] commands) {
-		for(String eachCommand: commands){
-			
+		for (String eachCommand : commands) {
+
 		}
 	}
 }
