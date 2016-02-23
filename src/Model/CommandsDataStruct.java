@@ -3,9 +3,6 @@ package Model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CommandsDataStruct {
@@ -46,13 +43,13 @@ public class CommandsDataStruct {
 			instance = new CommandsDataStruct();
 		return instance;
 	}
-	
-	public String grabPossibleCommands(String command){
+
+	public String grabPossibleCommands(String command) {
 		String typeNargs = "";
-		for(Node eachCommand : commandInfo){
-			if(eachCommand.name.equals(command) || eachCommand.subname.equals(command)){
+		for (Node eachCommand : commandInfo) {
+			if (eachCommand.name.equals(command) || eachCommand.subname.equals(command)) {
 				typeNargs += eachCommand.type + ":" + eachCommand.numArgs;
-			}  
+			}
 		}
 		return typeNargs;
 	}

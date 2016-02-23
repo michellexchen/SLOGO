@@ -1,16 +1,12 @@
 package Model;
 
-public class TurtleCommand implements CommandNode {
+public class TurtleCommand extends Node {
 
 	Node thisCommandsTree;
 	private static final String NODETYPE = "command";
 
 	public TurtleCommand(int noOfArgs, String command) {
-		createThisCommandsSubNodes(noOfArgs, command);
-	}
-
-	public void createThisCommandsSubNodes(int noOfArgs, String command) {
-		thisCommandsTree = new Node(NODETYPE, command, noOfArgs);
+		super(NODETYPE, command, noOfArgs);
 	}
 
 	@Override
@@ -24,6 +20,5 @@ public class TurtleCommand implements CommandNode {
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

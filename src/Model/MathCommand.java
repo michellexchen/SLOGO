@@ -22,5 +22,4 @@ public class MathCommand implements CommandNode {
 
 	}
 
-
 }

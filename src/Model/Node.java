@@ -1,19 +1,31 @@
 package Model;
 
+import java.util.ArrayList;
 
 public class Node implements CommandNode {
 
 	String commandType;
 	String commandName;
 	int noOfChildren;
-	int[] args;
-	Node next;
+	Node mustExecuteCommands;
+	int[] commandsArgs;
 
 	public Node(String type, String name, int args) {
 		this.commandType = type;
 		this.commandName = name;
 		this.noOfChildren = args;
-		this.args = new int[noOfChildren];
+		/*this will hold the current commands needed arguments to execute*/
+		this.commandsArgs = new int[noOfChildren];
+	}
+	
+	public Node addNextCommands(String arg1, String arg2, int arg3){
+		/*this should hold any commands that must be executed before we finishing executing the current command*/
+		this.mustExecuteCommands = new Node(arg1, arg2, arg3);
+		return mustExecuteCommands;
+	}
+	
+	public int[] addArgs(){
+		return commandsArgs;
 	}
 
 	@Override
@@ -27,5 +39,6 @@ public class Node implements CommandNode {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }
