@@ -7,24 +7,25 @@ import java.util.TreeMap;
 public abstract class CommandNode {
 
 	private CommandsDataStruct commandsClass;
-	private List<?> possibleCommands;
 	
 	public CommandNode(){
 		commandsClass = new CommandsDataStruct();
-		possibleCommands = commandsClass.getInstance().grabPossibleCommands();
 	}
 	
 	public abstract void evaluate(String myCommand);
 	
 	public abstract void intermediateCanvasUpdate();
 	
-	public void determineTypeNArgs(){
+	public String determineTypeNArgs(String command){
+		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
+		int splitByIdx = noOfArgsNType.indexOf(":");
+		String type = noOfArgsNType.substring(0, splitByIdx);
+		int args = Integer.parseInt(noOfArgsNType.substring(splitByIdx, noOfArgsNType.length()));
+			
+		
+			
+			
+			
 	}
-	
-	private List<?> getCommands(){
-		return possibleCommands;
-	}
-	
-	
 
 }

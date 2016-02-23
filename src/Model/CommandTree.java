@@ -10,8 +10,8 @@ public class CommandTree {
 
 	private CommandNode root;
 
-	public CommandTree(CommandNode root) {
-		this.root = root;
+	public CommandTree() {
+		
 	}
 
 	public void traverse() {
@@ -20,7 +20,7 @@ public class CommandTree {
 
 	public void createTree(String[] commands) {
 		for (String eachCommand : commands) {
-
+			CommandNode command = new CommandNode(eachCommand);
 		}
 	}
 }

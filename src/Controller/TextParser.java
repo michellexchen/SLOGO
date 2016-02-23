@@ -4,7 +4,6 @@ import Model.CommandNode;
 import Model.CommandTree;
 
 public class TextParser {
-	private CommandNode root;
 	private String text;
 	private String[] commandParts;
 	CommandTree currtree;
@@ -24,7 +23,7 @@ public class TextParser {
 		// either set up the tree structure
 		if (init) {
 			if (currtree == null) {
-				currtree = new CommandTree(root);
+				currtree = new CommandTree();
 			}
 		}
 		// or set the tree up so that it can create a new tree structure for a

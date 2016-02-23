@@ -47,8 +47,14 @@ public class CommandsDataStruct {
 		return instance;
 	}
 	
-	public List<Node> grabPossibleCommands(){
-		return commandInfo;
+	public String grabPossibleCommands(String command){
+		String typeNargs = "";
+		for(Node eachCommand : commandInfo){
+			if(eachCommand.name.equals(command) || eachCommand.subname.equals(command)){
+				typeNargs += eachCommand.type + ":" + eachCommand.numArgs;
+			}  
+		}
+		return typeNargs;
 	}
 
 	private void readInRulesFile() {
