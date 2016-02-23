@@ -14,4 +14,7 @@ public abstract class CommandNode {
 	
 	public abstract void intermediateCanvasUpdate();
 
+
+	
+	public abstract Node grabNode();
 }

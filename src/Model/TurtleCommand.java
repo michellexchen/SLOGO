@@ -2,13 +2,15 @@ package Model;
 
 public class TurtleCommand extends CommandNode {
 
+	Node thisCommandsTree;
+	private static final String NODETYPE = "command";
 	
-	public TurtleCommand(int noOfArgs) {
-		createThisCommandsSubNodes(noOfArgs);
+	public TurtleCommand(int noOfArgs, String command) {
+		createThisCommandsSubNodes(noOfArgs, command);
 	}
 	
-	public void createThisCommandsSubNodes(int noOfArgs){
-		
+	public void createThisCommandsSubNodes(int noOfArgs, String command){
+		thisCommandsTree = new Node(NODETYPE, command, noOfArgs);
 	}
 	
 	@Override
@@ -21,6 +23,11 @@ public class TurtleCommand extends CommandNode {
 	public void intermediateCanvasUpdate() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Node grabNode() {
+		return thisCommandsTree;
 	}
 
 }

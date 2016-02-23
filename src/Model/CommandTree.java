@@ -10,9 +10,13 @@ public class CommandTree {
 
 	private CommandsDataStruct commandsClass;
 	private CommandNode root;
+	private static final String NODETYPE = "root";
+	private String[] currCommands;
 
 	public CommandTree() {
 		commandsClass = new CommandsDataStruct();
+		//creates a root node that should no by using noOfCommands how many set of commands it needs to execute
+		root = new Node(NODETYPE, NODETYPE, noOfCommands());
 	}
 	
 	public String determineType(String command){
@@ -30,13 +34,26 @@ public class CommandTree {
 	}
 
 	public void createTree(String[] commands) {
+		currCommands = commands;
 		for (String eachCommand : commands) {
 			String type = determineType(eachCommand);
 			int args = determineArgs(eachCommand);
 			/* get rid of if statements */
 			if(type.equals("command")){
-				root = new TurtleCommand(args);
+				root = new TurtleCommand(args, eachCommand);
 			}
 		}
 	}
+	
+	private int noOfCommands() {
+		int count = 0;
+		for(String eachCommand : currCommands) {
+			if(!isNumeric(eachCommand)) count++;
+		}
+		return count;
+	}
+	
+	private boolean isNumeric(String s) {  
+	    return s.matches("[-+]?\\d*\\.?\\d+");  
+	}  
 }
