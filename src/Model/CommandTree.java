@@ -1,5 +1,11 @@
 package Model;
 
+/*
+ * This will be used as our structure for our turtles instructions
+ * It will hold all of the nodes that make up one set of commands
+ * each new set of commands will create an instance of this syntax tree
+ */
+
 public class CommandTree {
 
 	private CommandNode root;
@@ -7,8 +13,14 @@ public class CommandTree {
 	public CommandTree(CommandNode root) {
 		this.root = root;
 	}
-
+	
 	public void traverse() {
 
+	}
+	
+	public void createTree(String[] commands) {
+		for(String eachCommand: commands){
+			
+		}
 	}
 }
