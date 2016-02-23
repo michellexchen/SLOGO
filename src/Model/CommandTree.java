@@ -36,7 +36,7 @@ public class CommandTree {
 
 	public void createTree(String[] commands) {
 		currCommands = commands;
-		for (int idx = 0; idx < commands.length; idx++ ) {
+		for (int idx = 0; idx < commands.length; idx++) {
 			String eachCommand = commands[idx];
 			String type = determineType(eachCommand);
 			int args = determineArgs(eachCommand);
@@ -44,38 +44,45 @@ public class CommandTree {
 			createSubNodes(root, type, args, idx, commands);
 		}
 	}
-	
+
 	/*
 	 * 
-	 * this is a recursive method that reads our user parsed input and determines if a string is a command or an
-	 * argument to execute the previous command
+	 * this is a recursive method that reads our user parsed input and
+	 * determines if a string is a command or an argument to execute the
+	 * previous command
 	 * 
 	 */
-	public void createSubNodes(Node curr, String type, int args, int commandsidx, String[] commands){
-		if(commandsidx == commands.length) return;
+	public void createSubNodes(Node curr, String type, int args, int commandsidx, String[] commands) {
+		if (commandsidx == commands.length)
+			return;
 		Node node;
 		if (type.equals("command")) {
-			/*we'll have to change how this is implemented... sub nodes can also take commands as args*/
+			/*
+			 * we'll have to change how this is implemented... sub nodes can
+			 * also take commands as args
+			 */
 			node = new TurtleCommand(args, commands[commandsidx]);
 			curr.mustExecuteCommands = node;
 		}
-		//added this because below call to recursive function doesn't like that it gets initialized in if statement
+		// added this because below call to recursive function doesn't like that
+		// it gets initialized in if statement
 		node = new TurtleCommand(args, commands[commandsidx]);
-			if(isNumeric(commands[commandsidx])){
-				for(int i = 0; i < args; i++){
-					curr.commandsArgs[i] = Integer.parseInt(commands[commandsidx]);
-					commandsidx++;
-				}
-			} else {
-				/*
-				 * we know that the next input parsed string is another command so we need to add to this nodes
-				 * must execute commands.. 
-				 * essentially we cannot execute our current nodes args until the mustExecuteCommands
-				 * arraylist has been ran through
-				 */
-				//call this function with our curr being passed and the new command idx
-				createSubNodes(node, type, args, commandsidx, commands);
+		if (isNumeric(commands[commandsidx])) {
+			for (int i = 0; i < args; i++) {
+				curr.commandsArgs[i] = Integer.parseInt(commands[commandsidx]);
+				commandsidx++;
 			}
+		} else {
+			/*
+			 * we know that the next input parsed string is another command so
+			 * we need to add to this nodes must execute commands.. essentially
+			 * we cannot execute our current nodes args until the
+			 * mustExecuteCommands arraylist has been ran through
+			 */
+			// call this function with our curr being passed and the new command
+			// idx
+			createSubNodes(node, type, args, commandsidx, commands);
+		}
 	}
 
 	private int noOfCommands() {

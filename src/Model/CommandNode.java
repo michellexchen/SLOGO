@@ -9,5 +9,5 @@ public interface CommandNode {
 	public abstract void evaluate(String myCommand);
 
 	public abstract void intermediateCanvasUpdate();
-	
+
 }
