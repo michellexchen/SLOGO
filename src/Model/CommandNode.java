@@ -1,7 +1,20 @@
 package Model;
 
-public interface CommandNode {
+import java.util.Map;
+import java.util.TreeMap;
 
-	public void evaluate(String myCommand);
+public abstract class CommandNode {
+
+	private static final Map<String, String> commandInfo = new TreeMap<String, String>();
+	
+	public abstract void evaluate(String myCommand);
+	
+	public abstract void intermediateCanvasUpdate();
+	
+	public void determineTypeNArgs(){
+		
+	}
+	
+	
 
 }
