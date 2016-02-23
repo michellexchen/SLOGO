@@ -3,10 +3,14 @@ package Model;
 public class TurtleCommand extends CommandNode {
 
 	
-	public TurtleCommand() {
-		// TODO Auto-generated constructor stub
+	public TurtleCommand(int noOfArgs) {
+		createThisCommandsSubNodes(noOfArgs);
 	}
-
+	
+	public void createThisCommandsSubNodes(int noOfArgs){
+		
+	}
+	
 	@Override
 	public void evaluate(String myCommand) {
 		// TODO Auto-generated method stub

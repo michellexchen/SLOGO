@@ -8,10 +8,21 @@ package Model;
 
 public class CommandTree {
 
+	private CommandsDataStruct commandsClass;
 	private CommandNode root;
 
 	public CommandTree() {
-		
+		commandsClass = new CommandsDataStruct();
+	}
+	
+	public String determineType(String command){
+		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
+		return noOfArgsNType.substring(0, noOfArgsNType.indexOf(":"));
+	}
+	
+	public int determineArgs(String command){
+		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
+		return Integer.parseInt(noOfArgsNType.substring(noOfArgsNType.indexOf(":"), noOfArgsNType.length()));
 	}
 
 	public void traverse() {
@@ -20,7 +31,12 @@ public class CommandTree {
 
 	public void createTree(String[] commands) {
 		for (String eachCommand : commands) {
-			CommandNode command = new CommandNode(eachCommand);
+			String type = determineType(eachCommand);
+			int args = determineArgs(eachCommand);
+			/* get rid of if statements */
+			if(type.equals("command")){
+				root = new TurtleCommand(args);
+			}
 		}
 	}
 }

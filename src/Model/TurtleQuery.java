@@ -2,8 +2,12 @@ package Model;
 
 public class TurtleQuery extends CommandNode {
 
-	public TurtleQuery() {
-		// TODO Auto-generated constructor stub
+	public TurtleQuery(int noOfArgs) {
+		createThisCommandsSubNodes(noOfArgs);
+	}
+
+	public void createThisCommandsSubNodes(int noOfArgs) {
+
 	}
 
 	@Override
@@ -15,7 +19,7 @@ public class TurtleQuery extends CommandNode {
 	@Override
 	public void intermediateCanvasUpdate() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

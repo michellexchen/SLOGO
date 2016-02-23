@@ -2,8 +2,12 @@ package Model;
 
 public class MathCommand extends CommandNode{
 
-	public MathCommand() {
-		// TODO Auto-generated constructor stub
+	public MathCommand(int noOfArgs) {
+		createThisCommandsSubNodes(noOfArgs);
+	}
+	
+	public void createThisCommandsSubNodes(int noOfArgs){
+		
 	}
 
 	@Override
