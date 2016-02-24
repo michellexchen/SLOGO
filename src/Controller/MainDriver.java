@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Turtle;
 import View.MainView;
+import View.SLogoException;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -26,14 +27,19 @@ public class MainDriver extends Application {
 	}
 
 	public void start(Stage myStage) throws Exception {
-		myStage.setTitle("SLogo Integrated Development Environment");
-		this.myStage = myStage;
-		myRoot = new Group();
-		myScene = new Scene(myRoot, VIEW_WIDTH, VIEW_HEIGHT);
-		myStage.setScene(myScene);
+//		myStage.setTitle("SLogo Integrated Development Environment");
+//		this.myStage = myStage;
+//		myRoot = new Group();
+//		myScene = new Scene(myRoot, VIEW_WIDTH, VIEW_HEIGHT);
+//		myStage.setScene(myScene);
 		languagesDriver = new LanguagesDriver();
-		MainView view = new MainView(myScene, myRoot, myStage, languagesDriver);
-		myStage.show();
+		MainView myView = new MainView(languagesDriver);
+		try {
+		myView.addProject();
+		myView.getMyProject().get(0).show();
+		} catch (SLogoException e) {
+			myView.showError(e);
+		}
 		createBackend();
 	}
 
