@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 /*
  * This will be used as our structure for our turtles instructions
  * It will hold all of the nodes that make up one set of commands
@@ -12,6 +15,7 @@ public class CommandTree {
 	private Node root;
 	private static final String NODETYPE = "root";
 	private String[] currCommands;
+	private Map<String, Integer> globalVars = new TreeMap<String, Integer>();
 
 	public CommandTree() {
 		commandsClass = new CommandsDataStruct();
@@ -62,11 +66,13 @@ public class CommandTree {
 			 * also take commands as args
 			 */
 			node = new TurtleCommand(args, commands[commandsidx]);
-			curr.mustExecuteCommands = node;
+			curr.nextExecuteCommand = node;
+			commandsidx++;
 		}
 		// added this because below call to recursive function doesn't like that
 		// it gets initialized in if statement
 		node = new TurtleCommand(args, commands[commandsidx]);
+		///////////////////
 		if (isNumeric(commands[commandsidx])) {
 			for (int i = 0; i < args; i++) {
 				curr.commandsArgs[i] = Integer.parseInt(commands[commandsidx]);

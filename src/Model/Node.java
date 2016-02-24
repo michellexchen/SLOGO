@@ -7,7 +7,7 @@ public class Node implements CommandNode {
 	String commandType;
 	String commandName;
 	int noOfChildren;
-	Node mustExecuteCommands;
+	Node nextExecuteCommand;
 	int[] commandsArgs;
 
 	public Node(String type, String name, int args) {
@@ -23,8 +23,8 @@ public class Node implements CommandNode {
 		 * this should hold any commands that must be executed before we
 		 * finishing executing the current command
 		 */
-		this.mustExecuteCommands = new Node(arg1, arg2, arg3);
-		return mustExecuteCommands;
+		this.nextExecuteCommand = new Node(arg1, arg2, arg3);
+		return nextExecuteCommand;
 	}
 
 	public int[] addArgs() {
