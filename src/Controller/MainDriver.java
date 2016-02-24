@@ -36,11 +36,11 @@ public class MainDriver extends Application {
 		MainView myView = new MainView(languagesDriver);
 		try {
 		myView.addProject();
-		myView.getMyProject().get(0).show();
+		myView.getMyProjects().get(0).show();
 		} catch (SLogoException e) {
 			myView.showError(e);
 		}
-		createBackend();
+		//createBackend();
 	}
 
 	private void createBackend() {

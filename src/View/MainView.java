@@ -1,5 +1,6 @@
 package View;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MainView {
 	
 	public MainView () {
 		myHistory = new CommandHistoryViewer();
-		
+		myProjects = new ArrayList<Project>();
 	}
 	
 	public MainView(LanguagesDriver languagesDriver) {
@@ -33,6 +34,8 @@ public class MainView {
 //		this.myScene = myScene;
 		myLanguagesDriver = languagesDriver;
 		myHistory = new CommandHistoryViewer();
+		myProjects = new ArrayList<Project>();
+
 	}
 	
 //	@Override
@@ -60,14 +63,15 @@ public class MainView {
 	 * clear() wipes out all the projects we have and restarts
 	 */
 	public void clear() {
-		getMyProject().clear();
+		getMyProjects().clear();
 		//TODO: Code for restasrting
 	}
 	
 	public void addProject() throws SLogoException{
 		Project myNewProject = new Project();
+
 		myNewProject.initialize();
-		getMyProject().add(myNewProject);
+		getMyProjects().add(myNewProject);
 	}
 	
 	
@@ -134,7 +138,7 @@ public class MainView {
 	}
 
 
-	public List<Project> getMyProject() {
+	public List<Project> getMyProjects() {
 		return myProjects;
 	}
 

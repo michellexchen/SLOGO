@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class Project {
 	private List<Character> myCharacters;
 	private Canvas myCanvas;
-	private Collection<CommandNode> myCommandHistory;
+	private List<CommandNode> myCommandHistory;
 	
 	
 	//Visualization Primitives
@@ -28,6 +28,7 @@ public class Project {
 	}
 
 	public void initialize() {
+
         BorderPane myBorderPane = new BorderPane();
         myBorderPane.setPadding(new Insets(10, 20, 10, 20));
         GridPane grid = new GridPane();
@@ -35,7 +36,9 @@ public class Project {
         grid.setVgap(10);
         grid.setPadding(new Insets(0, 10, 0, 10));
         myBorderPane.setCenter(grid);
+        myBorderPane.setPrefSize(500,400);
 		myProjectScene = new Scene(myBorderPane);
+		myProjectStage = new Stage();
 		myProjectStage.setScene(myProjectScene);
 	}
 	
@@ -91,7 +94,7 @@ public class Project {
 	}
 
 
-	public void setMyCommandHistory(Collection<CommandNode> myCommandHistory) {
+	public void setMyCommandHistory(List<CommandNode> myCommandHistory) {
 		this.myCommandHistory = myCommandHistory;
 	}
 
