@@ -1,11 +1,14 @@
 package View;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
 import Model.CommandNode;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
@@ -27,19 +30,14 @@ public class Project {
 		
 	}
 
-	public void initialize() {
+	public void initialize() throws IOException {
 
-        BorderPane myBorderPane = new BorderPane();
-        myBorderPane.setPadding(new Insets(10, 20, 10, 20));
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(0, 10, 0, 10));
-        myBorderPane.setCenter(grid);
-        myBorderPane.setPrefSize(500,400);
-		myProjectScene = new Scene(myBorderPane);
+	    Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
+		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();
 		myProjectStage.setScene(myProjectScene);
+		myProjectStage.setTitle("SLOGO");
+	    
 	}
 	
 	
