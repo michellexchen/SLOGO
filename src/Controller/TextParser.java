@@ -1,26 +1,29 @@
 package Controller;
 
-import Model.CommandNode;
 import Model.CommandTree;
 
 public class TextParser {
-	private String text;
-	private String[] commandParts;
+	private String myCommand;
+	private String[] myNodes;
 	CommandTree currtree;
 
 	public TextParser(String text) {
-		this.text = text;
+		myCommand = text;
 		parseCommands(text);
 	}
 
 	private void parseCommands(String text) {
-		commandParts = text.split(" ");
+		myNodes = text.split(" ");
 		currtree = new CommandTree();
-		currtree.createTree(commandParts);
+		currtree.createTree(myNodes);
 	}
 
-	public String[] grabCurrCommands() {
-		return commandParts;
+	public String[] getNodes() {
+		return myNodes;
+	}
+	
+	public String getOriginalCommand(){
+		return myCommand;
 	}
 
 }
