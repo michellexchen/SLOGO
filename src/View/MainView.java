@@ -1,12 +1,15 @@
 package View;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import Controller.LanguagesDriver;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -43,6 +46,8 @@ public class MainView {
 //		// TODO Auto-generated method stub
 //		
 //	}
+	
+
 
 	public void showProject(Project project) throws SLogoException {
 		project.show();
@@ -70,7 +75,12 @@ public class MainView {
 	public void addProject() throws SLogoException{
 		Project myNewProject = new Project();
 
-		myNewProject.initialize();
+		try {
+			myNewProject.initialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		getMyProjects().add(myNewProject);
 	}
 	
@@ -161,7 +171,7 @@ public class MainView {
 //		myView.getMyProject().get(0).show();
 //		
 //	}
-//
+
 
 	
 }
