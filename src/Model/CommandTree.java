@@ -35,7 +35,7 @@ public class CommandTree {
 	}
 
 	public void traverse() {
-
+		
 	}
 
 	public void createTree(String[] commands) {

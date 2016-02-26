@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 public class MainDriver extends Application {
 
-	private LanguagesDriver languagesDriver;
 	private Group myRoot;
 	private Scene myScene;
 	private Stage myStage;
@@ -27,16 +26,15 @@ public class MainDriver extends Application {
 	}
 
 	public void start(Stage myStage) throws Exception {
-//		myStage.setTitle("SLogo Integrated Development Environment");
-//		this.myStage = myStage;
-//		myRoot = new Group();
-//		myScene = new Scene(myRoot, VIEW_WIDTH, VIEW_HEIGHT);
-//		myStage.setScene(myScene);
-		languagesDriver = new LanguagesDriver();
-		MainView myView = new MainView(languagesDriver);
+		//		myStage.setTitle("SLogo Integrated Development Environment");
+		//		this.myStage = myStage;
+		//		myRoot = new Group();
+		//		myScene = new Scene(myRoot, VIEW_WIDTH, VIEW_HEIGHT);
+		//		myStage.setScene(myScene);
+		MainView myView = new MainView();
 		try {
-		myView.addProject();
-		myView.getMyProjects().get(0).show();
+			myView.addProject();
+			myView.getMyProjects().get(0).show();
 		} catch (SLogoException e) {
 			myView.showError(e);
 		}
@@ -48,7 +46,7 @@ public class MainDriver extends Application {
 		myRoot.getChildren().add(ogTurt.getTurtle());
 		simulateGettingCommand("forward 50");
 	}
-	
+
 	private void simulateGettingCommand(String command){
 		TextParser tp_forw = new TextParser(command);
 	}

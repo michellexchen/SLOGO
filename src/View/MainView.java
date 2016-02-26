@@ -26,28 +26,10 @@ public class MainView {
 	private Project myCurrentProject;
 	private List<Project> myProjects;
 	
-	public MainView () {
+	public MainView() {
 		myHistory = new CommandHistoryViewer();
 		myProjects = new ArrayList<Project>();
 	}
-	
-	public MainView(LanguagesDriver languagesDriver) {
-//		this.myStage = myStage;
-//		this.myRoot = myRoot;
-//		this.myScene = myScene;
-		myLanguagesDriver = languagesDriver;
-		myHistory = new CommandHistoryViewer();
-		myProjects = new ArrayList<Project>();
-
-	}
-	
-//	@Override
-//	public void start(Stage arg0) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-	
-
 
 	public void showProject(Project project) throws SLogoException {
 		project.show();
@@ -90,11 +72,6 @@ public class MainView {
 	//////////////////////////
 	public LanguagesDriver getLanguagesDriver() {
 		return myLanguagesDriver;
-	}
-
-
-	public void setLanguagesDriver(LanguagesDriver languagesDriver) {
-		myLanguagesDriver = languagesDriver;
 	}
 
 
@@ -175,4 +152,3 @@ public class MainView {
 
 	
 }
-
