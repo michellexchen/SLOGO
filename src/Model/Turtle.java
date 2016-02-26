@@ -24,19 +24,19 @@ public class Turtle implements Character {
 		this.isHidden = isHidden;
 	}
 
-	public Character step(CharacterState myState) {
-		return this;
+	private Character step(CharacterState myState) {
+		
 	}
 
 	public CharacterState getState() {
 		return myState;
 	}
 
-	public void move() {
+	private void move() {
 
 	}
 
-	public void rotate() {
+	private void rotate() {
 
 	}
 
@@ -56,22 +56,8 @@ public class Turtle implements Character {
 		this.isHidden = hide;
 	}
 
-	public void setTurtleImage() {
-
-	}
-
-	public void setPenColor() {
-
-	}
-
 	public String getName() {
 		return myName;
-	}
-
-	public Rectangle getTurtle() {
-		Rectangle rec = new Rectangle(xCoor, yCoor, TURTSIZE, TURTSIZE);
-		rec.setFill(Color.BLACK);
-		return rec;
 	}
 
 }

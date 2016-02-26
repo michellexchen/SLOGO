@@ -10,13 +10,9 @@ public interface Character {
 
 	public abstract void rotate();
 
-	public abstract void penDown();
+	public abstract void penDown(); //Do we need both of these?
 
-	public abstract void penUp();
-
-	public abstract void setTurtleImage();
-
-	public abstract void setPenColor();
+	public abstract void penUp();//^^^
 
 	public abstract String getName();
 
