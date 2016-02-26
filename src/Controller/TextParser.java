@@ -15,7 +15,7 @@ public class TextParser {
 
 	private void parseCommands(String text) {
 		commandParts = text.split(" ");
-		setUpTree();
+		currtree = new CommandTree();
 		currtree.createTree(commandParts);
 	}
 
@@ -23,15 +23,4 @@ public class TextParser {
 		return commandParts;
 	}
 
-	public void setUpTree() {
-		// either set up the tree structure
-		if (currtree == null) {
-			currtree = new CommandTree();
-		}
-		// or set the tree up so that it can create a new tree structure for a
-		// new set of commands
-		else {
-			currtree = null;
-		}
-	}
 }
