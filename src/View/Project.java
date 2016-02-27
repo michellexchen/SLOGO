@@ -3,22 +3,17 @@ package View;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-
-import Model.CommandNode;
+import Model.Node;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Project {
 	private List<Character> myCharacters;
 	private Canvas myCanvas;
-	private List<CommandNode> myCommandHistory;
+	private List<Node> myCommandHistory;
 	
 	
 	//Visualization Primitives
@@ -87,12 +82,12 @@ public class Project {
 	}
 
 
-	public Collection<CommandNode> getMyCommandHistory() {
+	public Collection<Node> getMyCommandHistory() {
 		return myCommandHistory;
 	}
 
 
-	public void setMyCommandHistory(List<CommandNode> myCommandHistory) {
+	public void setMyCommandHistory(List<Node> myCommandHistory) {
 		this.myCommandHistory = myCommandHistory;
 	}
 
