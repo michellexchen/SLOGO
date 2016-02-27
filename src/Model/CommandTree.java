@@ -1,106 +1,19 @@
 package Model;
 
-import java.util.Map;
-import java.util.TreeMap;
-
-/*
- * This will be used as our structure for our turtles instructions
- * It will hold all of the nodes that make up one set of commands
- * each new set of commands will create an instance of this syntax tree
- */
-
 public class CommandTree {
-
-	private CommandsDataStruct commandsClass;
-	private Node root;
-	private static final String NODETYPE = "root";
-	private String[] currCommands;
-	private Map<String, Integer> globalVars = new TreeMap<String, Integer>();
-
-	public CommandTree() {
-		commandsClass = new CommandsDataStruct();
-		// creates a root node that should no by using noOfCommands how many set
-		// of commands it needs to execute
-		root = new Node(NODETYPE, NODETYPE, noOfCommands());
-	}
-
-	public String determineType(String command) {
-		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
-		return noOfArgsNType.substring(0, noOfArgsNType.indexOf(":"));
-	}
-
-	public int determineArgs(String command) {
-		String noOfArgsNType = commandsClass.getInstance().grabPossibleCommands(command);
-		return Integer.parseInt(noOfArgsNType.substring(noOfArgsNType.indexOf(":"), noOfArgsNType.length()));
-	}
-
-	public void traverse() {
+	
+	private CommandNode root;
+	
+	public void traverse(){
 		
 	}
-
-	public void createTree(String[] commands) {
-		currCommands = commands;
-		for (int idx = 0; idx < commands.length; idx++) {
-			String eachCommand = commands[idx];
-			String type = determineType(eachCommand);
-			int args = determineArgs(eachCommand);
-			/* get rid of if statements */
-			createSubNodes(root, type, args, idx, commands);
-		}
+	
+	public void setRoot(CommandNode root){
+		this.root = root;
+	}
+	
+	public CommandNode getRoot(){
+		return root;
 	}
 
-	/*
-	 * 
-	 * this is a recursive method that reads our user parsed input and
-	 * determines if a string is a command or an argument to execute the
-	 * previous command
-	 * 
-	 */
-	public void createSubNodes(Node curr, String type, int args, int commandsidx, String[] commands) {
-		if (commandsidx == commands.length)
-			return;
-		Node node;
-		if (type.equals("command")) {
-			/*
-			 * we'll have to change how this is implemented... sub nodes can
-			 * also take commands as args
-			 */
-			node = new TurtleCommand(args, commands[commandsidx]);
-			curr.nextExecuteCommand = node;
-			commandsidx++;
-		}
-		// added this because below call to recursive function doesn't like that
-		// it gets initialized in if statement
-		node = new TurtleCommand(args, commands[commandsidx]);
-		///////////////////
-		if (isNumeric(commands[commandsidx])) {
-			for (int i = 0; i < args; i++) {
-				curr.commandsArgs[i] = Integer.parseInt(commands[commandsidx]);
-				commandsidx++;
-			}
-		} else {
-			/*
-			 * we know that the next input parsed string is another command so
-			 * we need to add to this nodes must execute commands.. essentially
-			 * we cannot execute our current nodes args until the
-			 * mustExecuteCommands arraylist has been ran through
-			 */
-			// call this function with our curr being passed and the new command
-			// idx
-			createSubNodes(node, type, args, commandsidx, commands);
-		}
-	}
-
-	private int noOfCommands() {
-		int count = 0;
-		for (String eachCommand : currCommands) {
-			if (!isNumeric(eachCommand))
-				count++;
-		}
-		return count;
-	}
-
-	private boolean isNumeric(String s) {
-		return s.matches("[-+]?\\d*\\.?\\d+");
-	}
 }

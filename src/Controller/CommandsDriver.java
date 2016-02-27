@@ -12,7 +12,7 @@ import java.io.IOException;
 public class CommandsDriver extends FileDriver{
 
 	private final String commandDirectory = "resources";
-	private final String commandExtension = "CommandInfo.txt";
+	private final String commandExtension = "Commands.resources";
 
 	public void load(){
 		setDirectory(commandDirectory);

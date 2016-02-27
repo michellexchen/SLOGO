@@ -1,13 +1,19 @@
 package Model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
 
-public interface CommandNode {
-
-	public abstract void evaluate(String myCommand);
-
-	public abstract void intermediateCanvasUpdate();
+public abstract class CommandNode {
+	
+	private ArrayList<CommandNode> children = new ArrayList<CommandNode>();
+	
+	public ArrayList<CommandNode> getChildren(){
+		return children;
+	}
+	
+	public void addChild(CommandNode child){
+		children.add(child);
+	}
+	
+	public abstract int getNumChildren();
 
 }

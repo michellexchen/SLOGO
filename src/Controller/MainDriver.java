@@ -19,11 +19,6 @@ public class MainDriver extends Application {
 	}
 
 	public void start(Stage myStage) throws Exception {
-		//		myStage.setTitle("SLogo Integrated Development Environment");
-		//		this.myStage = myStage;
-		//		myRoot = new Group();
-		//		myScene = new Scene(myRoot, VIEW_WIDTH, VIEW_HEIGHT);
-		//		myStage.setScene(myScene);
 		MainView myView = new MainView();
 		try {
 			myView.addProject();
@@ -41,9 +36,8 @@ public class MainDriver extends Application {
 	}
 
 	private void simulateGettingCommand(String command){
-		TextParser parser = new TextParser();
-		parser.parse(command);
-		CommandTree myTree = parser.getTree();
+		TreeFactory ft = new TreeFactory();
+		CommandTree myTree = ft.makeTree(command);
 		myTree.traverse();
 	}
 }
