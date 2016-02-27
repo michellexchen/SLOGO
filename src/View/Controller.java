@@ -53,9 +53,9 @@ public class Controller
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	myHistory = new ArrayList<String>(); //intialize history
+    	myHistory = new ArrayList<String>(); //initialize history
     	helpLink(); //help button
-        runCommand();
+        runCommand(); //run button
     }
 
     private void helpLink(){
