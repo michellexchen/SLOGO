@@ -1,6 +1,11 @@
 package Model;
 
-public class NumericNode extends CommandNode{
+/**
+ * SLogo's NumericNode, a class representing a numerical value (evaluate returns the value) with no children
+ *
+ */
+
+public class NumericNode implements Node{
 
 	private double myValue;
 	
@@ -8,7 +13,7 @@ public class NumericNode extends CommandNode{
 		myValue = value;
 	}
 	
-	public void evaluate(CharacterState state){
+	public void evaluate(){
 		NumericEvaluate();
 	}
 	

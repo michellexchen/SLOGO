@@ -20,7 +20,7 @@ public class CommandsDriver extends FileDriver{
 		try {
 			super.load();
 		} catch (IOException e) {
-			// Throw {CommandInfo.txt} file not found Error message on UI
+			// Throw Command Resources file not found Error message on UI
 		}
 	}
 

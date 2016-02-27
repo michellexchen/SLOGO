@@ -1,7 +1,9 @@
 package Model;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+/**
+ * SLogo's Turtle with a TurtleState and name
+ *
+ */
 
 public class Turtle implements Character {
 

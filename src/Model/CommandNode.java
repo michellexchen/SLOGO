@@ -2,20 +2,21 @@ package Model;
 
 import java.util.ArrayList;
 
-public abstract class CommandNode {
-	
-	private ArrayList<CommandNode> children = new ArrayList<CommandNode>();
-	
-	public ArrayList<CommandNode> getChildren(){
+/**
+ * SLogo's CommandNode, an abstract class representing any command (Turtle, Query, Math, etc.)
+ *
+ */
+
+public abstract class CommandNode implements Node{
+
+	private ArrayList<Node> children = new ArrayList<Node>();
+
+	public ArrayList<Node> getChildren(){
 		return children;
 	}
-	
-	public void addChild(CommandNode child){
+
+	public void addChild(Node child){
 		children.add(child);
 	}
 	
-	public abstract void evaluate(CharacterState state);
-	
-	public abstract int getNumChildren();
-
 }

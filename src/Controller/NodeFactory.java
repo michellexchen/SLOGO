@@ -1,9 +1,16 @@
 package Controller;
 
 import java.util.ArrayList;
-
 import Model.CommandNode;
+import Model.Node;
 import Model.NumericNode;
+
+/**
+ * SLogo's Node Factory that creates first Node in list of unparsed nodes in String form
+ * Updates unparsed nodes list after node is created
+ * @author Adam Tache
+ *
+ */
 
 public class NodeFactory {
 
@@ -13,8 +20,8 @@ public class NodeFactory {
 		CommandsDriver = new CommandsDriver();
 	}
 
-	public CommandNode createNode(ArrayList<String> myNodes){
-		CommandNode node = null;
+	public Node createNode(ArrayList<String> myNodes){
+		Node node = null;
 		if(myNodes.size() == 0)
 			return null;
 		String currNode = myNodes.get(0);
@@ -32,15 +39,15 @@ public class NodeFactory {
 			Class cls;
 			try {
 				cls = Class.forName(clsName);
-				node = (CommandNode) cls.newInstance();
+				node = (Node) cls.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				// Throw command not implemented exception
 			}
 		}
+		myNodes.remove(0);
 		int numChildren = node.getNumChildren();
 		for(int x=0; x<numChildren; x++){
-			myNodes.remove(0);
-			node.addChild(createNode(myNodes));
+			((CommandNode) node).addChild(createNode(myNodes));
 		}
 		return node;
 	}

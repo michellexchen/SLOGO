@@ -1,12 +1,21 @@
 package Model.Turtle_Commands;
 
 import Model.CharacterState;
-import Model.CommandNode;
+import Model.Turtle;
 
-public abstract class TurtleCommandNode extends CommandNode {
+/**
+ * SLogo's TurtleCommandNode, an abstract class representing any Turtle Command
+ *
+ */
 
-	public void evaluate(CharacterState state){
-		TurtleEvaluate(state);
+public abstract class TurtleCommandNode extends TurtleStateCommand {
+	
+	public TurtleCommandNode(Turtle turtle){
+		super(turtle);
+	}
+
+	public void evaluate(){
+		TurtleEvaluate(getTurtle().getState());
 	}
 	
 	public abstract double TurtleEvaluate(CharacterState state);

@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * SLogo's TurtleState, a class extending abstract CharacterState to control Turtle-only functions (currently pen)
+ *
+ */
+
 public class TurtleState extends CharacterState{
 
 	private boolean penDown;

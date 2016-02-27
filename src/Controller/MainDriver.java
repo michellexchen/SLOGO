@@ -5,12 +5,10 @@ import Model.Turtle;
 import View.MainView;
 import View.SLogoException;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.stage.Stage;
 
 public class MainDriver extends Application {
 
-	private Group myRoot;
 	private final int VIEW_WIDTH = 1000;
 	private final int VIEW_HEIGHT = 750;
 

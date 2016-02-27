@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * SLogo's highest State in hierarchy, to support multiple types of character states
+ *
+ */
+
 public abstract class CharacterState {
 	
 	private double xCoor;

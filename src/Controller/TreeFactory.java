@@ -1,8 +1,15 @@
 package Controller;
 import java.util.ArrayList;
 import java.util.Arrays;
-import Model.CommandNode;
+import Model.Node;
 import Model.CommandTree;
+
+/**
+ * SLogo's Tree Factory that creates abstract syntax tree of Nodes
+ * Creates Nodes, that can either be CommandNodes (if command) or NumericNode (if numerical)
+ * @author Adam Tache
+ *
+ */
 
 public class TreeFactory {
 
@@ -10,7 +17,7 @@ public class TreeFactory {
 		String[] myNodes = text.split(" ");
 		format(myNodes);
 		CommandTree myTree = new CommandTree();
-		CommandNode root;
+		Node root;
 		ArrayList<String> nodeList = (ArrayList<String>) Arrays.asList(myNodes);
 		NodeFactory NodeFactory = new NodeFactory();
 		root = NodeFactory.createNode(nodeList);
