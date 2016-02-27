@@ -2,6 +2,9 @@ package Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
 import Model.MainModel;
 import View.MainView;
 import View.SLogoException;
@@ -13,7 +16,7 @@ public class MainDriver extends Application {
 		launch(args);
 	}
 
-	public void start(Stage myStage) throws SLogoException {
+	public void start(Stage myStage) throws SLogoException, IOException {
 		MainView myView = new MainView();
 		try {
 			myView.addProject();
