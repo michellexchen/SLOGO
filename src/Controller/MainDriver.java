@@ -2,9 +2,7 @@ package Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import Model.CommandTree;
 import Model.MainModel;
-import Model.Turtle;
 import View.MainView;
 import View.SLogoException;
 
