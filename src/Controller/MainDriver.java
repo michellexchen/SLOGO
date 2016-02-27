@@ -25,7 +25,7 @@ public class MainDriver extends Application {
 			myView.showError(e);
 		}
 		MainModel myModel = new MainModel();
-		myModel.createBackend();
+		//myModel.createBackend();
 	}
 
 
