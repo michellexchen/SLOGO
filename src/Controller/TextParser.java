@@ -5,24 +5,23 @@ import Model.CommandTree;
 public class TextParser {
 	private String myCommand;
 	private String[] myNodes;
-	CommandTree currtree;
+	CommandTree myTree;
 
-	public TextParser(String text) {
-		myCommand = text;
-		parseCommands(text);
-	}
-
-	private void parseCommands(String text) {
+	public void parse(String text) {
 		myNodes = text.split(" ");
-		currtree = new CommandTree();
-		currtree.createTree(myNodes);
+		myTree = new CommandTree();
+		myTree.createTree(myNodes);
+	}
+	
+	public CommandTree getTree(){
+		return myTree;
 	}
 
 	public String[] getNodes() {
 		return myNodes;
 	}
 	
-	public String getOriginalCommand(){
+	public String getCommand(){
 		return myCommand;
 	}
 

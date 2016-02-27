@@ -3,7 +3,7 @@ package Controller;
 import java.io.IOException;
 
 /**
- * SLogo's Commands driving class that extends FileDriver abstract class
+ * SLogo's Commands reader class that extends FileDriver abstract class
  * 
  * @author Adam Tache
  *
