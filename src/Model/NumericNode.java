@@ -8,7 +8,11 @@ public class NumericNode extends CommandNode{
 		myValue = value;
 	}
 	
-	public double evaluate() {
+	public void evaluate(){
+		NumericEvaluate();
+	}
+	
+	public double NumericEvaluate(){
 		return myValue;
 	}
 	

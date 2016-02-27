@@ -2,6 +2,10 @@ package Model;
 
 public abstract class TurtleCommandNode extends CommandNode {
 
-	public abstract double evaluate();
+	public void evaluate(){
+		TurtleEvaluate();
+	}
+	
+	public abstract double TurtleEvaluate();
 
 }

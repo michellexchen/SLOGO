@@ -5,7 +5,7 @@ public class CommandTree {
 	private CommandNode root;
 	
 	public void traverse(){
-		
+		root.evaluate();
 	}
 	
 	public void setRoot(CommandNode root){

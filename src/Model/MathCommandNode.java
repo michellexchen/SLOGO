@@ -2,6 +2,10 @@ package Model;
 
 public abstract class MathCommandNode extends CommandNode {
 
-	public abstract double evaluate();
+	public void evaluate(){
+		MathEvaluate();
+	}
+	
+	public abstract double MathEvaluate();
 
 }

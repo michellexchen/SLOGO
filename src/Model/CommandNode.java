@@ -14,6 +14,8 @@ public abstract class CommandNode {
 		children.add(child);
 	}
 	
+	public abstract void evaluate();
+	
 	public abstract int getNumChildren();
 
 }

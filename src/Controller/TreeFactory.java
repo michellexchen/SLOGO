@@ -6,10 +6,6 @@ import Model.CommandTree;
 
 public class TreeFactory {
 
-	public TreeFactory(){
-
-	}
-
 	public CommandTree makeTree(String text){
 		String[] myNodes = text.split(" ");
 		format(myNodes);

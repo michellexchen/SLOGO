@@ -2,6 +2,9 @@ package Model;
 
 public abstract class TurtleQueryNode extends CommandNode {
 
-	public abstract double evaluate();
+	public void evaluate(){
+		QueryEvaluate();
+	}
+	public abstract void QueryEvaluate();
 
 }
