@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import Model.CommandTree;
 import Model.Node;
+import Model.Turtle;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes
@@ -14,14 +15,14 @@ import Model.Node;
 
 public class TreeFactory {
 
-	public CommandTree makeTree(String text){
+	public CommandTree makeTree(String text, Turtle turtle){
 		String[] myNodes = text.split(" ");
 		format(myNodes);
 		CommandTree myTree = new CommandTree();
 		Node root;
 		ArrayList<String> nodeList = new ArrayList<String>(Arrays.asList(myNodes));
 		NodeFactory NodeFactory = new NodeFactory();
-		root = NodeFactory.createNode(nodeList);
+		root = NodeFactory.createNode(nodeList, turtle);
 		myTree.setRoot(root);
 		return myTree;
 	}

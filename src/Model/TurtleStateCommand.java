@@ -12,10 +12,6 @@ public abstract class TurtleStateCommand extends CommandNode{
 
 	private Turtle myTurtle;
 
-	public TurtleStateCommand(Turtle myTurtle){
-		this.myTurtle = myTurtle;
-	}
-	
 	public void setTurtle(Turtle turtle){
 		myTurtle = turtle;
 	}

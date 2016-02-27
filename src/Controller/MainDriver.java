@@ -32,7 +32,7 @@ public class MainDriver extends Application {
 		//myRoot.getChildren().add(ogTurt.getTurtle());
 		TreeFactory tf = new TreeFactory();
 		String command = "forward 50";
-		CommandTree myTree = tf.makeTree(command);
+		CommandTree myTree = tf.makeTree(command, ogTurt);
 		myTree.traverse(ogTurt.getState());
 	}
 }

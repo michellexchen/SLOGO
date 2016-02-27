@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +21,6 @@ public abstract class FileDriver {
 
 	public void load() throws IOException {
 		String fileName = directory + "/" + extension;
-		File file = new File(fileName);
 		myFileReader = null;
 		try {
 			myFileReader = new BufferedReader(new FileReader(fileName));

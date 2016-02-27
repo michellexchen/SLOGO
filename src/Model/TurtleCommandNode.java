@@ -1,7 +1,6 @@
 package Model;
 
 import Model.CharacterState;
-import Model.Turtle;
 
 /**
  * SLogo's TurtleCommandNode, an abstract class representing any Turtle Command
@@ -9,10 +8,6 @@ import Model.Turtle;
  */
 
 public abstract class TurtleCommandNode extends TurtleStateCommand {
-	
-	public TurtleCommandNode(Turtle turtle){
-		super(turtle);
-	}
 
 	public void evaluate(){
 		TurtleEvaluate(getTurtle().getState());
