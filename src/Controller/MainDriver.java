@@ -1,23 +1,16 @@
 package Controller;
 
+import Model.CommandTree;
 import Model.Turtle;
 import View.MainView;
 import View.SLogoException;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-/**
- * @author Adam Tache
- *
- */
 
 public class MainDriver extends Application {
 
 	private Group myRoot;
-	private Scene myScene;
-	private Stage myStage;
 	private final int VIEW_WIDTH = 1000;
 	private final int VIEW_HEIGHT = 750;
 
@@ -48,6 +41,9 @@ public class MainDriver extends Application {
 	}
 
 	private void simulateGettingCommand(String command){
-		TextParser tp_forw = new TextParser(command);
+		TextParser parser = new TextParser();
+		parser.parse(command);
+		CommandTree myTree = parser.getTree();
+		myTree.traverse();
 	}
 }

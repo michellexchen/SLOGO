@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * SLogo's File driving highest level abstract class
+ * SLogo's File reader highest level abstract class
  * 
  * @author Adam Tache
  *
