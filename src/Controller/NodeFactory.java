@@ -42,7 +42,7 @@ public class NodeFactory {
 			String clsName = CommandName+"Node";
 			Class cls;
 			try {
-				cls = Class.forName(clsName);
+				cls = Class.forName("Model."+clsName);
 				node = (Node) cls.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				// Throw command not implemented exception
