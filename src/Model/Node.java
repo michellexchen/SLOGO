@@ -7,6 +7,6 @@ package Model;
  */
 
 public interface Node {
-	public abstract void evaluate();
+	public abstract double evaluate();
 	public abstract int getNumChildren();
 }

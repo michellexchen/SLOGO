@@ -13,11 +13,7 @@ public class NumericNode implements Node{
 		myValue = value;
 	}
 	
-	public void evaluate(){
-		NumericEvaluate();
-	}
-	
-	public double NumericEvaluate(){
+	public double evaluate(){
 		return myValue;
 	}
 	

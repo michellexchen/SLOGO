@@ -9,8 +9,8 @@ import Model.CharacterState;
 
 public abstract class TurtleQueryNode extends TurtleStateCommand {
 	
-	public void evaluate(){
-		QueryEvaluate(getTurtle().getState());
+	public double evaluate(){
+		return QueryEvaluate(getTurtle().getState());
 	}
 	
 	public abstract double QueryEvaluate(CharacterState state);
