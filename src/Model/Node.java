@@ -7,6 +7,6 @@ package Model;
  */
 
 public interface Node {
-	public abstract double evaluate();
+	public abstract double evaluate(CharacterState state);
 	public abstract int getNumChildren();
 }

@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class BackwardNode {
+public class BackwardNode extends TurtleCommandNode{
 	private ArrayList<CommandNode> myChildren;
 	private final static int NUM_CHILDREN = 1;
 	
@@ -10,7 +10,7 @@ public class BackwardNode {
 		this.myChildren = new ArrayList<CommandNode>();
 	}
 	
-	public double TurtleEvaluate(CharacterState currentState) {
+	public double evaluate(CharacterState currentState) {
 		double[] newCoor = calculateLoc(currentState.getDirection());
 		currentState.setXCoor(currentState.getXCoor() + newCoor[0]);
 		currentState.setYCoor(currentState.getYCoor() + newCoor[1]);

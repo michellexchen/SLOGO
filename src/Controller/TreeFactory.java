@@ -15,14 +15,14 @@ import Model.Turtle;
 
 public class TreeFactory {
 
-	public CommandTree makeTree(String text, Turtle turtle){
+	public CommandTree makeTree(String text){
 		String[] myNodes = text.split(" ");
 		format(myNodes);
 		CommandTree myTree = new CommandTree();
 		Node root;
 		ArrayList<String> nodeList = new ArrayList<String>(Arrays.asList(myNodes));
 		NodeFactory NodeFactory = new NodeFactory();
-		root = NodeFactory.createNode(nodeList, turtle);
+		root = NodeFactory.createNode(nodeList);
 		myTree.setRoot(root);
 		return myTree;
 	}

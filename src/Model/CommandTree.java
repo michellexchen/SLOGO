@@ -10,7 +10,7 @@ public class CommandTree {
 	private Node root;
 	
 	public void traverse(CharacterState state){
-		root.evaluate();
+		root.evaluate(state);
 	}
 	
 	public void setRoot(Node root){

@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class SetXYNode {
+public class SetXYNode extends TurtleCommandNode{
 	private ArrayList<CommandNode> myChildren;
 	private final static int NUM_CHILDREN = 2;
 	
@@ -10,7 +10,7 @@ public class SetXYNode {
 		myChildren = new ArrayList<CommandNode>();
 	}
 	
-	public double TurtleEvaluate(CharacterState currentState) {
+	public double evaluate(CharacterState currentState) {
 		double distance = calculateDistance(currentState.getXCoor(), currentState.getYCoor());
 		currentState.setXCoor(myChildren.get(0).evaluate());
 		currentState.setYCoor(myChildren.get(1).evaluate());

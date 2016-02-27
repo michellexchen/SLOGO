@@ -13,7 +13,7 @@ public class NumericNode implements Node{
 		myValue = value;
 	}
 	
-	public double evaluate(){
+	public double evaluate(CharacterState state){
 		return myValue;
 	}
 	

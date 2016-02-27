@@ -18,7 +18,7 @@ public class MainModel {
 		//myRoot.getChildren().add(ogTurt.getTurtle());
 		TreeFactory tf = new TreeFactory();
 		String command = "forward 50";
-		CommandTree myTree = tf.makeTree(command, ogTurt);
+		CommandTree myTree = tf.makeTree(command);
 		myTree.traverse(ogTurt.getState());
 	}
 }

@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class LeftNode {
+public class LeftNode extends TurnNode{
 	private ArrayList<CommandNode> myChildren;
 	private final static int NUM_CHILDREN = 1;
 	

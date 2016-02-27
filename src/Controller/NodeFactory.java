@@ -6,7 +6,7 @@ import Model.CommandNode;
 import Model.Node;
 import Model.NumericNode;
 import Model.Turtle;
-import Model.TurtleStateCommand;
+import Model.TurtleCommandNode;
 
 /**
  * SLogo's Node Factory that creates first Node in list of unparsed nodes in String form
@@ -24,7 +24,7 @@ public class NodeFactory {
 		CommandsDriver = new CommandsDriver();
 	}
 
-	public Node createNode(ArrayList<String> myNodes, Turtle turtle){
+	public Node createNode(ArrayList<String> myNodes){
 		Node node = null;
 		if(myNodes.size() == 0)
 			return null;
@@ -44,9 +44,6 @@ public class NodeFactory {
 			try {
 				cls = Class.forName(clsName);
 				node = (Node) cls.newInstance();
-				if(node instanceof TurtleStateCommand){
-					((TurtleStateCommand) node).setTurtle(turtle);
-				}
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				// Throw command not implemented exception
 			}
@@ -54,7 +51,7 @@ public class NodeFactory {
 		myNodes.remove(0);
 		int numChildren = node.getNumChildren();
 		for(int x=0; x<numChildren; x++){
-			((CommandNode) node).addChild(createNode(myNodes, turtle));
+			((CommandNode) node).addChild(createNode(myNodes));
 		}
 		return node;
 	}
