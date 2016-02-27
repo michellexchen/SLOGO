@@ -14,7 +14,7 @@ public abstract class CommandNode {
 		children.add(child);
 	}
 	
-	public abstract void evaluate();
+	public abstract void evaluate(CharacterState state);
 	
 	public abstract int getNumChildren();
 

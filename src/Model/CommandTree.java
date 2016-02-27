@@ -4,8 +4,8 @@ public class CommandTree {
 	
 	private CommandNode root;
 	
-	public void traverse(){
-		root.evaluate();
+	public void traverse(CharacterState state){
+		root.evaluate(state);
 	}
 	
 	public void setRoot(CommandNode root){

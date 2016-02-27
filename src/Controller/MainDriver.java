@@ -26,18 +26,15 @@ public class MainDriver extends Application {
 		} catch (SLogoException e) {
 			myView.showError(e);
 		}
-		//createBackend();
+		createBackend();
 	}
 
 	private void createBackend() {
 		Turtle ogTurt = new Turtle("OG", VIEW_WIDTH / 2, VIEW_HEIGHT / 2, true, 0, false);
 		//myRoot.getChildren().add(ogTurt.getTurtle());
-		simulateGettingCommand("forward 50");
-	}
-
-	private void simulateGettingCommand(String command){
 		TreeFactory ft = new TreeFactory();
+		String command = "forward 50";
 		CommandTree myTree = ft.makeTree(command);
-		myTree.traverse();
+		myTree.traverse(ogTurt.getState());
 	}
 }

@@ -8,7 +8,7 @@ public class NumericNode extends CommandNode{
 		myValue = value;
 	}
 	
-	public void evaluate(){
+	public void evaluate(CharacterState state){
 		NumericEvaluate();
 	}
 	
