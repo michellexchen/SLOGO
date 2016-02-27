@@ -10,9 +10,9 @@ public class TowardsXYNode extends TurnNode{
 		myChildren = new ArrayList<CommandNode>();
 	}
 	
-	public double calculateDir(double x, double y) {
-		double diffX = myChildren.get(0).evaluate() - x;
-		double diffY = myChildren.get(1).evaluate() - y;
+	public double calculateDir(double x, double y, CharacterState state) {
+		double diffX = myChildren.get(0).evaluate(state) - x;
+		double diffY = myChildren.get(1).evaluate(state) - y;
 		return Math.atan(diffX/diffY);
 	}
 	

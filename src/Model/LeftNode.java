@@ -10,8 +10,8 @@ public class LeftNode extends TurnNode{
 		myChildren = new ArrayList<CommandNode>();
 	}
 	
-	public double calculateDir(double x, double y) {
-		return myChildren.get(0).evaluate();
+	public double calculateDir(double x, double y, CharacterState state) {
+		return myChildren.get(0).evaluate(state);
 	}
 	
 	public int getNumChildren() {

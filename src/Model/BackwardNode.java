@@ -11,16 +11,16 @@ public class BackwardNode extends TurtleCommandNode{
 	}
 	
 	public double evaluate(CharacterState currentState) {
-		double[] newCoor = calculateLoc(currentState.getDirection());
+		double[] newCoor = calculateLoc(currentState.getDirection(), currentState);
 		currentState.setXCoor(currentState.getXCoor() + newCoor[0]);
 		currentState.setYCoor(currentState.getYCoor() + newCoor[1]);
-		return myChildren.get(0).evaluate();
+		return myChildren.get(0).evaluate(currentState);
 	}
 	
-	private double[] calculateLoc(double direction) {
+	private double[] calculateLoc(double direction, CharacterState state) {
 		double[] result = new double[2];
-		result[0] = -Math.sin(direction)*myChildren.get(0).evaluate();
-		result[1] = -Math.cos(direction)*myChildren.get(0).evaluate(); 
+		result[0] = -Math.sin(direction)*myChildren.get(0).evaluate(state);
+		result[1] = -Math.cos(direction)*myChildren.get(0).evaluate(state); 
 		return result;
 	}
 
