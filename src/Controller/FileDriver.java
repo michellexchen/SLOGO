@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,16 +17,17 @@ import java.util.Properties;
 public abstract class FileDriver {
 	Properties myProperties;
 	private BufferedReader myFileReader;
-	private String directory = "";
-	private String extension = "";
+	private String directory;
+	private String extension;
 
 	public void load() throws IOException {
-		String filename = directory + "/" + extension;
+		String fileName = directory + "/" + extension;
+		File file = new File(fileName);
 		myFileReader = null;
 		try {
-			myFileReader = new BufferedReader(new FileReader(filename));
+			myFileReader = new BufferedReader(new FileReader(fileName));
 		} catch (IOException e) {
-			throw new FileNotFoundException(String.format("File not found: %s", filename));
+			throw new FileNotFoundException(String.format("File not found: %s", fileName));
 		}
 		myProperties = new Properties();
 		myProperties.load(myFileReader);

@@ -1,4 +1,4 @@
-package Model.Turtle_Commands;
+package Model;
 
 import Model.CharacterState;
 import Model.Turtle;

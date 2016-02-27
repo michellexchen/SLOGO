@@ -1,11 +1,11 @@
 package Controller;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import Model.CommandTree;
 import Model.Turtle;
 import View.MainView;
 import View.SLogoException;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 public class MainDriver extends Application {
 
@@ -30,9 +30,9 @@ public class MainDriver extends Application {
 	private void createBackend() {
 		Turtle ogTurt = new Turtle("OG", VIEW_WIDTH / 2, VIEW_HEIGHT / 2, true, 0, false);
 		//myRoot.getChildren().add(ogTurt.getTurtle());
-		TreeFactory ft = new TreeFactory();
+		TreeFactory tf = new TreeFactory();
 		String command = "forward 50";
-		CommandTree myTree = ft.makeTree(command);
+		CommandTree myTree = tf.makeTree(command);
 		myTree.traverse(ogTurt.getState());
 	}
 }

@@ -3,7 +3,7 @@ package Controller;
 import java.io.IOException;
 
 /**
- * SLogo's Commands reader class that extends FileDriver abstract class
+ * SLogo's Commands resources file reader class that extends FileDriver abstract class
  * 
  * @author Adam Tache
  *
@@ -11,9 +11,13 @@ import java.io.IOException;
 
 public class CommandsDriver extends FileDriver{
 
-	private final String commandDirectory = "resources";
+	private final String commandDirectory = "resources/commands";
 	private final String commandExtension = "Commands.resources";
-
+	
+	public CommandsDriver(){
+		load();
+	}
+	
 	public void load(){
 		setDirectory(commandDirectory);
 		setExtension(commandExtension);

@@ -4,7 +4,7 @@ left:Left
 right:Right
 setheading:SetHeading
 towards:Toward
-setxySetXY
+setxy:SetXY
 goto:GoTo
 pendown:PenDown
 penup:PenUp

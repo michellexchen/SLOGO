@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class LanguagesDriver extends FileDriver{
 
-	private String langDirectory = "resources.languages";
+	private String langDirectory = "resources/languages";
 	private String langExtension = ".properties";
 	
 	public void load(String language){

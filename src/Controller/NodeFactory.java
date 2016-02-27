@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+
 import Model.CommandNode;
 import Model.Node;
 import Model.NumericNode;
@@ -8,6 +9,7 @@ import Model.NumericNode;
 /**
  * SLogo's Node Factory that creates first Node in list of unparsed nodes in String form
  * Updates unparsed nodes list after node is created
+ * Creates sub-nodes if necessary
  * @author Adam Tache
  *
  */
@@ -27,7 +29,7 @@ public class NodeFactory {
 		String currNode = myNodes.get(0);
 		String CommandName = CommandsDriver.getString(currNode);
 		if(CommandName == null){
-			if(isNumeric(CommandName)){
+			if(isNumeric(currNode)){
 				node = new NumericNode(Double.parseDouble(currNode));
 			}
 			else{
