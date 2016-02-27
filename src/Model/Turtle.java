@@ -5,55 +5,23 @@ import javafx.scene.shape.Rectangle;
 
 public class Turtle implements Character {
 
-	private TurtleState myState;
+	private TurtleState myCurrentState;
+	private TurtleState myNextState;
 	private String myName;
-	private boolean penDown;
-	private double xCoor;
-	private double yCoor;
-	private double direction;
-	private boolean isHidden;
-	private static final int TURTSIZE = 50;
+	private int TURTLE_SIZE = 50;
 
 	public Turtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) {
-		this.myState = new TurtleState(xCoor, yCoor, penDown, direction, isHidden);
+		this.myCurrentState = new TurtleState(xCoor, yCoor, penDown, direction, isHidden);
+		this.myNextState = null;
 		this.myName = myName;
-		this.penDown = penDown;
-		this.xCoor = xCoor;
-		this.yCoor = yCoor;
-		this.direction = direction;
-		this.isHidden = isHidden;
 	}
 
 	private Character step(CharacterState myState) {
 		
 	}
-
+	
 	public CharacterState getState() {
-		return myState;
-	}
-
-	private void move() {
-
-	}
-
-	private void rotate() {
-
-	}
-
-	public void penDown() {
-		this.penDown = true;
-	}
-
-	public void penUp() {
-		this.penDown = false;
-	}
-
-	public boolean isItHidden() {
-		return isItHidden();
-	}
-
-	public void setHidden(boolean hide) {
-		this.isHidden = hide;
+		return myCurrentState;
 	}
 
 	public String getName() {

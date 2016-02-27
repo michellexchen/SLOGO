@@ -14,32 +14,34 @@ public class TurtleState implements CharacterState {
 		this.direction = direction;
 		this.isHidden = isHidden;
 	}
-
-	public void updateState(TurtleState newState) {
-		xCoor = newState.getXCoor();
-		yCoor = newState.getYCoor();
-		penDown = newState.getPenDown();
-		direction = newState.getDirection();
-		isHidden = newState.getHidden();
+	
+	public CharacterState move() {
+		
+	}
+	
+	public CharacterState rotate() {
+		
+	}
+	
+	public CharacterState penDown() {
+		
+	}
+	
+	public CharacterState penUp() {
+		
+	}
+	
+	public CharacterState setHidden(boolean hide) {
+		this.isHidden = hide;
 	}
 
-	public double getXCoor() {
-		return xCoor;
-	}
+//	public void updateState(TurtleState newState) {
+//		xCoor = newState.getXCoor();
+//		yCoor = newState.getYCoor();
+//		penDown = newState.getPenDown();
+//		direction = newState.getDirection();
+//		isHidden = newState.getHidden();
+//	}
 
-	public double getYCoor() {
-		return yCoor;
-	}
-
-	public boolean getPenDown() {
-		return penDown;
-	}
-
-	public double getDirection() {
-		return direction;
-	}
-
-	public boolean getHidden() {
-		return isHidden;
-	}
+	
 }
