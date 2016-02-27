@@ -1,13 +1,24 @@
 package Model;
 
 public interface CharacterState {
-	public double getXCoor();
-
-	public double getYCoor();
-
-	public double getDirection();
-
-	public boolean getPenDown();
-
-	public boolean getHidden();
+	
+	public CharacterState move() {
+		
+	}
+	
+	public CharacterState rotate() {
+		
+	}
+	
+	public CharacterState penDown() {
+		
+	}
+	
+	public CharacterState penUp() {
+		
+	}
+	
+	public CharacterState setHidden(boolean hide) {
+		
+	}
 }
