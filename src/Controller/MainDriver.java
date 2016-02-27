@@ -2,6 +2,9 @@ package Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
 import Model.CommandTree;
 import Model.MainModel;
 import Model.Turtle;
@@ -15,7 +18,7 @@ public class MainDriver extends Application {
 		launch(args);
 	}
 
-	public void start(Stage myStage) throws SLogoException {
+	public void start(Stage myStage) throws SLogoException, IOException {
 		MainView myView = new MainView();
 		try {
 			myView.addProject();
@@ -24,7 +27,7 @@ public class MainDriver extends Application {
 			myView.showError(e);
 		}
 		MainModel myModel = new MainModel();
-		myModel.createBackend();
+		//myModel.createBackend();
 	}
 
 

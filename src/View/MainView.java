@@ -48,14 +48,14 @@ public class MainView {
 		//TODO: Code for restasrting
 	}
 
-	public void addProject() throws SLogoException{
+	public void addProject() throws SLogoException, IOException{
 		Project myNewProject = new Project();
 
 		try {
 			myNewProject.initialize();
-		} catch (IOException e) {
+		} catch (SLogoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();//Remove
 		}
 		getMyProjects().add(myNewProject);
 	}

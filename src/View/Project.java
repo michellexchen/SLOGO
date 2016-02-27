@@ -25,13 +25,13 @@ public class Project {
 		
 	}
 
-	public void initialize() throws IOException {
+	public void initialize() throws SLogoException, IOException {
 
 	    Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();
 		myProjectStage.setScene(myProjectScene);
-		myProjectStage.setTitle("SLOGO");
+		myProjectStage.setTitle("SLogo");
 	    
 	}
 	
