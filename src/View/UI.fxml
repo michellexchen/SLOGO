@@ -66,7 +66,7 @@
               <children>
                 <Label layoutX="11.0" layoutY="6.0" prefWidth="128.0" text="My Variables">
                   <stylesheets>
-                    <URL value="file:/Users/Michelle/Documents/workspace/slogo_team18/src/style.css" />
+                    <URL value="@../style.css" />
                   </stylesheets>
                 </Label>
               </children>
@@ -75,7 +75,7 @@
         </ScrollPane>
         <Button layoutX="530.0" layoutY="312.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="114.0" style="" text="CUSTOMIZE">
           <stylesheets>
-            <URL value="file:/Users/Michelle/Documents/workspace/slogo_team18/src/style.css" />
+            <URL value="@../style.css" />
           </stylesheets>
         </Button>
       </children>
