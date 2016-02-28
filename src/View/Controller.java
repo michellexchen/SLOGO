@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,8 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -40,16 +45,16 @@ public class Controller
 	private List<String> myHistory;
 	
     @FXML 
-    private Hyperlink helpHyperlink;
-    
+    private Hyperlink helpHyperlink;   
     @FXML
     private TextField command;
-    
     @FXML
     private Button run;
-    
     @FXML
     private ScrollPane history;
+    
+    @FXML
+    private MenuButton menu;
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -99,12 +104,12 @@ public class Controller
     	return command.getText();
     }
     
-    public void displayHistory(){
+    private void displayHistory(){
     	myHistoryView = new ListView<String>();
     	ObservableList<String> items =FXCollections.observableArrayList (
     			myHistory);
     	myHistoryView.setItems(items);
     	history.setContent(myHistoryView);
-    }
+    }    
         
 }

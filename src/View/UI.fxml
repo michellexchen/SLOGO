@@ -14,20 +14,16 @@
       <children>
         <Pane layoutX="172.0" layoutY="14.0" prefHeight="377.0" prefWidth="377.0" style="" styleClass="screen">
           <children>
-            <Label layoutX="11.0" layoutY="7.0" text="Project 1" />
+            <Label id="labe" fx:id="project" layoutX="11.0" layoutY="7.0" text="hi" />
           </children>
           <stylesheets>
             <URL value="@../style.css" />
           </stylesheets>
         </Pane>
-        <MenuButton layoutX="7.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="157.0" style="" text="Choose Project" textFill="BLACK" wrapText="false">
+        <MenuButton id="projectMenu" fx:id="menu" layoutX="7.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="157.0" style="" text="Choose Project" textFill="BLACK" wrapText="false">
           <font>
             <Font size="11.0" />
           </font>
-          <items>
-            <MenuItem mnemonicParsing="false" text="Project1" />
-            <MenuItem mnemonicParsing="false" text="Project2" />
-          </items>
           <stylesheets>
             <URL value="@../style.css" />
           </stylesheets>
