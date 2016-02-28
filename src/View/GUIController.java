@@ -20,6 +20,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -35,39 +36,37 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
-public class GUIController
-
-    implements Initializable {
+public class GUIController implements Initializable {
 	
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
-	private ListView<String> myHistoryView;
-	private List<String> myHistory;
+	private ListView<String> myHistoryPaneView;
+	private List<String> mymyHistoryPane;
 	
     @FXML 
     private Hyperlink helpHyperlink;   
     @FXML
-    private TextField command;
+    private TextField myCommand;
     @FXML
-    private Button run;
+    private Button myRunButton;
     @FXML
-    private ScrollPane history;
+    private ScrollPane myHistoryPane;
     
     @FXML
-    private MenuButton menu;
+    private MenuButton myMenu;
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	myHistory = new ArrayList<String>(); //initialize history
+    	mymyHistoryPane = new ArrayList<String>(); //initialize myHistoryPane
     	helpLink(); //help button
-        runCommand(); //run button
+        myRunButtonmyCommand(); //myRunButton button
     }
 
     private void helpLink(){
     	helpHyperlink.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				popup("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php");	            
+				popup("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/myCommands.php");	            
 			}
     	});
     }
@@ -79,7 +78,7 @@ public class GUIController
     	VBox vbox = new VBox();
         Scene scene = new Scene(vbox);
         Stage stage = new Stage();        
-        stage.setTitle("SLOGO Basic command");
+        stage.setTitle("SLOGO Basic myCommand");
         stage.setWidth(900);
         stage.setHeight(550);
         vbox.getChildren().addAll(myBrowser);
@@ -88,28 +87,28 @@ public class GUIController
         stage.show();
     }
 
-    private void runCommand(){
-    	run.setOnAction(new EventHandler<ActionEvent>() {
+    private void myRunButtonmyCommand(){
+    	myRunButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-	    		sendCommand();
-	    		myHistory.add(command.getText());
-	    		displayHistory();
-	    		command.clear();
+	    		sendmyCommand();
+	    		mymyHistoryPane.add(myCommand.getText());
+	    		displayHistoryPane();
+	    		myCommand.clear();
 			}
     	});
     }
     
-    public String sendCommand(){ //to send to backend?
-    	return command.getText();
+    public String sendmyCommand(){ //to send to backend?
+    	return myCommand.getText();
     }
     
-    private void displayHistory(){
-    	myHistoryView = new ListView<String>();
+    private void displayHistoryPane(){
+    	myHistoryPaneView = new ListView<String>();
     	ObservableList<String> items =FXCollections.observableArrayList (
-    			myHistory);
-    	myHistoryView.setItems(items);
-    	history.setContent(myHistoryView);
+    			mymyHistoryPane);
+    	myHistoryPaneView.setItems(items);
+    	myHistoryPane.setContent(myHistoryPaneView);
     }    
         
 }

@@ -11,6 +11,7 @@ import java.util.Observable;
  */
 public class DisplayData extends Observable {
 
+	
 	/**
 	 * 
 	 */
