@@ -12,7 +12,9 @@ public class MainDriver extends Application {
 
 
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args); 
+		Application.launch(MainDriver.class, (java.lang.String[])null);
+		
 	}
 
 	public void start(Stage myStage) throws SLogoException {
@@ -23,9 +25,11 @@ public class MainDriver extends Application {
 		} catch (SLogoException e) {
 			myView.showError(e);
 		}
-		MainModel myModel = new MainModel();
-		myModel.createBackend();
+//		MainModel myModel = new MainModel();
+//		myModel.createBackend();
 	}
+	
+	
 
 
 }
