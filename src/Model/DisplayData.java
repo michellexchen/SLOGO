@@ -3,17 +3,20 @@
  */
 package Model;
 
+import java.util.List;
 import java.util.Observable;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 /**
  * @author Hunter
  *
  */
 public class DisplayData extends Observable {
-
+	private Position myPosition;
+	
 	private double xCoordinate;
 	private double yCoordinate;
 	private double myAngle;
@@ -23,17 +26,19 @@ public class DisplayData extends Observable {
 	private Color penColor;
 	private ImageView myImage;
 	
-	
+	private List<Line> myLines;
 	/**
 	 * Constructor that sets initial values
 	 * 
 	 * @param xCoordinate, yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public DisplayData(double x, double y, double angle, boolean penDown,
+	public DisplayData(Position position, double angle, boolean penDown,
 			Color penColor, ImageView image) {
 		
-		this.xCoordinate = x;
-		this.yCoordinate = y;
+//		this.xCoordinate = x;
+//		this.yCoordinate = y;
+		this.myPosition = position;
+		
 		this.myAngle = angle;
 		this.penDown = penDown;
 		this.penColor = penColor;
@@ -42,57 +47,72 @@ public class DisplayData extends Observable {
 	}
 	
 	/**
-	 * Set the state of DisplayData as 'changed'
+	 * Set the hasState value of DisplayData as 'changed'
 	 * and notify all Observers
 	 * 
 	 * @param None
 	 */
-	private void changed() {
+	private void applyChanges() {
 		setChanged();
 		notifyObservers();
 	}
 	
-	public double getxCoordinate() {
+	
+	public void addLine(Line newline) {
+		myLines.add(newline);
+	}
+	
+	
+	
+	public double getX() {
 		return xCoordinate;
 	}
-	public void setxCoordinate(double xCoordinate) {
-		changed();
+	public void setX(double xCoordinate) {
+		//changed();
 		this.xCoordinate = xCoordinate;
 	}
-	public double getyCoordinate() {
+	public double getY() {
 		return yCoordinate;
 	}
-	public void setyCoordinate(double yCoordinate) {
-		changed();
+	public void setY(double yCoordinate) {
+		//changed();
 		this.yCoordinate = yCoordinate;
 	}
-	public double getMyAngle() {
+	public double getAngle() {
 		return myAngle;
 	}
-	public void setMyAngle(double myAngle) {
-		changed();
+	public void setAngle(double myAngle) {
+		//changed();
 		this.myAngle = myAngle;
 	}
 	public boolean isPenDown() {
 		return penDown;
 	}
 	public void setPenDown(boolean penDown) {
-		changed();
+		//changed();
 		this.penDown = penDown;
 	}
 	public Color getPenColor() {
 		return penColor;
 	}
 	public void setPenColor(Color penColor) {
-		changed();
+		//changed();
 		this.penColor = penColor;
 	}
-	public ImageView getMyImage() {
+	public ImageView getImage() {
 		return myImage;
 	}
-	public void setMyImage(ImageView myImage) {
-		changed();
+	public void setImage(ImageView myImage) {
+		//changed();
 		this.myImage = myImage;
+	}
+	
+	public Position getPosition() {
+		return myPosition;
+	}
+
+	public void setPosition(Position myPosition) {
+		this.myPosition = myPosition;
 	}
 
 
