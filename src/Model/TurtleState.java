@@ -1,45 +1,25 @@
 package Model;
 
-public class TurtleState implements CharacterState {
-	private double xCoor;
-	private double yCoor;
+/**
+ * SLogo's TurtleState, a class extending abstract CharacterState to control Turtle-only functions (currently pen)
+ *
+ */
+
+public class TurtleState extends CharacterState{
+
 	private boolean penDown;
-	private double direction;
-	private boolean isHidden;
-
-	public TurtleState(double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) {
-		this.xCoor = xCoor;
-		this.yCoor = yCoor;
+	
+	public TurtleState(double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown) {
+		super(xCoor, yCoor, direction, isHidden);
 		this.penDown = penDown;
-		this.direction = direction;
-		this.isHidden = isHidden;
 	}
-
-	public void updateState(TurtleState newState) {
-		xCoor = newState.getXCoor();
-		yCoor = newState.getYCoor();
-		penDown = newState.getPenDown();
-		direction = newState.getDirection();
-		isHidden = newState.getHidden();
+	
+	public void setPen(boolean penDown) {
+		this.penDown = penDown;
 	}
-
-	public double getXCoor() {
-		return xCoor;
-	}
-
-	public double getYCoor() {
-		return yCoor;
-	}
-
-	public boolean getPenDown() {
+	
+	public boolean getPen(){
 		return penDown;
 	}
-
-	public double getDirection() {
-		return direction;
-	}
-
-	public boolean getHidden() {
-		return isHidden;
-	}
+	
 }
