@@ -1,7 +1,7 @@
 /**
  * 
  */
-package View;
+package Controller;
 
 /**
  * SLogo's Exception class that extends Exception abstract class

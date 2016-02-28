@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import Model.MainModel;
 import View.MainView;
-import View.SLogoException;
 
 public class MainDriver extends Application {
 

@@ -3,6 +3,8 @@ package View;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+
+import Controller.SLogoException;
 import Model.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
