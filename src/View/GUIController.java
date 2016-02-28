@@ -39,8 +39,8 @@ public class GUIController
 
     implements Initializable {
 	
-	private WebView browser;
-	private WebEngine webEngine;
+	private WebView	myBrowser;
+	private WebEngine myWebEngine;
 	private ListView<String> myHistoryView;
 	private List<String> myHistory;
 	
@@ -73,17 +73,17 @@ public class GUIController
     }
     
     private void popup(String link){
-		browser = new WebView();
-        webEngine = browser.getEngine();
-        webEngine.load(link);
+		myBrowser = new WebView();
+        myWebEngine = myBrowser.getEngine();
+        myWebEngine.load(link);
     	VBox vbox = new VBox();
         Scene scene = new Scene(vbox);
         Stage stage = new Stage();        
         stage.setTitle("SLOGO Basic command");
         stage.setWidth(900);
         stage.setHeight(550);
-        vbox.getChildren().addAll(browser);
-        VBox.setVgrow(browser, Priority.ALWAYS);        
+        vbox.getChildren().addAll(myBrowser);
+        VBox.setVgrow(myBrowser, Priority.ALWAYS);        
         stage.setScene(scene);
         stage.show();
     }
