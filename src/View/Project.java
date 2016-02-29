@@ -23,6 +23,7 @@ public class Project {
 	
 	private FXMLLoader myLoader;
 	private GUIController myGUIController;
+	private Parent root;
 	
 	//Visualization Primitives
 	//private Group myRoot;
@@ -40,9 +41,9 @@ public class Project {
 	}
 
 	public void initialize () throws SLogoException, IOException {
-		myLoader = new FXMLLoader();
-	    Parent root = myLoader.load(getClass().getResource("UI.fxml"));
-	    myGUIController = myLoader.getController();
+		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
+	    root = (Parent) myLoader.load();
+	    myGUIController = (GUIController) myLoader.getController();
 	    myGUIController.setMyModel(myModel);
 
 		myProjectScene = new Scene(root);
