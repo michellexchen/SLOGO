@@ -133,6 +133,11 @@ public class GUIController implements Initializable, View  {
         	myTextField.clear();
         	setCommand(myCommand);
         	
+        	/*
+        	 * TODO: Call Model's readCommand that calls
+        	 * View's getCommand
+        	 * and passes the command to the parser
+        	 */
         });
         
         
