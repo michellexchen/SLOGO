@@ -53,13 +53,19 @@ public class GUIController implements Initializable {
     private ScrollPane myHistoryPane;
     
     @FXML
+    private Button helpButton;
+    
+    @FXML
     private MenuButton myMenu;
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
     	mymyHistoryPane = new ArrayList<String>(); //initialize myHistoryPane
-    	helpLink(); //help button
-        myRunButtonmyCommand(); //myRunButton button
+    	//helpLink(); //help button
+        //myRunButtonmyCommand(); //myRunButton button
+        helpButton.setOnAction(e -> {
+        	popup("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/myCommands.php");
+        });
     }
 
     private void helpLink(){
