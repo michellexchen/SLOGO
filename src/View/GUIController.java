@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Model.MainModel;
+import Model.Model;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -254,6 +255,46 @@ public class GUIController implements Initializable, View  {
 
 	public void setMyMenuItems(List<MenuItem> myMenuItems) {
 		this.myMenuItems = myMenuItems;
+	}
+
+
+
+
+	/**
+	 * @return the myModel
+	 */
+	public MainModel getModel() {
+		return myModel;
+	}
+
+
+
+
+	/**
+	 * @param myModel the myModel to set
+	 */
+	public void setModel(MainModel myModel) {
+		this.myModel = myModel;
+	}
+
+
+
+
+	/**
+	 * @return the myView
+	 */
+	public MainView getView() {
+		return myView;
+	}
+
+
+
+
+	/**
+	 * @param myView the myView to set
+	 */
+	public void setView(MainView myView) {
+		this.myView = myView;
 	}    
         
 }

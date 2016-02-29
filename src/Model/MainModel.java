@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.TreeFactory;
+import View.View;
 
 public class MainModel implements Model {
 
@@ -10,9 +11,16 @@ public class MainModel implements Model {
 	
 	//Command that was read in by clicking Run button
 	private String myCommand;
+	private View myView;
 	
 	public MainModel() {
 		// TODO Auto-generated constructor stub
+
+	}
+	
+	public MainModel(View view) {
+		// TODO Auto-generated constructor stub
+		myView = view;
 	}
 	
 	
@@ -31,4 +39,34 @@ public class MainModel implements Model {
 		// TODO Auto-generated method stub
 		
 	}
+
+	/**
+	 * @return the myCommand
+	 */
+	public String getCommand() {
+		return myCommand;
+	}
+
+	/**
+	 * @param myCommand the myCommand to set
+	 */
+	public void setCommand(String myCommand) {
+		this.myCommand = myCommand;
+	}
+
+	/**
+	 * @return the myView
+	 */
+	public View getView() {
+		return myView;
+	}
+
+	/**
+	 * @param myView the View to set
+	 */
+	public void setView(View myView) {
+		this.myView = myView;
+	}
+
+
 }

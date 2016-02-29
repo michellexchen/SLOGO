@@ -17,6 +17,8 @@ public class Project {
 	private Canvas myCanvas;
 	private List<Node> myCommandHistory;
 	
+	private FXMLLoader myLoader;
+	private GUIController myGUIController;
 	
 	//Visualization Primitives
 	//private Group myRoot;
@@ -28,8 +30,10 @@ public class Project {
 	}
 
 	public void initialize () throws SLogoException, IOException {
+		myLoader = new FXMLLoader();
+	    Parent root = myLoader.load(getClass().getResource("UI.fxml"));
+	    myGUIController = (GUIController) myLoader.getController();
 
-	    Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();
 		myProjectStage.setScene(myProjectScene);
@@ -107,6 +111,34 @@ public class Project {
 
 	public void setMyProjectStage(Stage myProjectStage) {
 		this.myProjectStage = myProjectStage;
+	}
+
+	/**
+	 * @return the myLoader
+	 */
+	public FXMLLoader getLoader() {
+		return myLoader;
+	}
+
+	/**
+	 * @param myLoader the myLoader to set
+	 */
+	public void setLoader(FXMLLoader myLoader) {
+		this.myLoader = myLoader;
+	}
+
+	/**
+	 * @return the myGUIController
+	 */
+	public GUIController getGUIController() {
+		return myGUIController;
+	}
+
+	/**
+	 * @param myGUIController the myGUIController to set
+	 */
+	public void setGUIController(GUIController myGUIController) {
+		this.myGUIController = myGUIController;
 	}
 	
 }

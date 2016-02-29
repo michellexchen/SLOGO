@@ -6,9 +6,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import Controller.LanguagesDriver;
 import Controller.SLogoException;
+import Model.Model;
 
 
-public class MainView {
+public class MainView implements View {
 
 	private LanguagesDriver myLangDriver;
 	//	private Group myRoot;
@@ -17,6 +18,9 @@ public class MainView {
 	private CommandHistoryViewer myHistory;
 	private Project myCurrentProject;
 	private List<Project> myProjects;
+	
+	private String myCommand;
+	private Model myModel;
 
 	public MainView() {
 		myHistory = new CommandHistoryViewer();
@@ -24,6 +28,16 @@ public class MainView {
 		myLangDriver = new LanguagesDriver();
 		String language = "English"; // Get from UI
 		myLangDriver.load(language);
+	}
+	
+	public MainView(Model model) {
+		myHistory = new CommandHistoryViewer();
+		myProjects = new ArrayList<Project>();
+		myLangDriver = new LanguagesDriver();
+		String language = "English"; // Get from UI
+		myLangDriver.load(language);
+		
+		myModel = model;
 	}
 
 	public void showProject(Project project) throws SLogoException {
@@ -49,7 +63,7 @@ public class MainView {
 		//TODO: Code for restasrting
 	}
 
-	public void addProject() throws SLogoException, IOException{
+	public void addProject() throws IOException{
 		Project myNewProject = new Project();
 
 		try {
@@ -127,6 +141,37 @@ public class MainView {
 
 	public void setMyProject(List<Project> myProject) {
 		this.myProjects = myProject;
+	}
+
+	/**
+	 * @return the myModel
+	 */
+	public Model getModel() {
+		return myModel;
+	}
+
+	/**
+	 * @param myModel the myModel to set
+	 */
+	public void setModel(Model myModel) {
+		this.myModel = myModel;
+	}
+
+	
+
+	@Override
+	/**
+	 * @return the myCommand
+	 */
+	public String getCommand() {
+		return myCommand;
+	}
+
+	/**
+	 * @param myCommand the myCommand to set
+	 */
+	public void setCommand(String myCommand) {
+		this.myCommand = myCommand;
 	}
 
 
