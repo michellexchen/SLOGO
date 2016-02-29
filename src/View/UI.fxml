@@ -12,7 +12,7 @@
   <children>
     <AnchorPane id="AnchorPane" layoutX="0.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" styleClass="window">
       <children>
-        <Pane layoutX="172.0" layoutY="14.0" prefHeight="331.0" prefWidth="331.0" style="" styleClass="screen">
+        <Pane fx:id="myCanvas" layoutX="172.0" layoutY="14.0" prefHeight="331.0" prefWidth="331.0" style="" styleClass="screen">
           <children>
             <Label layoutX="11.0" layoutY="7.0" text="Project 1" />
           </children>
@@ -20,36 +20,35 @@
             <URL value="@../View/style.css" />
           </stylesheets>
         </Pane>
-        <Button fx:id="helpButton" layoutX="58.0" layoutY="353.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="53.0" style="" text="HELP">
+        <Button fx:id="myHelpButton" layoutX="59.0" layoutY="353.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="53.0" style="" text="HELP">
           <stylesheets>
             <URL value="@../View/style.css" />
           </stylesheets>
         </Button>
-        <MenuButton layoutX="7.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="157.0" style="" text="Choose Project" textFill="BLACK" wrapText="false">
+        <MenuButton fx:id="myMenu" layoutX="7.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="157.0" style="" text="Choose Project" textFill="BLACK" wrapText="false">
           <font>
             <Font size="11.0" />
           </font>
           <items>
             <MenuItem mnemonicParsing="false" text="Project1" />
-            <MenuItem mnemonicParsing="false" text="Project2" />
           </items>
           <stylesheets>
             <URL value="@../View/style.css" />
           </stylesheets>
         </MenuButton>
-        <TextField layoutX="172.0" layoutY="353.0" prefHeight="33.0" prefWidth="274.0" promptText="Enter command here...">
+        <TextField fx:id="myTextField" layoutX="172.0" layoutY="353.0" prefHeight="33.0" prefWidth="274.0" promptText="Enter command here...">
           <stylesheets>
             <URL value="@../View/style.css" />
           </stylesheets>
         </TextField>
-        <Button layoutX="450.0" layoutY="353.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="53.0" style="" text="RUN">
+        <Button fx:id="myRunButton" layoutX="450.0" layoutY="353.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="53.0" style="" text="RUN">
           <stylesheets>
             <URL value="@../View/style.css" />
           </stylesheets>
         </Button>
         <ScrollPane layoutX="7.0" layoutY="43.0" prefHeight="302.0" prefWidth="157.0" vbarPolicy="ALWAYS">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="149.0">
+            <AnchorPane id="Content" fx:id="myCommandHistoryPane" minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="149.0">
               <children>
                 <Label layoutX="11.0" layoutY="6.0" prefWidth="128.0" text="Command History">
                   <stylesheets>
@@ -62,7 +61,7 @@
         </ScrollPane>
         <ScrollPane layoutX="511.0" layoutY="14.0" prefHeight="287.0" prefWidth="157.0" vbarPolicy="ALWAYS">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="149.0">
+            <AnchorPane id="Content" fx:id="myVariablePane" minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="149.0">
               <children>
                 <Label layoutX="11.0" layoutY="6.0" prefWidth="128.0" text="My Variables">
                   <stylesheets>
@@ -73,7 +72,7 @@
             </AnchorPane>
           </content>
         </ScrollPane>
-        <Button layoutX="530.0" layoutY="312.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="114.0" style="" text="CUSTOMIZE">
+        <Button fx:id="myCustomizeButton" layoutX="530.0" layoutY="312.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="114.0" style="" text="CUSTOMIZE">
           <stylesheets>
             <URL value="@../View/style.css" />
           </stylesheets>

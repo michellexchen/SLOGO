@@ -23,11 +23,11 @@ public class Project {
 	private Scene myProjectScene;
 	private Stage myProjectStage;
 	
-	public Project() {
+	public Project () {
 		
 	}
 
-	public void initialize() throws SLogoException, IOException {
+	public void initialize () throws SLogoException, IOException {
 
 	    Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
 		myProjectScene = new Scene(root);
@@ -38,21 +38,21 @@ public class Project {
 	}
 	
 	
-	public void updateStates() {
+	public void updateStates () {
 		
 		
 	}
 
-	public void show() throws SLogoException{
+	public void show () throws SLogoException {
 		getStage().show();
 	}
 	
-	public void hide() {
+	public void hide () {
 		
 		
 	}
 	
-	public void setBackgroundColor() {
+	public void setBackgroundColor () {
 		
 		
 	}
@@ -74,7 +74,7 @@ public class Project {
 	}
 
 
-	public Canvas getMyCanvas() {
+	public Canvas getMyCanvas () {
 		return myCanvas;
 	}
 
