@@ -75,6 +75,17 @@ public class MainView implements View {
 		getMyProjects().add(myNewProject);
 	}
 
+	public void addProject(Model model) throws IOException{
+		Project myNewProject = new Project(model);
+
+		try {
+			myNewProject.initialize();
+		} catch (SLogoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();//Remove
+		}
+		getMyProjects().add(myNewProject);
+	}
 
 	//////////////////////////
 	// getters and setters  //

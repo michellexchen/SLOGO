@@ -46,11 +46,11 @@ public class GUIController implements Initializable, View  {
 	private List<String> mymyHistoryPane;
 	
 	//Model to interact with
-	private MainModel myModel;
+	private Model myModel;
 	
 	
 	//View to interact with
-	private MainView myView;
+	private View myView;
 	
 	
 	
@@ -138,6 +138,8 @@ public class GUIController implements Initializable, View  {
         	 * View's getCommand
         	 * and passes the command to the parser
         	 */
+        	getMyModel().readCommand(myCommand);
+        	
         });
         
         
@@ -264,13 +266,13 @@ public class GUIController implements Initializable, View  {
 
 
 
-
-	/**
-	 * @return the myModel
-	 */
-	public MainModel getModel() {
-		return myModel;
-	}
+//
+//	/**
+//	 * @return the myModel
+//	 */
+//	public MainModel getModel() {
+//		return myModel;
+//	}
 
 
 
@@ -283,12 +285,52 @@ public class GUIController implements Initializable, View  {
 	}
 
 
+//
+//
+//	/**
+//	 * @return the myView
+//	 */
+//	public MainView getView() {
+//		return myView;
+//	}
+//
+
+
+
+	/**
+	 * @param myView the myView to set
+	 */
+	public void setView(MainView myView) {
+		this.myView = myView;
+	}
+
+
+
+
+	/**
+	 * @return the myModel
+	 */
+	public Model getMyModel() {
+		return myModel;
+	}
+
+
+
+
+	/**
+	 * @param myModel the myModel to set
+	 */
+	public void setMyModel(Model myModel) {
+		this.myModel = myModel;
+	}
+
+
 
 
 	/**
 	 * @return the myView
 	 */
-	public MainView getView() {
+	public View getMyView() {
 		return myView;
 	}
 
@@ -298,7 +340,7 @@ public class GUIController implements Initializable, View  {
 	/**
 	 * @param myView the myView to set
 	 */
-	public void setView(MainView myView) {
+	public void setMyView(View myView) {
 		this.myView = myView;
 	}    
         

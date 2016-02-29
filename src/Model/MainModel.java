@@ -37,9 +37,15 @@ public class MainModel implements Model {
 	@Override
 	public void readCommand(String command) {
 		// TODO Auto-generated method stub
+		setCommand(command);
 		
+		//TEST
+		System.out.println(getCommand());
 	}
 
+	//public void 
+	
+	
 	/**
 	 * @return the myCommand
 	 */

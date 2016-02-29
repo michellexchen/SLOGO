@@ -29,7 +29,8 @@ public class MainDriver extends Application {
 		myModel.setView(myView);
 		
 		try {
-			myView.addProject();
+			myView.addProject(myModel);
+			//myView.getMyProjects().get(0).setMyModel(myModel);
 			myView.getMyProjects().get(0).show();
 		} catch (SLogoException e) {
 			myView.showError(e);

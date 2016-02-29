@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 import Controller.SLogoException;
+import Model.DisplayData;
+import Model.Model;
 import Model.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +15,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
 public class Project {
-	private List<Character> myCharacters;
-	private Canvas myCanvas;
+	//private List<Character> myCharacters;
+	//private Canvas myCanvas;
 	private List<Node> myCommandHistory;
+	
+	private List<DisplayData> myDisplayData;
 	
 	private FXMLLoader myLoader;
 	private GUIController myGUIController;
@@ -25,14 +29,21 @@ public class Project {
 	private Scene myProjectScene;
 	private Stage myProjectStage;
 	
+	private Model myModel;
+	
 	public Project () {
 		
+	}
+	
+	public Project (Model model) {
+		myModel = model;
 	}
 
 	public void initialize () throws SLogoException, IOException {
 		myLoader = new FXMLLoader();
 	    Parent root = myLoader.load(getClass().getResource("UI.fxml"));
-	    myGUIController = (GUIController) myLoader.getController();
+	    myGUIController = myLoader.getController();
+	    myGUIController.setMyModel(myModel);
 
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();
@@ -40,6 +51,9 @@ public class Project {
 		myProjectStage.setTitle("SLogo");
 	    
 	}
+	
+	
+	
 	
 	
 	public void updateStates () {
@@ -68,24 +82,24 @@ public class Project {
 	//////////////////////////
 	// getters and setters  //
 	//////////////////////////
-	public Collection<Character> getMyCharacters() {
-		return myCharacters;
-	}
-
-
-	public void setMyCharacters(List<Character> myCharacters) {
-		this.myCharacters = myCharacters;
-	}
-
-
-	public Canvas getMyCanvas () {
-		return myCanvas;
-	}
-
-
-	public void setMyCanvas(Canvas myCanvas) {
-		this.myCanvas = myCanvas;
-	}
+//	public Collection<Character> getMyCharacters() {
+//		return myCharacters;
+//	}
+//
+//
+//	public void setMyCharacters(List<Character> myCharacters) {
+//		this.myCharacters = myCharacters;
+//	}
+//
+//
+//	public Canvas getMyCanvas () {
+//		return myCanvas;
+//	}
+//
+//
+//	public void setMyCanvas(Canvas myCanvas) {
+//		this.myCanvas = myCanvas;
+//	}
 
 
 	public Collection<Node> getMyCommandHistory() {
@@ -139,6 +153,34 @@ public class Project {
 	 */
 	public void setGUIController(GUIController myGUIController) {
 		this.myGUIController = myGUIController;
+	}
+
+	/**
+	 * @return the myDisplayData
+	 */
+	public List<DisplayData> getMyDisplayData() {
+		return myDisplayData;
+	}
+
+	/**
+	 * @param myDisplayData the myDisplayData to set
+	 */
+	public void setMyDisplayData(List<DisplayData> myDisplayData) {
+		this.myDisplayData = myDisplayData;
+	}
+
+	/**
+	 * @return the myModel
+	 */
+	public Model getMyModel() {
+		return myModel;
+	}
+
+	/**
+	 * @param myModel the myModel to set
+	 */
+	public void setMyModel(Model myModel) {
+		this.myModel = myModel;
 	}
 	
 }
