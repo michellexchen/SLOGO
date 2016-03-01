@@ -49,13 +49,9 @@ public class NodeFactory {
 
 	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException{
 		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
-		List<String> remainders = new ArrayList<String>();
 		Node child = createNode(myNodes.get(0));
 		myNodes.remove(0);
-		for(int x=0; x<myNodes.size(); x++){
-			remainders.add(myNodes.get(x));
-		}
-		childToRemaindersMap.put(child, remainders);
+		childToRemaindersMap.put(child, myNodes);
 		if(myNodes.size() > 0){
 			double numChildren = child.getNumChildren();
 			for(int x=0; x<numChildren; x++){
