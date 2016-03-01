@@ -35,7 +35,7 @@ public class NodeFactory {
 				node = new NumericNode(Double.parseDouble(currNode));
 			}
 			else{
-				// Throw illegal command exception
+				// TODO: Throw illegal command exception
 			}
 		}
 		else{
@@ -45,7 +45,7 @@ public class NodeFactory {
 				cls = Class.forName("Model."+clsName);
 				node = (Node) cls.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				// Throw command not implemented exception
+				// TODO: Throw command not implemented exception
 			}
 		}
 		myNodes.remove(0);

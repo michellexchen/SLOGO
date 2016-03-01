@@ -27,6 +27,7 @@ public class MainDriver extends Application {
 		myModel = new MainModel();
 		myView = new MainView();
 		myModel.setView(myView);
+		myModel.initialize();
 		
 		try {
 			myView.addProject(myModel);
@@ -35,7 +36,6 @@ public class MainDriver extends Application {
 		} catch (SLogoException e) {
 			myView.showError(e);
 		}
-		myModel.createBackend();
 	}
 
 }

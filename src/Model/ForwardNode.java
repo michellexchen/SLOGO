@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import Model.TurtleCommandNode;
 
 public class ForwardNode extends TurtleCommandNode{
@@ -22,5 +21,9 @@ public class ForwardNode extends TurtleCommandNode{
 
 	public int getNumChildren() {
 		return NUM_CHILDREN;
+	}
+	
+	public String toString(){
+		return "Forward";
 	}
 }

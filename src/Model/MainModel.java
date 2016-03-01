@@ -13,6 +13,9 @@ public class MainModel implements Model {
 	private String myCommand;
 	private View myView;
 	
+	private TreeFactory myTreeFactory;
+	private Workspace myWorkspace;
+	
 	public MainModel() {
 		// TODO Auto-generated constructor stub
 
@@ -23,28 +26,17 @@ public class MainModel implements Model {
 		myView = view;
 	}
 	
-	
-	public void createBackend() {
-		Turtle ogTurt = new Turtle("OG", VIEW_WIDTH / 2, VIEW_HEIGHT / 2, true, 0, false);
-		//myRoot.getChildren().add(ogTurt.getTurtle());
-		TreeFactory tf = new TreeFactory();
-		String command = "forward 50";
-		CommandTree myTree = tf.makeTree(command);
-		myTree.traverse(ogTurt.getState());
+	public void initialize(){
+		myWorkspace = new Workspace();
+		myWorkspace.createTurtle();
+		myTreeFactory = new TreeFactory();
 	}
 
-
-	@Override
-	public void readCommand(String command) {
-		// TODO Auto-generated method stub
+	public void readCommand(String command){
 		setCommand(command);
-		
-		//TEST
-		System.out.println(getCommand());
+		CommandTree myTree = myTreeFactory.makeTree(command);
+		myTree.traverse(myWorkspace.getCharacterList().get(0).getState());
 	}
-
-	//public void 
-	
 	
 	/**
 	 * @return the myCommand
@@ -73,6 +65,5 @@ public class MainModel implements Model {
 	public void setView(View myView) {
 		this.myView = myView;
 	}
-
 
 }
