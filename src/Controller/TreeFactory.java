@@ -42,7 +42,7 @@ public class TreeFactory {
 	public void createChildren(Node root, List<String> nodeList) throws SLogoException {
 		System.out.println("CREATING "+root.getNumChildren()+" CHILDREN");
 		for (int x = 0; x < root.getNumChildren(); x++) {
-			HashMap<Node, List<String>> childToRemaindersMap = nodeFactory.createChild(nodeList);
+			HashMap<Node, List<String>> childToRemaindersMap = createChild(nodeList);
 			Iterator it = childToRemaindersMap.entrySet().iterator();
 			Map.Entry pair = (Map.Entry) it.next();
 			Node child = (Node) pair.getKey();
@@ -50,6 +50,24 @@ public class TreeFactory {
 			((CommandNode) root).addChild(child);
 			System.out.println("NEW CHILD: " + child + " REMAINDERS: " + nodeList);
 		}
+	}
+	
+	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException {
+		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
+		Node child = nodeFactory.createNode(myNodes.get(0));
+		myNodes.remove(0);
+		childToRemaindersMap.put(child, myNodes);
+		if (myNodes.size() > 0) {
+			for (int x = 0; x < child.getNumChildren(); x++) {
+				HashMap<Node, List<String>> childChildToRemaindersMap = createChild(myNodes);
+				Iterator it = childChildToRemaindersMap.entrySet().iterator();
+				Map.Entry pair = (Map.Entry) it.next();
+				Node childChild = (Node) pair.getKey();
+				myNodes = (List<String>) pair.getValue();
+				((CommandNode) child).addChild(childChild);
+			}
+		}
+		return childToRemaindersMap;
 	}
 
 	public List<String> format(String text) throws SLogoException {
