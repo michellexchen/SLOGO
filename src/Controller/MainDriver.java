@@ -16,18 +16,17 @@ public class MainDriver extends Application {
 	private MainModel myModel;
 	private MainView myView;
 	private GUIController myGUI;
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	public void start(Stage myStage) throws SLogoException, IOException {
-		
-		
+
 		myModel = new MainModel();
 		myView = new MainView();
 		myModel.setView(myView);
-		
+
 		try {
 			myView.addProject(myModel);
 			myView.getMyProjects().get(0).setMyModel(myModel);

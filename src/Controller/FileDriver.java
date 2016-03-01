@@ -31,11 +31,11 @@ public abstract class FileDriver {
 		myProperties.load(myFileReader);
 	}
 
-	public void setDirectory(String directory){
+	public void setDirectory(String directory) {
 		this.directory = directory;
 	}
 
-	public void setExtension(String extension){
+	public void setExtension(String extension) {
 		this.extension = extension;
 	}
 
