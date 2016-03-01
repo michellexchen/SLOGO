@@ -2,7 +2,11 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import Model.CommandNode;
 import Model.MathNode;
 import Model.Node;
 import Model.NumericNode;
@@ -51,15 +55,27 @@ public class NodeFactory {
 		return node;
 	}
 	
-	public HashMap<Node, List<String>> createChild(List<String> myNodes){
+	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException{
 		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
 		List<String> remainders = new ArrayList<String>();
-		Node child = null;
 		// TODO: consider if child is a command
+		Node child = createNode(myNodes.get(0));
+		myNodes.remove(0);
 		for(int x=0; x<myNodes.size(); x++){
 			remainders.add(myNodes.get(x));
 		}
 		childToRemaindersMap.put(child, remainders);
+		if(myNodes.size() > 0){
+			double numChildren = child.getNumChildren();
+			for(int x=0; x<numChildren; x++){
+				HashMap<Node, List<String>> childChildToRemaindersMap = createChild(myNodes);
+				Iterator it = childToRemaindersMap.entrySet().iterator();
+				Map.Entry pair = (Map.Entry)it.next();
+				Node childChild = (Node) pair.getKey();
+				myNodes = (List<String>) pair.getValue();
+				((CommandNode)child).addChild(child);
+			}
+		}
 		return childToRemaindersMap;
 	}
 

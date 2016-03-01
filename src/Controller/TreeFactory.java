@@ -38,6 +38,7 @@ public class TreeFactory {
 				Map.Entry pair = (Map.Entry)it.next();
 				Node child = (Node) pair.getKey();
 				nodeList = (List<String>) pair.getValue();
+				((CommandNode)root).addChild(child);
 			}
 		}
 		return myTree;
