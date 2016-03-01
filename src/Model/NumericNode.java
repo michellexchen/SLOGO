@@ -8,6 +8,7 @@ package Model;
 
 public class NumericNode implements Node {
 
+	private int NUM_CHILDREN = 0;
 	private double myValue;
 
 	public NumericNode(double value) {
@@ -19,7 +20,7 @@ public class NumericNode implements Node {
 	}
 
 	public int getNumChildren() {
-		return 0;
+		return NUM_CHILDREN;
 	}
 	
 	public String toString(){

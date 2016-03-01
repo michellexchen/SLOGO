@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.SLogoException;
+
 /**
  * SLogo's highest level in Node hierarchy
  * 
@@ -7,8 +9,7 @@ package Model;
  */
 
 public interface Node {
-	public abstract double evaluate(CharacterState state);
-
+	public abstract double evaluate(CharacterState state) throws SLogoException;
 	public abstract int getNumChildren();
 	public abstract String toString();
 }

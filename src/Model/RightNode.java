@@ -1,14 +1,16 @@
 package Model;
 
-public class RightNode extends TurnNode {
-	private final static int NUM_CHILDREN = 1;
+import Controller.SLogoException;
 
-	public double calculateDir(double x, double y, CharacterState state) {
-		return -1 * getChildren().get(0).evaluate(state);
+public class RightNode extends TurnNode {
+	private int NUM_CHILDREN = 1;
+
+	public RightNode(){
+		setNumChildren(NUM_CHILDREN);
 	}
 
-	public int getNumChildren() {
-		return NUM_CHILDREN;
+	public double calculateDir(double x, double y, CharacterState state) throws SLogoException {
+		return -1 * getChildren().get(0).evaluate(state);
 	}
 
 }

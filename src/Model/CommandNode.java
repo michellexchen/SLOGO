@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public abstract class CommandNode implements Node {
 
 	private ArrayList<Node> children = new ArrayList<Node>();
+	private int NUM_CHILDREN;
 
 	public ArrayList<Node> getChildren() {
 		return children;
@@ -18,6 +19,14 @@ public abstract class CommandNode implements Node {
 
 	public void addChild(Node child) {
 		children.add(child);
+	}
+
+	public int getNumChildren() {
+		return NUM_CHILDREN;
+	}
+	
+	public void setNumChildren(int num){
+		NUM_CHILDREN = num;
 	}
 
 }

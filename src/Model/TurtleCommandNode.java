@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.SLogoException;
 import Model.CommandNode;
 import Model.Turtle;
 
@@ -20,5 +21,5 @@ public abstract class TurtleCommandNode extends CommandNode{
 		return myTurtle;
 	}
 	
-	public abstract double evaluate(CharacterState state);
+	public abstract double evaluate(CharacterState state) throws SLogoException;
 }
