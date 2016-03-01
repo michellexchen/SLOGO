@@ -1,47 +1,38 @@
 package Model;
 
-public class TurtleState implements CharacterState {
-	private double xCoor;
-	private double yCoor;
+import javafx.scene.paint.Color;
+
+/**
+ * SLogo's TurtleState, a class extending abstract CharacterState to control
+ * Turtle-only functions (currently pen)
+ *
+ */
+
+public class TurtleState extends CharacterState {
+
 	private boolean penDown;
-	private double direction;
-	private boolean isHidden;
+	private Color penColor;
 
-	public TurtleState(double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) {
-		this.xCoor = xCoor;
-		this.yCoor = yCoor;
+	public TurtleState(double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown, double angle) {
+		super(xCoor, yCoor, direction, isHidden, angle);
 		this.penDown = penDown;
-		this.direction = direction;
-		this.isHidden = isHidden;
-	}
-	
-	public CharacterState move() {
-		
-	}
-	
-	public CharacterState rotate() {
-		
-	}
-	
-	public CharacterState penDown() {
-		
-	}
-	
-	public CharacterState penUp() {
-		
-	}
-	
-	public CharacterState setHidden(boolean hide) {
-		this.isHidden = hide;
+		penColor = Color.BLACK;
 	}
 
-//	public void updateState(TurtleState newState) {
-//		xCoor = newState.getXCoor();
-//		yCoor = newState.getYCoor();
-//		penDown = newState.getPenDown();
-//		direction = newState.getDirection();
-//		isHidden = newState.getHidden();
-//	}
+	public void setPen(boolean penDown) {
+		this.penDown = penDown;
+	}
 
-	
+	public boolean getPen() {
+		return penDown;
+	}
+
+	public Color getPenColor() {
+		return penColor;
+	}
+
+	public void setPenColor(Color penColor) {
+		this.penColor = penColor;
+	}
+
 }

@@ -1,27 +1,29 @@
 package Model;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+/**
+ * SLogo's Turtle with a TurtleState and name
+ *
+ */
 
 public class Turtle implements Character {
 
-	private TurtleState myCurrentState;
-	private TurtleState myNextState;
-	private String myName;
-	private int TURTLE_SIZE = 50;
+	TurtleState myState;
+	String myName;
 
-	public Turtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) {
-		this.myCurrentState = new TurtleState(xCoor, yCoor, penDown, direction, isHidden);
-		this.myNextState = null;
+	public Turtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden,
+			double angle) {
+		myState = new TurtleState(xCoor, yCoor, direction, isHidden, penDown, angle);
+		System.out.println("tutle " + myName + " current state is: location xCoor " + xCoor);
 		this.myName = myName;
 	}
 
-	private Character step(CharacterState myState) {
-		
+	public void setState(CharacterState myState) {
+		this.myState = (TurtleState) myState;
+		System.out.println("tutle " + myState.getXCoor() + " current state is: location xCoor " + myState.getXCoor());
 	}
-	
+
 	public CharacterState getState() {
-		return myCurrentState;
+		return myState;
 	}
 
 	public String getName() {

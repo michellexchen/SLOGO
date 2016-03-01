@@ -1,40 +1,66 @@
 package View;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import Controller.LanguagesDriver;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
+import Controller.LanguagesDriver;
+import Controller.SLogoException;
+import Model.Model;
 
+public class MainView implements View {
 
-public class MainView {
+	private final int WIDTH = 331;
+	private final int HEIGHT = 331;
 
+	
 	private LanguagesDriver myLangDriver;
-;
-	//	private Group myRoot;
-	//	private Scene myScene;
-	//	private Stage myStage;
+	// private Group myRoot;
+	// private Scene myScene;
+	// private Stage myStage;
 	private CommandHistoryViewer myHistory;
-	private Project myCurrentProject;
-	private List<Project> myProjects;
+	private WorkspaceView myCurrentProject;
+	private List<WorkspaceView> myProjects;
 
-	public MainView() {
-		myHistory = new CommandHistoryViewer();
-		myProjects = new ArrayList<Project>();
+	private String myCommand;
+	private Model myModel;
+	
+	
+	private Visualizer myVisualizer;
+	
+
+	public MainView() throws SLogoException {
+//		myHistory = new CommandHistoryViewer();
+//		myProjects = new ArrayList<Project>();
 		myLangDriver = new LanguagesDriver();
 		String language = "English"; // Get from UI
 		myLangDriver.load(language);
 	}
 
-	public void showProject(Project project) throws SLogoException {
+	public MainView(Model model) throws SLogoException {
+//		myHistory = new CommandHistoryViewer();
+//		myProjects = new ArrayList<Project>();
+//		String language = "English"; // Get from UI
+		myModel = model;
+	}
+
+	/**
+	 * Called at start
+	 * Initializes necessary classes used to visualize turtles
+	 */
+	public void initialize() throws SLogoException {
+		myVisualizer = new Visualizer(WIDTH, HEIGHT);
+		myLangDriver = new LanguagesDriver();
+
+		String language = "English"; // Get from UI
+
+		myLangDriver.load(language);
+
+
+	}
+	
+	public void showProject(WorkspaceView project) throws SLogoException {
 		project.show();
 
 	}
@@ -46,7 +72,7 @@ public class MainView {
 		alert.setContentText("Ooops, there was an error!");
 
 		alert.showAndWait();
-		//Or restart the simulation
+		// Or restart the simulation
 	}
 
 	/*
@@ -54,104 +80,107 @@ public class MainView {
 	 */
 	public void clear() {
 		getMyProjects().clear();
-		//TODO: Code for restasrting
+		// TODO: Code for deleting all the projects existent
 	}
 
-	public void addProject() throws SLogoException{
-		Project myNewProject = new Project();
+	public void addProject() throws IOException, SLogoException {
+		WorkspaceView myNewProject = new WorkspaceView();
 
 		try {
 			myNewProject.initialize();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SLogoException e) {
+			throw new SLogoException("project did not initialize");
 		}
 		getMyProjects().add(myNewProject);
 	}
 
+	public void addProject(Model model) throws IOException, SLogoException {
+		WorkspaceView myNewProject = new WorkspaceView(model);
+
+		try {
+			myNewProject.initialize();
+		} catch (SLogoException e) {
+			throw new SLogoException("project did not initialize");
+		}
+		getMyProjects().add(myNewProject);
+	}
 
 	//////////////////////////
-	// getters and setters  //
+	// getters and setters //
 	//////////////////////////
 	public LanguagesDriver getLanguagesDriver() {
 		return myLangDriver;
 	}
 
-
-	//	public Group getMyRoot() {
-	//		return myRoot;
-	//	}
-	//
-	//
-	//	public void setMyRoot(Group myRoot) {
-	//		this.myRoot = myRoot;
-	//	}
-	//
-	//
-	//	public Scene getMyScene() {
-	//		return myScene;
-	//	}
-	//
-	//
-	//	public void setMyScene(Scene myScene) {
-	//		this.myScene = myScene;
-	//	}
-	//
-	//
-	//	public Stage getMyStage() {
-	//		return myStage;
-	//	}
-	//
-	//
-	//	public void setMyStage(Stage myStage) {
-	//		this.myStage = myStage;
-	//	}
-
-
 	public CommandHistoryViewer getMyHistory() {
 		return myHistory;
 	}
-
 
 	public void setMyHistory(CommandHistoryViewer myHistory) {
 		this.myHistory = myHistory;
 	}
 
-
-	public Project getMyCurrentProject() {
+	public WorkspaceView getMyCurrentProject() {
 		return myCurrentProject;
 	}
 
-
-	public void setMyCurrentProject(Project myCurrentProject) {
+	public void setMyCurrentProject(WorkspaceView myCurrentProject) {
 		this.myCurrentProject = myCurrentProject;
 	}
 
-
-	public List<Project> getMyProjects() {
+	public List<WorkspaceView> getMyProjects() {
 		return myProjects;
 	}
 
-
-	public void setMyProject(List<Project> myProject) {
+	public void setMyProject(List<WorkspaceView> myProject) {
 		this.myProjects = myProject;
 	}
 
+	/**
+	 * @return the myModel
+	 */
+	public Model getModel() {
+		return myModel;
+	}
 
+	/**
+	 * @param myModel
+	 *            the myModel to set
+	 */
+	public void setModel(Model myModel) {
+		this.myModel = myModel;
+	}
 
+	@Override
+	/**
+	 * @return the myCommand
+	 */
+	public String getCommand() {
+		return myCommand;
+	}
 
+	/**
+	 * @param myCommand
+	 *            the myCommand to set
+	 */
+	public void setCommand(String myCommand) {
+		this.myCommand = myCommand;
+	}
+
+	@Override
+	public Visualizer getVisualizer() {
+		
+		return myVisualizer;
+	}
 
 	/*
 	 * View: for unit testing purposes
+	 * 
+	 * 
+	 * public static void main(String[] args) { MainView myView = new
+	 * MainView(); myView.addProject(); myView.getMyProject().get(0).show();
+	 * 
+	 * }
 	 */
-	//	
-	//	public static void main(String[] args) {
-	//		MainView myView = new MainView();
-	//		myView.addProject();
-	//		myView.getMyProject().get(0).show();
-	//		
-	//	}
-
-
 
 }

@@ -3,24 +3,29 @@ package Controller;
 import java.io.IOException;
 
 /**
- * SLogo's Commands reader class that extends FileDriver abstract class
+ * SLogo's Commands resources file reader class that extends FileDriver abstract
+ * class
  * 
  * @author Adam Tache
  *
  */
 
-public class CommandsDriver extends FileDriver{
+public class CommandsDriver extends FileDriver {
 
-	private final String commandDirectory = "resources";
-	private final String commandExtension = "CommandInfo.txt";
+	private final String commandDirectory = "resources/commands";
+	private final String commandExtension = "Commands.resources";
 
-	public void load(){
+	public CommandsDriver() throws SLogoException {
+		load();
+	}
+
+	public void load() throws SLogoException {
 		setDirectory(commandDirectory);
 		setExtension(commandExtension);
 		try {
 			super.load();
 		} catch (IOException e) {
-			// Throw {CommandInfo.txt} file not found Error message on UI
+			throw new SLogoException("Command resources file not found");
 		}
 	}
 

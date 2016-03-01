@@ -1,49 +1,50 @@
 package Controller;
 
-import Model.CommandTree;
-import Model.Turtle;
-import View.MainView;
-import View.SLogoException;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import Model.MainModel;
+import View.GUIController;
+import View.MainView;
+
+/**
+ * Controls the initial setup of our GUI and back end
+ * 
+ * @author Mario Oliver
+ *
+ */
 
 public class MainDriver extends Application {
 
-	private Group myRoot;
-	private final int VIEW_WIDTH = 1000;
-	private final int VIEW_HEIGHT = 750;
+	private MainModel myModel;
+	private MainView myView;
+	private GUIController myGUI;
+	private String myLanguage;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	public void start(Stage myStage) throws Exception {
-		//		myStage.setTitle("SLogo Integrated Development Environment");
-		//		this.myStage = myStage;
-		//		myRoot = new Group();
-		//		myScene = new Scene(myRoot, VIEW_WIDTH, VIEW_HEIGHT);
-		//		myStage.setScene(myScene);
-		MainView myView = new MainView();
+	public void start(Stage myStage) throws SLogoException, IOException {
+
+		myModel = new MainModel();
+		myView = new MainView();
+		myModel.setView(myView);
+		myModel.initialize();
+		LanguagesDriver langDriver = new LanguagesDriver();
+		// doesn't do anything
+		// this.myLanguage = myLanguage;
+		langDriver.load("English");
+
 		try {
-			myView.addProject();
+			myView.addProject(myModel);
+			myView.getMyProjects().get(0).setMyModel(myModel);
 			myView.getMyProjects().get(0).show();
 		} catch (SLogoException e) {
 			myView.showError(e);
 		}
-		//createBackend();
 	}
 
-	private void createBackend() {
-		Turtle ogTurt = new Turtle("OG", VIEW_WIDTH / 2, VIEW_HEIGHT / 2, true, 0, false);
-		myRoot.getChildren().add(ogTurt.getTurtle());
-		simulateGettingCommand("forward 50");
-	}
-
-	private void simulateGettingCommand(String command){
-		TextParser parser = new TextParser();
-		parser.parse(command);
-		CommandTree myTree = parser.getTree();
-		myTree.traverse();
-	}
 }
