@@ -9,8 +9,6 @@ public class MainModel implements Model {
 	// Command that was read in by clicking Run button
 	private String myCommand;
 	private View myView;
-
-	private TreeFactory myTreeFactory;
 	private Workspace myWorkspace;
 
 	public MainModel() {
@@ -26,15 +24,11 @@ public class MainModel implements Model {
 	public void initialize() {
 		myWorkspace = new Workspace();
 		myWorkspace.createTurtle();
-		myTreeFactory = new TreeFactory();
 	}
 
 	public void readCommand(String command) throws SLogoException {
 		setCommand(command);
-		CommandTree myTree = myTreeFactory.makeTree(command);
-		for(Character character : myWorkspace.getCharacterList()){
-			myTree.traverse(character.getState());
-		}
+		myWorkspace.readCommand(command);
 	}
 
 	/**

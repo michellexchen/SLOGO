@@ -43,6 +43,18 @@ public class DisplayData extends Observable {
 	
 	}
 	
+	public DisplayData(CharacterState state) {
+		updateData(state);
+	}
+	
+	public void updateData(CharacterState state){
+		myPosition = new Position(state.getXCoor(), state.getYCoor());
+		myAngle = state.getAngle();
+		penDown = ((TurtleState) state).getPen();
+		penColor = ((TurtleState) state).getPenColor();
+		myImage = state.getImageView();
+	}
+
 	/**
 	 * Set the hasState value of DisplayData as 'changed'
 	 * and notify all Observers
