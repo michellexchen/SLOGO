@@ -22,32 +22,32 @@ public class DisplayData extends Observable {
 	private boolean penDown;
 	private Color penColor;
 	private ImageView myImage;
-	
+
 	private List<Line> myLines;
+
 	/**
 	 * Constructor that sets initial values
 	 * 
-	 * @param xCoordinate, yCoordinate, angle, penDown, penColor, and Image
+	 * @param xCoordinate,
+	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public DisplayData(Position position, double angle, boolean penDown,
-			Color penColor, ImageView image) {
-		
-//		this.xCoordinate = x;
-//		this.yCoordinate = y;
+	public DisplayData(Position position, double angle, boolean penDown, Color penColor, ImageView image) {
+
+		// this.xCoordinate = x;
+		// this.yCoordinate = y;
 		this.myPosition = position;
-		
 		this.myAngle = angle;
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
-	
+
 	}
-	
+
 	public DisplayData(CharacterState state) {
 		updateData(state);
 	}
-	
-	public void updateData(CharacterState state){
+
+	public void updateData(CharacterState state) {
 		myPosition = new Position(state.getXCoor(), state.getYCoor());
 		myAngle = state.getAngle();
 		penDown = ((TurtleState) state).getPen();
@@ -56,8 +56,8 @@ public class DisplayData extends Observable {
 	}
 
 	/**
-	 * Set the hasState value of DisplayData as 'changed'
-	 * and notify all Observers
+	 * Set the hasState value of DisplayData as 'changed' and notify all
+	 * Observers
 	 * 
 	 * @param None
 	 */
@@ -65,57 +65,65 @@ public class DisplayData extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
-	
+
 	public void addLine(Line newline) {
 		myLines.add(newline);
 	}
-	
-	
-	
+
 	public double getX() {
 		return xCoordinate;
 	}
+
 	public void setX(double xCoordinate) {
-		//changed();
+		// changed();
 		this.xCoordinate = xCoordinate;
 	}
+
 	public double getY() {
 		return yCoordinate;
 	}
+
 	public void setY(double yCoordinate) {
-		//changed();
+		// changed();
 		this.yCoordinate = yCoordinate;
 	}
+
 	public double getAngle() {
 		return myAngle;
 	}
+
 	public void setAngle(double myAngle) {
-		//changed();
+		// changed();
 		this.myAngle = myAngle;
 	}
+
 	public boolean isPenDown() {
 		return penDown;
 	}
+
 	public void setPenDown(boolean penDown) {
-		//changed();
+		// changed();
 		this.penDown = penDown;
 	}
+
 	public Color getPenColor() {
 		return penColor;
 	}
+
 	public void setPenColor(Color penColor) {
-		//changed();
+		// changed();
 		this.penColor = penColor;
 	}
+
 	public ImageView getImage() {
 		return myImage;
 	}
+
 	public void setImage(ImageView myImage) {
-		//changed();
+		// changed();
 		this.myImage = myImage;
 	}
-	
+
 	public Position getPosition() {
 		return myPosition;
 	}
@@ -124,6 +132,4 @@ public class DisplayData extends Observable {
 		this.myPosition = myPosition;
 	}
 
-
-	
 }

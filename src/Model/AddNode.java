@@ -16,7 +16,7 @@ public class AddNode extends CommandNode {
 		for (int x = 0; x < getChildren().size(); x++) {
 			result += getChildren().get(x).evaluate(state);
 		}
-		return -1 * result;
+		return result;
 	}
 
 }
