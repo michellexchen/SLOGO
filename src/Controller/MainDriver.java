@@ -14,6 +14,7 @@ public class MainDriver extends Application {
 	private MainModel myModel;
 	private MainView myView;
 	private GUIController myGUI;
+	private String myLanguage;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -25,6 +26,9 @@ public class MainDriver extends Application {
 		myView = new MainView();
 		myModel.setView(myView);
 		myModel.initialize();
+		LanguagesDriver langDriver = new LanguagesDriver();
+		this.myLanguage = myLanguage;
+		langDriver.load(myLanguage);
 
 		try {
 			myView.addProject(myModel);
