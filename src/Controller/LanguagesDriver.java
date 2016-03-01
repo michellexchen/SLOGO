@@ -28,4 +28,8 @@ public class LanguagesDriver extends FileDriver{
 	public String format(String language) {
 		return Character.toString(language.charAt(0)).toUpperCase() + language.substring(1).toLowerCase();
 	}
+	
+	public String getTranslation(String key) {
+        return myProperties.getProperty(key);
+    }
 }

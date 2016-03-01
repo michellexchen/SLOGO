@@ -6,10 +6,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import Model.MainModel;
-import Model.Model;
 import View.GUIController;
 import View.MainView;
-import View.View;
 
 public class MainDriver extends Application {
 

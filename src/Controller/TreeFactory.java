@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import Model.CommandTree;
-import Model.Node;
-import Model.Turtle;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates
@@ -20,10 +17,10 @@ import Model.Turtle;
 
 public class TreeFactory {
 
-	public CommandTree makeTree(String text) {
+	public CommandTree makeTree(String text) throws SLogoException {
 		CommandTree myTree = new CommandTree();
 		List<String> nodeList = format(text);
-		NodeFactory NodeFactory = new NodeFactory();
+		RootFactory NodeFactory = new RootFactory();
 		myTree.setRoot(NodeFactory.createNode((ArrayList<String>) nodeList));
 		return myTree;
 	}

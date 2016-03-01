@@ -1,13 +1,10 @@
 package Model;
 
+import Controller.SLogoException;
 import Controller.TreeFactory;
 import View.View;
 
 public class MainModel implements Model {
-
-	// TO BE REMOVED
-	private final int VIEW_WIDTH = 1000;
-	private final int VIEW_HEIGHT = 750;
 
 	// Command that was read in by clicking Run button
 	private String myCommand;
@@ -32,10 +29,12 @@ public class MainModel implements Model {
 		myTreeFactory = new TreeFactory();
 	}
 
-	public void readCommand(String command) {
+	public void readCommand(String command) throws SLogoException {
 		setCommand(command);
 		CommandTree myTree = myTreeFactory.makeTree(command);
-		myTree.traverse(myWorkspace.getCharacterList().get(0).getState());
+		for(Character character : myWorkspace.getCharacterList()){
+			myTree.traverse(character.getState());
+		}
 	}
 
 	/**

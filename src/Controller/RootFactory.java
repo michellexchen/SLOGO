@@ -5,23 +5,19 @@ import java.util.ArrayList;
 import Model.CommandNode;
 import Model.Node;
 import Model.NumericNode;
-import Model.Turtle;
-import Model.TurtleCommandNode;
 
 /**
- * SLogo's Node Factory that creates first Node in list of unparsed nodes in
- * String form Updates unparsed nodes list after node is created Creates
- * sub-nodes if necessary
+ * SLogo's Node Factory that creates and returns root node with subnodes
  * 
  * @author Adam Tache
  *
  */
 
-public class NodeFactory {
+public class RootFactory {
 
 	CommandsDriver CommandsDriver;
 
-	public NodeFactory() {
+	public RootFactory() {
 		CommandsDriver = new CommandsDriver();
 	}
 
@@ -30,21 +26,23 @@ public class NodeFactory {
 		if (myNodes.size() == 0)
 			return null;
 		String currNode = myNodes.get(0);
-		String CommandName = CommandsDriver.getString(currNode);
-		if (CommandName == null) {
+		String commandName = CommandsDriver.getString(currNode);
+		if (commandName == null) {
 			if (isNumeric(currNode)) {
 				node = new NumericNode(Double.parseDouble(currNode));
 			} else {
 				throw new SLogoException("This command is illegal");
 			}
 		} else {
-			String clsName = CommandName + "Node";
+			LanguagesDriver langDriver = new LanguagesDriver();
+			String englishCommand = langDriver.getTranslation(commandName);
+			String clsName = englishCommand + "Node";
 			Class cls;
 			try {
 				cls = Class.forName("Model." + clsName);
 				node = (Node) cls.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				throw new SLogoException("This command is not yet implemented");
+				throw new SLogoException("Command " + commandName+ " is not yet implemented");
 			}
 		}
 		myNodes.remove(0);

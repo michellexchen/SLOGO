@@ -138,7 +138,12 @@ public class GUIController implements Initializable, View  {
         	 * View's getCommand
         	 * and passes the command to the parser
         	 */
-        	getMyModel().readCommand(myCommand);
+        	try {
+				getMyModel().readCommand(myCommand);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         	
         });
         
