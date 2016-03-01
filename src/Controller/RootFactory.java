@@ -26,7 +26,9 @@ public class RootFactory {
 		if (myNodes.size() == 0)
 			return null;
 		String currNode = myNodes.get(0);
-		String commandName = CommandsDriver.getString(currNode);
+		LanguagesDriver langDriver = new LanguagesDriver();
+		String englishCommand = langDriver.getTranslation(currNode);
+		String commandName = CommandsDriver.getString(englishCommand);
 		if (commandName == null) {
 			if (isNumeric(currNode)) {
 				node = new NumericNode(Double.parseDouble(currNode));
@@ -34,8 +36,6 @@ public class RootFactory {
 				throw new SLogoException("This command is illegal");
 			}
 		} else {
-			LanguagesDriver langDriver = new LanguagesDriver();
-			String englishCommand = langDriver.getTranslation(commandName);
 			String clsName = englishCommand + "Node";
 			Class cls;
 			try {
