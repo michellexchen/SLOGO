@@ -6,6 +6,8 @@ import java.util.List;
 import Controller.SLogoException;
 import Controller.TreeFactory;
 import View.Visualizer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * @author Adam
@@ -20,11 +22,21 @@ public class Workspace {
 	private Visualizer myVisualizer;
 
 	public Workspace() {
+
+	}
+	
+	public void initialize () {
 		myDataList = new ArrayList<DisplayData>();
+		ObservableList<DisplayData> myObservableDataList = 
+				FXCollections.observableList(myDataList);
 		myCommandHistory = new ArrayList<String>();
+		ObservableList<String> myObservableCommandHistory = 
+				FXCollections.observableList(myCommandHistory);
 		myCharacters = new ArrayList<Character>();
 		myTreeFactory = new TreeFactory();
+		
 	}
+	
 
 	public void createTurtle() {
 		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);

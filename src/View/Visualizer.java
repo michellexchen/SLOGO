@@ -6,12 +6,13 @@ import java.util.Observer;
 
 import Model.DisplayData;
 import Model.Position;
+import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Visualizer implements Observer {
-	private List<DisplayData> myDataList;
+	private ObservableList<DisplayData> myObservableDataList;
 	
 	private int myWidth;
 	private int myHeight;
@@ -33,8 +34,8 @@ public class Visualizer implements Observer {
 	@Override
 	public void update(Observable observable, Object arg1) {
 		// TODO 
-		myDisplayData = (DisplayData) observable;
-		myDisplayData.addLine(createLine(myDisplayData.getPosition()));
+//		myDisplayData = (DisplayData) observable;
+//		myDisplayData.addLine(createLine(myDisplayData.getPosition()));
 		//update rotation (angle)
 		//update penDown
 		//update penColor

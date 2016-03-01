@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 import Controller.SLogoException;
 import Controller.TreeFactory;
 import View.View;
@@ -61,6 +63,11 @@ public class MainModel implements Model {
 	@Override
 	public void createBackend() {
 
+	}
+
+	@Override
+	public List<DisplayData> getDisplayDataList() {
+		return myWorkspace.getDataList();
 	}
 
 }
