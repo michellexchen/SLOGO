@@ -18,7 +18,7 @@ public class Project {
 	//private List<Character> myCharacters;
 	//private Canvas myCanvas;
 	private List<Node> myCommandHistory;
-	
+	//private List<>
 	private List<DisplayData> myDisplayData;
 	
 	private FXMLLoader myLoader;
@@ -41,11 +41,18 @@ public class Project {
 	}
 
 	public void initialize () throws SLogoException, IOException {
+		
+		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
+		myPrompt.promptScreen();
+		
+		//GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 	    root = (Parent) myLoader.load();
 	    myGUIController = (GUIController) myLoader.getController();
 	    myGUIController.setMyModel(myModel);
 
+	    
+	    
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();
 		myProjectStage.setScene(myProjectScene);

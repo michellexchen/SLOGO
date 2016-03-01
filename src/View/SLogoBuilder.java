@@ -21,8 +21,10 @@ public abstract class SLogoBuilder {
 	/**
 	 * Abstract class extended by different view builders
 	 */
-	public SLogoBuilder(String language) {
-        myLanguageResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+//	public SLogoBuilder(String language) {
+	public SLogoBuilder () {
+
+//        myLanguageResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 	}
 	
 	

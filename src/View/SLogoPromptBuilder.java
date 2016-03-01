@@ -1,9 +1,12 @@
 package View;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -21,15 +24,38 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int TEXT_FONTSIZE = 20;
     private static final String FONT = "Georgia";
 
-	public SLogoPromptBuilder(String language) {
-		super(language);
+    private String myLanguage;
+    
+//	public SLogoPromptBuilder(String language) {
+//		super(language);
+//	}
+	public SLogoPromptBuilder() {
+
 	}
 
 	public void promptScreen () {
 
 		Stage prompt = new Stage();
 
-		Label label = new Label(getResources().getString("Select"));
+//		Label label = new Label(getResources().getString("Select"));
+		Label label = new Label("Choose your language");
+
+		//Create a combobox
+		ObservableList<String> options = 
+			    FXCollections.observableArrayList(
+			        "English",
+			        "French",
+			        "Chinese"
+			    );
+			final ComboBox comboBox = new ComboBox(options);
+//	        comboBox.valueProperty().addListener(new ChangeListener<String>() {
+//	            @Override 
+//	            public void changed(ObservableValue ov, String t, String t1) {                
+//	                address = t1;                
+//	            }    
+//	        });
+			//TODO: Save the option
+		
 		label.setTextFill(Color.DARKBLUE);
 		label.setFont(Font.font(FONT, FontWeight.BOLD, LABEL_FONTSIZE));
 
@@ -50,8 +76,9 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		VBox vbox = new VBox(PADDING);
 		vbox.setPadding(new Insets(PADDING));
 //		vbox.getChildren().addAll(labelHb, buttonHb1, myActionStatus);
-		vbox.getChildren().addAll(labelHb, myActionStatus);
-
+		vbox.getChildren().addAll(labelHb, myActionStatus, comboBox);
+		
+		
 		Scene promptScene = new Scene(vbox, XPROMPTSIZE, YPROMPTSIZE);
 		prompt.setScene(promptScene);
 		prompt.showAndWait();
