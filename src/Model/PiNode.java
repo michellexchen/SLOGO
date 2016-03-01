@@ -2,10 +2,10 @@ package Model;
 
 import Controller.SLogoException;
 
-public class PiNode extends CommandNode{
+public class PiNode extends CommandNode {
 	private int NUM_CHILDREN = 0;
-	
-	public PiNode(){
+
+	public PiNode() {
 		setNumChildren(NUM_CHILDREN);
 	}
 

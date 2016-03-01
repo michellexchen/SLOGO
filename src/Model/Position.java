@@ -1,11 +1,9 @@
 package Model;
 
 /**
- * A wrapper class for (x, y)-current and (x, y)-previous
- * coordinates
+ * A wrapper class for (x, y)-current and (x, y)-previous coordinates
  * 
- * Supports automatic center point (0, 0) conversion
- * using Pane size
+ * Supports automatic center point (0, 0) conversion using Pane size
  * 
  * @author Hunter
  *
@@ -19,41 +17,40 @@ public class Position {
 	private double yCurrent;
 	private double xCenter;
 	private double yCenter;
-	
+
 	public Position(double width, double height) {
 		// TODO Auto-generated constructor stub
 		myWidth = width;
 		myHeight = height;
-		
-		//set the center coordinates
+
+		// set the center coordinates
 		xCenter = width / 2;
 		yCenter = height / 2;
-		
+
 		xPrevious = xCenter;
 		yPrevious = yCenter;
-		
+
 		xCurrent = xCenter;
 		yCurrent = yCenter;
 	}
-	
+
 	/**
 	 * Sets new XY coordinates
 	 * 
 	 * @param x
 	 * @param y
 	 */
-	public void setXY (double x, double y) {
+	public void setXY(double x, double y) {
 		xPrevious = xCurrent;
 		yPrevious = yCurrent;
 		xCurrent = x + xCenter;
 		yCurrent = y + yCenter;
 	}
 
-	
 	/////////////////////
-	///Getters and Setters
+	/// Getters and Setters
 	/////////////////////
-	
+
 	public double getMyWidth() {
 		return myWidth;
 	}
