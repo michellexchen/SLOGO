@@ -23,37 +23,38 @@ import Model.Node;
 
 public class TreeFactory {
 
+	private NodeFactory nodeFactory;
+
 	public CommandTree makeTree(String text) throws SLogoException {
+		if (text == null)
+			throw new SLogoException("Did not input correct command");
 		CommandTree myTree = new CommandTree();
 		List<String> nodeList = format(text);
-		NodeFactory nodeFactory = new NodeFactory();
+		nodeFactory = new NodeFactory();
 		Node root = nodeFactory.createNode(nodeList.get(0));
 		nodeList.remove(0);
 		myTree.setRoot(root);
-		if(nodeList.size() > 0){
-			double numChildren = root.getNumChildren();
-			for(int x=0; x<numChildren; x++){
-				HashMap<Node, List<String>> childToRemaindersMap = nodeFactory.createChild(nodeList);
-				Iterator it = childToRemaindersMap.entrySet().iterator();
-				Map.Entry pair = (Map.Entry)it.next();
-				Node child = (Node) pair.getKey();
-				nodeList = (List<String>) pair.getValue();
-				((CommandNode)root).addChild(child);
-				System.out.println("NEW CHILD: "+child+" REMAINDERS: "+nodeList);
-			}
-		}
+		if (nodeList.size() > 0)
+			createChildren(root, nodeList);
 		return myTree;
 	}
 
-	public List<String> format(String text) {
-		ArrayList<String> myNodes = new ArrayList<>();
-		if (text != null)
-			myNodes = Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
-					.collect(Collectors.toCollection(ArrayList::new));
-		else {
-			// throw our exception class
+	public void createChildren(Node root, List<String> nodeList) throws SLogoException {
+		for (int x = 0; x < root.getNumChildren(); x++) {
+			HashMap<Node, List<String>> childToRemaindersMap = nodeFactory.createChild(nodeList);
+			Iterator it = childToRemaindersMap.entrySet().iterator();
+			Map.Entry pair = (Map.Entry) it.next();
+			Node child = (Node) pair.getKey();
+			nodeList = (List<String>) pair.getValue();
+			((CommandNode) root).addChild(child);
+			System.out.println("NEW CHILD: " + child + " REMAINDERS: " + nodeList);
 		}
-		return myNodes;
+	}
+
+	public List<String> format(String text) throws SLogoException {
+		// List<String> myNodes = new ArrayList<>();
+		return Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 }

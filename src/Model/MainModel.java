@@ -12,12 +12,9 @@ public class MainModel implements Model {
 	private Workspace myWorkspace;
 
 	public MainModel() {
-		// TODO Auto-generated constructor stub
-
 	}
 
 	public MainModel(View view) {
-		// TODO Auto-generated constructor stub
 		myView = view;
 	}
 
@@ -63,7 +60,6 @@ public class MainModel implements Model {
 
 	@Override
 	public void createBackend() {
-		// TODO Auto-generated method stub
 
 	}
 

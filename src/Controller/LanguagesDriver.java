@@ -23,7 +23,7 @@ public class LanguagesDriver extends FileDriver{
 		try {
 			super.load();
 		} catch (IOException e) {
-			// Throw File not found Error message on UI
+			System.out.println(e.getMessage());
 		}
 	}
 	

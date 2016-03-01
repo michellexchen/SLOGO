@@ -9,6 +9,13 @@ import Model.MainModel;
 import View.GUIController;
 import View.MainView;
 
+/**
+ * Controls the initial setup of our GUI and back end
+ * 
+ * @author Mario Oliver
+ *
+ */
+
 public class MainDriver extends Application {
 
 	private MainModel myModel;
@@ -27,7 +34,8 @@ public class MainDriver extends Application {
 		myModel.setView(myView);
 		myModel.initialize();
 		LanguagesDriver langDriver = new LanguagesDriver();
-		this.myLanguage = myLanguage;
+		// doesn't do anything
+		// this.myLanguage = myLanguage;
 		langDriver.load("English");
 
 		try {

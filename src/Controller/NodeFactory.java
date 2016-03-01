@@ -27,33 +27,22 @@ public class NodeFactory {
 		langDriver.load("English"); // To remove
 	}
 
-	public Node createNode(String myNode) throws SLogoException {
+	public Node createNode(String englishCommand) throws SLogoException {
 		Node node = null;
-		if (myNode.length() == 0)
-			throw new SLogoException("No command entered");
-		String englishCommand = myNode;
 		if(!langDriver.getLanguage().equals("English")){
 			// englishCommand = langDriver.getTranslation(myNode);
 			// TODO: Implement proper translation (switch value and key in current languages files)
 		}
+		if (isNumeric(englishCommand))
+			return new NumericNode(Double.parseDouble(englishCommand));
 		String commandName = CommandsDriver.getString(englishCommand);
-		System.out.println(englishCommand+" "+commandName);
-		if (commandName == null) {
-			if (isNumeric(myNode)) {
-				node = new NumericNode(Double.parseDouble(myNode));
-			} else {
-				throw new SLogoException("The command " + englishCommand + " is illegal");
-			}
-		} else {
-			String clsName = commandName + "Node";
-			Class cls;
+		if (commandName == null) throw new SLogoException("The command " + englishCommand + " is illegal");
+		else 
 			try {
-				cls = Class.forName("Model." + clsName);
-				node = (Node) cls.newInstance();
+				node = (Node) Class.forName("Model." + commandName + "Node").newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new SLogoException("Command " + commandName+ " is not yet implemented");
 			}
-		}
 		System.out.println("NODE CREATED "+node.toString());
 		return node;
 	}
