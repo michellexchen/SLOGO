@@ -4,8 +4,8 @@
 package Controller;
 
 /**
- * SLogo's Exception class that extends Exception abstract class
- * in the Java library
+ * SLogo's Exception class that extends Exception abstract class in the Java
+ * library
  * 
  * @author Hunter Lee
  *

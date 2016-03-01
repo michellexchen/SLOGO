@@ -25,7 +25,7 @@ public class NodeFactory {
 		CommandsDriver = new CommandsDriver();
 	}
 
-	public Node createNode(ArrayList<String> myNodes) {
+	public Node createNode(ArrayList<String> myNodes) throws SLogoException {
 		Node node = null;
 		if (myNodes.size() == 0)
 			return null;
@@ -35,7 +35,7 @@ public class NodeFactory {
 			if (isNumeric(currNode)) {
 				node = new NumericNode(Double.parseDouble(currNode));
 			} else {
-				// TODO: Throw illegal command exception
+				throw new SLogoException("This command is illegal");
 			}
 		} else {
 			String clsName = CommandName + "Node";
@@ -44,7 +44,7 @@ public class NodeFactory {
 				cls = Class.forName("Model." + clsName);
 				node = (Node) cls.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				// TODO: Throw command not implemented exception
+				throw new SLogoException("This command is not yet implemented");
 			}
 		}
 		myNodes.remove(0);
