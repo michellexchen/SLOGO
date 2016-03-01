@@ -40,6 +40,7 @@ public class TreeFactory {
 	}
 
 	public void createChildren(Node root, List<String> nodeList) throws SLogoException {
+		System.out.println("CREATING "+root.getNumChildren()+" CHILDREN");
 		for (int x = 0; x < root.getNumChildren(); x++) {
 			HashMap<Node, List<String>> childToRemaindersMap = nodeFactory.createChild(nodeList);
 			Iterator it = childToRemaindersMap.entrySet().iterator();

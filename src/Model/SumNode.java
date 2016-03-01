@@ -11,6 +11,9 @@ public class SumNode extends CommandNode{
 
 	public double evaluate(CharacterState state) throws SLogoException {
 		double result = 0;
+//		System.out.println(getChildren().size());
+//		System.out.println(getChildren().get(0));
+//		System.out.println(getChildren().get(1));
 		for(int x=0; x<getChildren().size(); x++){
 			result += getChildren().get(x).evaluate(state);
 		}
