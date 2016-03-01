@@ -39,6 +39,12 @@ public class MainView implements View {
 		myModel = model;
 	}
 
+	
+	public void initialize() {
+		
+		
+	}
+	
 	public void showProject(Project project) throws SLogoException {
 		project.show();
 

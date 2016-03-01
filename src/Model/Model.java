@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 import Controller.SLogoException;
 import View.View;
 
@@ -11,4 +13,7 @@ public interface Model {
 
 	public void createBackend();
 
+	
+	//Need this implemented 
+	public List<DisplayData> getDisplayDataList();
 }

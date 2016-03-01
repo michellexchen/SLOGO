@@ -1,5 +1,6 @@
 package View;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Visualizer implements Observer {
-	private DisplayData myDisplayData;
+	private List<DisplayData> myDataList;
 	
 	private int myWidth;
 	private int myHeight;
