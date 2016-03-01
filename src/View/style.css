@@ -38,10 +38,3 @@
 .text-field {
 	-fx-font-family: "Andale Mono";
 }
-
-.vbox {
-    	-fx-background-color: #d6e0f6;
-    	-fx-padding: 10;
-    	-fx-spacing: 10;
-    	-fx-alignment: center;
-}
