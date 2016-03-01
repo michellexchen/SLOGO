@@ -5,47 +5,39 @@ import View.View;
 
 public class MainModel implements Model {
 
-	//TO BE REMOVED
+	// TO BE REMOVED
 	private final int VIEW_WIDTH = 1000;
 	private final int VIEW_HEIGHT = 750;
-	
-	//Command that was read in by clicking Run button
+
+	// Command that was read in by clicking Run button
 	private String myCommand;
 	private View myView;
-	
+
+	private TreeFactory myTreeFactory;
+	private Workspace myWorkspace;
+
 	public MainModel() {
 		// TODO Auto-generated constructor stub
 
 	}
-	
+
 	public MainModel(View view) {
 		// TODO Auto-generated constructor stub
 		myView = view;
 	}
-	
-	
-	public void createBackend() {
-		Turtle ogTurt = new Turtle("OG", VIEW_WIDTH / 2, VIEW_HEIGHT / 2, true, 0, false);
-		//myRoot.getChildren().add(ogTurt.getTurtle());
-		TreeFactory tf = new TreeFactory();
-		String command = "forward 50";
-		CommandTree myTree = tf.makeTree(command);
-		myTree.traverse(ogTurt.getState());
+
+	public void initialize() {
+		myWorkspace = new Workspace();
+		myWorkspace.createTurtle();
+		myTreeFactory = new TreeFactory();
 	}
 
-
-	@Override
 	public void readCommand(String command) {
-		// TODO Auto-generated method stub
 		setCommand(command);
-		
-		//TEST
-		System.out.println(getCommand());
+		CommandTree myTree = myTreeFactory.makeTree(command);
+		myTree.traverse(myWorkspace.getCharacterList().get(0).getState());
 	}
 
-	//public void 
-	
-	
 	/**
 	 * @return the myCommand
 	 */
@@ -54,7 +46,8 @@ public class MainModel implements Model {
 	}
 
 	/**
-	 * @param myCommand the myCommand to set
+	 * @param myCommand
+	 *            the myCommand to set
 	 */
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
@@ -68,11 +61,17 @@ public class MainModel implements Model {
 	}
 
 	/**
-	 * @param myView the View to set
+	 * @param myView
+	 *            the View to set
 	 */
 	public void setView(View myView) {
 		this.myView = myView;
 	}
 
+	@Override
+	public void createBackend() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

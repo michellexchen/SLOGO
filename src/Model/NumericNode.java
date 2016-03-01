@@ -21,5 +21,9 @@ public class NumericNode implements Node {
 	public int getNumChildren() {
 		return 0;
 	}
+	
+	public String toString(){
+		return ""+myValue;
+	}
 
 }

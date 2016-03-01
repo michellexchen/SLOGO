@@ -16,12 +16,9 @@ import javafx.scene.shape.Line;
  */
 public class DisplayData extends Observable {
 	private Position myPosition;
-	
 	private double xCoordinate;
 	private double yCoordinate;
 	private double myAngle;
-	
-	
 	private boolean penDown;
 	private Color penColor;
 	private ImageView myImage;

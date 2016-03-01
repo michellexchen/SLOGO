@@ -1,6 +1,8 @@
 package Controller;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import Model.CommandTree;
 import Model.Node;
@@ -14,25 +16,24 @@ import Model.Turtle;
  */
 
 public class TreeFactory {
-
+	
 	public CommandTree makeTree(String text){
-		String[] myNodes = text.split(" ");
-		format(myNodes);
 		CommandTree myTree = new CommandTree();
-		Node root;
-		ArrayList<String> nodeList = new ArrayList<String>(Arrays.asList(myNodes));
+		List<String> nodeList = format(text);
 		NodeFactory NodeFactory = new NodeFactory();
-		root = NodeFactory.createNode(nodeList);
-		myTree.setRoot(root);
+		myTree.setRoot(NodeFactory.createNode((ArrayList<String>)nodeList));
 		return myTree;
 	}
 
-	public void format(String[] myNodes){
-		if(myNodes != null){
-			for(int x=0; x<myNodes.length; x++){
-				myNodes[x] = myNodes[x].toLowerCase();
-			}
+	public List<String> format(String text){
+		ArrayList<String> myNodes = new ArrayList<>();
+		if(text != null) myNodes = Arrays.stream(text.split(" "))
+		    	    		 .map(String::toLowerCase)
+		    	    		 .collect(Collectors.toCollection(ArrayList::new));
+		else { 
+			//throw our exception class
 		}
+	     return myNodes;
 	}
 
 }

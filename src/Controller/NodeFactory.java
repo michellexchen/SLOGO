@@ -34,8 +34,9 @@ public class NodeFactory {
 		if (CommandName == null) {
 			if (isNumeric(currNode)) {
 				node = new NumericNode(Double.parseDouble(currNode));
-			} else {
-				// Throw illegal command exception
+			}
+			else{
+				// TODO: Throw illegal command exception
 			}
 		} else {
 			String clsName = CommandName + "Node";
@@ -44,7 +45,7 @@ public class NodeFactory {
 				cls = Class.forName("Model." + clsName);
 				node = (Node) cls.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				// Throw command not implemented exception
+				// TODO: Throw command not implemented exception
 			}
 		}
 		myNodes.remove(0);
