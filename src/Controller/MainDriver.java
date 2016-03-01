@@ -28,7 +28,7 @@ public class MainDriver extends Application {
 		myModel.initialize();
 		LanguagesDriver langDriver = new LanguagesDriver();
 		this.myLanguage = myLanguage;
-		langDriver.load(myLanguage);
+		langDriver.load("English");
 
 		try {
 			myView.addProject(myModel);

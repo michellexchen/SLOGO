@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import Model.BooleanNode;
 import Model.CommandNode;
-import Model.MathNode;
 import Model.Node;
 import Model.NumericNode;
 
@@ -27,7 +24,7 @@ public class NodeFactory {
 	public NodeFactory() throws SLogoException {
 		CommandsDriver = new CommandsDriver();
 		langDriver = new LanguagesDriver();
-		langDriver.load("English");
+		langDriver.load("English"); // To remove
 	}
 
 	public Node createNode(String myNode) throws SLogoException {
@@ -51,15 +48,8 @@ public class NodeFactory {
 			String clsName = commandName + "Node";
 			Class cls;
 			try {
-				System.out.println(clsName+"\n\n");
 				cls = Class.forName("Model." + clsName);
 				node = (Node) cls.newInstance();
-				if(clsName.equals("MathNode")){
-					((MathNode) node).setType(englishCommand);
-				}
-				if(clsName.equals("BooleanNode")){
-					((BooleanNode) node).setType(englishCommand);
-				}
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new SLogoException("Command " + commandName+ " is not yet implemented");
 			}
