@@ -66,7 +66,7 @@ public class NodeFactory {
 		}
 		return childToRemaindersMap;
 	}
-
+	
 	private boolean isNumeric(String s) {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}

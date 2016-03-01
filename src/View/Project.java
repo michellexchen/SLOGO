@@ -15,105 +15,90 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
 public class Project {
-	//private List<Character> myCharacters;
-	//private Canvas myCanvas;
+	// private List<Character> myCharacters;
+	// private Canvas myCanvas;
 	private List<Node> myCommandHistory;
-	//private List<>
+	// private List<>
 	private List<DisplayData> myDisplayData;
-	
+
 	private FXMLLoader myLoader;
 	private GUIController myGUIController;
 	private Parent root;
-	
-	//Visualization Primitives
-	//private Group myRoot;
+
+	// Visualization Primitives
+	// private Group myRoot;
 	private Scene myProjectScene;
 	private Stage myProjectStage;
-	
+
 	private Model myModel;
-	
-	public Project () {
-		
+
+	public Project() {
+
 	}
-	
-	public Project (Model model) {
+
+	public Project(Model model) {
 		myModel = model;
 	}
 
-	public void initialize () throws SLogoException, IOException {
-		
+	public void initialize() throws SLogoException, IOException {
+
 		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
 		myPrompt.promptScreen();
-		
-		//GUI Initialization
-		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
-	    root = (Parent) myLoader.load();
-	    myGUIController = (GUIController) myLoader.getController();
-	    myGUIController.setMyModel(myModel);
 
-	    
-	    
+		// GUI Initialization
+		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
+		root = (Parent) myLoader.load();
+		myGUIController = (GUIController) myLoader.getController();
+		myGUIController.setMyModel(myModel);
+
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();
 		myProjectStage.setScene(myProjectScene);
 		myProjectStage.setTitle("SLogo");
-	    
-	}
-	
-	
-	
-	
-	
-	public void updateStates () {
-		
-		
+
 	}
 
-	public void show () throws SLogoException {
+	public void updateStates() {
+
+	}
+
+	public void show() throws SLogoException {
 		getStage().show();
 	}
-	
-	public void hide () {
-		
-		
-	}
-	
-	public void setBackgroundColor () {
-		
-		
-	}
-	
-	
-	
-	
-	
-	//////////////////////////
-	// getters and setters  //
-	//////////////////////////
-//	public Collection<Character> getMyCharacters() {
-//		return myCharacters;
-//	}
-//
-//
-//	public void setMyCharacters(List<Character> myCharacters) {
-//		this.myCharacters = myCharacters;
-//	}
-//
-//
-//	public Canvas getMyCanvas () {
-//		return myCanvas;
-//	}
-//
-//
-//	public void setMyCanvas(Canvas myCanvas) {
-//		this.myCanvas = myCanvas;
-//	}
 
+	public void hide() {
+
+	}
+
+	public void setBackgroundColor() {
+
+	}
+
+	//////////////////////////
+	// getters and setters //
+	//////////////////////////
+//	 public Collection<Character> getMyCharacters() {
+//	 return myCharacters;
+//	 }
+//	
+//	
+//	 public void setMyCharacters(List<Character> myCharacters) {
+//	 this.myCharacters = myCharacters;
+//	 }
+//	
+//	
+//	 public Canvas getMyCanvas () {
+//	 return myCanvas;
+//	 }
+//	
+//	
+//	 public void setMyCanvas(Canvas myCanvas) {
+//	 this.myCanvas = myCanvas;
+//	 }
 
 	public Collection<Node> getMyCommandHistory() {
 		return myCommandHistory;
 	}
-
 
 	public void setMyCommandHistory(List<Node> myCommandHistory) {
 		this.myCommandHistory = myCommandHistory;
@@ -143,7 +128,8 @@ public class Project {
 	}
 
 	/**
-	 * @param myLoader the myLoader to set
+	 * @param myLoader
+	 *            the myLoader to set
 	 */
 	public void setLoader(FXMLLoader myLoader) {
 		this.myLoader = myLoader;
@@ -157,7 +143,8 @@ public class Project {
 	}
 
 	/**
-	 * @param myGUIController the myGUIController to set
+	 * @param myGUIController
+	 *            the myGUIController to set
 	 */
 	public void setGUIController(GUIController myGUIController) {
 		this.myGUIController = myGUIController;
@@ -171,7 +158,8 @@ public class Project {
 	}
 
 	/**
-	 * @param myDisplayData the myDisplayData to set
+	 * @param myDisplayData
+	 *            the myDisplayData to set
 	 */
 	public void setMyDisplayData(List<DisplayData> myDisplayData) {
 		this.myDisplayData = myDisplayData;
@@ -185,10 +173,11 @@ public class Project {
 	}
 
 	/**
-	 * @param myModel the myModel to set
+	 * @param myModel
+	 *            the myModel to set
 	 */
 	public void setMyModel(Model myModel) {
 		this.myModel = myModel;
 	}
-	
+
 }
