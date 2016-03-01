@@ -15,17 +15,17 @@ public class CommandsDriver extends FileDriver {
 	private final String commandDirectory = "resources/commands";
 	private final String commandExtension = "Commands.resources";
 
-	public CommandsDriver() {
+	public CommandsDriver() throws SLogoException {
 		load();
 	}
 
-	public void load() {
+	public void load() throws SLogoException {
 		setDirectory(commandDirectory);
 		setExtension(commandExtension);
 		try {
 			super.load();
 		} catch (IOException e) {
-			// Throw Command Resources file not found Error message on UI
+			throw new SLogoException("Command resources file not found");
 		}
 	}
 

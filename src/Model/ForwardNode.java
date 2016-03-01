@@ -23,5 +23,9 @@ public class ForwardNode extends TurtleCommandNode {
 		result[1] = Math.cos(direction) * getChildren().get(0).evaluate(currentState);
 		return result;
 	}
+	
+	public String toString(){
+		return "Forward";
+	}
 
 }

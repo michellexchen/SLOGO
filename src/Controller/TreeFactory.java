@@ -39,6 +39,7 @@ public class TreeFactory {
 				Node child = (Node) pair.getKey();
 				nodeList = (List<String>) pair.getValue();
 				((CommandNode)root).addChild(child);
+				System.out.println("NEW CHILD: "+child+" REMAINDERS: "+nodeList);
 			}
 		}
 		return myTree;

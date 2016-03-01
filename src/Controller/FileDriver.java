@@ -19,7 +19,7 @@ public abstract class FileDriver {
 	private String directory;
 	private String extension;
 
-	public void load() throws IOException {
+	public void load() throws IOException, SLogoException {
 		String fileName = directory + "/" + extension;
 		myFileReader = null;
 		try {

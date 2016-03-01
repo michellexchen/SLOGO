@@ -12,9 +12,11 @@ public class LanguagesDriver extends FileDriver{
 
 	private String langDirectory = "resources/languages";
 	private String langExtension = ".properties";
+	private String myLanguage;
 	
-	public void load(String language){
+	public void load(String language) throws SLogoException{
 		String myLang = format(language);
+		myLanguage = myLang;
 		langExtension = myLang + langExtension;
 		setDirectory(langDirectory);
 		setExtension(langExtension);
@@ -23,6 +25,10 @@ public class LanguagesDriver extends FileDriver{
 		} catch (IOException e) {
 			// Throw File not found Error message on UI
 		}
+	}
+	
+	public String getLanguage(){
+		return myLanguage;
 	}
 	
 	public String format(String language) {

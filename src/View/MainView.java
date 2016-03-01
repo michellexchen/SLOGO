@@ -22,7 +22,7 @@ public class MainView implements View {
 	private String myCommand;
 	private Model myModel;
 
-	public MainView() {
+	public MainView() throws SLogoException {
 		myHistory = new CommandHistoryViewer();
 		myProjects = new ArrayList<Project>();
 		myLangDriver = new LanguagesDriver();
@@ -30,13 +30,12 @@ public class MainView implements View {
 		myLangDriver.load(language);
 	}
 	
-	public MainView(Model model) {
+	public MainView(Model model) throws SLogoException {
 		myHistory = new CommandHistoryViewer();
 		myProjects = new ArrayList<Project>();
 		myLangDriver = new LanguagesDriver();
 		String language = "English"; // Get from UI
 		myLangDriver.load(language);
-		
 		myModel = model;
 	}
 

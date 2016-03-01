@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import Controller.SLogoException;
 
 public class MathNode extends CommandNode{
@@ -22,16 +21,15 @@ public class MathNode extends CommandNode{
 		this.state = state;
 		Class thisClass = null;
 		try {
-			thisClass = Class.forName("MathNode");
+			thisClass = Class.forName("Model.MathNode");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SLogoException("Class not implemented");
 		}
 		Method method = null;
 		try {
 			method = thisClass.getMethod(commandType, new Class[] {});
 		} catch (NoSuchMethodException | SecurityException e) {
-			throw new SLogoException("Math method not implemented");
+			throw new SLogoException("Method " + commandType+ " not implemented");
 		}
 		try {
 			return (double) method.invoke(this, new Object[] {});
@@ -40,7 +38,7 @@ public class MathNode extends CommandNode{
 		}
 	}
 	
-	public double add() throws SLogoException{
+	public double sum() throws SLogoException{
 		double result = 0;
 		for(int x=0; x<children.size(); x++){
 			result += children.get(x).evaluate(state);
@@ -81,7 +79,7 @@ public class MathNode extends CommandNode{
 	}
 	
 	public double minus() throws SLogoException{
-		return -1*add();
+		return -1*sum();
 	}
 	
 	public double random() throws SLogoException{
@@ -208,7 +206,6 @@ public class MathNode extends CommandNode{
 	public double log() throws SLogoException{
 		double num = children.get(0).evaluate(state);
 		String numToStr = num+"";
-		double ln = 0;
 		int decimalIndex = numToStr.indexOf(".");
 		int toSubtract = 1;
 		if(decimalIndex != -1){
@@ -230,5 +227,9 @@ public class MathNode extends CommandNode{
 			pow *= base;
 		}
 		return pow;
+	}
+	
+	public String toString(){
+		return commandType;
 	}
 }

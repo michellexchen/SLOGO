@@ -20,45 +20,52 @@ import Model.NumericNode;
 
 public class NodeFactory {
 
-	CommandsDriver CommandsDriver;
+	private CommandsDriver CommandsDriver;
+	private LanguagesDriver langDriver = new LanguagesDriver();
 
-	public NodeFactory() {
+	public NodeFactory() throws SLogoException {
 		CommandsDriver = new CommandsDriver();
+		langDriver = new LanguagesDriver();
+		langDriver.load("English");
 	}
 
 	public Node createNode(String myNode) throws SLogoException {
 		Node node = null;
 		if (myNode.length() == 0)
 			throw new SLogoException("No command entered");
-		LanguagesDriver langDriver = new LanguagesDriver();
-		String englishCommand = langDriver.getTranslation(myNode);
+		String englishCommand = myNode;
+		if(!langDriver.getLanguage().equals("English")){
+			// englishCommand = langDriver.getTranslation(myNode);
+			// TODO: Implement proper translation (switch value and key in current languages files)
+		}
 		String commandName = CommandsDriver.getString(englishCommand);
+		System.out.println(englishCommand+" "+commandName);
 		if (commandName == null) {
 			if (isNumeric(myNode)) {
 				node = new NumericNode(Double.parseDouble(myNode));
 			} else {
-				throw new SLogoException("This command is illegal");
+				throw new SLogoException("The command " + englishCommand + " is illegal");
 			}
 		} else {
-			String clsName = englishCommand + "Node";
+			String clsName = commandName + "Node";
 			Class cls;
 			try {
 				cls = Class.forName("Model." + clsName);
 				node = (Node) cls.newInstance();
 				if(clsName.equals("MathNode")){
-					((MathNode) node).setType(commandName);
+					((MathNode) node).setType(englishCommand);
 				}
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new SLogoException("Command " + commandName+ " is not yet implemented");
 			}
 		}
+		System.out.println("NODE CREATED "+node.toString());
 		return node;
 	}
-	
+
 	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException{
 		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
 		List<String> remainders = new ArrayList<String>();
-		// TODO: consider if child is a command
 		Node child = createNode(myNodes.get(0));
 		myNodes.remove(0);
 		for(int x=0; x<myNodes.size(); x++){
