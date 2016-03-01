@@ -179,7 +179,7 @@ public class GUIController implements Initializable, View  {
         Stage stage = new Stage();        
         vbox.getChildren().addAll(myBrowser);
         VBox.setVgrow(myBrowser, Priority.ALWAYS);
-        stage.setTitle("SLOGO Basic myTextField");
+        stage.setTitle("SLOGO Basic Commands");
         stage.setWidth(900);
         stage.setHeight(550);
         stage.setScene(scene);
@@ -221,8 +221,6 @@ public class GUIController implements Initializable, View  {
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
 	}
-
-
 
 
 	public Pane getCanvas() {
