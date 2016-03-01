@@ -17,9 +17,9 @@ import javafx.stage.Stage;
 public class Project {
 	// private List<Character> myCharacters;
 	// private Canvas myCanvas;
-	private List<Node> myCommandHistory;
+	//private List<Node> myCommandHistory;
 	// private List<>
-	private List<DisplayData> myDisplayData;
+	//private List<DisplayData> myDisplayData;
 
 	private FXMLLoader myLoader;
 	private GUIController myGUIController;
@@ -96,13 +96,13 @@ public class Project {
 //	 this.myCanvas = myCanvas;
 //	 }
 
-	public Collection<Node> getMyCommandHistory() {
-		return myCommandHistory;
-	}
-
-	public void setMyCommandHistory(List<Node> myCommandHistory) {
-		this.myCommandHistory = myCommandHistory;
-	}
+//	public Collection<Node> getMyCommandHistory() {
+//		return myCommandHistory;
+//	}
+//
+//	public void setMyCommandHistory(List<Node> myCommandHistory) {
+//		this.myCommandHistory = myCommandHistory;
+//	}
 
 	public Scene getScene() {
 		return myProjectScene;
@@ -150,20 +150,20 @@ public class Project {
 		this.myGUIController = myGUIController;
 	}
 
-	/**
-	 * @return the myDisplayData
-	 */
-	public List<DisplayData> getMyDisplayData() {
-		return myDisplayData;
-	}
-
-	/**
-	 * @param myDisplayData
-	 *            the myDisplayData to set
-	 */
-	public void setMyDisplayData(List<DisplayData> myDisplayData) {
-		this.myDisplayData = myDisplayData;
-	}
+//	/**
+//	 * @return the myDisplayData
+//	 */
+////	public List<DisplayData> getMyDisplayData() {
+////		return myDisplayData;
+////	}
+//
+//	/**
+//	 * @param myDisplayData
+//	 *            the myDisplayData to set
+//	 */
+//	public void setMyDisplayData(List<DisplayData> myDisplayData) {
+//		this.myDisplayData = myDisplayData;
+//	}
 
 	/**
 	 * @return the myModel

@@ -345,6 +345,15 @@ public class GUIController implements Initializable, View  {
 	 */
 	public void setMyView(View myView) {
 		this.myView = myView;
+	}
+
+
+
+
+	@Override
+	public Visualizer getVisualizer() {
+		// TODO Auto-generated method stub
+		return null;
 	}    
         
 }

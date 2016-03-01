@@ -21,10 +21,17 @@ public class Visualizer implements Observer {
 		myWidth = width;
 		myHeight = height;
 	}
+	
+	public Visualizer() {
+		//myDisplayData = data;
+		myWidth = 331;
+		myHeight = 331;
+	}
+
 
 	@Override
 	public void update(Observable observable, Object arg1) {
-		// TODO Auto-generated method stub
+		// TODO 
 		myDisplayData = (DisplayData) observable;
 		myDisplayData.addLine(createLine(myDisplayData.getPosition()));
 		//update rotation (angle)

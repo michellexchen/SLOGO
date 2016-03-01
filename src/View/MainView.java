@@ -146,6 +146,12 @@ public class MainView implements View {
 		this.myCommand = myCommand;
 	}
 
+	@Override
+	public Visualizer getVisualizer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * View: for unit testing purposes
 	 * 

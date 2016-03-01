@@ -9,6 +9,8 @@ package Model;
  *
  */
 public class Position {
+	
+	
 	private double myWidth;
 	private double myHeight;
 	private double xPrevious;
@@ -26,6 +28,23 @@ public class Position {
 		// set the center coordinates
 		xCenter = width / 2;
 		yCenter = height / 2;
+
+		xPrevious = xCenter;
+		yPrevious = yCenter;
+
+		xCurrent = xCenter;
+		yCurrent = yCenter;
+	}
+
+	
+	public Position() {
+		// TODO Auto-generated constructor stub
+		myWidth = 331;
+		myHeight = 331;
+
+		// set the center coordinates
+		xCenter = myWidth / 2;
+		yCenter = myHeight / 2;
 
 		xPrevious = xCenter;
 		yPrevious = yCenter;

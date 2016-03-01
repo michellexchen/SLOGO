@@ -5,6 +5,7 @@ import java.util.List;
 
 import Controller.SLogoException;
 import Controller.TreeFactory;
+import View.Visualizer;
 
 /**
  * @author Adam
@@ -16,6 +17,7 @@ public class Workspace {
 	private List<String> myCommandHistory;
 	private List<Character> myCharacters;
 	private TreeFactory myTreeFactory;
+	private Visualizer myVisualizer;
 
 	public Workspace() {
 		myDataList = new ArrayList<DisplayData>();
@@ -28,6 +30,7 @@ public class Workspace {
 		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
 		DisplayData turtleData = new DisplayData(myTurtle.getState());
+		turtleData.addObserver(myVisualizer);
 		myDataList.add(turtleData);
 	}
 
