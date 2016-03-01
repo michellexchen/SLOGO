@@ -9,4 +9,6 @@ public interface View {
 	public String getCommand();
 
 	public Visualizer getVisualizer();
+	
+	
 }

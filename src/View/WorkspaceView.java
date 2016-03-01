@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
-public class Project {
+public class WorkspaceView {
 	// private List<Character> myCharacters;
 	// private Canvas myCanvas;
 	//private List<Node> myCommandHistory;
@@ -32,11 +32,11 @@ public class Project {
 
 	private Model myModel;
 
-	public Project() {
+	public WorkspaceView() {
 
 	}
 
-	public Project(Model model) {
+	public WorkspaceView(Model model) {
 		myModel = model;
 	}
 

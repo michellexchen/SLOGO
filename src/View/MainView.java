@@ -11,41 +11,56 @@ import Model.Model;
 
 public class MainView implements View {
 
+	private final int WIDTH = 331;
+	private final int HEIGHT = 331;
+
+	
 	private LanguagesDriver myLangDriver;
 	// private Group myRoot;
 	// private Scene myScene;
 	// private Stage myStage;
 	private CommandHistoryViewer myHistory;
-	private Project myCurrentProject;
-	private List<Project> myProjects;
+	private WorkspaceView myCurrentProject;
+	private List<WorkspaceView> myProjects;
 
 	private String myCommand;
 	private Model myModel;
+	
+	
+	private Visualizer myVisualizer;
+	
 
 	public MainView() throws SLogoException {
-		myHistory = new CommandHistoryViewer();
-		myProjects = new ArrayList<Project>();
+//		myHistory = new CommandHistoryViewer();
+//		myProjects = new ArrayList<Project>();
 		myLangDriver = new LanguagesDriver();
 		String language = "English"; // Get from UI
 		myLangDriver.load(language);
 	}
 
 	public MainView(Model model) throws SLogoException {
-		myHistory = new CommandHistoryViewer();
-		myProjects = new ArrayList<Project>();
-		myLangDriver = new LanguagesDriver();
-		String language = "English"; // Get from UI
-		myLangDriver.load(language);
+//		myHistory = new CommandHistoryViewer();
+//		myProjects = new ArrayList<Project>();
+//		String language = "English"; // Get from UI
 		myModel = model;
 	}
 
-	
-	public void initialize() {
-		
-		
+	/**
+	 * Called at start
+	 * Initializes necessary classes used to visualize turtles
+	 */
+	public void initialize() throws SLogoException {
+		myVisualizer = new Visualizer(WIDTH, HEIGHT);
+		myLangDriver = new LanguagesDriver();
+
+		String language = "English"; // Get from UI
+
+		myLangDriver.load(language);
+
+
 	}
 	
-	public void showProject(Project project) throws SLogoException {
+	public void showProject(WorkspaceView project) throws SLogoException {
 		project.show();
 
 	}
@@ -65,11 +80,11 @@ public class MainView implements View {
 	 */
 	public void clear() {
 		getMyProjects().clear();
-		// TODO: Code for restasrting
+		// TODO: Code for deleting all the projects existent
 	}
 
 	public void addProject() throws IOException, SLogoException {
-		Project myNewProject = new Project();
+		WorkspaceView myNewProject = new WorkspaceView();
 
 		try {
 			myNewProject.initialize();
@@ -80,7 +95,7 @@ public class MainView implements View {
 	}
 
 	public void addProject(Model model) throws IOException, SLogoException {
-		Project myNewProject = new Project(model);
+		WorkspaceView myNewProject = new WorkspaceView(model);
 
 		try {
 			myNewProject.initialize();
@@ -105,19 +120,19 @@ public class MainView implements View {
 		this.myHistory = myHistory;
 	}
 
-	public Project getMyCurrentProject() {
+	public WorkspaceView getMyCurrentProject() {
 		return myCurrentProject;
 	}
 
-	public void setMyCurrentProject(Project myCurrentProject) {
+	public void setMyCurrentProject(WorkspaceView myCurrentProject) {
 		this.myCurrentProject = myCurrentProject;
 	}
 
-	public List<Project> getMyProjects() {
+	public List<WorkspaceView> getMyProjects() {
 		return myProjects;
 	}
 
-	public void setMyProject(List<Project> myProject) {
+	public void setMyProject(List<WorkspaceView> myProject) {
 		this.myProjects = myProject;
 	}
 
@@ -154,8 +169,8 @@ public class MainView implements View {
 
 	@Override
 	public Visualizer getVisualizer() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return myVisualizer;
 	}
 
 	/*
