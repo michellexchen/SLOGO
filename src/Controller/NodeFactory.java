@@ -34,8 +34,7 @@ public class NodeFactory {
 		if (CommandName == null) {
 			if (isNumeric(currNode)) {
 				node = new NumericNode(Double.parseDouble(currNode));
-			}
-			else{
+			} else {
 				// TODO: Throw illegal command exception
 			}
 		} else {
