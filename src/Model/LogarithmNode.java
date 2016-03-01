@@ -6,6 +6,12 @@ import java.util.HashMap;
 import Controller.SLogoException;
 
 public class LogarithmNode extends CommandNode{
+	
+	private int NUM_CHILDREN = 1;
+	
+	public LogarithmNode(){
+		setNumChildren(NUM_CHILDREN);
+	}
 
 	public double evaluate(CharacterState state) throws SLogoException {
 		double num = getChildren().get(0).evaluate(state);

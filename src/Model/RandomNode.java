@@ -3,7 +3,7 @@ package Model;
 import Controller.SLogoException;
 
 public class RandomNode extends CommandNode{
-	private int NUM_CHILDREN = 0;
+	private int NUM_CHILDREN = 1;
 
 	public RandomNode(){
 		setNumChildren(NUM_CHILDREN);

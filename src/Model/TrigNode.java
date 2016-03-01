@@ -2,7 +2,7 @@ package Model;
 
 public abstract class TrigNode extends CommandNode{
 	
-	private int NUM_CHILDREN = 0;
+	private int NUM_CHILDREN = 1;
 	private double pi = 3.141592653589793238462643383279;
 	
 	public TrigNode(){

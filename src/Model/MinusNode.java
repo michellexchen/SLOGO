@@ -3,7 +3,7 @@ package Model;
 import Controller.SLogoException;
 
 public class MinusNode extends CommandNode{
-	private int NUM_CHILDREN = 2;
+	private int NUM_CHILDREN = 1;
 
 	public MinusNode(){
 		setNumChildren(NUM_CHILDREN);
