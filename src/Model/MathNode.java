@@ -1,79 +1,53 @@
 package Model;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import Controller.SLogoException;
 
-public class MathNode extends CommandNode{
+public class MathNode extends ReflectNode{
 
-	private ArrayList<Node> children = new ArrayList<Node>();
-	private String commandType;
-	private CharacterState state;
 	private double pi = 3.141592653589793238462643383279;
 	
 	public void setType(String type){
-		commandType = type;
-	}
-	
-	public double evaluate(CharacterState state) throws SLogoException{
-		this.state = state;
-		Class thisClass = null;
-		try {
-			thisClass = Class.forName("Model.MathNode");
-		} catch (ClassNotFoundException e) {
-			throw new SLogoException("Class not implemented");
-		}
-		Method method = null;
-		try {
-			method = thisClass.getMethod(commandType, new Class[] {});
-		} catch (NoSuchMethodException | SecurityException e) {
-			throw new SLogoException("Method " + commandType+ " not implemented");
-		}
-		try {
-			return (double) method.invoke(this, new Object[] {});
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new SLogoException("Math method not implemented");
-		}
+		super.setCommandType(type);
+		super.setClassType("Math");
 	}
 	
 	public double sum() throws SLogoException{
 		double result = 0;
-		for(int x=0; x<children.size(); x++){
-			result += children.get(x).evaluate(state);
+		for(int x=0; x<getChildren().size(); x++){
+			result += getChildren().get(x).evaluate(getState());
 		}
 		return result;
 	}
 	
 	public double difference() throws SLogoException{
-		double result = children.get(0).evaluate(state);
-		for(int x=1; x<children.size(); x++){
-			result -= children.get(x).evaluate(state);
+		double result = getChildren().get(0).evaluate(getState());
+		for(int x=1; x<getChildren().size(); x++){
+			result -= getChildren().get(x).evaluate(getState());
 		}
 		return result;
 	}
 	
 	public double product() throws SLogoException{
 		double result = 1;
-		for(int x=0; x<children.size(); x++){
-			result += children.get(x).evaluate(state);
+		for(int x=0; x<getChildren().size(); x++){
+			result += getChildren().get(x).evaluate(getState());
 		}
 		return result;
 	}
 	
 	public double quotient() throws SLogoException{
-		double result = children.get(0).evaluate(state);
-		for(int x=0; x<children.size(); x++){
-			result /= children.get(x).evaluate(state);
+		double result = getChildren().get(0).evaluate(getState());
+		for(int x=0; x<getChildren().size(); x++){
+			result /= getChildren().get(x).evaluate(getState());
 		}
 		return result;
 	}
 	
 	public double remainder() throws SLogoException{
-		double result = children.get(0).evaluate(state);
-		for(int x=0; x<children.size(); x++){
-			result %= children.get(x).evaluate(state);
+		double result = getChildren().get(0).evaluate(getState());
+		for(int x=0; x<getChildren().size(); x++){
+			result %= getChildren().get(x).evaluate(getState());
 		}
 		return result;
 	}
@@ -83,7 +57,7 @@ public class MathNode extends CommandNode{
 	}
 	
 	public double random() throws SLogoException{
-		double result = children.get(0).evaluate(state);
+		double result = getChildren().get(0).evaluate(getState());
 		if(result < 0){
 			return 0;
 		}
@@ -119,23 +93,23 @@ public class MathNode extends CommandNode{
 	
 	public double sin() throws SLogoException{
 		// for 1 < X < 1, sin(x) = x - x^3/3! + x^5/5! - x^7/7! + ...
-		double degrees = children.get(0).evaluate(state);
+		double degrees = getChildren().get(0).evaluate(getState());
 		return sinTaylorApprox(degrees);
 	}
 	
 	public double cos() throws SLogoException{
-		double degrees = children.get(0).evaluate(state);
+		double degrees = getChildren().get(0).evaluate(getState());
 		return cosTaylorApprox(degrees);
 	}
 	
 	public double tan() throws SLogoException{
-		double degrees = children.get(0).evaluate(state);
+		double degrees = getChildren().get(0).evaluate(getState());
 		return sinTaylorApprox(degrees) / cosTaylorApprox(degrees);
 	}
 	
 	public double atan() throws SLogoException{
 		// For for -2pi < X < 2pi, atan(x) = x - x^3/3 + x^5/5 - x^7/7 + ...
-		double radians = degToRad(children.get(0).evaluate(state));
+		double radians = degToRad(getChildren().get(0).evaluate(getState()));
 		if(radians<1 || radians>1){
 			throw new SLogoException("Arctan(x) domain is [-1, 1]");
 		}
@@ -204,7 +178,7 @@ public class MathNode extends CommandNode{
 	}
 	
 	public double log() throws SLogoException{
-		double num = children.get(0).evaluate(state);
+		double num = getChildren().get(0).evaluate(getState());
 		String numToStr = num+"";
 		int decimalIndex = numToStr.indexOf(".");
 		int toSubtract = 1;
@@ -220,16 +194,12 @@ public class MathNode extends CommandNode{
 	}
 	
 	public double pow() throws SLogoException{
-		double base = children.get(0).evaluate(state);
+		double base = getChildren().get(0).evaluate(getState());
 		double pow = 1;
-		double exponent = children.get(1).evaluate(state);
+		double exponent = getChildren().get(1).evaluate(getState());
 		for(int x=0; x<exponent; x++){
 			pow *= base;
 		}
 		return pow;
-	}
-	
-	public String toString(){
-		return commandType;
 	}
 }
