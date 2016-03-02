@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import Controller.LanguagesDriver;
 import Controller.SLogoException;
 import Model.Model;
+import Model.Workspace;
 
 public class MainView implements View {
 
@@ -115,5 +116,17 @@ public class MainView implements View {
 	@Override
 	public void updateCommandHistory() {
 		getVisualizer().updateCommandHistory();
+	}
+
+	@Override
+	public void updateWorkspaces() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setCurrentWorkspace(Workspace workspace) {
+		// TODO Auto-generated method stub
+		
 	}
 }

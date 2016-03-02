@@ -7,6 +7,7 @@ import Controller.SLogoException;
 import Controller.TreeFactory;
 import View.View;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 public class MainModel implements Model {
@@ -28,6 +29,21 @@ public class MainModel implements Model {
 	public void initialize() {	
 		myWorkspaces = new ArrayList<Workspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
+		myObservableWorkspaces.addListener((ListChangeListener) c -> {
+			getView().updateWorkspaces();
+			getView().setCurrentWorkspace(getCurrentWorkspace());
+		});
+//		myObservableWorkspaces.addListener(new ListChangeListener() {
+//
+//			@Override
+//			public void onChanged(Change c) {
+//				// TODO Auto-generated method stub
+//				getView().updateWorkspaces();
+//				getView().setCurrentWorkspace(getCurrentWorkspace());
+//			}
+//			
+//			
+//		});
 		createNewWorkspace();
 		
 	}
