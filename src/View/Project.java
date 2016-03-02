@@ -50,8 +50,6 @@ public class Project {
 	    root = (Parent) myLoader.load();
 	    myGUIController = (GUIController) myLoader.getController();
 	    myGUIController.setMyModel(myModel);
-
-	    
 	    
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();

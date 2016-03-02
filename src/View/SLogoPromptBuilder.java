@@ -4,12 +4,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -22,10 +25,9 @@ import javafx.stage.Stage;
 
 public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int XPROMPTSIZE = 500;
-    private static final int YPROMPTSIZE = 300;
-    private static final int PADDING = 50;
+    private static final int YPROMPTSIZE = 275; 
+    private static final int PADDING = 55;
 	private final int SPLASHSIZE = 400;
-	//private final int SIZE = 500;
     private static final int LABEL_FONTSIZE = 32;
     private static final int TEXT_FONTSIZE = 20;
     private static final String FONT = "Georgia";
@@ -37,38 +39,36 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private Label label;
 	private ComboBox comboBox;
 	private HBox labelHb;
+	private HBox langHb;
+	private HBox buttonHb;
+	private Label lang;
+	private HBox colorHb;
+	private Label colorLabel;
 	private Text myActionStatus;
 	private Button ok;
+	private ComboBox colorCb;
+	private Color myColor = Color.WHITE;
+	private ColorPicker colorPicker;
+
 
 //	public SLogoPromptBuilder(String language) {
 //		super(language);
 //	}
+	
 	public SLogoPromptBuilder() {
 
 	}
 
 	public void promptScreen () {
-
 		prompt = new Stage();
-		setup(); //sets labelHb, myActionstatus
-		setScene(promptScene);
-		//readInput();
-
-//		Label label = new Label(getResources().getString("Select"));
-
-//		Button btn1 = new Button(getResources().getString("FileChoose"));
-//		btn1.setOnAction(e -> showSingleFileChooser(prompt, myActionStatus));
-//		HBox buttonHb1 = new HBox(PADDING);
-//		buttonHb1.setAlignment(Pos.CENTER);
-//		buttonHb1.getChildren().addAll(btn1);		
-
+		setup();
+		setScene(promptScene);		
 	}
 	
 	private void setup(){
-		setLabel();
-		setLangCombobox(); //sets language list
-		setHBox();
-		setText();
+		setWelcome();
+		setLanguage();
+		setColor();
 		setButton();
 	}
 	
@@ -77,25 +77,29 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		promptScene = new Scene(vbox, XPROMPTSIZE, YPROMPTSIZE);
 		prompt.setScene(promptScene);
 		prompt.showAndWait();
-		promptScene.getStylesheets().add("View/style.css");	
 	}
 	
-
 	private VBox setVBox(){
 		vbox = new VBox();
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
 		vbox.setPadding(new Insets(PADDING));
-//		vbox.getChildren().addAll(labelHb, buttonHb1, myActionStatus);
-		vbox.getChildren().addAll(labelHb, myActionStatus, lang, comboBox, ok);
+		vbox.getChildren().addAll(labelHb, langHb, colorHb, buttonHb);
 		vbox.getStylesheets().add("View/splashstyle.css");
 		return vbox;
 	}
 	
-	private Label lang;
+	private void setWelcome(){ 
+		label = new Label("WELCOME TO SLOGO!");
+		label.setTextFill(Color.DARKBLUE);
+		label.setFont(Font.font(FONT, FontWeight.BOLD, LABEL_FONTSIZE));
+		labelHb = new HBox();
+		labelHb.setAlignment(Pos.CENTER);
+		labelHb.getChildren().add(label);
+		labelHb.setPrefSize(75, 75);
+	}
 	
-	private void setLangCombobox(){ //dropdown of languages
-		lang = new Label("Select Language:");
-		lang.getStylesheets().add("View/splashstyle.css");
+	private void setLanguage(){ 
+		lang = new Label("Select language:  ");
 		ObservableList<String> options = 
 				FXCollections.observableArrayList(
 						"English",
@@ -108,50 +112,47 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 						"Spanish"
 				);
 		comboBox = new ComboBox(options);
+		comboBox.setValue("English");
+		langHb = new HBox();
+		langHb.setAlignment(Pos.CENTER);
+		langHb.getChildren().addAll(lang, comboBox);
+		langHb.setPrefSize(75, 75);
+
 	}
 	
-	private void setLabel(){ //welcome phrase
-		label = new Label("Welcome to SLOGO!");
-		label.setTextFill(Color.DARKBLUE);
-		label.setFont(Font.font(FONT, FontWeight.BOLD, LABEL_FONTSIZE));
+	private void setColor(){
+		colorLabel = new Label("Select background color: ");
+		colorLabel.setPrefWidth(202);
+		colorPicker = new ColorPicker();
+        colorPicker.setOnAction(e -> {
+			myColor = colorPicker.getValue();
+        });
+		colorHb = new HBox();
+		colorHb.getChildren().addAll(colorLabel, colorPicker);
+		colorHb.setPrefSize(75, 75);
+	}
+		
+	
+	private void setButton(){ 
+		buttonHb = new HBox();
+		ok = new Button("OKAY");
+		buttonHb.setAlignment(Pos.CENTER);
+		buttonHb.getChildren().add(ok);
+		buttonHb.setPrefSize(75, 75);
+		ok.setOnMouseClicked(e -> {
+			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
+			//testing
+			System.out.println(myLanguage);
+			System.out.println(myColor.toString());
+		});
 	}
 	
-	private void setHBox(){ //adds label in hbox
-		labelHb = new HBox();
-		labelHb.setAlignment(Pos.CENTER);
-		labelHb.getChildren().add(label);
-	}
-	
-	private void setText(){
-		myActionStatus = new Text();
-		myActionStatus.setFont(Font.font(FONT, FontWeight.NORMAL, TEXT_FONTSIZE));
-		myActionStatus.setFill(Color.FIREBRICK);
+	public String sendMyLanguage(){ //for back end
+		return myLanguage;
 	}
 
-	private void setButton(){
-		ok = new Button("OKAY");
+	public Color sendMyColor(){ 
+		return myColor;
 	}
 	
-//	myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
-//    root = (Parent) myLoader.load();
-//    myGUIController = (GUIController) myLoader.getController();
-//    myGUIController.setMyModel(myModel);
-//
-//    
-//    
-//	myProjectScene = new Scene(root);
-//	myProjectStage = new Stage();
-//	myProjectStage.setScene(myProjectScene);
-//	myProjectStage.setTitle("SLogo");
-	
-//	private void readInput(){
-//        comboBox.valueProperty().addListener(new ChangeListener<String>() {
-//        @Override 
-//        public void changed(ObservableValue ov, String t, String t1) {                
-//            //address = t1; 
-//        	System.out.println("changed");
-//        }    
-//    });
-//	//TODO: Save the option
-//	}
 }
