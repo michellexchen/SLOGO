@@ -92,7 +92,10 @@ public class MainModel implements Model {
 	public List<DisplayData> getDisplayDataList() {
 		return myCurrentWorkspace.getDataList();
 	}
-
+	
+	/**
+	 * Create a new workspace and set it as current workspace
+	 */
 	@Override
 	public void createNewWorkspace() {
 		// TODO Auto-generated method stub
@@ -106,6 +109,7 @@ public class MainModel implements Model {
 	/**
 	 * @return the myCurrentWorkspace
 	 */
+	@Override
 	public Workspace getCurrentWorkspace() {
 		return myCurrentWorkspace;
 	}
