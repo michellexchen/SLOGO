@@ -19,3 +19,4 @@ public interface View {
 	
 	public void setCurrentWorkspace(Workspace workspace);
 }
+	
