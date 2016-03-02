@@ -16,6 +16,7 @@ public abstract class CharacterState {
 	private boolean isHidden;
 	private double angle;
 	private ImageView imageView;
+	private boolean penDo
 
 	public CharacterState(double xCoor, double yCoor, double direction, boolean isHidden, double angle) {
 		this.xCoor = xCoor;
