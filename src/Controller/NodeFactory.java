@@ -49,22 +49,8 @@ public class NodeFactory {
 		return node;
 	}
 
-	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException {
-		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
-		Node child = createNode(myNodes.get(0));
-		myNodes.remove(0);
-		childToRemaindersMap.put(child, myNodes);
-		if (myNodes.size() > 0) {
-			for (int x = 0; x < child.getNumChildren(); x++) {
-				HashMap<Node, List<String>> childChildToRemaindersMap = createChild(myNodes);
-				Iterator it = childChildToRemaindersMap.entrySet().iterator();
-				Map.Entry pair = (Map.Entry) it.next();
-				Node childChild = (Node) pair.getKey();
-				myNodes = (List<String>) pair.getValue();
-				((CommandNode) child).addChild(childChild);
-			}
-		}
-		return childToRemaindersMap;
+	public void addChildren(){
+		
 	}
 
 	private boolean isNumeric(String s) {

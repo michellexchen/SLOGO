@@ -20,31 +20,31 @@ public class MainDriver extends Application {
 
 	private MainModel myModel;
 	private MainView myView;
-	private GUIController myGUI;
-	private String myLanguage;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	public void start(Stage myStage) throws SLogoException, IOException {
+		initialize();
 
+	}
+	
+	public void initialize () throws SLogoException, IOException {
+		loadLanguage();
 		myModel = new MainModel();
 		myView = new MainView();
 		myModel.setView(myView);
+		myView.setModel(myModel);
 		myModel.initialize();
+		myView.initialize();
+
+	}
+	
+	public void loadLanguage () throws SLogoException {
 		LanguagesDriver langDriver = new LanguagesDriver();
 		// doesn't do anything
 		// this.myLanguage = myLanguage;
 		langDriver.load("English");
-
-		try {
-			myView.addProject(myModel);
-			myView.getMyProjects().get(0).setMyModel(myModel);
-			myView.getMyProjects().get(0).show();
-		} catch (SLogoException e) {
-			myView.showError(e);
-		}
 	}
-
 }
