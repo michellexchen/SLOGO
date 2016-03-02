@@ -3,6 +3,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -33,8 +34,6 @@ public class DisplayData extends Observable {
 	 */
 	public DisplayData(Position position, double angle, boolean penDown, Color penColor, ImageView image) {
 
-		// this.xCoordinate = x;
-		// this.yCoordinate = y;
 		this.myPosition = position;
 		this.myAngle = angle;
 		this.penDown = penDown;
@@ -45,16 +44,22 @@ public class DisplayData extends Observable {
 
 	public DisplayData(CharacterState state) {
 		updateData(state);
+		initialize();
 	}
 
+	public void initialize () {
+		myLines = new ArrayList<Line>();
+	}
+	
 	public void updateData(CharacterState state) {
-		myPosition = new Position(state.getXCoor(), state.getYCoor());
+		myPosition = new Position();
+		myPosition.setXY(state.getXCoor(),  state.getYCoor());
 		myAngle = state.getAngle();
 		penDown = ((TurtleState) state).getPen();
 		penColor = ((TurtleState) state).getPenColor();
 		myImage = state.getImageView();
 	}
-
+	
 	/**
 	 * Set the hasState value of DisplayData as 'changed' and notify all
 	 * Observers

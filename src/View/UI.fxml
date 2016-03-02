@@ -54,22 +54,22 @@
         </Button>
         <ScrollPane id="history" fx:id="myCommandHistoryPane" content="$null" layoutX="10.0" layoutY="67.0" prefHeight="381.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </ScrollPane>
         <Label alignment="CENTER" layoutX="48.0" layoutY="48.0" prefWidth="128.0" text="Command History">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </Label>
         <Label alignment="CENTER" layoutX="682.0" layoutY="14.0" prefWidth="128.0" text="Variables">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </Label>
         <Label alignment="CENTER" layoutX="682.0" layoutY="238.0" prefWidth="128.0" text="Custom Commands">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </Label>
         <ScrollPane content="$null" layoutX="667.0" layoutY="261.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />

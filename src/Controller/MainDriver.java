@@ -36,9 +36,10 @@ public class MainDriver extends Application {
 		myView = new MainView();
 		myModel.setView(myView);
 		myView.setModel(myModel);
-		myView.initialize();
-		myModel.initialize();
 
+		myModel.initialize();
+		myView.initialize();
+		myModel.addListeners();
 
 	}
 	

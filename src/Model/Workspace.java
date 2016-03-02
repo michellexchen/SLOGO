@@ -47,15 +47,14 @@ public class Workspace {
 		myTreeFactory = new TreeFactory();
 		
 		createTurtle();
-		getView().updateDisplayData();
-		getView().updateCommandHistory();
+//		getView().updateDisplayData();
+//		getView().updateCommandHistory();
 	}
 	
 	private void createObservableLists (List<DisplayData> datalist, 
 			List<String> commandhistory) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
-		myObservableDataList.addListener
-				((ListChangeListener) change -> getView().updateDisplayData());
+
 		
 //		myObservableDataList.addListener(new ListChangeListener() {
 //			@Override
@@ -68,8 +67,7 @@ public class Workspace {
 //		});
 		
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
-		myObservableCommandHistory.addListener
-				((ListChangeListener) change -> getView().updateCommandHistory());
+
 
 	}
 //	public void onChanged(ListChangeListener.Change change) {
@@ -81,13 +79,19 @@ public class Workspace {
 //
 //}
 
+	
+	public void addListeners () {
+		getObservableDataList().addListener
+		((ListChangeListener) change -> getView().updateDisplayData());
+		getObservableCommandHistory().addListener
+		((ListChangeListener) change -> getView().updateCommandHistory());
+	}
 
 	public void createTurtle() {
 		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
 		DisplayData turtleData = new DisplayData(myTurtle.getState());
-		//turtleData.addObserver(myVisualizer);
-		myObservableDataList.add(turtleData);
+		getObservableDataList().add(turtleData);
 	}
 
 	public List<DisplayData> getDataList() {
@@ -122,7 +126,8 @@ public class Workspace {
 		CommandTree myTree = myTreeFactory.makeTree(command);
 		for (Character character : myCharacters) {
 			myTree.traverse(character.getState());
-			myDataList.get(myCharacters.indexOf(character)).updateData(character.getState());
+			myObservableDataList.get(myCharacters.indexOf(character))
+							.updateData(character.getState());
 		}
 	}
 	

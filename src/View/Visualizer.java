@@ -21,8 +21,8 @@ import javafx.stage.Stage;
 
 public class Visualizer implements Observer {
 	
-	private static final String TURTLE_IMAGE_PATH = "resources/turtle_images/";
-	private static final int TURTLE_SIZE = 10;
+	private static final String TURTLE_IMAGE_PATH = "file:resources/turtle_images/";
+	private static final int TURTLE_SIZE = 20;
 	
 	private ObservableList<DisplayData> myObservableDataList;
 	
@@ -62,7 +62,10 @@ public class Visualizer implements Observer {
 
 		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
 		myPrompt.promptScreen();
-
+		
+		//Get the ObservableDataList
+		setObservableDataList(getModel().getDisplayDataList());
+		
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
@@ -144,6 +147,7 @@ public class Visualizer implements Observer {
 	public void updateDisplayData () {
 		//System.out.println("Running");
 		getModel().getDisplayDataList();
+		//System.out.println(getObservableDataList());
 		for (DisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
@@ -157,6 +161,10 @@ public class Visualizer implements Observer {
 	
 	public void placeTurtle(DisplayData displaydata) {
         Image image = new Image(TURTLE_IMAGE_PATH + "turtle_1.png");
+//		System.out.println(TURTLE_IMAGE_PATH + "turtle_1.png");
+//		System.out.println(getClass().getResource("turtle_1.png").toExternalForm());
+//        Image image = new Image(getClass().getResource("turtle_1.png").toExternalForm());
+
         
 		ImageView turtle = new ImageView();
 		turtle.setImage(image);

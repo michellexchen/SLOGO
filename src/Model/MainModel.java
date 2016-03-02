@@ -30,10 +30,7 @@ public class MainModel implements Model {
 		myWorkspaces = new ArrayList<Workspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 		createNewWorkspace();
-		myObservableWorkspaces.addListener((ListChangeListener) c -> {
-			getView().updateWorkspaces();
-			getView().setCurrentWorkspace(getCurrentWorkspace());
-		});
+
 //		myObservableWorkspaces.addListener(new ListChangeListener() {
 //
 //			@Override
@@ -47,7 +44,20 @@ public class MainModel implements Model {
 //		});
 		
 	}
-
+	
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addListeners () {
+		myObservableWorkspaces.addListener((ListChangeListener) c -> {
+			getView().updateWorkspaces();
+			getView().setCurrentWorkspace(getCurrentWorkspace());
+		});
+		myCurrentWorkspace.addListeners();
+		
+		getView().updateDisplayData();
+		getView().updateCommandHistory();
+		getView().updateWorkspaces();
+	}
+	
 	public void readCommand(String command) throws SLogoException {
 		setCommand(command);
 		myCurrentWorkspace.readCommand(command);
@@ -90,9 +100,10 @@ public class MainModel implements Model {
 
 	@Override
 	public ObservableList<DisplayData> getDisplayDataList() {
-		System.out.println(myCurrentWorkspace);
+		System.out.println("This is current workspace: " + myCurrentWorkspace);
 
-		System.out.println(myCurrentWorkspace.getObservableDataList());
+		System.out.println("This is currentworkspaces observabledatalist " 
+				+ myCurrentWorkspace.getObservableDataList());
 		return myCurrentWorkspace.getObservableDataList();
 	}
 	

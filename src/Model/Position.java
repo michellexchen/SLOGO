@@ -9,7 +9,7 @@ package Model;
  *
  */
 public class Position {
-	
+	private static final int PANE_SIZE = 450;
 	
 	private double myWidth;
 	private double myHeight;
@@ -38,9 +38,13 @@ public class Position {
 
 	
 	public Position() {
+		initialize();
+	}
+	
+	public void initialize() {
 		// TODO Auto-generated constructor stub
-		myWidth = 331;
-		myHeight = 331;
+		myWidth = PANE_SIZE;
+		myHeight = PANE_SIZE;
 
 		// set the center coordinates
 		xCenter = myWidth / 2;

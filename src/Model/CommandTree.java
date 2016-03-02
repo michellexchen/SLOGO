@@ -3,6 +3,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.xpath.internal.operations.Variable;
+
 import Controller.SLogoException;
 
 /**

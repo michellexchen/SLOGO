@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class CommandsDriver extends FileDriver {
 
-	private final String commandDirectory = "resources/commands";
-	private final String commandExtension = "Commands.resources";
+	private static final String commandDirectory = "resources/commands";
+	private static final String commandExtension = "Commands.resources";
 
 	public CommandsDriver() throws SLogoException {
 		load();
