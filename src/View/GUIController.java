@@ -86,8 +86,9 @@ public class GUIController implements Initializable  {
     
     
     //Command History Pane where ObservableList<CommandNode> will go
+    
     @FXML
-    private AnchorPane myCommandHistoryPane;
+    private ScrollPane myCommandHistoryPane;
     
     
     //myVariablePane where ObservableList<Variable> will go
@@ -106,8 +107,8 @@ public class GUIController implements Initializable  {
 //    private Hyperlink helpHyperlink;   
 //
 //
-//    @FXML
-//    private List<String> myHistoryPane;
+    @FXML
+    private List<String> myHistory;
 //    
 //
 //    
@@ -118,36 +119,22 @@ public class GUIController implements Initializable  {
     	
     	//TODO: Separate the operations below into different methods
     	
+    	myHistory = new ArrayList<String>();
     	
     	//Help button - assign action
         myHelpButton.setOnAction(e -> {
         	popup("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php");
         });
-        
-
-        
-        
+                   
         //Run button - return user input and stores it in myCommand
+        
         myRunButton.setOnAction(e -> {
-        	String myCommand = myTextField.getText();
-        	myTextField.clear();
-        	setCommand(myCommand);
-        	
-        	/*
-        	 * TODO: Call Model's readCommand that calls
-        	 * View's getCommand
-        	 * and passes the command to the parser
-        	 */
-        	try {
-				getModel().readCommand(myCommand);
-			} catch (SLogoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-        	
+        	myCommand = myTextField.getText();
+            myTextField.clear();
+            run(myCommand);
         });
         
-        
+
         //Initialize main Pane-myCanvas
         //myCanvas = new Pane(); ALREADY INITIALIZED?
         //This is how to add line objects
@@ -159,7 +146,24 @@ public class GUIController implements Initializable  {
         
     }
         
-    
+    private void run(String myC){
+        setCommand(myCommand);
+          	/*
+          	 * TODO: Call Model's readCommand that calls
+          	 * View's getCommand
+          	 * and passes the command to the parser
+          	 */
+          	try {
+  				getModel().readCommand(myC);
+  			} catch (SLogoException e1) {
+  				myC = "ERROR: " + myC;
+  			}
+          	
+          	myHistory.add(myC);
+          	displayHistory();
+          	
+         
+    }
     
         
     	//myHistoryPane = new ArrayList<String>(); //initialize myHistoryPane
@@ -190,8 +194,6 @@ public class GUIController implements Initializable  {
         stage.setScene(scene);
         stage.show();
     }
-
-    
     
     
 //    private void myRunButtonmyTextField(){
@@ -210,13 +212,38 @@ public class GUIController implements Initializable  {
 //    	return myTextField.getText();
 //    }
 //    
-//    private void displayHistoryPane(){
+//    private void displayHistory(){
 //    	myHistoryPaneView = new ListView<String>();
 //    	ObservableList<String> items =FXCollections.observableArrayList (
-//    			mymyHistoryPane);
+//    			myHistoryPane);
 //    	myHistoryPaneView.setItems(items);
 //    	((ScrollPane) myHistoryPane).setContent(myHistoryPaneView);
 //    }
+    
+    private void displayHistory(){
+    	myHistoryPaneView = new ListView<String>();
+    	ObservableList<String> items =FXCollections.observableArrayList (
+    			myHistory);
+    	myHistoryPaneView.setItems(items);
+    	myCommandHistoryPane.setContent(myHistoryPaneView);
+//    	myHistoryPaneView.setOnMouseClicked(e-> {
+//    		System.out.println("*");
+//    		System.out.println(e.toString());
+//    		run(myCommand);
+//    	});
+    	
+    	myHistoryPaneView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+    	    @Override
+    	    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    	    	if(newValue.contains("ERROR")) {
+    	    		myCommand = newValue.substring(7);
+    	    	} else {
+    	    		myCommand = newValue;
+    	    	}
+    	        run(myCommand);
+    	    }
+    	});
+    }    
     
 //    @Override
 //	public String getCommand() {
