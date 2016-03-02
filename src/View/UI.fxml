@@ -8,9 +8,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.GUIController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GUIController">
   <children>
-    <AnchorPane id="AnchorPane" layoutX="-1.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="801.0" styleClass="window">
+    <AnchorPane id="AnchorPane" layoutX="-1.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="801.0" styleClass="window" stylesheets="@style.css">
       <children>
         <Pane fx:id="myCanvas" layoutX="172.0" layoutY="14.0" prefHeight="450.0" prefWidth="450.0" style="" styleClass="screen">
           <children>
@@ -54,29 +54,26 @@
         </Button>
         <ScrollPane id="history" content="$null" layoutX="8.0" layoutY="67.0" prefHeight="397.0" prefWidth="157.0" styleClass="label" vbarPolicy="ALWAYS">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </ScrollPane>
         <Label alignment="CENTER" layoutX="22.0" layoutY="45.0" prefWidth="128.0" text="Command History">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </Label>
         <Label alignment="CENTER" layoutX="638.0" layoutY="11.0" prefWidth="128.0" text="Variables">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </Label>
         <Label alignment="CENTER" layoutX="645.0" layoutY="239.0" prefWidth="128.0" text="Custom Commands">
           <stylesheets>
-            <URL value="@../../../../../Desktop/slogo_team18/src/style.css" />
+            <URL value="@style.css" />
           </stylesheets>
         </Label>
         <ScrollPane content="$null" layoutX="631.0" layoutY="264.0" prefHeight="200.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
       </children>
-      <stylesheets>
-        <URL value="@style.css" />
-      </stylesheets>
     </AnchorPane>
   </children>
 </AnchorPane>
