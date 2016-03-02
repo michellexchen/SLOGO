@@ -27,7 +27,8 @@ public class NodeFactory {
 		langDriver.load("English"); // To remove
 	}
 
-	public Node createNode(String englishCommand) throws SLogoException {
+	public Node createNode(List<String> nodeList) throws SLogoException {
+		String englishCommand = nodeList.get(0);
 		Node node = null;
 		if (!langDriver.getLanguage().equals("English")) {
 			// englishCommand = langDriver.getTranslation(myNode);

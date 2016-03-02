@@ -40,7 +40,7 @@ public class DisplayData extends Observable {
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
-
+		
 	}
 
 	public DisplayData(CharacterState state) {

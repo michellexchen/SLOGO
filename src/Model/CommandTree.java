@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Controller.SLogoException;
 
 /**
@@ -11,10 +14,11 @@ import Controller.SLogoException;
 public class CommandTree {
 
 	private Node root;
+	//have access to the list here of variables
+	private List<Variable> myVars = new ArrayList<>();
 
 	public void traverse(CharacterState state) throws SLogoException {
-		root.evaluate(state);
-
+		root.evaluate(state); //also add the list
 	}
 
 	public void setRoot(Node root) {
@@ -23,6 +27,10 @@ public class CommandTree {
 
 	public Node getRoot() {
 		return root;
+	}
+	
+	public void setMyVars(List<Variable> list){
+		this.myVars = list;
 	}
 
 }
