@@ -30,8 +30,8 @@ public class Visualizer implements Observer {
 
 	// Visualization Primitives
 	// private Group myRoot;
-	private Scene myProjectScene;
-	private Stage myProjectStage;
+	private Scene myScene;
+	private Stage myStage;
 
 	private Model myModel;
 	
@@ -62,10 +62,10 @@ public class Visualizer implements Observer {
 		myGUIController = (GUIController) myLoader.getController();
 		myGUIController.setMyModel(myModel);
 
-		myProjectScene = new Scene(root);
-		myProjectStage = new Stage();
-		myProjectStage.setScene(myProjectScene);
-		myProjectStage.setTitle("SLogo");
+		myScene = new Scene(root);
+		myStage = new Stage();
+		myStage.setScene(myScene);
+		myStage.setTitle("SLogo");
 
 	}
 
@@ -130,6 +130,24 @@ public class Visualizer implements Observer {
 		return newLine;
 	}
 	
+	/**
+	 * This method updates turtles' attributes and position
+	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
+	 */
+	public void updateDisplayData () {
+		
+		
+	}
+	
+	/**
+	 * This method updates command history display in GUI.
+	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
+	 */
+	public void updateCommandHistory () {
+		
+	}
+	
+	
 	
 	
 	public int getWidth() {
@@ -148,21 +166,21 @@ public class Visualizer implements Observer {
 		this.myHeight = height;
 	}
 
-	public Scene getScene() {
-		return myProjectScene;
-	}
-
-	public void setMyProjectScene(Scene myProjectScene) {
-		this.myProjectScene = myProjectScene;
-	}
-
-	public Stage getStage() {
-		return myProjectStage;
-	}
-
-	public void setMyProjectStage(Stage myProjectStage) {
-		this.myProjectStage = myProjectStage;
-	}
+//	public Scene getScene() {
+//		return myProjectScene;
+//	}
+//
+//	public void setMyProjectScene(Scene myProjectScene) {
+//		this.myProjectScene = myProjectScene;
+//	}
+//
+//	public Stage getStage() {
+//		return myProjectStage;
+//	}
+//
+//	public void setMyProjectStage(Stage myProjectStage) {
+//		this.myProjectStage = myProjectStage;
+//	}
 
 	/**
 	 * @return the myLoader
@@ -222,6 +240,34 @@ public class Visualizer implements Observer {
 	 */
 	public void setMyModel(Model myModel) {
 		this.myModel = myModel;
+	}
+
+	/**
+	 * @return the myScene
+	 */
+	public Scene getScene() {
+		return myScene;
+	}
+
+	/**
+	 * @param myScene the myScene to set
+	 */
+	public void setScene(Scene myScene) {
+		this.myScene = myScene;
+	}
+
+	/**
+	 * @return the myStage
+	 */
+	public Stage getStage() {
+		return myStage;
+	}
+
+	/**
+	 * @param myStage the myStage to set
+	 */
+	public void setStage(Stage myStage) {
+		this.myStage = myStage;
 	}
 
 

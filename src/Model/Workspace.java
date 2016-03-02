@@ -5,6 +5,7 @@ import java.util.List;
 
 import Controller.SLogoException;
 import Controller.TreeFactory;
+import View.View;
 import View.Visualizer;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -16,6 +17,8 @@ import javafx.collections.ObservableList;
  */
 public class Workspace {
 
+	private View myView;
+	
 	private List<DisplayData> myDataList;
 	private List<String> myCommandHistory;
 	
@@ -29,6 +32,9 @@ public class Workspace {
 
 	public Workspace() {
 
+	}
+	public Workspace(View view) {
+		myView = view;
 	}
 	
 	public void initialize () {
@@ -72,7 +78,7 @@ public class Workspace {
 		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
 		DisplayData turtleData = new DisplayData(myTurtle.getState());
-		turtleData.addObserver(myVisualizer);
+		//turtleData.addObserver(myVisualizer);
 		myDataList.add(turtleData);
 	}
 

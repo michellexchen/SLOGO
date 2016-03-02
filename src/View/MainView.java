@@ -48,9 +48,11 @@ public class MainView implements View {
 	/**
 	 * Called at start
 	 * Initializes necessary classes used to visualize turtles
+	 * @throws IOException 
 	 */
-	public void initialize() throws SLogoException {
+	public void initialize() throws SLogoException, IOException {
 		myVisualizer = new Visualizer(WIDTH, HEIGHT);
+		myVisualizer.initialize();
 		myLangDriver = new LanguagesDriver();
 
 		String language = "English"; // Get from UI
@@ -60,10 +62,10 @@ public class MainView implements View {
 
 	}
 	
-	public void showProject(WorkspaceView project) throws SLogoException {
-		project.show();
-
-	}
+//	public void showProject(WorkspaceView project) throws SLogoException {
+//		project.show();
+//
+//	}
 
 	public void showError(SLogoException e) {
 		Alert alert = new Alert(AlertType.ERROR);
@@ -83,27 +85,27 @@ public class MainView implements View {
 //		// TODO: Code for deleting all the projects existent
 //	}
 
-	public void addProject() throws IOException, SLogoException {
-		WorkspaceView myNewProject = new WorkspaceView();
-
-		try {
-			myNewProject.initialize();
-		} catch (SLogoException e) {
-			throw new SLogoException("project did not initialize");
-		}
-		getMyProjects().add(myNewProject);
-	}
-
-	public void addProject(Model model) throws IOException, SLogoException {
-		WorkspaceView myNewProject = new WorkspaceView(model);
-
-		try {
-			myNewProject.initialize();
-		} catch (SLogoException e) {
-			throw new SLogoException("project did not initialize");
-		}
-		getMyProjects().add(myNewProject);
-	}
+//	public void addProject() throws IOException, SLogoException {
+//		WorkspaceView myNewProject = new WorkspaceView();
+//
+//		try {
+//			myNewProject.initialize();
+//		} catch (SLogoException e) {
+//			throw new SLogoException("project did not initialize");
+//		}
+//		getMyProjects().add(myNewProject);
+//	}
+//
+//	public void addProject(Model model) throws IOException, SLogoException {
+//		WorkspaceView myNewProject = new WorkspaceView(model);
+//
+//		try {
+//			myNewProject.initialize();
+//		} catch (SLogoException e) {
+//			throw new SLogoException("project did not initialize");
+//		}
+//		getMyProjects().add(myNewProject);
+//	}
 
 	//////////////////////////
 	// getters and setters //
@@ -176,13 +178,13 @@ public class MainView implements View {
 	@Override
 	public void updateDisplayData() {
 		// TODO Auto-generated method stub
-		
+		getVisualizer().updateDisplayData();
 	}
 
 	@Override
 	public void updateCommandHistory() {
 		// TODO Auto-generated method stub
-		
+		getVisualizer().updateCommandHistory();
 	}
 
 	/*

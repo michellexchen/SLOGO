@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Controller.SLogoException;
@@ -23,8 +24,14 @@ public class MainModel implements Model {
 	}
 
 	public void initialize() {
-		myCurrentWorkspace = new Workspace();
+//		myCurrentWorkspace = new Workspace();
 //		myWorkspace.createTurtle(); //Don't need this
+		
+		
+		myWorkspaces = new ArrayList<Workspace>();
+		
+		createNewWorkspace();
+		
 	}
 
 	public void readCommand(String command) throws SLogoException {
@@ -75,7 +82,8 @@ public class MainModel implements Model {
 	@Override
 	public void createNewWorkspace() {
 		// TODO Auto-generated method stub
-		Workspace myWorkspace = new Workspace();
+		Workspace myWorkspace = new Workspace(getView());
+		myWorkspace.initialize();
 		getWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
 	}

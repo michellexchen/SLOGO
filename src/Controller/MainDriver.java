@@ -32,19 +32,25 @@ public class MainDriver extends Application {
 		myModel = new MainModel();
 		myView = new MainView();
 		myModel.setView(myView);
+		myView.setModel(myModel);
 		myModel.initialize();
+		myView.initialize();
+
 		LanguagesDriver langDriver = new LanguagesDriver();
 		// doesn't do anything
 		// this.myLanguage = myLanguage;
 		langDriver.load("English");
 
-		try {
-			myView.addProject(myModel);
-			myView.getMyProjects().get(0).setMyModel(myModel);
-			myView.getMyProjects().get(0).show();
-		} catch (SLogoException e) {
-			myView.showError(e);
-		}
+		
+		
+		
+//		try {
+//			myView.addProject(myModel);
+//			myView.getMyProjects().get(0).setMyModel(myModel);
+//			myView.getMyProjects().get(0).show();
+//		} catch (SLogoException e) {
+//			myView.showError(e);
+//		}
 	}
 
 }
