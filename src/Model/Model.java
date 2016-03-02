@@ -16,4 +16,8 @@ public interface Model {
 	
 	//Need this implemented 
 	public List<DisplayData> getDisplayDataList();
+	
+	
+	public void createNewWorkspace();
+	
 }

@@ -10,5 +10,7 @@ public interface View {
 
 	public Visualizer getVisualizer();
 	
+	public void updateDisplayData();
 	
+	public void updateCommandHistory();
 }

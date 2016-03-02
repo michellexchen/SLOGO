@@ -16,13 +16,13 @@ public class MainView implements View {
 
 	
 	private LanguagesDriver myLangDriver;
-	// private Group myRoot;
-	// private Scene myScene;
-	// private Stage myStage;
-	private CommandHistoryViewer myHistory;
-	private WorkspaceView myCurrentProject;
-	private List<WorkspaceView> myProjects;
 
+	private CommandHistoryViewer myHistory;
+//	private WorkspaceView myCurrentWorkspaceView;
+//	private List<WorkspaceView> myProjects;
+
+	
+	
 	private String myCommand;
 	private Model myModel;
 	
@@ -78,10 +78,10 @@ public class MainView implements View {
 	/*
 	 * clear() wipes out all the projects we have and restarts
 	 */
-	public void clear() {
-		getMyProjects().clear();
-		// TODO: Code for deleting all the projects existent
-	}
+//	public void clear() {
+//		getMyProjects().clear();
+//		// TODO: Code for deleting all the projects existent
+//	}
 
 	public void addProject() throws IOException, SLogoException {
 		WorkspaceView myNewProject = new WorkspaceView();
@@ -120,21 +120,21 @@ public class MainView implements View {
 		this.myHistory = myHistory;
 	}
 
-	public WorkspaceView getMyCurrentProject() {
-		return myCurrentProject;
-	}
-
-	public void setMyCurrentProject(WorkspaceView myCurrentProject) {
-		this.myCurrentProject = myCurrentProject;
-	}
-
-	public List<WorkspaceView> getMyProjects() {
-		return myProjects;
-	}
-
-	public void setMyProject(List<WorkspaceView> myProject) {
-		this.myProjects = myProject;
-	}
+//	public WorkspaceView getMyCurrentProject() {
+//		return myCurrentProject;
+//	}
+//
+//	public void setMyCurrentProject(WorkspaceView myCurrentProject) {
+//		this.myCurrentProject = myCurrentProject;
+//	}
+//
+//	public List<WorkspaceView> getMyProjects() {
+//		return myProjects;
+//	}
+//
+//	public void setMyProject(List<WorkspaceView> myProject) {
+//		this.myProjects = myProject;
+//	}
 
 	/**
 	 * @return the myModel
@@ -171,6 +171,18 @@ public class MainView implements View {
 	public Visualizer getVisualizer() {
 		
 		return myVisualizer;
+	}
+
+	@Override
+	public void updateDisplayData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCommandHistory() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/*

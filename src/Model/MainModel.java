@@ -11,7 +11,9 @@ public class MainModel implements Model {
 	// Command that was read in by clicking Run button
 	private String myCommand;
 	private View myView;
-	private Workspace myWorkspace;
+	private Workspace myCurrentWorkspace;
+	
+	private List<Workspace> myWorkspaces;
 
 	public MainModel() {
 	}
@@ -21,13 +23,13 @@ public class MainModel implements Model {
 	}
 
 	public void initialize() {
-		myWorkspace = new Workspace();
-		myWorkspace.createTurtle();
+		myCurrentWorkspace = new Workspace();
+//		myWorkspace.createTurtle(); //Don't need this
 	}
 
 	public void readCommand(String command) throws SLogoException {
 		setCommand(command);
-		myWorkspace.readCommand(command);
+		myCurrentWorkspace.readCommand(command);
 	}
 
 	/**
@@ -67,7 +69,43 @@ public class MainModel implements Model {
 
 	@Override
 	public List<DisplayData> getDisplayDataList() {
-		return myWorkspace.getDataList();
+		return myCurrentWorkspace.getDataList();
 	}
 
+	@Override
+	public void createNewWorkspace() {
+		// TODO Auto-generated method stub
+		Workspace myWorkspace = new Workspace();
+		getWorkspaces().add(myWorkspace);
+		setCurrentWorkspace(myWorkspace);
+	}
+
+
+	/**
+	 * @return the myCurrentWorkspace
+	 */
+	public Workspace getCurrentWorkspace() {
+		return myCurrentWorkspace;
+	}
+
+	/**
+	 * @param myCurrentWorkspace the myCurrentWorkspace to set
+	 */
+	public void setCurrentWorkspace(Workspace myCurrentWorkspace) {
+		this.myCurrentWorkspace = myCurrentWorkspace;
+	}
+
+	/**
+	 * @return the myWorkspaces
+	 */
+	public List<Workspace> getWorkspaces() {
+		return myWorkspaces;
+	}
+
+	/**
+	 * @param myWorkspaces the myWorkspaces to set
+	 */
+	public void setWorkspaces(List<Workspace> myWorkspaces) {
+		this.myWorkspaces = myWorkspaces;
+	}
 }

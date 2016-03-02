@@ -38,7 +38,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
-public class GUIController implements Initializable, View  {
+public class GUIController implements Initializable  {
 	
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
@@ -218,10 +218,10 @@ public class GUIController implements Initializable, View  {
 //    	((ScrollPane) myHistoryPane).setContent(myHistoryPaneView);
 //    }
     
-    @Override
-	public String getCommand() {
-		return myCommand;
-	}
+//    @Override
+//	public String getCommand() {
+//		return myCommand;
+//	}
 
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
@@ -350,10 +350,10 @@ public class GUIController implements Initializable, View  {
 
 
 
-	@Override
-	public Visualizer getVisualizer() {
-		// TODO Auto-generated method stub
-		return null;
-	}    
+//	@Override
+//	public Visualizer getVisualizer() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}    
         
 }

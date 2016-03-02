@@ -13,7 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
-
+@Deprecated
 public class WorkspaceView {
 	// private List<Character> myCharacters;
 	// private Canvas myCanvas;

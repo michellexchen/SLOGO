@@ -7,6 +7,7 @@ import Controller.SLogoException;
 import Controller.TreeFactory;
 import View.Visualizer;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 /**
@@ -17,6 +18,11 @@ public class Workspace {
 
 	private List<DisplayData> myDataList;
 	private List<String> myCommandHistory;
+	
+	ObservableList<DisplayData> myObservableDataList;
+	ObservableList<String> myObservableCommandHistory;
+	
+	
 	private List<Character> myCharacters;
 	private TreeFactory myTreeFactory;
 	private Visualizer myVisualizer;
@@ -27,14 +33,38 @@ public class Workspace {
 	
 	public void initialize () {
 		myDataList = new ArrayList<DisplayData>();
-		ObservableList<DisplayData> myObservableDataList = 
-				FXCollections.observableList(myDataList);
+		//myObservableDataList = FXCollections.observableList(myDataList);
 		myCommandHistory = new ArrayList<String>();
-		ObservableList<String> myObservableCommandHistory = 
-				FXCollections.observableList(myCommandHistory);
+		//myObservableCommandHistory = FXCollections.observableList(myCommandHistory);
+		
+		
 		myCharacters = new ArrayList<Character>();
 		myTreeFactory = new TreeFactory();
 		
+		createTurtle();
+	}
+	
+	private void createObservableLists (List<DisplayData> datalist, 
+			List<String> commandhistory) {
+		myObservableDataList = FXCollections.observableList(datalist);
+		myObservableDataList.addListener(new ListChangeListener() {
+			@Override
+			public void onChanged(ListChangeListener.Change change) {
+				//DO When turtles change
+				
+				
+			}
+			
+		});
+		myObservableCommandHistory = FXCollections.observableList(commandhistory);
+		myObservableCommandHistory.addListener(new ListChangeListener() {
+			@Override
+			public void onChanged(ListChangeListener.Change change) {
+				//Update the commandHistory
+			}
+			
+		});
+
 	}
 	
 
