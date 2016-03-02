@@ -3,10 +3,10 @@ package CommandNode;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.xpath.internal.operations.Variable;
 
 import Exception.SLogoException;
 import Model.CharacterState;
+import Model.Variable;
 
 /**
  * SLogo's CommandTree with access to root and self traversal to evaluate tree
@@ -17,11 +17,11 @@ import Model.CharacterState;
 public class CommandTree {
 
 	private Node root;
-	//have access to the list here of variables
+	// have access to the list here of variables
 	private List<Variable> myVars = new ArrayList<>();
 
 	public void traverse(CharacterState state) throws SLogoException {
-		root.evaluate(state); //also add the list
+		root.evaluate(state); // also add the list
 	}
 
 	public void setRoot(Node root) {
@@ -31,9 +31,12 @@ public class CommandTree {
 	public Node getRoot() {
 		return root;
 	}
+
+	public void setMyVars(String yo) {
+	}
 	
-	public void setMyVars(List<Variable> list){
-		this.myVars = list;
+	public void setMyVars(Variable vars){
+		this.myVars.add(vars);
 	}
 
 }

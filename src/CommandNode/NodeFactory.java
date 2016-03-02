@@ -24,6 +24,7 @@ public class NodeFactory {
 	}
 
 	public Node createNode(List<String> nodeList) throws SLogoException {
+		sanitate(nodeList);
 		String englishCommand = nodeList.get(0);
 		Node node = null;
 		if (!langDriver.getLanguage().equals("English")) {
@@ -46,8 +47,15 @@ public class NodeFactory {
 		return node;
 	}
 
-	public void addChildren(){
-		
+	public void sanitate(List<String>nodeList){
+		int idxOfMake = nodeList.indexOf("make");
+		if(idxOfMake > 0){
+			
+		}
+	}
+	
+	public void addChildren() {
+
 	}
 
 	private boolean isNumeric(String s) {

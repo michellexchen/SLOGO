@@ -3,31 +3,29 @@ package Model;
 import java.util.Observable;
 
 public class Variable extends Observable {
-	
+
 	private String myName;
 	private double myValue;
-	
+
 	public Variable() {
-//		class Pair {
-//			String variable;
-//			double value;
+		// class Pair {
+		// String variable;
+		// double value;
 	}
-	
+
 	public Variable(String name, double value) {
 		myName = name;
 		myValue = value;
 	}
 
-	public void addListeners () {
-		
+	public void addListeners() {
+
 	}
-	
-	
-//////////////////////////////
-/////Getters and Setters//////
-//////////////////////////////
-	
-	
+
+	//////////////////////////////
+	///// Getters and Setters//////
+	//////////////////////////////
+
 	/**
 	 * @return the myName
 	 */
@@ -36,7 +34,8 @@ public class Variable extends Observable {
 	}
 
 	/**
-	 * @param myName the myName to set
+	 * @param myName
+	 *            the myName to set
 	 */
 	public void setName(String myName) {
 		this.myName = myName;
@@ -50,22 +49,22 @@ public class Variable extends Observable {
 	}
 
 	/**
-	 * @param myValue the myValue to set
+	 * @param myValue
+	 *            the myValue to set
 	 */
 	public void setValue(double myValue) {
 		this.myValue = myValue;
 	}
 
-//	@Override
-//	public void addListener(InvalidationListener arg0) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void removeListener(InvalidationListener arg0) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	// @Override
+	// public void addListener(InvalidationListener arg0) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// @Override
+	// public void removeListener(InvalidationListener arg0) {
+	// // TODO Auto-generated method stub
+	//
+	// }
 }
-

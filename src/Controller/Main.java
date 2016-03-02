@@ -29,8 +29,8 @@ public class Main extends Application {
 	public void start(Stage myStage) throws SLogoException, IOException {
 		initialize();
 	}
-	
-	public void initialize () throws SLogoException, IOException {
+
+	public void initialize() throws SLogoException, IOException {
 		myModel = new MainModel();
 		myView = new MainView(myModel);
 		myModel.setView(myView);

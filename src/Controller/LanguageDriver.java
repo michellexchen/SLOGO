@@ -1,4 +1,5 @@
 package Controller;
+
 import java.io.IOException;
 
 import Exception.SLogoException;
@@ -10,12 +11,12 @@ import Exception.SLogoException;
  *
  */
 
-public class LanguageDriver extends FileDriver{
+public class LanguageDriver extends FileDriver {
 
 	private String langDirectory = "resources/languages";
 	private String langExtension = ".properties";
 	private String myLanguage;
-	
+
 	public void load(String language) throws SLogoException {
 		String myLang = format(language);
 		myLanguage = myLang;
@@ -26,19 +27,19 @@ public class LanguageDriver extends FileDriver{
 			super.load();
 		} catch (IOException e) {
 			throw new SLogoException("Encountered an error loading the language file");
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 		}
 	}
-	
-	public String getLanguage(){
+
+	public String getLanguage() {
 		return myLanguage;
 	}
-	
+
 	public String format(String language) {
 		return Character.toString(language.charAt(0)).toUpperCase() + language.substring(1).toLowerCase();
 	}
-	
+
 	public String getTranslation(String key) {
-        return myProperties.getProperty(key);
-    }
+		return myProperties.getProperty(key);
+	}
 }

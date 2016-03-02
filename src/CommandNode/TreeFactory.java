@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import Exception.SLogoException;
+import Model.Variable;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates
@@ -22,19 +23,45 @@ import Exception.SLogoException;
 public class TreeFactory {
 
 	private NodeFactory nodeFactory;
+	private CommandTree myTree;
 
 	public CommandTree makeTree(String text) throws SLogoException {
 		if (text == null)
 			throw new SLogoException("Did not input correct command");
-		CommandTree myTree = new CommandTree();
+		myTree = new CommandTree();
 		List<String> nodeList = format(text);
 		nodeFactory = new NodeFactory();
 		Node root = nodeFactory.createNode(nodeList);
 		nodeList.remove(0);
+		/*
+		 * this will get removed so that it's not a conditional in the makeTree structure
+		 *
+		 */
+		if(sanitate(nodeList)){
+			root.addVarParam(nodeList.get(0));
+			nodeList.remove(0);
+		}
 		myTree.setRoot(root);
 		if (nodeList.size() > 0)
 			createChildren(root, nodeList);
 		return myTree;
+	}
+	
+	public boolean sanitate(List<String>nodeList){
+		int idxOfMake = nodeList.indexOf("make");
+		if(idxOfMake == 1){
+			if(idxOfMake + 1 < nodeList.size() && checkContainsColon(nodeList.get(idxOfMake)+1)){
+				Variable var = new Variable();
+				var.setName(nodeList.get(idxOfMake));
+				myTree.setMyVars(var);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkContainsColon(String input){
+		return true;
 	}
 
 	public void createChildren(Node root, List<String> nodeList) throws SLogoException {
