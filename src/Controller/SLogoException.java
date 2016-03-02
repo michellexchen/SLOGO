@@ -31,13 +31,11 @@ public class SLogoException extends Exception {
 	 */
 	public SLogoException(String arg0) {
 		super(arg0);
-//		Alert alert = new Alert(AlertType.INFORMATION);
 		Dialog alert = new Dialog();
 		alert.setTitle("SLOGO ALERT");
 		alert.setHeaderText("ALERT: " + arg0);
 		ButtonType buttonTypeOk = new ButtonType("Okay");
 		alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
-		
 		
 		DialogPane dialogPane = alert.getDialogPane();
 		dialogPane.getStylesheets().add(getClass().getResource("myDialog.css").toExternalForm());

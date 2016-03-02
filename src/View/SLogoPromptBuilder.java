@@ -45,7 +45,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private HBox colorHb;
 	private Label colorLabel;
 	private Text myActionStatus;
-	private Button ok;
+	private Button myOkayButton;
 	private ComboBox colorCb;
 	private Color myColor = Color.WHITE;
 	private ColorPicker colorPicker;
@@ -135,12 +135,13 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	
 	private void setButton(){ 
 		buttonHb = new HBox();
-		ok = new Button("OKAY");
+		myOkayButton = new Button("OKAY");
 		buttonHb.setAlignment(Pos.CENTER);
-		buttonHb.getChildren().add(ok);
+		buttonHb.getChildren().add(myOkayButton);
 		buttonHb.setPrefSize(75, 75);
-		ok.setOnMouseClicked(e -> {
+		myOkayButton.setOnMouseClicked(e -> {
 			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
+			getPrompt().hide();
 			//testing
 			System.out.println(myLanguage);
 			System.out.println(myColor.toString());
@@ -153,6 +154,20 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 
 	public Color sendMyColor(){ 
 		return myColor;
+	}
+	
+	/**
+	 * @return the prompt
+	 */
+	public Stage getPrompt() {
+		return prompt;
+	}
+
+	/**
+	 * @param prompt the prompt to set
+	 */
+	public void setPrompt(Stage prompt) {
+		this.prompt = prompt;
 	}
 	
 }
