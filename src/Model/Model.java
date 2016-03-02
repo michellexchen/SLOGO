@@ -20,4 +20,7 @@ public interface Model {
 	
 	public void createNewWorkspace();
 	
+	public Workspace getCurrentWorkspace();
+	
+	
 }
