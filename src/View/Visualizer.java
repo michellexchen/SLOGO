@@ -13,12 +13,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class Visualizer implements Observer {
+	
+	private static final String TURTLE_IMAGE_PATH = "resources/turtle_images/";
+	private static final int TURTLE_SIZE = 10;
+	
 	private ObservableList<DisplayData> myObservableDataList;
 	
 	private int myWidth;
@@ -137,9 +142,42 @@ public class Visualizer implements Observer {
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
-		
-		
+		System.out.println("Running");
+		getModel().getDisplayDataList();
+		for (DisplayData turtledata : getObservableDataList()) {
+			//Place the turtle
+			placeTurtle(turtledata);
+			
+			//Draw lines
+			getGUIController().addToCanvas(turtledata.getLines());
+			
+			
+		}
 	}
+	
+	public void placeTurtle(DisplayData displaydata) {
+        Image image = new Image(TURTLE_IMAGE_PATH + "turtle_1.png");
+        
+		ImageView turtle = new ImageView();
+		turtle.setImage(image);
+		
+		//turtle resize
+		turtle.setFitWidth(TURTLE_SIZE);
+		turtle.setPreserveRatio(true);
+		turtle.setSmooth(true);
+		turtle.setCache(true);
+		
+		//turtle rotate
+		turtle.setRotate(displaydata.getAngle());
+		
+		//place turtle using Position
+		turtle.setLayoutX(displaydata.getPosition().xCurrent());
+		turtle.setLayoutY(displaydata.getPosition().yCurrent());
+		
+		//Put it in the Pane
+		getGUIController().addToCanvas(turtle);
+	}
+	
 	
 	/**
 	 * This method updates command history display in GUI.
@@ -201,7 +239,7 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myModel
 	 */
-	public Model getMyModel() {
+	public Model getModel() {
 		return myModel;
 	}
 
@@ -209,7 +247,7 @@ public class Visualizer implements Observer {
 	 * @param myModel
 	 *            the myModel to set
 	 */
-	public void setMyModel(Model myModel) {
+	public void setModel(Model myModel) {
 		this.myModel = myModel;
 	}
 
@@ -239,5 +277,19 @@ public class Visualizer implements Observer {
 	 */
 	public void setStage(Stage myStage) {
 		this.myStage = myStage;
+	}
+
+	/**
+	 * @return the myObservableDataList
+	 */
+	public ObservableList<DisplayData> getObservableDataList() {
+		return myObservableDataList;
+	}
+
+	/**
+	 * @param myObservableDataList the myObservableDataList to set
+	 */
+	public void setObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+		this.myObservableDataList = myObservableDataList;
 	}
 }

@@ -31,7 +31,7 @@ public class TreeFactory {
 		CommandTree myTree = new CommandTree();
 		List<String> nodeList = format(text);
 		nodeFactory = new NodeFactory();
-		Node root = nodeFactory.createNode(nodeList.get(0));
+		Node root = nodeFactory.createNode(nodeList);
 		nodeList.remove(0);
 		myTree.setRoot(root);
 		if (nodeList.size() > 0)
@@ -54,7 +54,7 @@ public class TreeFactory {
 	
 	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException {
 		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
-		Node child = nodeFactory.createNode(myNodes.get(0));
+		Node child = nodeFactory.createNode(myNodes);
 		myNodes.remove(0);
 		childToRemaindersMap.put(child, myNodes);
 		if (myNodes.size() > 0) {

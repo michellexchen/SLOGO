@@ -40,7 +40,7 @@ public class DisplayData extends Observable {
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
-
+		
 	}
 
 	public DisplayData(CharacterState state) {
@@ -130,6 +130,20 @@ public class DisplayData extends Observable {
 
 	public void setPosition(Position myPosition) {
 		this.myPosition = myPosition;
+	}
+
+	/**
+	 * @return the myLines
+	 */
+	public List<Line> getLines() {
+		return myLines;
+	}
+
+	/**
+	 * @param myLines the myLines to set
+	 */
+	public void setLines(List<Line> myLines) {
+		this.myLines = myLines;
 	}
 
 }

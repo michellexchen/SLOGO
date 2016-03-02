@@ -2,18 +2,15 @@ package Model;
 
 import Controller.SLogoException;
 
-public class MakeNode extends CommandNode {
+public class BracketNode extends CommandNode {
 
-	public MakeNode() {
+	public BracketNode() {
+		// TODO Auto-generated constructor stub
+	}
 
-	}
-	
-	public void grabVar(){
-		System.out.println("yo");
-	}
-	
 	@Override
 	public double evaluate(CharacterState state) throws SLogoException {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 

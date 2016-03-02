@@ -4,6 +4,7 @@ import java.util.List;
 
 import Controller.SLogoException;
 import View.View;
+import javafx.collections.ObservableList;
 
 public interface Model {
 
@@ -15,7 +16,7 @@ public interface Model {
 
 	
 	//Need this implemented 
-	public List<DisplayData> getDisplayDataList();
+	public ObservableList<DisplayData> getDisplayDataList();
 	
 	
 	public void createNewWorkspace();
