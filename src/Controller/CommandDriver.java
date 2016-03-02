@@ -12,12 +12,12 @@ import Exception.SLogoException;
  *
  */
 
-public class CommandsDriver extends FileDriver {
+public class CommandDriver extends FileDriver {
 
 	private static final String commandDirectory = "resources/commands";
 	private static final String commandExtension = "Commands.resources";
 
-	public CommandsDriver() throws SLogoException {
+	public CommandDriver() throws SLogoException {
 		load();
 	}
 

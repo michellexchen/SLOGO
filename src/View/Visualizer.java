@@ -31,6 +31,7 @@ public class Visualizer implements Observer {
 	
 	private FXMLLoader myLoader;
 	private GUIController myGUIController;
+	private SLogoPromptBuilder myPromptBuilder;
 	private Parent root;
 
 	// Visualization Primitives
@@ -53,9 +54,10 @@ public class Visualizer implements Observer {
 
 	public void initialize() throws SLogoException, IOException {
 
-		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
-		myPrompt.promptScreen();
-		setCanvasColor(toRGBCode(myPrompt.sendMyColor()));
+		myPromptBuilder = new SLogoPromptBuilder();
+		myPromptBuilder.promptScreen();
+		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
+		getModel().loadLanguage();
 
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
@@ -199,7 +201,18 @@ public class Visualizer implements Observer {
 	public void updateCommandHistory () {
 		
 	}
+	
+	
+	
+	
+	//////////////////////////
+	// getters and setters //
+	//////////////////////////
 
+	public String getLanguage() {
+		return myPromptBuilder.sendMyLanguage();
+	}
+	
 	public int getWidth() {
 		return myWidth;
 	}
@@ -490,5 +503,19 @@ public class Visualizer implements Observer {
 	 */
 	public static int getTurtleSize() {
 		return TURTLE_SIZE;
+	}
+
+	/**
+	 * @return the myPromptBuilder
+	 */
+	public SLogoPromptBuilder getMyPromptBuilder() {
+		return myPromptBuilder;
+	}
+
+	/**
+	 * @param myPromptBuilder the myPromptBuilder to set
+	 */
+	public void setMyPromptBuilder(SLogoPromptBuilder myPromptBuilder) {
+		this.myPromptBuilder = myPromptBuilder;
 	}
 }

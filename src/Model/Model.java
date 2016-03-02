@@ -5,6 +5,14 @@ import Exception.SLogoException;
 import View.View;
 import javafx.collections.ObservableList;
 
+/**
+ * Model interface - A contract for View
+ * Model in MVC Design Pattern: View can only call methods
+ * defined in this interface 
+ * 
+ * @author Hunter
+ *
+ */
 public interface Model {
 
 	public void readCommand(String command) throws SLogoException;
@@ -12,11 +20,6 @@ public interface Model {
 	public void setView(View myView);
 
 	public void createBackend();
-
-	
-	//Need this implemented 
-	//public ObservableList<DisplayData> getDisplayDataList();
-	
 	
 	public void createNewWorkspace();
 	
@@ -24,5 +27,6 @@ public interface Model {
 
 	public ObservableList<DisplayData> getObservableDataList();
 	
+	public void loadLanguage();
 	
 }

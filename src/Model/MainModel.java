@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CommandNode.DisplayData;
+import Controller.LanguageDriver;
 import Exception.SLogoException;
+import View.SLogoPromptBuilder;
 import View.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -15,11 +17,12 @@ public class MainModel implements Model {
 	private String myCommand;
 	private View myView;
 	private Workspace myCurrentWorkspace;
+	private LanguageDriver myLanguageDriver;
 	
 	private List<Workspace> myWorkspaces;
 	private ObservableList<Workspace> myObservableWorkspaces;
 
-	public MainModel() {
+	public MainModel() throws SLogoException {
 		myWorkspaces = new ArrayList<Workspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 	}
@@ -28,6 +31,16 @@ public class MainModel implements Model {
 		myView = view;
 	}
 
+	@Override
+	public void loadLanguage () {
+		myLanguageDriver = new LanguageDriver();
+		try {
+			myLanguageDriver.load(getView().getLanguage());
+		} catch (SLogoException e) {
+			//TODO: Display error
+		}
+	}
+	
 	public void initialize() {	
 		createNewWorkspace();
 	}
@@ -131,5 +144,19 @@ public class MainModel implements Model {
 	 */
 	public void setObservableWorkspaces(ObservableList<Workspace> myObservableWorkspaces) {
 		this.myObservableWorkspaces = myObservableWorkspaces;
+	}
+
+	/**
+	 * @return the myLanguageDriver
+	 */
+	public LanguageDriver getMyLanguageDriver() {
+		return myLanguageDriver;
+	}
+
+	/**
+	 * @param myLanguageDriver the myLanguageDriver to set
+	 */
+	public void setMyLanguageDriver(LanguageDriver myLanguageDriver) {
+		this.myLanguageDriver = myLanguageDriver;
 	}
 }

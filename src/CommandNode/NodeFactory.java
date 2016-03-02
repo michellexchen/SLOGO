@@ -1,8 +1,8 @@
 package CommandNode;
 
 import java.util.List;
-import Controller.CommandsDriver;
-import Controller.LanguagesDriver;
+import Controller.CommandDriver;
+import Controller.LanguageDriver;
 import Exception.SLogoException;
 
 /**
@@ -14,12 +14,12 @@ import Exception.SLogoException;
 
 public class NodeFactory {
 
-	private CommandsDriver CommandsDriver;
-	private LanguagesDriver langDriver = new LanguagesDriver();
+	private CommandDriver CommandsDriver;
+	private LanguageDriver langDriver = new LanguageDriver();
 
 	public NodeFactory() throws SLogoException {
-		CommandsDriver = new CommandsDriver();
-		langDriver = new LanguagesDriver();
+		CommandsDriver = new CommandDriver();
+		langDriver = new LanguageDriver();
 		langDriver.load("English"); // To remove
 	}
 

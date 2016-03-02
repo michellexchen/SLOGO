@@ -3,6 +3,14 @@ package View;
 import java.util.Observer;
 import Model.Workspace;
 
+/**
+ * View interface - A contract for Model
+ * View in MVC Design Pattern: Model can only call methods
+ * defined in this interface
+ * 
+ * @author Hunter
+ *
+ */
 public interface View {
 	
 	public String getCommand();
@@ -20,6 +28,8 @@ public interface View {
 	public void setCurrentWorkspace(Workspace workspace);
 	
 	public Observer getObserver();
+	
+	public String getLanguage();
 
 }
 	

@@ -10,13 +10,13 @@ import Exception.SLogoException;
  *
  */
 
-public class LanguagesDriver extends FileDriver{
+public class LanguageDriver extends FileDriver{
 
 	private String langDirectory = "resources/languages";
 	private String langExtension = ".properties";
 	private String myLanguage;
 	
-	public void load(String language) throws SLogoException{
+	public void load(String language) throws SLogoException {
 		String myLang = format(language);
 		myLanguage = myLang;
 		langExtension = myLang + langExtension;
@@ -25,7 +25,8 @@ public class LanguagesDriver extends FileDriver{
 		try {
 			super.load();
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			throw new SLogoException("Encountered an error loading the language file");
+			//System.out.println(e.getMessage());
 		}
 	}
 	

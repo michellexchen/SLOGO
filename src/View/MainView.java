@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import Controller.LanguagesDriver;
 import Exception.SLogoException;
 import Model.Model;
 import Model.Workspace;
@@ -15,23 +14,17 @@ public class MainView implements View {
 	private final int WIDTH = 331;
 	private final int HEIGHT = 331;
 
-	private LanguagesDriver myLangDriver;
 	private String myCommand;
 	private Model myModel;
 	private Visualizer myVisualizer;
 
 	public MainView() throws SLogoException {
-		myLangDriver = new LanguagesDriver();
-		String language = "English"; // Get from UI
-		myLangDriver.load(language);
-		
 		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
 	}
 
 	public MainView(Model model) throws SLogoException {
 		myModel = model;
 		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
-
 	}
 	
 	/**
@@ -41,10 +34,6 @@ public class MainView implements View {
 	 */
 	public void initialize() throws SLogoException, IOException {
 		myVisualizer.initialize();
-		
-		myLangDriver = new LanguagesDriver();
-		String language = "English"; // Get from UI
-		myLangDriver.load(language);
 	}
 
 	public void showError(SLogoException e) {
@@ -60,9 +49,6 @@ public class MainView implements View {
 	//////////////////////////
 	// getters and setters //
 	//////////////////////////
-	public LanguagesDriver getLanguagesDriver() {
-		return myLangDriver;
-	}
 
 	/**
 	 * @return the myModel
@@ -133,6 +119,12 @@ public class MainView implements View {
 	public Observer getObserver() {
 		// TODO Auto-generated method stub
 		return getVisualizer();
+	}
+
+	@Override
+	public String getLanguage() {
+		// TODO Auto-generated method stub
+		return myVisualizer.getLanguage();
 	}
 
 
