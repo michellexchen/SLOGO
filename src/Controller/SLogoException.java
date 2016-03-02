@@ -3,6 +3,14 @@
  */
 package Controller;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextInputDialog;
+
 /**
  * SLogo's Exception class that extends Exception abstract class in the Java
  * library
@@ -12,7 +20,10 @@ package Controller;
  */
 public class SLogoException extends Exception {
 
+	
+	
 	public SLogoException() {
+		
 	}
 
 	/**
@@ -20,7 +31,19 @@ public class SLogoException extends Exception {
 	 */
 	public SLogoException(String arg0) {
 		super(arg0);
-		// TODO Auto-generated constructor stub
+//		Alert alert = new Alert(AlertType.INFORMATION);
+		Dialog alert = new Dialog();
+		alert.setTitle("SLOGO ALERT");
+		alert.setHeaderText("ALERT: " + arg0);
+		ButtonType buttonTypeOk = new ButtonType("Okay");
+		alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
+		
+		
+		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().getResource("myDialog.css").toExternalForm());
+		dialogPane.getStyleClass().add("myDialog");
+		alert.showAndWait();
+		
 	}
 
 	/**

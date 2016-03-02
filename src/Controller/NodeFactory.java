@@ -38,7 +38,7 @@ public class NodeFactory {
 			return new NumericNode(Double.parseDouble(englishCommand));
 		String commandName = CommandsDriver.getString(englishCommand);
 		if (commandName == null)
-			throw new SLogoException("The command " + englishCommand + " is illegal");
+			throw new SLogoException("The command \"" + englishCommand + "\" is illegal!");
 		else
 			try {
 				node = (Node) Class.forName("Model." + commandName + "Node").newInstance();
