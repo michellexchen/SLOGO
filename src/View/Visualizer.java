@@ -38,16 +38,18 @@ public class Visualizer implements Observer {
 	
 	
 	//private DisplayData myDisplayData;
-	public Visualizer(int width, int height) {
+	public Visualizer(Model model, int width, int height) {
 		//myDisplayData = data;
+		myModel = model;
 		myWidth = width;
 		myHeight = height;
 	}
 	
-	public Visualizer() {
+	public Visualizer(Model model) {
 		//myDisplayData = data;
 		myWidth = 331;
 		myHeight = 331;
+		myModel = model;
 	}
 
 	
