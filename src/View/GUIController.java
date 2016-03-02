@@ -2,6 +2,7 @@ package View;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -153,7 +155,7 @@ public class GUIController implements Initializable  {
         //This is how to add line objects
         //canvas.getChildren().addAll(circle,rectangle);
         
-        
+        //myCanvas.getChildren().add(new Line(100, 10,   10,   110));
         //
 
         
@@ -232,7 +234,13 @@ public class GUIController implements Initializable  {
 		return myCanvas;
 	}
 
-
+	public void addToCanvas(Node list) {
+		getCanvas().getChildren().add(list);
+	}
+	
+	public void addToCanvas(List<Line> nodelist) {
+		getCanvas().getChildren().addAll(nodelist);
+	}
 
 
 	public void setCanvas(Pane myCanvas) {
@@ -266,7 +274,6 @@ public class GUIController implements Initializable  {
 	public void setMyMenuItems(List<MenuItem> myMenuItems) {
 		this.myMenuItems = myMenuItems;
 	}
-
 
 
 //

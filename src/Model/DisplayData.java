@@ -132,4 +132,18 @@ public class DisplayData extends Observable {
 		this.myPosition = myPosition;
 	}
 
+	/**
+	 * @return the myLines
+	 */
+	public List<Line> getLines() {
+		return myLines;
+	}
+
+	/**
+	 * @param myLines the myLines to set
+	 */
+	public void setLines(List<Line> myLines) {
+		this.myLines = myLines;
+	}
+
 }
