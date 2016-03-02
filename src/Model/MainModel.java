@@ -89,8 +89,8 @@ public class MainModel implements Model {
 	}
 
 	@Override
-	public List<DisplayData> getDisplayDataList() {
-		return myCurrentWorkspace.getDataList();
+	public ObservableList<DisplayData> getDisplayDataList() {
+		return myCurrentWorkspace.getObservableDataList();
 	}
 	
 	/**

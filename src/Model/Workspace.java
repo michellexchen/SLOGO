@@ -41,11 +41,14 @@ public class Workspace {
 	public void initialize () {
 		myDataList = new ArrayList<DisplayData>();
 		myCommandHistory = new ArrayList<String>();		
+		createObservableLists(myDataList, myCommandHistory);
 		
 		myCharacters = new ArrayList<Character>();
 		myTreeFactory = new TreeFactory();
 		
 		createTurtle();
+		getView().updateDisplayData();
+		getView().updateCommandHistory();
 	}
 	
 	private void createObservableLists (List<DisplayData> datalist, 
@@ -84,7 +87,7 @@ public class Workspace {
 		myCharacters.add(myTurtle);
 		DisplayData turtleData = new DisplayData(myTurtle.getState());
 		//turtleData.addObserver(myVisualizer);
-		myDataList.add(turtleData);
+		myObservableDataList.add(turtleData);
 	}
 
 	public List<DisplayData> getDataList() {
@@ -135,5 +138,29 @@ public class Workspace {
 	 */
 	public void setView(View myView) {
 		this.myView = myView;
+	}
+	/**
+	 * @return the myObservableDataList
+	 */
+	public ObservableList<DisplayData> getObservableDataList() {
+		return myObservableDataList;
+	}
+	/**
+	 * @param myObservableDataList the myObservableDataList to set
+	 */
+	public void setObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+		this.myObservableDataList = myObservableDataList;
+	}
+	/**
+	 * @return the myObservableCommandHistory
+	 */
+	public ObservableList<String> getObservableCommandHistory() {
+		return myObservableCommandHistory;
+	}
+	/**
+	 * @param myObservableCommandHistory the myObservableCommandHistory to set
+	 */
+	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
+		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
 }
