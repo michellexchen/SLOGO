@@ -10,6 +10,8 @@ import Controller.SLogoException;
 
 public interface Node {
 	public abstract double evaluate(CharacterState state) throws SLogoException;
+
 	public abstract int getNumChildren();
+
 	public abstract String toString();
 }

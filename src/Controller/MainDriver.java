@@ -9,30 +9,42 @@ import Model.MainModel;
 import View.GUIController;
 import View.MainView;
 
+/**
+ * Controls the initial setup of our GUI and back end
+ * 
+ * @author Mario Oliver
+ *
+ */
+
 public class MainDriver extends Application {
 
 	private MainModel myModel;
 	private MainView myView;
-	private GUIController myGUI;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	public void start(Stage myStage) throws SLogoException, IOException {
+		initialize();
 
+	}
+	
+	public void initialize () throws SLogoException, IOException {
+		loadLanguage();
 		myModel = new MainModel();
 		myView = new MainView();
 		myModel.setView(myView);
+		myView.setModel(myModel);
 		myModel.initialize();
+		myView.initialize();
 
-		try {
-			myView.addProject(myModel);
-			myView.getMyProjects().get(0).setMyModel(myModel);
-			myView.getMyProjects().get(0).show();
-		} catch (SLogoException e) {
-			myView.showError(e);
-		}
 	}
-
+	
+	public void loadLanguage () throws SLogoException {
+		LanguagesDriver langDriver = new LanguagesDriver();
+		// doesn't do anything
+		// this.myLanguage = myLanguage;
+		langDriver.load("English");
+	}
 }

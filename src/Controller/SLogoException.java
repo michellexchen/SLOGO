@@ -12,11 +12,7 @@ package Controller;
  */
 public class SLogoException extends Exception {
 
-	/**
-	 * 
-	 */
 	public SLogoException() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

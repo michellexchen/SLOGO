@@ -5,8 +5,8 @@ import Model.TurtleCommandNode;
 
 public class ForwardNode extends TurtleCommandNode {
 	private int NUM_CHILDREN = 1;
-	
-	public ForwardNode(){
+
+	public ForwardNode() {
 		setNumChildren(NUM_CHILDREN);
 	}
 
@@ -23,8 +23,8 @@ public class ForwardNode extends TurtleCommandNode {
 		result[1] = Math.cos(direction) * getChildren().get(0).evaluate(currentState);
 		return result;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return "Forward";
 	}
 

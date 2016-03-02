@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import Model.BooleanNode;
 import Model.CommandNode;
-import Model.MathNode;
 import Model.Node;
 import Model.NumericNode;
 
@@ -27,68 +24,33 @@ public class NodeFactory {
 	public NodeFactory() throws SLogoException {
 		CommandsDriver = new CommandsDriver();
 		langDriver = new LanguagesDriver();
-		langDriver.load("English");
+		langDriver.load("English"); // To remove
 	}
 
-	public Node createNode(String myNode) throws SLogoException {
+	public Node createNode(String englishCommand) throws SLogoException {
 		Node node = null;
-		if (myNode.length() == 0)
-			throw new SLogoException("No command entered");
-		String englishCommand = myNode;
-		if(!langDriver.getLanguage().equals("English")){
+		if (!langDriver.getLanguage().equals("English")) {
 			// englishCommand = langDriver.getTranslation(myNode);
-			// TODO: Implement proper translation (switch value and key in current languages files)
+			// TODO: Implement proper translation (switch value and key in
+			// current languages files)
 		}
+		if (isNumeric(englishCommand))
+			return new NumericNode(Double.parseDouble(englishCommand));
 		String commandName = CommandsDriver.getString(englishCommand);
-		System.out.println(englishCommand+" "+commandName);
-		if (commandName == null) {
-			if (isNumeric(myNode)) {
-				node = new NumericNode(Double.parseDouble(myNode));
-			} else {
-				throw new SLogoException("The command " + englishCommand + " is illegal");
-			}
-		} else {
-			String clsName = commandName + "Node";
-			Class cls;
+		if (commandName == null)
+			throw new SLogoException("The command " + englishCommand + " is illegal");
+		else
 			try {
-				System.out.println(clsName+"\n\n");
-				cls = Class.forName("Model." + clsName);
-				node = (Node) cls.newInstance();
-				if(clsName.equals("MathNode")){
-					((MathNode) node).setType(englishCommand);
-				}
-				if(clsName.equals("BooleanNode")){
-					((BooleanNode) node).setType(englishCommand);
-				}
+				node = (Node) Class.forName("Model." + commandName + "Node").newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				throw new SLogoException("Command " + commandName+ " is not yet implemented");
+				throw new SLogoException("Command " + commandName + " is not yet implemented");
 			}
-		}
-		System.out.println("NODE CREATED "+node.toString());
+		System.out.println("NODE CREATED " + node.toString());
 		return node;
 	}
 
-	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException{
-		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
-		List<String> remainders = new ArrayList<String>();
-		Node child = createNode(myNodes.get(0));
-		myNodes.remove(0);
-		for(int x=0; x<myNodes.size(); x++){
-			remainders.add(myNodes.get(x));
-		}
-		childToRemaindersMap.put(child, remainders);
-		if(myNodes.size() > 0){
-			double numChildren = child.getNumChildren();
-			for(int x=0; x<numChildren; x++){
-				HashMap<Node, List<String>> childChildToRemaindersMap = createChild(myNodes);
-				Iterator it = childToRemaindersMap.entrySet().iterator();
-				Map.Entry pair = (Map.Entry)it.next();
-				Node childChild = (Node) pair.getKey();
-				myNodes = (List<String>) pair.getValue();
-				((CommandNode)child).addChild(child);
-			}
-		}
-		return childToRemaindersMap;
+	public void addChildren(){
+		
 	}
 
 	private boolean isNumeric(String s) {

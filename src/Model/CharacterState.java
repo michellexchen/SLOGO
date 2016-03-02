@@ -3,20 +3,22 @@ package Model;
 import javafx.scene.image.ImageView;
 
 /**
- * SLogo's highest State in hierarchy, to support multiple types of character states
+ * SLogo's highest State in hierarchy, to support multiple types of character
+ * states
  *
  */
 
 public abstract class CharacterState {
-	
+
 	private double xCoor;
 	private double yCoor;
 	private double direction;
 	private boolean isHidden;
 	private double angle;
 	private ImageView imageView;
-	
-	public CharacterState(double xCoor, double yCoor, double direction, boolean isHidden, double angle){
+	private boolean penDo
+
+	public CharacterState(double xCoor, double yCoor, double direction, boolean isHidden, double angle) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		this.direction = direction;
@@ -24,54 +26,53 @@ public abstract class CharacterState {
 		this.angle = angle;
 		imageView = new ImageView();
 	}
-	
+
 	public void setHidden(boolean hide) {
 		this.isHidden = hide;
 	}
-	
-	public boolean getHidden(){
+
+	public boolean getHidden() {
 		return isHidden;
 	}
-	
-	public void setXCoor(double xCoor){
+
+	public void setXCoor(double xCoor) {
 		this.xCoor = xCoor;
 	}
-	
-	public void setYCoor(double yCoor){
+
+	public void setYCoor(double yCoor) {
 		this.yCoor = yCoor;
 	}
-	
-	public double getXCoor(){
+
+	public double getXCoor() {
 		return xCoor;
 	}
-	
-	public double getYCoor(){
+
+	public double getYCoor() {
 		return yCoor;
 	}
-	
-	public double getDirection(){
+
+	public double getDirection() {
 		return direction;
 	}
-	
-	public void setDirection(double direction){
+
+	public void setDirection(double direction) {
 		this.direction = direction;
 	}
-	
-	public double getAngle(){
+
+	public double getAngle() {
 		return angle;
 	}
-	
-	public void setAngle(double angle){
+
+	public void setAngle(double angle) {
 		this.angle = angle;
 	}
-	
-	public ImageView getImageView(){
+
+	public ImageView getImageView() {
 		return imageView;
 	}
-	
-	public void setImageView(ImageView imageView){
+
+	public void setImageView(ImageView imageView) {
 		this.imageView = imageView;
 	}
-	
-	
+
 }
