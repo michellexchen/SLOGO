@@ -27,10 +27,12 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int XPROMPTSIZE = 500;
     private static final int YPROMPTSIZE = 275; 
     private static final int PADDING = 55;
-	private final int SPLASHSIZE = 400;
+	private static final int SPLASHSIZE = 400;
     private static final int LABEL_FONTSIZE = 32;
     private static final int TEXT_FONTSIZE = 20;
     private static final String FONT = "Georgia";
+    private static final int PREFSIZE = 75;
+    private static final int COLORLABELSIZE = 202;
 
     private String myLanguage;
     private Stage prompt;
@@ -47,16 +49,12 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private Text myActionStatus;
 	private Button myOkayButton;
 	private ComboBox colorCb;
-	private Color myColor = Color.WHITE;
+	private Color myColor;
 	private ColorPicker colorPicker;
 
-
-//	public SLogoPromptBuilder(String language) {
-//		super(language);
-//	}
 	
 	public SLogoPromptBuilder() {
-
+		myColor = Color.WHITE;
 	}
 
 	public void promptScreen () {
@@ -95,7 +93,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		labelHb = new HBox();
 		labelHb.setAlignment(Pos.CENTER);
 		labelHb.getChildren().add(label);
-		labelHb.setPrefSize(75, 75);
+		labelHb.setPrefSize(PREFSIZE, PREFSIZE);
 	}
 	
 	private void setLanguage(){ 
@@ -116,20 +114,20 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		langHb = new HBox();
 		langHb.setAlignment(Pos.CENTER);
 		langHb.getChildren().addAll(lang, comboBox);
-		langHb.setPrefSize(75, 75);
+		langHb.setPrefSize(PREFSIZE, PREFSIZE);
 
 	}
 	
 	private void setColor(){
 		colorLabel = new Label("Select background color: ");
-		colorLabel.setPrefWidth(202);
+		colorLabel.setPrefWidth(COLORLABELSIZE);
 		colorPicker = new ColorPicker();
         colorPicker.setOnAction(e -> {
 			myColor = colorPicker.getValue();
         });
 		colorHb = new HBox();
 		colorHb.getChildren().addAll(colorLabel, colorPicker);
-		colorHb.setPrefSize(75, 75);
+		colorHb.setPrefSize(PREFSIZE, PREFSIZE);
 	}
 		
 	
@@ -138,13 +136,13 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		myOkayButton = new Button("OKAY");
 		buttonHb.setAlignment(Pos.CENTER);
 		buttonHb.getChildren().add(myOkayButton);
-		buttonHb.setPrefSize(75, 75);
+		buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
 		myOkayButton.setOnMouseClicked(e -> {
 			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
 			getPrompt().hide();
 			//testing
-			System.out.println(myLanguage);
-			System.out.println(myColor.toString());
+//			System.out.println(myLanguage);
+//			System.out.println(myColor.toString());
 		});
 	}
 	

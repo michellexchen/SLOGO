@@ -154,7 +154,7 @@ public class Workspace {
 		for (Character character : myCharacters) {
 			myTree.traverse(character.getState());
 			getObservableDataList().get(myCharacters.indexOf(character))
-							.updateData(character.getState());
+										.updateData(character.getState());
 		}
 	}
 	

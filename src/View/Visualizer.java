@@ -40,6 +40,7 @@ public class Visualizer implements Observer {
 
 	private Model myModel;
 	
+	private String myCanvasColor;
 	
 	
 	//private DisplayData myDisplayData;
@@ -62,6 +63,7 @@ public class Visualizer implements Observer {
 
 		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
 		myPrompt.promptScreen();
+		setCanvasColor(toRGBCode(myPrompt.sendMyColor()));
 //		
 //		System.out.println(getModel());
 //		System.out.println(getModel().getObservableDataList());
@@ -105,15 +107,6 @@ public class Visualizer implements Observer {
 
 	@Override
 	public void update(Observable observable, Object arg1) {
-		// TODO 
-//		myDisplayData = (DisplayData) observable;
-//		myDisplayData.addLine(createLine(myDisplayData.getPosition()));
-		//update rotation (angle)
-		//update penDown
-		//update penColor
-		//update Image
-		
-		System.out.println("DisplayData got updated");
 		updateDisplayData();
 	}
 	
@@ -135,6 +128,12 @@ public class Visualizer implements Observer {
 		
 	}
 	
+	/**
+	 * Creates a Line object with default color black
+	 * 
+	 * @param position
+	 * @return Line
+	 */
 	public Line createLine(Position position) {
 		Line newLine = new Line();
 		newLine.setStartX(position.xPrevious());
@@ -147,12 +146,28 @@ public class Visualizer implements Observer {
 	}
 	
 	/**
+	 * Creates a Line object with specified color
+	 * 
+	 * @param position
+	 * @param color
+	 * @return Line
+	 */
+	public Line createLine(Position position, Color color) {
+		Line newLine = createLine(position);
+		newLine.setFill(color);
+		return newLine;
+	}
+	/**
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
+		
+		//Set Pane Color
+		getGUIController().getCanvas().setStyle("-fx-background-color: "
+													+ getCanvasColor());
 		
 		//System.out.println("Running");
 		getModel().getObservableDataList();
@@ -190,9 +205,9 @@ public class Visualizer implements Observer {
 		//turtle rotate
 		turtle.setRotate(displaydata.getAngle());
 		
-		//place turtle using Position
-		turtle.setLayoutX(displaydata.getPosition().xCurrent());
-		turtle.setLayoutY(displaydata.getPosition().yCurrent());
+		//place turtle using Position and center at the coordinates (x,y)
+		turtle.setLayoutX(displaydata.getPosition().xCurrent() - TURTLE_SIZE / 2);
+		turtle.setLayoutY(displaydata.getPosition().yCurrent() - TURTLE_SIZE / 2);
 		
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
@@ -312,4 +327,28 @@ public class Visualizer implements Observer {
 	public void setObservableDataList(ObservableList<DisplayData> myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
+
+	/**
+	 * @return the myCanvasColor
+	 */
+	public String getCanvasColor() {
+		return myCanvasColor;
+	}
+
+	/**
+	 * @param myCanvasColor the myCanvasColor to set
+	 */
+	public void setCanvasColor(String myCanvasColor) {
+		this.myCanvasColor = myCanvasColor;
+	}
+	
+
+
+	public String toRGBCode (Color color) {
+		return String.format( "#%02X%02X%02X",
+				(int)( color.getRed() * 255 ),
+				(int)( color.getGreen() * 255 ),
+				(int)( color.getBlue() * 255 ) );
+	}
+
 }
