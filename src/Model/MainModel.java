@@ -6,6 +6,8 @@ import java.util.List;
 import Controller.SLogoException;
 import Controller.TreeFactory;
 import View.View;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class MainModel implements Model {
 
@@ -14,6 +16,7 @@ public class MainModel implements Model {
 	private Workspace myCurrentWorkspace;
 	
 	private List<Workspace> myWorkspaces;
+	private ObservableList<Workspace> myObservableWorkspaces;
 
 	public MainModel() {
 	}
@@ -24,6 +27,7 @@ public class MainModel implements Model {
 
 	public void initialize() {	
 		myWorkspaces = new ArrayList<Workspace>();
+		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 		createNewWorkspace();
 		
 	}
@@ -78,7 +82,7 @@ public class MainModel implements Model {
 		// TODO Auto-generated method stub
 		Workspace myWorkspace = new Workspace(getView());
 		myWorkspace.initialize();
-		getWorkspaces().add(myWorkspace);
+		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
 	}
 
@@ -97,17 +101,31 @@ public class MainModel implements Model {
 		this.myCurrentWorkspace = myCurrentWorkspace;
 	}
 
+//	/**
+//	 * @return the myWorkspaces
+//	 */
+//	public List<Workspace> getWorkspaces() {
+//		return myWorkspaces;
+//	}
+//
+//	/**
+//	 * @param myWorkspaces the myWorkspaces to set
+//	 */
+//	public void setWorkspaces(List<Workspace> myWorkspaces) {
+//		this.myWorkspaces = myWorkspaces;
+//	}
+
 	/**
-	 * @return the myWorkspaces
+	 * @return the myObservableWorkspaces
 	 */
-	public List<Workspace> getWorkspaces() {
-		return myWorkspaces;
+	public ObservableList<Workspace> getObservableWorkspaces() {
+		return myObservableWorkspaces;
 	}
 
 	/**
-	 * @param myWorkspaces the myWorkspaces to set
+	 * @param myObservableWorkspaces the myObservableWorkspaces to set
 	 */
-	public void setWorkspaces(List<Workspace> myWorkspaces) {
-		this.myWorkspaces = myWorkspaces;
+	public void setObservableWorkspaces(ObservableList<Workspace> myObservableWorkspaces) {
+		this.myObservableWorkspaces = myObservableWorkspaces;
 	}
 }

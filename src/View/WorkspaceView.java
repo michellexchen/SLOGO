@@ -49,7 +49,7 @@ public class WorkspaceView {
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
 		myGUIController = (GUIController) myLoader.getController();
-		myGUIController.setMyModel(myModel);
+		myGUIController.setModel(myModel);
 
 		myProjectScene = new Scene(root);
 		myProjectStage = new Stage();

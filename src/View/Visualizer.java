@@ -60,13 +60,13 @@ public class Visualizer implements Observer {
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
 		myGUIController = (GUIController) myLoader.getController();
-		myGUIController.setMyModel(myModel);
-
+		myGUIController.setModel(myModel);
+		
 		myScene = new Scene(root);
 		myStage = new Stage();
 		myStage.setScene(myScene);
 		myStage.setTitle("SLogo");
-
+		show();
 	}
 
 	public void updateStates() {

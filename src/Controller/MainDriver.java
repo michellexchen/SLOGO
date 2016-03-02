@@ -31,13 +31,14 @@ public class MainDriver extends Application {
 	}
 	
 	public void initialize () throws SLogoException, IOException {
+		loadLanguage();
 		myModel = new MainModel();
 		myView = new MainView();
 		myModel.setView(myView);
 		myView.setModel(myModel);
 		myModel.initialize();
 		myView.initialize();
-		loadLanguage();
+
 	}
 	
 	public void loadLanguage () throws SLogoException {

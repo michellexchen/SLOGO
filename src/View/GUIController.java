@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Controller.SLogoException;
 import Model.MainModel;
 import Model.Model;
 import javafx.beans.value.ChangeListener;
@@ -43,7 +44,6 @@ public class GUIController implements Initializable  {
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
-	private List<String> mymyHistoryPane;
 	
 	//Model to interact with
 	private Model myModel;
@@ -139,8 +139,8 @@ public class GUIController implements Initializable  {
         	 * and passes the command to the parser
         	 */
         	try {
-				getMyModel().readCommand(myCommand);
-			} catch (Exception e1) {
+				getModel().readCommand(myCommand);
+			} catch (SLogoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -280,32 +280,32 @@ public class GUIController implements Initializable  {
 
 
 
-	/**
-	 * @param myModel the myModel to set
-	 */
-	public void setModel(MainModel myModel) {
-		this.myModel = myModel;
-	}
-
-
+//	/**
+//	 * @param myModel the myModel to set
+//	 */
+//	public void setModel(MainModel myModel) {
+//		this.myModel = myModel;
+//	}
+//
+//
+////
+////
+////	/**
+////	 * @return the myView
+////	 */
+////	public MainView getView() {
+////		return myView;
+////	}
+////
+//
 //
 //
 //	/**
-//	 * @return the myView
+//	 * @param myView the myView to set
 //	 */
-//	public MainView getView() {
-//		return myView;
+//	public void setView(MainView myView) {
+//		this.myView = myView;
 //	}
-//
-
-
-
-	/**
-	 * @param myView the myView to set
-	 */
-	public void setView(MainView myView) {
-		this.myView = myView;
-	}
 
 
 
@@ -313,7 +313,7 @@ public class GUIController implements Initializable  {
 	/**
 	 * @return the myModel
 	 */
-	public Model getMyModel() {
+	public Model getModel() {
 		return myModel;
 	}
 
@@ -323,7 +323,7 @@ public class GUIController implements Initializable  {
 	/**
 	 * @param myModel the myModel to set
 	 */
-	public void setMyModel(Model myModel) {
+	public void setModel(Model myModel) {
 		this.myModel = myModel;
 	}
 
@@ -333,7 +333,7 @@ public class GUIController implements Initializable  {
 	/**
 	 * @return the myView
 	 */
-	public View getMyView() {
+	public View getView() {
 		return myView;
 	}
 
@@ -343,7 +343,7 @@ public class GUIController implements Initializable  {
 	/**
 	 * @param myView the myView to set
 	 */
-	public void setMyView(View myView) {
+	public void setView(View myView) {
 		this.myView = myView;
 	}
 

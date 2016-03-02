@@ -50,28 +50,34 @@ public class Workspace {
 	
 	private void createObservableLists (List<DisplayData> datalist, 
 			List<String> commandhistory) {
-		myObservableDataList = FXCollections.observableList(datalist);
-		myObservableDataList.addListener(new ListChangeListener() {
-			@Override
-			public void onChanged(ListChangeListener.Change change) {
-				//DO When turtles change
-				getView().updateDisplayData();
-				
-			}
-			
-		});
-		myObservableCommandHistory = FXCollections.observableList(commandhistory);
-		myObservableCommandHistory.addListener(new ListChangeListener() {
-			@Override
-			public void onChanged(ListChangeListener.Change change) {
-				//Update the commandHistory
-				getView().updateCommandHistory();
-			}
-			
-		});
+		myObservableDataList = FXCollections.observableArrayList(datalist);
+		myObservableDataList.addListener
+				((ListChangeListener) change -> getView().updateDisplayData());
+		
+//		myObservableDataList.addListener(new ListChangeListener() {
+//			@Override
+//			public void onChanged(ListChangeListener.Change change) {
+//				//DO When turtles change
+//				getView().updateDisplayData();
+//				
+//			}
+//			
+//		});
+		
+		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
+		myObservableCommandHistory.addListener
+				((ListChangeListener) change -> getView().updateCommandHistory());
 
 	}
-	
+//	public void onChanged(ListChangeListener.Change change) {
+//		//Update the commandHistory
+//		getView().updateCommandHistory();
+//	}
+//	
+//});
+//
+//}
+
 
 	public void createTurtle() {
 		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);
