@@ -142,7 +142,7 @@ public class Visualizer implements Observer {
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
-		System.out.println("Running");
+		//System.out.println("Running");
 		getModel().getDisplayDataList();
 		for (DisplayData turtledata : getObservableDataList()) {
 			//Place the turtle

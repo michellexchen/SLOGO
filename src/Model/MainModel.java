@@ -29,6 +29,7 @@ public class MainModel implements Model {
 	public void initialize() {	
 		myWorkspaces = new ArrayList<Workspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
+		createNewWorkspace();
 		myObservableWorkspaces.addListener((ListChangeListener) c -> {
 			getView().updateWorkspaces();
 			getView().setCurrentWorkspace(getCurrentWorkspace());
@@ -44,7 +45,6 @@ public class MainModel implements Model {
 //			
 //			
 //		});
-		createNewWorkspace();
 		
 	}
 
@@ -90,6 +90,9 @@ public class MainModel implements Model {
 
 	@Override
 	public ObservableList<DisplayData> getDisplayDataList() {
+		System.out.println(myCurrentWorkspace);
+
+		System.out.println(myCurrentWorkspace.getObservableDataList());
 		return myCurrentWorkspace.getObservableDataList();
 	}
 	
@@ -100,6 +103,7 @@ public class MainModel implements Model {
 	public void createNewWorkspace() {
 		// TODO Auto-generated method stub
 		Workspace myWorkspace = new Workspace(getView());
+		setCurrentWorkspace(myWorkspace);
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
