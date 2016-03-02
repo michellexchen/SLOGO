@@ -18,7 +18,8 @@ import javafx.collections.ObservableList;
 public class Workspace {
 
 	private View myView;
-	
+
+
 	private List<DisplayData> myDataList;
 	private List<String> myCommandHistory;
 	
@@ -39,10 +40,7 @@ public class Workspace {
 	
 	public void initialize () {
 		myDataList = new ArrayList<DisplayData>();
-		//myObservableDataList = FXCollections.observableList(myDataList);
-		myCommandHistory = new ArrayList<String>();
-		//myObservableCommandHistory = FXCollections.observableList(myCommandHistory);
-		
+		myCommandHistory = new ArrayList<String>();		
 		
 		myCharacters = new ArrayList<Character>();
 		myTreeFactory = new TreeFactory();
@@ -57,7 +55,7 @@ public class Workspace {
 			@Override
 			public void onChanged(ListChangeListener.Change change) {
 				//DO When turtles change
-				
+				getView().updateDisplayData();
 				
 			}
 			
@@ -67,6 +65,7 @@ public class Workspace {
 			@Override
 			public void onChanged(ListChangeListener.Change change) {
 				//Update the commandHistory
+				getView().updateCommandHistory();
 			}
 			
 		});
@@ -116,5 +115,19 @@ public class Workspace {
 			myTree.traverse(character.getState());
 			myDataList.get(myCharacters.indexOf(character)).updateData(character.getState());
 		}
+	}
+	
+	
+	/**
+	 * @return the myView
+	 */
+	public View getView() {
+		return myView;
+	}
+	/**
+	 * @param myView the myView to set
+	 */
+	public void setView(View myView) {
+		this.myView = myView;
 	}
 }

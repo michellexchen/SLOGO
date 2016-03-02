@@ -9,7 +9,6 @@ import View.View;
 
 public class MainModel implements Model {
 
-	// Command that was read in by clicking Run button
 	private String myCommand;
 	private View myView;
 	private Workspace myCurrentWorkspace;
@@ -23,13 +22,8 @@ public class MainModel implements Model {
 		myView = view;
 	}
 
-	public void initialize() {
-//		myCurrentWorkspace = new Workspace();
-//		myWorkspace.createTurtle(); //Don't need this
-		
-		
+	public void initialize() {	
 		myWorkspaces = new ArrayList<Workspace>();
-		
 		createNewWorkspace();
 		
 	}

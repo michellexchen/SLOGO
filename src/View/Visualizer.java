@@ -166,22 +166,6 @@ public class Visualizer implements Observer {
 		this.myHeight = height;
 	}
 
-//	public Scene getScene() {
-//		return myProjectScene;
-//	}
-//
-//	public void setMyProjectScene(Scene myProjectScene) {
-//		this.myProjectScene = myProjectScene;
-//	}
-//
-//	public Stage getStage() {
-//		return myProjectStage;
-//	}
-//
-//	public void setMyProjectStage(Stage myProjectStage) {
-//		this.myProjectStage = myProjectStage;
-//	}
-
 	/**
 	 * @return the myLoader
 	 */
@@ -211,21 +195,6 @@ public class Visualizer implements Observer {
 	public void setGUIController(GUIController myGUIController) {
 		this.myGUIController = myGUIController;
 	}
-
-//	/**
-//	 * @return the myDisplayData
-//	 */
-////	public List<DisplayData> getMyDisplayData() {
-////		return myDisplayData;
-////	}
-//
-//	/**
-//	 * @param myDisplayData
-//	 *            the myDisplayData to set
-//	 */
-//	public void setMyDisplayData(List<DisplayData> myDisplayData) {
-//		this.myDisplayData = myDisplayData;
-//	}
 
 	/**
 	 * @return the myModel
@@ -269,6 +238,4 @@ public class Visualizer implements Observer {
 	public void setStage(Stage myStage) {
 		this.myStage = myStage;
 	}
-
-
 }
