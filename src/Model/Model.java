@@ -1,8 +1,7 @@
 package Model;
 
-import java.util.List;
-
-import Controller.SLogoException;
+import CommandNode.DisplayData;
+import Exception.SLogoException;
 import View.View;
 import javafx.collections.ObservableList;
 

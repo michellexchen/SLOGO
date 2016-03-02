@@ -2,40 +2,30 @@ package View;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Controller.SLogoException;
-import Model.MainModel;
+import Exception.SLogoException;
 import Model.Model;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -43,20 +33,17 @@ import javafx.stage.Stage;
 
 public class GUIController implements Initializable  {
 	
+	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
+						+ "compsci308/spring16/assign/03_slogo/commands.php";
+	private static final int POPUP_WIDTH = 900;
+	private static final int POPUP_HEIGHT = 550;
+
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
 	
-	//Model to interact with
 	private Model myModel;
-	
-	
-	//View to interact with
 	private View myView;
-	
-	
-	
-	//Command string
 	private String myCommand;
 	
 	//Help button
@@ -82,39 +69,22 @@ public class GUIController implements Initializable  {
 
     
     //MenuButton's MenuItem list
-    
     private List<MenuItem> myMenuItems;
-    
-    
-    
+
     //Command History Pane where ObservableList<CommandNode> will go
-    
     @FXML
     private ScrollPane myCommandHistoryPane;
-    
-    
+ 
     //myVariablePane where ObservableList<Variable> will go
     @FXML
-    private AnchorPane myVariablePane;
-    
+    private ScrollPane myVariablePane;
     
     //Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
     @FXML
     private Button myCustomizeButton;
     
-    
-//    
-//	
-//    @FXML 
-//    private Hyperlink helpHyperlink;   
-//
-//
     @FXML
     private List<String> myHistory;
-//    
-//
-//    
-
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -125,7 +95,7 @@ public class GUIController implements Initializable  {
     	
     	//Help button - assign action
         myHelpButton.setOnAction(e -> {
-        	popup("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php");
+        	popup(HELP_URL);
         });
                    
         //Run button - return user input and stores it in myCommand
@@ -134,21 +104,10 @@ public class GUIController implements Initializable  {
         	myCommand = myTextField.getText();
             myTextField.clear();
             run(myCommand);
-        });
-        
-
-        //Initialize main Pane-myCanvas
-        //myCanvas = new Pane(); ALREADY INITIALIZED?
-        //This is how to add line objects
-        //canvas.getChildren().addAll(circle,rectangle);
-        
-        //myCanvas.getChildren().add(new Line(100, 10,   10,   110));
-        //
-
-        
+        });  
     }
         
-    private void run(String myC){
+    private void run(String command){
         setCommand(myCommand);
           	/*
           	 * TODO: Call Model's readCommand that calls
@@ -156,30 +115,14 @@ public class GUIController implements Initializable  {
           	 * and passes the command to the parser
           	 */
           	try {
-  				getModel().readCommand(myC);
+  				getModel().readCommand(command);
   			} catch (SLogoException e1) {
-  				myC = "ERROR: " + myC;
+  				command = "ERROR: " + command;
   			}
           	
-          	myHistory.add(myC);
+          	myHistory.add(command);
           	displayHistory();
-          	
-         
     }
-    
-        
-    	//myHistoryPane = new ArrayList<String>(); //initialize myHistoryPane
-    	//helpLink(); //help button
-        //myRunButtonmyTextField(); //myRunButton button
-
-//    private void helpLink(){
-//    	helpHyperlink.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//				popup("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/myTextFields.php");	            
-//			}
-//    	});
-//    }
     
     private void popup(String link){
 		myBrowser = new WebView();
@@ -191,8 +134,8 @@ public class GUIController implements Initializable  {
         vbox.getChildren().addAll(myBrowser);
         VBox.setVgrow(myBrowser, Priority.ALWAYS);
         stage.setTitle("SLOGO Basic Commands");
-        stage.setWidth(900);
-        stage.setHeight(550);
+        stage.setWidth(POPUP_WIDTH);
+        stage.setHeight(POPUP_HEIGHT);
         stage.setScene(scene);
         stage.show();
     }
@@ -234,10 +177,13 @@ public class GUIController implements Initializable  {
 //    		run(myCommand);
 //    	});
     	
-    	myHistoryPaneView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+    	myHistoryPaneView.getSelectionModel().selectedItemProperty().addListener
+    												(new ChangeListener<String>() {
     	    @Override
-    	    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    	    public void changed(ObservableValue<? extends String> observable, 
+    	    									String oldValue, String newValue) {
     	    	if(newValue.contains("ERROR")) {
+    	    		//TODO: Do something about this magic number '7'
     	    		myCommand = newValue.substring(7);
     	    	} else {
     	    		myCommand = newValue;
@@ -246,11 +192,6 @@ public class GUIController implements Initializable  {
     	    }
     	});
     }    
-    
-//    @Override
-//	public String getCommand() {
-//		return myCommand;
-//	}
 
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
@@ -274,75 +215,21 @@ public class GUIController implements Initializable  {
 		this.myCanvas = myCanvas;
 	}
 
-
-
-
 	public MenuButton getMyMenu() {
 		return myMenu;
 	}
-
-
-
 
 	public void setMyMenu(MenuButton myMenu) {
 		this.myMenu = myMenu;
 	}
 
-
-
-
 	public List<MenuItem> getMyMenuItems() {
 		return myMenuItems;
 	}
 
-
-
-
 	public void setMyMenuItems(List<MenuItem> myMenuItems) {
 		this.myMenuItems = myMenuItems;
 	}
-
-
-//
-//	/**
-//	 * @return the myModel
-//	 */
-//	public MainModel getModel() {
-//		return myModel;
-//	}
-
-
-
-
-//	/**
-//	 * @param myModel the myModel to set
-//	 */
-//	public void setModel(MainModel myModel) {
-//		this.myModel = myModel;
-//	}
-//
-//
-////
-////
-////	/**
-////	 * @return the myView
-////	 */
-////	public MainView getView() {
-////		return myView;
-////	}
-////
-//
-//
-//
-//	/**
-//	 * @param myView the myView to set
-//	 */
-//	public void setView(MainView myView) {
-//		this.myView = myView;
-//	}
-
-
-
 
 	/**
 	 * @return the myModel
@@ -351,28 +238,19 @@ public class GUIController implements Initializable  {
 		return myModel;
 	}
 
-
-
-
 	/**
 	 * @param myModel the myModel to set
 	 */
 	public void setModel(Model myModel) {
 		this.myModel = myModel;
 	}
-
-
-
-
+	
 	/**
 	 * @return the myView
 	 */
 	public View getView() {
 		return myView;
 	}
-
-
-
 
 	/**
 	 * @param myView the myView to set
@@ -381,13 +259,199 @@ public class GUIController implements Initializable  {
 		this.myView = myView;
 	}
 
+	/**
+	 * @return the myBrowser
+	 */
+	public WebView getMyBrowser() {
+		return myBrowser;
+	}
 
+	/**
+	 * @param myBrowser the myBrowser to set
+	 */
+	public void setMyBrowser(WebView myBrowser) {
+		this.myBrowser = myBrowser;
+	}
 
+	/**
+	 * @return the myWebEngine
+	 */
+	public WebEngine getMyWebEngine() {
+		return myWebEngine;
+	}
 
-//	@Override
-//	public Visualizer getVisualizer() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}    
-        
+	/**
+	 * @param myWebEngine the myWebEngine to set
+	 */
+	public void setMyWebEngine(WebEngine myWebEngine) {
+		this.myWebEngine = myWebEngine;
+	}
+
+	/**
+	 * @return the myHistoryPaneView
+	 */
+	public ListView<String> getMyHistoryPaneView() {
+		return myHistoryPaneView;
+	}
+
+	/**
+	 * @param myHistoryPaneView the myHistoryPaneView to set
+	 */
+	public void setMyHistoryPaneView(ListView<String> myHistoryPaneView) {
+		this.myHistoryPaneView = myHistoryPaneView;
+	}
+
+	/**
+	 * @return the myModel
+	 */
+	public Model getMyModel() {
+		return myModel;
+	}
+
+	/**
+	 * @param myModel the myModel to set
+	 */
+	public void setMyModel(Model myModel) {
+		this.myModel = myModel;
+	}
+
+	/**
+	 * @return the myView
+	 */
+	public View getMyView() {
+		return myView;
+	}
+
+	/**
+	 * @param myView the myView to set
+	 */
+	public void setMyView(View myView) {
+		this.myView = myView;
+	}
+
+	/**
+	 * @return the myCommand
+	 */
+	public String getMyCommand() {
+		return myCommand;
+	}
+
+	/**
+	 * @param myCommand the myCommand to set
+	 */
+	public void setMyCommand(String myCommand) {
+		this.myCommand = myCommand;
+	}
+
+	/**
+	 * @return the myHelpButton
+	 */
+	public Button getMyHelpButton() {
+		return myHelpButton;
+	}
+
+	/**
+	 * @param myHelpButton the myHelpButton to set
+	 */
+	public void setMyHelpButton(Button myHelpButton) {
+		this.myHelpButton = myHelpButton;
+	}
+
+	/**
+	 * @return the myTextField
+	 */
+	public TextField getMyTextField() {
+		return myTextField;
+	}
+
+	/**
+	 * @param myTextField the myTextField to set
+	 */
+	public void setMyTextField(TextField myTextField) {
+		this.myTextField = myTextField;
+	}
+
+	/**
+	 * @return the myRunButton
+	 */
+	public Button getMyRunButton() {
+		return myRunButton;
+	}
+
+	/**
+	 * @param myRunButton the myRunButton to set
+	 */
+	public void setMyRunButton(Button myRunButton) {
+		this.myRunButton = myRunButton;
+	}
+
+	/**
+	 * @return the myCanvas
+	 */
+	public Pane getMyCanvas() {
+		return myCanvas;
+	}
+
+	/**
+	 * @param myCanvas the myCanvas to set
+	 */
+	public void setMyCanvas(Pane myCanvas) {
+		this.myCanvas = myCanvas;
+	}
+
+	/**
+	 * @return the myCommandHistoryPane
+	 */
+	public ScrollPane getMyCommandHistoryPane() {
+		return myCommandHistoryPane;
+	}
+
+	/**
+	 * @param myCommandHistoryPane the myCommandHistoryPane to set
+	 */
+	public void setMyCommandHistoryPane(ScrollPane myCommandHistoryPane) {
+		this.myCommandHistoryPane = myCommandHistoryPane;
+	}
+
+	/**
+	 * @return the myVariablePane
+	 */
+	public ScrollPane getMyVariablePane() {
+		return myVariablePane;
+	}
+
+	/**
+	 * @param myVariablePane the myVariablePane to set
+	 */
+	public void setMyVariablePane(ScrollPane myVariablePane) {
+		this.myVariablePane = myVariablePane;
+	}
+
+	/**
+	 * @return the myCustomizeButton
+	 */
+	public Button getMyCustomizeButton() {
+		return myCustomizeButton;
+	}
+
+	/**
+	 * @param myCustomizeButton the myCustomizeButton to set
+	 */
+	public void setMyCustomizeButton(Button myCustomizeButton) {
+		this.myCustomizeButton = myCustomizeButton;
+	}
+
+	/**
+	 * @return the myHistory
+	 */
+	public List<String> getMyHistory() {
+		return myHistory;
+	}
+
+	/**
+	 * @param myHistory the myHistory to set
+	 */
+	public void setMyHistory(List<String> myHistory) {
+		this.myHistory = myHistory;
+	}
 }

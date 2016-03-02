@@ -16,9 +16,10 @@ public abstract class CharacterState {
 	private boolean isHidden;
 	private double angle;
 	private ImageView imageView;
-	private boolean penDo;
+	private boolean penDown;
 
-	public CharacterState(double xCoor, double yCoor, double direction, boolean isHidden, double angle) {
+	public CharacterState(double xCoor, double yCoor, double direction,
+					      boolean isHidden, double angle) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		this.direction = direction;
@@ -74,5 +75,4 @@ public abstract class CharacterState {
 	public void setImageView(ImageView imageView) {
 		this.imageView = imageView;
 	}
-
 }

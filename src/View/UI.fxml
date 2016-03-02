@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.GUIController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GUIController">
   <children>
     <AnchorPane id="AnchorPane" layoutX="0.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" styleClass="window">
       <children>
@@ -46,7 +46,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-        <ScrollPane content="$null" layoutX="668.0" layoutY="35.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
+        <ScrollPane fx:id="myVariablePane" content="$null" layoutX="668.0" layoutY="35.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
         <Button fx:id="myCustomizeButton" layoutX="689.0" layoutY="462.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="114.0" style="" text="CUSTOMIZE">
           <stylesheets>
             <URL value="@style.css" />

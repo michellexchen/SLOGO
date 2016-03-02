@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+import Exception.SLogoException;
+
 /**
  * SLogo's highest level in File reader hierarchy
  * 

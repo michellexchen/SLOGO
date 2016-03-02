@@ -1,14 +1,12 @@
 package View;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observer;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import Controller.LanguagesDriver;
-import Controller.SLogoException;
+import Exception.SLogoException;
 import Model.Model;
 import Model.Workspace;
 
@@ -18,7 +16,6 @@ public class MainView implements View {
 	private final int HEIGHT = 331;
 
 	private LanguagesDriver myLangDriver;
-//	private CommandHistoryViewer myHistory;
 	private String myCommand;
 	private Model myModel;
 	private Visualizer myVisualizer;
@@ -28,11 +25,7 @@ public class MainView implements View {
 		String language = "English"; // Get from UI
 		myLangDriver.load(language);
 		
-		
-		
 		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
-
-
 	}
 
 	public MainView(Model model) throws SLogoException {
@@ -40,22 +33,17 @@ public class MainView implements View {
 		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
 
 	}
-
+	
 	/**
 	 * Called at start
 	 * Initializes necessary classes used to visualize turtles
 	 * @throws IOException 
 	 */
 	public void initialize() throws SLogoException, IOException {
-//		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
-
-		//System.out.println("WOW!!: " + getModel());
-		
 		myVisualizer.initialize();
+		
 		myLangDriver = new LanguagesDriver();
-
 		String language = "English"; // Get from UI
-
 		myLangDriver.load(language);
 	}
 
@@ -76,14 +64,6 @@ public class MainView implements View {
 		return myLangDriver;
 	}
 
-//	public CommandHistoryViewer getMyHistory() {
-//		return myHistory;
-//	}
-//
-//	public void setMyHistory(CommandHistoryViewer myHistory) {
-//		this.myHistory = myHistory;
-//	}
-	
 	/**
 	 * @return the myModel
 	 */
@@ -136,6 +116,12 @@ public class MainView implements View {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void updateVariables() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void setCurrentWorkspace(Workspace workspace) {
@@ -148,4 +134,6 @@ public class MainView implements View {
 		// TODO Auto-generated method stub
 		return getVisualizer();
 	}
+
+
 }

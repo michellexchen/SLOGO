@@ -1,9 +1,6 @@
 package View;
 
-import java.io.IOException;
 import java.util.Observer;
-
-import Controller.SLogoException;
 import Model.Workspace;
 
 public interface View {
@@ -17,9 +14,12 @@ public interface View {
 	public void updateCommandHistory();
 	
 	public void updateWorkspaces();
+
+	public void updateVariables();
 	
 	public void setCurrentWorkspace(Workspace workspace);
 	
 	public Observer getObserver();
+
 }
 	

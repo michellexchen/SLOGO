@@ -5,8 +5,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import Exception.SLogoException;
 import Model.MainModel;
-import View.GUIController;
 import View.MainView;
 import View.SLogoPromptBuilder;
 
@@ -35,12 +35,9 @@ public class MainDriver extends Application {
 		myModel = new MainModel();
 		myView = new MainView(myModel);
 		myModel.setView(myView);
-		//myView.setModel(myModel);
-
 		myModel.initialize();
 		myView.initialize();
 		myModel.addListeners();
-
 	}
 	
 	public void loadLanguage () throws SLogoException {

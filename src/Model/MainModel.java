@@ -3,8 +3,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.SLogoException;
-import Controller.TreeFactory;
+import CommandNode.DisplayData;
+import Exception.SLogoException;
 import View.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -29,25 +29,10 @@ public class MainModel implements Model {
 	}
 
 	public void initialize() {	
-//		myWorkspaces = new ArrayList<Workspace>();
-//		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 		createNewWorkspace();
-
-//		myObservableWorkspaces.addListener(new ListChangeListener() {
-//
-//			@Override
-//			public void onChanged(Change c) {
-//				// TODO Auto-generated method stub
-//				getView().updateWorkspaces();
-//				getView().setCurrentWorkspace(getCurrentWorkspace());
-//			}
-//			
-//			
-//		});
-		
 	}
 	
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners () {
 		myObservableWorkspaces.addListener((ListChangeListener) c -> {
 			getView().updateWorkspaces();
@@ -133,7 +118,6 @@ public class MainModel implements Model {
 	public void setCurrentWorkspace(Workspace myCurrentWorkspace) {
 		this.myCurrentWorkspace = myCurrentWorkspace;
 	}
-
 
 	/**
 	 * @return the myObservableWorkspaces

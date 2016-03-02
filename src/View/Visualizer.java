@@ -1,14 +1,13 @@
 package View;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import Controller.SLogoException;
-import Model.DisplayData;
+import CommandNode.DisplayData;
+import CommandNode.Position;
+import Exception.SLogoException;
 import Model.Model;
-import Model.Position;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +21,7 @@ import javafx.stage.Stage;
 public class Visualizer implements Observer {
 	
 	private static final String TURTLE_IMAGE_PATH = "file:resources/turtle_images/";
+	private static final String TURTLE_IMAGE = "turtle_1.png";
 	private static final int TURTLE_SIZE = 20;
 	
 	private ObservableList<DisplayData> myObservableDataList;
@@ -34,40 +34,29 @@ public class Visualizer implements Observer {
 	private Parent root;
 
 	// Visualization Primitives
-	// private Group myRoot;
 	private Scene myScene;
 	private Stage myStage;
-
 	private Model myModel;
-	
 	private String myCanvasColor;
 	
-	
-	//private DisplayData myDisplayData;
 	public Visualizer(Model model, int width, int height) {
-		//myDisplayData = data;
 		myModel = model;
 		myWidth = width;
 		myHeight = height;
 	}
 	
 	public Visualizer(Model model) {
-		//myDisplayData = data;
 		myWidth = 331;
 		myHeight = 331;
 		myModel = model;
 	}
 
-	
 	public void initialize() throws SLogoException, IOException {
 
 		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
 		myPrompt.promptScreen();
 		setCanvasColor(toRGBCode(myPrompt.sendMyColor()));
-//		
-//		System.out.println(getModel());
-//		System.out.println(getModel().getObservableDataList());
-		
+
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
 		
@@ -99,11 +88,6 @@ public class Visualizer implements Observer {
 	public void setBackgroundColor() {
 
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public void update(Observable observable, Object arg1) {
@@ -169,9 +153,7 @@ public class Visualizer implements Observer {
 		getGUIController().getCanvas().setStyle("-fx-background-color: "
 													+ getCanvasColor());
 		
-		//System.out.println("Running");
 		getModel().getObservableDataList();
-		//System.out.println(getObservableDataList());
 		for (DisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
@@ -187,11 +169,7 @@ public class Visualizer implements Observer {
 	}
 	
 	public void placeTurtle(DisplayData displaydata) {
-        Image image = new Image(TURTLE_IMAGE_PATH + "turtle_1.png");
-//		System.out.println(TURTLE_IMAGE_PATH + "turtle_1.png");
-//		System.out.println(getClass().getResource("turtle_1.png").toExternalForm());
-//        Image image = new Image(getClass().getResource("turtle_1.png").toExternalForm());
-
+        Image image = new Image(TURTLE_IMAGE_PATH + TURTLE_IMAGE);
         
 		ImageView turtle = new ImageView();
 		turtle.setImage(image);
@@ -221,10 +199,7 @@ public class Visualizer implements Observer {
 	public void updateCommandHistory () {
 		
 	}
-	
-	
-	
-	
+
 	public int getWidth() {
 		return myWidth;
 	}
@@ -324,7 +299,8 @@ public class Visualizer implements Observer {
 	/**
 	 * @param myObservableDataList the myObservableDataList to set
 	 */
-	public void setObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+	public void setObservableDataList(ObservableList<DisplayData> 
+												myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
 
@@ -341,9 +317,13 @@ public class Visualizer implements Observer {
 	public void setCanvasColor(String myCanvasColor) {
 		this.myCanvasColor = myCanvasColor;
 	}
-	
 
-
+	/**
+	 * Converts Color object into its hex String representation
+	 * 
+	 * @param color
+	 * @return String
+	 */
 	public String toRGBCode (Color color) {
 		return String.format( "#%02X%02X%02X",
 				(int)( color.getRed() * 255 ),
@@ -351,4 +331,164 @@ public class Visualizer implements Observer {
 				(int)( color.getBlue() * 255 ) );
 	}
 
+	/**
+	 * @return the myObservableDataList
+	 */
+	public ObservableList<DisplayData> getMyObservableDataList() {
+		return myObservableDataList;
+	}
+
+	/**
+	 * @param myObservableDataList the myObservableDataList to set
+	 */
+	public void setMyObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+		this.myObservableDataList = myObservableDataList;
+	}
+
+	/**
+	 * @return the myWidth
+	 */
+	public int getMyWidth() {
+		return myWidth;
+	}
+
+	/**
+	 * @param myWidth the myWidth to set
+	 */
+	public void setMyWidth(int myWidth) {
+		this.myWidth = myWidth;
+	}
+
+	/**
+	 * @return the myHeight
+	 */
+	public int getMyHeight() {
+		return myHeight;
+	}
+
+	/**
+	 * @param myHeight the myHeight to set
+	 */
+	public void setMyHeight(int myHeight) {
+		this.myHeight = myHeight;
+	}
+
+	/**
+	 * @return the myLoader
+	 */
+	public FXMLLoader getMyLoader() {
+		return myLoader;
+	}
+
+	/**
+	 * @param myLoader the myLoader to set
+	 */
+	public void setMyLoader(FXMLLoader myLoader) {
+		this.myLoader = myLoader;
+	}
+
+	/**
+	 * @return the myGUIController
+	 */
+	public GUIController getMyGUIController() {
+		return myGUIController;
+	}
+
+	/**
+	 * @param myGUIController the myGUIController to set
+	 */
+	public void setMyGUIController(GUIController myGUIController) {
+		this.myGUIController = myGUIController;
+	}
+
+	/**
+	 * @return the root
+	 */
+	public Parent getRoot() {
+		return root;
+	}
+
+	/**
+	 * @param root the root to set
+	 */
+	public void setRoot(Parent root) {
+		this.root = root;
+	}
+
+	/**
+	 * @return the myScene
+	 */
+	public Scene getMyScene() {
+		return myScene;
+	}
+
+	/**
+	 * @param myScene the myScene to set
+	 */
+	public void setMyScene(Scene myScene) {
+		this.myScene = myScene;
+	}
+
+	/**
+	 * @return the myStage
+	 */
+	public Stage getMyStage() {
+		return myStage;
+	}
+
+	/**
+	 * @param myStage the myStage to set
+	 */
+	public void setMyStage(Stage myStage) {
+		this.myStage = myStage;
+	}
+
+	/**
+	 * @return the myModel
+	 */
+	public Model getMyModel() {
+		return myModel;
+	}
+
+	/**
+	 * @param myModel the myModel to set
+	 */
+	public void setMyModel(Model myModel) {
+		this.myModel = myModel;
+	}
+
+	/**
+	 * @return the myCanvasColor
+	 */
+	public String getMyCanvasColor() {
+		return myCanvasColor;
+	}
+
+	/**
+	 * @param myCanvasColor the myCanvasColor to set
+	 */
+	public void setMyCanvasColor(String myCanvasColor) {
+		this.myCanvasColor = myCanvasColor;
+	}
+
+	/**
+	 * @return the turtleImagePath
+	 */
+	public static String getTurtleImagePath() {
+		return TURTLE_IMAGE_PATH;
+	}
+
+	/**
+	 * @return the turtleImage
+	 */
+	public static String getTurtleImage() {
+		return TURTLE_IMAGE;
+	}
+
+	/**
+	 * @return the turtleSize
+	 */
+	public static int getTurtleSize() {
+		return TURTLE_SIZE;
+	}
 }

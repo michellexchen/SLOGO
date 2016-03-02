@@ -1,6 +1,8 @@
 package Controller;
 import java.io.IOException;
 
+import Exception.SLogoException;
+
 /**
  * SLogo's Languages reader class that extends FileDriver abstract class
  * 
