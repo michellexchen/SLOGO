@@ -176,6 +176,13 @@ public class Visualizer implements Observer {
 		ImageView turtle = new ImageView();
 		turtle.setImage(image);
 		
+		//assign click action - change the action to change attributes
+		turtle.setOnMouseClicked(e -> {
+			turtle.setFitWidth(120);
+			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
+			turtle.setLayoutY(displaydata.getPosition().yCurrent() - 120 / 2);
+		});
+
 		//turtle resize
 		turtle.setFitWidth(TURTLE_SIZE);
 		turtle.setPreserveRatio(true);
