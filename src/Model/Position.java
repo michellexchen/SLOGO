@@ -10,6 +10,7 @@ package Model;
  */
 public class Position {
 	private static final int PANE_SIZE = 450;
+	private static final int PADDING = 40;
 	
 	private double myWidth;
 	private double myHeight;
@@ -66,8 +67,22 @@ public class Position {
 	public void setXY(double x, double y) {
 		xPrevious = xCurrent;
 		yPrevious = yCurrent;
+		
 		xCurrent = x + xCenter;
 		yCurrent = y + yCenter;
+		
+		if (xCurrent > PANE_SIZE - PADDING) {
+			xCurrent = PANE_SIZE - PADDING;
+		}
+		if (xCurrent < PADDING) {
+			xCurrent = PADDING;
+		}
+		if (yCurrent > PANE_SIZE - PADDING) {
+			yCurrent = PANE_SIZE - PADDING;
+		}
+		if (yCurrent < PADDING) {
+			yCurrent = PADDING;
+		}
 	}
 
 	/////////////////////

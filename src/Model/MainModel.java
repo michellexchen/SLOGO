@@ -20,6 +20,8 @@ public class MainModel implements Model {
 	private ObservableList<Workspace> myObservableWorkspaces;
 
 	public MainModel() {
+		myWorkspaces = new ArrayList<Workspace>();
+		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 	}
 
 	public MainModel(View view) {
@@ -27,8 +29,8 @@ public class MainModel implements Model {
 	}
 
 	public void initialize() {	
-		myWorkspaces = new ArrayList<Workspace>();
-		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
+//		myWorkspaces = new ArrayList<Workspace>();
+//		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 		createNewWorkspace();
 
 //		myObservableWorkspaces.addListener(new ListChangeListener() {
@@ -99,11 +101,7 @@ public class MainModel implements Model {
 	}
 
 	@Override
-	public ObservableList<DisplayData> getDisplayDataList() {
-		System.out.println("This is current workspace: " + myCurrentWorkspace);
-
-		System.out.println("This is currentworkspaces observabledatalist " 
-				+ myCurrentWorkspace.getObservableDataList());
+	public ObservableList<DisplayData> getObservableDataList() {
 		return myCurrentWorkspace.getObservableDataList();
 	}
 	
@@ -136,19 +134,6 @@ public class MainModel implements Model {
 		this.myCurrentWorkspace = myCurrentWorkspace;
 	}
 
-//	/**
-//	 * @return the myWorkspaces
-//	 */
-//	public List<Workspace> getWorkspaces() {
-//		return myWorkspaces;
-//	}
-//
-//	/**
-//	 * @param myWorkspaces the myWorkspaces to set
-//	 */
-//	public void setWorkspaces(List<Workspace> myWorkspaces) {
-//		this.myWorkspaces = myWorkspaces;
-//	}
 
 	/**
 	 * @return the myObservableWorkspaces

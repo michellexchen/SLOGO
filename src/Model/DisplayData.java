@@ -58,6 +58,8 @@ public class DisplayData extends Observable {
 		penDown = ((TurtleState) state).getPen();
 		penColor = ((TurtleState) state).getPenColor();
 		myImage = state.getImageView();
+		
+		applyChanges();
 	}
 	
 	/**

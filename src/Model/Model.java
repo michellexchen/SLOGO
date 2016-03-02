@@ -16,12 +16,14 @@ public interface Model {
 
 	
 	//Need this implemented 
-	public ObservableList<DisplayData> getDisplayDataList();
+	//public ObservableList<DisplayData> getDisplayDataList();
 	
 	
 	public void createNewWorkspace();
 	
 	public Workspace getCurrentWorkspace();
+
+	public ObservableList<DisplayData> getObservableDataList();
 	
 	
 }

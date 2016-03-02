@@ -3,6 +3,8 @@ package View;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import Controller.LanguagesDriver;
@@ -25,10 +27,18 @@ public class MainView implements View {
 		myLangDriver = new LanguagesDriver();
 		String language = "English"; // Get from UI
 		myLangDriver.load(language);
+		
+		
+		
+		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+
+
 	}
 
 	public MainView(Model model) throws SLogoException {
 		myModel = model;
+		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+
 	}
 
 	/**
@@ -37,7 +47,10 @@ public class MainView implements View {
 	 * @throws IOException 
 	 */
 	public void initialize() throws SLogoException, IOException {
-		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+//		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+
+		//System.out.println("WOW!!: " + getModel());
+		
 		myVisualizer.initialize();
 		myLangDriver = new LanguagesDriver();
 
@@ -128,5 +141,11 @@ public class MainView implements View {
 	public void setCurrentWorkspace(Workspace workspace) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Observer getObserver() {
+		// TODO Auto-generated method stub
+		return getVisualizer();
 	}
 }

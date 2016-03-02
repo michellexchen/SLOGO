@@ -62,9 +62,12 @@ public class Visualizer implements Observer {
 
 		SLogoPromptBuilder myPrompt = new SLogoPromptBuilder();
 		myPrompt.promptScreen();
+//		
+//		System.out.println(getModel());
+//		System.out.println(getModel().getObservableDataList());
 		
 		//Get the ObservableDataList
-		setObservableDataList(getModel().getDisplayDataList());
+		setObservableDataList(getModel().getObservableDataList());
 		
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -109,6 +112,9 @@ public class Visualizer implements Observer {
 		//update penDown
 		//update penColor
 		//update Image
+		
+		System.out.println("DisplayData got updated");
+		updateDisplayData();
 	}
 	
 	public void setImage (ImageView image) {
@@ -145,14 +151,20 @@ public class Visualizer implements Observer {
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
+		//Clear entire Pane
+		getGUIController().getCanvas().getChildren().clear();
+		
 		//System.out.println("Running");
-		getModel().getDisplayDataList();
+		getModel().getObservableDataList();
 		//System.out.println(getObservableDataList());
 		for (DisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
 			
-			//Draw lines
+			//Create a line
+			turtledata.addLine(createLine(turtledata.getPosition()));
+			
+			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
 			
 			

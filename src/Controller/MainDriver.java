@@ -33,9 +33,9 @@ public class MainDriver extends Application {
 	public void initialize () throws SLogoException, IOException {
 		loadLanguage();
 		myModel = new MainModel();
-		myView = new MainView();
+		myView = new MainView(myModel);
 		myModel.setView(myView);
-		myView.setModel(myModel);
+		//myView.setModel(myModel);
 
 		myModel.initialize();
 		myView.initialize();
