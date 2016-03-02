@@ -16,7 +16,7 @@ public class MainView implements View {
 	private final int HEIGHT = 331;
 
 	private LanguagesDriver myLangDriver;
-	private CommandHistoryViewer myHistory;
+//	private CommandHistoryViewer myHistory;
 	private String myCommand;
 	private Model myModel;
 	private Visualizer myVisualizer;
@@ -37,7 +37,7 @@ public class MainView implements View {
 	 * @throws IOException 
 	 */
 	public void initialize() throws SLogoException, IOException {
-		myVisualizer = new Visualizer(WIDTH, HEIGHT);
+		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
 		myVisualizer.initialize();
 		myLangDriver = new LanguagesDriver();
 
@@ -63,13 +63,13 @@ public class MainView implements View {
 		return myLangDriver;
 	}
 
-	public CommandHistoryViewer getMyHistory() {
-		return myHistory;
-	}
-
-	public void setMyHistory(CommandHistoryViewer myHistory) {
-		this.myHistory = myHistory;
-	}
+//	public CommandHistoryViewer getMyHistory() {
+//		return myHistory;
+//	}
+//
+//	public void setMyHistory(CommandHistoryViewer myHistory) {
+//		this.myHistory = myHistory;
+//	}
 	
 	/**
 	 * @return the myModel
