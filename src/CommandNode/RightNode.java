@@ -10,8 +10,8 @@ public class RightNode extends TurnNode {
 		setNumChildren(NUM_CHILDREN);
 	}
 
-	public double calculateDir(double x, double y, CharacterState state) throws SLogoException {
-		return -1 * getChildren().get(0).evaluate(state);
+	public double calculateDir(CharacterState state) throws SLogoException {
+		return state.getDirection() + getChildren().get(0).evaluate(state);
 	}
 
 }
