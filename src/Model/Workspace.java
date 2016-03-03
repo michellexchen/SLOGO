@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import CommandNode.CommandTree;
@@ -104,10 +105,28 @@ public class Workspace {
 	}
 
 	public void readCommand(String command) throws SLogoException {
+//		format(command);
 		CommandTree myTree = myTreeFactory.makeTree(command);
 		for (Character character : myCharacters) {
 			myTree.traverse(character.getState(), myTree);
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
+		}
+	}
+	
+	public void format(String command){
+		checkForVars(command.split(" "));
+	}
+	
+	public void checkForVars(String[] command){
+		
+		for(int i = 0; i < command.length; i++){
+			if(command[i].equals("make")){
+				Variable var = new Variable();
+				var.setName(command[i+1]);
+				
+				//myTreeFactory.makeTree(text)
+				i++; //skip checking my next input as it's been checked right now
+			}
 		}
 	}
 	
