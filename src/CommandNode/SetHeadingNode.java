@@ -10,7 +10,7 @@ public class SetHeadingNode extends TurnNode{
 		setNumChildren(NUM_CHILDREN);
 	}
 	
-	public double calculateDir(double x, double y, CharacterState state) throws SLogoException {
+	public double calculateDir(CharacterState state) throws SLogoException {
 		return getChildren().get(0).evaluate(state);
 	}
 

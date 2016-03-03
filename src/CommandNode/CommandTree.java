@@ -23,6 +23,7 @@ public class CommandTree {
 	public void traverse(CharacterState state, CommandTree tree) throws SLogoException {
 		if(root.grabType().equals("Control")){
 			double val = root.evaluate(state, tree);
+			//grab the last added variable from our var list and set's the value mapped to the key 
 			myVars.get(myVars.size()-1).setValue(val);
 		} else {
 			root.evaluate(state); // also add the list
