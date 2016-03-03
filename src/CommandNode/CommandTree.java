@@ -21,8 +21,13 @@ public class CommandTree {
 	// have access to the list here of variables
 	private List<Variable> myVars = new ArrayList<>();
 
-	public void traverse(CharacterState state, Workspace workspace) throws SLogoException {
-		root.evaluate(state, workspace); // also add the list
+	public void traverse(CharacterState state, CommandTree tree) throws SLogoException {
+		if(root.grabType().equals("Control")){
+			double val = root.evaluate(state, tree);
+			myVars.get(myVars.size()-1).setValue(val);
+		} else {
+			root.evaluate(state); // also add the list
+		}
 	}
 
 	public void setRoot(Node root) {
@@ -31,9 +36,6 @@ public class CommandTree {
 
 	public Node getRoot() {
 		return root;
-	}
-
-	public void setMyVars(String yo) {
 	}
 	
 	public void setMyVars(Variable vars){

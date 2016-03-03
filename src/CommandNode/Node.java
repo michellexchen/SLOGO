@@ -14,9 +14,11 @@ import Model.Workspace;
 public interface Node {
 	boolean setvalue = false;
 	
+	static final String NODE = "normal";
+	
 	public abstract double evaluate(CharacterState state) throws SLogoException;
 	
-	default public double evaluate(CharacterState state, Workspace workspace) {
+	default public double evaluate(CharacterState state, CommandTree tree) throws SLogoException {
 		return 0;
 	};
 
@@ -34,5 +36,9 @@ public interface Node {
 	
 	default public boolean getVarsValue(){
 		return setvalue;
+	}
+	
+	default public String grabType(){
+		return NODE;
 	}
 }

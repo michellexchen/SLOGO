@@ -3,8 +3,9 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 import Model.Variable;
+import Model.Workspace;
 
-public class MakeNode extends CommandNode {
+public class MakeNode extends CommandNode implements ControlNode {
 
 	private Variable makesVar;
 	
@@ -12,17 +13,15 @@ public class MakeNode extends CommandNode {
 
 	}
 	
-	public void grabVar(){
-		System.out.println("yo");
-	}
-	
 	@Override
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(CharacterState state, CommandTree tree)  {
 		/*
 		 * evaluate runs through the tree which holds the value that will be returned that should be equal to 
 		 * our value after this point
 		 */
 		//makesVar.setValue(); --> the node that gets executed before this should return a value that we
+		tree.setMyVars(makesVar);
+		System.out.println("entered right loop for make node");
 		return 0;
 	}
 	
@@ -44,6 +43,18 @@ public class MakeNode extends CommandNode {
 	
 	public void setVar(Variable var){
 		this.makesVar = var;
+	}
+
+	@Override
+	public String grabType() {
+		// TODO Auto-generated method stub
+		return ControlNode.super.grabType();
+	}
+
+	@Override
+	public double evaluate(CharacterState state) throws SLogoException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	
