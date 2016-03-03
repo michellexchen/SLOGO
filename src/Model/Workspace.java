@@ -106,7 +106,7 @@ public class Workspace {
 	public void readCommand(String command) throws SLogoException {
 		CommandTree myTree = myTreeFactory.makeTree(command);
 		for (Character character : myCharacters) {
-			myTree.traverse(character.getState());
+			myTree.traverse(character.getState(), this);
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
 		}
 	}

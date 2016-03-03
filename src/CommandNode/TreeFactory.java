@@ -32,25 +32,26 @@ public class TreeFactory {
 		List<String> nodeList = format(text);
 		nodeFactory = new NodeFactory();
 		Node root = nodeFactory.createNode(nodeList);
+		if (sanitate(nodeList)) {
+			root.addVarParam(nodeList.get(1));
+			nodeList.remove(1);
+		}
 		nodeList.remove(0);
 		/*
-		 * this will get removed so that it's not a conditional in the makeTree structure
+		 * this will get removed so that it's not a conditional in the makeTree
+		 * structure
 		 *
 		 */
-		if(sanitate(nodeList)){
-			root.addVarParam(nodeList.get(0));
-			nodeList.remove(0);
-		}
 		myTree.setRoot(root);
 		if (nodeList.size() > 0)
 			createChildren(root, nodeList);
 		return myTree;
 	}
-	
-	public boolean sanitate(List<String>nodeList){
+
+	public boolean sanitate(List<String> nodeList) {
 		int idxOfMake = nodeList.indexOf("make");
-		if(idxOfMake == 1){
-			if(idxOfMake + 1 < nodeList.size() && checkContainsColon(nodeList.get(idxOfMake)+1)){
+		if (idxOfMake > -1) {
+			if (idxOfMake + 1 < nodeList.size() && checkContainsColon(nodeList.get(idxOfMake) + 1)) {
 				Variable var = new Variable();
 				var.setName(nodeList.get(idxOfMake));
 				myTree.setMyVars(var);
@@ -59,13 +60,13 @@ public class TreeFactory {
 		}
 		return false;
 	}
-	
-	public boolean checkContainsColon(String input){
+
+	public boolean checkContainsColon(String input) {
 		return true;
 	}
 
 	public void createChildren(Node root, List<String> nodeList) throws SLogoException {
-		System.out.println("CREATING "+root.getNumChildren()+" CHILDREN");
+		System.out.println("CREATING " + root.getNumChildren() + " CHILDREN");
 		for (int x = 0; x < root.getNumChildren(); x++) {
 			HashMap<Node, List<String>> childToRemaindersMap = createChild(nodeList);
 			Iterator it = childToRemaindersMap.entrySet().iterator();
@@ -76,7 +77,7 @@ public class TreeFactory {
 			System.out.println("NEW CHILD: " + child + " REMAINDERS: " + nodeList);
 		}
 	}
-	
+
 	public HashMap<Node, List<String>> createChild(List<String> myNodes) throws SLogoException {
 		HashMap<Node, List<String>> childToRemaindersMap = new HashMap<Node, List<String>>();
 		Node child = nodeFactory.createNode(myNodes);

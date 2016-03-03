@@ -28,5 +28,6 @@ public abstract class CommandNode implements Node {
 	public void setNumChildren(int num){
 		NUM_CHILDREN = num;
 	}
-
+	
+	
 }

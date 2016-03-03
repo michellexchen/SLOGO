@@ -22,7 +22,7 @@ public class MakeNode extends CommandNode {
 		 * evaluate runs through the tree which holds the value that will be returned that should be equal to 
 		 * our value after this point
 		 */
-		//makesVar.setValue(); --> the node that gets executed before this should return a value that we now set to
+		//makesVar.setValue(); --> the node that gets executed before this should return a value that we
 		return 0;
 	}
 	

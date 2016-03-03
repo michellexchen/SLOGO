@@ -7,6 +7,7 @@ import java.util.List;
 import Exception.SLogoException;
 import Model.CharacterState;
 import Model.Variable;
+import Model.Workspace;
 
 /**
  * SLogo's CommandTree with access to root and self traversal to evaluate tree
@@ -20,8 +21,8 @@ public class CommandTree {
 	// have access to the list here of variables
 	private List<Variable> myVars = new ArrayList<>();
 
-	public void traverse(CharacterState state) throws SLogoException {
-		root.evaluate(state); // also add the list
+	public void traverse(CharacterState state, Workspace workspace) throws SLogoException {
+		root.evaluate(state, workspace); // also add the list
 	}
 
 	public void setRoot(Node root) {
