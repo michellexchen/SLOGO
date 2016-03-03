@@ -1,7 +1,7 @@
-package CommandNode;
+package commandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.CharacterState;
 
 public class BackwardNode extends TurtleCommandNode {
 	private final static int NUM_CHILDREN = 1;

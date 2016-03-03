@@ -1,13 +1,12 @@
-package CommandNode;
+package commandNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.Variable;
-import Model.Workspace;
+import exception.SLogoException;
+import model.CharacterState;
+import model.Variable;
+import model.Workspace;
 
 /**
  * SLogo's CommandTree with access to root and self traversal to evaluate tree

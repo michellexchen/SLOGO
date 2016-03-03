@@ -1,6 +1,6 @@
-package CommandNode;
+package commandNode;
 
-import Model.CharacterState;
+import model.CharacterState;
 
 /**
  * SLogo's NumericNode, a class representing a numerical value (evaluate returns

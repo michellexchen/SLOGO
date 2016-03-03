@@ -1,10 +1,10 @@
-package CommandNode;
+package commandNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.CharacterState;
 
 public class LogarithmNode extends CommandNode{
 	

@@ -1,13 +1,12 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import CommandNode.DisplayData;
-import CommandNode.Position;
-import Exception.SLogoException;
-import Model.Model;
+import commandNode.DisplayData;
+import commandNode.Position;
+import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import model.Model;
 
 public class Visualizer implements Observer {
 	

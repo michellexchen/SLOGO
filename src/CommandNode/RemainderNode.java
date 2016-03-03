@@ -1,7 +1,7 @@
-package CommandNode;
+package commandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.CharacterState;
 
 public class RemainderNode extends CommandNode{
 	private int NUM_CHILDREN = 2;

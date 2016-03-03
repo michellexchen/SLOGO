@@ -1,13 +1,13 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.Observer;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import Exception.SLogoException;
-import Model.Model;
-import Model.Workspace;
+import model.Model;
+import model.Workspace;
+import exception.SLogoException;
 
 public class MainView implements View {
 

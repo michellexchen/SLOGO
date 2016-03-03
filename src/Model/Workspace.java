@@ -1,16 +1,16 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CommandNode.CommandTree;
-import CommandNode.DisplayData;
-import CommandNode.TreeFactory;
-import Exception.SLogoException;
-import View.View;
+import commandNode.CommandTree;
+import commandNode.DisplayData;
+import commandNode.TreeFactory;
+import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import view.View;
 
 /**
  * @author Adam

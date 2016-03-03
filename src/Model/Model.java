@@ -1,9 +1,9 @@
-package Model;
+package model;
 
-import CommandNode.DisplayData;
-import Exception.SLogoException;
-import View.View;
+import commandNode.DisplayData;
+import exception.SLogoException;
 import javafx.collections.ObservableList;
+import view.View;
 
 /**
  * Model interface - A contract for View Model in MVC Design Pattern: View can

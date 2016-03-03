@@ -1,8 +1,8 @@
-package CommandNode;
+package commandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.TurtleState;
+import exception.SLogoException;
+import model.CharacterState;
+import model.TurtleState;
 
 public class PenDownNode extends CommandNode{
 	

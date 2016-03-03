@@ -1,16 +1,16 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CommandNode.DisplayData;
-import Controller.LanguageDriver;
-import Exception.SLogoException;
-import View.SLogoPromptBuilder;
-import View.View;
+import commandNode.DisplayData;
+import controller.LanguageDriver;
+import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import view.SLogoPromptBuilder;
+import view.View;
 
 public class MainModel implements Model {
 

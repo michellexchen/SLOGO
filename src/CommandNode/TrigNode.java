@@ -1,4 +1,4 @@
-package CommandNode;
+package commandNode;
 
 public abstract class TrigNode extends CommandNode{
 	

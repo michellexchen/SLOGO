@@ -1,8 +1,8 @@
-package CommandNode;
+package commandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.Turtle;
+import exception.SLogoException;
+import model.CharacterState;
+import model.Turtle;
 
 /**
  * SLogo's TurtleCommandNode, an abstract class representing any Turtle Command that affects a TurtleState (TurtleCommand, Query currently)
