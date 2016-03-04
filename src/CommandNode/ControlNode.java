@@ -1,4 +1,4 @@
-package commandNode;
+package CommandNode;
 
 public interface ControlNode {
 

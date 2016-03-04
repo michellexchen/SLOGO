@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import exception.SLogoException;
+import Exception.SLogoException;
 
 /**
  * SLogo's highest level in File reader hierarchy

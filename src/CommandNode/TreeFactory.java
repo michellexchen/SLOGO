@@ -1,4 +1,4 @@
-package commandNode;
+package CommandNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import exception.SLogoException;
-import model.Variable;
+import Exception.SLogoException;
+import Model.Variable;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates

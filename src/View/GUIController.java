@@ -1,11 +1,12 @@
-package view;
+package View;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import exception.SLogoException;
+import Exception.SLogoException;
+import Model.Model;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,7 +29,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import model.Model;
 
 
 public class GUIController implements Initializable  {

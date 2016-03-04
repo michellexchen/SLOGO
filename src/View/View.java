@@ -1,8 +1,7 @@
-package view;
+package View;
 
 import java.util.Observer;
-
-import model.Workspace;
+import Model.Workspace;
 
 /**
  * View interface - A contract for Model

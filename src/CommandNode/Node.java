@@ -1,9 +1,9 @@
-package commandNode;
+package CommandNode;
 
-import exception.SLogoException;
-import model.CharacterState;
-import model.Variable;
-import model.Workspace;
+import Exception.SLogoException;
+import Model.CharacterState;
+import Model.Variable;
+import Model.Workspace;
 
 /**
  * SLogo's highest level in Node hierarchy

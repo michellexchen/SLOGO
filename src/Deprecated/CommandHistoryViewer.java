@@ -1,4 +1,4 @@
-package deprecated;
+package Deprecated;
 
 import java.util.List;
 import javafx.event.ActionEvent;

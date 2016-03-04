@@ -1,7 +1,7 @@
-package commandNode;
+package CommandNode;
 
-import exception.SLogoException;
-import model.CharacterState;
+import Exception.SLogoException;
+import Model.CharacterState;
 
 public class SetHeadingNode extends TurnNode{
 	private final static int NUM_CHILDREN = 1;

@@ -1,7 +1,7 @@
-package commandNode;
+package CommandNode;
 
-import exception.SLogoException;
-import model.CharacterState;
+import Exception.SLogoException;
+import Model.CharacterState;
 
 public class ToNode extends CommandNode {
 

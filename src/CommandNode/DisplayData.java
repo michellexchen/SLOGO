@@ -1,17 +1,17 @@
 /**
  * 
  */
-package commandNode;
+package CommandNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import Model.CharacterState;
+import Model.TurtleState;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import model.CharacterState;
-import model.TurtleState;
 
 /**
  * @author Hunter

@@ -1,20 +1,20 @@
-package deprecated;
+package Deprecated;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import commandNode.DisplayData;
-import commandNode.Node;
-import exception.SLogoException;
+import CommandNode.DisplayData;
+import CommandNode.Node;
+import Exception.SLogoException;
+import Model.Model;
+import View.GUIController;
+import View.SLogoPromptBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
-import model.Model;
-import view.GUIController;
-import view.SLogoPromptBuilder;
 @Deprecated
 public class WorkspaceView {
 	// private List<Character> myCharacters;

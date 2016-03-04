@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 /**
  * SLogo's Turtle with a TurtleState and name
