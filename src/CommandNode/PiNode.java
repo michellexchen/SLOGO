@@ -3,15 +3,10 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class PiNode extends CommandNode {
-	private int NUM_CHILDREN = 0;
-
-	public PiNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
-
+public class PiNode extends NullaryNode {
+	
 	public double evaluate(CharacterState state) throws SLogoException {
-		return 3.141592653589793238462643383279;
+		return Math.PI;
 	}
 
 }

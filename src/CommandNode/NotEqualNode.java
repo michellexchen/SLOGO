@@ -3,20 +3,10 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class NotEqualNode extends CommandNode{
+public class NotEqualNode extends EqualityNode {
 
-	private int NUM_CHILDREN = 2;
-	
-	public NotEqualNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
-	
 	public double evaluate(CharacterState state) throws SLogoException {
-		double expr1 = getChildren().get(0).evaluate(state);
-		for(int x=1; x<getChildren().size(); x++){
-			if(expr1 == getChildren().get(x).evaluate(state))
-				return 0;
-		}
-		return 1;
+		return isEqual(state) ? 0 : 1;
 	}
+	
 }

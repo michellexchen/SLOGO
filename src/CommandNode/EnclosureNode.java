@@ -7,20 +7,14 @@ import Model.CharacterState;
 import Model.Workspace;
 import javafx.util.Pair;
 
-public class EnclosureNode extends CommandNode {
+public class EnclosureNode extends UnaryNode {
 
-	private int NUM_CHILDREN = 0;
 	private String bracketContent;
 	private Workspace ws;
 	private Parser parser;
 
-	public EnclosureNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
-
 	public void setBracketContent(String content){
 		String removedBrackets = content.substring(1, content.length() - 1);
-		System.out.println(removedBrackets);
 		String trimmedWhiteSpace = removedBrackets.trim();
 		bracketContent = trimmedWhiteSpace;
 		System.out.println("BRACKET CONTENT: "+bracketContent);

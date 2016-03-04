@@ -3,12 +3,7 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class ForwardNode extends TurtleCommandNode {
-	private int NUM_CHILDREN = 1;
-
-	public ForwardNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
+public class ForwardNode extends UnaryNode {
 
 	public double evaluate(CharacterState currentState) throws SLogoException {
 		double[] newCoor = calculateLoc(currentState.getDirection(), currentState);
@@ -22,10 +17,6 @@ public class ForwardNode extends TurtleCommandNode {
 		result[0] = Math.sin(direction) * getChildren().get(0).evaluate(currentState);
 		result[1] = -1*Math.cos(direction) * getChildren().get(0).evaluate(currentState);
 		return result;
-	}
-
-	public String toString() {
-		return "Forward";
 	}
 
 }

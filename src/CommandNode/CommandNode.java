@@ -29,5 +29,4 @@ public abstract class CommandNode implements Node {
 		NUM_CHILDREN = num;
 	}
 	
-	
 }

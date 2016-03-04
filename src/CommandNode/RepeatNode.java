@@ -3,12 +3,7 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class RepeatNode extends CommandNode {
-	private int NUM_CHILDREN = 2;
-	
-	public RepeatNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
+public class RepeatNode extends BinaryNode {
 
 	public double evaluate(CharacterState state) throws SLogoException {
 		int repcount = (int) getChildren().get(0).evaluate(state);

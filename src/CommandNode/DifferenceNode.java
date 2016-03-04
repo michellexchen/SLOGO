@@ -3,18 +3,9 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class DifferenceNode extends CommandNode {
-	private int NUM_CHILDREN = 2;
-
-	public DifferenceNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
+public class DifferenceNode extends BinaryNode {
 
 	public double evaluate(CharacterState state) throws SLogoException {
-		double result = getChildren().get(0).evaluate(state);
-		for (int x = 1; x < getChildren().size(); x++) {
-			result -= getChildren().get(x).evaluate(state);
-		}
-		return result;
+		return getChildren().get(0).evaluate(state) - getChildren().get(1).evaluate(state);
 	}
 }

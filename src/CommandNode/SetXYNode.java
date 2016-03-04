@@ -3,12 +3,7 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class SetXYNode extends TurtleCommandNode {
-	private final static int NUM_CHILDREN = 2;
-	
-	public SetXYNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
+public class SetXYNode extends BinaryNode {
 
 	public double evaluate(CharacterState currentState) throws SLogoException {
 		double distance = calculateDistance(currentState.getXCoor(), currentState.getYCoor(), currentState);
@@ -21,4 +16,5 @@ public class SetXYNode extends TurtleCommandNode {
 		return Math.sqrt(Math.pow(getChildren().get(0).evaluate(state) + 500 - x, 2) //Replace 500 with X midpoint
 				- Math.pow(Math.abs(getChildren().get(1).evaluate(state) - 500) - y, 2)); //Replace 500 with Y midpoint
 	}
+	
 }

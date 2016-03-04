@@ -3,20 +3,10 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class AndNode extends CommandNode {
-
-	private int NUM_CHILDREN = 2;
-
-	public AndNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
+public class AndNode extends BinaryNode {
 
 	public double evaluate(CharacterState state) throws SLogoException {
-		for (int x = 0; x < getChildren().size(); x++) {
-			double expr = getChildren().get(x).evaluate(state);
-			if (expr == 0)
-				return 1;
-		}
-		return 0;
+		return getChildren().get(0).evaluate(state) != 0 && getChildren().get(0).evaluate(state) != 0 ? 1 : 0;
 	}
+	
 }

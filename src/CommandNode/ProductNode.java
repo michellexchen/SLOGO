@@ -3,18 +3,10 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class ProductNode extends CommandNode{
-	private int NUM_CHILDREN = 2;
-
-	public ProductNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
+public class ProductNode extends BinaryNode{
 
 	public double evaluate(CharacterState state) throws SLogoException {
-		double result = 1;
-		for(int x=0; x<getChildren().size(); x++){
-			result *= getChildren().get(x).evaluate(state);
-		}
-		return result;
+		return getChildren().get(0).evaluate(state) * getChildren().get(1).evaluate(state);
 	}
+	
 }

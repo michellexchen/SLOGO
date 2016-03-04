@@ -8,9 +8,8 @@ import Model.CharacterState;
  *
  */
 
-public class NumericNode implements Node {
+public class NumericNode extends UnaryNode {
 
-	private int NUM_CHILDREN = 0;
 	private double myValue;
 
 	public NumericNode(double value) {
@@ -19,14 +18,6 @@ public class NumericNode implements Node {
 
 	public double evaluate(CharacterState state) {
 		return myValue;
-	}
-
-	public int getNumChildren() {
-		return NUM_CHILDREN;
-	}
-	
-	public String toString(){
-		return ""+myValue;
 	}
 
 }

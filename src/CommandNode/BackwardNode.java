@@ -3,8 +3,7 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class BackwardNode extends TurtleCommandNode {
-	private final static int NUM_CHILDREN = 1;
+public class BackwardNode extends UnaryNode {
 
 	public double evaluate(CharacterState currentState) throws SLogoException {
 		double[] newCoor = calculateLoc(currentState.getDirection(), currentState);
@@ -20,7 +19,4 @@ public class BackwardNode extends TurtleCommandNode {
 		return result;
 	}
 
-	public int getNumChildren() {
-		return NUM_CHILDREN;
-	}
 }

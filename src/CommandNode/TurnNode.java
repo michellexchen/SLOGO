@@ -3,7 +3,7 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public abstract class TurnNode extends TurtleCommandNode {
+public abstract class TurnNode extends UnaryNode {
 
 	public double evaluate(CharacterState currentState) throws SLogoException {
 		double newDirection = calculateDir(currentState);

@@ -3,18 +3,12 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class MinusNode extends CommandNode {
-	private int NUM_CHILDREN = 1;
+public class MinusNode extends UnaryNode {
 
-	public MinusNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
+	private int SIGN_FLIP = -1;
 
 	public double evaluate(CharacterState state) throws SLogoException {
-		double result = 0;
-		for (int x = 0; x < getChildren().size(); x++) {
-			result += getChildren().get(x).evaluate(state);
-		}
-		return -1 * result;
+		return SIGN_FLIP * getChildren().get(0).evaluate(state);
 	}
+	
 }

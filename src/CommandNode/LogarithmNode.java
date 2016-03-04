@@ -6,14 +6,8 @@ import java.util.HashMap;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class LogarithmNode extends CommandNode{
+public class LogarithmNode extends UnaryNode{
 	
-	private int NUM_CHILDREN = 1;
-	
-	public LogarithmNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
-
 	public double evaluate(CharacterState state) throws SLogoException {
 		double num = getChildren().get(0).evaluate(state);
 		String numToStr = num+"";

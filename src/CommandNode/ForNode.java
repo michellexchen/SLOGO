@@ -2,13 +2,7 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 
-public class ForNode extends CommandNode {
-
-	private int NUM_CHILDREN = 2;
-
-	public ForNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
+public class ForNode extends BinaryNode {
 
 	public double evaluate(CharacterState state) throws SLogoException {
 		// TODO: Error checking
