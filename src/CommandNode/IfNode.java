@@ -5,13 +5,17 @@ import Model.CharacterState;
 
 public class IfNode extends CommandNode {
 
+	private int NUM_CHILDREN = 2;
+	
 	public IfNode() {
-		// TODO Auto-generated constructor stub
+		setNumChildren(NUM_CHILDREN);
 	}
 
-	@Override
 	public double evaluate(CharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
+		double expr = getChildren().get(0).evaluate(state);
+		if(expr != 0){
+			return getChildren().get(1).evaluate(state);
+		}
 		return 0;
 	}
 
