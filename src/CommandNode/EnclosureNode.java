@@ -73,5 +73,9 @@ public class EnclosureNode extends CommandNode {
 			return true;
 		return false;
 	}
+	
+	public String getBracketContent(){
+		return bracketContent;
+	}
 
 }

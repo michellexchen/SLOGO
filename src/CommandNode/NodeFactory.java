@@ -66,24 +66,29 @@ public class NodeFactory {
 	public List<Node> createChildren(Node root, List<Node> nodeList) throws SLogoException {
 		for (int x = 0; x < root.getNumChildren(); x++) {
 			Pair<Node, List<Node>> childAndRemainderNodes = createChild(nodeList);
-			Node child = childAndRemainderNodes.getKey();
-			nodeList = childAndRemainderNodes.getValue();
-			((CommandNode) root).addChild(child);
+			if(childAndRemainderNodes != null){
+				Node child = childAndRemainderNodes.getKey();
+				nodeList = childAndRemainderNodes.getValue();
+				((CommandNode) root).addChild(child);
+			}
 		}
 		return nodeList;
 	}
 
 	public Pair<Node, List<Node>> createChild(List<Node> myNodes) throws SLogoException {
 		Pair<Node, List<Node>> childAndRemaindersPair = null;
-		Node child = myNodes.get(0);
-		myNodes.remove(0);
-		childAndRemaindersPair = new Pair<Node, List<Node>>(child, myNodes);
-		if (myNodes.size() > 0) {
-			for (int x = 0; x < child.getNumChildren(); x++) {
-				Pair<Node, List<Node>> childChildToRemaindersPair = createChild(myNodes);
-				Node childChild = childChildToRemaindersPair.getKey();
-				myNodes = childChildToRemaindersPair.getValue();
-				((CommandNode) child).addChild(childChild);
+		Node child = null;
+		if(myNodes.size() > 0){
+			child = myNodes.get(0);
+			myNodes.remove(0);
+			childAndRemaindersPair = new Pair<Node, List<Node>>(child, myNodes);
+			if (myNodes.size() > 0) {
+				for (int x = 0; x < child.getNumChildren(); x++) {
+					Pair<Node, List<Node>> childChildToRemaindersPair = createChild(myNodes);
+					Node childChild = childChildToRemaindersPair.getKey();
+					myNodes = childChildToRemaindersPair.getValue();
+					((CommandNode) child).addChild(childChild);
+				}
 			}
 		}
 		return childAndRemaindersPair;
