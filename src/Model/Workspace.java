@@ -119,6 +119,7 @@ public class Workspace {
 			Map.Entry pair = (Map.Entry) it.next();
 			CommandTree myTree = (CommandTree) pair.getKey();
 			nodeList = (List<Node>) pair.getValue();
+			traverse(myTree);
 		}
 	}
 
