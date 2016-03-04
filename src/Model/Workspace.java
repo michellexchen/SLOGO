@@ -2,11 +2,16 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import CommandNode.CommandTree;
 import CommandNode.DisplayData;
+import CommandNode.Node;
 import CommandNode.TreeFactory;
+import Controller.Parser;
 import Exception.SLogoException;
 import View.View;
 import javafx.collections.FXCollections;
@@ -33,7 +38,7 @@ public class Workspace {
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<Variable> myObservableVariableList;
 
-	public Workspace(View view) {
+	public Workspace(View view) throws SLogoException {
 		myView = view;
 
 		myDataList = new ArrayList<DisplayData>();
@@ -105,33 +110,44 @@ public class Workspace {
 	}
 
 	public void readCommand(String command) throws SLogoException {
-//		format(command);
-		CommandTree myTree = myTreeFactory.makeTree(command);
+		//		format(command);
+		Parser parser = new Parser();
+		List<Node> nodeList = parser.parse(command);
+		while(nodeList.size() > 0){
+			HashMap<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
+			Iterator it = tuple.entrySet().iterator();
+			Map.Entry pair = (Map.Entry) it.next();
+			CommandTree myTree = (CommandTree) pair.getKey();
+			nodeList = (List<Node>) pair.getValue();
+		}
+	}
+
+	public void traverse(CommandTree myTree) throws SLogoException{
 		for (Character character : myCharacters) {
 			myTree.traverse(character.getState(), myTree);
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
 		}
 	}
-	
+
 	public void format(String command){
 		checkForVars(command.split(" "));
 	}
-	
+
 	public void checkForVars(String[] command){
-		
+
 		for(int i = 0; i < command.length; i++){
 			if(command[i].equals("make")){
 				Variable var = new Variable();
 				var.setName(command[i+1]);
-				
+
 				//myTreeFactory.makeTree(text)
 				i++; //skip checking my next input as it's been checked right now
 			}
 		}
 	}
-	
+
 	public void addToVarList(Variable var){
-		
+
 	}
 
 	/**

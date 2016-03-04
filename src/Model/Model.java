@@ -20,7 +20,7 @@ public interface Model {
 
 	public void createBackend();
 
-	public void createNewWorkspace();
+	public void createNewWorkspace() throws SLogoException;
 
 	public Workspace getCurrentWorkspace();
 

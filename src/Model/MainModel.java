@@ -41,7 +41,7 @@ public class MainModel implements Model {
 		}
 	}
 	
-	public void initialize() {	
+	public void initialize() throws SLogoException {	
 		createNewWorkspace();
 	}
 	
@@ -105,9 +105,10 @@ public class MainModel implements Model {
 	
 	/**
 	 * Create a new workspace and set it as current workspace
+	 * @throws SLogoException 
 	 */
 	@Override
-	public void createNewWorkspace() {
+	public void createNewWorkspace() throws SLogoException {
 		// TODO Auto-generated method stub
 		Workspace myWorkspace = new Workspace(getView());
 		setCurrentWorkspace(myWorkspace);
