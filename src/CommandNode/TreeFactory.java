@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import Exception.SLogoException;
 import Model.Variable;
+import javafx.util.Pair;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates
@@ -31,7 +32,7 @@ public class TreeFactory {
 		myTree = new CommandTree();
 	}
 
-	public HashMap<CommandTree, List<Node>> makeTree(List<Node> nodeList) throws SLogoException {
+	public Pair<CommandTree, List<Node>> makeTree(List<Node> nodeList) throws SLogoException {
 //		if (sanitate(nodeList)) {
 //			root.addVarParam(nodeList.get(1));
 //			nodeList.remove(1);
@@ -47,8 +48,7 @@ public class TreeFactory {
 		List<Node> remainingNodes = new ArrayList<Node>();
 		if (nodeList.size() > 0)
 			remainingNodes = nf.createChildren(root, nodeList);
-		HashMap<CommandTree, List<Node>> tuple = new HashMap<CommandTree, List<Node>>();
-		tuple.put(myTree, remainingNodes);
+		Pair<CommandTree, List<Node>> tuple = new Pair<CommandTree, List<Node>>(myTree, remainingNodes);
 		return tuple;
 	}
 

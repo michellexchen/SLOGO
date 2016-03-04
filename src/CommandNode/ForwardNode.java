@@ -20,7 +20,7 @@ public class ForwardNode extends TurtleCommandNode {
 	private double[] calculateLoc(double direction, CharacterState currentState) throws SLogoException {
 		double[] result = new double[2];
 		result[0] = Math.sin(direction) * getChildren().get(0).evaluate(currentState);
-		result[1] = Math.cos(direction) * getChildren().get(0).evaluate(currentState);
+		result[1] = -1*Math.cos(direction) * getChildren().get(0).evaluate(currentState);
 		return result;
 	}
 

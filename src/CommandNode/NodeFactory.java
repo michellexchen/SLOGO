@@ -8,6 +8,8 @@ import java.util.Map;
 import Controller.CommandDriver;
 import Controller.LanguageDriver;
 import Exception.SLogoException;
+import Model.Workspace;
+import javafx.util.Pair;
 
 /**
  * SLogo's Node Factory that creates and returns root node with subnodes
@@ -53,42 +55,65 @@ public class NodeFactory {
 	public void sanitate(List<String>nodeList){
 		int idxOfMake = nodeList.indexOf("make");
 		if(idxOfMake > 0){
-			
+
 		}
 	}
 
 	private boolean isNumeric(String s) {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
-	
+
 	public List<Node> createChildren(Node root, List<Node> nodeList) throws SLogoException {
 		for (int x = 0; x < root.getNumChildren(); x++) {
-			HashMap<Node, List<Node>> childToRemaindersMap = createChild(nodeList);
-			Iterator it = childToRemaindersMap.entrySet().iterator();
-			Map.Entry pair = (Map.Entry) it.next();
-			Node child = (Node) pair.getKey();
-			nodeList = (List<Node>) pair.getValue();
+			Pair<Node, List<Node>> childAndRemainderNodes = createChild(nodeList);
+			Node child = childAndRemainderNodes.getKey();
+			nodeList = childAndRemainderNodes.getValue();
 			((CommandNode) root).addChild(child);
-			System.out.println("NEW CHILD: " + child + " REMAINDERS: " + nodeList);
 		}
 		return nodeList;
 	}
 
-	public HashMap<Node, List<Node>> createChild(List<Node> myNodes) throws SLogoException {
-		HashMap<Node, List<Node>> childToRemaindersMap = new HashMap<Node, List<Node>>();
+	public Pair<Node, List<Node>> createChild(List<Node> myNodes) throws SLogoException {
+		Pair<Node, List<Node>> childAndRemaindersPair = null;
 		Node child = myNodes.get(0);
 		myNodes.remove(0);
-		childToRemaindersMap.put(child, myNodes);
+		childAndRemaindersPair = new Pair<Node, List<Node>>(child, myNodes);
 		if (myNodes.size() > 0) {
 			for (int x = 0; x < child.getNumChildren(); x++) {
-				HashMap<Node, List<Node>> childChildToRemaindersMap = createChild(myNodes);
-				Iterator it = childChildToRemaindersMap.entrySet().iterator();
-				Map.Entry pair = (Map.Entry) it.next();
-				Node childChild = (Node) pair.getKey();
-				myNodes = (List<Node>) pair.getValue();
+				Pair<Node, List<Node>> childChildToRemaindersPair = createChild(myNodes);
+				Node childChild = childChildToRemaindersPair.getKey();
+				myNodes = childChildToRemaindersPair.getValue();
 				((CommandNode) child).addChild(childChild);
 			}
 		}
-		return childToRemaindersMap;
+		return childAndRemaindersPair;
+	}
+
+	public EnclosureNode createEnclosureNode(int enclosureStart, int enclosureEnd, List<String> nodeTextList, Workspace ws){
+		String enclosureContent = "";
+		System.out.println(nodeTextList+" "+enclosureStart+" "+enclosureEnd);
+		for(int x=enclosureStart; x<=enclosureEnd; x++){
+			String currNode = nodeTextList.get(x);
+			if(x!=enclosureEnd)
+				enclosureContent += currNode+" ";
+			else
+				enclosureContent += currNode;
+		}
+		EnclosureNode en = new EnclosureNode();
+		en.setBracketContent(enclosureContent);
+		en.setWorkspace(ws);
+		return en;
+	}
+
+	public boolean isOpenEnclosure(String node){
+		if(node.equals("(") || node.equals("["))
+			return true;
+		return false;
+	}
+
+	public boolean isClosedEnclosure(String node){
+		if(node.equals(")") || node.equals("]"))
+			return true;
+		return false;
 	}
 }

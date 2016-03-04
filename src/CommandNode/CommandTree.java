@@ -21,14 +21,16 @@ public class CommandTree {
 	// have access to the list here of variables
 	private List<Variable> myVars = new ArrayList<>();
 
-	public void traverse(CharacterState state, CommandTree tree) throws SLogoException {
+	public double traverse(CharacterState state, CommandTree tree) throws SLogoException {
+		double evaluation = 0;
 		if(root.grabType().equals("Control")){
-			double val = root.evaluate(state, tree);
+			evaluation = root.evaluate(state, tree);
 			//grab the last added variable from our var list and set's the value mapped to the key 
-			myVars.get(myVars.size()-1).setValue(val);
+			myVars.get(myVars.size()-1).setValue(evaluation);
 		} else {
-			root.evaluate(state); // also add the list
+			evaluation = root.evaluate(state); // also add the list
 		}
+		return evaluation;
 	}
 
 	public void setRoot(Node root) {

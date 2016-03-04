@@ -17,6 +17,7 @@ import View.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 
 /**
  * @author Adam
@@ -109,25 +110,28 @@ public class Workspace {
 		myDataList.add(displayData);
 	}
 
-	public void readCommand(String command) throws SLogoException {
+	public double readCommand(String command) throws SLogoException {
 		//		format(command);
-		Parser parser = new Parser();
+		Parser parser = new Parser(this);
 		List<Node> nodeList = parser.parse(command);
+		double evaluation = 0;
 		while(nodeList.size() > 0){
-			HashMap<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
-			Iterator it = tuple.entrySet().iterator();
-			Map.Entry pair = (Map.Entry) it.next();
-			CommandTree myTree = (CommandTree) pair.getKey();
-			nodeList = (List<Node>) pair.getValue();
-			traverse(myTree);
+			Pair<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
+			CommandTree myTree = tuple.getKey();
+			nodeList = tuple.getValue();
+			evaluation = traverse(myTree);
 		}
+		return evaluation;
 	}
 
-	public void traverse(CommandTree myTree) throws SLogoException{
+	public double traverse(CommandTree myTree) throws SLogoException{
+		double evaluation = 0;
 		for (Character character : myCharacters) {
-			myTree.traverse(character.getState(), myTree);
+			evaluation = myTree.traverse(character.getState(), myTree);
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
 		}
+		System.out.println("Evaluation: " + evaluation);
+		return evaluation;
 	}
 
 	public void format(String command){
