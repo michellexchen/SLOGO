@@ -4,15 +4,19 @@ import Exception.SLogoException;
 import Model.CharacterState;
 
 public class RepeatNode extends CommandNode {
-
+	private int NUM_CHILDREN = 2;
+	
 	public RepeatNode() {
-		// TODO Auto-generated constructor stub
+		setNumChildren(NUM_CHILDREN);
 	}
 
-	@Override
 	public double evaluate(CharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
-		return 0;
+		int repcount = (int) getChildren().get(0).evaluate(state);
+		double evaluation = 0;
+		for(int x=0; x<repcount; x++){
+			evaluation += getChildren().get(1).evaluate(state);
+		}
+		return evaluation;
 	}
 
 }
