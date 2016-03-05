@@ -48,28 +48,21 @@ public class NodeFactory {
 		return node;
 	}
 
-	public void sanitate(List<String>nodeList){
-		int idxOfMake = nodeList.indexOf("make");
-		if(idxOfMake > 0){
-
-		}
-	}
-
 	private boolean isNumeric(String s) {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
 
-	public List<Node> createChildren(Node root, List<Node> nodeList) throws SLogoException {
-		for (int x = 0; x < root.getNumChildren(); x++) {
-			Pair<Node, List<Node>> childAndRemainderNodes = createChild(nodeList);
-			if(childAndRemainderNodes != null){
-				Node child = childAndRemainderNodes.getKey();
-				nodeList = childAndRemainderNodes.getValue();
-				((CommandNode) root).addChild(child);
-			}
-		}
-		return nodeList;
-	}
+//	public List<Node> createChildren(Node root, List<String> nodeList) throws SLogoException {
+//		for (int x = 0; x < root.getNumChildren(); x++) {
+//			Pair<Node, List<Node>> childAndRemainderNodes = createChild(nodeList);
+//			if(childAndRemainderNodes != null){
+//				Node child = childAndRemainderNodes.getKey();
+//				nodeList = childAndRemainderNodes.getValue();
+//				((CommandNode) root).addChild(child);
+//			}
+//		}
+//		return nodeList;
+//	}
 
 	public Pair<Node, List<Node>> createChild(List<Node> myNodes) throws SLogoException {
 		Pair<Node, List<Node>> childAndRemaindersPair = null;

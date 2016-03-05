@@ -25,11 +25,12 @@ public class EnclosureNode extends UnaryNode {
 	}
 
 	public double evaluate(CharacterState state) throws SLogoException {
-		parser = new Parser(ws);
-		List<String> nodeTextList = parser.createNodeTextList(bracketContent);
-		checkInnerEnclosures(nodeTextList, state);
-		bracketContent = reformat(nodeTextList);
-		return ws.readCommand(bracketContent);
+//		parser = new Parser(ws);
+//		List<String> nodeTextList = parser.createNodeTextList(bracketContent);
+//		checkInnerEnclosures(nodeTextList, state);
+//		bracketContent = reformat(nodeTextList);
+//		return ws.readCommand(bracketContent);
+		return 0;
 	}
 	
 	public String reformat(List<String> nodeTextList){

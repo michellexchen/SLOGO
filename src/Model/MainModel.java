@@ -60,6 +60,7 @@ public class MainModel implements Model {
 	
 	public void readCommand(String command) throws SLogoException {
 		setCommand(command);
+		//this calls readCommand for the current workspace--> interprets input, creates tree, and evaluates the tree
 		myCurrentWorkspace.readCommand(command);
 	}
 

@@ -38,7 +38,7 @@ public class Workspace {
 	private ObservableList<DisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<Variable> myObservableVariableList;
-
+	
 	public Workspace(View view) throws SLogoException {
 		myView = view;
 
@@ -49,6 +49,10 @@ public class Workspace {
 
 		myCharacters = new ArrayList<Character>();
 		myTreeFactory = new TreeFactory();
+	}
+	
+	public ObservableList<Variable> getVarList(){
+		return myObservableVariableList;
 	}
 
 	public void initialize() {
@@ -110,49 +114,38 @@ public class Workspace {
 		myDataList.add(displayData);
 	}
 
-	public double readCommand(String command) throws SLogoException {
+	public void readCommand(String command) throws SLogoException {
 		//		format(command);
-		Parser parser = new Parser(this);
-		List<Node> nodeList = parser.parse(command);
-		double evaluation = 0;
-		while(nodeList.size() > 0){
-			Pair<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
-			CommandTree myTree = tuple.getKey();
-			nodeList = tuple.getValue();
-			evaluation = traverse(myTree);
-		}
-		return evaluation;
+		Parser parse = new Parser(this, command);
+		evaluateCommands(parse);
+//		List<Node> nodeList = parser.parse(command);
+//		while(nodeList.size() > 0){
+//			Pair<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
+//			CommandTree myTree = tuple.getKey();
+//			nodeList = tuple.getValue();
+//		}
 	}
 
+	public void evaluateCommands(Parser parse) throws SLogoException{
+		for (Character character : myCharacters) {
+			parse.executeCommandForChar(character);
+			//evaluation = myTree.traverse(character.getState());
+			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
+		}
+	}
+	
 	public double traverse(CommandTree myTree) throws SLogoException{
 		double evaluation = 0;
 		for (Character character : myCharacters) {
-			evaluation = myTree.traverse(character.getState(), myTree);
+			evaluation = myTree.traverse(character.getState());
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
 		}
 		System.out.println("Evaluation: " + evaluation);
 		return evaluation;
 	}
 
-	public void format(String command){
-		checkForVars(command.split(" "));
-	}
-
-	public void checkForVars(String[] command){
-
-		for(int i = 0; i < command.length; i++){
-			if(command[i].equals("make")){
-				Variable var = new Variable();
-				var.setName(command[i+1]);
-
-				//myTreeFactory.makeTree(text)
-				i++; //skip checking my next input as it's been checked right now
-			}
-		}
-	}
-
 	public void addToVarList(Variable var){
-
+		myObservableVariableList.add(var);
 	}
 
 	/**

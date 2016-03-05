@@ -26,12 +26,32 @@ public class TreeFactory {
 
 	private NodeFactory nf;
 	private CommandTree myTree;
+	private Node root;
 	
 	public TreeFactory() throws SLogoException{
 		nf = new NodeFactory();
 		myTree = new CommandTree();
 	}
+	
+	public CommandTree createTree(List<String> nodeList) throws SLogoException{
+		root = nf.createNode(nodeList.get(0));
+		myTree.setRoot(root);
+		nodeList.remove(0);
+		createStructure(nodeList, root); //now root will have the whole structure attached to it
+		return myTree;
+	}
 
+	private void createStructure(List<String> nodeList, Node root) throws SLogoException {
+		if(nodeList.isEmpty()) return;
+		for(int i = 0;  i < root.getNumChildren(); i++){
+			Node curr = nf.createNode(nodeList.get(0));
+			nodeList.remove(0);
+			root.addChild(curr);
+			createStructure(nodeList, curr);
+		}
+		return;
+	}
+	
 	public Pair<CommandTree, List<Node>> makeTree(List<Node> nodeList) throws SLogoException {
 //		if (sanitate(nodeList)) {
 //			root.addVarParam(nodeList.get(1));
@@ -46,27 +66,10 @@ public class TreeFactory {
 		 */
 		myTree.setRoot(root);
 		List<Node> remainingNodes = new ArrayList<Node>();
-		if (nodeList.size() > 0)
-			remainingNodes = nf.createChildren(root, nodeList);
+//		if (nodeList.size() > 0)
+//			remainingNodes = nf.createChildren(root, nodeList);
 		Pair<CommandTree, List<Node>> tuple = new Pair<CommandTree, List<Node>>(myTree, remainingNodes);
 		return tuple;
-	}
-
-	public boolean sanitate(List<String> nodeList) {
-		int idxOfMake = nodeList.indexOf("make");
-		if (idxOfMake > -1) {
-			if (idxOfMake + 1 < nodeList.size() && checkContainsColon(nodeList.get(idxOfMake) + 1)) {
-				Variable var = new Variable();
-				var.setName(nodeList.get(idxOfMake));
-				myTree.setMyVars(var);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean checkContainsColon(String input) {
-		return true;
 	}
 
 }
