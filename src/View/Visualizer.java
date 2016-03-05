@@ -83,7 +83,7 @@ public class Visualizer implements Observer {
 
 	}
 
-	public void show() throws SLogoException {
+	public void show() {
 		getStage().show();
 	}
 

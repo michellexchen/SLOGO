@@ -42,6 +42,9 @@ public class MainView implements View {
 		myVisualizers.add(myCurrentVisualizer);
 	}
 
+	
+	
+	
 	public void showError(SLogoException e) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Error Dialog");
@@ -134,9 +137,48 @@ public class MainView implements View {
 	}
 	
 	@Override
-	public void switchVisualizer() {
+	public void switchVisualizer (int index) {
 		// TODO Auto-generated method stub
+		getCurrentVisualizer().hide();
+		setCurrentVisualizer(getVisualizers().get(index));
+		getCurrentVisualizer().show();
 		
+	}
+
+	@Override
+	public void addVisualizer() {
+		// TODO Auto-generated method stub
+		Visualizer myNewVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+		getVisualizers().add(myNewVisualizer);
+		setCurrentVisualizer(myNewVisualizer);
+	}
+
+	/**
+	 * @return the myVisualizers
+	 */
+	public List<Visualizer> getVisualizers() {
+		return myVisualizers;
+	}
+
+	/**
+	 * @param myVisualizers the myVisualizers to set
+	 */
+	public void setVisualizers(List<Visualizer> myVisualizers) {
+		this.myVisualizers = myVisualizers;
+	}
+
+//	/**
+//	 * @return the myCurrentVisualizer
+//	 */
+//	public Visualizer getCurrentVisualizer() {
+//		return myCurrentVisualizer;
+//	}
+
+	/**
+	 * @param myCurrentVisualizer the myCurrentVisualizer to set
+	 */
+	public void setCurrentVisualizer(Visualizer myCurrentVisualizer) {
+		this.myCurrentVisualizer = myCurrentVisualizer;
 	}
 
 //	@Override

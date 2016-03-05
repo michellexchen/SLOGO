@@ -17,7 +17,9 @@ public interface View {
 
 	public Visualizer getCurrentVisualizer();
 	
-	public void switchVisualizer();
+	public void addVisualizer();
+	
+	public void switchVisualizer(int index);
 	
 	public void updateDisplayData();
 	
