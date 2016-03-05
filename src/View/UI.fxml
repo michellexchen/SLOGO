@@ -52,22 +52,22 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-        <ScrollPane id="history" fx:id="myCommandHistoryPane" content="$null" layoutX="10.0" layoutY="67.0" prefHeight="381.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
+        <ScrollPane id="history" fx:id="myCommandHistoryPane" content="$null" layoutX="10.0" layoutY="67.0" prefHeight="185.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
         </ScrollPane>
-        <Label alignment="CENTER" layoutX="48.0" layoutY="48.0" prefWidth="128.0" text="Command History">
+        <Label alignment="CENTER" layoutX="40.0" layoutY="50.0" prefWidth="128.0" text="Command History">
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
         </Label>
-        <Label alignment="CENTER" layoutX="682.0" layoutY="14.0" prefWidth="128.0" text="Variables">
+        <Label alignment="CENTER" layoutX="683.0" layoutY="18.0" prefWidth="128.0" text="Variables">
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
         </Label>
-        <Label alignment="CENTER" layoutX="682.0" layoutY="238.0" prefWidth="128.0" text="Custom Commands">
+        <Label alignment="CENTER" layoutX="683.0" layoutY="245.0" prefWidth="128.0" text="Custom Commands">
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
@@ -78,6 +78,16 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
+            <Label alignment="CENTER" layoutX="40.0" layoutY="270.0" prefWidth="128.0" text="Properties">
+               <stylesheets>
+                  <URL value="@style.css" />
+               </stylesheets>
+            </Label>
+            <ScrollPane id="history" fx:id="myPropertyPane" content="$null" layoutX="10.0" layoutY="287.0" prefHeight="168.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
+               <stylesheets>
+                  <URL value="@style.css" />
+               </stylesheets>
+            </ScrollPane>
       </children>
       <stylesheets>
         <URL value="@style.css" />

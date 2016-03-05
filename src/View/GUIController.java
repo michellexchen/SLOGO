@@ -79,12 +79,19 @@ public class GUIController implements Initializable  {
     @FXML
     private ScrollPane myVariablePane;
     
+    //Displays the properties of a turtle
+    @FXML
+    private ScrollPane myPropertyPane;
+    
     //Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
     @FXML
     private Button myCustomizeButton;
     
     @FXML
     private List<String> myHistory;
+    
+
+    
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
