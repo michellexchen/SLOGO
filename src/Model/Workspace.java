@@ -116,7 +116,7 @@ public class Workspace {
 
 	public double readCommand(String command) throws SLogoException {
 		//		format(command);
-		Parser parser = new Parser(this);
+		Parser parser = new Parser();
 		List<Node> nodeList = parser.parse(command);
 		double evaluation = 0;
 		while(nodeList.size() > 0){

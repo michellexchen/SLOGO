@@ -3,8 +3,8 @@ import java.util.List;
 
 import Controller.CommandDriver;
 import Controller.LanguageDriver;
+import Controller.NormalCommandDriver;
 import Exception.SLogoException;
-import Model.Workspace;
 import javafx.util.Pair;
 
 /**
@@ -20,13 +20,12 @@ public class NodeFactory {
 	private LanguageDriver langDriver = new LanguageDriver();
 
 	public NodeFactory() throws SLogoException {
-		CommandsDriver = new CommandDriver();
+		CommandsDriver = new NormalCommandDriver();
 		langDriver = new LanguageDriver();
 		langDriver.load("English"); // To remove
 	}
 
 	public Node createNode(String strNode) throws SLogoException {
-		//sanitate(nodeList);
 		Node node = null;
 		if (!langDriver.getLanguage().equals("English")) {
 			// englishCommand = langDriver.getTranslation(myNode);
@@ -44,15 +43,7 @@ public class NodeFactory {
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new SLogoException("Command " + commandName + " is not yet implemented");
 			}
-		System.out.println("NODE CREATED " + node.toString());
 		return node;
-	}
-
-	public void sanitate(List<String>nodeList){
-		int idxOfMake = nodeList.indexOf("make");
-		if(idxOfMake > 0){
-
-		}
 	}
 
 	private boolean isNumeric(String s) {
@@ -90,31 +81,4 @@ public class NodeFactory {
 		return childAndRemaindersPair;
 	}
 
-	public EnclosureNode createEnclosureNode(int enclosureStart, int enclosureEnd, List<String> nodeTextList, Workspace ws){
-		String enclosureContent = "";
-		System.out.println(nodeTextList+" "+enclosureStart+" "+enclosureEnd);
-		for(int x=enclosureStart; x<=enclosureEnd; x++){
-			String currNode = nodeTextList.get(x);
-			if(x!=enclosureEnd)
-				enclosureContent += currNode+" ";
-			else
-				enclosureContent += currNode;
-		}
-		EnclosureNode en = new EnclosureNode();
-		en.setBracketContent(enclosureContent);
-		en.setWorkspace(ws);
-		return en;
-	}
-
-	public boolean isOpenEnclosure(String node){
-		if(node.equals("(") || node.equals("["))
-			return true;
-		return false;
-	}
-
-	public boolean isClosedEnclosure(String node){
-		if(node.equals(")") || node.equals("]"))
-			return true;
-		return false;
-	}
 }
