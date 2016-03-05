@@ -67,7 +67,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Label>
-        <Label alignment="CENTER" layoutX="683.0" layoutY="245.0" prefWidth="128.0" text="Custom Commands">
+        <Label alignment="CENTER" layoutX="682.0" layoutY="244.0" prefWidth="128.0" text="Custom Commands">
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
@@ -78,12 +78,12 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-            <Label alignment="CENTER" layoutX="40.0" layoutY="270.0" prefWidth="128.0" text="Properties">
+            <Label alignment="CENTER" layoutX="40.0" layoutY="261.0" prefWidth="128.0" text="Properties">
                <stylesheets>
                   <URL value="@style.css" />
                </stylesheets>
             </Label>
-            <ScrollPane id="history" fx:id="myPropertyPane" content="$null" layoutX="10.0" layoutY="287.0" prefHeight="168.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
+            <ScrollPane id="history" fx:id="myPropertyPane" content="$null" layoutX="10.0" layoutY="279.0" prefHeight="176.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
                <stylesheets>
                   <URL value="@style.css" />
                </stylesheets>

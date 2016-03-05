@@ -20,9 +20,13 @@ import javafx.stage.Stage;
 
 public class Visualizer implements Observer {
 	
-	private static final String TURTLE_IMAGE_PATH = "file:resources/turtle_images/";
-	private static final String TURTLE_IMAGE = "turtle_1.png";
-	private static final int TURTLE_SIZE = 20;
+	private static final String IMAGE_PATH = "file:resources/myTurtleImages/";
+	private static final int PANE_SIZE = 440;
+//	private String myTurtleImage = "turtle_1.png";
+//	private int myTurtleSize = 20;
+	
+	private String myTurtleImage = "turtle_2.png";
+	private int myTurtleSize = 20;
 	
 	private ObservableList<DisplayData> myObservableDataList;
 	
@@ -83,7 +87,8 @@ public class Visualizer implements Observer {
 		getStage().show();
 	}
 
-	public void hide() {
+	public void hide () {
+		this.getStage().hide();
 
 	}
 
@@ -171,7 +176,7 @@ public class Visualizer implements Observer {
 	}
 	
 	public void placeTurtle(DisplayData displaydata) {
-        Image image = new Image(TURTLE_IMAGE_PATH + TURTLE_IMAGE);
+        Image image = new Image(IMAGE_PATH + myTurtleImage);
         
 		ImageView turtle = new ImageView();
 		turtle.setImage(image);
@@ -184,7 +189,7 @@ public class Visualizer implements Observer {
 		});
 
 		//turtle resize
-		turtle.setFitWidth(TURTLE_SIZE);
+		turtle.setFitWidth(myTurtleSize);
 		turtle.setPreserveRatio(true);
 		turtle.setSmooth(true);
 		turtle.setCache(true);
@@ -193,8 +198,8 @@ public class Visualizer implements Observer {
 		turtle.setRotate(displaydata.getAngle());
 		
 		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getPosition().xCurrent() - TURTLE_SIZE / 2);
-		turtle.setLayoutY(displaydata.getPosition().yCurrent() - TURTLE_SIZE / 2);
+		turtle.setLayoutX(displaydata.getPosition().xCurrent() - myTurtleSize / 2);
+		turtle.setLayoutY(displaydata.getPosition().yCurrent() - myTurtleSize / 2);
 		
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
@@ -209,6 +214,9 @@ public class Visualizer implements Observer {
 		
 	}
 	
+//	public void hide () {
+//		this.getStage().hide();
+//	}
 	
 	
 	
@@ -491,25 +499,25 @@ public class Visualizer implements Observer {
 		this.myCanvasColor = myCanvasColor;
 	}
 
+//	/**
+//	 * @return the myTurtleImagePath
+//	 */
+//	public static String getmyTurtleImagePath() {
+//		return myTurtleImage_PATH;
+//	}
+
 	/**
-	 * @return the turtleImagePath
+	 * @return the myTurtleImage
 	 */
-	public static String getTurtleImagePath() {
-		return TURTLE_IMAGE_PATH;
+	public String getmyTurtleImage() {
+		return myTurtleImage;
 	}
 
 	/**
-	 * @return the turtleImage
+	 * @return the myTurtleSize
 	 */
-	public static String getTurtleImage() {
-		return TURTLE_IMAGE;
-	}
-
-	/**
-	 * @return the turtleSize
-	 */
-	public static int getTurtleSize() {
-		return TURTLE_SIZE;
+	public int getmyTurtleSize() {
+		return myTurtleSize;
 	}
 
 	/**
@@ -524,5 +532,33 @@ public class Visualizer implements Observer {
 	 */
 	public void setMyPromptBuilder(SLogoPromptBuilder myPromptBuilder) {
 		this.myPromptBuilder = myPromptBuilder;
+	}
+
+	/**
+	 * @return the myTurtleImage
+	 */
+	public String getMyTurtleImage() {
+		return myTurtleImage;
+	}
+
+	/**
+	 * @param myTurtleImage the myTurtleImage to set
+	 */
+	public void setMyTurtleImage(String myTurtleImage) {
+		this.myTurtleImage = myTurtleImage;
+	}
+
+	/**
+	 * @return the myTurtleSize
+	 */
+	public int getMyTurtleSize() {
+		return myTurtleSize;
+	}
+
+	/**
+	 * @param myTurtleSize the myTurtleSize to set
+	 */
+	public void setMyTurtleSize(int myTurtleSize) {
+		this.myTurtleSize = myTurtleSize;
 	}
 }
