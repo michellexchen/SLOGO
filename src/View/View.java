@@ -1,6 +1,9 @@
 package View;
 
+import java.io.IOException;
 import java.util.Observer;
+
+import Exception.SLogoException;
 import Model.Workspace;
 
 /**
@@ -17,7 +20,7 @@ public interface View {
 
 	public Visualizer getCurrentVisualizer();
 	
-	public void addVisualizer();
+	public void AddVisualizer() throws SLogoException, IOException;
 	
 	public void switchVisualizer(int index);
 	

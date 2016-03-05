@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+
 import CommandNode.DisplayData;
 import Exception.SLogoException;
 import View.View;
@@ -20,7 +22,7 @@ public interface Model {
 
 	public void createBackend();
 
-	public void createNewWorkspace() throws SLogoException;
+	public void AddWorkspace() throws SLogoException, IOException;
 
 	public Workspace getCurrentWorkspace();
 

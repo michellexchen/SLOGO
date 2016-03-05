@@ -88,7 +88,7 @@ public class Visualizer implements Observer {
 	}
 
 	public void hide () {
-		this.getStage().hide();
+		getStage().hide();
 
 	}
 

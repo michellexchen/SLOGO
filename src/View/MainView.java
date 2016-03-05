@@ -146,11 +146,30 @@ public class MainView implements View {
 	}
 
 	@Override
-	public void addVisualizer() {
+	public void AddVisualizer() throws SLogoException, IOException {
 		// TODO Auto-generated method stub
 		Visualizer myNewVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
 		getVisualizers().add(myNewVisualizer);
 		setCurrentVisualizer(myNewVisualizer);
+		
+		myNewVisualizer.initialize();
+
+//		// initialize this new visualizer
+//		try {
+//		} catch (SLogoException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			/*
+//			 * 
+//			 * NEED ERROR SHOWING MECHANISM
+//			 * 
+//			 */
+//		}
+		// show this new visualizer
+		//myNewVisualizer.show();
 	}
 
 	/**

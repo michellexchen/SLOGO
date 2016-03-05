@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,17 +108,33 @@ public class MainModel implements Model {
 	 * Create a new workspace and set it as current workspace
 	 * @throws SLogoException 
 	 */
-	@Override
+//	@Override
 	public void createNewWorkspace() throws SLogoException {
 		// TODO Auto-generated method stub
+		
+		
 		Workspace myWorkspace = new Workspace(getView());
 		setCurrentWorkspace(myWorkspace);
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
+		
 	}
 
-
+	@Override
+	public void AddWorkspace() throws SLogoException, IOException {
+		// TODO Auto-generated method stub
+		//Need to get View to create a new Visualizer for this workspace
+		getView().AddVisualizer();
+		
+		createNewWorkspace();
+		
+//		System.out.println("HAHAHA:");
+		getView().getCurrentVisualizer().show();
+		//FIX THE DEPENDENCY
+	}
+	
+	
 	/**
 	 * @return the myCurrentWorkspace
 	 */
@@ -160,4 +177,6 @@ public class MainModel implements Model {
 	public void setMyLanguageDriver(LanguageDriver myLanguageDriver) {
 		this.myLanguageDriver = myLanguageDriver;
 	}
+
+
 }

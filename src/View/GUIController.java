@@ -127,8 +127,15 @@ public class GUIController implements Initializable  {
         	//Hide current stage
         	Stage currentStage = (Stage)myAddWorkspaceButton.getScene().getWindow();
         	currentStage.hide();
-        	//Get Model to create a new workspace and switch into it
         	
+        	//Get Model to create a new workspace and switch into it
+        	try {
+				getModel().AddWorkspace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace(); 
+				//GET RID OF THIS
+			}
         });
     }
         
