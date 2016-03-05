@@ -55,8 +55,9 @@ public class Workspace {
 		createTurtle();
 	}
 
-	private void createObservableLists(List<DisplayData> datalist, List<String> commandhistory,
-			List<Variable> variablelist) {
+	private void createObservableLists(List<DisplayData> datalist, 
+									   List<String> commandhistory,
+									   List<Variable> variablelist) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
 		myObservableVariableList = FXCollections.observableArrayList(variablelist);
@@ -65,11 +66,14 @@ public class Workspace {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
-		getObservableDataList().addListener((ListChangeListener) change -> getView().updateDisplayData());
+		getObservableDataList().addListener((ListChangeListener) 
+				change -> getView().updateDisplayData());
 
-		getObservableCommandHistory().addListener((ListChangeListener) change -> getView().updateCommandHistory());
+		getObservableCommandHistory().addListener((ListChangeListener) 
+				change -> getView().updateCommandHistory());
 
-		getObservableCommandHistory().addListener((ListChangeListener) change -> getView().updateVariables());
+		getObservableCommandHistory().addListener((ListChangeListener) 
+				change -> getView().updateVariables());
 	}
 
 	public void createTurtle() {
@@ -128,7 +132,8 @@ public class Workspace {
 		double evaluation = 0;
 		for (Character character : myCharacters) {
 			evaluation = myTree.traverse(character.getState(), myTree);
-			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
+			getObservableDataList().get(myCharacters.indexOf(character))
+								   .updateData(character.getState());
 		}
 		System.out.println("Evaluation: " + evaluation);
 		return evaluation;

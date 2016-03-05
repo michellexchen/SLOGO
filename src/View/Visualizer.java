@@ -20,13 +20,13 @@ import javafx.stage.Stage;
 
 public class Visualizer implements Observer {
 	
-	private static final String IMAGE_PATH = "file:resources/myTurtleImages/";
+	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
 //	private String myTurtleImage = "turtle_1.png";
 //	private int myTurtleSize = 20;
 	
-	private String myTurtleImage = "turtle_2.png";
-	private int myTurtleSize = 20;
+	private String myTurtleImage = "turtle_4.png";
+	private int myTurtleSize = 40;
 	
 	private ObservableList<DisplayData> myObservableDataList;
 	
@@ -183,9 +183,11 @@ public class Visualizer implements Observer {
 		
 		//assign click action - change the action to change attributes
 		turtle.setOnMouseClicked(e -> {
+//			System.out.println("I am clicked");
 			turtle.setFitWidth(120);
 			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
 			turtle.setLayoutY(displaydata.getPosition().yCurrent() - 120 / 2);
+			turtle.setRotate(90);
 		});
 
 		//turtle resize
@@ -203,6 +205,8 @@ public class Visualizer implements Observer {
 		
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
+//		System.out.println("I'm getting called");
+
 	}
 	
 	
