@@ -15,7 +15,9 @@ public interface View {
 	
 	public String getCommand();
 
-	public Visualizer getVisualizer();
+	public Visualizer getCurrentVisualizer();
+	
+	public void switchVisualizer();
 	
 	public void updateDisplayData();
 	

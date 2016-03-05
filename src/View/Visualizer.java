@@ -25,7 +25,7 @@ public class Visualizer implements Observer {
 //	private String myTurtleImage = "turtle_1.png";
 //	private int myTurtleSize = 20;
 	
-	private String myTurtleImage = "turtle_4.png";
+	private String myTurtleImage = "turtle_5.png";
 	private int myTurtleSize = 40;
 	
 	private ObservableList<DisplayData> myObservableDataList;

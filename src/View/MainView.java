@@ -1,6 +1,8 @@
 package View;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observer;
 
 import javafx.scene.control.Alert;
@@ -16,15 +18,18 @@ public class MainView implements View {
 
 	private String myCommand;
 	private Model myModel;
-	private Visualizer myVisualizer;
+	private List<Visualizer> myVisualizers;
+	private Visualizer myCurrentVisualizer;
 
 	public MainView() throws SLogoException {
-		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+		myCurrentVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
 	}
 
 	public MainView(Model model) throws SLogoException {
 		myModel = model;
-		myVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+		myVisualizers = new ArrayList<Visualizer>();
+		myCurrentVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+
 	}
 	
 	/**
@@ -33,7 +38,8 @@ public class MainView implements View {
 	 * @throws IOException 
 	 */
 	public void initialize() throws SLogoException, IOException {
-		myVisualizer.initialize();
+		myCurrentVisualizer.initialize();
+		myVisualizers.add(myCurrentVisualizer);
 	}
 
 	public void showError(SLogoException e) {
@@ -82,19 +88,19 @@ public class MainView implements View {
 	}
 
 	@Override
-	public Visualizer getVisualizer() {
+	public Visualizer getCurrentVisualizer() {
 		
-		return myVisualizer;
+		return myCurrentVisualizer;
 	}
 
 	@Override
 	public void updateDisplayData() {
-		getVisualizer().updateDisplayData();
+		getCurrentVisualizer().updateDisplayData();
 	}
 
 	@Override
 	public void updateCommandHistory() {
-		getVisualizer().updateCommandHistory();
+		getCurrentVisualizer().updateCommandHistory();
 	}
 
 	@Override
@@ -118,14 +124,26 @@ public class MainView implements View {
 	@Override
 	public Observer getObserver() {
 		// TODO Auto-generated method stub
-		return getVisualizer();
+		return getCurrentVisualizer();
 	}
 
 	@Override
 	public String getLanguage() {
 		// TODO Auto-generated method stub
-		return myVisualizer.getLanguage();
+		return myCurrentVisualizer.getLanguage();
 	}
+	
+	@Override
+	public void switchVisualizer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+//	@Override
+//	public Visualizer getVisualizer() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 }

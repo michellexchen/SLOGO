@@ -66,6 +66,7 @@ public class GUIController implements Initializable  {
     //Drop-down menuButton - Choose Project
     @FXML
     private MenuButton myMenu;
+   
 
     
     //MenuButton's MenuItem list
@@ -83,6 +84,10 @@ public class GUIController implements Initializable  {
     @FXML
     private ScrollPane myPropertyPane;
     
+    //This adds workspace
+    @FXML
+    private Button myAddWorkspaceButton;
+    
     //Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
     @FXML
     private Button myCustomizeButton;
@@ -90,6 +95,7 @@ public class GUIController implements Initializable  {
     @FXML
     private List<String> myHistory;
     
+
 
     
     
@@ -112,6 +118,18 @@ public class GUIController implements Initializable  {
             myTextField.clear();
             run(myCommand);
         });  
+        
+        
+        
+        //AddWorkspace Button. Causes Model to create a new workspace
+        myAddWorkspaceButton.setOnAction(e -> {
+        	
+        	//Hide current stage
+        	Stage currentStage = (Stage)myAddWorkspaceButton.getScene().getWindow();
+        	currentStage.hide();
+        	//Get Model to create a new workspace and switch into it
+        	
+        });
     }
         
     private void run(String command){
