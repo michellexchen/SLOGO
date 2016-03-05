@@ -1,23 +1,14 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import CommandNode.CommandTree;
 import CommandNode.DisplayData;
-import CommandNode.Node;
-import CommandNode.TreeFactory;
-import Controller.Parser;
 import Exception.SLogoException;
 import View.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
 
 /**
  * @author Adam
@@ -34,7 +25,6 @@ public class Workspace {
 
 	// BELOW ARE TO BE USED
 	private List<Character> myCharacters;
-	private TreeFactory myTreeFactory;
 	private ObservableList<DisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<Variable> myObservableVariableList;
@@ -48,7 +38,6 @@ public class Workspace {
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 
 		myCharacters = new ArrayList<Character>();
-		myTreeFactory = new TreeFactory();
 	}
 
 	public void initialize() {
@@ -112,31 +101,6 @@ public class Workspace {
 
 	public void addDisplayData(DisplayData displayData) {
 		myDataList.add(displayData);
-	}
-
-	public double readCommand(String command) throws SLogoException {
-		//		format(command);
-		Parser parser = new Parser();
-		List<Node> nodeList = parser.parse(command);
-		double evaluation = 0;
-		while(nodeList.size() > 0){
-			Pair<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
-			CommandTree myTree = tuple.getKey();
-			nodeList = tuple.getValue();
-			evaluation = traverse(myTree);
-		}
-		return evaluation;
-	}
-
-	public double traverse(CommandTree myTree) throws SLogoException{
-		double evaluation = 0;
-		for (Character character : myCharacters) {
-			evaluation = myTree.traverse(character.getState(), myTree);
-			getObservableDataList().get(myCharacters.indexOf(character))
-								   .updateData(character.getState());
-		}
-		System.out.println("Evaluation: " + evaluation);
-		return evaluation;
 	}
 
 	public void format(String command){

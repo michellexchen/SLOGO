@@ -1,6 +1,9 @@
-package CommandNode;
+package Model;
 import java.util.List;
 
+import CommandNode.CommandNode;
+import CommandNode.Node;
+import CommandNode.NumericNode;
 import Controller.CommandDriver;
 import Controller.LanguageDriver;
 import Controller.NormalCommandDriver;

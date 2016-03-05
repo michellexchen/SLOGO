@@ -1,10 +1,12 @@
-package Controller;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import CommandNode.NodeFactory;
+
+import Controller.CommandDriver;
+import Controller.NormalCommandDriver;
 import Exception.SLogoException;
 import CommandNode.Node;
 
@@ -52,7 +54,7 @@ public class Parser {
 		try{
 			myParser = (Parser) Class.forName(commandName + "Parser").newInstance();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			return myParser;
+			return null;
 		}
 		return myParser;
 	}

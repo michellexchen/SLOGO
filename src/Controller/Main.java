@@ -2,13 +2,10 @@ package Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import Exception.SLogoException;
 import Model.MainModel;
 import View.MainView;
-import View.SLogoPromptBuilder;
 
 /**
  * Controls the initial setup of our GUI and back end

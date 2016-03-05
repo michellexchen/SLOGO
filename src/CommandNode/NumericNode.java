@@ -8,7 +8,7 @@ import Model.CharacterState;
  *
  */
 
-public class NumericNode extends UnaryNode {
+public class NumericNode extends NullaryNode {
 
 	private double myValue;
 

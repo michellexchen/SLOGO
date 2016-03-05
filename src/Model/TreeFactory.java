@@ -1,10 +1,10 @@
-package CommandNode;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import CommandNode.Node;
 import Exception.SLogoException;
-import Model.Variable;
 import javafx.util.Pair;
 
 /**

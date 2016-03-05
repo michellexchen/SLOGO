@@ -3,29 +3,11 @@ package CommandNode;
 import Exception.SLogoException;
 import Model.CharacterState;
 import Model.Variable;
-import Model.Workspace;
 
-public class MakeNode extends CommandNode implements ControlNode {
+public class MakeNode extends BinaryNode{
 
 	private Variable makesVar;
 	
-	public MakeNode() {
-
-	}
-	
-	@Override
-	public double evaluate(CharacterState state, CommandTree tree)  {
-		/*
-		 * evaluate runs through the tree which holds the value that will be returned that should be equal to 
-		 * our value after this point
-		 */
-		//makesVar.setValue(); --> the node that gets executed before this should return a value that we
-		tree.setMyVars(makesVar);
-		System.out.println("entered right loop for make node");
-		return 0;
-	}
-	
-	@Override
 	public void addVarParam(String string) {
 //		CommandNode.super.addVarParam(string);
 //		int value = Integer.parseInt(string);
@@ -45,11 +27,11 @@ public class MakeNode extends CommandNode implements ControlNode {
 		this.makesVar = var;
 	}
 
-	@Override
-	public String grabType() {
-		// TODO Auto-generated method stub
-		return ControlNode.super.grabType();
-	}
+//	@Override
+//	public String grabType() {
+//		// TODO Auto-generated method stub
+//		return ControlNode.super.grabType();
+//	}
 
 	@Override
 	public double evaluate(CharacterState state) throws SLogoException {
@@ -57,6 +39,4 @@ public class MakeNode extends CommandNode implements ControlNode {
 		return 0;
 	}
 	
-	
-
 }

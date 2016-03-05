@@ -7,7 +7,6 @@ import java.util.List;
 import CommandNode.DisplayData;
 import Controller.LanguageDriver;
 import Exception.SLogoException;
-import View.SLogoPromptBuilder;
 import View.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -19,7 +18,7 @@ public class MainModel implements Model {
 	private View myView;
 	private Workspace myCurrentWorkspace;
 	private LanguageDriver myLanguageDriver;
-	
+
 	private List<Workspace> myWorkspaces;
 	private ObservableList<Workspace> myObservableWorkspaces;
 
@@ -41,11 +40,11 @@ public class MainModel implements Model {
 			//TODO: Display error
 		}
 	}
-	
+
 	public void initialize() throws SLogoException {	
 		createNewWorkspace();
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners () {
 		myObservableWorkspaces.addListener((ListChangeListener) c -> {
@@ -53,15 +52,16 @@ public class MainModel implements Model {
 			getView().setCurrentWorkspace(getCurrentWorkspace());
 		});
 		myCurrentWorkspace.addListeners();
-		
+
 		getView().updateDisplayData();
 		getView().updateCommandHistory();
 		getView().updateWorkspaces();
 	}
-	
+
 	public void readCommand(String command) throws SLogoException {
 		setCommand(command);
-		myCurrentWorkspace.readCommand(command);
+		ParserController parseController = new ParserController(myCurrentWorkspace);
+		parseController.readCommand(command);
 	}
 
 	/**
@@ -103,22 +103,22 @@ public class MainModel implements Model {
 	public ObservableList<DisplayData> getObservableDataList() {
 		return myCurrentWorkspace.getObservableDataList();
 	}
-	
+
 	/**
 	 * Create a new workspace and set it as current workspace
 	 * @throws SLogoException 
 	 */
-//	@Override
+	//	@Override
 	public void createNewWorkspace() throws SLogoException {
 		// TODO Auto-generated method stub
-		
-		
+
+
 		Workspace myWorkspace = new Workspace(getView());
 		setCurrentWorkspace(myWorkspace);
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
-		
+
 	}
 
 	@Override
@@ -126,15 +126,15 @@ public class MainModel implements Model {
 		// TODO Auto-generated method stub
 		//Need to get View to create a new Visualizer for this workspace
 		getView().AddVisualizer();
-		
+
 		createNewWorkspace();
-		
-//		System.out.println("HAHAHA:");
+
+		//		System.out.println("HAHAHA:");
 		getView().getCurrentVisualizer().show();
 		//FIX THE DEPENDENCY
 	}
-	
-	
+
+
 	/**
 	 * @return the myCurrentWorkspace
 	 */
