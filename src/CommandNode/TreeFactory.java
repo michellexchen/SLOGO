@@ -30,10 +30,10 @@ public class TreeFactory {
 	
 	public TreeFactory() throws SLogoException{
 		nf = new NodeFactory();
-		myTree = new CommandTree();
 	}
 	
 	public CommandTree createTree(List<String> nodeList) throws SLogoException{
+		myTree = new CommandTree();
 		root = nf.createNode(nodeList.get(0));
 		myTree.setRoot(root);
 		nodeList.remove(0);

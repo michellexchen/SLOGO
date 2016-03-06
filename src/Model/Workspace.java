@@ -127,6 +127,11 @@ public class Workspace {
 	}
 
 	public void evaluateCommands(Parser parse) throws SLogoException{
+		/*
+		 * this method for different turtles will not work
+		 * we need to have a way to know which turtle it is that we are currently playing with
+		 * characters won't get changed concurrently so this iteration may not even be necesessary 
+		 */
 		for (Character character : myCharacters) {
 			parse.executeCommandForChar(character);
 			//evaluation = myTree.traverse(character.getState());
