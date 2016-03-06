@@ -11,7 +11,7 @@ import exception.SLogoException;
  *
  */
 
-public class LanguageDriver extends FileLoader {
+public class LanguageLoader extends FileLoader {
 
 	private String langDirectory = "resources/languages";
 	private String langExtension = ".properties";

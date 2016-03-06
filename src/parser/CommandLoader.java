@@ -1,6 +1,7 @@
-package model;
+package parser;
 import java.io.IOException;
 import exception.SLogoException;
+import model.FileLoader;
 
 /**
  * SLogo's Commands resources file reader class that extends FileDriver abstract

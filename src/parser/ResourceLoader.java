@@ -1,14 +1,15 @@
-package model;
+package parser;
 
 import java.io.IOException;
 
 import exception.SLogoException;
+import model.FileLoader;
 
-public class ResourcesLoader extends FileLoader{
+public class ResourceLoader extends FileLoader{
 	private static final String resourcesDirectory = "resources/resources";
 	private static final String resourcesExtension = "slogo_resources.resources";
 	
-	public ResourcesLoader() throws SLogoException{
+	public ResourceLoader() throws SLogoException{
 		load();
 	}
 

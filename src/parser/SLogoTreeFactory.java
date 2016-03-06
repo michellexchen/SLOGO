@@ -1,4 +1,4 @@
-package model;
+package parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ import exception.SLogoException;
  *
  */
 
-public class TreeFactory {
+public class SLogoTreeFactory {
 
 	CommandLoader myCommandDriver;
-	ResourcesLoader myResourcesDriver;
+	ResourceLoader myResourcesDriver;
 
-	public TreeFactory() throws SLogoException{
+	public SLogoTreeFactory() throws SLogoException{
 		myCommandDriver = new CommandLoader();
-		myResourcesDriver = new ResourcesLoader();
+		myResourcesDriver = new ResourceLoader();
 	}
 
 	public List<Node> create(List<String> commandParts) throws SLogoException {
