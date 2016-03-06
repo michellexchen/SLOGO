@@ -39,6 +39,8 @@ public class SLogoWorkspace {
 
 		myCharacters = new ArrayList<SLogoCharacter>();
 	}
+	
+	
 
 	public void initialize() {
 		createTurtle();
@@ -167,5 +169,10 @@ public class SLogoWorkspace {
 	 */
 	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
 		this.myObservableCommandHistory = myObservableCommandHistory;
+	}
+
+
+	public List<SLogoVariable> getVarList() {
+		return myObservableVariableList;
 	}
 }
