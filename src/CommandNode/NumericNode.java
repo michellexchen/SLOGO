@@ -1,11 +1,6 @@
-package CommandNode;
+package commandnode;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import model.SLogoCharacterState;
 
 /**
  * SLogo's NumericNode, a class representing a numerical value (evaluate returns

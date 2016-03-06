@@ -1,11 +1,7 @@
-package CommandNode;
+package commandnode;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 /**
  * SLogo's CommandTree with access to root and self traversal to evaluate tree

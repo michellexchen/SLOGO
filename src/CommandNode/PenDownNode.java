@@ -1,11 +1,8 @@
-package CommandNode;
+package commandnode;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import exception.SLogoException;
+import model.SLogoCharacterState;
+import model.SLogoTurtleState;
 
 public class PenDownNode extends NullaryNode{
 	

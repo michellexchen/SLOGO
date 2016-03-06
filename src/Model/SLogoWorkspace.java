@@ -1,17 +1,13 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import view.View;
 
 /**
  * 
@@ -42,10 +38,6 @@ public class SLogoWorkspace {
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 
 		myCharacters = new ArrayList<SLogoCharacter>();
-	}
-	
-	public ObservableList<SLogoVariable> getVarList(){
-		return myObservableVariableList;
 	}
 
 	public void initialize() {
@@ -111,38 +103,6 @@ public class SLogoWorkspace {
 		myDataList.add(displayData);
 	}
 
-	public void readCommand(String command) throws SLogoException {
-		Parser parse = new Parser(this, command);
-		evaluateCommands(parse);
-	}
-
-	public void evaluateCommands(Parser parse) throws SLogoException{
-		/*
-		 * this method for different turtles will not work
-		 * we need to have a way to know which turtle it is that we are currently playing with
-		 * characters won't get changed concurrently so this iteration may not even be necesessary 
-		 */
-		for (SLogoCharacter character : myCharacters) {
-			parse.executeCommandForChar(character);
-			//evaluation = myTree.traverse(character.getState());
-			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
-		}
-	}
-	
-	public double traverse(CommandTree myTree) throws SLogoException{
-		double evaluation = 0;
-		for (SLogoCharacter character : myCharacters) {
-			evaluation = myTree.traverse(character.getState());
-			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
-		}
-		System.out.println("Evaluation: " + evaluation);
-		return evaluation;
-	}
-
-	public void addToVarList(SLogoVariable var){
-		myObservableVariableList.add(var);
-	}
-		
 	public void format(String command){
 		checkForVars(command.split(" "));
 	}
@@ -158,6 +118,10 @@ public class SLogoWorkspace {
 				i++; //skip checking my next input as it's been checked right now
 			}
 		}
+	}
+
+	public void addToVarList(SLogoVariable var){
+
 	}
 
 	/**

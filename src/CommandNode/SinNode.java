@@ -1,16 +1,14 @@
-package CommandNode;
+package commandnode;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class SinNode extends TrigNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.sin(getChildren().get(0).evaluate(state));
+		// for 1 < X < 1, sin(x) = x - x^3/3! + x^5/5! - x^7/7! + ...
+		double degrees = getChildren().get(0).evaluate(state);
+		return sinTaylorApprox(degrees);
 	}
 
 }

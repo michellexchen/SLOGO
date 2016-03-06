@@ -1,12 +1,8 @@
-package CommandNode;
+package commandnode;
 
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
 public class ShowingNode extends NullaryNode{
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException{

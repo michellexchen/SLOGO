@@ -1,10 +1,11 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import CommandNode.Position;
+import commandnode.Position;
+import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,12 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import model.Model;
+import model.SLogoDisplayData;
 
 public class SLogoVisualizer implements Observer {
 	

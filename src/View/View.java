@@ -1,14 +1,11 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.Observer;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import exception.SLogoException;
+import model.SLogoWorkspace;
+
 /**
  * View interface - A contract for Model
  * View in MVC Design Pattern: Model can only call methods

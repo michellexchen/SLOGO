@@ -1,22 +1,19 @@
-package Model;
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.Parser;
+import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import parser.ParserController;
+import view.View;
 
 public class SLogoModel implements Model {
 
+	private String myCommand;
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageDriver myLanguageDriver;
@@ -59,16 +56,26 @@ public class SLogoModel implements Model {
 		getView().updateCommandHistory();
 		getView().updateWorkspaces();
 	}
-	
-	/*public void readCommand(String command) throws SLogoException {
-		setCommand(command);
-		//this calls readCommand for the current workspace--> interprets input, creates tree, and evaluates the tree
-		myCurrentWorkspace.readCommand(command);
-	}*/
 
 	public void readCommand(String command) throws SLogoException {
-		Parser parser = new Parser(myCurrentWorkspace, command);
-		parser.readCommand(command);
+		setCommand(command);
+		ParserController parseController = new ParserController(myCurrentWorkspace);
+		parseController.readCommand(command);
+	}
+
+	/**
+	 * @return the myCommand
+	 */
+	public String getCommand() {
+		return myCommand;
+	}
+
+	/**
+	 * @param myCommand
+	 *            the myCommand to set
+	 */
+	public void setCommand(String myCommand) {
+		this.myCommand = myCommand;
 	}
 
 	/**

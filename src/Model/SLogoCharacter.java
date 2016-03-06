@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * SLogo's highest Character in hierarchy, to support multiple types of

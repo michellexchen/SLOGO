@@ -1,17 +1,15 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
+import exception.SLogoException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import Model.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import model.Model;
+import model.SLogoWorkspace;
 
 public class SLogoView implements View {
 

@@ -1,14 +1,10 @@
-package Model;
+package model;
 
 import java.io.IOException;
 
+import exception.SLogoException;
 import javafx.collections.ObservableList;
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import view.View;
 
 /**
  * Model interface - A contract for View Model in MVC Design Pattern: View can

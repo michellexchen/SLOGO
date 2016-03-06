@@ -1,7 +1,7 @@
-package CommandNode;
+package commandnode;
 
-import Model.*;
-import Exception.*;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class EqualNode extends EqualityNode {
 

@@ -1,18 +1,13 @@
 /**
  * 
  */
-package Model;
+package model;
 
 import java.util.ArrayList;
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
 import java.util.List;
 import java.util.Observable;
-import CommandNode.Position;
+
+import commandnode.Position;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

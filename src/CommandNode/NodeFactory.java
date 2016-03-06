@@ -1,13 +1,10 @@
-package CommandNode;
+package commandnode;
 import java.util.List;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import Exception.SLogoException;
+import exception.SLogoException;
 import javafx.util.Pair;
+import model.LanguageDriver;
+import parser.NormalCommandDriver;
 
 /**
  * SLogo's Node Factory that creates and returns root node with subnodes
@@ -22,13 +19,12 @@ public class NodeFactory {
 	private LanguageDriver langDriver = new LanguageDriver();
 
 	public NodeFactory() throws SLogoException {
-		//CommandsDriver = new CommandDriver();
+		CommandsDriver = new NormalCommandDriver();
 		langDriver = new LanguageDriver();
-		//langDriver.load("English"); // To remove
+		langDriver.load("English"); // To remove
 	}
 
 	public Node createNode(String strNode) throws SLogoException {
-		//sanitate(nodeList);
 		Node node = null;
 		if (!langDriver.getLanguage().equals("English")) {
 			// englishCommand = langDriver.getTranslation(myNode);
@@ -42,11 +38,10 @@ public class NodeFactory {
 			throw new SLogoException("The command \"" + strNode + "\" is illegal!");
 		else
 			try {
-				node = (Node) Class.forName("CommandNode." + commandName + "Node").newInstance();
+				node = (Node) Class.forName("commandnode." + commandName + "Node").newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new SLogoException("Command " + commandName + " is not yet implemented");
 			}
-		System.out.println("NODE CREATED " + node.toString());
 		return node;
 	}
 
@@ -54,17 +49,17 @@ public class NodeFactory {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
 
-//	public List<Node> createChildren(Node root, List<String> nodeList) throws SLogoException {
-//		for (int x = 0; x < root.getNumChildren(); x++) {
-//			Pair<Node, List<Node>> childAndRemainderNodes = createChild(nodeList);
-//			if(childAndRemainderNodes != null){
-//				Node child = childAndRemainderNodes.getKey();
-//				nodeList = childAndRemainderNodes.getValue();
-//				((CommandNode) root).addChild(child);
-//			}
-//		}
-//		return nodeList;
-//	}
+	public List<Node> createChildren(Node root, List<Node> nodeList) throws SLogoException {
+		for (int x = 0; x < root.getNumChildren(); x++) {
+			Pair<Node, List<Node>> childAndRemainderNodes = createChild(nodeList);
+			if(childAndRemainderNodes != null){
+				Node child = childAndRemainderNodes.getKey();
+				nodeList = childAndRemainderNodes.getValue();
+				((CommandNode) root).addChild(child);
+			}
+		}
+		return nodeList;
+	}
 
 	public Pair<Node, List<Node>> createChild(List<Node> myNodes) throws SLogoException {
 		Pair<Node, List<Node>> childAndRemaindersPair = null;
@@ -85,31 +80,4 @@ public class NodeFactory {
 		return childAndRemaindersPair;
 	}
 
-	public EnclosureNode createEnclosureNode(int enclosureStart, int enclosureEnd, List<String> nodeTextList, SLogoWorkspace ws){
-		String enclosureContent = "";
-		System.out.println(nodeTextList+" "+enclosureStart+" "+enclosureEnd);
-		for(int x=enclosureStart; x<=enclosureEnd; x++){
-			String currNode = nodeTextList.get(x);
-			if(x!=enclosureEnd)
-				enclosureContent += currNode+" ";
-			else
-				enclosureContent += currNode;
-		}
-		EnclosureNode en = new EnclosureNode();
-		en.setBracketContent(enclosureContent);
-//		en.setWorkspace(ws);
-		return en;
-	}
-
-	public boolean isOpenEnclosure(String node){
-		if(node.equals("(") || node.equals("["))
-			return true;
-		return false;
-	}
-
-	public boolean isClosedEnclosure(String node){
-		if(node.equals(")") || node.equals("]"))
-			return true;
-		return false;
-	}
 }

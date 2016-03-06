@@ -1,15 +1,12 @@
-package Model;
+package model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+
+import exception.SLogoException;
 
 /**
  * SLogo's highest level in File reader hierarchy

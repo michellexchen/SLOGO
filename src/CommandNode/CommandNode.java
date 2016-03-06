@@ -1,4 +1,4 @@
-package CommandNode;
+package commandnode;
 
 import java.util.ArrayList;
 
@@ -20,16 +20,9 @@ public abstract class CommandNode implements Node {
 	public void addChild(Node child) {
 		children.add(child);
 	}
-	
-	public int numRequiredChildren(){
+
+	public int getNumChildren() {
 		return NUM_CHILDREN;
-	}
-	public int getNumChildren(){
-		return NUM_CHILDREN;
-	}
-	
-	public int numCurrentChildren(){
-		return children.size();
 	}
 	
 	public void setNumChildren(int num){

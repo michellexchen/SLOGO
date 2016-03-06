@@ -1,11 +1,7 @@
-package CommandNode;
+package commandnode;
 
-import Model.*;
-import View.*;
-import Exception.*;
-import Controller.*;
-import deprecated_to_be_deleted.*;
-import CommandNode.*;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class RepeatNode extends BinaryNode {
 
@@ -13,7 +9,7 @@ public class RepeatNode extends BinaryNode {
 		int repcount = (int) getChildren().get(0).evaluate(state);
 		double evaluation = 0;
 		for(int x=0; x<repcount; x++){
-			evaluation = getChildren().get(1).evaluate(state);
+			evaluation += getChildren().get(1).evaluate(state);
 		}
 		return evaluation;
 	}
