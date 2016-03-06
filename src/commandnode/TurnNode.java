@@ -11,6 +11,20 @@ public abstract class TurnNode extends UnaryNode {
 		currentState.setDirection(newDirection);
 		return diff;
 	}
+	
+	public double convertDir(double direction) {
+		double result;
+		if (direction > 360) {
+			result = direction % 360;
+		}
+		else if(direction < 0) {
+			result = 360 - (Math.abs(direction) % 360);
+		}
+		else {
+			result = direction;
+		}
+		return result;
+	}
 
 	public abstract double calculateDir(SLogoCharacterState state) throws SLogoException;
 
