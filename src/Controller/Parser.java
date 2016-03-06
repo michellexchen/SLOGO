@@ -44,8 +44,8 @@ public class Parser {
 				myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
 				.updateData(character.getState());
 			}
+			System.out.println("Evaluation: " + evaluation);
 		}
-		System.out.println("Evaluation: " + evaluation);
 		return evaluation;
 	}
 

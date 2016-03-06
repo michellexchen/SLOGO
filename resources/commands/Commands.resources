@@ -5,7 +5,7 @@ subtract:Difference
 left:Left
 right:Right
 setheading:SetHeading
-towards:Toward
+towards:TowardsXY
 setxy:SetXY
 goto:GoTo
 pendown:PenDown
@@ -39,8 +39,13 @@ pi:Pi
 less:Less
 less?:Less
 greater:Greater
+greater?:Greater
 equal:Equal
-notequal:Notequal
+equal?:Equal
+equalp:Equal
+notequal?:NotEqual
+notequalp:NotEqual
+notequal:NotEqual
 and:And
 or:Or
 not:Not
