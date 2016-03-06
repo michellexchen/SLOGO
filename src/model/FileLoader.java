@@ -15,7 +15,7 @@ import exception.SLogoException;
  *
  */
 
-public abstract class FileDriver {
+public abstract class FileLoader {
 	Properties myProperties;
 	private BufferedReader myFileReader;
 	private String directory;

@@ -1,7 +1,6 @@
-package controller;
+package model;
 import java.io.IOException;
 import exception.SLogoException;
-import model.FileDriver;
 
 /**
  * SLogo's Commands resources file reader class that extends FileDriver abstract
@@ -11,12 +10,12 @@ import model.FileDriver;
  *
  */
 
-public class CommandDriver extends FileDriver {
+public class CommandLoader extends FileLoader {
 
 	private static final String commandDirectory = "resources/commands";
 	private static final String commandExtension = "Commands.resources";
 	
-	public CommandDriver() throws SLogoException{
+	public CommandLoader() throws SLogoException{
 		load();
 	}
 

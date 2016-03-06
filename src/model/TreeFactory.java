@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,12 @@ import exception.SLogoException;
 
 public class TreeFactory {
 
-	CommandDriver myCommandDriver;
-	ResourcesDriver myResourcesDriver;
+	CommandLoader myCommandDriver;
+	ResourcesLoader myResourcesDriver;
 
 	public TreeFactory() throws SLogoException{
-		myCommandDriver = new CommandDriver();
-		myResourcesDriver = new ResourcesDriver();
+		myCommandDriver = new CommandLoader();
+		myResourcesDriver = new ResourcesLoader();
 	}
 
 	public List<Node> create(List<String> commandParts) throws SLogoException {

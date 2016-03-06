@@ -1,15 +1,14 @@
-package controller;
+package model;
 
 import java.io.IOException;
 
 import exception.SLogoException;
-import model.FileDriver;
 
-public class ResourcesDriver extends FileDriver{
+public class ResourcesLoader extends FileLoader{
 	private static final String resourcesDirectory = "resources/resources";
 	private static final String resourcesExtension = "slogo_resources.resources";
 	
-	public ResourcesDriver() throws SLogoException{
+	public ResourcesLoader() throws SLogoException{
 		load();
 	}
 

@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,17 +7,15 @@ import java.util.stream.Collectors;
 
 import commandnode.Node;
 import exception.SLogoException;
-import model.SLogoCharacter;
-import model.SLogoWorkspace;
 
 public class Parser {
 
-	CommandDriver commandDriver;
+	CommandLoader commandDriver;
 	TreeFactory myTreeFactory;
 	SLogoWorkspace myWorkspace;
 
 	public Parser(SLogoWorkspace ws) throws SLogoException{
-		commandDriver = new CommandDriver();
+		commandDriver = new CommandLoader();
 		myTreeFactory = new TreeFactory();
 		myWorkspace = ws;
 	}
