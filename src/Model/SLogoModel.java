@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.Parser;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import parser.ParserController;
 import view.View;
 
 public class SLogoModel implements Model {
 
-	private String myCommand;
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageDriver myLanguageDriver;
@@ -58,24 +57,8 @@ public class SLogoModel implements Model {
 	}
 
 	public void readCommand(String command) throws SLogoException {
-		setCommand(command);
-		ParserController parseController = new ParserController(myCurrentWorkspace);
-		parseController.readCommand(command);
-	}
-
-	/**
-	 * @return the myCommand
-	 */
-	public String getCommand() {
-		return myCommand;
-	}
-
-	/**
-	 * @param myCommand
-	 *            the myCommand to set
-	 */
-	public void setCommand(String myCommand) {
-		this.myCommand = myCommand;
+		Parser parser = new Parser(myCurrentWorkspace);
+		parser.readCommand(command);
 	}
 
 	/**

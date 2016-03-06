@@ -20,9 +20,12 @@ public abstract class CommandNode implements Node {
 	public void addChild(Node child) {
 		children.add(child);
 	}
-
-	public int getNumChildren() {
+	
+	public int numRequiredChildren(){
 		return NUM_CHILDREN;
+	}
+	public int numCurrentChildren(){
+		return children.size();
 	}
 	
 	public void setNumChildren(int num){

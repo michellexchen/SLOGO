@@ -6,9 +6,7 @@ import model.SLogoCharacterState;
 public class SinNode extends TrigNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// for 1 < X < 1, sin(x) = x - x^3/3! + x^5/5! - x^7/7! + ...
-		double degrees = getChildren().get(0).evaluate(state);
-		return sinTaylorApprox(degrees);
+		return Math.sin(getChildren().get(0).evaluate(state));
 	}
 
 }
