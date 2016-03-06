@@ -130,7 +130,7 @@ public class GUIController implements Initializable  {
         	
         	//Get Model to create a new workspace and switch into it
         	try {
-				getModel().AddWorkspace();
+				getModel().addWorkspace();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace(); 

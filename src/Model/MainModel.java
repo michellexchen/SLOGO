@@ -114,7 +114,6 @@ public class MainModel implements Model {
 
 
 		Workspace myWorkspace = new Workspace(getView());
-		setCurrentWorkspace(myWorkspace);
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
@@ -122,16 +121,22 @@ public class MainModel implements Model {
 	}
 
 	@Override
-	public void AddWorkspace() throws SLogoException, IOException {
+	public void addWorkspace() throws SLogoException, IOException {
 		// TODO Auto-generated method stub
 		//Need to get View to create a new Visualizer for this workspace
-		getView().AddVisualizer();
 
 		createNewWorkspace();
+		
+		getView().addVisualizer();
+
+		getCurrentWorkspace().addListeners();
+
 
 		//		System.out.println("HAHAHA:");
-		getView().getCurrentVisualizer().show();
+		//getView().getCurrentVisualizer().show();
 		//FIX THE DEPENDENCY
+		getView().updateDisplayData();
+
 	}
 
 

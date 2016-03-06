@@ -20,7 +20,7 @@ public interface View {
 
 	public Visualizer getCurrentVisualizer();
 	
-	public void AddVisualizer() throws SLogoException, IOException;
+	public void addVisualizer() throws SLogoException, IOException;
 	
 	public void switchVisualizer(int index);
 	

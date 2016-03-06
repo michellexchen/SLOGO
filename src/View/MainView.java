@@ -146,13 +146,13 @@ public class MainView implements View {
 	}
 
 	@Override
-	public void AddVisualizer() throws SLogoException, IOException {
+	public void addVisualizer() throws SLogoException, IOException {
 		// TODO Auto-generated method stub
 		Visualizer myNewVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
 		getVisualizers().add(myNewVisualizer);
-		setCurrentVisualizer(myNewVisualizer);
 		
 		myNewVisualizer.initialize();
+		setCurrentVisualizer(myNewVisualizer);
 
 //		// initialize this new visualizer
 //		try {

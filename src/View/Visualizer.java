@@ -153,6 +153,8 @@ public class Visualizer implements Observer {
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
+//		System.out.println("I ran");
+		
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 		
@@ -171,7 +173,7 @@ public class Visualizer implements Observer {
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
 			
-			
+//			System.out.println("For every turtle");
 		}
 	}
 	

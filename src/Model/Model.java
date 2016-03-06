@@ -22,7 +22,7 @@ public interface Model {
 
 	public void createBackend();
 
-	public void AddWorkspace() throws SLogoException, IOException;
+	public void addWorkspace() throws SLogoException, IOException;
 
 	public Workspace getCurrentWorkspace();
 
