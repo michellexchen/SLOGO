@@ -1,4 +1,4 @@
-package CommandNode;
+package commandnode;
 
 import java.util.ArrayList;
 

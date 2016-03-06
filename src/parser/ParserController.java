@@ -1,18 +1,21 @@
-package Model;
+package parser;
 
 import java.util.List;
 
-import CommandNode.Node;
-import Model.Parser;
-import Exception.SLogoException;
+import commandnode.CommandTree;
+import commandnode.Node;
+import commandnode.TreeFactory;
+import exception.SLogoException;
 import javafx.util.Pair;
+import model.SLogoCharacter;
+import model.SLogoWorkspace;
 
 public class ParserController {
 	
 	private TreeFactory myTreeFactory;
-	private Workspace myWorkspace;
+	private SLogoWorkspace myWorkspace;
 	
-	public ParserController(Workspace ws) throws SLogoException{
+	public ParserController(SLogoWorkspace ws) throws SLogoException{
 		myTreeFactory = new TreeFactory();
 		myWorkspace = ws;
 	}
@@ -32,8 +35,8 @@ public class ParserController {
 	
 	public double evaluateTree(CommandTree myTree) throws SLogoException{
 		double evaluation = 0;
-		List<Character> myCharacters = myWorkspace.getCharacterList();
-		for (Character character : myCharacters) {
+		List<SLogoCharacter> myCharacters = myWorkspace.getCharacterList();
+		for (SLogoCharacter character : myCharacters) {
 			evaluation = myTree.traverse(character.getState());
 			myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
 								   .updateData(character.getState());

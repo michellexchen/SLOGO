@@ -1,10 +1,10 @@
-package CommandNode;
-import Exception.SLogoException;
-import Model.CharacterState;
+package commandnode;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class ForNode extends QuaternionNode {
 
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		return 0; // TEMP
 	}
 

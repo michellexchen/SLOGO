@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Exception;
+package exception;
 
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;

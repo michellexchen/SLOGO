@@ -1,11 +1,11 @@
-package CommandNode;
+package commandnode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class TowardsXYNode extends TurnNode {
 
-	public double calculateDir(CharacterState state) throws SLogoException {
+	public double calculateDir(SLogoCharacterState state) throws SLogoException {
 		double diffX = Math.abs(getChildren().get(0).evaluate(state) + 500 - state.getXCoor());
 		double diffY = Math.abs(Math.abs(getChildren().get(1).evaluate(state) - 500) - state.getYCoor());
 		if (getChildren().get(0).evaluate(state) < 0) {

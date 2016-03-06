@@ -1,6 +1,6 @@
-package CommandNode;
+package commandnode;
 
-import Model.CharacterState;
+import model.SLogoCharacterState;
 
 /**
  * SLogo's NumericNode, a class representing a numerical value (evaluate returns
@@ -16,7 +16,7 @@ public class NumericNode extends NullaryNode {
 		myValue = value;
 	}
 
-	public double evaluate(CharacterState state) {
+	public double evaluate(SLogoCharacterState state) {
 		return myValue;
 	}
 

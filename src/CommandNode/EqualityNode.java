@@ -1,11 +1,11 @@
-package CommandNode;
+package commandnode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public abstract class EqualityNode extends BinaryNode{
 
-	public boolean isEqual(CharacterState state) throws SLogoException{
+	public boolean isEqual(SLogoCharacterState state) throws SLogoException{
 		return getChildren().get(0).evaluate(state) == getChildren().get(1).evaluate(state) ? true : false;
 	}
 

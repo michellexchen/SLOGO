@@ -1,52 +1,52 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CommandNode.DisplayData;
-import Exception.SLogoException;
-import View.View;
+import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import view.View;
 
 /**
- * @author Adam
+ * 
+ * Workspace class that serves as a container for data objects
  *
  */
-public class Workspace {
+public class SLogoWorkspace {
 
 	private View myView;
 
 	// NEVER USE THESE: BUG ALERT!
-	private List<DisplayData> myDataList;
+	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
-	private List<Variable> myVariableList;
+	private List<SLogoVariable> myVariableList;
 
 	// BELOW ARE TO BE USED
-	private List<Character> myCharacters;
-	private ObservableList<DisplayData> myObservableDataList;
+	private List<SLogoCharacter> myCharacters;
+	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
-	private ObservableList<Variable> myObservableVariableList;
+	private ObservableList<SLogoVariable> myObservableVariableList;
 
-	public Workspace(View view) throws SLogoException {
+	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
 
-		myDataList = new ArrayList<DisplayData>();
+		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
-		myVariableList = new ArrayList<Variable>();
+		myVariableList = new ArrayList<SLogoVariable>();
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 
-		myCharacters = new ArrayList<Character>();
+		myCharacters = new ArrayList<SLogoCharacter>();
 	}
 
 	public void initialize() {
 		createTurtle();
 	}
 
-	private void createObservableLists(List<DisplayData> datalist, 
+	private void createObservableLists(List<SLogoDisplayData> datalist, 
 									   List<String> commandhistory,
-									   List<Variable> variablelist) {
+									   List<SLogoVariable> variablelist) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
 		myObservableVariableList = FXCollections.observableArrayList(variablelist);
@@ -66,16 +66,16 @@ public class Workspace {
 	}
 
 	public void createTurtle() {
-		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);
+		SLogoTurtle myTurtle = new SLogoTurtle("OG", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
-		DisplayData turtleData = new DisplayData(myTurtle.getState());
+		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 
 		// Add Observer (Visualizer)
 		turtleData.addObserver(getView().getObserver());
 		getObservableDataList().add(turtleData);
 	}
 
-	public List<DisplayData> getDataList() {
+	public List<SLogoDisplayData> getDataList() {
 		return myDataList;
 	}
 
@@ -83,15 +83,15 @@ public class Workspace {
 		return myCommandHistory;
 	}
 
-	public List<Character> getCharacterList() {
+	public List<SLogoCharacter> getCharacterList() {
 		return myCharacters;
 	}
 
-	public void addNewCharacter(Character character) {
+	public void addNewCharacter(SLogoCharacter character) {
 		myCharacters.add(character);
 	}
 
-	public void removeCharacter(Character character) {
+	public void removeCharacter(SLogoCharacter character) {
 		myCharacters.remove(character);
 	}
 
@@ -99,7 +99,7 @@ public class Workspace {
 		myCommandHistory.add(command);
 	}
 
-	public void addDisplayData(DisplayData displayData) {
+	public void addDisplayData(SLogoDisplayData displayData) {
 		myDataList.add(displayData);
 	}
 
@@ -111,7 +111,7 @@ public class Workspace {
 
 		for(int i = 0; i < command.length; i++){
 			if(command[i].equals("make")){
-				Variable var = new Variable();
+				SLogoVariable var = new SLogoVariable();
 				var.setName(command[i+1]);
 
 				//myTreeFactory.makeTree(text)
@@ -120,7 +120,7 @@ public class Workspace {
 		}
 	}
 
-	public void addToVarList(Variable var){
+	public void addToVarList(SLogoVariable var){
 
 	}
 
@@ -142,7 +142,7 @@ public class Workspace {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<DisplayData> getObservableDataList() {
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myObservableDataList;
 	}
 
@@ -150,7 +150,7 @@ public class Workspace {
 	 * @param myObservableDataList
 	 *            the myObservableDataList to set
 	 */
-	public void setObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+	public void setObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
 

@@ -1,17 +1,17 @@
-package CommandNode;
+package commandnode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.Variable;
+import exception.SLogoException;
+import model.SLogoCharacterState;
+import model.SLogoVariable;
 
 public class MakeNode extends BinaryNode{
 
-	private Variable makesVar;
+	private SLogoVariable makesVar;
 	
 	public void addVarParam(String string) {
 //		CommandNode.super.addVarParam(string);
 //		int value = Integer.parseInt(string);
-		makesVar = new Variable();
+		makesVar = new SLogoVariable();
 		makesVar.setName(string);
 	}
 	
@@ -23,7 +23,7 @@ public class MakeNode extends BinaryNode{
 //		makesVar.setValue(value);
 //	}
 	
-	public void setVar(Variable var){
+	public void setVar(SLogoVariable var){
 		this.makesVar = var;
 	}
 
@@ -34,7 +34,7 @@ public class MakeNode extends BinaryNode{
 //	}
 
 	@Override
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

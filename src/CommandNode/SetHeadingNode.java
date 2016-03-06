@@ -1,11 +1,11 @@
-package CommandNode;
+package commandnode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class SetHeadingNode extends TurnNode{
 	
-	public double calculateDir(CharacterState state) throws SLogoException {
+	public double calculateDir(SLogoCharacterState state) throws SLogoException {
 		return getChildren().get(0).evaluate(state);
 	}
 

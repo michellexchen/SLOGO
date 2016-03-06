@@ -1,34 +1,34 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
+import exception.SLogoException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import Exception.SLogoException;
-import Model.Model;
-import Model.Workspace;
+import model.Model;
+import model.SLogoWorkspace;
 
-public class MainView implements View {
+public class SLogoView implements View {
 
-	private final int WIDTH = 331;
-	private final int HEIGHT = 331;
+	private final int WIDTH = 440;
+	private final int HEIGHT = 440;
 
 	private String myCommand;
 	private Model myModel;
-	private List<Visualizer> myVisualizers;
-	private Visualizer myCurrentVisualizer;
+	private List<SLogoVisualizer> myVisualizers;
+	private SLogoVisualizer myCurrentVisualizer;
 
-	public MainView() throws SLogoException {
-		myCurrentVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+	public SLogoView() throws SLogoException {
+		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 	}
 
-	public MainView(Model model) throws SLogoException {
+	public SLogoView(Model model) throws SLogoException {
 		myModel = model;
-		myVisualizers = new ArrayList<Visualizer>();
-		myCurrentVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+		myVisualizers = new ArrayList<SLogoVisualizer>();
+		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 
 	}
 	
@@ -91,7 +91,7 @@ public class MainView implements View {
 	}
 
 	@Override
-	public Visualizer getCurrentVisualizer() {
+	public SLogoVisualizer getCurrentVisualizer() {
 		
 		return myCurrentVisualizer;
 	}
@@ -119,7 +119,7 @@ public class MainView implements View {
 	}
 
 	@Override
-	public void setCurrentWorkspace(Workspace workspace) {
+	public void setCurrentWorkspace(SLogoWorkspace workspace) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -148,7 +148,7 @@ public class MainView implements View {
 	@Override
 	public void addVisualizer() throws SLogoException, IOException {
 		// TODO Auto-generated method stub
-		Visualizer myNewVisualizer = new Visualizer(getModel(), WIDTH, HEIGHT);
+		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 		getVisualizers().add(myNewVisualizer);
 		
 		myNewVisualizer.initialize();
@@ -175,14 +175,14 @@ public class MainView implements View {
 	/**
 	 * @return the myVisualizers
 	 */
-	public List<Visualizer> getVisualizers() {
+	public List<SLogoVisualizer> getVisualizers() {
 		return myVisualizers;
 	}
 
 	/**
 	 * @param myVisualizers the myVisualizers to set
 	 */
-	public void setVisualizers(List<Visualizer> myVisualizers) {
+	public void setVisualizers(List<SLogoVisualizer> myVisualizers) {
 		this.myVisualizers = myVisualizers;
 	}
 
@@ -196,7 +196,7 @@ public class MainView implements View {
 	/**
 	 * @param myCurrentVisualizer the myCurrentVisualizer to set
 	 */
-	public void setCurrentVisualizer(Visualizer myCurrentVisualizer) {
+	public void setCurrentVisualizer(SLogoVisualizer myCurrentVisualizer) {
 		this.myCurrentVisualizer = myCurrentVisualizer;
 	}
 

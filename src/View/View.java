@@ -1,10 +1,10 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.Observer;
 
-import Exception.SLogoException;
-import Model.Workspace;
+import exception.SLogoException;
+import model.SLogoWorkspace;
 
 /**
  * View interface - A contract for Model
@@ -18,7 +18,7 @@ public interface View {
 	
 	public String getCommand();
 
-	public Visualizer getCurrentVisualizer();
+	public SLogoVisualizer getCurrentVisualizer();
 	
 	public void addVisualizer() throws SLogoException, IOException;
 	
@@ -32,7 +32,7 @@ public interface View {
 
 	public void updateVariables();
 	
-	public void setCurrentWorkspace(Workspace workspace);
+	public void setCurrentWorkspace(SLogoWorkspace workspace);
 	
 	public Observer getObserver();
 	

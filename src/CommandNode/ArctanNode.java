@@ -1,11 +1,11 @@
-package CommandNode;
+package commandnode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class ArctanNode extends TrigNode {
 
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// For for -2pi < X < 2pi, atan(x) = x - x^3/3 + x^5/5 - x^7/7 + ...
 		double radians = degToRad(getChildren().get(0).evaluate(state));
 		if (radians < 1 || radians > 1) {

@@ -1,14 +1,14 @@
-package Model;
+package parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Controller.CommandDriver;
-import Controller.NormalCommandDriver;
-import Exception.SLogoException;
-import CommandNode.Node;
+import commandnode.CommandDriver;
+import commandnode.Node;
+import commandnode.NodeFactory;
+import exception.SLogoException;
 
 public class Parser {
 

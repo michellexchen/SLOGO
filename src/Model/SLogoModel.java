@@ -1,33 +1,32 @@
-package Model;
+package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import CommandNode.DisplayData;
-import Controller.LanguageDriver;
-import Exception.SLogoException;
-import View.View;
+import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import parser.ParserController;
+import view.View;
 
-public class MainModel implements Model {
+public class SLogoModel implements Model {
 
 	private String myCommand;
 	private View myView;
-	private Workspace myCurrentWorkspace;
+	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageDriver myLanguageDriver;
 
-	private List<Workspace> myWorkspaces;
-	private ObservableList<Workspace> myObservableWorkspaces;
+	private List<SLogoWorkspace> myWorkspaces;
+	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
 
-	public MainModel() throws SLogoException {
-		myWorkspaces = new ArrayList<Workspace>();
+	public SLogoModel() throws SLogoException {
+		myWorkspaces = new ArrayList<SLogoWorkspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 	}
 
-	public MainModel(View view) {
+	public SLogoModel(View view) {
 		myView = view;
 	}
 
@@ -100,7 +99,7 @@ public class MainModel implements Model {
 	}
 
 	@Override
-	public ObservableList<DisplayData> getObservableDataList() {
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myCurrentWorkspace.getObservableDataList();
 	}
 
@@ -113,7 +112,7 @@ public class MainModel implements Model {
 		// TODO Auto-generated method stub
 
 
-		Workspace myWorkspace = new Workspace(getView());
+		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
@@ -144,28 +143,28 @@ public class MainModel implements Model {
 	 * @return the myCurrentWorkspace
 	 */
 	@Override
-	public Workspace getCurrentWorkspace() {
+	public SLogoWorkspace getCurrentWorkspace() {
 		return myCurrentWorkspace;
 	}
 
 	/**
 	 * @param myCurrentWorkspace the myCurrentWorkspace to set
 	 */
-	public void setCurrentWorkspace(Workspace myCurrentWorkspace) {
+	public void setCurrentWorkspace(SLogoWorkspace myCurrentWorkspace) {
 		this.myCurrentWorkspace = myCurrentWorkspace;
 	}
 
 	/**
 	 * @return the myObservableWorkspaces
 	 */
-	public ObservableList<Workspace> getObservableWorkspaces() {
+	public ObservableList<SLogoWorkspace> getObservableWorkspaces() {
 		return myObservableWorkspaces;
 	}
 
 	/**
 	 * @param myObservableWorkspaces the myObservableWorkspaces to set
 	 */
-	public void setObservableWorkspaces(ObservableList<Workspace> myObservableWorkspaces) {
+	public void setObservableWorkspaces(ObservableList<SLogoWorkspace> myObservableWorkspaces) {
 		this.myObservableWorkspaces = myObservableWorkspaces;
 	}
 

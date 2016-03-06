@@ -1,19 +1,19 @@
-package Model;
+package model;
 
 import java.util.Observable;
 
-public class Variable extends Observable {
+public class SLogoVariable extends Observable {
 
 	private String myName;
 	private double myValue;
 
-	public Variable() {
+	public SLogoVariable() {
 		// class Pair {
 		// String variable;
 		// double value;
 	}
 
-	public Variable(String name, double value) {
+	public SLogoVariable(String name, double value) {
 		myName = name;
 		myValue = value;
 	}

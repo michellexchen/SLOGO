@@ -1,11 +1,11 @@
-package CommandNode;
+package commandnode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 public class DoTimesNode extends BinaryNode {
 
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		int repcount = (int) getChildren().get(0).evaluate(state);
 		double evaluation = 0;
 		for(int x=1; x<=repcount; x++){

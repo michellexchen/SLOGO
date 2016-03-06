@@ -1,14 +1,10 @@
-package Model;
+package commandnode;
 import java.util.List;
 
-import CommandNode.CommandNode;
-import CommandNode.Node;
-import CommandNode.NumericNode;
-import Controller.CommandDriver;
-import Controller.LanguageDriver;
-import Controller.NormalCommandDriver;
-import Exception.SLogoException;
+import exception.SLogoException;
 import javafx.util.Pair;
+import model.LanguageDriver;
+import parser.NormalCommandDriver;
 
 /**
  * SLogo's Node Factory that creates and returns root node with subnodes
@@ -42,7 +38,7 @@ public class NodeFactory {
 			throw new SLogoException("The command \"" + strNode + "\" is illegal!");
 		else
 			try {
-				node = (Node) Class.forName("CommandNode." + commandName + "Node").newInstance();
+				node = (Node) Class.forName("commandnode." + commandName + "Node").newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new SLogoException("Command " + commandName + " is not yet implemented");
 			}

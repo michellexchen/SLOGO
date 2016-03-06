@@ -1,13 +1,11 @@
-package View;
+package view;
 
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import CommandNode.DisplayData;
-import CommandNode.Position;
-import Exception.SLogoException;
-import Model.Model;
+import commandnode.Position;
+import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import model.Model;
+import model.SLogoDisplayData;
 
-public class Visualizer implements Observer {
+public class SLogoVisualizer implements Observer {
 	
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
@@ -28,13 +28,13 @@ public class Visualizer implements Observer {
 	private String myTurtleImage = "turtle_5.png";
 	private int myTurtleSize = 40;
 	
-	private ObservableList<DisplayData> myObservableDataList;
+	private ObservableList<SLogoDisplayData> myObservableDataList;
 	
 	private int myWidth;
 	private int myHeight;
 	
 	private FXMLLoader myLoader;
-	private GUIController myGUIController;
+	private SLogoGUIController myGUIController;
 	private SLogoPromptBuilder myPromptBuilder;
 	private Parent root;
 
@@ -44,13 +44,13 @@ public class Visualizer implements Observer {
 	private Model myModel;
 	private String myCanvasColor;
 	
-	public Visualizer(Model model, int width, int height) {
+	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
 		myWidth = width;
 		myHeight = height;
 	}
 	
-	public Visualizer(Model model) {
+	public SLogoVisualizer(Model model) {
 		myWidth = 331;
 		myHeight = 331;
 		myModel = model;
@@ -69,7 +69,7 @@ public class Visualizer implements Observer {
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
-		myGUIController = (GUIController) myLoader.getController();
+		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
 		
 		myScene = new Scene(root);
@@ -115,7 +115,7 @@ public class Visualizer implements Observer {
 		
 	}
 	
-	public void rotate (DisplayData displaydata) {
+	public void rotate (SLogoDisplayData displaydata) {
 		
 	}
 	
@@ -163,7 +163,7 @@ public class Visualizer implements Observer {
 													+ getCanvasColor());
 		
 		getModel().getObservableDataList();
-		for (DisplayData turtledata : getObservableDataList()) {
+		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
 			
@@ -177,7 +177,7 @@ public class Visualizer implements Observer {
 		}
 	}
 	
-	public void placeTurtle(DisplayData displaydata) {
+	public void placeTurtle(SLogoDisplayData displaydata) {
         Image image = new Image(IMAGE_PATH + myTurtleImage);
         
 		ImageView turtle = new ImageView();
@@ -268,7 +268,7 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myGUIController
 	 */
-	public GUIController getGUIController() {
+	public SLogoGUIController getGUIController() {
 		return myGUIController;
 	}
 
@@ -276,7 +276,7 @@ public class Visualizer implements Observer {
 	 * @param myGUIController
 	 *            the myGUIController to set
 	 */
-	public void setGUIController(GUIController myGUIController) {
+	public void setGUIController(SLogoGUIController myGUIController) {
 		this.myGUIController = myGUIController;
 	}
 
@@ -326,14 +326,14 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<DisplayData> getObservableDataList() {
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myObservableDataList;
 	}
 
 	/**
 	 * @param myObservableDataList the myObservableDataList to set
 	 */
-	public void setObservableDataList(ObservableList<DisplayData> 
+	public void setObservableDataList(ObservableList<SLogoDisplayData> 
 												myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
@@ -368,14 +368,14 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<DisplayData> getMyObservableDataList() {
+	public ObservableList<SLogoDisplayData> getMyObservableDataList() {
 		return myObservableDataList;
 	}
 
 	/**
 	 * @param myObservableDataList the myObservableDataList to set
 	 */
-	public void setMyObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+	public void setMyObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
 
@@ -424,14 +424,14 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myGUIController
 	 */
-	public GUIController getMyGUIController() {
+	public SLogoGUIController getMyGUIController() {
 		return myGUIController;
 	}
 
 	/**
 	 * @param myGUIController the myGUIController to set
 	 */
-	public void setMyGUIController(GUIController myGUIController) {
+	public void setMyGUIController(SLogoGUIController myGUIController) {
 		this.myGUIController = myGUIController;
 	}
 

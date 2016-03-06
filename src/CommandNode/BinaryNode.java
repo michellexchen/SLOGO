@@ -1,4 +1,4 @@
-package CommandNode;
+package commandnode;
 
 public abstract class BinaryNode extends CommandNode{
 	

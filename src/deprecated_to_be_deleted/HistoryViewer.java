@@ -1,4 +1,4 @@
-package Deprecated;
+package deprecated_to_be_deleted;
 
 import java.util.Collection;
 

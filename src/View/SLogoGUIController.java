@@ -1,12 +1,11 @@
-package View;
+package view;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Exception.SLogoException;
-import Model.Model;
+import exception.SLogoException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,9 +28,10 @@ import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import model.Model;
 
 
-public class GUIController implements Initializable  {
+public class SLogoGUIController implements Initializable  {
 	
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
 						+ "compsci308/spring16/assign/03_slogo/commands.php";

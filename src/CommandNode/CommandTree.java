@@ -1,7 +1,7 @@
-package Model;
+package commandnode;
 
-import CommandNode.Node;
-import Exception.SLogoException;
+import exception.SLogoException;
+import model.SLogoCharacterState;
 
 /**
  * SLogo's CommandTree with access to root and self traversal to evaluate tree
@@ -13,7 +13,7 @@ public class CommandTree {
 
 	private Node root;
 
-	public double traverse(CharacterState state) throws SLogoException {
+	public double traverse(SLogoCharacterState state) throws SLogoException {
 		return root.evaluate(state);
 	}
 
