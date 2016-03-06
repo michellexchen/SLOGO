@@ -109,35 +109,20 @@ public class SLogoModel implements Model {
 	 */
 	//	@Override
 	public void createNewWorkspace() throws SLogoException {
-		// TODO Auto-generated method stub
-
-
 		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
-
 	}
 
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {
-		// TODO Auto-generated method stub
 		//Need to get View to create a new Visualizer for this workspace
-
 		createNewWorkspace();
-		
 		getView().addVisualizer();
-
 		getCurrentWorkspace().addListeners();
-
-
-		//		System.out.println("HAHAHA:");
-		//getView().getCurrentVisualizer().show();
-		//FIX THE DEPENDENCY
 		getView().updateDisplayData();
-
 	}
-
 
 	/**
 	 * @return the myCurrentWorkspace

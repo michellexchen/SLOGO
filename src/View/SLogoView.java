@@ -132,44 +132,23 @@ public class SLogoView implements View {
 
 	@Override
 	public String getLanguage() {
-		// TODO Auto-generated method stub
 		return myCurrentVisualizer.getLanguage();
 	}
 	
 	@Override
 	public void switchVisualizer (int index) {
-		// TODO Auto-generated method stub
 		getCurrentVisualizer().hide();
 		setCurrentVisualizer(getVisualizers().get(index));
 		getCurrentVisualizer().show();
-		
 	}
 
 	@Override
 	public void addVisualizer() throws SLogoException, IOException {
-		// TODO Auto-generated method stub
 		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 		getVisualizers().add(myNewVisualizer);
 		
 		myNewVisualizer.initialize();
 		setCurrentVisualizer(myNewVisualizer);
-
-//		// initialize this new visualizer
-//		try {
-//		} catch (SLogoException e) {
-//			// TODO Auto-generated catch block
-////			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			/*
-//			 * 
-//			 * NEED ERROR SHOWING MECHANISM
-//			 * 
-//			 */
-//		}
-		// show this new visualizer
-		//myNewVisualizer.show();
 	}
 
 	/**
@@ -186,25 +165,10 @@ public class SLogoView implements View {
 		this.myVisualizers = myVisualizers;
 	}
 
-//	/**
-//	 * @return the myCurrentVisualizer
-//	 */
-//	public Visualizer getCurrentVisualizer() {
-//		return myCurrentVisualizer;
-//	}
-
 	/**
 	 * @param myCurrentVisualizer the myCurrentVisualizer to set
 	 */
 	public void setCurrentVisualizer(SLogoVisualizer myCurrentVisualizer) {
 		this.myCurrentVisualizer = myCurrentVisualizer;
 	}
-
-//	@Override
-//	public Visualizer getVisualizer() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-
 }

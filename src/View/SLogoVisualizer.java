@@ -22,8 +22,6 @@ public class SLogoVisualizer implements Observer {
 	
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
-//	private String myTurtleImage = "turtle_1.png";
-//	private int myTurtleSize = 20;
 	
 	private String myTurtleImage = "turtle_5.png";
 	private int myTurtleSize = 40;
@@ -152,9 +150,7 @@ public class SLogoVisualizer implements Observer {
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {
-//		System.out.println("I ran");
-		
+	public void updateDisplayData () {		
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 		
@@ -172,9 +168,7 @@ public class SLogoVisualizer implements Observer {
 			
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
-			
-//			System.out.println("For every turtle");
-		}
+			}
 	}
 	
 	public void placeTurtle(SLogoDisplayData displaydata) {
@@ -185,7 +179,6 @@ public class SLogoVisualizer implements Observer {
 		
 		//assign click action - change the action to change attributes
 		turtle.setOnMouseClicked(e -> {
-//			System.out.println("I am clicked");
 			turtle.setFitWidth(120);
 			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
 			turtle.setLayoutY(displaydata.getPosition().yCurrent() - 120 / 2);
@@ -207,10 +200,7 @@ public class SLogoVisualizer implements Observer {
 		
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
-//		System.out.println("I'm getting called");
-
 	}
-	
 	
 	/**
 	 * This method updates command history display in GUI.
@@ -219,12 +209,6 @@ public class SLogoVisualizer implements Observer {
 	public void updateCommandHistory () {
 		
 	}
-	
-//	public void hide () {
-//		this.getStage().hide();
-//	}
-	
-	
 	
 	//////////////////////////
 	// getters and setters //
@@ -504,13 +488,6 @@ public class SLogoVisualizer implements Observer {
 	public void setMyCanvasColor(String myCanvasColor) {
 		this.myCanvasColor = myCanvasColor;
 	}
-
-//	/**
-//	 * @return the myTurtleImagePath
-//	 */
-//	public static String getmyTurtleImagePath() {
-//		return myTurtleImage_PATH;
-//	}
 
 	/**
 	 * @return the myTurtleImage
