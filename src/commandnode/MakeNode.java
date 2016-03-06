@@ -8,6 +8,10 @@ public class MakeNode extends BinaryNode{
 
 	private SLogoVariable makesVar;
 	
+	public MakeNode(){
+		makesVar.getName() = 
+	}
+	
 	public void addVarParam(String string) {
 //		CommandNode.super.addVarParam(string);
 //		int value = Integer.parseInt(string);

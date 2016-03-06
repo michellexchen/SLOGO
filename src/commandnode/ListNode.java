@@ -13,10 +13,6 @@ public class ListNode extends CommandNode{
 		this.myNodes = myNodes;
 	}
 	
-	public List<Node> getMyNodes(){
-		return myNodes;
-	}
-	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double evaluation = 0;
 		for(Node node : myNodes){

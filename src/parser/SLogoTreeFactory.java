@@ -27,7 +27,7 @@ public class SLogoTreeFactory {
 		myResourcesDriver = new ResourceLoader();
 	}
 
-	public List<Node> create(List<String> commandParts) throws SLogoException {
+	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
 		List<Node> myRoots = new ArrayList<Node>();
 		while(!commandParts.isEmpty()){
 			String currCommand = commandParts.remove(0);
@@ -41,7 +41,8 @@ public class SLogoTreeFactory {
 	}
 
 	public Node createChild(List<String> commandParts) throws SLogoException{
-		String currCommand = commandParts.remove(0);
+		String currCommand = commandParts.get(0);
+		commandParts.remove(0);
 		if(isNumeric(currCommand)){
 			return createNode(currCommand);
 		}
@@ -73,7 +74,7 @@ public class SLogoTreeFactory {
 			else
 				innerCommands.add(currCommand);
 		}
-		return create(innerCommands);
+		return createNodes(innerCommands);
 	}
 
 	public Node createNode(String strNode) throws SLogoException {
