@@ -45,6 +45,7 @@ public class Parser {
 				.updateData(character.getState());
 			}
 		}
+		System.out.println("Evaluation: " + evaluation);
 		return evaluation;
 	}
 

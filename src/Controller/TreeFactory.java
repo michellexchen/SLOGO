@@ -36,7 +36,6 @@ public class TreeFactory {
 			}
 			myRoots.add(myNode);
 		}
-		System.out.println(myRoots);
 		return myRoots;
 	}
 
@@ -46,7 +45,6 @@ public class TreeFactory {
 			return createNode(currCommand);
 		}
 		if(isOpenBracket(currCommand)){
-			commandParts.remove(0);
 			List<Node> commandList = createCommandList(commandParts);
 			ListNode listNode = new ListNode(commandList);
 			return listNode;
@@ -62,9 +60,9 @@ public class TreeFactory {
 
 	public List<Node> createCommandList(List<String> commandParts) throws SLogoException{
 		List<String> innerCommands = new ArrayList<String>();
-		String currCommand = commandParts.remove(0);
 		int openBrackets = 1;
 		int closedBrackets = 0;
+		String currCommand = "";
 		while(openBrackets != closedBrackets){
 			currCommand = commandParts.remove(0);
 			if(isOpenBracket(currCommand))
