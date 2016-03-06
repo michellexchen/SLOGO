@@ -14,7 +14,7 @@ public class SLogoModel implements Model {
 
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
-	private LanguageDriver myLanguageDriver;
+	private LanguageLoader myLanguageDriver;
 
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
@@ -30,7 +30,7 @@ public class SLogoModel implements Model {
 
 	@Override
 	public void loadLanguage () {
-		myLanguageDriver = new LanguageDriver();
+		myLanguageDriver = new LanguageLoader();
 		try {
 			myLanguageDriver.load(getView().getLanguage());
 		} catch (SLogoException e) {
@@ -138,14 +138,14 @@ public class SLogoModel implements Model {
 	/**
 	 * @return the myLanguageDriver
 	 */
-	public LanguageDriver getMyLanguageDriver() {
+	public LanguageLoader getMyLanguageDriver() {
 		return myLanguageDriver;
 	}
 
 	/**
 	 * @param myLanguageDriver the myLanguageDriver to set
 	 */
-	public void setMyLanguageDriver(LanguageDriver myLanguageDriver) {
+	public void setMyLanguageDriver(LanguageLoader myLanguageDriver) {
 		this.myLanguageDriver = myLanguageDriver;
 	}
 
