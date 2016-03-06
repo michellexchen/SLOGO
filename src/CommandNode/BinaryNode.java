@@ -7,4 +7,5 @@ public abstract class BinaryNode extends CommandNode{
 	public BinaryNode() {
 		setNumChildren(NUM_CHILDREN);
 	}
+	
 }

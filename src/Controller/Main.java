@@ -2,13 +2,15 @@ package Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 import java.io.IOException;
 
-import Exception.SLogoException;
-import Model.MainModel;
-import View.MainView;
-import View.SLogoPromptBuilder;
 
 /**
  * Controls the initial setup of our GUI and back end
@@ -19,20 +21,18 @@ import View.SLogoPromptBuilder;
 
 public class Main extends Application {
 
-	private MainModel myModel;
-	private MainView myView;
+	private SLogoModel myModel;
+	private SLogoView myView;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 
 	public void start(Stage myStage) throws SLogoException, IOException {
 		initialize();
 	}
 
 	public void initialize() throws SLogoException, IOException {
-		myModel = new MainModel();
-		myView = new MainView(myModel);
+		myModel = new SLogoModel();
+		myView = new SLogoView(myModel);
 		myModel.setView(myView);
 		myModel.initialize();
 		myView.initialize();

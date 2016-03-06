@@ -1,8 +1,8 @@
 package Controller;
 
 import java.io.IOException;
-
-import Exception.SLogoException;
+import Model.*;
+import Exception.*;
 
 /**
  * SLogo's Commands resources file reader class that extends FileDriver abstract
@@ -16,8 +16,8 @@ public class CommandDriver extends FileDriver {
 
 	private static final String commandDirectory = "resources/commands";
 	private static final String commandExtension = "Commands.resources";
-
-	public CommandDriver() throws SLogoException {
+	
+	public CommandDriver() throws SLogoException{
 		load();
 	}
 

@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public abstract class CharacterState {
+public abstract class SLogoCharacterState {
 
 	private double xCoor;
 	private double yCoor;
@@ -18,7 +18,7 @@ public abstract class CharacterState {
 	private ImageView imageView;
 	private boolean penDown;
 
-	public CharacterState(double xCoor, double yCoor, double direction,
+	public SLogoCharacterState(double xCoor, double yCoor, double direction,
 					      boolean isHidden, double angle) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;

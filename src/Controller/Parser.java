@@ -7,13 +7,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 import CommandNode.NodeFactory;
 import CommandNode.TreeFactory;
 import Exception.SLogoException;
-import Model.Variable;
-import Model.Character;
-import Model.Workspace;
-import View.MainView;
 import View.View;
 import javafx.util.Pair;
 import CommandNode.CommandTree;
@@ -24,12 +26,14 @@ public class Parser {
 
 	private NodeFactory nf;
 	private TreeFactory tf;
-	private Workspace ws;
+	private SLogoWorkspace ws;
+	private SLogoWorkspace myWorkspace;
+	private Controller.TreeFactory myTreeFactory = new Controller.TreeFactory();
 	private List<CommandTree> executableTrees;
 	private String[] bracketChars = {"{", "("};
 
-	public Parser(Workspace ws, String command) throws SLogoException {
-		this.ws = ws;
+	public Parser(SLogoWorkspace ws, String command) throws SLogoException {
+		this.ws = ws; this.myWorkspace = ws;
 		init();
 		List<String> commands = checkThenParseCommand(command);
 		createTrees(commands);
@@ -66,64 +70,37 @@ public class Parser {
 		return nodeList;
 	}
 	
-	public void executeCommandForChar(Character character) throws SLogoException{
+	public void executeCommandForChar(SLogoCharacter character) throws SLogoException{
 		for(CommandTree tree: executableTrees){
 			tree.traverse(character.getState());
 		}
 	}
 	
-	public List<Node> setUpNodeList(List<String> nodeTextList, List<Node> nodeList) throws SLogoException{
-		for(int x=0; x<nodeTextList.size(); x++){
-			String currNode = nodeTextList.get(x);
-			if(isOpenEnclosure(currNode)){
-				Pair<EnclosureNode, Integer> enclosureNodeAndEndIndex = setUpOutermostEnclosureNode(nodeTextList, x);
-				EnclosureNode en = enclosureNodeAndEndIndex.getKey();
-				int closedEnclosureIndex = enclosureNodeAndEndIndex.getValue();
-				nodeList.add(en);
-				x = closedEnclosureIndex;
-			}
-			else{
-				nodeList.add(nf.createNode(nodeTextList.get(x)));
-			}
-		}
-		return nodeList;
+
+	public double readCommand(String command) throws SLogoException {
+		System.out.println("Reading command: "+command);
+		List<String> commandParts = getCommandParts(command);
+		List<Node> myNodes = myTreeFactory.create(commandParts);
+		return evaluateNodes(myNodes);
+	}
+
+	public List<String> getCommandParts(String text) throws SLogoException {
+		return Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public Pair<EnclosureNode, Integer> setUpOutermostEnclosureNode(List<String> nodeTextList, int openEnclosureIndex){
-		int openEnclosures = 1;
-		int closedEnclosures = 0;
-		String currNode = "";
-		Pair<EnclosureNode, Integer> tuple = null;
-		for(int y=openEnclosureIndex+1; y<nodeTextList.size(); y++){
-			currNode = nodeTextList.get(y);
-			if(isClosedEnclosure(currNode)){
-				closedEnclosures++;
-				if(openEnclosures == closedEnclosures){
-					System.out.println("NODE TEXT LIST: " + nodeTextList);
-					EnclosureNode en = nf.createEnclosureNode(openEnclosureIndex, y, nodeTextList, ws);
-					tuple = new Pair<EnclosureNode, Integer>(en, y);
-					break;
-				}
+	public double evaluateNodes(List<Node> myNodes) throws SLogoException{
+		double evaluation = 0;
+		List<SLogoCharacter> myCharacters = myWorkspace.getCharacterList();
+		for(Node myNode : myNodes){
+			for (SLogoCharacter character : myCharacters) {
+				evaluation = myNode.evaluate(character.getState());
+				myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
+				.updateData(character.getState());
 			}
-			else{
-				if(isOpenEnclosure(currNode)){
-					openEnclosures++;
-				}
-			}
+			System.out.println("Evaluation: " + evaluation);
 		}
-		return tuple;
-	}
-
-	public boolean isOpenEnclosure(String node){
-		if(node.equals("(") || node.equals("["))
-			return true;
-		return false;
-	}
-
-	public boolean isClosedEnclosure(String node){
-		if(node.equals(")") || node.equals("]"))
-			return true;
-		return false;
+		return evaluation;
 	}
 	
 	
@@ -133,7 +110,7 @@ public class Parser {
 	private List<String> sanitateVars(List<String> commands){
 		String[] commandList = new String[commands.size()];
 		commandList = commands.toArray(commandList);
-		List<Variable> wsl = ws.getVarList();
+		List<SLogoVariable> wsl = ws.getVarList();
 		//can change this to regrex
 		for(int i = 0; i < wsl.size(); i++){
 			String name = wsl.get(i).getName();
@@ -180,10 +157,10 @@ public class Parser {
 		return results;
 	}
 	
-	public static void main(String[] args) throws SLogoException{
+	/*public static void main(String[] args) throws SLogoException{
 		String input = "fd add 50";
-		Workspace w = new Workspace(new MainView());
-		Variable t = new Variable();
+		SLogoWorkspace w = new Workspace(new MainView());
+		SLogoVariable t = new Variable();
 		t.setName(":t");
 		t.setValue(50);
 		w.addToVarList(t);
@@ -196,6 +173,6 @@ public class Parser {
 		y.setValue(500);
 		w.addToVarList(y);
 		Parser p = new Parser(w, input);
-	}
+	}*/
 
 }

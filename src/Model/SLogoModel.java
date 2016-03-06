@@ -1,33 +1,35 @@
 package Model;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import CommandNode.DisplayData;
-import Controller.LanguageDriver;
-import Exception.SLogoException;
-import View.SLogoPromptBuilder;
-import View.View;
+import Controller.Parser;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-public class MainModel implements Model {
+public class SLogoModel implements Model {
 
-	private String myCommand;
 	private View myView;
-	private Workspace myCurrentWorkspace;
+	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageDriver myLanguageDriver;
-	
-	private List<Workspace> myWorkspaces;
-	private ObservableList<Workspace> myObservableWorkspaces;
 
-	public MainModel() throws SLogoException {
-		myWorkspaces = new ArrayList<Workspace>();
+	private List<SLogoWorkspace> myWorkspaces;
+	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
+
+	public SLogoModel() throws SLogoException {
+		myWorkspaces = new ArrayList<SLogoWorkspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 	}
 
-	public MainModel(View view) {
+	public SLogoModel(View view) {
 		myView = view;
 	}
 
@@ -40,11 +42,11 @@ public class MainModel implements Model {
 			//TODO: Display error
 		}
 	}
-	
+
 	public void initialize() throws SLogoException {	
 		createNewWorkspace();
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners () {
 		myObservableWorkspaces.addListener((ListChangeListener) c -> {
@@ -52,31 +54,21 @@ public class MainModel implements Model {
 			getView().setCurrentWorkspace(getCurrentWorkspace());
 		});
 		myCurrentWorkspace.addListeners();
-		
+
 		getView().updateDisplayData();
 		getView().updateCommandHistory();
 		getView().updateWorkspaces();
 	}
 	
-	public void readCommand(String command) throws SLogoException {
+	/*public void readCommand(String command) throws SLogoException {
 		setCommand(command);
 		//this calls readCommand for the current workspace--> interprets input, creates tree, and evaluates the tree
 		myCurrentWorkspace.readCommand(command);
-	}
+	}*/
 
-	/**
-	 * @return the myCommand
-	 */
-	public String getCommand() {
-		return myCommand;
-	}
-
-	/**
-	 * @param myCommand
-	 *            the myCommand to set
-	 */
-	public void setCommand(String myCommand) {
-		this.myCommand = myCommand;
+	public void readCommand(String command) throws SLogoException {
+		Parser parser = new Parser(myCurrentWorkspace, command);
+		parser.readCommand(command);
 	}
 
 	/**
@@ -100,51 +92,57 @@ public class MainModel implements Model {
 	}
 
 	@Override
-	public ObservableList<DisplayData> getObservableDataList() {
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myCurrentWorkspace.getObservableDataList();
 	}
-	
+
 	/**
 	 * Create a new workspace and set it as current workspace
 	 * @throws SLogoException 
 	 */
-	@Override
+	//	@Override
 	public void createNewWorkspace() throws SLogoException {
-		// TODO Auto-generated method stub
-		Workspace myWorkspace = new Workspace(getView());
-		setCurrentWorkspace(myWorkspace);
+		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
 	}
 
+	@Override
+	public void addWorkspace() throws SLogoException, IOException {
+		//Need to get View to create a new Visualizer for this workspace
+		createNewWorkspace();
+		getView().addVisualizer();
+		getCurrentWorkspace().addListeners();
+		getView().updateDisplayData();
+	}
 
 	/**
 	 * @return the myCurrentWorkspace
 	 */
 	@Override
-	public Workspace getCurrentWorkspace() {
+	public SLogoWorkspace getCurrentWorkspace() {
 		return myCurrentWorkspace;
 	}
 
 	/**
 	 * @param myCurrentWorkspace the myCurrentWorkspace to set
 	 */
-	public void setCurrentWorkspace(Workspace myCurrentWorkspace) {
+	public void setCurrentWorkspace(SLogoWorkspace myCurrentWorkspace) {
 		this.myCurrentWorkspace = myCurrentWorkspace;
 	}
 
 	/**
 	 * @return the myObservableWorkspaces
 	 */
-	public ObservableList<Workspace> getObservableWorkspaces() {
+	public ObservableList<SLogoWorkspace> getObservableWorkspaces() {
 		return myObservableWorkspaces;
 	}
 
 	/**
 	 * @param myObservableWorkspaces the myObservableWorkspaces to set
 	 */
-	public void setObservableWorkspaces(ObservableList<Workspace> myObservableWorkspaces) {
+	public void setObservableWorkspaces(ObservableList<SLogoWorkspace> myObservableWorkspaces) {
 		this.myObservableWorkspaces = myObservableWorkspaces;
 	}
 
@@ -161,4 +159,6 @@ public class MainModel implements Model {
 	public void setMyLanguageDriver(LanguageDriver myLanguageDriver) {
 		this.myLanguageDriver = myLanguageDriver;
 	}
+
+
 }

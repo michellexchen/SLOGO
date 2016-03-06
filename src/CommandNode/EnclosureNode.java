@@ -3,14 +3,17 @@ import java.util.List;
 
 import Controller.Parser;
 import Exception.SLogoException;
-import Model.CharacterState;
-import Model.Workspace;
 import javafx.util.Pair;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
 
 public class EnclosureNode extends UnaryNode {
 
 	private String bracketContent;
-	private Workspace ws;
+	private SLogoWorkspace ws;
 	private Parser parser;
 
 	public void setBracketContent(String content){
@@ -20,11 +23,11 @@ public class EnclosureNode extends UnaryNode {
 		System.out.println("BRACKET CONTENT: "+bracketContent);
 	}
 
-	public void setWorkspace(Workspace ws){
+	public void setWorkspace(SLogoWorkspace ws){
 		this.ws = ws;
 	}
 
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 //		parser = new Parser(ws);
 //		List<String> nodeTextList = parser.createNodeTextList(bracketContent);
 //		checkInnerEnclosures(nodeTextList, state);
@@ -41,11 +44,11 @@ public class EnclosureNode extends UnaryNode {
 		return toPrint;
 	}
 
-	public void checkInnerEnclosures(List<String> nodeTextList, CharacterState state) throws SLogoException{
+	public void checkInnerEnclosures(List<String> nodeTextList, SLogoCharacterState state) throws SLogoException{
 		for(int x=0; x<nodeTextList.size(); x++){
 			String currNode = nodeTextList.get(x);
 			if(isOpenEnclosure(currNode)){
-				Pair<EnclosureNode, Integer> enclosureNodeAndEndIndex = parser.setUpOutermostEnclosureNode(nodeTextList, x);
+				Pair<EnclosureNode, Integer> enclosureNodeAndEndIndex = null;//parser.setUpOutermostEnclosureNode(nodeTextList, x);
 				EnclosureNode en = enclosureNodeAndEndIndex.getKey();
 				int closedEnclosureIndex = enclosureNodeAndEndIndex.getValue();
 				String evaluation = en.evaluate(state)+"";

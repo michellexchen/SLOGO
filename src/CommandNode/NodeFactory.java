@@ -1,10 +1,12 @@
 package CommandNode;
 import java.util.List;
 
-import Controller.CommandDriver;
-import Controller.LanguageDriver;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
 import Exception.SLogoException;
-import Model.Workspace;
 import javafx.util.Pair;
 
 /**
@@ -20,9 +22,9 @@ public class NodeFactory {
 	private LanguageDriver langDriver = new LanguageDriver();
 
 	public NodeFactory() throws SLogoException {
-		CommandsDriver = new CommandDriver();
+		//CommandsDriver = new CommandDriver();
 		langDriver = new LanguageDriver();
-		langDriver.load("English"); // To remove
+		//langDriver.load("English"); // To remove
 	}
 
 	public Node createNode(String strNode) throws SLogoException {
@@ -83,7 +85,7 @@ public class NodeFactory {
 		return childAndRemaindersPair;
 	}
 
-	public EnclosureNode createEnclosureNode(int enclosureStart, int enclosureEnd, List<String> nodeTextList, Workspace ws){
+	public EnclosureNode createEnclosureNode(int enclosureStart, int enclosureEnd, List<String> nodeTextList, SLogoWorkspace ws){
 		String enclosureContent = "";
 		System.out.println(nodeTextList+" "+enclosureStart+" "+enclosureEnd);
 		for(int x=enclosureStart; x<=enclosureEnd; x++){
@@ -95,7 +97,7 @@ public class NodeFactory {
 		}
 		EnclosureNode en = new EnclosureNode();
 		en.setBracketContent(enclosureContent);
-		en.setWorkspace(ws);
+//		en.setWorkspace(ws);
 		return en;
 	}
 

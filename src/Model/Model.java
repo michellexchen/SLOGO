@@ -1,9 +1,14 @@
 package Model;
 
-import CommandNode.DisplayData;
-import Exception.SLogoException;
-import View.View;
+import java.io.IOException;
+
 import javafx.collections.ObservableList;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 /**
  * Model interface - A contract for View Model in MVC Design Pattern: View can
@@ -20,11 +25,11 @@ public interface Model {
 
 	public void createBackend();
 
-	public void createNewWorkspace() throws SLogoException;
+	public void addWorkspace() throws SLogoException, IOException;
 
-	public Workspace getCurrentWorkspace();
+	public SLogoWorkspace getCurrentWorkspace();
 
-	public ObservableList<DisplayData> getObservableDataList();
+	public ObservableList<SLogoDisplayData> getObservableDataList();
 
 	public void loadLanguage();
 

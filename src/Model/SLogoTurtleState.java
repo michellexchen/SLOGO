@@ -8,12 +8,12 @@ import javafx.scene.paint.Color;
  *
  */
 
-public class TurtleState extends CharacterState {
+public class SLogoTurtleState extends SLogoCharacterState {
 
 	private boolean penDown;
 	private Color penColor;
 
-	public TurtleState(double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown, double angle) {
+	public SLogoTurtleState(double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown, double angle) {
 		super(xCoor, yCoor, direction, isHidden, angle);
 		this.penDown = penDown;
 		penColor = Color.BLACK;

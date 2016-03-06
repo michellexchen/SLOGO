@@ -1,7 +1,11 @@
 package CommandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 public class ToNode extends CommandNode {
 
@@ -10,7 +14,7 @@ public class ToNode extends CommandNode {
 	}
 
 	@Override
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

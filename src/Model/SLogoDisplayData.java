@@ -1,14 +1,18 @@
 /**
  * 
  */
-package CommandNode;
+package Model;
 
 import java.util.ArrayList;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 import java.util.List;
 import java.util.Observable;
-
-import Model.CharacterState;
-import Model.TurtleState;
+import CommandNode.Position;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -17,7 +21,7 @@ import javafx.scene.shape.Line;
  * @author Hunter
  *
  */
-public class DisplayData extends Observable {
+public class SLogoDisplayData extends Observable {
 	private Position myPosition;
 	private double xCoordinate;
 	private double yCoordinate;
@@ -34,7 +38,7 @@ public class DisplayData extends Observable {
 	 * @param xCoordinate,
 	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public DisplayData(Position position, double angle, boolean penDown, Color penColor, ImageView image) {
+	public SLogoDisplayData(Position position, double angle, boolean penDown, Color penColor, ImageView image) {
 
 		this.myPosition = position;
 		this.myAngle = angle;
@@ -44,7 +48,7 @@ public class DisplayData extends Observable {
 		
 	}
 
-	public DisplayData(CharacterState state) {
+	public SLogoDisplayData(SLogoCharacterState state) {
 		updateData(state);
 		initialize();
 	}
@@ -53,12 +57,12 @@ public class DisplayData extends Observable {
 		myLines = new ArrayList<Line>();
 	}
 	
-	public void updateData(CharacterState state) {
+	public void updateData(SLogoCharacterState state) {
 		myPosition = new Position();
 		myPosition.setXY(state.getXCoor(),  state.getYCoor());
 		myAngle = state.getAngle();
-		penDown = ((TurtleState) state).getPen();
-		penColor = ((TurtleState) state).getPenColor();
+		penDown = ((SLogoTurtleState) state).getPen();
+		penColor = ((SLogoTurtleState) state).getPenColor();
 		myImage = state.getImageView();
 		
 		applyChanges();

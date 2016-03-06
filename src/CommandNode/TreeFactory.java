@@ -10,8 +10,13 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import Exception.SLogoException;
-import Model.Variable;
 import javafx.util.Pair;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates

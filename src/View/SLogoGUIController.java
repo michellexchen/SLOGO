@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Exception.SLogoException;
-import Model.Model;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,9 +27,15 @@ import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 
-public class GUIController implements Initializable  {
+public class SLogoGUIController implements Initializable  {
 	
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
 						+ "compsci308/spring16/assign/03_slogo/commands.php";
@@ -66,6 +70,7 @@ public class GUIController implements Initializable  {
     //Drop-down menuButton - Choose Project
     @FXML
     private MenuButton myMenu;
+   
 
     
     //MenuButton's MenuItem list
@@ -79,12 +84,24 @@ public class GUIController implements Initializable  {
     @FXML
     private ScrollPane myVariablePane;
     
+    //Displays the properties of a turtle
+    @FXML
+    private ScrollPane myPropertyPane;
+    
+    //This adds workspace
+    @FXML
+    private Button myAddWorkspaceButton;
+    
     //Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
     @FXML
     private Button myCustomizeButton;
     
     @FXML
     private List<String> myHistory;
+    
+
+
+    
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -105,6 +122,25 @@ public class GUIController implements Initializable  {
             myTextField.clear();
             run(myCommand);
         });  
+        
+        
+        
+        //AddWorkspace Button. Causes Model to create a new workspace
+        myAddWorkspaceButton.setOnAction(e -> {
+        	
+        	//Hide current stage
+        	Stage currentStage = (Stage)myAddWorkspaceButton.getScene().getWindow();
+        	currentStage.hide();
+        	
+        	//Get Model to create a new workspace and switch into it
+        	try {
+				getModel().addWorkspace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace(); 
+				//GET RID OF THIS
+			}
+        });
     }
         
     private void run(String command){

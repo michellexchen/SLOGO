@@ -1,11 +1,15 @@
 package CommandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
 
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 public class ShowingNode extends NullaryNode{
 	
-	public double evaluate(CharacterState state) throws SLogoException{
+	public double evaluate(SLogoCharacterState state) throws SLogoException{
 		return (!state.getHidden()) ? 1 : 0;
 	}
 }

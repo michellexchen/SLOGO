@@ -1,8 +1,12 @@
-package Controller;
+package Model;
 
 import java.io.IOException;
-
-import Exception.SLogoException;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 /**
  * SLogo's Languages reader class that extends FileDriver abstract class
@@ -27,7 +31,6 @@ public class LanguageDriver extends FileDriver {
 			super.load();
 		} catch (IOException e) {
 			throw new SLogoException("Encountered an error loading the language file");
-			// System.out.println(e.getMessage());
 		}
 	}
 

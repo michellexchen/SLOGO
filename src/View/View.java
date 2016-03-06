@@ -1,8 +1,14 @@
 package View;
 
+import java.io.IOException;
 import java.util.Observer;
-import Model.Workspace;
 
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 /**
  * View interface - A contract for Model
  * View in MVC Design Pattern: Model can only call methods
@@ -15,7 +21,11 @@ public interface View {
 	
 	public String getCommand();
 
-	public Visualizer getVisualizer();
+	public SLogoVisualizer getCurrentVisualizer();
+	
+	public void addVisualizer() throws SLogoException, IOException;
+	
+	public void switchVisualizer(int index);
 	
 	public void updateDisplayData();
 	
@@ -25,7 +35,7 @@ public interface View {
 
 	public void updateVariables();
 	
-	public void setCurrentWorkspace(Workspace workspace);
+	public void setCurrentWorkspace(SLogoWorkspace workspace);
 	
 	public Observer getObserver();
 	

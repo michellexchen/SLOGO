@@ -1,12 +1,15 @@
 package CommandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.TurtleState;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 public class PenDownNode extends NullaryNode{
 	
-	public double evaluate(CharacterState state) throws SLogoException{
-		return ((TurtleState) state).getPen() ? 1 : 0;
+	public double evaluate(SLogoCharacterState state) throws SLogoException{
+		return ((SLogoTurtleState) state).getPen() ? 1 : 0;
 	}
 }

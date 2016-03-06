@@ -1,13 +1,16 @@
 package CommandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 public class CosNode extends TrigNode{
 
-	public double evaluate(CharacterState state) throws SLogoException {
-		double degrees = getChildren().get(0).evaluate(state);
-		return cosTaylorApprox(degrees);
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		return Math.cos(getChildren().get(0).evaluate(state));
 	}
 
 }

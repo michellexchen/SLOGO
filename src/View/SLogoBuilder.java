@@ -14,7 +14,6 @@ public abstract class SLogoBuilder {
     protected static final String DEFAULT_LANG_PACKAGE = "resources.languages/";
 
     private ResourceBundle myResources;
-//    private ResourceBundle myLanguageResources;
 
 	/**
 	 * Abstract class extended by different view builders

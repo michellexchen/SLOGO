@@ -1,20 +1,22 @@
-package Deprecated;
+package deprecated_to_be_deleted;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import CommandNode.DisplayData;
 import CommandNode.Node;
-import Exception.SLogoException;
-import Model.Model;
-import View.GUIController;
-import View.SLogoPromptBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
+
 @Deprecated
 public class WorkspaceView {
 	// private List<Character> myCharacters;
@@ -24,7 +26,7 @@ public class WorkspaceView {
 	//private List<DisplayData> myDisplayData;
 
 	private FXMLLoader myLoader;
-	private GUIController myGUIController;
+	private SLogoGUIController myGUIController;
 	private Parent root;
 
 	// Visualization Primitives
@@ -50,7 +52,7 @@ public class WorkspaceView {
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
-		myGUIController = (GUIController) myLoader.getController();
+		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
 
 		myProjectScene = new Scene(root);
@@ -140,7 +142,7 @@ public class WorkspaceView {
 	/**
 	 * @return the myGUIController
 	 */
-	public GUIController getGUIController() {
+	public SLogoGUIController getGUIController() {
 		return myGUIController;
 	}
 
@@ -148,7 +150,7 @@ public class WorkspaceView {
 	 * @param myGUIController
 	 *            the myGUIController to set
 	 */
-	public void setGUIController(GUIController myGUIController) {
+	public void setGUIController(SLogoGUIController myGUIController) {
 		this.myGUIController = myGUIController;
 	}
 

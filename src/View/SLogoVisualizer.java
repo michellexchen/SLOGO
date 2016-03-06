@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import CommandNode.DisplayData;
 import CommandNode.Position;
-import Exception.SLogoException;
-import Model.Model;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,20 +14,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
-public class Visualizer implements Observer {
+public class SLogoVisualizer implements Observer {
 	
-	private static final String TURTLE_IMAGE_PATH = "file:resources/turtle_images/";
-	private static final String TURTLE_IMAGE = "turtle_1.png";
-	private static final int TURTLE_SIZE = 20;
+	private static final String IMAGE_PATH = "file:resources/turtle_images/";
+	private static final int PANE_SIZE = 440;
 	
-	private ObservableList<DisplayData> myObservableDataList;
+	private String myTurtleImage = "turtle_5.png";
+	private int myTurtleSize = 40;
+	
+	private ObservableList<SLogoDisplayData> myObservableDataList;
 	
 	private int myWidth;
 	private int myHeight;
 	
 	private FXMLLoader myLoader;
-	private GUIController myGUIController;
+	private SLogoGUIController myGUIController;
 	private SLogoPromptBuilder myPromptBuilder;
 	private Parent root;
 
@@ -40,13 +45,13 @@ public class Visualizer implements Observer {
 	private Model myModel;
 	private String myCanvasColor;
 	
-	public Visualizer(Model model, int width, int height) {
+	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
 		myWidth = width;
 		myHeight = height;
 	}
 	
-	public Visualizer(Model model) {
+	public SLogoVisualizer(Model model) {
 		myWidth = 331;
 		myHeight = 331;
 		myModel = model;
@@ -65,7 +70,7 @@ public class Visualizer implements Observer {
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
-		myGUIController = (GUIController) myLoader.getController();
+		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
 		
 		myScene = new Scene(root);
@@ -79,11 +84,12 @@ public class Visualizer implements Observer {
 
 	}
 
-	public void show() throws SLogoException {
+	public void show() {
 		getStage().show();
 	}
 
-	public void hide() {
+	public void hide () {
+		getStage().hide();
 
 	}
 
@@ -110,7 +116,7 @@ public class Visualizer implements Observer {
 		
 	}
 	
-	public void rotate (DisplayData displaydata) {
+	public void rotate (SLogoDisplayData displaydata) {
 		
 	}
 	
@@ -147,7 +153,7 @@ public class Visualizer implements Observer {
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {
+	public void updateDisplayData () {		
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 		
@@ -156,7 +162,7 @@ public class Visualizer implements Observer {
 													+ getCanvasColor());
 		
 		getModel().getObservableDataList();
-		for (DisplayData turtledata : getObservableDataList()) {
+		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
 			
@@ -165,13 +171,11 @@ public class Visualizer implements Observer {
 			
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
-			
-			
-		}
+			}
 	}
 	
-	public void placeTurtle(DisplayData displaydata) {
-        Image image = new Image(TURTLE_IMAGE_PATH + TURTLE_IMAGE);
+	public void placeTurtle(SLogoDisplayData displaydata) {
+        Image image = new Image(IMAGE_PATH + myTurtleImage);
         
 		ImageView turtle = new ImageView();
 		turtle.setImage(image);
@@ -181,10 +185,11 @@ public class Visualizer implements Observer {
 			turtle.setFitWidth(120);
 			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
 			turtle.setLayoutY(displaydata.getPosition().yCurrent() - 120 / 2);
+			turtle.setRotate(90);
 		});
 
 		//turtle resize
-		turtle.setFitWidth(TURTLE_SIZE);
+		turtle.setFitWidth(myTurtleSize);
 		turtle.setPreserveRatio(true);
 		turtle.setSmooth(true);
 		turtle.setCache(true);
@@ -193,13 +198,12 @@ public class Visualizer implements Observer {
 		turtle.setRotate(displaydata.getAngle());
 		
 		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getPosition().xCurrent() - TURTLE_SIZE / 2);
-		turtle.setLayoutY(displaydata.getPosition().yCurrent() - TURTLE_SIZE / 2);
+		turtle.setLayoutX(displaydata.getPosition().xCurrent() - myTurtleSize / 2);
+		turtle.setLayoutY(displaydata.getPosition().yCurrent() - myTurtleSize / 2);
 		
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
 	}
-	
 	
 	/**
 	 * This method updates command history display in GUI.
@@ -208,9 +212,6 @@ public class Visualizer implements Observer {
 	public void updateCommandHistory () {
 		
 	}
-	
-	
-	
 	
 	//////////////////////////
 	// getters and setters //
@@ -254,7 +255,7 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myGUIController
 	 */
-	public GUIController getGUIController() {
+	public SLogoGUIController getGUIController() {
 		return myGUIController;
 	}
 
@@ -262,7 +263,7 @@ public class Visualizer implements Observer {
 	 * @param myGUIController
 	 *            the myGUIController to set
 	 */
-	public void setGUIController(GUIController myGUIController) {
+	public void setGUIController(SLogoGUIController myGUIController) {
 		this.myGUIController = myGUIController;
 	}
 
@@ -312,14 +313,14 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<DisplayData> getObservableDataList() {
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myObservableDataList;
 	}
 
 	/**
 	 * @param myObservableDataList the myObservableDataList to set
 	 */
-	public void setObservableDataList(ObservableList<DisplayData> 
+	public void setObservableDataList(ObservableList<SLogoDisplayData> 
 												myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
@@ -354,14 +355,14 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<DisplayData> getMyObservableDataList() {
+	public ObservableList<SLogoDisplayData> getMyObservableDataList() {
 		return myObservableDataList;
 	}
 
 	/**
 	 * @param myObservableDataList the myObservableDataList to set
 	 */
-	public void setMyObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+	public void setMyObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
 
@@ -410,14 +411,14 @@ public class Visualizer implements Observer {
 	/**
 	 * @return the myGUIController
 	 */
-	public GUIController getMyGUIController() {
+	public SLogoGUIController getMyGUIController() {
 		return myGUIController;
 	}
 
 	/**
 	 * @param myGUIController the myGUIController to set
 	 */
-	public void setMyGUIController(GUIController myGUIController) {
+	public void setMyGUIController(SLogoGUIController myGUIController) {
 		this.myGUIController = myGUIController;
 	}
 
@@ -492,24 +493,17 @@ public class Visualizer implements Observer {
 	}
 
 	/**
-	 * @return the turtleImagePath
+	 * @return the myTurtleImage
 	 */
-	public static String getTurtleImagePath() {
-		return TURTLE_IMAGE_PATH;
+	public String getmyTurtleImage() {
+		return myTurtleImage;
 	}
 
 	/**
-	 * @return the turtleImage
+	 * @return the myTurtleSize
 	 */
-	public static String getTurtleImage() {
-		return TURTLE_IMAGE;
-	}
-
-	/**
-	 * @return the turtleSize
-	 */
-	public static int getTurtleSize() {
-		return TURTLE_SIZE;
+	public int getmyTurtleSize() {
+		return myTurtleSize;
 	}
 
 	/**
@@ -524,5 +518,33 @@ public class Visualizer implements Observer {
 	 */
 	public void setMyPromptBuilder(SLogoPromptBuilder myPromptBuilder) {
 		this.myPromptBuilder = myPromptBuilder;
+	}
+
+	/**
+	 * @return the myTurtleImage
+	 */
+	public String getMyTurtleImage() {
+		return myTurtleImage;
+	}
+
+	/**
+	 * @param myTurtleImage the myTurtleImage to set
+	 */
+	public void setMyTurtleImage(String myTurtleImage) {
+		this.myTurtleImage = myTurtleImage;
+	}
+
+	/**
+	 * @return the myTurtleSize
+	 */
+	public int getMyTurtleSize() {
+		return myTurtleSize;
+	}
+
+	/**
+	 * @param myTurtleSize the myTurtleSize to set
+	 */
+	public void setMyTurtleSize(int myTurtleSize) {
+		this.myTurtleSize = myTurtleSize;
 	}
 }

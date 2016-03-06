@@ -1,35 +1,20 @@
 package CommandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.Variable;
-import Model.Workspace;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
-public class MakeNode extends CommandNode implements ControlNode {
+public class MakeNode extends BinaryNode{
 
-	private Variable makesVar;
+	private SLogoVariable makesVar;
 	
-	public MakeNode() {
-
-	}
-	
-	@Override
-	public double evaluate(CharacterState state, CommandTree tree)  {
-		/*
-		 * evaluate runs through the tree which holds the value that will be returned that should be equal to 
-		 * our value after this point
-		 */
-		//makesVar.setValue(); --> the node that gets executed before this should return a value that we
-		tree.setMyVars(makesVar);
-		System.out.println("entered right loop for make node");
-		return 0;
-	}
-	
-	@Override
 	public void addVarParam(String string) {
 //		CommandNode.super.addVarParam(string);
 //		int value = Integer.parseInt(string);
-		makesVar = new Variable();
+		makesVar = new SLogoVariable();
 		makesVar.setName(string);
 	}
 	
@@ -41,22 +26,20 @@ public class MakeNode extends CommandNode implements ControlNode {
 //		makesVar.setValue(value);
 //	}
 	
-	public void setVar(Variable var){
+	public void setVar(SLogoVariable var){
 		this.makesVar = var;
 	}
 
-	@Override
-	public String grabType() {
-		// TODO Auto-generated method stub
-		return ControlNode.super.grabType();
-	}
+//	@Override
+//	public String grabType() {
+//		// TODO Auto-generated method stub
+//		return ControlNode.super.grabType();
+//	}
 
 	@Override
-	public double evaluate(CharacterState state) throws SLogoException {
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	
-	
-
 }

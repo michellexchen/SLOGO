@@ -1,9 +1,7 @@
 package CommandNode;
 
-import Exception.SLogoException;
-import Model.CharacterState;
-import Model.Variable;
-import Model.Workspace;
+import Model.*;
+import Exception.*;
 
 /**
  * SLogo's highest level in Node hierarchy
@@ -13,18 +11,11 @@ import Model.Workspace;
 
 public interface Node {
 	
-	static final String NODE = "normal";
-	
-	public abstract double evaluate(CharacterState state) throws SLogoException;
-	
-	default public double evaluate(CharacterState state, CommandTree tree) throws SLogoException {
-		return 0;
-	};
-
-	public abstract void addChild(Node node);
-	
-	public abstract int getNumChildren();
-
+	public abstract double evaluate(SLogoCharacterState state) throws SLogoException;
+	public abstract int numRequiredChildren();
+	public abstract int numCurrentChildren();
 	public abstract String toString();
+	public abstract void addChild(Node child);
+	public abstract int getNumChildren();
 	
 }

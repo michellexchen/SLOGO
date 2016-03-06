@@ -1,21 +1,17 @@
 package CommandNode;
-import Exception.SLogoException;
-import Model.CharacterState;
 
-public class ForNode extends BinaryNode {
 
-	public double evaluate(CharacterState state) throws SLogoException {
-		// TODO: Error checking
-		EnclosureNode controlBracket = (EnclosureNode) getChildren().get(0);
-		String[] arr = controlBracket.getBracketContent().split("\\s+");
-		int start = Integer.parseInt(arr[0]);
-		int end = Integer.parseInt(arr[1]);
-		int increment = Integer.parseInt(arr[2]);
-		double evaluation = 0;
-		for(int x=start; x<=end; x += increment){
-			evaluation += getChildren().get(1).evaluate(state);
-		}
-		return evaluation;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
+
+public class ForNode extends QuaternionNode {
+
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		return 0; // TEMP
 	}
 
 }

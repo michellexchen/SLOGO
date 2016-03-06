@@ -1,6 +1,11 @@
 package CommandNode;
 
-import Model.CharacterState;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 /**
  * SLogo's NumericNode, a class representing a numerical value (evaluate returns
@@ -8,7 +13,7 @@ import Model.CharacterState;
  *
  */
 
-public class NumericNode extends UnaryNode {
+public class NumericNode extends NullaryNode {
 
 	private double myValue;
 
@@ -16,7 +21,7 @@ public class NumericNode extends UnaryNode {
 		myValue = value;
 	}
 
-	public double evaluate(CharacterState state) {
+	public double evaluate(SLogoCharacterState state) {
 		return myValue;
 	}
 

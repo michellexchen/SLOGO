@@ -1,57 +1,50 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import CommandNode.CommandTree;
-import CommandNode.DisplayData;
-import CommandNode.Node;
-import CommandNode.TreeFactory;
-import Controller.Parser;
-import Exception.SLogoException;
-import View.View;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
+import Model.*;
+import View.*;
+import Exception.*;
+import Controller.*;
+import deprecated_to_be_deleted.*;
+import CommandNode.*;
 
 /**
- * @author Adam
+ * 
+ * Workspace class that serves as a container for data objects
  *
  */
-public class Workspace {
+public class SLogoWorkspace {
 
 	private View myView;
 
 	// NEVER USE THESE: BUG ALERT!
-	private List<DisplayData> myDataList;
+	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
-	private List<Variable> myVariableList;
+	private List<SLogoVariable> myVariableList;
 
 	// BELOW ARE TO BE USED
-	private List<Character> myCharacters;
-	private TreeFactory myTreeFactory;
-	private ObservableList<DisplayData> myObservableDataList;
+	private List<SLogoCharacter> myCharacters;
+	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
-	private ObservableList<Variable> myObservableVariableList;
-	
-	public Workspace(View view) throws SLogoException {
+	private ObservableList<SLogoVariable> myObservableVariableList;
+
+	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
 
-		myDataList = new ArrayList<DisplayData>();
+		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
-		myVariableList = new ArrayList<Variable>();
+		myVariableList = new ArrayList<SLogoVariable>();
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 
-		myCharacters = new ArrayList<Character>();
-		myTreeFactory = new TreeFactory();
+		myCharacters = new ArrayList<SLogoCharacter>();
 	}
 	
-	public ObservableList<Variable> getVarList(){
+	public ObservableList<SLogoVariable> getVarList(){
 		return myObservableVariableList;
 	}
 
@@ -59,8 +52,9 @@ public class Workspace {
 		createTurtle();
 	}
 
-	private void createObservableLists(List<DisplayData> datalist, List<String> commandhistory,
-			List<Variable> variablelist) {
+	private void createObservableLists(List<SLogoDisplayData> datalist, 
+									   List<String> commandhistory,
+									   List<SLogoVariable> variablelist) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
 		myObservableVariableList = FXCollections.observableArrayList(variablelist);
@@ -69,24 +63,27 @@ public class Workspace {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
-		getObservableDataList().addListener((ListChangeListener) change -> getView().updateDisplayData());
+		getObservableDataList().addListener((ListChangeListener) 
+				change -> getView().updateDisplayData());
 
-		getObservableCommandHistory().addListener((ListChangeListener) change -> getView().updateCommandHistory());
+		getObservableCommandHistory().addListener((ListChangeListener) 
+				change -> getView().updateCommandHistory());
 
-		getObservableCommandHistory().addListener((ListChangeListener) change -> getView().updateVariables());
+		getObservableCommandHistory().addListener((ListChangeListener) 
+				change -> getView().updateVariables());
 	}
 
 	public void createTurtle() {
-		Turtle myTurtle = new Turtle("OG", 0, 0, true, 0, false, 0);
+		SLogoTurtle myTurtle = new SLogoTurtle("OG", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
-		DisplayData turtleData = new DisplayData(myTurtle.getState());
+		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 
 		// Add Observer (Visualizer)
 		turtleData.addObserver(getView().getObserver());
 		getObservableDataList().add(turtleData);
 	}
 
-	public List<DisplayData> getDataList() {
+	public List<SLogoDisplayData> getDataList() {
 		return myDataList;
 	}
 
@@ -94,15 +91,15 @@ public class Workspace {
 		return myCommandHistory;
 	}
 
-	public List<Character> getCharacterList() {
+	public List<SLogoCharacter> getCharacterList() {
 		return myCharacters;
 	}
 
-	public void addNewCharacter(Character character) {
+	public void addNewCharacter(SLogoCharacter character) {
 		myCharacters.add(character);
 	}
 
-	public void removeCharacter(Character character) {
+	public void removeCharacter(SLogoCharacter character) {
 		myCharacters.remove(character);
 	}
 
@@ -110,20 +107,13 @@ public class Workspace {
 		myCommandHistory.add(command);
 	}
 
-	public void addDisplayData(DisplayData displayData) {
+	public void addDisplayData(SLogoDisplayData displayData) {
 		myDataList.add(displayData);
 	}
 
 	public void readCommand(String command) throws SLogoException {
-		//		format(command);
 		Parser parse = new Parser(this, command);
 		evaluateCommands(parse);
-//		List<Node> nodeList = parser.parse(command);
-//		while(nodeList.size() > 0){
-//			Pair<CommandTree, List<Node>> tuple = myTreeFactory.makeTree(nodeList);
-//			CommandTree myTree = tuple.getKey();
-//			nodeList = tuple.getValue();
-//		}
 	}
 
 	public void evaluateCommands(Parser parse) throws SLogoException{
@@ -132,7 +122,7 @@ public class Workspace {
 		 * we need to have a way to know which turtle it is that we are currently playing with
 		 * characters won't get changed concurrently so this iteration may not even be necesessary 
 		 */
-		for (Character character : myCharacters) {
+		for (SLogoCharacter character : myCharacters) {
 			parse.executeCommandForChar(character);
 			//evaluation = myTree.traverse(character.getState());
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
@@ -141,7 +131,7 @@ public class Workspace {
 	
 	public double traverse(CommandTree myTree) throws SLogoException{
 		double evaluation = 0;
-		for (Character character : myCharacters) {
+		for (SLogoCharacter character : myCharacters) {
 			evaluation = myTree.traverse(character.getState());
 			getObservableDataList().get(myCharacters.indexOf(character)).updateData(character.getState());
 		}
@@ -149,8 +139,25 @@ public class Workspace {
 		return evaluation;
 	}
 
-	public void addToVarList(Variable var){
+	public void addToVarList(SLogoVariable var){
 		myObservableVariableList.add(var);
+	}
+		
+	public void format(String command){
+		checkForVars(command.split(" "));
+	}
+
+	public void checkForVars(String[] command){
+
+		for(int i = 0; i < command.length; i++){
+			if(command[i].equals("make")){
+				SLogoVariable var = new SLogoVariable();
+				var.setName(command[i+1]);
+
+				//myTreeFactory.makeTree(text)
+				i++; //skip checking my next input as it's been checked right now
+			}
+		}
 	}
 
 	/**
@@ -171,7 +178,7 @@ public class Workspace {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<DisplayData> getObservableDataList() {
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myObservableDataList;
 	}
 
@@ -179,7 +186,7 @@ public class Workspace {
 	 * @param myObservableDataList
 	 *            the myObservableDataList to set
 	 */
-	public void setObservableDataList(ObservableList<DisplayData> myObservableDataList) {
+	public void setObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
 

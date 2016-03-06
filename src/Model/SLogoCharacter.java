@@ -6,11 +6,11 @@ package Model;
  *
  */
 
-public interface Character {
+public interface SLogoCharacter {
 
-	public abstract void setState(CharacterState myState);
+	public abstract void setState(SLogoCharacterState myState);
 
-	public abstract CharacterState getState();
+	public abstract SLogoCharacterState getState();
 
 	public abstract String getName();
 
