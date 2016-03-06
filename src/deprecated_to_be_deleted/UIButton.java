@@ -1,4 +1,4 @@
-package view;
+package deprecated_to_be_deleted;
 
 import com.sun.javafx.geom.BaseBounds;
 import com.sun.javafx.geom.transform.BaseTransform;
