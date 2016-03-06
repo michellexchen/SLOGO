@@ -1,4 +1,4 @@
-package commandnode;
+package CommandNode;
 
 import model.SLogoCharacterState;
 

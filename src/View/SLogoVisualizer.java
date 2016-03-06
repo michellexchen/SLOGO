@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import commandnode.Position;
+import CommandNode.Position;
 import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;

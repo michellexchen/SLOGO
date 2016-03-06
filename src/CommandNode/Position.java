@@ -1,4 +1,4 @@
-package commandnode;
+package CommandNode;
 
 /**
  * A wrapper class for (x, y)-current and (x, y)-previous coordinates

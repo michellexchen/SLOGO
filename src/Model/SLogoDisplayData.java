@@ -6,8 +6,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import commandnode.Position;
+import CommandNode.Position;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

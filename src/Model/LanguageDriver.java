@@ -27,7 +27,6 @@ public class LanguageDriver extends FileDriver {
 			super.load();
 		} catch (IOException e) {
 			throw new SLogoException("Encountered an error loading the language file");
-			// System.out.println(e.getMessage());
 		}
 	}
 

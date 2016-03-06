@@ -1,5 +1,7 @@
 forward:Forward
-back:Back
+back:Backward
+add:Sum
+subtract:Difference
 left:Left
 right:Right
 setheading:SetHeading

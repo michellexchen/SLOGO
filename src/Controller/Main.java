@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -21,9 +21,7 @@ public class Main extends Application {
 	private SLogoModel myModel;
 	private SLogoView myView;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 
 	public void start(Stage myStage) throws SLogoException, IOException {
 		initialize();

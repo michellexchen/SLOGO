@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import commandnode.Node;
+import CommandNode.Node;
 import exception.SLogoException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

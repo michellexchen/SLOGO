@@ -1,4 +1,4 @@
-package commandnode;
+package CommandNode;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;

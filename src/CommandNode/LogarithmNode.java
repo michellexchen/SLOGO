@@ -1,4 +1,4 @@
-package commandnode;
+package CommandNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
