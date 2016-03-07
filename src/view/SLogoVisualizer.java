@@ -163,7 +163,7 @@ public class SLogoVisualizer implements Observer {
 		getGUIController().getCanvas().setStyle("-fx-background-color: "
 													+ getCanvasColor());
 		
-		getModel().getObservableDataList();
+		//getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);

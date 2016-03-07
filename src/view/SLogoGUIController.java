@@ -52,13 +52,14 @@ public class SLogoGUIController implements Initializable  {
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
 	private ListView<String> myPropertiesPaneView = new ListView<String>();
-    private ObservableList<String> properties;
+    private ObservableList<String> myProperties;
     
     
     private Color myCanvasColor;
-    private ColorPicker colorPicker;
-    private HBox colorHb;
+    private ColorPicker myColorPicker;
+    private HBox myColorHBox;
     
+    private SLogoCustomizerBuilder myCustomizer;
 
 	
 	private Model myModel;
@@ -114,8 +115,8 @@ public class SLogoGUIController implements Initializable  {
     @FXML
     private List<String> myHistory;
     
-    @FXML
-    private List<String> myProperties;
+//    @FXML
+//    private List<String> myProperties;
 
     
     
@@ -227,16 +228,15 @@ public class SLogoGUIController implements Initializable  {
     
     
     public void displayProperties(){
-    	myPropertiesPaneView.setItems(properties);
+    	myPropertiesPaneView.setItems(myProperties);
     	myPropertiesPaneView.setPrefSize(200, 150);
     }
     
-    SLogoCustomizer customizer;
 
     
     public void updateProperties(SLogoDisplayData displayData){
     	
-    	properties =FXCollections.observableArrayList (
+    	myProperties =FXCollections.observableArrayList (
     			("Angle: "+ Double.toString(displayData.getAngle())),
     			("X position: " + displayData.getX()),
     			("Y position: " + displayData.getY()),
@@ -245,15 +245,15 @@ public class SLogoGUIController implements Initializable  {
     			);
     	
     	myPropertiesPaneView.setPrefSize(200, 150);
-    	myPropertiesPaneView.setItems(properties);
+    	myPropertiesPaneView.setItems(myProperties);
     }
     
     
     private void customize(){
     	myCustomizeButton.setOnMouseClicked(e -> {
-    		customizer = new SLogoCustomizer();
+    		myCustomizer = new SLogoCustomizerBuilder();
     		System.out.println("hi");
-    		System.out.println(customizer.getMyColor());
+    		System.out.println(myCustomizer.getMyColor());
 //        	Dialog customize = new Dialog();
 //        	customize.getDialogPane().setPrefSize(500, 500);
 //        	customize.setTitle("CUSTOMIZE");
@@ -266,17 +266,17 @@ public class SLogoGUIController implements Initializable  {
     private HBox chooseColor(){	//for selecting color   		
 		Label colorLabel = new Label("Select background color: ");
 		
-		colorPicker = new ColorPicker();
-        colorPicker.setOnAction(e -> {
-        	myCanvasColor = colorPicker.getValue();
+		myColorPicker = new ColorPicker();
+        myColorPicker.setOnAction(e -> {
+        	myCanvasColor = myColorPicker.getValue();
         	System.out.println(myCanvasColor);
         });
 		
-		colorHb = new HBox();
-		colorHb.getStylesheets().add("View/splashstyle.css");
-		colorHb.getChildren().addAll(colorLabel, colorPicker);
+		myColorHBox = new HBox();
+		myColorHBox.getStylesheets().add("View/splashstyle.css");
+		myColorHBox.getChildren().addAll(colorLabel, myColorPicker);
 
-		return colorHb;
+		return myColorHBox;
     }
     
 	public void setCommand(String myCommand) {
