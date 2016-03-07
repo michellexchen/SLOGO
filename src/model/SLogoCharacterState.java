@@ -14,9 +14,9 @@ public abstract class SLogoCharacterState {
 	private double myYCoordinate;
 	private double myDirection;
 	private boolean isHidden;
+	private Pen myPen;
 	private double myAngle;
 	private ImageView myImageView;
-	private boolean myPenDown;
 
 	public SLogoCharacterState(double xCoor, double yCoor, double direction,
 					      boolean isHidden, double angle) {
@@ -26,6 +26,10 @@ public abstract class SLogoCharacterState {
 		this.isHidden = isHidden;
 		this.myAngle = angle;
 		myImageView = new ImageView();
+	}
+	
+	public Pen getPen() {
+		return myPen;
 	}
 
 	public void setHidden(boolean hide) {
@@ -74,10 +78,6 @@ public abstract class SLogoCharacterState {
 
 	public void setImageView(ImageView imageView) {
 		this.myImageView = imageView;
-	}
-	
-	public void setPen(boolean penDown) {
-		this.myPenDown = penDown;
 	}
 	
 }
