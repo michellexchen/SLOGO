@@ -41,8 +41,7 @@ public class SLogoTreeFactory {
 	}
 
 	public Node createChild(List<String> commandParts) throws SLogoException{
-		String currCommand = commandParts.get(0);
-		commandParts.remove(0);
+		String currCommand = commandParts.remove(0);
 		if(isNumeric(currCommand)){
 			return createNode(currCommand);
 		}

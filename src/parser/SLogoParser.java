@@ -25,19 +25,16 @@ public class SLogoParser {
 	}
 
 	public List<String> formatCommandParts(String text) throws SLogoException {
-		return Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
-				.collect(Collectors.toCollection(ArrayList::new));
+		return sanitateVars(Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
+				.collect(Collectors.toCollection(ArrayList::new)));
 	}
-
 
 	public double readCommand(String command) throws SLogoException {
 		System.out.println("Reading command: "+command);
 		List<String> commandParts = formatCommandParts(command);
-		List<Node> myTree = myTreeFactory.create(commandParts);
+		List<Node> myTree = myTreeFactory.createNodes(commandParts);
 		return evaluateNodes(myTree);
 	}
-
-	
 	
 	public double evaluateNodes(List<Node> myNodes) throws SLogoException{
 		double evaluation = 0;
@@ -53,31 +50,43 @@ public class SLogoParser {
 		return evaluation;
 	}
 	
+	public boolean isVar(String str){
+		return str.matches(":[a-zA-Z_]+");
+	}
+	
+	public boolean isMake(String str){
+		return str.equals("make");
+	}
+	
+	private SLogoVariable checkGlobalVars(String possibleVar){
+		for(SLogoVariable var: myWorkspace.getVarList()) {
+			if(var.getName().equals(possibleVar)) return var;
+		}
+		return null;
+	}
+	
 	/*
 	 * Translates the variables in an input into their respective values; default value being 0
 	 */
 	private List<String> sanitateVars(List<String> commands){
 		String[] commandList = new String[commands.size()];
 		commandList = commands.toArray(commandList);
-		List<SLogoVariable> wsl = myWorkspace.getVarList();
-		//can change this to regrex
 		for(int i = 0; i < commands.size(); i++){
-			
+			if(isMake(commands.get(i))) i+= 2;
+			if(isVar(commands.get(i))){
+				SLogoVariable globalVar = checkGlobalVars(commands.get(i));
+				if(globalVar != null){
+					commandList[i] = "" + globalVar.getValue();
+				}
+			}
 		}
-		for(int i = 0; i < wsl.size(); i++){
-			String name = wsl.get(i).getName();
-			if(commands.indexOf(name) > -1){
-				System.out.println(commands.get(commands.indexOf(wsl.get(i).getName())));
-				commandList[commands.indexOf(wsl.get(i).getName())] = "" + wsl.get(i).getValue();
-			} //else if(commandList[commands.indexOf(name)].contains(":"))
-				//	commandList[commands.indexOf(wsl.get(i).getName())] = "0";
-		}
-		List<String> results = Arrays.asList(commandList);
+		List<String> results = new ArrayList<String>(Arrays.asList(commandList));
+		System.out.println(results);
 		return results;
 	}
 	
 	public static void main(String[] args) throws SLogoException{
-		String input = "fd add 50";
+		String input = "fd add :s 100";
 		SLogoWorkspace w = new SLogoWorkspace(new SLogoView());
 		SLogoVariable t = new SLogoVariable();
 		t.setName(":t");
