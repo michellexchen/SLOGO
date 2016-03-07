@@ -14,12 +14,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -43,6 +45,8 @@ public class SLogoGUIController implements Initializable  {
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
 	private ListView<String> myPropertiesPaneView = new ListView<String>();
+    private ObservableList<String> properties;
+
 	
 	private Model myModel;
 	private View myView;
@@ -84,7 +88,7 @@ public class SLogoGUIController implements Initializable  {
     
     //Displays the properties of a turtle
     @FXML
-    private ScrollPane myPropertyPane;
+    private Pane myPropertyPane;
     
     //This adds workspace
     @FXML
@@ -104,7 +108,9 @@ public class SLogoGUIController implements Initializable  {
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	
+    	//initializes properties
+    	myPropertyPane.getChildren().add(myPropertiesPaneView);
+
     	//TODO: Separate the operations below into different methods
     	
     	myHistory = new ArrayList<String>();
@@ -205,16 +211,15 @@ public class SLogoGUIController implements Initializable  {
     	});
     }    
     
-    private ObservableList<String> properties;
     
     public void displayProperties(){
-    	//myPropertiesPaneView = new ListView<String>();	
     	myPropertiesPaneView.setItems(properties);
-    	myPropertyPane.setContent(myPropertiesPaneView);
+    	myPropertiesPaneView.setPrefSize(200, 150);
     }
     
+    
     public void updateProperties(SLogoDisplayData displayData){
-    	    	
+    	
     	properties =FXCollections.observableArrayList (
     			("Angle: "+ Double.toString(displayData.getAngle())),
     			("X position: " + displayData.getX()),
@@ -223,8 +228,8 @@ public class SLogoGUIController implements Initializable  {
     			("Pen Color: " + displayData.getPenColor().toString())			
     			);
     	
+    	myPropertiesPaneView.setPrefSize(200, 150);
     	myPropertiesPaneView.setItems(properties);
-    	myPropertyPane.setContent(myPropertiesPaneView);
     }
 
 	public void setCommand(String myCommand) {

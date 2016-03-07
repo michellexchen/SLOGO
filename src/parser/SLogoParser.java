@@ -33,7 +33,7 @@ public class SLogoParser {
 	public double readCommand(String command) throws SLogoException {
 		System.out.println("Reading command: "+command);
 		List<String> commandParts = formatCommandParts(command);
-		List<Node> myTree = myTreeFactory.create(commandParts);
+		List<Node> myTree = myTreeFactory.createNodes(commandParts);
 		return evaluateNodes(myTree);
 	}
 
@@ -76,23 +76,23 @@ public class SLogoParser {
 		return results;
 	}
 	
-	public static void main(String[] args) throws SLogoException{
-		String input = "fd add 50";
-		SLogoWorkspace w = new SLogoWorkspace(new SLogoView());
-		SLogoVariable t = new SLogoVariable();
-		t.setName(":t");
-		t.setValue(50);
-		w.addToVarList(t);
-		SLogoVariable s = new SLogoVariable();
-		s.setName(":s");
-		s.setValue(10);
-		w.addToVarList(s);
-		SLogoVariable y = new SLogoVariable();
-		y.setName(":y");
-		y.setValue(500);
-		w.addToVarList(y);
-		SLogoParser p = new SLogoParser(w);
-		p.readCommand(input);
-	}
+//	public static void main(String[] args) throws SLogoException{
+//		String input = "fd add 50";
+//		SLogoWorkspace w = new SLogoWorkspace(new SLogoView());
+//		SLogoVariable t = new SLogoVariable();
+//		t.setName(":t");
+//		t.setValue(50);
+//		w.addToVarList(t);
+//		SLogoVariable s = new SLogoVariable();
+//		s.setName(":s");
+//		s.setValue(10);
+//		w.addToVarList(s);
+//		SLogoVariable y = new SLogoVariable();
+//		y.setName(":y");
+//		y.setValue(500);
+//		w.addToVarList(y);
+//		SLogoParser p = new SLogoParser(w);
+//		// p.readCommand(input);
+//	}
 
 }
