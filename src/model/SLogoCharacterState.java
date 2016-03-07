@@ -75,4 +75,9 @@ public abstract class SLogoCharacterState {
 	public void setImageView(ImageView imageView) {
 		this.imageView = imageView;
 	}
+	
+	public void setPen(boolean penDown) {
+		this.penDown = penDown;
+	}
+	
 }
