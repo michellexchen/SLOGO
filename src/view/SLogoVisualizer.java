@@ -18,6 +18,12 @@ import javafx.stage.Stage;
 import model.Model;
 import model.SLogoDisplayData;
 
+/**
+ * 
+ * Visualizer class that contains methods that renders turtles 
+ * on the screen to show the user
+ *
+ */
 public class SLogoVisualizer implements Observer {
 	
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
@@ -163,7 +169,7 @@ public class SLogoVisualizer implements Observer {
 		getGUIController().getCanvas().setStyle("-fx-background-color: "
 													+ getCanvasColor());
 		
-		getModel().getObservableDataList();
+		//getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
@@ -174,6 +180,7 @@ public class SLogoVisualizer implements Observer {
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
 			
+			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
 			
 			System.out.println("**");
@@ -189,6 +196,7 @@ public class SLogoVisualizer implements Observer {
 		turtle.setImage(image);
 		
 		//assign click action - change the action to change attributes
+		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
 			turtle.setFitWidth(120);
 			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);

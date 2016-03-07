@@ -87,6 +87,7 @@ public class SLogoParser {
 	
 	public static void main(String[] args) throws SLogoException{
 		String input = "fd add :s 100";
+		String makeInput = "make :k 789";
 		SLogoWorkspace w = new SLogoWorkspace(new SLogoView());
 		SLogoVariable t = new SLogoVariable();
 		t.setName(":t");
@@ -101,7 +102,8 @@ public class SLogoParser {
 		y.setValue(500);
 		w.addToVarList(y);
 		SLogoParser p = new SLogoParser(w);
-		p.readCommand(input);
+		p.readCommand(makeInput);
 	}
+	
 
 }

@@ -10,22 +10,22 @@ import javafx.scene.image.ImageView;
 
 public abstract class SLogoCharacterState {
 
-	private double xCoor;
-	private double yCoor;
-	private double direction;
+	private double myXCoordinate;
+	private double myYCoordinate;
+	private double myDirection;
 	private boolean isHidden;
-	private double angle;
-	private ImageView imageView;
 	private Pen myPen;
+	private double myAngle;
+	private ImageView myImageView;
 
 	public SLogoCharacterState(double xCoor, double yCoor, double direction,
 					      boolean isHidden, double angle) {
-		this.xCoor = xCoor;
-		this.yCoor = yCoor;
-		this.direction = direction;
+		this.myXCoordinate = xCoor;
+		this.myYCoordinate = yCoor;
+		this.myDirection = direction;
 		this.isHidden = isHidden;
-		this.angle = angle;
-		imageView = new ImageView();
+		this.myAngle = angle;
+		myImageView = new ImageView();
 	}
 	
 	public Pen getPen() {
@@ -41,43 +41,43 @@ public abstract class SLogoCharacterState {
 	}
 
 	public void setXCoor(double xCoor) {
-		this.xCoor = xCoor;
+		this.myXCoordinate = xCoor;
 	}
 
 	public void setYCoor(double yCoor) {
-		this.yCoor = yCoor;
+		this.myYCoordinate = yCoor;
 	}
 
 	public double getXCoor() {
-		return xCoor;
+		return myXCoordinate;
 	}
 
 	public double getYCoor() {
-		return yCoor;
+		return myYCoordinate;
 	}
 
 	public double getDirection() {
-		return direction;
+		return myDirection;
 	}
 
 	public void setDirection(double direction) {
-		this.direction = direction;
+		this.myDirection = direction;
 	}
 
 	public double getAngle() {
-		return angle;
+		return myAngle;
 	}
 
 	public void setAngle(double angle) {
-		this.angle = angle;
+		this.myAngle = angle;
 	}
 
 	public ImageView getImageView() {
-		return imageView;
+		return myImageView;
 	}
 
 	public void setImageView(ImageView imageView) {
-		this.imageView = imageView;
+		this.myImageView = imageView;
 	}
 	
 }

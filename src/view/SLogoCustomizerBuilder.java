@@ -9,7 +9,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class SLogoCustomizer extends SLogoBuilder{
+/**
+ * 
+ * CustomizerBuilder that builds a prompt screen when
+ * Customize button is clicked
+ */
+public class SLogoCustomizerBuilder extends SLogoBuilder{
     private static final int XPROMPTSIZE = 500;
     private static final int YPROMPTSIZE = 275; 
     private static final int PADDING = 55;
@@ -27,7 +32,7 @@ public class SLogoCustomizer extends SLogoBuilder{
 	private HBox colorHb;
 
 	
-	public SLogoCustomizer() {
+	public SLogoCustomizerBuilder() {
 		setup();
 		myCustomizerStage = new Stage();
 		myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
