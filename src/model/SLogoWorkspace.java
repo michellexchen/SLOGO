@@ -123,7 +123,7 @@ public class SLogoWorkspace {
 	}
 
 	public void addToVarList(SLogoVariable var){
-
+		myObservableVariableList.add(var);
 	}
 
 	/**
