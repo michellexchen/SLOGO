@@ -14,21 +14,31 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Model;
+import model.SLogoDisplayData;
 
 
 public class SLogoGUIController implements Initializable  {
@@ -41,6 +51,15 @@ public class SLogoGUIController implements Initializable  {
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
+	private ListView<String> myPropertiesPaneView = new ListView<String>();
+    private ObservableList<String> properties;
+    
+    
+    private Color myCanvasColor;
+    private ColorPicker colorPicker;
+    private HBox colorHb;
+    
+
 	
 	private Model myModel;
 	private View myView;
@@ -82,7 +101,7 @@ public class SLogoGUIController implements Initializable  {
     
     //Displays the properties of a turtle
     @FXML
-    private ScrollPane myPropertyPane;
+    private Pane myPropertyPane;
     
     //This adds workspace
     @FXML
@@ -95,13 +114,16 @@ public class SLogoGUIController implements Initializable  {
     @FXML
     private List<String> myHistory;
     
-
+    @FXML
+    private List<String> myProperties;
 
     
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	
+    	//initializes properties
+    	myPropertyPane.getChildren().add(myPropertiesPaneView);
+
     	//TODO: Separate the operations below into different methods
     	
     	myHistory = new ArrayList<String>();
@@ -119,8 +141,9 @@ public class SLogoGUIController implements Initializable  {
             run(myCommand);
         });  
         
-        
-        
+        //customize button
+        customize();
+              
         //AddWorkspace Button. Causes Model to create a new workspace
         myAddWorkspaceButton.setOnAction(e -> {
         	
@@ -154,6 +177,7 @@ public class SLogoGUIController implements Initializable  {
           	
           	myHistory.add(command);
           	displayHistory();
+          	displayProperties();
     }
     
     private void popup(String link){
@@ -172,30 +196,6 @@ public class SLogoGUIController implements Initializable  {
         stage.show();
     }
     
-    
-//    private void myRunButtonmyTextField(){
-//    	myRunButton.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//	    		sendmyTextField();
-//	    		myHistoryPane.add(myTextField.getText());
-//	    		displayHistoryPane();
-//	    		myTextField.clear();
-//			}
-//    	});
-//    }
-//    
-//    public String sendmyTextField(){ //to send to backend?
-//    	return myTextField.getText();
-//    }
-//    
-//    private void displayHistory(){
-//    	myHistoryPaneView = new ListView<String>();
-//    	ObservableList<String> items =FXCollections.observableArrayList (
-//    			myHistoryPane);
-//    	myHistoryPaneView.setItems(items);
-//    	((ScrollPane) myHistoryPane).setContent(myHistoryPaneView);
-//    }
     
     private void displayHistory(){
     	myHistoryPaneView = new ListView<String>();
@@ -224,11 +224,64 @@ public class SLogoGUIController implements Initializable  {
     	    }
     	});
     }    
+    
+    
+    public void displayProperties(){
+    	myPropertiesPaneView.setItems(properties);
+    	myPropertiesPaneView.setPrefSize(200, 150);
+    }
+    
+    SLogoCustomizer customizer;
 
+    
+    public void updateProperties(SLogoDisplayData displayData){
+    	
+    	properties =FXCollections.observableArrayList (
+    			("Angle: "+ Double.toString(displayData.getAngle())),
+    			("X position: " + displayData.getX()),
+    			("Y position: " + displayData.getY()),
+    			("Pen Down: " + displayData.isPenDown()),
+    			("Pen Color: " + displayData.getPenColor().toString())			
+    			);
+    	
+    	myPropertiesPaneView.setPrefSize(200, 150);
+    	myPropertiesPaneView.setItems(properties);
+    }
+    
+    
+    private void customize(){
+    	myCustomizeButton.setOnMouseClicked(e -> {
+    		customizer = new SLogoCustomizer();
+    		System.out.println("hi");
+    		System.out.println(customizer.getMyColor());
+//        	Dialog customize = new Dialog();
+//        	customize.getDialogPane().setPrefSize(500, 500);
+//        	customize.setTitle("CUSTOMIZE");
+//        	customize.setGraphic(chooseColor());
+//        	customize.getDialogPane().getButtonTypes().add(new ButtonType("DONE", ButtonData.CANCEL_CLOSE));
+//        	customize.showAndWait();
+		});
+    }
+
+    private HBox chooseColor(){	//for selecting color   		
+		Label colorLabel = new Label("Select background color: ");
+		
+		colorPicker = new ColorPicker();
+        colorPicker.setOnAction(e -> {
+        	myCanvasColor = colorPicker.getValue();
+        	System.out.println(myCanvasColor);
+        });
+		
+		colorHb = new HBox();
+		colorHb.getStylesheets().add("View/splashstyle.css");
+		colorHb.getChildren().addAll(colorLabel, colorPicker);
+
+		return colorHb;
+    }
+    
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
 	}
-
 
 	public Pane getCanvas() {
 		return myCanvas;
@@ -247,22 +300,6 @@ public class SLogoGUIController implements Initializable  {
 		this.myCanvas = myCanvas;
 	}
 
-	public MenuButton getMyMenu() {
-		return myMenu;
-	}
-
-	public void setMyMenu(MenuButton myMenu) {
-		this.myMenu = myMenu;
-	}
-
-	public List<MenuItem> getMyMenuItems() {
-		return myMenuItems;
-	}
-
-	public void setMyMenuItems(List<MenuItem> myMenuItems) {
-		this.myMenuItems = myMenuItems;
-	}
-
 	/**
 	 * @return the myModel
 	 */
@@ -277,213 +314,4 @@ public class SLogoGUIController implements Initializable  {
 		this.myModel = myModel;
 	}
 	
-	/**
-	 * @return the myView
-	 */
-	public View getView() {
-		return myView;
-	}
-
-	/**
-	 * @param myView the myView to set
-	 */
-	public void setView(View myView) {
-		this.myView = myView;
-	}
-
-	/**
-	 * @return the myBrowser
-	 */
-	public WebView getMyBrowser() {
-		return myBrowser;
-	}
-
-	/**
-	 * @param myBrowser the myBrowser to set
-	 */
-	public void setMyBrowser(WebView myBrowser) {
-		this.myBrowser = myBrowser;
-	}
-
-	/**
-	 * @return the myWebEngine
-	 */
-	public WebEngine getMyWebEngine() {
-		return myWebEngine;
-	}
-
-	/**
-	 * @param myWebEngine the myWebEngine to set
-	 */
-	public void setMyWebEngine(WebEngine myWebEngine) {
-		this.myWebEngine = myWebEngine;
-	}
-
-	/**
-	 * @return the myHistoryPaneView
-	 */
-	public ListView<String> getMyHistoryPaneView() {
-		return myHistoryPaneView;
-	}
-
-	/**
-	 * @param myHistoryPaneView the myHistoryPaneView to set
-	 */
-	public void setMyHistoryPaneView(ListView<String> myHistoryPaneView) {
-		this.myHistoryPaneView = myHistoryPaneView;
-	}
-
-	/**
-	 * @return the myModel
-	 */
-	public Model getMyModel() {
-		return myModel;
-	}
-
-	/**
-	 * @param myModel the myModel to set
-	 */
-	public void setMyModel(Model myModel) {
-		this.myModel = myModel;
-	}
-
-	/**
-	 * @return the myView
-	 */
-	public View getMyView() {
-		return myView;
-	}
-
-	/**
-	 * @param myView the myView to set
-	 */
-	public void setMyView(View myView) {
-		this.myView = myView;
-	}
-
-	/**
-	 * @return the myCommand
-	 */
-	public String getMyCommand() {
-		return myCommand;
-	}
-
-	/**
-	 * @param myCommand the myCommand to set
-	 */
-	public void setMyCommand(String myCommand) {
-		this.myCommand = myCommand;
-	}
-
-	/**
-	 * @return the myHelpButton
-	 */
-	public Button getMyHelpButton() {
-		return myHelpButton;
-	}
-
-	/**
-	 * @param myHelpButton the myHelpButton to set
-	 */
-	public void setMyHelpButton(Button myHelpButton) {
-		this.myHelpButton = myHelpButton;
-	}
-
-	/**
-	 * @return the myTextField
-	 */
-	public TextField getMyTextField() {
-		return myTextField;
-	}
-
-	/**
-	 * @param myTextField the myTextField to set
-	 */
-	public void setMyTextField(TextField myTextField) {
-		this.myTextField = myTextField;
-	}
-
-	/**
-	 * @return the myRunButton
-	 */
-	public Button getMyRunButton() {
-		return myRunButton;
-	}
-
-	/**
-	 * @param myRunButton the myRunButton to set
-	 */
-	public void setMyRunButton(Button myRunButton) {
-		this.myRunButton = myRunButton;
-	}
-
-	/**
-	 * @return the myCanvas
-	 */
-	public Pane getMyCanvas() {
-		return myCanvas;
-	}
-
-	/**
-	 * @param myCanvas the myCanvas to set
-	 */
-	public void setMyCanvas(Pane myCanvas) {
-		this.myCanvas = myCanvas;
-	}
-
-	/**
-	 * @return the myCommandHistoryPane
-	 */
-	public ScrollPane getMyCommandHistoryPane() {
-		return myCommandHistoryPane;
-	}
-
-	/**
-	 * @param myCommandHistoryPane the myCommandHistoryPane to set
-	 */
-	public void setMyCommandHistoryPane(ScrollPane myCommandHistoryPane) {
-		this.myCommandHistoryPane = myCommandHistoryPane;
-	}
-
-	/**
-	 * @return the myVariablePane
-	 */
-	public ScrollPane getMyVariablePane() {
-		return myVariablePane;
-	}
-
-	/**
-	 * @param myVariablePane the myVariablePane to set
-	 */
-	public void setMyVariablePane(ScrollPane myVariablePane) {
-		this.myVariablePane = myVariablePane;
-	}
-
-	/**
-	 * @return the myCustomizeButton
-	 */
-	public Button getMyCustomizeButton() {
-		return myCustomizeButton;
-	}
-
-	/**
-	 * @param myCustomizeButton the myCustomizeButton to set
-	 */
-	public void setMyCustomizeButton(Button myCustomizeButton) {
-		this.myCustomizeButton = myCustomizeButton;
-	}
-
-	/**
-	 * @return the myHistory
-	 */
-	public List<String> getMyHistory() {
-		return myHistory;
-	}
-
-	/**
-	 * @param myHistory the myHistory to set
-	 */
-	public void setMyHistory(List<String> myHistory) {
-		this.myHistory = myHistory;
-	}
 }

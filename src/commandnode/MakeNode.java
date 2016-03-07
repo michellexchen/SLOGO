@@ -9,7 +9,7 @@ public class MakeNode extends BinaryNode{
 	private SLogoVariable makesVar;
 	
 	public MakeNode(){
-		makesVar.getName() = 
+//		makesVar.getName() = 
 	}
 	
 	public void addVarParam(String string) {

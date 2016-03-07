@@ -28,7 +28,7 @@ public class SLogoException extends Exception {
 	public SLogoException(String arg0) {
 		super(arg0);
 		Dialog alert = new Dialog();
-		alert.setTitle("SLOGO EXCEPTIOM");
+		alert.setTitle("SLOGO EXCEPTION");
 		alert.setHeaderText("ERROR: " + arg0);
 		ButtonType buttonTypeOk = new ButtonType("Okay");
 		alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
