@@ -135,7 +135,7 @@ public class SLogoGUIController implements Initializable  {
         });
                    
         //Run button - return user input and stores it in myCommand
-        
+        //This will be refactored to a separate mmethod
         myRunButton.setOnAction(e -> {
         	myCommand = myTextField.getText();
             myTextField.clear();
@@ -146,6 +146,7 @@ public class SLogoGUIController implements Initializable  {
         customize();
               
         //AddWorkspace Button. Causes Model to create a new workspace
+        //This will be refactored out to a separate method
         myAddWorkspaceButton.setOnAction(e -> {
         	
         	//Hide current stage
@@ -237,7 +238,7 @@ public class SLogoGUIController implements Initializable  {
     public void updateProperties(SLogoDisplayData displayData){
     	
     	myProperties =FXCollections.observableArrayList (
-    			("Angle: "+ Double.toString(displayData.getAngle())),
+    			("Angle: " + Double.toString(displayData.getAngle())),
     			("X position: " + displayData.getX()),
     			("Y position: " + displayData.getY()),
     			("Pen Down: " + displayData.isPenDown()),
@@ -273,7 +274,7 @@ public class SLogoGUIController implements Initializable  {
         });
 		
 		myColorHBox = new HBox();
-		myColorHBox.getStylesheets().add("View/splashstyle.css");
+		myColorHBox.getStylesheets().add("view/splashstyle.css");
 		myColorHBox.getChildren().addAll(colorLabel, myColorPicker);
 
 		return myColorHBox;

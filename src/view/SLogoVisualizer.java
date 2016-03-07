@@ -189,6 +189,7 @@ public class SLogoVisualizer implements Observer {
 		turtle.setImage(image);
 		
 		//assign click action - change the action to change attributes
+		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
 			turtle.setFitWidth(120);
 			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
