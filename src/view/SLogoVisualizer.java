@@ -18,6 +18,12 @@ import javafx.stage.Stage;
 import model.Model;
 import model.SLogoDisplayData;
 
+/**
+ * 
+ * Visualizer class that contains methods that renders turtles 
+ * on the screen to show the user
+ *
+ */
 public class SLogoVisualizer implements Observer {
 	
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
@@ -174,6 +180,7 @@ public class SLogoVisualizer implements Observer {
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
 			
+			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
 			
 			System.out.println("**");

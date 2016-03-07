@@ -40,7 +40,12 @@ import javafx.stage.Stage;
 import model.Model;
 import model.SLogoDisplayData;
 
-
+/**
+ * 
+ * A controller class used in conjunction with SceneBuilder's
+ * UI.fxml file
+ *
+ */
 public class SLogoGUIController implements Initializable  {
 	
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"

@@ -2,6 +2,11 @@ package model;
 
 import java.util.Observable;
 
+/**
+ * 
+ * SLogo Variable class that represents variable objects
+ *
+ */
 public class SLogoVariable extends Observable {
 
 	private String myName;

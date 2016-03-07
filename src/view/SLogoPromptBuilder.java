@@ -17,6 +17,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * Subclass of SLogoBuilder that generates a prompt screen
+ * that greets the user and takes in necessary information 
+ * such as language and pane color
+ * 
+ */
 public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int XPROMPTSIZE = 500;
     private static final int YPROMPTSIZE = 275; 

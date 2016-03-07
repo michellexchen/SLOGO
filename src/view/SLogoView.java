@@ -11,6 +11,11 @@ import javafx.scene.control.Alert.AlertType;
 import model.Model;
 import model.SLogoWorkspace;
 
+/**
+ * 
+ * View class that contains GUI front-end components
+ *
+ */
 public class SLogoView implements View {
 
 	private final int WIDTH = 440;

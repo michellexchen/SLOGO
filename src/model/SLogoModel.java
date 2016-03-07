@@ -11,6 +11,12 @@ import javafx.collections.ObservableList;
 import parser.SLogoParser;
 import view.View;
 
+/**
+ * 
+ * Model class that houses workspaces and saves metadata
+ * for SLogo IDE
+ *
+ */
 public class SLogoModel implements Model {
 
 	private View myView;

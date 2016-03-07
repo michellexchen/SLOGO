@@ -6,8 +6,9 @@ package view;
 import java.util.ResourceBundle;
 
 /**
+ * Abstract builder class that are extended by other builders in View
  * @author Hunter
- *
+ * 
  */
 public abstract class SLogoBuilder {
     protected static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
