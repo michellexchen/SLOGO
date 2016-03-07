@@ -28,6 +28,8 @@ public class SLogoWorkspace {
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<SLogoVariable> myObservableVariableList;
+	private ObservableList<int[]> myObservableColorList;
+	private ObservableList<String> myObservableShapeList;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
