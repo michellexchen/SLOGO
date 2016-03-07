@@ -29,6 +29,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Model;
+import model.SLogoDisplayData;
 
 
 public class SLogoGUIController implements Initializable  {
@@ -41,6 +42,7 @@ public class SLogoGUIController implements Initializable  {
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
+	private ListView<String> myPropertiesPaneView = new ListView<String>();
 	
 	private Model myModel;
 	private View myView;
@@ -95,7 +97,8 @@ public class SLogoGUIController implements Initializable  {
     @FXML
     private List<String> myHistory;
     
-
+    @FXML
+    private List<String> myProperties;
 
     
     
@@ -154,6 +157,7 @@ public class SLogoGUIController implements Initializable  {
           	
           	myHistory.add(command);
           	displayHistory();
+          	displayProperties();
     }
     
     private void popup(String link){
@@ -172,30 +176,6 @@ public class SLogoGUIController implements Initializable  {
         stage.show();
     }
     
-    
-//    private void myRunButtonmyTextField(){
-//    	myRunButton.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//	    		sendmyTextField();
-//	    		myHistoryPane.add(myTextField.getText());
-//	    		displayHistoryPane();
-//	    		myTextField.clear();
-//			}
-//    	});
-//    }
-//    
-//    public String sendmyTextField(){ //to send to backend?
-//    	return myTextField.getText();
-//    }
-//    
-//    private void displayHistory(){
-//    	myHistoryPaneView = new ListView<String>();
-//    	ObservableList<String> items =FXCollections.observableArrayList (
-//    			myHistoryPane);
-//    	myHistoryPaneView.setItems(items);
-//    	((ScrollPane) myHistoryPane).setContent(myHistoryPaneView);
-//    }
     
     private void displayHistory(){
     	myHistoryPaneView = new ListView<String>();
@@ -224,6 +204,28 @@ public class SLogoGUIController implements Initializable  {
     	    }
     	});
     }    
+    
+    private ObservableList<String> properties;
+    
+    public void displayProperties(){
+    	//myPropertiesPaneView = new ListView<String>();	
+    	myPropertiesPaneView.setItems(properties);
+    	myPropertyPane.setContent(myPropertiesPaneView);
+    }
+    
+    public void updateProperties(SLogoDisplayData displayData){
+    	    	
+    	properties =FXCollections.observableArrayList (
+    			("Angle: "+ Double.toString(displayData.getAngle())),
+    			("X position: " + displayData.getX()),
+    			("Y position: " + displayData.getY()),
+    			("Pen Down: " + displayData.isPenDown()),
+    			("Pen Color: " + displayData.getPenColor().toString())			
+    			);
+    	
+    	myPropertiesPaneView.setItems(properties);
+    	myPropertyPane.setContent(myPropertiesPaneView);
+    }
 
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;

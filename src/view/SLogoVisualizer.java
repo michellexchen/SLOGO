@@ -64,17 +64,22 @@ public class SLogoVisualizer implements Observer {
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
 		
+		
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
 		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
 		
+		
 		myScene = new Scene(root);
 		myStage = new Stage();
 		myStage.setScene(myScene);
 		myStage.setTitle("SLogo");
 		show();
+		
+//		CommandView myCommandView = new CommandView();
+//		myCommandView.show();
 	}
 
 	public void updateStates() {
@@ -168,7 +173,10 @@ public class SLogoVisualizer implements Observer {
 			
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
+			
+			getGUIController().updateProperties(turtledata);
 			}
+		
 	}
 	
 	public void placeTurtle(SLogoDisplayData displaydata) {
