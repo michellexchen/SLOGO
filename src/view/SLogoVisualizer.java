@@ -175,6 +175,9 @@ public class SLogoVisualizer implements Observer {
 			getGUIController().addToCanvas(turtledata.getLines());
 			
 			getGUIController().updateProperties(turtledata);
+			
+			System.out.println("**");
+			System.out.println(turtledata.getX());
 			}
 		
 	}

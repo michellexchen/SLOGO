@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SLogoGUIController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.SLogoGUIController">
   <children>
     <AnchorPane id="AnchorPane" layoutX="0.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" styleClass="window">
       <children>
@@ -78,16 +78,16 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-            <Label alignment="CENTER" layoutX="40.0" layoutY="261.0" prefWidth="128.0" text="Properties">
-               <stylesheets>
-                  <URL value="@style.css" />
-               </stylesheets>
-            </Label>
-            <ScrollPane id="history" fx:id="myPropertyPane" content="$null" layoutX="10.0" layoutY="279.0" prefHeight="176.0" prefWidth="200.0" styleClass="label" vbarPolicy="ALWAYS">
-               <stylesheets>
-                  <URL value="@style.css" />
-               </stylesheets>
-            </ScrollPane>
+        <Label alignment="CENTER" layoutX="40.0" layoutY="261.0" prefWidth="128.0" text="Properties">
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Label>
+        <Pane fx:id="myPropertyPane" layoutX="13.0" layoutY="278.0" prefHeight="176.0" prefWidth="200.00009999999747" styleClass="label">
+          <stylesheets>
+            <URL value="@style.css" />
+          </stylesheets>
+        </Pane>
       </children>
       <stylesheets>
         <URL value="@style.css" />
