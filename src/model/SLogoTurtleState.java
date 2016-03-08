@@ -23,7 +23,7 @@ public class SLogoTurtleState extends SLogoCharacterState {
 		this.penDown = penDown;
 	}
 
-	public boolean getPen() {
+	public boolean getPenDown() {
 		return penDown;
 	}
 

@@ -1,4 +1,4 @@
-package commandnode;
+package model;
 
 /**
  * A wrapper class for (x, y)-current and (x, y)-previous coordinates
@@ -8,7 +8,7 @@ package commandnode;
  * @author Hunter
  *
  */
-public class Position {
+public class SLogoPosition {
 	private static final int PANE_SIZE = 450;
 	private static final int PADDING = 40;
 	
@@ -21,7 +21,7 @@ public class Position {
 	private double xCenter;
 	private double yCenter;
 
-	public Position(double width, double height) {
+	public SLogoPosition(double width, double height) {
 		// TODO Auto-generated constructor stub
 		myWidth = width;
 		myHeight = height;
@@ -38,7 +38,7 @@ public class Position {
 	}
 
 	
-	public Position() {
+	public SLogoPosition() {
 		initialize();
 	}
 	

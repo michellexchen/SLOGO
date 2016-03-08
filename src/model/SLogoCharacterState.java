@@ -14,7 +14,7 @@ public abstract class SLogoCharacterState {
 	private double myYCoordinate;
 	private double myDirection;
 	private boolean isHidden;
-	private Pen myPen;
+	private SLogoPenData myPen;
 	private double myAngle;
 	private ImageView myImageView;
 
@@ -28,7 +28,7 @@ public abstract class SLogoCharacterState {
 		myImageView = new ImageView();
 	}
 	
-	public Pen getPen() {
+	public SLogoPenData getPen() {
 		return myPen;
 	}
 

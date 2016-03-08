@@ -14,14 +14,14 @@ import view.SLogoView;
 
 public class SLogoParser {
 
-	CommandLoader commandDriver;
+	CommandLoader myCommandDriver;
 	SLogoTreeFactory myTreeFactory;
 	SLogoWorkspace myWorkspace;
 
-	public SLogoParser(SLogoWorkspace ws) throws SLogoException{
-		commandDriver = new CommandLoader();
+	public SLogoParser(SLogoWorkspace workspace) throws SLogoException{
+		myCommandDriver = new CommandLoader();
 		myTreeFactory = new SLogoTreeFactory();
-		myWorkspace = ws;
+		myWorkspace = workspace;
 	}
 
 	public List<String> formatCommandParts(String text) throws SLogoException {
