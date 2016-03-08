@@ -18,8 +18,9 @@ public abstract class SLogoCharacterState {
 	private double myAngle;
 	private ImageView myImageView;
 
-	public SLogoCharacterState(double xCoor, double yCoor, double direction,
+	public SLogoCharacterState(Pen myPen, double xCoor, double yCoor, double direction,
 					      boolean isHidden, double angle) {
+		this.myPen = myPen;
 		this.myXCoordinate = xCoor;
 		this.myYCoordinate = yCoor;
 		this.myDirection = direction;

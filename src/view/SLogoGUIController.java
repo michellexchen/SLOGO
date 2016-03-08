@@ -64,7 +64,7 @@ public class SLogoGUIController implements Initializable  {
     private ColorPicker myColorPicker;
     private HBox myColorHBox;
     
-    private SLogoCustomizerBuilder myCustomizer;
+    private static SLogoCustomizerBuilder myCustomizer;
 
 	
 	private Model myModel;
@@ -258,8 +258,10 @@ public class SLogoGUIController implements Initializable  {
     private void customize(){
     	myCustomizeButton.setOnMouseClicked(e -> {
     		myCustomizer = new SLogoCustomizerBuilder();
-    		System.out.println("hi");
-    		System.out.println(myCustomizer.getMyColor());
+//    		System.out.println("new pane color:");
+//    		System.out.println(myCustomizer.getMyPaneColor());
+//    		System.out.println("new font color:");
+//    		System.out.println(myCustomizer.getMyFontColor());
 //        	Dialog customize = new Dialog();
 //        	customize.getDialogPane().setPrefSize(500, 500);
 //        	customize.setTitle("CUSTOMIZE");
@@ -275,7 +277,6 @@ public class SLogoGUIController implements Initializable  {
 		myColorPicker = new ColorPicker();
         myColorPicker.setOnAction(e -> {
         	myCanvasColor = myColorPicker.getValue();
-        	System.out.println(myCanvasColor);
         });
 		
 		myColorHBox = new HBox();
@@ -283,6 +284,10 @@ public class SLogoGUIController implements Initializable  {
 		myColorHBox.getChildren().addAll(colorLabel, myColorPicker);
 
 		return myColorHBox;
+    }
+    
+    public Color getPaneColor(){
+    	return myCanvasColor;
     }
     
 	public void setCommand(String myCommand) {

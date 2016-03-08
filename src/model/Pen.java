@@ -20,6 +20,10 @@ public class Pen {
 		return penColor;
 	}
 	
+	public boolean isPenDown(){
+		return penDown;
+	}
+	
 	public void setPenDown(boolean penDown) {
 		this.penDown = penDown;
 	}

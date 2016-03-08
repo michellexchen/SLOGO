@@ -9,10 +9,11 @@ public class SLogoTurtle implements SLogoCharacter {
 
 	SLogoTurtleState myState;
 	String myName;
+	Pen myPen;
 
 	public SLogoTurtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden,
 			double angle) {
-		myState = new SLogoTurtleState(xCoor, yCoor, direction, isHidden, penDown, angle);
+		myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, isHidden, penDown, angle);
 		System.out.println("tutle " + myName + " current state is: location xCoor " + xCoor);
 		this.myName = myName;
 	}

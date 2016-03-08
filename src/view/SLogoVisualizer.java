@@ -59,6 +59,10 @@ public class SLogoVisualizer implements Observer {
 		myHeight = 331;
 		myModel = model;
 	}
+	
+	public SLogoVisualizer(){
+		
+	}
 
 	public void initialize() throws SLogoException, IOException {
 
@@ -76,7 +80,6 @@ public class SLogoVisualizer implements Observer {
 		root = (Parent) myLoader.load();
 		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
-		
 		
 		myScene = new Scene(root);
 		myStage = new Stage();

@@ -58,7 +58,7 @@ public class SLogoDisplayData extends Observable {
 		myAngle = state.getAngle();
 		xCoordinate = state.getXCoor();
 		yCoordinate = state.getYCoor();
-		penDown = ((SLogoTurtleState) state).getPen();
+		penDown = ((SLogoTurtleState) state).getPenDown();
 		penColor = ((SLogoTurtleState) state).getPenColor();
 		myImage = state.getImageView();
 		applyChanges();
