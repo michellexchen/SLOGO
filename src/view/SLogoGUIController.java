@@ -97,6 +97,9 @@ public class SLogoGUIController implements Initializable  {
     //MenuButton's MenuItem list
     private List<MenuItem> myMenuItems;
 
+    
+    
+    
     //Command History Pane where ObservableList<CommandNode> will go
     @FXML
     private ScrollPane myCommandHistoryPane;

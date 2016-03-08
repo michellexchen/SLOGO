@@ -2,7 +2,20 @@ package model;
 
 import java.util.ArrayList;
 
+
+/**
+ * 
+ * Container for pen-related info
+ * Only used in DisplayData--Character still has private fields that
+ * keep relevant information
+ *
+ */
+
 public class SLogoPenData {
+	
+	
+	
+	
 	
 	//Why is this an int array of 3 elements?
 	//Are there only 3 colors available? Why?
