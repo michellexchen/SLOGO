@@ -1,5 +1,7 @@
 package commandnode;
 
+import algorithms.Context;
+import algorithms.EncodingVars;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 import model.SLogoPenData;
@@ -15,7 +17,9 @@ public class VariableNode extends CommandNode {
 	public VariableNode(String name) throws SLogoException {
 		if (checkLength(name)){
 			this.variableName = name;
-			this.val = createNumericRepOfVar(name);
+			Context encode = new Context(new EncodingVars()); 
+//			this.val = createNumericRepOfVar(name);
+			this.val = encode.performOperation(name);
 		}
 		else 
 			throw new SLogoException(myResourcesDriver.getString("Variable"));
