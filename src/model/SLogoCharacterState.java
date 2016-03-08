@@ -14,11 +14,11 @@ public abstract class SLogoCharacterState {
 	private double myYCoordinate;
 	private double myDirection;
 	private boolean isHidden;
-	private Pen myPen;
+	private SLogoPenData myPen;
 	private double myAngle;
 	private ImageView myImageView;
 
-	public SLogoCharacterState(Pen myPen, double xCoor, double yCoor, double direction,
+	public SLogoCharacterState(SLogoPenData myPen, double xCoor, double yCoor, double direction,
 					      boolean isHidden, double angle) {
 		this.myPen = myPen;
 		this.myXCoordinate = xCoor;
@@ -29,7 +29,7 @@ public abstract class SLogoCharacterState {
 		myImageView = new ImageView();
 	}
 	
-	public Pen getPen() {
+	public SLogoPenData getPen() {
 		return myPen;
 	}
 

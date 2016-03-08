@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import commandnode.Position;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -17,7 +16,7 @@ import javafx.scene.shape.Line;
  *
  */
 public class SLogoDisplayData extends Observable {
-	private Position myPosition;
+	private SLogoPosition myPosition;
 	private double xCoordinate;
 	private double yCoordinate;
 	private double myAngle;
@@ -26,6 +25,13 @@ public class SLogoDisplayData extends Observable {
 	private ImageView myImage;
 
 	private List<Line> myLines;
+	
+	//////////////////
+	//This is the new field, PenData
+	private SLogoPenData myPenData;
+	
+	//////////////////
+	
 
 	/**
 	 * Constructor that sets initial values
@@ -33,13 +39,15 @@ public class SLogoDisplayData extends Observable {
 	 * @param xCoordinate,
 	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public SLogoDisplayData(Position position, double angle, boolean penDown, Color penColor, ImageView image) {
+	public SLogoDisplayData(SLogoPosition position, double angle, boolean penDown, 
+			Color penColor, ImageView image, SLogoPenData pendata) {
 
 		this.myPosition = position;
 		this.myAngle = angle;
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
+		this.myPenData = pendata;
 		
 	}
 
@@ -53,7 +61,7 @@ public class SLogoDisplayData extends Observable {
 	}
 	
 	public void updateData(SLogoCharacterState state) {
-		myPosition = new Position();
+		myPosition = new SLogoPosition();
 		myPosition.setXY(state.getXCoor(),  state.getYCoor());
 		myAngle = state.getAngle();
 		xCoordinate = state.getXCoor();
@@ -133,11 +141,11 @@ public class SLogoDisplayData extends Observable {
 		this.myImage = myImage;
 	}
 
-	public Position getPosition() {
+	public SLogoPosition getPosition() {
 		return myPosition;
 	}
 
-	public void setPosition(Position myPosition) {
+	public void setPosition(SLogoPosition myPosition) {
 		this.myPosition = myPosition;
 	}
 

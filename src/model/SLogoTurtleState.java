@@ -14,7 +14,7 @@ public class SLogoTurtleState extends SLogoCharacterState {
 	private Color penColor;
 	private Pen myPen = new Pen();
 
-	public SLogoTurtleState(Pen myPen, double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown, double angle) {
+	public SLogoTurtleState(SLogoPenData myPen, double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown, double angle) {
 		super(myPen, xCoor, yCoor, direction, isHidden, angle);
 		this.penDown = penDown;
 		penColor = Color.BLACK;
@@ -24,14 +24,15 @@ public class SLogoTurtleState extends SLogoCharacterState {
 		this.penDown = penDown;
 	}
 
-	public Pen getPen() {
-		return myPen;
+
+	public boolean getPenDown() {
+		return penDown;
 	}
 
-	public boolean getPenDown(){
-		return myPen.isPenDown();
-	}
-	
+//	public boolean getPenDown(){
+//		return myPen.isPenDown();
+//	}
+//	
 	public Color getPenColor() {
 		return penColor;
 	}

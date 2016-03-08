@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import commandnode.Position;
 import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Model;
+import model.SLogoPosition;
 import model.SLogoDisplayData;
 
 /**
@@ -137,7 +137,7 @@ public class SLogoVisualizer implements Observer {
 	 * @param position
 	 * @return Line
 	 */
-	public Line createLine(Position position) {
+	public Line createLine(SLogoPosition position) {
 		Line newLine = new Line();
 		newLine.setStartX(position.xPrevious());
 		newLine.setStartY(position.yPrevious());
@@ -155,7 +155,7 @@ public class SLogoVisualizer implements Observer {
 	 * @param color
 	 * @return Line
 	 */
-	public Line createLine(Position position, Color color) {
+	public Line createLine(SLogoPosition position, Color color) {
 		Line newLine = createLine(position);
 		newLine.setFill(color);
 		return newLine;
@@ -172,7 +172,7 @@ public class SLogoVisualizer implements Observer {
 		getGUIController().getCanvas().setStyle("-fx-background-color: "
 													+ getCanvasColor());
 		
-		//getModel().getObservableDataList();
+		getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);

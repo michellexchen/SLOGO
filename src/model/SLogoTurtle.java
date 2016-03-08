@@ -9,7 +9,7 @@ public class SLogoTurtle implements SLogoCharacter {
 
 	SLogoTurtleState myState;
 	String myName;
-	Pen myPen;
+	SLogoPenData myPen;
 
 	public SLogoTurtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden,
 			double angle) {
