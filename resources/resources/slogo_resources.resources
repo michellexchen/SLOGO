@@ -4,3 +4,4 @@ CommandNode:commandnode.
 Node:Node
 Command:Command\u0020
 Implemented:\u0020is not yet implemented
+Variable: variable must include more characters

@@ -39,6 +39,7 @@ public class MakeNode extends BinaryNode {
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// TODO Auto-generated method stub
+		double charAschiiRepresentation = getChildren().get(0).evaluate(state);
 		return 0;
 	}
 

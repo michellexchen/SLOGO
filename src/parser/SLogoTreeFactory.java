@@ -7,6 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import exception.SLogoException;
+import commandnode.VariableNode;
 
 /**
  * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates
@@ -33,7 +34,9 @@ public class SLogoTreeFactory {
 			String currCommand = commandParts.remove(0);
 			Node myNode = createNode(currCommand);
 			while (myNode.numCurrentChildren() != myNode.numRequiredChildren()) {
-				//if(isInBounds(commandParts)) if(isVariable(commandParts.get(1))) -->>>>> this is were I add my :var to the make node
+				// if(isInBounds(commandParts))
+				// if(isVariable(commandParts.get(1))) -->>>>> this is were I
+				// add my :var to the make node
 				myNode.addChild(createChild(commandParts));
 			}
 			myRoots.add(myNode);
@@ -58,8 +61,8 @@ public class SLogoTreeFactory {
 			return myChild;
 		}
 	}
-	
-	public boolean isInBounds(List<String>commandParts){
+
+	public boolean isInBounds(List<String> commandParts) {
 		return commandParts.size() >= 1;
 	}
 
@@ -84,6 +87,10 @@ public class SLogoTreeFactory {
 		Node node = null;
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
+		if (isVariable(strNode)) {
+//			System.out.println("it is a variable");
+			return new VariableNode(strNode);
+		}
 		String commandName = myCommandDriver.getString(strNode);
 		if (commandName == null)
 			throw new SLogoException(
@@ -107,8 +114,8 @@ public class SLogoTreeFactory {
 	private boolean isOpenBracket(String str) {
 		return str.equals("[");
 	}
-	
-	private boolean isVariable(String str){
+
+	private boolean isVariable(String str) {
 		return str.matches(":[a-zA-Z_]+");
 	}
 
