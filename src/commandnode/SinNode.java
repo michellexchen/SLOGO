@@ -3,10 +3,10 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class SinNode extends TrigNode{
+public class SinNode extends UnaryNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.sin(getChildren().get(0).evaluate(state));
+		return Math.sin(evaluateChild(0, state));
 	}
 
 }

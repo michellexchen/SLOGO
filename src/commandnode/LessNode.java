@@ -6,6 +6,6 @@ import model.SLogoCharacterState;
 public class LessNode extends BinaryNode{
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return getChildren().get(0).evaluate(state) < getChildren().get(1).evaluate(state) ? 1 : 0;
+		return evaluateChild(0, state) < evaluateChild(1, state) ? 1 : 0;
 	}
 }

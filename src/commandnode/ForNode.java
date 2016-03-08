@@ -1,5 +1,4 @@
 package commandnode;
-
 import exception.SLogoException;
 import model.SLogoCharacterState;
 

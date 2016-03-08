@@ -6,19 +6,19 @@ import model.SLogoCharacterState;
 public class TowardsXYNode extends TurnNode {
 
 	public double calculateDir(SLogoCharacterState state) throws SLogoException {
-		double diffX = boundCoor(transformXCoor(getChildren().get(0).evaluate(state))) - state.getXCoor();
-		double diffY = boundCoor(transformYCoor(getChildren().get(1).evaluate(state))) - state.getYCoor();
-		if (diffX < 0) {
-			if (diffY < 0) {
-				return 270 + Math.atan(diffX / diffY);
+		double diffX = Math.abs(evaluateChild(0, state) + 500 - state.getXCoor());
+		double diffY = Math.abs(Math.abs(evaluateChild(1, state) - 500) - state.getYCoor());
+		if (evaluateChild(0, state) < 0) {
+			if (evaluateChild(1, state) < 0) {
+				return -180 + Math.atan(diffX / diffY);
 			}
-			return 270 - Math.atan(diffX / diffY);
+			return -1 * Math.atan(diffX / diffY);
 		}
 		else {
-			if (diffY < 0) {
-				return 90 - Math.atan(diffX / diffY);
+			if (evaluateChild(1, state) < 0) {
+				return 180 - Math.atan(diffX / diffY);
 			}
-			return 90 + Math.atan(diffX / diffY);
+			return Math.atan(diffX / diffY);
 		}
 	}
 	

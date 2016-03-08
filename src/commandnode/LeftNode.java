@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 public class LeftNode extends TurnNode {
 
 	public double calculateDir(SLogoCharacterState state) throws SLogoException {
-		return state.getDirection() - getChildren().get(0).evaluate(state);
+		return state.getDirection() - evaluateChild(0, state);
 	}
 
 }

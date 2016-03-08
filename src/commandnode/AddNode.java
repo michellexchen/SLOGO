@@ -5,7 +5,7 @@ import model.SLogoCharacterState;
 public class AddNode extends BinaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return getChildren().get(0).evaluate(state) + getChildren().get(1).evaluate(state);
+		return evaluateChild(0, state) + evaluateChild(1, state);
 	}
 
 }

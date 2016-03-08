@@ -2,6 +2,9 @@ package commandnode;
 
 import java.util.ArrayList;
 
+import exception.SLogoException;
+import model.SLogoCharacterState;
+
 /**
  * SLogo's CommandNode, an abstract class representing any command (Turtle,
  * Query, Math, etc.)
@@ -32,23 +35,12 @@ public abstract class CommandNode implements Node {
 		NUM_CHILDREN = num;
 	}
 	
-	public double transformXCoor(double myCoor) {
-		return (500 + myCoor);
-		
+	public Node getChild(int child){
+		return children.get(child);
 	}
 	
-	public double transformYCoor(double myCoor) {
-		return (500 - myCoor);
-	}
-	
-	public double boundCoor(double myCoor) {
-		if (myCoor > 1000) {
-			myCoor = 1000;
-		}
-		else if(myCoor < 0) {
-			myCoor = 0;
-		}
-		return myCoor;
+	public double evaluateChild(int child, SLogoCharacterState state) throws SLogoException{
+		return children.get(child).evaluate(state);
 	}
 	
 }

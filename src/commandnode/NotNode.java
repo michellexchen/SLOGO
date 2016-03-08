@@ -6,6 +6,6 @@ import model.SLogoCharacterState;
 public class NotNode extends UnaryNode{
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return getChildren().get(0).evaluate(state) == 0 ? 1 : 0;
+		return evaluateChild(0, state) == 0 ? 1 : 0;
 	}
 }

@@ -1,7 +1,7 @@
 package commandnode;
 
-public abstract class TernaryNode extends CommandNode {
-
+public abstract class TernaryNode extends CommandNode{
+	
 	private int NUM_CHILDREN = 3;
 
 	public TernaryNode() {

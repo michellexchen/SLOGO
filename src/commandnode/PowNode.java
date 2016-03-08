@@ -6,8 +6,8 @@ import model.SLogoCharacterState;
 public class PowNode extends BinaryNode{
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		double base = getChildren().get(0).evaluate(state);
-		double exponent = getChildren().get(1).evaluate(state);
+		double base = evaluateChild(0, state);
+		double exponent = evaluateChild(1, state);
 		return Math.pow(base, exponent);
 	}
 }

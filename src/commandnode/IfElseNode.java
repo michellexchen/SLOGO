@@ -6,8 +6,7 @@ import model.SLogoCharacterState;
 public class IfElseNode extends TernaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return getChildren().get(0).evaluate(state) != 0 ? getChildren().get(1).evaluate(state)
-				: getChildren().get(2).evaluate(state);
+		return evaluateChild(0, state) != 0 ? evaluateChild(1, state) : evaluateChild(2, state);
 	}
 
 }
