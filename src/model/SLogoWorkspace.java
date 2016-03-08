@@ -7,6 +7,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.image.ImageView;
 import view.View;
 
 /**
@@ -28,12 +29,12 @@ public class SLogoWorkspace {
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<SLogoVariable> myObservableVariableList;
-	private ObservableList<int[]> myObservableColorList;
-	private ObservableList<String> myObservableShapeList;
+	private ObservableList<int[]> myObservableColorList; //Last 3 have not been incorporated into class
+	private ObservableList<ImageView> myObservableShapeList;
+	private int[] backgroundColor;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
-
 		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
 		myVariableList = new ArrayList<SLogoVariable>();

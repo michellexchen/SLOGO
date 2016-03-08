@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
  *
  */
 
-public abstract class SLogoCharacterState {
+public class SLogoCharacterState {
 
 	private double myXCoordinate;
 	private double myYCoordinate;
@@ -26,6 +26,7 @@ public abstract class SLogoCharacterState {
 		this.isHidden = isHidden;
 		this.myAngle = angle;
 		myImageView = new ImageView();
+		myPen = new Pen();
 	}
 	
 	public Pen getPen() {
