@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import commandnode.MakeNode;
 import commandnode.Node;
 import commandnode.ToNode;
+import commandnode.VariableNode;
 import exception.SLogoException;
 import model.SLogoCharacter;
 import model.SLogoWorkspace;
@@ -18,8 +19,8 @@ public class SLogoParser {
 	private SLogoWorkspace myWorkspace;
 
 	public SLogoParser(SLogoWorkspace workspace) throws SLogoException{
-		myTreeFactory = new SLogoTreeFactory();
 		myWorkspace = workspace;
+		myTreeFactory = new SLogoTreeFactory(myWorkspace);
 	}
 
 	public List<String> formatCommandParts(String text) throws SLogoException {
@@ -39,12 +40,6 @@ public class SLogoParser {
 		List<SLogoCharacter> myCharacters = myWorkspace.getCharacterList();
 		for(Node myNode : myNodes){
 			for (SLogoCharacter character : myCharacters) {
-				if(myNode instanceof MakeNode){
-					((MakeNode) myNode).setWorkspace(myWorkspace);
-				}
-				if(myNode instanceof ToNode){
-					((ToNode) myNode).setWorkspace(myWorkspace);
-				}
 				evaluation = myNode.evaluate(character.getState());
 				myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
 				.updateData(character.getState());

@@ -7,6 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import exception.SLogoException;
+import model.SLogoWorkspace;
 import commandnode.VariableNode;
 
 /**
@@ -22,10 +23,12 @@ public class SLogoTreeFactory {
 
 	private CommandLoader myCommandLoader;
 	private ResourceLoader myResourcesLoader;
+	private SLogoWorkspace myWorkspace;
 
-	public SLogoTreeFactory() throws SLogoException {
+	public SLogoTreeFactory(SLogoWorkspace ws) throws SLogoException {
 		myCommandLoader = new CommandLoader();
 		myResourcesLoader = new ResourceLoader();
+		myWorkspace = ws;
 	}
 
 	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
@@ -50,7 +53,15 @@ public class SLogoTreeFactory {
 			List<Node> commandList = createCommandList(commandParts);
 			ListNode listNode = new ListNode(commandList);
 			return listNode;
-		} else {
+		} 
+		if (isVariable(currCommand)) {
+			System.out.println("HERE");
+			VariableNode myVar = new VariableNode(currCommand.substring(1));
+			myVar.setWorkspace(myWorkspace);
+			System.out.println(myVar.getWorkspace());
+			return myVar;
+		}
+		else {
 			Node myChild = createNode(currCommand);
 			while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
 				myChild.addChild(createChild(commandParts));
@@ -84,9 +95,6 @@ public class SLogoTreeFactory {
 		Node node = null;
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		if (isVariable(strNode)) {
-			return new VariableNode(strNode);
-		}
 		String commandName = myCommandLoader.getString(strNode);
 		if (commandName == null)
 			throw new SLogoException(

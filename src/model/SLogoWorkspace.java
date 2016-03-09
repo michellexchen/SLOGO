@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import view.View;
 
 /**
@@ -21,23 +23,22 @@ public class SLogoWorkspace {
 	// NEVER USE THESE: BUG ALERT!
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
-	private List<SLogoVariable> myVariableList;
+	private HashMap<String, Double> myVariableMap;
 
 	// BELOW ARE TO BE USED
 	private List<SLogoCharacter> myCharacters;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
-	private ObservableList<SLogoVariable> myObservableVariableList;
+	private ObservableMap<String, Double> myObservableVariableMap;
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
-
 		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
-		myVariableList = new ArrayList<SLogoVariable>();
-		createObservableLists(myDataList, myCommandHistory, myVariableList);
+		myVariableMap = new HashMap<String, Double>();
+		createObservableLists(myDataList, myCommandHistory, myVariableMap);
 
 		myCharacters = new ArrayList<SLogoCharacter>();
 	}
@@ -50,11 +51,10 @@ public class SLogoWorkspace {
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
 									   List<String> commandhistory,
-									   List<SLogoVariable> variablelist) {
+									   HashMap<String, Double> variableMap) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
-		myObservableVariableList = FXCollections.observableArrayList(variablelist);
-
+		myObservableVariableMap = (ObservableMap<String, Double>) FXCollections.observableMap(variableMap);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -124,8 +124,8 @@ public class SLogoWorkspace {
 		}
 	}
 
-	public void addToVarList(SLogoVariable var){
-		myObservableVariableList.add(var);
+	public void addToVarMap(String varName, double value){
+		myObservableVariableMap.put(varName, value);
 	}
 
 	/**
@@ -172,9 +172,13 @@ public class SLogoWorkspace {
 	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
 		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
+	
+	public HashMap<String, Double> getMyVarMap(){
+		return myVariableMap;
+	}
 
 
-	public List<SLogoVariable> getVarList() {
-		return myObservableVariableList;
+	public ObservableMap<String, Double> getVarMap() {
+		return myObservableVariableMap;
 	}
 }

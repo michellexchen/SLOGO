@@ -9,7 +9,7 @@ public class ForwardNode extends UnaryNode {
 		double[] newCoor = calculateLoc(state.getDirection(), state);
 		state.setXCoor(state.getXCoor() + newCoor[0]);
 		state.setYCoor(state.getYCoor() + newCoor[1]);
-		return getChildren().get(0).evaluate(state);
+		return evaluateChild(0, state);
 	}
 
 	private double[] calculateLoc(double direction, SLogoCharacterState state) throws SLogoException {
