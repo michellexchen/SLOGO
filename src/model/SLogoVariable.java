@@ -54,8 +54,7 @@ public class SLogoVariable extends Observable {
 	}
 
 	/**
-	 * @param myValue
-	 *            the myValue to set
+	 * @param myValue the myValue to set
 	 */
 	public void setValue(double myValue) {
 		this.myValue = myValue;

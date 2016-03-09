@@ -47,16 +47,17 @@ public class SLogoTreeFactory {
 	public Node createChild(List<String> commandParts) throws SLogoException {
 		String currCommand = commandParts.remove(0);
 		if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
-			List<Node> commandList = createCommandList(commandParts);
-			ListNode listNode = new ListNode(commandList);
+			List<String> innerCommands = createCommandList(commandParts);
+			ListNode listNode;
+			if(isOpenParenthesis(currCommand)) listNode = new ListNode(innerCommands.toArray(new String[innerCommands.size()]));
+			else listNode = new ListNode(createNodes(innerCommands));
 			return listNode;
-		} 
+		}
 		if (isVariable(currCommand)) {
 			VariableNode myVar = new VariableNode(currCommand);
 			myVar.setWorkspace(myWorkspace);
 			return myVar;
-		}
-		else {
+		} else {
 			Node myChild = createNode(currCommand);
 			while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
 				myChild.addChild(createChild(commandParts));
@@ -69,21 +70,21 @@ public class SLogoTreeFactory {
 		return commandParts.size() >= 1;
 	}
 
-	public List<Node> createCommandList(List<String> commandParts) throws SLogoException {
+	public List<String> createCommandList(List<String> commandParts) throws SLogoException {
 		List<String> innerCommands = new ArrayList<String>();
 		int openBrackets = 1;
 		int closedBrackets = 0;
 		String currCommand = "";
 		while (openBrackets != closedBrackets) {
 			currCommand = commandParts.remove(0);
-			if (isOpenBracket(currCommand))
+			if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand))
 				openBrackets++;
-			if (isClosedBracket(currCommand))
+			if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand))
 				closedBrackets++;
 			else
 				innerCommands.add(currCommand);
 		}
-		return createNodes(innerCommands);
+		return innerCommands;
 	}
 
 	public Node createNode(String strNode) throws SLogoException {
@@ -113,7 +114,7 @@ public class SLogoTreeFactory {
 	private boolean isOpenBracket(String str) {
 		return str.equals("[");
 	}
-	
+
 	private boolean isOpenParenthesis(String str) {
 		return str.equals("(");
 	}
@@ -124,6 +125,10 @@ public class SLogoTreeFactory {
 
 	private boolean isClosedBracket(String str) {
 		return str.equals("]");
+	}
+
+	private boolean isClosedParenthesis(String currCommand) {
+		return currCommand.equals(")");
 	}
 
 }

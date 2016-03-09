@@ -13,6 +13,14 @@ public class ListNode extends CommandNode{
 		this.myCommands = myCommands;
 	}
 	
+	public ListNode(String[] myParenthesisCommands){
+		if(myParenthesisCommands.length > 1){
+		for(int i = 2; i < myParenthesisCommands.length; i++){
+			myParenthesisCommands[1] += myParenthesisCommands[i];
+		}
+		}	
+	}
+	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double evaluation = 0;
 		for(Node node : myCommands){
