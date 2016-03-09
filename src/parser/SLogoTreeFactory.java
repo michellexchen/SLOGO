@@ -7,6 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import exception.SLogoException;
+import model.SLogoWorkspace;
 import commandnode.VariableNode;
 
 /**
@@ -20,12 +21,14 @@ import commandnode.VariableNode;
 
 public class SLogoTreeFactory {
 
-	CommandLoader myCommandDriver;
-	ResourceLoader myResourcesDriver;
+	private CommandLoader myCommandLoader;
+	private ResourceLoader myResourcesLoader;
+	private SLogoWorkspace myWorkspace;
 
-	public SLogoTreeFactory() throws SLogoException {
-		myCommandDriver = new CommandLoader();
-		myResourcesDriver = new ResourceLoader();
+	public SLogoTreeFactory(SLogoWorkspace ws) throws SLogoException {
+		myCommandLoader = new CommandLoader();
+		myResourcesLoader = new ResourceLoader();
+		myWorkspace = ws;
 	}
 
 	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
@@ -34,9 +37,6 @@ public class SLogoTreeFactory {
 			String currCommand = commandParts.remove(0);
 			Node myNode = createNode(currCommand);
 			while (myNode.numCurrentChildren() != myNode.numRequiredChildren()) {
-				// if(isInBounds(commandParts))
-				// if(isVariable(commandParts.get(1))) -->>>>> this is were I
-				// add my :var to the make node
 				myNode.addChild(createChild(commandParts));
 			}
 			myRoots.add(myNode);
@@ -46,13 +46,17 @@ public class SLogoTreeFactory {
 
 	public Node createChild(List<String> commandParts) throws SLogoException {
 		String currCommand = commandParts.remove(0);
-		if (isNumeric(currCommand)) {
-			return createNode(currCommand);
-		}
-		if (isOpenBracket(currCommand)) {
-			List<Node> commandList = createCommandList(commandParts);
-			ListNode listNode = new ListNode(commandList);
+		if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
+			List<String> innerCommands = createCommandList(commandParts);
+			ListNode listNode;
+			if(isOpenParenthesis(currCommand)) listNode = new ListNode(innerCommands.toArray(new String[innerCommands.size()]));
+			else listNode = new ListNode(createNodes(innerCommands));
 			return listNode;
+		}
+		if (isVariable(currCommand)) {
+			VariableNode myVar = new VariableNode(currCommand);
+			myVar.setWorkspace(myWorkspace);
+			return myVar;
 		} else {
 			Node myChild = createNode(currCommand);
 			while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
@@ -66,43 +70,39 @@ public class SLogoTreeFactory {
 		return commandParts.size() >= 1;
 	}
 
-	public List<Node> createCommandList(List<String> commandParts) throws SLogoException {
+	public List<String> createCommandList(List<String> commandParts) throws SLogoException {
 		List<String> innerCommands = new ArrayList<String>();
 		int openBrackets = 1;
 		int closedBrackets = 0;
 		String currCommand = "";
 		while (openBrackets != closedBrackets) {
 			currCommand = commandParts.remove(0);
-			if (isOpenBracket(currCommand))
+			if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand))
 				openBrackets++;
-			if (isClosedBracket(currCommand))
+			if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand))
 				closedBrackets++;
 			else
 				innerCommands.add(currCommand);
 		}
-		return createNodes(innerCommands);
+		return innerCommands;
 	}
 
 	public Node createNode(String strNode) throws SLogoException {
 		Node node = null;
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		if (isVariable(strNode)) {
-//			System.out.println("it is a variable");
-			return new VariableNode(strNode);
-		}
-		String commandName = myCommandDriver.getString(strNode);
+		String commandName = myCommandLoader.getString(strNode);
 		if (commandName == null)
 			throw new SLogoException(
-					myResourcesDriver.getString("TheCommand") + strNode + myResourcesDriver.getString("Illegal"));
+					myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));
 		else
 			try {
 				node = (Node) Class.forName(
-						myResourcesDriver.getString("CommandNode") + commandName + myResourcesDriver.getString("Node"))
+						myResourcesLoader.getString("CommandNode") + commandName + myResourcesLoader.getString("Node"))
 						.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				throw new SLogoException(myResourcesDriver.getString("Command") + commandName
-						+ myResourcesDriver.getString("Implemented"));
+				throw new SLogoException(myResourcesLoader.getString("Command") + commandName
+						+ myResourcesLoader.getString("Implemented"));
 			}
 		return node;
 	}
@@ -115,12 +115,20 @@ public class SLogoTreeFactory {
 		return str.equals("[");
 	}
 
+	private boolean isOpenParenthesis(String str) {
+		return str.equals("(");
+	}
+
 	private boolean isVariable(String str) {
 		return str.matches(":[a-zA-Z_]+");
 	}
 
 	private boolean isClosedBracket(String str) {
 		return str.equals("]");
+	}
+
+	private boolean isClosedParenthesis(String currCommand) {
+		return currCommand.equals(")");
 	}
 
 }

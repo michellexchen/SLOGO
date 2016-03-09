@@ -22,9 +22,9 @@ public class SLogoModel implements Model {
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageLoader myLanguageDriver;
-
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
+	private int numHistoricalTurtles;
 
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
@@ -100,6 +100,7 @@ public class SLogoModel implements Model {
 	public void createNewWorkspace() throws SLogoException {
 		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
+		numHistoricalTurtles++;
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
 	}

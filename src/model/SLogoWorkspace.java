@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import view.View;
 
 /**
@@ -33,7 +35,6 @@ public class SLogoWorkspace {
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
-
 		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
 		myVariableList = new ArrayList<SLogoVariable>();
@@ -42,19 +43,16 @@ public class SLogoWorkspace {
 		myCharacters = new ArrayList<SLogoCharacter>();
 	}
 	
-	
-
 	public void initialize() {
 		createTurtle();
 	}
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
 									   List<String> commandhistory,
-									   List<SLogoVariable> variablelist) {
+									   List<SLogoVariable> variableList) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
-		myObservableVariableList = FXCollections.observableArrayList(variablelist);
-
+		myObservableVariableList =  FXCollections.observableArrayList(variableList);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -70,7 +68,7 @@ public class SLogoWorkspace {
 	}
 
 	public void createTurtle() {
-		SLogoTurtle myTurtle = new SLogoTurtle("OG", 0, 0, true, 0, false, 0);
+		SLogoTurtle myTurtle = new SLogoTurtle("0", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 
@@ -107,25 +105,11 @@ public class SLogoWorkspace {
 		myDataList.add(displayData);
 	}
 
-	public void format(String command){
-		checkForVars(command.split(" "));
-	}
-
-	public void checkForVars(String[] command){
-
-		for(int i = 0; i < command.length; i++){
-			if(command[i].equals("make")){
-				SLogoVariable var = new SLogoVariable();
-				var.setName(command[i+1]);
-
-				//myTreeFactory.makeTree(text)
-				i++; //skip checking my next input as it's been checked right now
-			}
-		}
-	}
-
-	public void addToVarList(SLogoVariable var){
-		myObservableVariableList.add(var);
+	public void addToVarMap(SLogoVariable variable){
+		myObservableVariableList.add(variable);
+//		for(String each: myObservableVariableMap.keySet()){
+//			System.out.println(each + " " + myObservableVariableMap.get(each));
+//		}
 	}
 
 	/**
@@ -172,6 +156,10 @@ public class SLogoWorkspace {
 	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
 		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
+	
+	public List<SLogoVariable> getMyVarList(){
+		return myVariableList;
+	}
 
 
 	private void testerVariableList(){
@@ -180,4 +168,5 @@ public class SLogoWorkspace {
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
 	}
+
 }

@@ -3,16 +3,24 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class ToNode extends CommandNode {
+public class ToNode extends TernaryNode {
 
-	public ToNode() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
-		return 0;
+		// List<Node> myVariables = ((ListNode)
+		// (getChildren().get(0))).getCommands();
+		// List<Node> myCommands = ((ListNode)
+		// (getChildren().get(1))).getCommands();
+		// if(myVariables.size() != myCommands.size()){
+		// return 0;
+		// }
+		// SLogoWorkspace ws =
+		// ((VariableNode)myVariables.get(0)).getWorkspace();
+		// for(int x=0; x<myCommands.size(); x++){
+		// ws.getMyVarMap().put(((VariableNode)
+		// (myVariables.get(x))).getVarName(),
+		// (Double)myCommands.get(x).evaluate(state));
+		// }
+		return 1;
 	}
 
 }

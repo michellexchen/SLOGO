@@ -25,13 +25,12 @@ public class SLogoDisplayData extends Observable {
 	private ImageView myImage;
 
 	private List<Line> myLines;
-	
+
 	//////////////////
-	//This is the new field, PenData
+	// This is the new field, PenData
 	private SLogoPenData myPenData;
-	
+
 	//////////////////
-	
 
 	/**
 	 * Constructor that sets initial values
@@ -39,8 +38,8 @@ public class SLogoDisplayData extends Observable {
 	 * @param xCoordinate,
 	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public SLogoDisplayData(SLogoPosition position, double angle, boolean penDown, 
-			Color penColor, ImageView image, SLogoPenData pendata) {
+	public SLogoDisplayData(SLogoPosition position, double angle, boolean penDown, Color penColor, ImageView image,
+			SLogoPenData pendata) {
 
 		this.myPosition = position;
 		this.myAngle = angle;
@@ -48,7 +47,7 @@ public class SLogoDisplayData extends Observable {
 		this.penColor = penColor;
 		this.myImage = image;
 		this.myPenData = pendata;
-		
+
 	}
 
 	public SLogoDisplayData(SLogoCharacterState state) {
@@ -56,13 +55,13 @@ public class SLogoDisplayData extends Observable {
 		initialize();
 	}
 
-	public void initialize () {
+	public void initialize() {
 		myLines = new ArrayList<Line>();
 	}
-	
+
 	public void updateData(SLogoCharacterState state) {
 		myPosition = new SLogoPosition();
-		myPosition.setXY(state.getXCoor(),  state.getYCoor());
+		myPosition.setXY(state.getXCoor(), state.getYCoor());
 		myAngle = state.getAngle();
 		xCoordinate = state.getXCoor();
 		yCoordinate = state.getYCoor();
@@ -71,7 +70,7 @@ public class SLogoDisplayData extends Observable {
 		myImage = state.getImageView();
 		applyChanges();
 	}
-	
+
 	/**
 	 * Set the hasState value of DisplayData as 'changed' and notify all
 	 * Observers
