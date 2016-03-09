@@ -241,8 +241,6 @@ public class SLogoGUIController implements Initializable  {
     	myPropertiesPaneView.setPrefSize(200, 150);
     }
     
-
-    
     public void updateProperties(SLogoDisplayData displayData){
     	
     	myProperties =FXCollections.observableArrayList (
@@ -291,6 +289,10 @@ public class SLogoGUIController implements Initializable  {
     
     public Color getPaneColor(){
     	return myCanvasColor;
+    }
+    
+    public void setPaneColor(){
+    	this.myCanvasColor = new SLogoCustomizerBuilder().getMyPaneColor();
     }
     
 	public void setCommand(String myCommand) {

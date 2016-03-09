@@ -212,7 +212,7 @@ public class SLogoVisualizer implements Observer {
 		turtle.setPreserveRatio(true);
 		turtle.setSmooth(true);
 		turtle.setCache(true);
-		
+		       
 		//turtle rotate
 		turtle.setRotate(displaydata.getAngle());
 		

@@ -174,6 +174,9 @@ public class SLogoWorkspace {
 	}
 
 
+	private void testerVariableList(){
+		myObservableVariableList.add(new SLogoVariable("hi", 2));
+	}
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
 	}

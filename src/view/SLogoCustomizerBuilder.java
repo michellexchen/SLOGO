@@ -164,11 +164,10 @@ public class SLogoCustomizerBuilder extends SLogoBuilder{
 			System.out.println(myLineStyle);
 			System.out.println("my new line thickness: ");
 			System.out.println(myLineThickness);
+			myCustomizerStage.hide();
 		});
 	}
-	
-	
-	
+		
 	/**
 	 * @return the myColor
 	 */
