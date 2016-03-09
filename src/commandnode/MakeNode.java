@@ -7,7 +7,7 @@ import model.SLogoWorkspace;
 import commandnode.VariableNode;
 
 public class MakeNode extends BinaryNode {
-	
+
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		VariableNode varNode = ((VariableNode) getChildren().get(0));
 		String varName = varNode.getVarName();
@@ -15,7 +15,8 @@ public class MakeNode extends BinaryNode {
 		varNode.setValue(varValue);
 		SLogoWorkspace ws = varNode.getWorkspace();
 		SLogoVariable var = new SLogoVariable();
-		var.setName(varName); var.setValue(varValue);
+		var.setName(varName);
+		var.setValue(varValue);
 		ws.getMyVarList().add(var);
 		return varValue;
 	}

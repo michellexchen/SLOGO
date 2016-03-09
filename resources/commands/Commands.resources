@@ -50,6 +50,7 @@ and:And
 or:Or
 not:Not
 make:Make
+set:Set
 repeat:Repeat
 dotimes:DoTimes
 for:For
