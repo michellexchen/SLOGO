@@ -20,12 +20,12 @@ import commandnode.VariableNode;
 
 public class SLogoTreeFactory {
 
-	CommandLoader myCommandDriver;
-	ResourceLoader myResourcesDriver;
+	private CommandLoader myCommandLoader;
+	private ResourceLoader myResourcesLoader;
 
 	public SLogoTreeFactory() throws SLogoException {
-		myCommandDriver = new CommandLoader();
-		myResourcesDriver = new ResourceLoader();
+		myCommandLoader = new CommandLoader();
+		myResourcesLoader = new ResourceLoader();
 	}
 
 	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
@@ -87,18 +87,18 @@ public class SLogoTreeFactory {
 		if (isVariable(strNode)) {
 			return new VariableNode(strNode);
 		}
-		String commandName = myCommandDriver.getString(strNode);
+		String commandName = myCommandLoader.getString(strNode);
 		if (commandName == null)
 			throw new SLogoException(
-					myResourcesDriver.getString("TheCommand") + strNode + myResourcesDriver.getString("Illegal"));
+					myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));
 		else
 			try {
 				node = (Node) Class.forName(
-						myResourcesDriver.getString("CommandNode") + commandName + myResourcesDriver.getString("Node"))
+						myResourcesLoader.getString("CommandNode") + commandName + myResourcesLoader.getString("Node"))
 						.newInstance();
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				throw new SLogoException(myResourcesDriver.getString("Command") + commandName
-						+ myResourcesDriver.getString("Implemented"));
+				throw new SLogoException(myResourcesLoader.getString("Command") + commandName
+						+ myResourcesLoader.getString("Implemented"));
 			}
 		return node;
 	}

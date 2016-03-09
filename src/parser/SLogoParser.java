@@ -5,19 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import commandnode.MakeNode;
 import commandnode.Node;
+import commandnode.ToNode;
 import exception.SLogoException;
 import model.SLogoCharacter;
 import model.SLogoWorkspace;
 
 public class SLogoParser {
 
-	CommandLoader myCommandDriver;
-	SLogoTreeFactory myTreeFactory;
-	SLogoWorkspace myWorkspace;
+	private SLogoTreeFactory myTreeFactory;
+	private SLogoWorkspace myWorkspace;
 
 	public SLogoParser(SLogoWorkspace workspace) throws SLogoException{
-		myCommandDriver = new CommandLoader();
 		myTreeFactory = new SLogoTreeFactory();
 		myWorkspace = workspace;
 	}
@@ -39,6 +39,12 @@ public class SLogoParser {
 		List<SLogoCharacter> myCharacters = myWorkspace.getCharacterList();
 		for(Node myNode : myNodes){
 			for (SLogoCharacter character : myCharacters) {
+				if(myNode instanceof MakeNode){
+					((MakeNode) myNode).setWorkspace(myWorkspace);
+				}
+				if(myNode instanceof ToNode){
+					((ToNode) myNode).setWorkspace(myWorkspace);
+				}
 				evaluation = myNode.evaluate(character.getState());
 				myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
 				.updateData(character.getState());
@@ -50,10 +56,6 @@ public class SLogoParser {
 	
 	public boolean isVar(String str){
 		return str.matches(":[a-zA-Z_]+");
-	}
-	
-	public boolean isMake(String str){
-		return str.equals("make");
 	}
 	
 //	private SLogoVariable checkGlobalVars(String possibleVar){

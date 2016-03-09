@@ -4,6 +4,7 @@ import model.SLogoCharacterState;
 public class VariableNode extends NullaryNode{
 
 	private String varName;
+	private double myValue;
 
 	public VariableNode(String varName){
 		setVarName(varName);
@@ -17,8 +18,12 @@ public class VariableNode extends NullaryNode{
 		return varName;
 	}
 	
+	public void setValue(double value){
+		myValue = value;
+	}
+	
 	public double evaluate(SLogoCharacterState state){
-		return -1;
+		return myValue;
 	}
 	
 }
