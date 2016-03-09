@@ -34,9 +34,6 @@ public class SLogoTreeFactory {
 			String currCommand = commandParts.remove(0);
 			Node myNode = createNode(currCommand);
 			while (myNode.numCurrentChildren() != myNode.numRequiredChildren()) {
-				// if(isInBounds(commandParts))
-				// if(isVariable(commandParts.get(1))) -->>>>> this is were I
-				// add my :var to the make node
 				myNode.addChild(createChild(commandParts));
 			}
 			myRoots.add(myNode);
@@ -88,7 +85,6 @@ public class SLogoTreeFactory {
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
 		if (isVariable(strNode)) {
-//			System.out.println("it is a variable");
 			return new VariableNode(strNode);
 		}
 		String commandName = myCommandDriver.getString(strNode);
