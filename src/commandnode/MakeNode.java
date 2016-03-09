@@ -12,6 +12,7 @@ public class MakeNode extends BinaryNode {
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		String varName = ((VariableNode) getChildren().get(0)).getVarName();
 		double varValue = evaluateChild(1, state);
+		((VariableNode) getChildren().get(0)).setValue(varValue);
 		ws.getMyVarMap().put(varName, varValue);
 		return varValue;
 	}
