@@ -9,25 +9,22 @@ public class MakeNode extends BinaryNode {
 	private SLogoVariable makesVar;
 
 	public MakeNode() {
-
+		makesVar = new SLogoVariable();
 	}
 
 	public void addVarParam(String string) {
 		// CommandNode.super.addVarParam(string);
 		// int value = Integer.parseInt(string);
-		makesVar = new SLogoVariable();
 		makesVar.setName(string);
-	}
-
-	public void setVar(SLogoVariable var) {
-		this.makesVar = var;
 	}
 
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// TODO Auto-generated method stub
-		double charAsciiRepresentation = getChildren().get(0).evaluate(state);
+//		double charAsciiRepresentation = getChildren().get(0).evaluate(state);
 //		Context algorithm = Context()
+		String variableName = getChildren().get(0).
+		makesVar.setName(variableName);
 		return 0;
 	}
 

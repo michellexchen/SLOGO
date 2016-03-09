@@ -32,9 +32,12 @@ public class VariableNode extends CommandNode {
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		System.out.println(val);
-		return val;
+		return 0;
 	}
 	
+	public String getVariableName(){
+		return variableName;
+	}
 	
 	private double createNumericRepOfVar(String name){
 		String datagram = "";
