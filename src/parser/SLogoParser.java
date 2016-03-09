@@ -11,6 +11,7 @@ import commandnode.ToNode;
 import commandnode.VariableNode;
 import exception.SLogoException;
 import model.SLogoCharacter;
+import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 public class SLogoParser {
@@ -76,7 +77,7 @@ public class SLogoParser {
 //			}
 //		}
 //		List<String> results = new ArrayList<String>(Arrays.asList(commandList));
-////		System.out.println(results);
+//		System.out.println(results);
 //		return results;
 //	}
 //	
@@ -99,6 +100,10 @@ public class SLogoParser {
 //		SLogoParser p = new SLogoParser(w);
 //		p.readCommand(makeInput);
 //	}
+
+	private boolean isMake(String string) {
+		return string.equals("make");
+	}
 	
 
 }

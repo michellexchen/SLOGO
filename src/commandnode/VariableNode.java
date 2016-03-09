@@ -2,6 +2,7 @@ package commandnode;
 import java.util.HashMap;
 
 import model.SLogoCharacterState;
+import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 public class VariableNode extends NullaryNode{
@@ -27,7 +28,14 @@ public class VariableNode extends NullaryNode{
 	}
 	
 	public double evaluate(SLogoCharacterState state){
-		return getVarMap().get(varName);
+		return findVariable();
+	}
+	
+	private double findVariable(){
+		for(SLogoVariable variable: myWorkspace.getMyVarList()){
+			if(variable.getName().equals(varName)) return variable.getValue();
+		}
+		return 0;
 	}
 	
 	public SLogoWorkspace getWorkspace(){
@@ -36,10 +44,6 @@ public class VariableNode extends NullaryNode{
 	
 	public void setWorkspace(SLogoWorkspace ws){
 		myWorkspace = ws;
-	}
-	
-	public HashMap<String, Double> getVarMap(){
-		return myWorkspace.getMyVarMap();
 	}
 	
 }

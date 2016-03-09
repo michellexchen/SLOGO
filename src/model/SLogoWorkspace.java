@@ -23,13 +23,13 @@ public class SLogoWorkspace {
 	// NEVER USE THESE: BUG ALERT!
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
-	private HashMap<String, Double> myVariableMap;
+	private List<SLogoVariable> myVariableList;
 
 	// BELOW ARE TO BE USED
 	private List<SLogoCharacter> myCharacters;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
-	private ObservableMap<String, Double> myObservableVariableMap;
+	private ObservableList<SLogoVariable> myObservableVariableList;
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
 
@@ -37,24 +37,22 @@ public class SLogoWorkspace {
 		myView = view;
 		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
-		myVariableMap = new HashMap<String, Double>();
-		createObservableLists(myDataList, myCommandHistory, myVariableMap);
+		myVariableList = new ArrayList<SLogoVariable>();
+		createObservableLists(myDataList, myCommandHistory, myVariableList);
 
 		myCharacters = new ArrayList<SLogoCharacter>();
 	}
 	
-	
-
 	public void initialize() {
 		createTurtle();
 	}
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
 									   List<String> commandhistory,
-									   HashMap<String, Double> variableMap) {
+									   List<SLogoVariable> variableList) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
-		myObservableVariableMap = (ObservableMap<String, Double>) FXCollections.observableMap(variableMap);
+		myObservableVariableList =  FXCollections.observableArrayList(variableList);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -70,7 +68,7 @@ public class SLogoWorkspace {
 	}
 
 	public void createTurtle() {
-		SLogoTurtle myTurtle = new SLogoTurtle("OG", 0, 0, true, 0, false, 0);
+		SLogoTurtle myTurtle = new SLogoTurtle("0", 0, 0, true, 0, false, 0);
 		myCharacters.add(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 
@@ -107,25 +105,11 @@ public class SLogoWorkspace {
 		myDataList.add(displayData);
 	}
 
-	public void format(String command){
-		checkForVars(command.split(" "));
-	}
-
-	public void checkForVars(String[] command){
-
-		for(int i = 0; i < command.length; i++){
-			if(command[i].equals("make")){
-				SLogoVariable var = new SLogoVariable();
-				var.setName(command[i+1]);
-
-				//myTreeFactory.makeTree(text)
-				i++; //skip checking my next input as it's been checked right now
-			}
-		}
-	}
-
-	public void addToVarMap(String varName, double value){
-		myObservableVariableMap.put(varName, value);
+	public void addToVarMap(SLogoVariable variable){
+		myObservableVariableList.add(variable);
+//		for(String each: myObservableVariableMap.keySet()){
+//			System.out.println(each + " " + myObservableVariableMap.get(each));
+//		}
 	}
 
 	/**
@@ -173,12 +157,12 @@ public class SLogoWorkspace {
 		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
 	
-	public HashMap<String, Double> getMyVarMap(){
-		return myVariableMap;
+	public List<SLogoVariable> getMyVarList(){
+		return myVariableList;
 	}
 
 
-	public ObservableMap<String, Double> getVarMap() {
-		return myObservableVariableMap;
-	}
+//	public ObservableMap<String, Double> getVarMap() {
+//		return myObservableVariableMap;
+//	}
 }

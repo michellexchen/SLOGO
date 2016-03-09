@@ -2,6 +2,7 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
+import model.SLogoVariable;
 import model.SLogoWorkspace;
 import commandnode.VariableNode;
 
@@ -13,7 +14,9 @@ public class MakeNode extends BinaryNode {
 		double varValue = evaluateChild(1, state);
 		varNode.setValue(varValue);
 		SLogoWorkspace ws = varNode.getWorkspace();
-		ws.getMyVarMap().put(varName, varValue);
+		SLogoVariable var = new SLogoVariable();
+		var.setName(varName); var.setValue(varValue);
+		ws.getMyVarList().add(var);
 		return varValue;
 	}
 

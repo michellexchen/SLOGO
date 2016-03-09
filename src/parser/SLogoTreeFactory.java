@@ -46,19 +46,14 @@ public class SLogoTreeFactory {
 
 	public Node createChild(List<String> commandParts) throws SLogoException {
 		String currCommand = commandParts.remove(0);
-		if (isNumeric(currCommand)) {
-			return createNode(currCommand);
-		}
-		if (isOpenBracket(currCommand)) {
+		if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
 			List<Node> commandList = createCommandList(commandParts);
 			ListNode listNode = new ListNode(commandList);
 			return listNode;
 		} 
 		if (isVariable(currCommand)) {
-			System.out.println("HERE");
-			VariableNode myVar = new VariableNode(currCommand.substring(1));
+			VariableNode myVar = new VariableNode(currCommand);
 			myVar.setWorkspace(myWorkspace);
-			System.out.println(myVar.getWorkspace());
 			return myVar;
 		}
 		else {
@@ -117,6 +112,10 @@ public class SLogoTreeFactory {
 
 	private boolean isOpenBracket(String str) {
 		return str.equals("[");
+	}
+	
+	private boolean isOpenParenthesis(String str) {
+		return str.equals("(");
 	}
 
 	private boolean isVariable(String str) {
