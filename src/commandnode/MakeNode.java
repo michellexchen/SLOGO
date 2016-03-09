@@ -2,33 +2,22 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
-import model.SLogoVariable;
+import model.SLogoWorkspace;
+import commandnode.VariableNode;
 
 public class MakeNode extends BinaryNode {
 
-	private SLogoVariable makesVar;
-
-	public MakeNode() {
-
-	}
-
-	public void addVarParam(String string) {
-		// CommandNode.super.addVarParam(string);
-		// int value = Integer.parseInt(string);
-		makesVar = new SLogoVariable();
-		makesVar.setName(string);
-	}
-
-	public void setVar(SLogoVariable var) {
-		this.makesVar = var;
-	}
-
-	@Override
+	private SLogoWorkspace ws;
+	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
-		double charAsciiRepresentation = getChildren().get(0).evaluate(state);
-//		Context algorithm = Context()
-		return 0;
+		String varName = ((VariableNode) getChildren().get(1)).getVarName();
+		double varValue = evaluateChild(1, state);
+		ws.getMyVarMap().put(varName, varValue);
+		return varValue;
+	}
+	
+	public void setWorkspace(SLogoWorkspace ws){
+		this.ws = ws;
 	}
 
 }

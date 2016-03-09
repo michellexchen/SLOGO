@@ -1,68 +1,24 @@
 package commandnode;
-
-import algorithms.Context;
-import algorithms.EncodingVars;
-import exception.SLogoException;
 import model.SLogoCharacterState;
-import model.SLogoPenData;
-import model.SLogoTurtleState;
-import parser.ResourceLoader;
 
-public class VariableNode extends CommandNode {
+public class VariableNode extends NullaryNode{
 
-	private String variableName = "";
-	private double val = -1;
-	ResourceLoader myResourcesDriver = new ResourceLoader();
+	private String varName;
 
-	public VariableNode(String name) throws SLogoException {
-		if (checkLength(name)){
-			this.variableName = name;
-			Context encode = new Context(new EncodingVars()); 
-//			this.val = createNumericRepOfVar(name);
-			this.val = encode.performOperation(name);
-		}
-		else 
-			throw new SLogoException(myResourcesDriver.getString("Variable"));
+	public VariableNode(String varName){
+		setVarName(varName);
 	}
 
-	private boolean checkLength(String name) {
-		return name.length() > 1;
-	}
-
-	@Override
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		System.out.println(val);
-		return val;
+	public void setVarName(String varName){
+		this.varName = varName;
 	}
 	
-	
-	private double createNumericRepOfVar(String name){
-		String datagram = "";
-		int encodingBitStuff = 99;
-		for(int i = 1; i < name.length(); i++){
-			if(i > 7) break;
-			char ch = name.charAt(i);
-			if(ch == '_') System.out.println("used underscore");
-			int asciiRepOfVariable = Character.getNumericValue(ch);
-			System.out.println(ch + " translates to letter " + asciiRepOfVariable);
-//			asciiRepOfVariable -= 44;
-//			if(i == name.length()/2) datagram += ".";
-			datagram += asciiRepOfVariable;
-			System.out.println("datagram : " + datagram);
-		}
-		datagram += encodingBitStuff;
-		double i = Double.parseDouble(datagram);
-		return i;
+	public String getVarName(){
+		return varName;
 	}
 	
-	public static void main(String[] args) throws SLogoException{
-		double NUM_CHILDREN = 5.0;
-		String varinput1 = ":t";
-		String varinput2 = ":";
-		String varinput3 = ":lOdsdtfd";
-		VariableNode var = new VariableNode(varinput3);
-		var.evaluate(null);
-//		var.evaluate(new SLogoTurtleState(new SLogoPenData(), NUM_CHILDREN, NUM_CHILDREN, NUM_CHILDREN, false, false, NUM_CHILDREN));
+	public double evaluate(SLogoCharacterState state){
+		return -1;
 	}
-
+	
 }

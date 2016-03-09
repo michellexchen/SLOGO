@@ -7,18 +7,22 @@ import model.SLogoCharacterState;
 
 public class ListNode extends CommandNode{
 
-	private List<Node> myNodes;
+	private List<Node> myCommands;
 	
-	public ListNode(List<Node> myNodes){
-		this.myNodes = myNodes;
+	public ListNode(List<Node> myCommands){
+		this.myCommands = myCommands;
 	}
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double evaluation = 0;
-		for(Node node : myNodes){
+		for(Node node : myCommands){
 			evaluation = node.evaluate(state);
 		}
 		return evaluation;
+	}
+	
+	public List<Node> getCommands(){
+		return myCommands;
 	}
 
 }
