@@ -6,6 +6,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 import exception.SLogoException;
 import javafx.scene.paint.Color;
@@ -15,7 +16,7 @@ import javafx.scene.shape.Line;
  * @author Hunter
  *
  */
-public class SLogoDisplayData extends Observable {
+public class SLogoDisplayData extends Observable implements Observer {
 	
 	private SLogoPosition myPosition;
 	private double xCoordinate;
@@ -174,6 +175,12 @@ public class SLogoDisplayData extends Observable {
 	
 	public int getID(){
 		return ID;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
