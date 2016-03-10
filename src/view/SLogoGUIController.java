@@ -13,6 +13,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -136,7 +138,18 @@ public class SLogoGUIController implements Initializable {
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
     	//initialize MenuButton
-    	myMenuButton = new MenuButton("Select Workspace");
+//    	myMenuButton = new MenuButton("Select Workspace");
+//    	MenuItem B1 = new MenuItem("B1");
+//    	B1.setOnAction(new EventHandler<ActionEvent>()
+//    			{
+//    		
+//    		@Override public void handle(ActionEvent e)
+//    		{
+//    			System.out.println("You have selected: Ferrari");
+//    		}
+//    			});
+//    	myMenuButton.getItems().addAll(B1);
+    	
     	
     	
     	//initializes properties
@@ -148,7 +161,7 @@ public class SLogoGUIController implements Initializable {
 		
     	//TODO: Separate the operations below into different methods
     	
-    	//myHistory = new ArrayList<String>();
+    	myHistory = new ArrayList<String>();
     	
     	//Help button - assign action
         myHelpButton.setOnAction(e -> {
@@ -358,6 +371,14 @@ public class SLogoGUIController implements Initializable {
 
 		getMenuButton().getItems().clear();
 		getMenuButton().getItems().addAll(items);
+	    getMenuButton().showingProperty().addListener(new ChangeListener<Boolean>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+	            if(newValue) {
+	                getMenuButton().getItems().add(new MenuItem("new city item"));
+	            }
+	        }
+	    });
 		
 		System.out.println("This is menubuttons added: " + getMenuButton().getItems());
 		

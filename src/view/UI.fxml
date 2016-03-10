@@ -26,7 +26,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-        <MenuButton fx:id="myMenuButton" layoutX="5.0" layoutY="13.0" mnemonicParsing="false" prefHeight="21.625" prefWidth="176.0" style="" text="Choose Workspace" textFill="BLACK" wrapText="false">
+        <MenuButton fx:id="myMenuButton" layoutX="5.0" layoutY="13.0" mnemonicParsing="false" prefHeight="21.625" prefWidth="176.0" style="" text="Select Workspace" textFill="BLACK" wrapText="false">
           <font>
             <Font size="11.0" />
           </font>
