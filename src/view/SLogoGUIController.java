@@ -99,7 +99,6 @@ public class SLogoGUIController implements Initializable {
     
     //MenuButton's MenuItem list
     private List<MenuItem> myMenuItems;
-
     
     
     

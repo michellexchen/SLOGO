@@ -45,6 +45,17 @@ public class SLogoCustomizerBuilder extends Observable {
 	private Color myFontColor;
 	private HBox fontColorHb;
 	
+	private Button myOkayButton;
+	private HBox buttonHb;
+	private ComboBox comboBox;
+	private Label penStyleLabel;
+	private HBox penStyleHb;
+	private String myLineStyle;
+	private Slider thicknessSlider;
+	private Label thicknessSliderLabel;
+	private HBox thicknessSliderHb;
+	private double myLineThickness;
+	
 	
 	public SLogoCustomizerBuilder() {
 
@@ -147,16 +158,7 @@ public class SLogoCustomizerBuilder extends Observable {
 
 	}
 	
-	private Button myOkayButton;
-	private HBox buttonHb;
-	private ComboBox comboBox;
-	private Label penStyleLabel;
-	private HBox penStyleHb;
-	private String myLineStyle;
-	private Slider thicknessSlider;
-	private Label thicknessSliderLabel;
-	private HBox thicknessSliderHb;
-	private double myLineThickness;
+
 
 	private void setButton(){ 
 		buttonHb = new HBox();
@@ -179,7 +181,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	}
 	
 	public void update(Observable observable, Object arg1) {
-
+		
 	}
 		
 	/**

@@ -23,7 +23,7 @@ public class SLogoPen {
 	private PenStrokeLoader strokeLoader;
 	
 	private int DEFAULT_PEN_INDEX = 0;
-	private int DEFAULT_THICKNESS = 2;
+	private int DEFAULT_THICKNESS = 1;
 	private boolean DEFAULT_PEN_DOWN = true;
 	private int DEFAULT_STROKE_STYLE = 0;
 	
