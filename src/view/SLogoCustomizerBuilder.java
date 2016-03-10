@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Observable;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,7 +24,7 @@ import javafx.stage.Stage;
  * CustomizerBuilder that builds a prompt screen when
  * Customize button is clicked
  */
-public class SLogoCustomizerBuilder extends SLogoBuilder{
+public class SLogoCustomizerBuilder extends Observable {
 	
     private static final int XPROMPTSIZE = 500;
     private static final int YPROMPTSIZE = 275; 
@@ -53,7 +55,7 @@ public class SLogoCustomizerBuilder extends SLogoBuilder{
 		myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
 		myCustomizerStage.setScene(myCustomizerScene);
 		myCustomizerStage.setTitle("CUSTOMIZER");
-		myCustomizerStage.showAndWait();
+		//myCustomizerStage.showAndWait();
 	}
 	
 	private void setup(){
@@ -71,6 +73,14 @@ public class SLogoCustomizerBuilder extends SLogoBuilder{
 		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, thicknessSliderHb, buttonHb);
 		vbox.getStylesheets().add("view/splashstyle.css");
 		return vbox;
+	}
+	
+	public void hide(){
+		myCustomizerStage.hide();
+	}
+	
+	public void show(){
+		myCustomizerStage.show();
 	}
 
 	private void setColorPicker(){
@@ -166,6 +176,10 @@ public class SLogoCustomizerBuilder extends SLogoBuilder{
 			System.out.println(myLineThickness);
 			myCustomizerStage.hide();
 		});
+	}
+	
+	public void update(Observable observable, Object arg1) {
+
 	}
 		
 	/**
