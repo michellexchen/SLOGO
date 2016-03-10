@@ -1,7 +1,6 @@
 package model;
 
 import exception.SLogoException;
-import javafx.scene.image.ImageView;
 
 /**
  * SLogo's highest State in hierarchy, to support multiple types of character

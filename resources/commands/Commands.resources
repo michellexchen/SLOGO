@@ -88,4 +88,6 @@ setsh:SetShape
 setpalette:SetPalette
 pencolor:PenColor
 pc:PenColor
+setpencolor:SetPenColor
+setpc:SetPenColor
 shape:Shape

@@ -28,6 +28,8 @@ public class SLogoDisplayData extends Observable {
 	private double penSize;
 	private String myImage;
 	private List<Line> myLines;
+	private boolean turtleHidden;
+	private int ID;
 
 	/**
 	 * Constructor that sets initial values
@@ -36,13 +38,15 @@ public class SLogoDisplayData extends Observable {
 	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
 	public SLogoDisplayData(SLogoPosition position, double direction, boolean penDown, Color penColor, String image,
-			SLogoPen pen) {
+			SLogoPen pen, boolean turtleHidden, int ID) {
 		this.myPosition = position;
 		this.myDirection = direction;
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
 		this.myPen = pen;
+		this.turtleHidden = turtleHidden;
+		this.ID = ID;
 	}
 
 	public SLogoDisplayData(SLogoCharacterState state) throws SLogoException {
@@ -56,7 +60,7 @@ public class SLogoDisplayData extends Observable {
 
 	public void updateData(SLogoCharacterState state) {
 		myPen = state.getPen();
-		penDown = myPen.getPenDown();
+		penDown = myPen.isPenDown();
 		penColor = myPen.getPenColor();
 		penSize = myPen.getThickness();
 		// TODO: Configure stroke
@@ -65,6 +69,8 @@ public class SLogoDisplayData extends Observable {
 		xCoordinate = state.getXCoor();
 		yCoordinate = state.getYCoor();
 		myImage = state.getImage();
+		turtleHidden = state.getHidden();
+		ID = state.getID();
 		applyChanges();
 	}
 
@@ -165,6 +171,14 @@ public class SLogoDisplayData extends Observable {
 
 	public String getTurtleImage() {
 		return myImage;
+	}
+	
+	public boolean getTurtleHidden(){
+		return turtleHidden;
+	}
+	
+	public int getID(){
+		return ID;
 	}
 
 }

@@ -25,17 +25,17 @@ import model.SLogoDisplayData;
  *
  */
 public class SLogoVisualizer extends Observable implements Observer {
-	
+
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
-	
+
 	private int myTurtleSize = 40;
-	
+
 	private ObservableList<SLogoDisplayData> myObservableDataList;
-	
+
 	private int myWidth;
 	private int myHeight;
-	
+
 	private FXMLLoader myLoader;
 	private SLogoGUIController myGUIController;
 	private SLogoPromptBuilder myPromptBuilder;
@@ -46,21 +46,21 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private Stage myStage;
 	private Model myModel;
 	private String myCanvasColor;
-	
+
 	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
 		myWidth = width;
 		myHeight = height;
 	}
-	
+
 	public SLogoVisualizer(Model model) {
 		myWidth = 331;
 		myHeight = 331;
 		myModel = model;
 	}
-	
+
 	public SLogoVisualizer(){
-		
+
 	}
 
 	public void initialize() throws SLogoException, IOException {
@@ -78,8 +78,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
-		
-		
+
+
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
@@ -91,11 +91,11 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myStage.setScene(myScene);
 		myStage.setTitle("SLogo");
 		show();
-		
-		
-		
-//		CommandView myCommandView = new CommandView();
-//		myCommandView.show();
+
+
+
+		//		CommandView myCommandView = new CommandView();
+		//		myCommandView.show();
 	}
 
 	public void updateStates() {
@@ -119,31 +119,31 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public void update(Observable observable, Object arg1) {
 		updateDisplayData();
 	}
-	
+
 	public void setImage (ImageView image) {
-		
-		
+
+
 	}
 
-	
+
 	public void updateMenuButton (ObservableList<MenuItem> items) {
 		getGUIController().updateMenuButton(items);
 	}
-	
-	
+
+
 	public void setPenDown (boolean penDown) {
-		
-		
+
+
 	}
-	
+
 	public void setPenColor (Color color) {
-		
+
 	}
-	
+
 	public void rotate (SLogoDisplayData displaydata) {
-		
+
 	}
-	
+
 	/**
 	 * Creates a Line object with default color black
 	 * 
@@ -159,7 +159,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
-	
+
 	/**
 	 * Creates a Line object with specified color
 	 * 
@@ -170,10 +170,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public Line createLine(SLogoDisplayData turtledata) {
 		Line newLine = createLine(turtledata.getPosition());
 		newLine.setFill(turtledata.getPenColor());
-		newLine.setStrokeWidth(turtledata.getPenSize());
+		if(turtledata.isPenDown())
+			newLine.setStrokeWidth(turtledata.getPenSize());
+		else
+			newLine.setStrokeWidth(0);
 		return newLine;
 	}
-	
+
 	/**
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
@@ -181,34 +184,37 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public void updateDisplayData () {		
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
-		
+
 		//Set Pane Color
 		getGUIController().getCanvas().setStyle("-fx-background-color: "
-													+ getCanvasColor());
-		
+				+ getCanvasColor());
+
 		getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
-			
+
 			//Create a line
 			turtledata.addLine(createLine(turtledata));
-			
+
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
-			
+
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
 		}
-		
+
 	}
-	
+
 	public void placeTurtle(SLogoDisplayData displaydata) {
-        Image image = new Image(IMAGE_PATH + displaydata.getImage());
-        
+		Image image = new Image(IMAGE_PATH + displaydata.getImage());
+
 		ImageView turtle = new ImageView();
-		turtle.setImage(image);
-		
+
+		if(!displaydata.getTurtleHidden()){
+			turtle.setImage(image);
+		}
+
 		//assign click action - change the action to change attributes
 		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
@@ -223,26 +229,26 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setPreserveRatio(true);
 		turtle.setSmooth(true);
 		turtle.setCache(true);
-		       
+
 		//turtle rotate
 		turtle.setRotate(displaydata.getDirection());
-		
+
 		//place turtle using Position and center at the coordinates (x,y)
 		turtle.setLayoutX(displaydata.getPosition().xCurrent() - myTurtleSize / 2);
 		turtle.setLayoutY(displaydata.getPosition().yCurrent() - myTurtleSize / 2);
-		
+
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
 	}
-	
+
 	/**
 	 * This method updates command history display in GUI.
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateCommandHistory () {
-		
+
 	}
-	
+
 	//////////////////////////
 	// getters and setters //
 	//////////////////////////
@@ -250,7 +256,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public String getLanguage() {
 		return myPromptBuilder.sendMyLanguage();
 	}
-	
+
 	public int getWidth() {
 		return myWidth;
 	}
@@ -351,7 +357,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * @param myObservableDataList the myObservableDataList to set
 	 */
 	public void setObservableDataList(ObservableList<SLogoDisplayData> 
-												myObservableDataList) {
+	myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
 	}
 

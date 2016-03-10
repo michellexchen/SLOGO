@@ -80,7 +80,7 @@ public class SLogoPen {
 		this.myStrokeStyle = myStrokeStyle;
 	}
 
-	public boolean getPenDown() {
+	public boolean isPenDown() {
 		return isDown;
 	}
 	
