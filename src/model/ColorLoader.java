@@ -48,7 +48,7 @@ public class ColorLoader extends FileLoader{
 		return new Color(rgb[0], rgb[1], rgb[2], DEFAULT_OPACITY);
 	}
 
-	public void addRGB(double index, double r, double g, double b) throws SLogoException{
+	public void addRGB(int index, int r, int g, int b) throws SLogoException{
 		double red = convertRGB(r);
 		double green = convertRGB(g);
 		double blue = convertRGB(b);
@@ -65,7 +65,7 @@ public class ColorLoader extends FileLoader{
 		myRGBMap.put((int) index, rgb);
 	}
 	
-	public double convertRGB(double value){
+	public double convertRGB(int value){
 		return value/255;
 	}
 

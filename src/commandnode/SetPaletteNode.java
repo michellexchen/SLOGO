@@ -17,10 +17,10 @@ public class SetPaletteNode extends QuaternionNode{
 	}
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		myColorLoader.addRGB(myChildren.get(0).evaluate(state),
-				myChildren.get(1).evaluate(state),
-				myChildren.get(2).evaluate(state),
-				myChildren.get(3).evaluate(state));
+		myColorLoader.addRGB((int) myChildren.get(0).evaluate(state),
+				(int) myChildren.get(1).evaluate(state),
+				(int) myChildren.get(2).evaluate(state),
+				(int) myChildren.get(3).evaluate(state));
 		return myChildren.get(0).evaluate(state);
 	}
 }
