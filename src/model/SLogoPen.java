@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 public class SLogoPen {
 	
 	private Color myColor;
-	private int myThickness;
+	private double myThickness;
 	private boolean isDown;
 	private String myStrokeStyle;
 	
@@ -29,7 +29,8 @@ public class SLogoPen {
 	public SLogoPen() throws SLogoException{
 		colorLoader = new ColorLoader();
 		// myColor = colorLoader.getColor(DEFAULT_COLOR);
-		myColor = Color.BLACK; // temp
+		// TODO: Configure when ColorLoader parsing done
+		myColor = Color.BLACK; // Temp
 		strokeLoader = new PenStrokeLoader();
 		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
 		myThickness = DEFAULT_THICKNESS;
@@ -40,11 +41,11 @@ public class SLogoPen {
 		myColor = colorLoader.getColor(index);
 	}
 	
-	public void setThickness (int thickness) {
+	public void setThickness (double thickness) {
 		this.myThickness = thickness;
 	}
 	
-	public int getThickness(){
+	public double getThickness(){
 		return myThickness;
 	}
 	

@@ -25,7 +25,7 @@ public class SLogoDisplayData extends Observable {
 	private SLogoPen myPen;
 	private boolean penDown;
 	private Color penColor;
-	private int penSize;
+	private double penSize;
 	private ImageView myImage;
 	private List<Line> myLines;
 
@@ -159,9 +159,8 @@ public class SLogoDisplayData extends Observable {
 		this.myLines = myLines;
 	}
 
-	public Object getPenSize() {
-		// TODO Auto-generated method stub
-		return null;
+	public double getPenSize() {
+		return penSize;
 	}
 
 }
