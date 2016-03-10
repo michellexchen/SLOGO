@@ -77,6 +77,8 @@ public class SLogoPosition {
 		setxCurrent(xCurrent + x);
 		setyCurrent(yCurrent - y);
 		
+		
+		//Debugging purposes
 		System.out.println("Prev: " + xPrevious + "  " + yPrevious);
 		System.out.println("Current " + xCurrent + "  " + yCurrent);
 		

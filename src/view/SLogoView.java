@@ -79,6 +79,9 @@ public class SLogoView implements View {
 		//Name the menuitem
 		MenuItem myMenuItem = new MenuItem("Workspace " + 
 										getMenuItems().size());
+		myMenuItem.setId("Workspace " + 
+										getMenuItems().size());
+		System.out.println("MenuItem creation check: " + myMenuItem.getId());
 		//Add it to List<MenuItem>
 		getMenuItems().add(myMenuItem);
 		

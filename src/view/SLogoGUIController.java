@@ -13,6 +13,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -93,7 +95,7 @@ public class SLogoGUIController implements Initializable, Observer {
     
     //Drop-down menuButton - Choose Project
     @FXML
-    private MenuButton myMenu;
+    private MenuButton myMenuButton;
    
 
     
@@ -122,8 +124,11 @@ public class SLogoGUIController implements Initializable, Observer {
     @FXML
     private Button myCustomizeButton;
     
+    
+    //History
     @FXML
     private List<String> myHistory;
+  
     
 //    @FXML
 //    private List<String> myProperties;
@@ -132,6 +137,21 @@ public class SLogoGUIController implements Initializable, Observer {
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+    	//initialize MenuButton
+//    	myMenuButton = new MenuButton("Select Workspace");
+//    	MenuItem B1 = new MenuItem("B1");
+//    	B1.setOnAction(new EventHandler<ActionEvent>()
+//    			{
+//    		
+//    		@Override public void handle(ActionEvent e)
+//    		{
+//    			System.out.println("You have selected: Ferrari");
+//    		}
+//    			});
+//    	myMenuButton.getItems().addAll(B1);
+    	
+    	
+    	
     	//initializes properties
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
 
@@ -358,22 +378,45 @@ public class SLogoGUIController implements Initializable, Observer {
 	public void updateMenuButton(ObservableList<MenuItem> items) {
 		// TODO Auto-generated method stub
 		
-		getMenu().getItems().clear();
-		getMenu().getItems().addAll(items);
 		
-//		for (MenuItem item : items) {
-//			getMenu().getItems().add(item);
-//			System.out.println("Happening");
-//		}
+		System.out.println("This is menubutton: " + getMenuButton());
+		System.out.println("This is items: " + items);
+
+		getMenuButton().getItems().clear();
+		getMenuButton().getItems().addAll(items);
+	    getMenuButton().showingProperty().addListener(new ChangeListener<Boolean>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+	            if(newValue) {
+	                getMenuButton().getItems().add(new MenuItem("new city item"));
+	            }
+	        }
+	    });
+		
+		System.out.println("This is menubuttons added: " + getMenuButton().getItems());
+		
+//		System.out.println("Is tghis happening");
+		for (MenuItem item : getMenuButton().getItems()) {
+//			
+//			System.out.println(item);
+//			System.out.println(item.toString());
+//			
+		}
 		
 	}
 
-	public MenuButton getMenu() {
-		return myMenu;
+	/**
+	 * @return the myMenuButton
+	 */
+	public MenuButton getMenuButton() {
+		return myMenuButton;
 	}
 
-	public void setMenu(MenuButton myMenu) {
-		this.myMenu = myMenu;
+	/**
+	 * @param myMenuButton the myMenuButton to set
+	 */
+	public void setMenuButton(MenuButton myMenuButton) {
+		this.myMenuButton = myMenuButton;
 	}
 
 	@Override
@@ -381,6 +424,13 @@ public class SLogoGUIController implements Initializable, Observer {
 		getCanvas().setStyle("-fx-background-color: " + toRGBCode(myPropertiesData.getPaneColor()));
 		System.out.println(myPropertiesData.getPaneColor());
 	}
+//	public MenuButton getMenuButton() {
+//		return myMenuButton;
+//	}
+//
+//	public void setMenu(MenuButton myMenu) {
+//		this.myMenuB = myMenu;
+//	}
 
 //	@Override
 //	public void update(Observable arg0, Object arg1) {
