@@ -64,7 +64,7 @@ public class SLogoGUIController implements Initializable  {
     private ColorPicker myColorPicker;
     private HBox myColorHBox;
     
-    private static SLogoCustomizerBuilder myCustomizer;
+    private SLogoCustomizerBuilder myCustomizer;
 
 	
 	private Model myModel;
@@ -133,6 +133,10 @@ public class SLogoGUIController implements Initializable  {
     	//initializes properties
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
 
+    	//initialize myCustomizer
+		myCustomizer = new SLogoCustomizerBuilder();
+		myCustomizer.hide();
+		
     	//TODO: Separate the operations below into different methods
     	
     	myHistory = new ArrayList<String>();
@@ -258,7 +262,7 @@ public class SLogoGUIController implements Initializable  {
     
     private void customize(){
     	myCustomizeButton.setOnMouseClicked(e -> {
-    		myCustomizer = new SLogoCustomizerBuilder();
+    		myCustomizer.show();
 //    		System.out.println("new pane color:");
 //    		System.out.println(myCustomizer.getMyPaneColor());
 //    		System.out.println("new font color:");
@@ -270,6 +274,10 @@ public class SLogoGUIController implements Initializable  {
 //        	customize.getDialogPane().getButtonTypes().add(new ButtonType("DONE", ButtonData.CANCEL_CLOSE));
 //        	customize.showAndWait();
 		});
+    }
+    
+    public SLogoCustomizerBuilder getCustomizer() {
+    	return myCustomizer;
     }
 
     private HBox chooseColor(){	//for selecting color   		
