@@ -57,9 +57,7 @@ public class SLogoDisplayData extends Observable {
 	public void updateData(SLogoCharacterState state) {
 		myPen = state.getPen();
 		penDown = myPen.getPenDown();
-		System.out.println("B " + getPenColor());
 		penColor = myPen.getPenColor();
-		System.out.println("A " + getPenColor());
 		penSize = myPen.getThickness();
 		// TODO: Configure stroke
 		myPosition = new SLogoPosition();

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.Properties;
 
 import exception.SLogoException;
@@ -33,7 +34,7 @@ public abstract class FileLoader {
 		myProperties = new Properties();
 		myProperties.load(myFileReader);
 	}
-	
+
 	public String getFileName(){
 		return fileName;
 	}
@@ -48,6 +49,24 @@ public abstract class FileLoader {
 
 	public String getString(String key) {
 		return myProperties.getProperty(key);
+	}
+
+	public int countLines(String filename) throws SLogoException{
+		LineNumberReader reader;
+		try {
+			reader = new LineNumberReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+			throw new SLogoException("SLogo resources file not found");
+		}
+		int numLines = 0;
+		String nextLine = "";
+		try {
+			while ((nextLine = reader.readLine()) != null) {}
+		} catch (IOException e) {
+			throw new SLogoException("SLogo resources file not found");
+		}
+		numLines = reader.getLineNumber(); 
+		return numLines;
 	}
 
 }

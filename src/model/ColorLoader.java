@@ -29,7 +29,7 @@ public class ColorLoader extends FileLoader{
 		try {
 			super.load();
 		} catch (IOException e) {
-			throw new SLogoException("SLogo resources file not found");
+			throw new SLogoException("SLogo Color file not found");
 		}
 	}
 
@@ -41,25 +41,6 @@ public class ColorLoader extends FileLoader{
 			double[] rgbVals = {convertRGB(Integer.parseInt(rgbStrs[0])), convertRGB(Integer.parseInt(rgbStrs[1])), convertRGB(Integer.parseInt(rgbStrs[2]))};
 			myRGBMap.put(x, rgbVals);
 		}
-		
-	}
-
-	public int countLines(String filename) throws SLogoException{
-		LineNumberReader reader;
-		try {
-			reader = new LineNumberReader(new FileReader(filename));
-		} catch (FileNotFoundException e) {
-			throw new SLogoException("SLogo resources file not found");
-		}
-		int numLines = 0;
-		String nextLine = "";
-		try {
-			while ((nextLine = reader.readLine()) != null) {}
-		} catch (IOException e) {
-			throw new SLogoException("SLogo resources file not found");
-		}
-		numLines = reader.getLineNumber(); 
-		return numLines;
 	}
 
 	public Color getColor(int index) throws SLogoException{
