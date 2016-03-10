@@ -22,15 +22,13 @@ public class SLogoPen {
 	private PenStrokeLoader strokeLoader;
 	
 	private int DEFAULT_COLOR = 0;
-	private int DEFAULT_THICKNESS = 5;
+	private int DEFAULT_THICKNESS = 2;
 	private boolean DEFAULT_PEN_DOWN = true;
 	private int DEFAULT_STROKE_STYLE = 0;
 	
 	public SLogoPen() throws SLogoException{
 		colorLoader = new ColorLoader();
-		// myColor = colorLoader.getColor(DEFAULT_COLOR);
-		// TODO: Configure when ColorLoader parsing done
-		myColor = Color.BLACK; // Temp
+		myColor = colorLoader.getColor(DEFAULT_COLOR);
 		strokeLoader = new PenStrokeLoader();
 		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
 		myThickness = DEFAULT_THICKNESS;

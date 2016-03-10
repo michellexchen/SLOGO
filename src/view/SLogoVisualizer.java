@@ -158,7 +158,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		newLine.setStartY(position.yPrevious());
 		newLine.setEndX(position.xCurrent());
 		newLine.setEndY(position.yCurrent());
-		newLine.setFill(Color.BLACK);
 		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
@@ -170,9 +169,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * @param color
 	 * @return Line
 	 */
-	public Line createLine(SLogoPosition position, Color color) {
-		Line newLine = createLine(position);
-		newLine.setFill(color);
+	public Line createLine(SLogoDisplayData turtledata) {
+		Line newLine = createLine(turtledata.getPosition());
+		newLine.setFill(turtledata.getPenColor());
+		newLine.setStrokeWidth(turtledata.getPenSize());
 		return newLine;
 	}
 	
@@ -194,7 +194,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 			placeTurtle(turtledata);
 			
 			//Create a line
-			turtledata.addLine(createLine(turtledata.getPosition()));
+			turtledata.addLine(createLine(turtledata));
 			
 			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());

@@ -20,9 +20,10 @@ public abstract class FileLoader {
 	private BufferedReader myFileReader;
 	private String directory;
 	private String extension;
+	private String fileName;
 
 	public void load() throws IOException, SLogoException {
-		String fileName = directory + "/" + extension;
+		fileName = directory + "/" + extension;
 		myFileReader = null;
 		try {
 			myFileReader = new BufferedReader(new FileReader(fileName));
@@ -31,6 +32,10 @@ public abstract class FileLoader {
 		}
 		myProperties = new Properties();
 		myProperties.load(myFileReader);
+	}
+	
+	public String getFileName(){
+		return fileName;
 	}
 
 	public void setDirectory(String directory) {
