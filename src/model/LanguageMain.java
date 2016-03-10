@@ -2,9 +2,9 @@ package model;
 
 public class LanguageMain {
 	
-	public static void main (String[] args) {
-		System.out.println(translate("fd 50 rt 90 BACK :distance Left :angle"));
-	}
+//	public static void main (String[] args) {
+//		System.out.println(translate("fd 50 rt 90 BACK :distance Left :angle"));
+//	}
 	
 	private static String parseText(LanguageParser lang, String[] text) {
 		String result = "";
