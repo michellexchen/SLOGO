@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class Pen {
 	
+	/**
+	 * PLEASE USE SLogoPenData class
+	 * 
+	 * either rename this class to SLogoPenData or work on SLogoPenData
+	 * 
+	 * **Naming convention**
+	 */
+	
 	private int[] penColor = new int[3];
 	private int penSize;
 	private boolean penDown;

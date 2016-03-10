@@ -66,13 +66,21 @@ public class SLogoPosition {
 	 */
 	
 	public void setXY (double x, double y) {
-
 		
-		xCurrent = x + xCenter;
-		yCurrent = yCenter - y;
 		
-		xPrevious = xCurrent;
-		yPrevious = yCurrent;
+		
+		setxPrevious(xCurrent);
+		setyPrevious(yCurrent);
+		
+//		xPrevious = xCurrent;
+//		yPrevious = yCurrent;
+		
+		
+		setxCurrent(xCurrent + x);
+		setyCurrent(yCurrent - y);
+		
+		System.out.println("Prev: " + xPrevious + "  " + yPrevious);
+		System.out.println("Current " + xCurrent + "  " + yCurrent);
 		
 		if (xCurrent > PANE_SIZE - PADDING) {
 			xCurrent = PANE_SIZE - PADDING;
@@ -162,5 +170,25 @@ public class SLogoPosition {
 	public void setyCurrent(double yCurrent) {
 		this.yCurrent = yCurrent;
 	}
+
+
+//	public double getxPrevious() {
+//		return xPrevious;
+//	}
+//
+//
+//	public double getyPrevious() {
+//		return yPrevious;
+//	}
+//
+//
+//	public double getxCurrent() {
+//		return xCurrent;
+//	}
+//
+//
+//	public double getyCurrent() {
+//		return yCurrent;
+//	}
 
 }

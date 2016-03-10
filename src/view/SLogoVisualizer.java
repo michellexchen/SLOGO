@@ -175,6 +175,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		newLine.setFill(color);
 		return newLine;
 	}
+	
 	/**
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)

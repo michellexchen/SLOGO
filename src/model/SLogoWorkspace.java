@@ -19,7 +19,7 @@ import view.View;
 public class SLogoWorkspace {
 
 	private View myView;
-	private TurtleFactory turtleFactory;
+	private SLogoTurtleFactory turtleFactory;
 
 	// NEVER USE THESE: BUG ALERT!
 	private List<SLogoDisplayData> myDataList;
@@ -36,7 +36,7 @@ public class SLogoWorkspace {
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
-		turtleFactory = new TurtleFactory(this);
+		turtleFactory = new SLogoTurtleFactory(this);
 		myDataList = new ArrayList<SLogoDisplayData>();
 		myCommandHistory = new ArrayList<String>();
 		myVariableList = new ArrayList<SLogoVariable>();

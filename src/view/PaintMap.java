@@ -1,7 +1,11 @@
 package view;
 
 /**
- * Class that maps Color objects to the string of their names and vice versa. Used by graphics and XMLReader classes.
+
+* Class that maps Color objects to the string of their names and vice versa.
+*  Used by graphics and XMLReader classes.
+*  
+*  RENAME THIS CLASS
  */
 
 import java.util.HashMap;
@@ -14,6 +18,10 @@ import javafx.scene.paint.Color;
  */
 
 public class PaintMap {
+	
+	/**
+	 * Using my**** for private variable names
+	 */
 	private static PaintMap instance;
 	private Map<String, Color> stringToColor;
 	private Map<Color, String> colorToString;
