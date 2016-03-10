@@ -6,10 +6,10 @@ import model.SLogoCharacterState;
 public abstract class TurnNode extends UnaryNode {
 
 	public double evaluate(SLogoCharacterState currentState) throws SLogoException {
-		double newDirection = calculateDir(currentState);
+		double newDirection = convertDir(calculateDir(currentState));
 		double diff = Math.abs(newDirection - currentState.getDirection());
 		currentState.setDirection(newDirection);
-		return diff;
+		return Math.toDegrees(diff);
 	}
 	
 	public double convertDir(double direction) {
@@ -23,7 +23,7 @@ public abstract class TurnNode extends UnaryNode {
 		else {
 			result = direction;
 		}
-		return result;
+		return Math.toRadians(result);
 	}
 
 	public abstract double calculateDir(SLogoCharacterState state) throws SLogoException;

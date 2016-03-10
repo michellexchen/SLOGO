@@ -64,12 +64,13 @@ public class SLogoPosition {
 	 * @param x
 	 * @param y
 	 */
-	public void setXY(double x, double y) {
+	
+	public double[] setXY(double x, double y) {
 		xPrevious = xCurrent;
 		yPrevious = yCurrent;
 		
 		xCurrent = x + xCenter;
-		yCurrent = y + yCenter;
+		yCurrent = yCenter - y;
 		
 		if (xCurrent > PANE_SIZE - PADDING) {
 			xCurrent = PANE_SIZE - PADDING;
@@ -83,6 +84,8 @@ public class SLogoPosition {
 		if (yCurrent < PADDING) {
 			yCurrent = PADDING;
 		}
+		double[] result = {xCurrent, yCurrent};
+		return result;
 	}
 
 	/////////////////////
