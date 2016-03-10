@@ -79,3 +79,13 @@ lessp:Less
 greaterp:Greater
 equalp:equal
 notequalp:NotEqual
+setbackground:SetBackground
+setbg:SetBackground
+setpensize:SetPenSize
+setps:SetPenSize
+setshape:SetShape
+setsh:SetShape
+setpalette:SetPalette
+pencolor:PenColor
+pc:PenColor
+shape:Shape
