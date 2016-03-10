@@ -17,7 +17,7 @@ public class SLogoPen {
 	private double myThickness;
 	private boolean isDown;
 	private String myStrokeStyle;
-	private int penIndex;
+	private int colorIndex;
 	
 	private ColorLoader colorLoader;
 	private PenStrokeLoader strokeLoader;
@@ -29,16 +29,20 @@ public class SLogoPen {
 	
 	public SLogoPen() throws SLogoException{
 		colorLoader = new ColorLoader();
-		penIndex = DEFAULT_PEN_INDEX;
-		myColor = colorLoader.getColor(penIndex);
+		colorIndex = DEFAULT_PEN_INDEX;
+		myColor = colorLoader.getColor(colorIndex);
 		strokeLoader = new PenStrokeLoader();
 		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
 		myThickness = DEFAULT_THICKNESS;
 		isDown = DEFAULT_PEN_DOWN;
 	}
 	
+	public int getColorIndex() {
+		return colorIndex;
+	}
+	
 	public void setColor(int penIndex) throws SLogoException {
-		this.penIndex = penIndex;
+		this.colorIndex = penIndex;
 		myColor = colorLoader.getColor(penIndex);
 	}
 	
