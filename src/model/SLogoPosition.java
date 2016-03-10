@@ -65,9 +65,7 @@ public class SLogoPosition {
 	 * @param y
 	 */
 	
-	public void setXY (double x, double y) {
-		
-		
+	public void setXY (double x, double y) {		
 		
 		setxPrevious(xCurrent);
 		setyPrevious(yCurrent);

@@ -70,10 +70,13 @@ public abstract class SLogoCharacterState {
 		return myImage;
 	}
 
-	public void setImage(int shapeIndex) throws SLogoException {
-		setShapeIndex(shapeIndex);
+	public void setImage(int myShapeIndex) throws SLogoException {
 		TurtleImageLoader imageLoader = new TurtleImageLoader();
-		this.myImage = imageLoader.getString(shapeIndex+"");
+		String indexImage = imageLoader.getString(myShapeIndex+"");
+		if(indexImage == null)
+			throw new SLogoException("Invalid shape index");
+		else
+			this.myImage = indexImage;
 	}
 	
 	public int getID(){
@@ -88,8 +91,13 @@ public abstract class SLogoCharacterState {
 		return myShapeIndex;
 	}
 	
-	public void setShapeIndex(int myShapeIndex){
+	public void setShapeIndex(int myShapeIndex) throws SLogoException{
 		this.myShapeIndex = myShapeIndex;
+		try {
+			setImage(myShapeIndex);
+		} catch (SLogoException e) {
+			
+		}
 	}
 	
 }

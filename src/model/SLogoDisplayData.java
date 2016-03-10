@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Observable;
 
 import exception.SLogoException;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -50,6 +49,7 @@ public class SLogoDisplayData extends Observable {
 	}
 
 	public SLogoDisplayData(SLogoCharacterState state) throws SLogoException {
+		myPosition = new SLogoPosition();
 		updateData(state);
 		initialize();
 	}
@@ -64,7 +64,7 @@ public class SLogoDisplayData extends Observable {
 		penColor = myPen.getPenColor();
 		penSize = myPen.getThickness();
 		// TODO: Configure stroke
-		myPosition = new SLogoPosition();
+		myDirection = state.getDirection();
 		myPosition.setXY(state.getXCoor(), state.getYCoor());
 		xCoordinate = state.getXCoor();
 		yCoordinate = state.getYCoor();
@@ -121,7 +121,6 @@ public class SLogoDisplayData extends Observable {
 	}
 
 	public void setPenDown(boolean penDown) {
-		// changed();
 		this.penDown = penDown;
 	}
 
@@ -130,7 +129,6 @@ public class SLogoDisplayData extends Observable {
 	}
 
 	public void setPenColor(Color penColor) {
-		// changed();
 		this.penColor = penColor;
 	}
 
@@ -139,7 +137,6 @@ public class SLogoDisplayData extends Observable {
 	}
 
 	public void setImage(String myImage) {
-		// changed();
 		this.myImage = myImage;
 	}
 

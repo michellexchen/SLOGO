@@ -130,12 +130,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		getGUIController().updateMenuButton(items);
 	}
 
-
-	public void setPenDown (boolean penDown) {
-
-
-	}
-
 	public void setPenColor (Color color) {
 
 	}
@@ -169,12 +163,18 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public Line createLine(SLogoDisplayData turtledata) {
 		Line newLine = createLine(turtledata.getPosition());
-		newLine.setFill(turtledata.getPenColor());
+		Color myColor = turtledata.getPenColor();
+		setPenColor(myColor);
+		newLine.setFill(myColor);
 		if(turtledata.isPenDown())
 			newLine.setStrokeWidth(turtledata.getPenSize());
 		else
 			newLine.setStrokeWidth(0);
 		return newLine;
+	}
+
+	public void clearScreen(){
+		getGUIController().getCanvas().getChildren().clear();
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void updateDisplayData () {		
 		//Clear entire Pane
-		getGUIController().getCanvas().getChildren().clear();
+		clearScreen();
 
 		//Set Pane Color
 		getGUIController().getCanvas().setStyle("-fx-background-color: "
@@ -211,9 +211,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 		ImageView turtle = new ImageView();
 
-		if(!displaydata.getTurtleHidden()){
-			turtle.setImage(image);
-		}
+		turtle.setImage(image);
+		turtle.setVisible(!displaydata.getTurtleHidden());
 
 		//assign click action - change the action to change attributes
 		//temporary method to demonstrate use
@@ -230,6 +229,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setSmooth(true);
 		turtle.setCache(true);
 
+		System.out.println("To rotate: " + displaydata.getDirection());
 		//turtle rotate
 		turtle.setRotate(displaydata.getDirection());
 

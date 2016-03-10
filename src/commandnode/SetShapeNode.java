@@ -7,7 +7,7 @@ public class SetShapeNode extends UnaryNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double index = evaluateChild(0, state);
-		state.setShapeIndex((int) index); 
+		state.setShapeIndex((int) index);
 		return index;
 	}
 }
