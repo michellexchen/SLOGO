@@ -12,8 +12,8 @@ public class TowardsXYNode extends TurnNode {
 	}
 
 	public double calculateDir(SLogoCharacterState state) throws SLogoException {
-		double diffX = getChildren().get(0).evaluate(state) - state.getXCoor();
-		double diffY = getChildren().get(1).evaluate(state) - state.getYCoor();
+		double diffX = evaluateChild(0, state) - state.getXCoor();
+		double diffY = evaluateChild(1, state) - state.getYCoor();
 		if (diffX < 0) {
 			if (diffY < 0) {
 				 return 270 + Math.toDegrees(Math.atan(diffX / diffY));
