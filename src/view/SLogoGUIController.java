@@ -93,7 +93,7 @@ public class SLogoGUIController implements Initializable {
     
     //Drop-down menuButton - Choose Project
     @FXML
-    private MenuButton myMenu;
+    private MenuButton myMenuButton;
    
 
     
@@ -123,8 +123,11 @@ public class SLogoGUIController implements Initializable {
     @FXML
     private Button myCustomizeButton;
     
+    
+    //History
     @FXML
     private List<String> myHistory;
+  
     
 //    @FXML
 //    private List<String> myProperties;
@@ -133,6 +136,10 @@ public class SLogoGUIController implements Initializable {
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+    	//initialize MenuButton
+    	myMenuButton = new MenuButton("Select Workspace");
+    	
+    	
     	//initializes properties
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
 
@@ -142,7 +149,7 @@ public class SLogoGUIController implements Initializable {
 		
     	//TODO: Separate the operations below into different methods
     	
-    	myHistory = new ArrayList<String>();
+    	//myHistory = new ArrayList<String>();
     	
     	//Help button - assign action
         myHelpButton.setOnAction(e -> {
@@ -346,23 +353,46 @@ public class SLogoGUIController implements Initializable {
 	public void updateMenuButton(ObservableList<MenuItem> items) {
 		// TODO Auto-generated method stub
 		
-		getMenu().getItems().clear();
-		getMenu().getItems().addAll(items);
 		
-//		for (MenuItem item : items) {
-//			getMenu().getItems().add(item);
-//			System.out.println("Happening");
-//		}
+		System.out.println("This is menubutton: " + getMenuButton());
+		System.out.println("This is items: " + items);
+
+		getMenuButton().getItems().clear();
+		getMenuButton().getItems().addAll(items);
+		
+		System.out.println("This is menubuttons added: " + getMenuButton().getItems());
+		
+//		System.out.println("Is tghis happening");
+		for (MenuItem item : getMenuButton().getItems()) {
+//			
+//			System.out.println(item);
+//			System.out.println(item.toString());
+//			
+		}
 		
 	}
 
-	public MenuButton getMenu() {
-		return myMenu;
+	/**
+	 * @return the myMenuButton
+	 */
+	public MenuButton getMenuButton() {
+		return myMenuButton;
 	}
 
-	public void setMenu(MenuButton myMenu) {
-		this.myMenu = myMenu;
+	/**
+	 * @param myMenuButton the myMenuButton to set
+	 */
+	public void setMenuButton(MenuButton myMenuButton) {
+		this.myMenuButton = myMenuButton;
 	}
+
+//	public MenuButton getMenuButton() {
+//		return myMenuButton;
+//	}
+//
+//	public void setMenu(MenuButton myMenu) {
+//		this.myMenuB = myMenu;
+//	}
 
 //	@Override
 //	public void update(Observable arg0, Object arg1) {
