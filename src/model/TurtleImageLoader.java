@@ -8,8 +8,9 @@ import exception.SLogoException;
 
 public class TurtleImageLoader extends FileLoader{
 	
-	private final String turtleDirectory = "resources/turtle_images/";
-	private final String turtleExtension = "";
+	private final String turtleDirectory = "resources/resources";
+	private final String turtleExtension = "TurtleImages.resources";
+	private final String IMAGE_PATH = "resources/turtle_images/";
 	private HashMap<Integer, String> myTurtleMap;
 	
 	public TurtleImageLoader() throws SLogoException{
@@ -26,7 +27,6 @@ public class TurtleImageLoader extends FileLoader{
 		try {
 			super.load();
 		} catch (IOException e) {
-			System.out.println(getFileName());
 			throw new SLogoException("SLogo Turtle Images not found");
 		}
 	}
@@ -40,7 +40,7 @@ public class TurtleImageLoader extends FileLoader{
 	}
 	
 	private int countDefaultImages(){
-		File turtle_images = new File(getFileName());
+		File turtle_images = new File(IMAGE_PATH);
 		int numDefaultTurtleImages = 0;
 		for(File file: turtle_images.listFiles()){
 			if(file.isFile()){
