@@ -1,21 +1,20 @@
 package model;
 
+import exception.SLogoException;
+
 /**
  * SLogo's Turtle with a TurtleState and name
  *
  */
 
-public class SLogoTurtle implements SLogoCharacter {
+public class SLogoTurtle implements SLogoCharacter{
 
-	SLogoTurtleState myState;
-	String myName;
-	SLogoPenData myPen;
+	private SLogoTurtleState myState;
+	private int myID;
 
-	public SLogoTurtle(String myName, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden,
-			double angle) {
-		myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, isHidden, penDown, angle);
-		System.out.println("tutle " + myName + " current state is: location xCoor " + xCoor);
-		this.myName = myName;
+	public SLogoTurtle(int ID, SLogoPen myPen, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) throws SLogoException {
+		myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, isHidden, penDown);
+		System.out.println("tutle " + myID + " current state is: location xCoor " + xCoor);
 	}
 
 	public void setState(SLogoCharacterState myState) {
@@ -27,8 +26,8 @@ public class SLogoTurtle implements SLogoCharacter {
 		return myState;
 	}
 
-	public String getName() {
-		return myName;
+	public int getID() {
+		return myID;
 	}
 
 }

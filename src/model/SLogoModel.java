@@ -25,9 +25,6 @@ public class SLogoModel implements Model {
 	private LanguageLoader myLanguageDriver;
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
-	
-	//Question: What is this private variable doing?
-	private int numHistoricalTurtles;
 
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
@@ -103,11 +100,6 @@ public class SLogoModel implements Model {
 	public void createNewWorkspace() throws SLogoException {
 		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
-		
-		//ADDED
-		numHistoricalTurtles++;
-		
-		
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
 		

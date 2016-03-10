@@ -1,6 +1,6 @@
 package model;
 
-import javafx.scene.paint.Color;
+import exception.SLogoException;
 
 /**
  * SLogo's TurtleState, a class extending abstract CharacterState to control
@@ -10,35 +10,8 @@ import javafx.scene.paint.Color;
 
 public class SLogoTurtleState extends SLogoCharacterState {
 
-	private boolean penDown;
-	private Color penColor;
-	private Pen myPen = new Pen();
-
-	public SLogoTurtleState(SLogoPenData myPen, double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown, double angle) {
-		super(myPen, xCoor, yCoor, direction, isHidden, angle);
-		this.penDown = penDown;
-		penColor = Color.BLACK;
-	}
-
-	public void setPen(boolean penDown) {
-		this.penDown = penDown;
-	}
-
-
-	public boolean getPenDown() {
-		return penDown;
-	}
-
-//	public boolean getPenDown(){
-//		return myPen.isPenDown();
-//	}
-//	
-	public Color getPenColor() {
-		return penColor;
-	}
-
-	public void setPenColor(Color penColor) {
-		this.penColor = penColor;
+	public SLogoTurtleState(SLogoPen myPen, double xCoor, double yCoor, double direction, boolean isHidden, boolean penDown) throws SLogoException {
+		super(myPen, xCoor, yCoor, direction, isHidden);
 	}
 
 }

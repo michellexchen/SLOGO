@@ -7,6 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import exception.SLogoException;
+import model.ResourceLoader;
 import model.SLogoWorkspace;
 import commandnode.VariableNode;
 

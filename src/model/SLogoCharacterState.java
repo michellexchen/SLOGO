@@ -14,22 +14,20 @@ public abstract class SLogoCharacterState {
 	private double myYCoordinate;
 	private double myDirection;
 	private boolean isHidden;
-	private SLogoPenData myPen;
-	private double myAngle;
+	private SLogoPen myPen;
 	private ImageView myImageView;
 
-	public SLogoCharacterState(SLogoPenData myPen, double xCoor, double yCoor, double direction,
-					      boolean isHidden, double angle) {
+	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
+					      boolean isHidden) {
 		this.myPen = myPen;
 		this.myXCoordinate = xCoor;
 		this.myYCoordinate = yCoor;
 		this.myDirection = direction;
 		this.isHidden = isHidden;
-		this.myAngle = angle;
 		myImageView = new ImageView();
 	}
 	
-	public SLogoPenData getPen() {
+	public SLogoPen getPen() {
 		return myPen;
 	}
 
@@ -63,14 +61,6 @@ public abstract class SLogoCharacterState {
 
 	public void setDirection(double direction) {
 		this.myDirection = direction;
-	}
-
-	public double getAngle() {
-		return myAngle;
-	}
-
-	public void setAngle(double angle) {
-		this.myAngle = angle;
 	}
 
 	public ImageView getImageView() {

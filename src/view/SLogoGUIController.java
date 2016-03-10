@@ -252,11 +252,12 @@ public class SLogoGUIController implements Initializable {
     public void updateProperties(SLogoDisplayData displayData){
     	
     	myProperties =FXCollections.observableArrayList (
-    			("Angle: " + Double.toString(displayData.getAngle())),
+    			("Direction: " + Double.toString(displayData.getDirection())),
     			("X position: " + displayData.getX()),
     			("Y position: " + displayData.getY()),
     			("Pen Down: " + displayData.isPenDown()),
-    			("Pen Color: " + displayData.getPenColor().toString())			
+    			("Pen Color: " + displayData.getPenColor().toString()),
+    			("Pen Size: " + displayData.getPenSize())
     			);
     	
     	myPropertiesPaneView.setPrefSize(200, 150);

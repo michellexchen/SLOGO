@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import exception.SLogoException;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -16,21 +17,17 @@ import javafx.scene.shape.Line;
  *
  */
 public class SLogoDisplayData extends Observable {
+	
 	private SLogoPosition myPosition;
 	private double xCoordinate;
 	private double yCoordinate;
-	private double myAngle;
+	private double myDirection;
+	private SLogoPen myPen;
 	private boolean penDown;
 	private Color penColor;
+	private int penSize;
 	private ImageView myImage;
-
 	private List<Line> myLines;
-
-	//////////////////
-	// This is the new field, PenData
-	private SLogoPenData myPenData;
-
-	//////////////////
 
 	/**
 	 * Constructor that sets initial values
@@ -38,35 +35,35 @@ public class SLogoDisplayData extends Observable {
 	 * @param xCoordinate,
 	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public SLogoDisplayData(SLogoPosition position, double angle, boolean penDown, Color penColor, ImageView image,
-			SLogoPenData pendata) {
-
+	public SLogoDisplayData(SLogoPosition position, double direction, boolean penDown, Color penColor, ImageView image,
+			SLogoPen pen) {
 		this.myPosition = position;
-		this.myAngle = angle;
+		this.myDirection = direction;
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
-		this.myPenData = pendata;
-
+		this.myPen = pen;
 	}
 
-	public SLogoDisplayData(SLogoCharacterState state) {
+	public SLogoDisplayData(SLogoCharacterState state) throws SLogoException {
 		updateData(state);
 		initialize();
 	}
 
-	public void initialize() {
+	public void initialize() throws SLogoException {
 		myLines = new ArrayList<Line>();
 	}
 
 	public void updateData(SLogoCharacterState state) {
+		myPen = state.getPen();
+		penDown = myPen.getPenDown();
+		penColor = myPen.getPenColor();
+		penSize = myPen.getThickness();
+		// TODO: Configure stroke
 		myPosition = new SLogoPosition();
 		myPosition.setXY(state.getXCoor(), state.getYCoor());
-		myAngle = state.getAngle();
 		xCoordinate = state.getXCoor();
 		yCoordinate = state.getYCoor();
-		penDown = ((SLogoTurtleState) state).getPenDown();
-		penColor = ((SLogoTurtleState) state).getPenColor();
 		myImage = state.getImageView();
 		applyChanges();
 	}
@@ -104,13 +101,13 @@ public class SLogoDisplayData extends Observable {
 		this.yCoordinate = yCoordinate;
 	}
 
-	public double getAngle() {
-		return myAngle;
+	public double getDirection() {
+		return myDirection;
 	}
 
-	public void setAngle(double myAngle) {
+	public void setDirection(double myDirection) {
 		// changed();
-		this.myAngle = myAngle;
+		this.myDirection = myDirection;
 	}
 
 	public boolean isPenDown() {
@@ -160,6 +157,11 @@ public class SLogoDisplayData extends Observable {
 	 */
 	public void setLines(List<Line> myLines) {
 		this.myLines = myLines;
+	}
+
+	public Object getPenSize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

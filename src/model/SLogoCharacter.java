@@ -12,6 +12,4 @@ public interface SLogoCharacter {
 
 	public abstract SLogoCharacterState getState();
 
-	public abstract String getName();
-
 }

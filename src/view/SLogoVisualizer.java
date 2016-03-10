@@ -227,7 +227,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setCache(true);
 		       
 		//turtle rotate
-		turtle.setRotate(displaydata.getAngle());
+		turtle.setRotate(displaydata.getDirection());
 		
 		//place turtle using Position and center at the coordinates (x,y)
 		turtle.setLayoutX(displaydata.getPosition().xCurrent() - myTurtleSize / 2);

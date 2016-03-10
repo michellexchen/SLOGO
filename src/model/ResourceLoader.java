@@ -1,9 +1,8 @@
-package parser;
+package model;
 
 import java.io.IOException;
 
 import exception.SLogoException;
-import model.FileLoader;
 
 public class ResourceLoader extends FileLoader{
 	private static final String resourcesDirectory = "resources/resources";

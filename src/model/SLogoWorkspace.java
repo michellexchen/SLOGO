@@ -41,12 +41,11 @@ public class SLogoWorkspace {
 		myCommandHistory = new ArrayList<String>();
 		myVariableList = new ArrayList<SLogoVariable>();
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
-
 		myCharacters = new ArrayList<SLogoCharacter>();
 	}
 	
-	public void initialize() {
-		turtleFactory.createTurtle();
+	public void initialize() throws SLogoException {
+		turtleFactory.createTurtle(turtleFactory.getDefaultID(), turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
 	}
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
@@ -68,16 +67,6 @@ public class SLogoWorkspace {
 		//Wrong! changed to variablelist
 		getObservableVariableList().addListener((ListChangeListener) 
 				change -> getView().updateVariables());
-	}
-
-	public void createTurtle() {
-		SLogoTurtle myTurtle = new SLogoTurtle("0", 0, 0, true, 0, false, 0);
-		myCharacters.add(myTurtle);
-		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
-
-		// Add Observer (Visualizer)
-		turtleData.addObserver(getView().getObserver());
-		getObservableDataList().add(turtleData);
 	}
 
 	public List<SLogoDisplayData> getDataList() {
