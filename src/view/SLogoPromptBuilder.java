@@ -52,10 +52,11 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private ComboBox colorCb;
 	private Color myColor;
 	private ColorPicker colorPicker;
-
+	private SLogoPropertiesData myPropertiesData;
 	
 	public SLogoPromptBuilder() {
 		myColor = Color.WHITE;
+		myPropertiesData = new SLogoPropertiesData();
 	}
 
 	public void promptScreen () {
@@ -129,6 +130,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		colorHb = new HBox();
 		colorHb.getChildren().addAll(colorLabel, colorPicker);
 		colorHb.setPrefSize(PREFSIZE, PREFSIZE);
+		//myPropertiesData.setColor(myColor);
 	}
 		
 	

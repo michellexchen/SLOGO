@@ -24,7 +24,7 @@ import model.SLogoDisplayData;
  * on the screen to show the user
  *
  */
-public class SLogoVisualizer implements Observer {
+public class SLogoVisualizer extends Observable implements Observer {
 	
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
@@ -67,7 +67,13 @@ public class SLogoVisualizer implements Observer {
 	public void initialize() throws SLogoException, IOException {
 
 		myPromptBuilder = new SLogoPromptBuilder();
+		// data = myPromptBuilder.getPropertiesData();
+		// observe the data
+		// because i am observing data, when data changes and data calls notify observers, i will call my update
+		// and in updatel, i will set all properties to what is in the current properties data
 		myPromptBuilder.promptScreen();
+		// get your properties data 
+		// data = myPromptBuilder.getData();
 		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
 		getModel().loadLanguage();
 
@@ -80,12 +86,14 @@ public class SLogoVisualizer implements Observer {
 		root = (Parent) myLoader.load();
 		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
-		
+		myGUIController.getCustomizer().addObserver(this); //subscribe to changes in customizer
 		myScene = new Scene(root);
 		myStage = new Stage();
 		myStage.setScene(myScene);
 		myStage.setTitle("SLogo");
 		show();
+		
+		
 		
 //		CommandView myCommandView = new CommandView();
 //		myCommandView.show();
@@ -185,10 +193,7 @@ public class SLogoVisualizer implements Observer {
 			
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
-			
-			System.out.println("**");
-			System.out.println(turtledata.getX());
-			}
+		}
 		
 	}
 	
