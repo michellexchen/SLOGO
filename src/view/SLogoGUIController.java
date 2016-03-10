@@ -153,6 +153,7 @@ public class SLogoGUIController implements Initializable  {
         //customize button
         customize();
               
+        
         //AddWorkspace Button. Causes Model to create a new workspace
         //This will be refactored out to a separate method
         myAddWorkspaceButton.setOnAction(e -> {

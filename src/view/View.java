@@ -1,9 +1,12 @@
 package view;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Observer;
 
 import exception.SLogoException;
+import javafx.scene.control.MenuItem;
 import model.SLogoWorkspace;
 
 /**
@@ -12,9 +15,10 @@ import model.SLogoWorkspace;
  * defined in this interface
  * 
  * @author Hunter
+ * @param <E>
  *
  */
-public interface View {
+public interface View<E> {
 	
 	public String getCommand();
 
@@ -37,6 +41,9 @@ public interface View {
 	public Observer getObserver();
 	
 	public String getLanguage();
+	
+	//List<E>
+	public List<MenuItem> getMenuItemList();
 
 }
 	

@@ -8,6 +8,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.MenuItem;
 import parser.SLogoParser;
 import view.View;
 
@@ -24,6 +25,8 @@ public class SLogoModel implements Model {
 	private LanguageLoader myLanguageDriver;
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
+	
+	//Question: What is this private variable doing?
 	private int numHistoricalTurtles;
 
 	public SLogoModel() throws SLogoException {
@@ -103,8 +106,24 @@ public class SLogoModel implements Model {
 		numHistoricalTurtles++;
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
+		
+		//Also add a MenuItem
+		
 	}
 
+	private void createMenuItem () {
+		//int  = getView().getMenuItem().size();
+		
+		//Name the menuitem
+		MenuItem myMenuItem = new MenuItem("Workspace " + 
+										getView().getMenuItemList().size());
+		//Add it to List<MenuItem>
+		getView().getMenuItemList().add(myMenuItem);
+		
+		
+		
+	}
+	
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {
 		//Need to get View to create a new Visualizer for this workspace

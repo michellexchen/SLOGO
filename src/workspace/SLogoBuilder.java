@@ -1,6 +1,3 @@
-/**
- * 
- */
 package workspace;
 
 import java.util.ResourceBundle;
