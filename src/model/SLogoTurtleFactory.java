@@ -1,7 +1,5 @@
 package model;
 
-import java.io.IOException;
-
 import exception.SLogoException;
 
 public class SLogoTurtleFactory {
@@ -14,7 +12,7 @@ public class SLogoTurtleFactory {
 	private int DEFAULT_X = 0;
 	private int DEFAULT_Y  = 0;
 	private int DEFAULT_ID = 0;
-	private String DEFAULT_IMAGE = "turtle_2.png";
+	private int DEFAULT_SHAPE_INDEX = 1;
 	
 	public SLogoTurtleFactory(SLogoWorkspace myWorkspace) {
 		this.myWorkspace = myWorkspace;
@@ -22,7 +20,7 @@ public class SLogoTurtleFactory {
 	
 	public void createTurtle(int myID, int myX, int myY) throws SLogoException{
 		SLogoPen myPen = new SLogoPen();
-		SLogoTurtle myTurtle = new SLogoTurtle(myID, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_IMAGE);
+		SLogoTurtle myTurtle = new SLogoTurtle(myID, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_SHAPE_INDEX);
 		myWorkspace.getCharacterList().add(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 

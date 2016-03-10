@@ -1,5 +1,6 @@
 package model;
 
+import exception.SLogoException;
 import javafx.scene.image.ImageView;
 
 /**
@@ -16,15 +17,18 @@ public abstract class SLogoCharacterState {
 	private boolean isHidden;
 	private SLogoPen myPen;
 	private String myImage;
+	private int myID;
+	private int myShapeIndex;
 
 	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
-					      boolean isHidden, String myImage) {
+					      boolean isHidden, int shapeIndex) throws SLogoException {
 		this.myPen = myPen;
 		this.myXCoordinate = xCoor;
 		this.myYCoordinate = yCoor;
 		this.myDirection = direction;
 		this.isHidden = isHidden;
-		this.myImage = myImage;
+		this.myShapeIndex = shapeIndex;
+		setImage(myShapeIndex);
 	}
 	
 	public SLogoPen getPen() {
@@ -67,8 +71,26 @@ public abstract class SLogoCharacterState {
 		return myImage;
 	}
 
-	public void setImageView(String myImage) {
-		this.myImage = myImage;
+	public void setImage(int shapeIndex) throws SLogoException {
+		setShapeIndex(shapeIndex);
+		TurtleImageLoader imageLoader = new TurtleImageLoader();
+		this.myImage = imageLoader.getString(shapeIndex+"");
+	}
+	
+	public int getID(){
+		return myID;
+	}
+	
+	public void setID(int myID){
+		this.myID = myID;
+	}
+	
+	public int getShapeIndex(){
+		return myShapeIndex;
+	}
+	
+	public void setShapeIndex(int myShapeIndex){
+		this.myShapeIndex = myShapeIndex;
 	}
 	
 }
