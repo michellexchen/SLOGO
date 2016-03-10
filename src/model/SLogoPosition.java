@@ -65,7 +65,30 @@ public class SLogoPosition {
 	 * @param y
 	 */
 	
-	public double[] setXY(double x, double y) {
+	public void setXY (double x, double y) {
+
+		
+		xCurrent = x + xCenter;
+		yCurrent = yCenter - y;
+		
+		xPrevious = xCurrent;
+		yPrevious = yCurrent;
+		
+		if (xCurrent > PANE_SIZE - PADDING) {
+			xCurrent = PANE_SIZE - PADDING;
+		}
+		if (xCurrent < PADDING) {
+			xCurrent = PADDING;
+		}
+		if (yCurrent > PANE_SIZE - PADDING) {
+			yCurrent = PANE_SIZE - PADDING;
+		}
+		if (yCurrent < PADDING) {
+			yCurrent = PADDING;
+		}
+	}
+	
+	public double[] setXY_deprecated(double x, double y) {
 		xPrevious = xCurrent;
 		yPrevious = yCurrent;
 		

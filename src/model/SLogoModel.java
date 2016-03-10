@@ -73,7 +73,7 @@ public class SLogoModel implements Model {
 	/**
 	 * @return the myView
 	 */
-	public View getView() {
+	public View<?> getView() {
 		return myView;
 	}
 
@@ -103,26 +103,30 @@ public class SLogoModel implements Model {
 	public void createNewWorkspace() throws SLogoException {
 		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
+		
+		//ADDED
 		numHistoricalTurtles++;
+		
+		
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
 		
 		//Also add a MenuItem
-		
+		getView().createMenuItem();
 	}
 
-	private void createMenuItem () {
-		//int  = getView().getMenuItem().size();
-		
-		//Name the menuitem
-		MenuItem myMenuItem = new MenuItem("Workspace " + 
-										getView().getMenuItemList().size());
-		//Add it to List<MenuItem>
-		getView().getMenuItemList().add(myMenuItem);
-		
-		
-		
-	}
+//	private void createMenuItem () {
+//		//int  = getView().getMenuItem().size();
+//		
+//		//Name the menuitem
+//		MenuItem myMenuItem = new MenuItem("Workspace " + 
+//										getView().getMenuItems().size());
+//		//Add it to List<MenuItem>
+//		getView().getMenuItems().add(myMenuItem);
+//		
+//		
+//		
+//	}
 	
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {

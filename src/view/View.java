@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observer;
 
 import exception.SLogoException;
+import javafx.collections.ObservableList;
 import javafx.scene.control.MenuItem;
 import model.SLogoWorkspace;
 
@@ -43,7 +44,9 @@ public interface View<E> {
 	public String getLanguage();
 	
 	//List<E>
-	public List<MenuItem> getMenuItemList();
+	public ObservableList<MenuItem> getMenuItems();
+	
+	public void createMenuItem ();
 
 }
 	

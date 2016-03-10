@@ -2,7 +2,10 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import exception.SLogoException;
@@ -46,7 +49,7 @@ import model.SLogoDisplayData;
  * UI.fxml file
  *
  */
-public class SLogoGUIController implements Initializable  {
+public class SLogoGUIController implements Initializable {
 	
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
 						+ "compsci308/spring16/assign/03_slogo/commands.php";
@@ -330,5 +333,32 @@ public class SLogoGUIController implements Initializable  {
 	public void setModel(Model myModel) {
 		this.myModel = myModel;
 	}
+
+	public void updateMenuButton(ObservableList<MenuItem> items) {
+		// TODO Auto-generated method stub
+		
+		getMenu().getItems().clear();
+		getMenu().getItems().addAll(items);
+		
+//		for (MenuItem item : items) {
+//			getMenu().getItems().add(item);
+//			System.out.println("Happening");
+//		}
+		
+	}
+
+	public MenuButton getMenu() {
+		return myMenu;
+	}
+
+	public void setMenu(MenuButton myMenu) {
+		this.myMenu = myMenu;
+	}
+
+//	@Override
+//	public void update(Observable arg0, Object arg1) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 	
 }

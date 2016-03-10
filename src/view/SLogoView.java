@@ -60,15 +60,31 @@ public class SLogoView implements View {
 		myVisualizers.add(myCurrentVisualizer);
 		
 		//Add listener 
-		myObservableMenuItems.addListener(new ListChangeListener() {
-            @Override
-            public void onChanged(ListChangeListener.Change change) {
-                //myCurrentVisualizer.
-            }
-        });
+		myObservableMenuItems.addListener((ListChangeListener) change -> {
+		    //for all visualizers, make GUIController add MenuItems to Menubutton
+			for (SLogoVisualizer visualizer : myVisualizers) {
+				visualizer.updateMenuButton(myObservableMenuItems);
+			}
+//			
+//			System.out.println("CALLED");
+		});
 	}
-
 	
+	
+	
+	@Override
+	public void createMenuItem () {
+		//int  = getView().getMenuItem().size();
+		
+		//Name the menuitem
+		MenuItem myMenuItem = new MenuItem("Workspace " + 
+										getMenuItems().size());
+		//Add it to List<MenuItem>
+		getMenuItems().add(myMenuItem);
+		
+		System.out.println(getMenuItems().size());
+		
+	}
 	
 	
 	public void showError(SLogoException e) {
@@ -198,11 +214,11 @@ public class SLogoView implements View {
 		this.myCurrentVisualizer = myCurrentVisualizer;
 	}
 
-	@Override
-	public List<MenuItem> getMenuItemList() {
-		// TODO Auto-generated method stub
-		return getMenuItems();
-	}
+//	@Override
+//	public List<MenuItem> getMenuItemList() {
+//		// TODO Auto-generated method stub
+//		return getMenuItems();
+//	}
 
 	public ObservableList<MenuItem> getMenuItems() {
 		return myObservableMenuItems;

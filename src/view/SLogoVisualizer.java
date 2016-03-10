@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -118,6 +119,12 @@ public class SLogoVisualizer implements Observer {
 		
 	}
 
+	
+	public void updateMenuButton (ObservableList<MenuItem> items) {
+		getGUIController().updateMenuButton(items);
+	}
+	
+	
 	public void setPenDown (boolean penDown) {
 		
 		
