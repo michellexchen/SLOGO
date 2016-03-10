@@ -12,9 +12,29 @@ import model.SLogoCharacterState;
  */
 
 public abstract class CommandNode implements Node {
-
+	
+	private static final int PANE_SIZE = 450;
+	private static final int PADDING = 40;
 	private ArrayList<Node> children = new ArrayList<Node>();
 	private int NUM_CHILDREN;
+	
+	public double transformXCoor(double myCoor) {
+		 return (PANE_SIZE/2 + myCoor);
+	}
+	
+	public double transformYCoor(double myCoor) {
+		 return (PANE_SIZE/2 - myCoor);
+	}
+
+	public double boundCoor(double myCoor) {
+		 if (myCoor > PANE_SIZE - PADDING) {
+			 myCoor = PANE_SIZE - PADDING;
+		 }
+		 else if(myCoor < PADDING) {
+			 myCoor = PADDING;
+		 }
+		 	return myCoor;
+	}
 
 	public ArrayList<Node> getChildren() {
 		return children;
