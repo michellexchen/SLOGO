@@ -1,10 +1,9 @@
 package model;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.util.HashMap;
+
+import commandnode.RGBColor;
 import exception.SLogoException;
 import javafx.scene.paint.Color;
 
@@ -48,21 +47,12 @@ public class ColorLoader extends FileLoader{
 		return new Color(rgb[0], rgb[1], rgb[2], DEFAULT_OPACITY);
 	}
 
-	public void addRGB(int index, int r, int g, int b) throws SLogoException{
-		double red = convertRGB(r);
-		double green = convertRGB(g);
-		double blue = convertRGB(b);
-		if (red < 0 || red > 1) {
-            throw new SLogoException("Color's red value (" + red + ") must be in the range 0.0-1.0");
-        }
-        if (green < 0 || green > 1) {
-            throw new SLogoException("Color's green value (" + green + ") must be in the range 0.0-1.0");
-        }
-        if (blue < 0 || blue > 1) {
-            throw new SLogoException("Color's blue value (" + blue + ") must be in the range 0.0-1.0");
-        }
+	public void addRGB(RGBColor color) throws SLogoException{
+		double red = convertRGB(color.getR());
+		double green = color.getG();
+		double blue = color.getB();
         double[] rgb = {red, green, blue};
-		myRGBMap.put((int) index, rgb);
+		myRGBMap.put(color.getIndex(), rgb);
 	}
 	
 	public double convertRGB(int value){

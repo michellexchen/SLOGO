@@ -21,7 +21,6 @@ public class SLogoDisplayData extends Observable {
 	private double xCoordinate;
 	private double yCoordinate;
 	private double myDirection;
-	private SLogoPen myPen;
 	private boolean penDown;
 	private Color penColor;
 	private double penSize;
@@ -43,7 +42,6 @@ public class SLogoDisplayData extends Observable {
 		this.penDown = penDown;
 		this.penColor = penColor;
 		this.myImage = image;
-		this.myPen = pen;
 		this.turtleHidden = turtleHidden;
 		this.ID = ID;
 	}
@@ -59,7 +57,7 @@ public class SLogoDisplayData extends Observable {
 	}
 
 	public void updateData(SLogoCharacterState state) {
-		myPen = state.getPen();
+		SLogoPen myPen = state.getPen();
 		penDown = myPen.isPenDown();
 		penColor = myPen.getPenColor();
 		penSize = myPen.getThickness();

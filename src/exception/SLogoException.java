@@ -3,9 +3,11 @@
  */
 package exception;
 
+import java.util.Optional;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * SLogo's Exception class that extends Exception abstract class in the Java
@@ -16,11 +18,7 @@ import javafx.scene.control.DialogPane;
  */
 public class SLogoException extends Exception {
 
-	
-	
-	public SLogoException() {
-		
-	}
+	private Optional<String> unresolvedException;
 
 	/**
 	 * @param arg0
@@ -32,7 +30,7 @@ public class SLogoException extends Exception {
 		alert.setHeaderText("ERROR: " + arg0);
 		ButtonType buttonTypeOk = new ButtonType("Okay");
 		alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
-		
+
 		DialogPane dialogPane = alert.getDialogPane();
 		dialogPane.getStylesheets().add(getClass().getResource("myDialog.css").toExternalForm());
 		dialogPane.getStyleClass().add("myDialog");
@@ -40,31 +38,20 @@ public class SLogoException extends Exception {
 	}
 
 	/**
-	 * @param arg0
+	 * @param instruction, numParams
+	 * Resource file 
 	 */
-	public SLogoException(Throwable arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
+	public SLogoException(String instruction, int numParams){	
+		super(instruction);
+		TextInputDialog dialog = new TextInputDialog("");
+		dialog.setTitle("Instructions");
+		dialog.setHeaderText(instruction);
+		dialog.setContentText("Please enter new argument(s) (separated by space if more than one):");
+		unresolvedException = dialog.showAndWait();
 	}
 
-	/**
-	 * @param arg0
-	 * @param arg1
-	 */
-	public SLogoException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
+	public Optional<String> getNewInput(){
+		return unresolvedException;
 	}
-
-	/**
-	 * @param arg0
-	 * @param arg1
-	 * @param arg2
-	 * @param arg3
-	 */
-	public SLogoException(String arg0, Throwable arg1, boolean arg2, boolean arg3) {
-		super(arg0, arg1, arg2, arg3);
-		// TODO Auto-generated constructor stub
-	}
-
+	
 }

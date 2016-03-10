@@ -22,12 +22,12 @@ import commandnode.VariableNode;
 
 public class SLogoTreeFactory {
 
-	private CommandLoader myCommandLoader;
+	private CommandNodeLoader myCommandNodeLoader;
 	private ResourceLoader myResourcesLoader;
 	private SLogoWorkspace myWorkspace;
 
 	public SLogoTreeFactory(SLogoWorkspace ws) throws SLogoException {
-		myCommandLoader = new CommandLoader();
+		myCommandNodeLoader = new CommandNodeLoader();
 		myResourcesLoader = new ResourceLoader();
 		myWorkspace = ws;
 	}
@@ -92,7 +92,7 @@ public class SLogoTreeFactory {
 		Node node = null;
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		String commandName = myCommandLoader.getString(strNode);
+		String commandName = myCommandNodeLoader.getString(strNode);
 		if (commandName == null)
 			throw new SLogoException(
 					myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));

@@ -1,4 +1,5 @@
 package parser;
+
 import java.io.IOException;
 import exception.SLogoException;
 import model.FileLoader;
@@ -14,15 +15,9 @@ import model.FileLoader;
 public class CommandLoader extends FileLoader {
 
 	private static final String commandDirectory = "resources/commands";
-	private static final String commandExtension = "Commands.resources";
 	
-	public CommandLoader() throws SLogoException{
-		load();
-	}
-
 	public void load() throws SLogoException {
 		setDirectory(commandDirectory);
-		setExtension(commandExtension);
 		try {
 			super.load();
 		} catch (IOException e) {

@@ -5,6 +5,9 @@ import model.SLogoCharacterState;
 
 public class SetPenColorNode extends UnaryNode{
 	
+	public SetPenColorNode(){
+		
+	}
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double index = evaluateChild(0, state);
 		state.getPen().setColor((int) index); 
