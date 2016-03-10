@@ -14,6 +14,7 @@ public class SLogoTurtleFactory {
 	private int DEFAULT_X = 0;
 	private int DEFAULT_Y  = 0;
 	private int DEFAULT_ID = 0;
+	private String DEFAULT_IMAGE = "turtle_2.png";
 	
 	public SLogoTurtleFactory(SLogoWorkspace myWorkspace) {
 		this.myWorkspace = myWorkspace;
@@ -21,7 +22,7 @@ public class SLogoTurtleFactory {
 	
 	public void createTurtle(int myID, int myX, int myY) throws SLogoException{
 		SLogoPen myPen = new SLogoPen();
-		SLogoTurtle myTurtle = new SLogoTurtle(myID, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN);
+		SLogoTurtle myTurtle = new SLogoTurtle(myID, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_IMAGE);
 		myWorkspace.getCharacterList().add(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 

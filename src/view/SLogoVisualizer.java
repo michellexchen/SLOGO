@@ -30,7 +30,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
 	
-	private String myTurtleImage = "turtle_5.png";
 	private int myTurtleSize = 40;
 	
 	private ObservableList<SLogoDisplayData> myObservableDataList;
@@ -206,7 +205,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	}
 	
 	public void placeTurtle(SLogoDisplayData displaydata) {
-        Image image = new Image(IMAGE_PATH + myTurtleImage);
+        Image image = new Image(IMAGE_PATH + displaydata.getImage());
         
 		ImageView turtle = new ImageView();
 		turtle.setImage(image);
@@ -525,13 +524,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	}
 
 	/**
-	 * @return the myTurtleImage
-	 */
-	public String getmyTurtleImage() {
-		return myTurtleImage;
-	}
-
-	/**
 	 * @return the myTurtleSize
 	 */
 	public int getmyTurtleSize() {
@@ -550,20 +542,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void setMyPromptBuilder(SLogoPromptBuilder myPromptBuilder) {
 		this.myPromptBuilder = myPromptBuilder;
-	}
-
-	/**
-	 * @return the myTurtleImage
-	 */
-	public String getMyTurtleImage() {
-		return myTurtleImage;
-	}
-
-	/**
-	 * @param myTurtleImage the myTurtleImage to set
-	 */
-	public void setMyTurtleImage(String myTurtleImage) {
-		this.myTurtleImage = myTurtleImage;
 	}
 
 	/**

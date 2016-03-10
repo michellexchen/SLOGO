@@ -26,7 +26,7 @@ public class SLogoDisplayData extends Observable {
 	private boolean penDown;
 	private Color penColor;
 	private double penSize;
-	private ImageView myImage;
+	private String myImage;
 	private List<Line> myLines;
 
 	/**
@@ -35,7 +35,7 @@ public class SLogoDisplayData extends Observable {
 	 * @param xCoordinate,
 	 *            yCoordinate, angle, penDown, penColor, and Image
 	 */
-	public SLogoDisplayData(SLogoPosition position, double direction, boolean penDown, Color penColor, ImageView image,
+	public SLogoDisplayData(SLogoPosition position, double direction, boolean penDown, Color penColor, String image,
 			SLogoPen pen) {
 		this.myPosition = position;
 		this.myDirection = direction;
@@ -64,7 +64,7 @@ public class SLogoDisplayData extends Observable {
 		myPosition.setXY(state.getXCoor(), state.getYCoor());
 		xCoordinate = state.getXCoor();
 		yCoordinate = state.getYCoor();
-		myImage = state.getImageView();
+		myImage = state.getImage();
 		applyChanges();
 	}
 
@@ -128,11 +128,11 @@ public class SLogoDisplayData extends Observable {
 		this.penColor = penColor;
 	}
 
-	public ImageView getImage() {
+	public String getImage() {
 		return myImage;
 	}
 
-	public void setImage(ImageView myImage) {
+	public void setImage(String myImage) {
 		// changed();
 		this.myImage = myImage;
 	}
@@ -161,6 +161,10 @@ public class SLogoDisplayData extends Observable {
 
 	public double getPenSize() {
 		return penSize;
+	}
+
+	public String getTurtleImage() {
+		return myImage;
 	}
 
 }

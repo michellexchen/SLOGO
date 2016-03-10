@@ -12,8 +12,8 @@ public class SLogoTurtle implements SLogoCharacter{
 	private SLogoTurtleState myState;
 	private int myID;
 
-	public SLogoTurtle(int ID, SLogoPen myPen, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden) throws SLogoException {
-		myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, isHidden, penDown);
+	public SLogoTurtle(int ID, SLogoPen myPen, double xCoor, double yCoor, boolean penDown, double direction, boolean isHidden, String myImage) throws SLogoException {
+		myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, isHidden, penDown, myImage);
 		System.out.println("tutle " + myID + " current state is: location xCoor " + xCoor);
 	}
 
