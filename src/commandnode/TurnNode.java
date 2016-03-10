@@ -9,7 +9,7 @@ public abstract class TurnNode extends UnaryNode {
 		double newDirection = convertDir(calculateDir(currentState));
 		double diff = Math.abs(newDirection - currentState.getDirection());
 		currentState.setDirection(newDirection);
-		return Math.toDegrees(diff);
+		return diff;
 	}
 	
 	public double convertDir(double direction) {
@@ -23,7 +23,7 @@ public abstract class TurnNode extends UnaryNode {
 		else {
 			result = direction;
 		}
-		return Math.toRadians(result);
+		return result;
 	}
 
 	public abstract double calculateDir(SLogoCharacterState state) throws SLogoException;
