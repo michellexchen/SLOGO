@@ -65,7 +65,8 @@ public class SLogoWorkspace {
 		getObservableCommandHistory().addListener((ListChangeListener) 
 				change -> getView().updateCommandHistory());
 
-		getObservableCommandHistory().addListener((ListChangeListener) 
+		//Wrong! changed to variablelist
+		getObservableVariableList().addListener((ListChangeListener) 
 				change -> getView().updateVariables());
 	}
 
@@ -169,6 +170,14 @@ public class SLogoWorkspace {
 	}
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
+	}
+
+	public ObservableList<SLogoVariable> getObservableVariableList() {
+		return myObservableVariableList;
+	}
+
+	public void setObservableVariableList(ObservableList<SLogoVariable> myObservableVariableList) {
+		this.myObservableVariableList = myObservableVariableList;
 	}
 
 }

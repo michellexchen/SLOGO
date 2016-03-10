@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.Observer;
 
 import exception.SLogoException;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.MenuItem;
 import model.Model;
 import model.SLogoWorkspace;
 
@@ -25,6 +29,11 @@ public class SLogoView implements View {
 	private Model myModel;
 	private List<SLogoVisualizer> myVisualizers;
 	private SLogoVisualizer myCurrentVisualizer;
+	
+	//List that keeps track of MenuItems that represent different workspaces
+	//in MenuButton
+	//private List<MenuItem> myMenuItems;
+	private ObservableList<MenuItem> myObservableMenuItems;
 
 	public SLogoView() throws SLogoException {
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
@@ -34,6 +43,10 @@ public class SLogoView implements View {
 		myModel = model;
 		myVisualizers = new ArrayList<SLogoVisualizer>();
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
+		
+		//Initialize the list of MenuItems (workspaces)
+		myObservableMenuItems = FXCollections
+							.observableArrayList(new ArrayList<MenuItem>());
 
 	}
 	
@@ -45,6 +58,14 @@ public class SLogoView implements View {
 	public void initialize() throws SLogoException, IOException {
 		myCurrentVisualizer.initialize();
 		myVisualizers.add(myCurrentVisualizer);
+		
+		//Add listener 
+		myObservableMenuItems.addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(ListChangeListener.Change change) {
+                //myCurrentVisualizer.
+            }
+        });
 	}
 
 	
@@ -175,5 +196,19 @@ public class SLogoView implements View {
 	 */
 	public void setCurrentVisualizer(SLogoVisualizer myCurrentVisualizer) {
 		this.myCurrentVisualizer = myCurrentVisualizer;
+	}
+
+	@Override
+	public List<MenuItem> getMenuItemList() {
+		// TODO Auto-generated method stub
+		return getMenuItems();
+	}
+
+	public ObservableList<MenuItem> getMenuItems() {
+		return myObservableMenuItems;
+	}
+
+	public void setMenuItems(ObservableList<MenuItem> myMenuItems) {
+		this.myObservableMenuItems = myMenuItems;
 	}
 }
