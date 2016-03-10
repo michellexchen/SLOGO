@@ -46,6 +46,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private Stage myStage;
 	private Model myModel;
 	private String myCanvasColor;
+	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
 	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
@@ -63,9 +64,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
+
 	public void initialize() throws SLogoException, IOException {
 
-		myPromptBuilder = new SLogoPromptBuilder();
+		myPromptBuilder = new SLogoPromptBuilder(myProperties);
 		// data = myPromptBuilder.getPropertiesData();
 		// observe the data
 		// because i am observing data, when data changes and data calls notify observers, i will call my update
@@ -86,6 +88,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
 		myGUIController.getCustomizer().addObserver(this); //subscribe to changes in customizer
+		myGUIController.setPropertiesData(myProperties);
 		myScene = new Scene(root);
 		myStage = new Stage();
 		myStage.setScene(myScene);
@@ -184,10 +187,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public void updateDisplayData () {		
 		//Clear entire Pane
 		clearScreen();
-
+		
 		//Set Pane Color
-		getGUIController().getCanvas().setStyle("-fx-background-color: "
-				+ getCanvasColor());
+//		getGUIController().getCanvas().setStyle("-fx-background-color: "
+//				+ getCanvasColor());
 
 		getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
@@ -202,6 +205,9 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
+			
+			//update turtle lines?????
+			
 		}
 
 	}
@@ -561,5 +567,9 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void setMyTurtleSize(int myTurtleSize) {
 		this.myTurtleSize = myTurtleSize;
+	}
+
+	public SLogoPropertiesData getPropertiesData() {
+		return myProperties;
 	}
 }

@@ -55,7 +55,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	private Label thicknessSliderLabel;
 	private HBox thicknessSliderHb;
 	private double myLineThickness;
-	
+	private SLogoPropertiesData myPropertiesData;
 	
 	public SLogoCustomizerBuilder() {
 
@@ -93,6 +93,10 @@ public class SLogoCustomizerBuilder extends Observable {
 	public void show(){
 		myCustomizerStage.show();
 	}
+	
+	public void setPropertiesData(SLogoPropertiesData propertiesData) {
+		myPropertiesData = propertiesData;
+	}
 
 	private void setColorPicker(){
 		colorLabel = new Label("Set background color: ");
@@ -128,8 +132,7 @@ public class SLogoCustomizerBuilder extends Observable {
 				FXCollections.observableArrayList(
 						"SOLID",
 						"DASHED",
-						"DOTTED"
-						
+						"DOTTED"						
 				);
 		comboBox = new ComboBox(options);
 		comboBox.setValue("SOLID");
@@ -169,6 +172,7 @@ public class SLogoCustomizerBuilder extends Observable {
 		myOkayButton.setOnMouseClicked(e -> {
 			System.out.println("new pane color: ");
 			System.out.println(myPaneColor);
+			myPropertiesData.setPaneColor(myPaneColor);
 			System.out.println("new font color: ");
 			System.out.println(myFontColor);
 			myLineStyle = comboBox.getSelectionModel().getSelectedItem().toString();
@@ -176,6 +180,7 @@ public class SLogoCustomizerBuilder extends Observable {
 			System.out.println(myLineStyle);
 			System.out.println("my new line thickness: ");
 			System.out.println(myLineThickness);
+			myPropertiesData.notifyObservers();
 			myCustomizerStage.hide();
 		});
 	}

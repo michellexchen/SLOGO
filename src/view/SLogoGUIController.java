@@ -49,7 +49,7 @@ import model.SLogoDisplayData;
  * UI.fxml file
  *
  */
-public class SLogoGUIController implements Initializable {
+public class SLogoGUIController implements Initializable, Observer {
 	
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
 						+ "compsci308/spring16/assign/03_slogo/commands.php";
@@ -68,7 +68,7 @@ public class SLogoGUIController implements Initializable {
     private HBox myColorHBox;
     
     private SLogoCustomizerBuilder myCustomizer;
-
+    private SLogoPropertiesData myPropertiesData;
 	
 	private Model myModel;
 	private View myView;
@@ -266,7 +266,8 @@ public class SLogoGUIController implements Initializable {
     
     private void customize(){
     	myCustomizeButton.setOnMouseClicked(e -> {
-    		myCustomizer.show();
+    		myCustomizer.setPropertiesData(myPropertiesData);
+    		myCustomizer.show();    		
 //    		System.out.println("new pane color:");
 //    		System.out.println(myCustomizer.getMyPaneColor());
 //    		System.out.println("new font color:");
@@ -279,6 +280,13 @@ public class SLogoGUIController implements Initializable {
 //        	customize.showAndWait();
 		});
     }
+    
+	public String toRGBCode (Color color) {
+		return String.format( "#%02X%02X%02X",
+				(int)( color.getRed() * 255 ),
+				(int)( color.getGreen() * 255 ),
+				(int)( color.getBlue() * 255 ) );
+	}
     
     public SLogoCustomizerBuilder getCustomizer() {
     	return myCustomizer;
@@ -328,6 +336,11 @@ public class SLogoGUIController implements Initializable {
 		this.myCanvas = myCanvas;
 	}
 
+    public void setPropertiesData(SLogoPropertiesData propertiesData) {
+        this.myPropertiesData = propertiesData;
+        myPropertiesData.addObserver(this);
+    }
+
 	/**
 	 * @return the myModel
 	 */
@@ -361,6 +374,12 @@ public class SLogoGUIController implements Initializable {
 
 	public void setMenu(MenuButton myMenu) {
 		this.myMenu = myMenu;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		getCanvas().setStyle("-fx-background-color: " + toRGBCode(myPropertiesData.getPaneColor()));
+		System.out.println(myPropertiesData.getPaneColor());
 	}
 
 //	@Override

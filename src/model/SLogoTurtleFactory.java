@@ -1,6 +1,7 @@
 package model;
 
 import exception.SLogoException;
+import view.SLogoPropertiesData;
 
 public class SLogoTurtleFactory {
 
@@ -27,6 +28,7 @@ public class SLogoTurtleFactory {
 		// Add Observer (Visualizer)
 		turtleData.addObserver(myWorkspace.getView().getObserver());
 		myWorkspace.getObservableDataList().add(turtleData);
+		myWorkspace.addPen(myPen);
 	}
 	
 	public void createDefaultTurtle() throws SLogoException{

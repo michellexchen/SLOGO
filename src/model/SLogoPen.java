@@ -1,4 +1,7 @@
 package model;
+import java.util.Observable;
+import java.util.Observer;
+
 import exception.SLogoException;
 import javafx.scene.paint.Color;
 
@@ -11,7 +14,7 @@ import javafx.scene.paint.Color;
  *
  */
 
-public class SLogoPen {
+public class SLogoPen implements Observer {
 	
 	private Color myColor;
 	private double myThickness;
@@ -82,6 +85,12 @@ public class SLogoPen {
 
 	public boolean isPenDown() {
 		return isDown;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

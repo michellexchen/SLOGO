@@ -17,24 +17,24 @@ public class SLogoPropertiesData extends Observable {
 		
 	}
 	
-	public Color getPaneColor() {
-		return myPaneColor;
-	}
 
 	/**
 	 * @return the myPaneColor
 	 */
-	public Color getMyPaneColor() {
+	public Color getPaneColor() {
 		return myPaneColor;
 	}
 
 	/**
 	 * @param myPaneColor the myPaneColor to set
 	 */
-	public void setMyPaneColor(Color myPaneColor) {
+	public void setPaneColor(Color myPaneColor) {
 		this.myPaneColor = myPaneColor;
+		setChanged();
 	}
-	 
-	
+
+	public void addPen(SLogoPen pen) {
+		myPen = pen;
+	}
 
 }

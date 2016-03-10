@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import view.SLogoPropertiesData;
 import view.View;
 
 /**
@@ -33,6 +34,7 @@ public class SLogoWorkspace {
 	private ObservableList<SLogoVariable> myObservableVariableList;
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
+	private SLogoPropertiesData myPropertiesData;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
@@ -42,6 +44,11 @@ public class SLogoWorkspace {
 		myVariableList = new ArrayList<SLogoVariable>();
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 		myCharacters = new ArrayList<SLogoCharacter>();
+		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
+	}
+
+	public void addPen(SLogoPen pen) {
+		myPropertiesData.addPen(pen);
 	}
 	
 	public void initialize() throws SLogoException {
