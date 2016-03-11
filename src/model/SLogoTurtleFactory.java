@@ -2,6 +2,11 @@ package model;
 
 import exception.SLogoException;
 
+/**
+ * SLogo's Turtle Factory class to create turtles
+ * 
+ */
+
 public class SLogoTurtleFactory {
 
 	private SLogoWorkspace myWorkspace;

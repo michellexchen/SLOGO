@@ -3,7 +3,7 @@ package model;
 import exception.SLogoException;
 
 /**
- * SLogo's Turtle with a TurtleState and name
+ * SLogo's Turtle with a TurtleState
  *
  */
 

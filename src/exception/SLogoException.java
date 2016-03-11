@@ -16,6 +16,7 @@ import javafx.scene.control.TextInputDialog;
  * @author Hunter Lee
  *
  */
+@SuppressWarnings("serial")
 public class SLogoException extends Exception {
 
 	private Optional<String> unresolvedException;
@@ -25,6 +26,7 @@ public class SLogoException extends Exception {
 	 */
 	public SLogoException(String arg0) {
 		super(arg0);
+		@SuppressWarnings("rawtypes")
 		Dialog alert = new Dialog();
 		alert.setTitle("SLOGO EXCEPTION");
 		alert.setHeaderText("ERROR: " + arg0);

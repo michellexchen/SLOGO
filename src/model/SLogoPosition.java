@@ -1,4 +1,12 @@
 package model;
+
+/**
+ * SLogo's Position class for accessing previous and current X and Y coordinates
+ * 
+ * @author Hunter
+ *
+ */
+
 public class SLogoPosition {
 	
 	private double myPrevX;
@@ -17,8 +25,6 @@ public class SLogoPosition {
 		myPrevY = myY;
 		myX = x;
 		myY = y;
-		System.out.println("Prev: " + myPrevX + "  " + myPrevY);
-		System.out.println("Current " + myX + "  " + myY);
 	}
 
 	public double getPrevX() {

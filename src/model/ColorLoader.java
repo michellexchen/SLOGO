@@ -1,11 +1,16 @@
 package model;
 
-import java.io.IOException;
 import java.util.HashMap;
-
 import commandnode.RGBColor;
 import exception.SLogoException;
 import javafx.scene.paint.Color;
+
+/**
+ * Class for loading default colors from resources file for commands
+ * 
+ * @author Adam Tache
+ *
+ */
 
 public class ColorLoader extends FileLoader{
 
@@ -15,21 +20,15 @@ public class ColorLoader extends FileLoader{
 	private double DEFAULT_OPACITY = 1.0;
 
 	public ColorLoader() throws SLogoException{
-		if(myRGBMap == null){
-			myRGBMap = new HashMap<Integer, double[]>();
-			load();
-			loadDefaultColors();
-		}
+		myRGBMap = new HashMap<Integer, double[]>();
+		load();
+		loadDefaultColors();
 	}
-	
+
 	public void load() throws SLogoException {
 		setDirectory(colorDirectory);
 		setExtension(colorExtension);
-		try {
-			super.load();
-		} catch (IOException e) {
-			throw new SLogoException("SLogo Color file not found");
-		}
+		super.load();
 	}
 
 	private void loadDefaultColors() throws SLogoException{
@@ -51,12 +50,12 @@ public class ColorLoader extends FileLoader{
 		double red = convertRGB(color.getR());
 		double green = color.getG();
 		double blue = color.getB();
-        double[] rgb = {red, green, blue};
+		double[] rgb = {red, green, blue};
 		myRGBMap.put(color.getIndex(), rgb);
 	}
-	
+
 	private double convertRGB(int value){
-		return value/255;
+		return value/255.0;
 	}
 
 }

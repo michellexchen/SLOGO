@@ -1,5 +1,9 @@
 package commandnode;
 
+/**
+ * @author Adam Tache
+ * Node representation of command with four children
+ */
 public abstract class QuaternionNode extends CommandNode{
 	private int NUM_CHILDREN = 4;
 

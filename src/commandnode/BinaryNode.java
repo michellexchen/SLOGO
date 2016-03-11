@@ -1,5 +1,9 @@
 package commandnode;
 
+/**
+ * @author Adam Tache
+ * Node representation of command with two children
+ */
 public abstract class BinaryNode extends CommandNode{
 	
 	private int NUM_CHILDREN = 2;

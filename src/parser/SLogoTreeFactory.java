@@ -22,12 +22,12 @@ import commandnode.VariableNode;
 
 public class SLogoTreeFactory {
 
-	private CommandNodeLoader myCommandNodeLoader;
+	private CommandNameLoader myCommandNodeLoader;
 	private ResourceLoader myResourcesLoader;
 	private SLogoWorkspace myWorkspace;
 
 	public SLogoTreeFactory(SLogoWorkspace ws) throws SLogoException {
-		myCommandNodeLoader = new CommandNodeLoader();
+		myCommandNodeLoader = new CommandNameLoader();
 		myResourcesLoader = new ResourceLoader();
 		myWorkspace = ws;
 	}
@@ -45,7 +45,7 @@ public class SLogoTreeFactory {
 		return myRoots;
 	}
 
-	public Node createChild(List<String> commandParts) throws SLogoException {
+	private Node createChild(List<String> commandParts) throws SLogoException {
 		String currCommand = commandParts.remove(0);
 		if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
 			List<String> innerCommands = createCommandList(commandParts);
@@ -67,11 +67,7 @@ public class SLogoTreeFactory {
 		}
 	}
 
-	public boolean isInBounds(List<String> commandParts) {
-		return commandParts.size() >= 1;
-	}
-
-	public List<String> createCommandList(List<String> commandParts) throws SLogoException {
+	private List<String> createCommandList(List<String> commandParts) throws SLogoException {
 		List<String> innerCommands = new ArrayList<String>();
 		int openBrackets = 1;
 		int closedBrackets = 0;
@@ -88,7 +84,7 @@ public class SLogoTreeFactory {
 		return innerCommands;
 	}
 
-	public Node createNode(String strNode) throws SLogoException {
+	private Node createNode(String strNode) throws SLogoException {
 		Node node = null;
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));

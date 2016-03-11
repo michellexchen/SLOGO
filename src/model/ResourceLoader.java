@@ -1,8 +1,12 @@
 package model;
-
-import java.io.IOException;
-
 import exception.SLogoException;
+
+/**
+ * SLogo's Resource loader class to load access resources
+ * 
+ * @author Adam Tache
+ *
+ */
 
 public class ResourceLoader extends FileLoader{
 	private static final String resourcesDirectory = "resources/resources";
@@ -15,10 +19,6 @@ public class ResourceLoader extends FileLoader{
 	public void load() throws SLogoException {
 		setDirectory(resourcesDirectory);
 		setExtension(resourcesExtension);
-		try {
-			super.load();
-		} catch (IOException e) {
-			throw new SLogoException("SLogo resources file not found");
-		}
+		super.load();
 	}
 }

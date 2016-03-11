@@ -1,7 +1,4 @@
 package model;
-import java.util.Observable;
-import java.util.Observer;
-
 import exception.SLogoException;
 import javafx.scene.paint.Color;
 
@@ -17,7 +14,7 @@ import javafx.scene.paint.Color;
 public class SLogoPen{
 	
 	private Color myColor;
-	private double myThickness;
+	private double mySize;
 	private boolean isDown;
 	private String myStrokeStyle;
 	private int colorIndex;
@@ -26,7 +23,7 @@ public class SLogoPen{
 	private PenStrokeLoader strokeLoader;
 	
 	private int DEFAULT_PEN_INDEX = 0;
-	private int DEFAULT_THICKNESS = 1;
+	private int DEFAULT_SIZE = 1;
 	private boolean DEFAULT_PEN_DOWN = true;
 	private int DEFAULT_STROKE_STYLE = 0;
 	
@@ -36,7 +33,7 @@ public class SLogoPen{
 		myColor = colorLoader.getColor(colorIndex);
 		strokeLoader = new PenStrokeLoader();
 		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
-		myThickness = DEFAULT_THICKNESS;
+		mySize = DEFAULT_SIZE;
 		isDown = DEFAULT_PEN_DOWN;
 	}
 	
@@ -49,12 +46,12 @@ public class SLogoPen{
 		myColor = colorLoader.getColor(penIndex);
 	}
 	
-	public void setSize(double thickness) {
-		this.myThickness = thickness;
+	public void setSize(double size) {
+		this.mySize = size;
 	}
 	
 	public double getSize(){
-		return myThickness;
+		return mySize;
 	}
 	
 	public Color getColor() {

@@ -1,7 +1,9 @@
 package commandnode;
 
-import exception.SLogoException;
-
+/**
+ * @author Adam Tache
+ * Node representation of command with three children
+ */
 public abstract class TernaryNode extends CommandNode{
 	
 	private int NUM_CHILDREN = 3;
@@ -9,4 +11,5 @@ public abstract class TernaryNode extends CommandNode{
 	public TernaryNode(){
 		setNumChildren(NUM_CHILDREN);
 	}
+	
 }

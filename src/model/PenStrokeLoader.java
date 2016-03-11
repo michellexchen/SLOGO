@@ -2,6 +2,13 @@ package model;
 
 import java.util.HashMap;
 
+/**
+ * SLogo's PenStroke loader class to access default pen stroke styles
+ * 
+ * @author Adam Tache
+ *
+ */
+
 public class PenStrokeLoader extends FileLoader{
 
 	private final String strokeDirectory = "resources/resources";

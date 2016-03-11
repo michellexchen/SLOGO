@@ -158,7 +158,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {		
+	public void updateDisplayData () {	
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 
@@ -208,7 +208,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT);
 		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT);
 
-		System.out.println("To rotate: " + displaydata.getDirection());
 		//turtle rotate
 		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
 		turtle.setRotate(displaydata.getDirection());

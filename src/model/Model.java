@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import exception.SLogoException;
 import javafx.collections.ObservableList;
-import view.View;
 
 /**
  * Model interface - A contract for View Model in MVC Design Pattern: View can
@@ -16,8 +15,6 @@ import view.View;
 public interface Model {
 
 	public void readCommand(String command) throws SLogoException;
-
-	public void setView(View myView);
 
 	public void createBackend();
 

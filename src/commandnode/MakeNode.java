@@ -12,7 +12,6 @@ public class MakeNode extends BinaryNode {
 		VariableNode varNode = ((VariableNode) getChildren().get(0));
 		String varName = varNode.getVarName();
 		double varValue = evaluateChild(1, state);
-		varNode.setValue(varValue);
 		SLogoWorkspace ws = varNode.getWorkspace();
 		SLogoVariable var = new SLogoVariable();
 		var.setName(varName);

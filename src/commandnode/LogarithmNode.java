@@ -6,8 +6,11 @@ import model.SLogoCharacterState;
 public class LogarithmNode extends UnaryNode{
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.log(evaluateChild(0, state));
-		
+		double toEvaluate = evaluateChild(0, state);
+		if(toEvaluate < 0){
+			throw new SLogoException(getInstruction("Logarithm"));
+		}
+		return Math.log(evaluateChild(0, state));	
 	}
 
 }

@@ -1,10 +1,16 @@
 package model;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 
 import exception.SLogoException;
+
+/**
+ * Class that allows access to Turtle images for commands
+ * 
+ * @author Adam Tache
+ *
+ */
 
 public class TurtleImageLoader extends FileLoader{
 	
@@ -24,11 +30,7 @@ public class TurtleImageLoader extends FileLoader{
 	public void load() throws SLogoException {
 		setDirectory(turtleDirectory);
 		setExtension(turtleExtension);
-		try {
-			super.load();
-		} catch (IOException e) {
-			throw new SLogoException("SLogo Turtle Images not found");
-		}
+		super.load();
 	}
 	
 	private void loadDefaultTurtles() throws SLogoException{

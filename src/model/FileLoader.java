@@ -10,7 +10,7 @@ import java.util.Properties;
 import exception.SLogoException;
 
 /**
- * SLogo's highest level in File reader hierarchy
+ * Abstract class extended by other file loaders for loading values from files
  * 
  * @author Adam Tache
  *
@@ -23,16 +23,20 @@ public abstract class FileLoader {
 	private String extension;
 	private String fileName;
 
-	public void load() throws IOException, SLogoException {
+	public void load() throws SLogoException  {
 		fileName = directory + "/" + extension;
 		myFileReader = null;
 		try {
 			myFileReader = new BufferedReader(new FileReader(fileName));
 		} catch (IOException e) {
-			throw new FileNotFoundException(String.format("File not found: %s", fileName));
+			throw new SLogoException(String.format("File not found: %s", fileName));
 		}
 		myProperties = new Properties();
-		myProperties.load(myFileReader);
+		try {
+			myProperties.load(myFileReader);
+		} catch (IOException e) {
+			throw new SLogoException("File Reader not found.");
+		}
 	}
 
 	public String getFileName(){
@@ -51,6 +55,7 @@ public abstract class FileLoader {
 		return myProperties.getProperty(key);
 	}
 
+	@SuppressWarnings("resource")
 	public int countLines(String filename) throws SLogoException{
 		LineNumberReader reader;
 		try {
@@ -59,6 +64,7 @@ public abstract class FileLoader {
 			throw new SLogoException("SLogo resources file not found");
 		}
 		int numLines = 0;
+		@SuppressWarnings("unused")
 		String nextLine = "";
 		try {
 			while ((nextLine = reader.readLine()) != null) {}

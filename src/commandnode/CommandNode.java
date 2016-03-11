@@ -8,7 +8,7 @@ import parser.InstructionLoader;
 
 /**
  * SLogo's CommandNode, an abstract class representing any command (Turtle,
- * Query, Math, etc.)
+ * Query, Math, etc.) with any number of children
  *
  */
 
@@ -22,11 +22,7 @@ public abstract class CommandNode implements Node {
 		try {
 			instructionsLoader = new InstructionLoader();
 		} catch (SLogoException e) {
-			try {
-				throw new SLogoException("Instructions loader not found");
-			} catch (SLogoException e1) {
-				e1.printStackTrace();
-			}
+			new SLogoException("Instruction loader not loading.");
 		}
 		children = new ArrayList<Node>();
 	}
@@ -39,9 +35,16 @@ public abstract class CommandNode implements Node {
 		children.add(child);
 	}
 	
+	/**
+	 * @return Number of children required for command
+	 */
 	public int numRequiredChildren(){
 		return NUM_CHILDREN;
 	}
+	
+	/**
+	 * @return Number of children currently added to command
+	 */
 	public int numCurrentChildren(){
 		return children.size();
 	}
@@ -54,10 +57,20 @@ public abstract class CommandNode implements Node {
 		return children.get(child);
 	}
 	
+	/**
+	 * @param child, index of desired child to evaluate
+	 * @param state, SLogoCharacterState to act upon if needed
+	 * @return evaluation of child using state
+	 * @throws SLogoException in subclasses if invalid command parameters
+	 */
 	public double evaluateChild(int child, SLogoCharacterState state) throws SLogoException{
 		return children.get(child).evaluate(state);
 	}
 	
+	/**
+	 * @param instruction, key for instructions resources file lookup
+	 * @return instruction from resources file
+	 */
 	public String getInstruction(String instruction){
 		return instructionsLoader.getString(instruction);
 	}

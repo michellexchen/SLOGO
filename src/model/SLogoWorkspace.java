@@ -1,14 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import view.SLogoPropertiesData;
 import view.View;
 
@@ -17,6 +14,7 @@ import view.View;
  * Workspace class that serves as a container for data objects
  *
  */
+
 public class SLogoWorkspace {
 
 	private View myView;
@@ -157,9 +155,9 @@ public class SLogoWorkspace {
 	}
 
 
-	private void testerVariableList(){
-		myObservableVariableList.add(new SLogoVariable("hi", 2));
-	}
+//	private void testerVariableList(){
+//		myObservableVariableList.add(new SLogoVariable("hi", 2));
+//	}
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
 	}

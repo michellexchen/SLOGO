@@ -7,29 +7,15 @@ import java.util.Observable;
  * SLogo Variable class that represents variable objects
  *
  */
+
 public class SLogoVariable extends Observable {
 
 	private String myName;
 	private double myValue;
 
-	public SLogoVariable() {
-		// class Pair {
-		// String variable;
-		// double value;
-	}
-
-	public SLogoVariable(String name, double value) {
-		myName = name;
-		myValue = value;
-	}
-
 	public void addListeners() {
 
 	}
-
-	//////////////////////////////
-	///// Getters and Setters//////
-	//////////////////////////////
 
 	/**
 	 * @return the myName
