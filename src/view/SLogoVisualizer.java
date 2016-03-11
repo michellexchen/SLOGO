@@ -146,8 +146,11 @@ public class SLogoVisualizer extends Observable implements Observer {
 		Color myColor = turtledata.getPen().getColor();
 		newLine.setFill(myColor);
 		newLine.setStrokeWidth(turtledata.getPen().getSize());
-		if(!turtledata.getPen().getDown() || turtledata.isCleared())
+		if(!turtledata.getPen().getDown() || turtledata.isCleared()){
 			newLine.setStrokeWidth(0);
+			if(turtledata.isCleared())
+				turtledata.setCleared(false);
+		}
 		return newLine;
 	}
 

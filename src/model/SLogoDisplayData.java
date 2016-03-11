@@ -15,7 +15,7 @@ import javafx.scene.shape.Line;
  *
  */
 public class SLogoDisplayData extends Observable{
-	
+
 	private SLogoPosition myPosition;
 	private double myDirection;
 	private String myImage;
@@ -25,27 +25,12 @@ public class SLogoDisplayData extends Observable{
 	private Color bgColor;
 	private SLogoPen myPen;
 	private double prevDirection;
-	private boolean isCleared;
-
-	/**
-	 * Constructor that sets initial values
-	 * 
-	 * @param xCoordinate,
-	 *            yCoordinate, angle, penDown, penColor, and Image
-	 */
-	public SLogoDisplayData(SLogoPosition position, double direction, boolean penDown, String image,
-			SLogoPen pen, boolean turtleHidden, int ID, Color bgColor) {
-		this.myPosition = position;
-		this.myDirection = direction;
-		this.myImage = image;
-		this.turtleHidden = turtleHidden;
-		this.ID = ID;
-		this.bgColor = bgColor;
-		this.myPen = pen;
-	}
+	private boolean cleared;
+	private SLogoCharacterState myState;
 
 	public SLogoDisplayData(SLogoCharacterState state) throws SLogoException {
 		myPosition = new SLogoPosition();
+		myState = state;
 		updateData(state);
 		initialize();
 	}
@@ -64,8 +49,8 @@ public class SLogoDisplayData extends Observable{
 		turtleHidden = state.getHidden();
 		ID = state.getID();
 		bgColor = state.getBGColor();
-		isCleared = state.isCleared();
-		if(isCleared)
+		cleared = state.getCleared();
+		if(cleared)
 			myLines = new ArrayList<Line>();
 		applyChanges();
 	}
@@ -126,15 +111,15 @@ public class SLogoDisplayData extends Observable{
 	public String getTurtleImage() {
 		return myImage;
 	}
-	
+
 	public boolean getTurtleHidden(){
 		return turtleHidden;
 	}
-	
+
 	public int getID(){
 		return ID;
 	}
-	
+
 	public Color getBGColor(){
 		return bgColor;
 	}
@@ -142,9 +127,13 @@ public class SLogoDisplayData extends Observable{
 	public double getPrevDirection() {
 		return prevDirection;
 	}
-	
+
 	public boolean isCleared(){
-		return isCleared;
+		return cleared;
+	}
+
+	public void setCleared(boolean cleared){
+		myState.setCleared(cleared);
 	}
 
 }
