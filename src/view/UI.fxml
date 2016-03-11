@@ -26,14 +26,6 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-        <MenuButton fx:id="myMenuButton" layoutX="5.0" layoutY="13.0" mnemonicParsing="false" prefHeight="21.625" prefWidth="176.0" style="" text="Select Workspace" textFill="BLACK" wrapText="false">
-          <font>
-            <Font size="11.0" />
-          </font>
-          <stylesheets>
-            <URL value="@style.css" />
-          </stylesheets>
-        </MenuButton>
         <TextField fx:id="myTextField" layoutX="220.0" layoutY="461.0" prefHeight="33.0" prefWidth="380.0" promptText="Enter command here...">
           <stylesheets>
             <URL value="@style.css" />
@@ -86,6 +78,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Pane>
+            <ComboBox fx:id="myComboBox" layoutX="14.0" layoutY="6.0" prefWidth="150.0" />
       </children>
       <stylesheets>
         <URL value="@style.css" />

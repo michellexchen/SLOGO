@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -98,6 +99,9 @@ public class SLogoGUIController implements Initializable, Observer {
     private MenuButton myMenuButton;
    
 
+    @FXML
+    private ComboBox myComboBox;
+    
     
     //MenuButton's MenuItem list
     private List<MenuItem> myMenuItems;

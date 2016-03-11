@@ -34,6 +34,7 @@ public class SLogoView implements View {
 	//in MenuButton
 	//private List<MenuItem> myMenuItems;
 	private ObservableList<MenuItem> myObservableMenuItems;
+	private ObservableList<String> myObservableEntries;
 
 	public SLogoView() throws SLogoException {
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
@@ -45,9 +46,13 @@ public class SLogoView implements View {
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 		
 		//Initialize the list of MenuItems (workspaces)
+		//No longer needed?
 		myObservableMenuItems = FXCollections
 							.observableArrayList(new ArrayList<MenuItem>());
-
+		//Using combobox
+		myObservableEntries = FXCollections
+				.observableArrayList(new ArrayList<String>());
+		
 	}
 	
 	/**
@@ -70,7 +75,14 @@ public class SLogoView implements View {
 		});
 	}
 	
+	private void createEntry () {
+		//int = getView().getMenuItems();
+		
+//		String newWorkspace = "Workspace " + getObservableEntries().size();
+		String newWorkspace = String.valueOf(getObservableEntries().size());
+		getObservableEntries().add(newWorkspace);
 	
+	}
 	
 	@Override
 	public void createMenuItem () {
@@ -229,5 +241,19 @@ public class SLogoView implements View {
 
 	public void setMenuItems(ObservableList<MenuItem> myMenuItems) {
 		this.myObservableMenuItems = myMenuItems;
+	}
+
+	/**
+	 * @return the myObservableEntries
+	 */
+	public ObservableList<String> getObservableEntries() {
+		return myObservableEntries;
+	}
+
+	/**
+	 * @param myObservableEntries the myObservableEntries to set
+	 */
+	public void setObservableEntries(ObservableList<String> myObservableEntries) {
+		this.myObservableEntries = myObservableEntries;
 	}
 }
