@@ -26,7 +26,7 @@ public interface Model {
 
 	public void loadLanguage();
 	
-	public void switchWorkspace(int index);
+	public void switchWorkspace(int index) throws SLogoException;
 	
 
 }

@@ -210,27 +210,30 @@ public class SLogoGUIController implements Initializable, Observer {
         
     private void assignMenuAction () {
     	myProject1.setOnAction(e -> {
-    		getModel().switchWorkspace(0);
+    		try {
+				getModel().switchWorkspace(0);
+			} catch (Exception e1) {}
     	});
-    	
     	myProject2.setOnAction(e -> {
-    		getModel().switchWorkspace(1);
-
+    		try {
+				getModel().switchWorkspace(1);
+			} catch (Exception e1) {}
     	});
-    	
     	myProject3.setOnAction(e -> {
-    		getModel().switchWorkspace(2);
-
+    		try {
+				getModel().switchWorkspace(2);
+			} catch (Exception e1) {}
     	});
     	myProject4.setOnAction(e -> {
-    		getModel().switchWorkspace(3);
-
+    		try {
+				getModel().switchWorkspace(3);
+			} catch (Exception e1) {}
     	});
     	myProject5.setOnAction(e -> {
-    		getModel().switchWorkspace(4);
-
+    		try {
+				getModel().switchWorkspace(4);
+			} catch (Exception e1) {}
     	});
-    	
     }
     
     

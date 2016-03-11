@@ -8,6 +8,8 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import parser.SLogoParser;
 import view.View;
 
@@ -156,10 +158,26 @@ public class SLogoModel implements Model {
 	}
 
 	@Override
-	public void switchWorkspace(int index) {
+	public void switchWorkspace(int index) throws SLogoException {
 		// TODO Auto-generated method stub
+		if (index >= getObservableWorkspaces().size()) {
+			throw new SLogoException
+				("This project doesn't exist!\nPlease click + button first!");
+		}
+		
 		setCurrentWorkspace(getObservableWorkspaces().get(index));
 		getView().switchVisualizer(index);
+		
+	}
+	
+	public void showError(SLogoException e) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error Dialog");
+		alert.setHeaderText("Error Occurred");
+		alert.setContentText("Ooops, there was an error!");
+
+		alert.showAndWait();
+		// Or restart the simulation
 	}
 
 }
