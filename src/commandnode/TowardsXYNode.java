@@ -7,7 +7,7 @@ public class TowardsXYNode extends TurnNode {
 	
 	private int NUM_CHILDREN = 2;
 	
-	public TowardsXYNode() {
+	public TowardsXYNode() throws SLogoException{
 		setNumChildren(NUM_CHILDREN);
 	}
 

@@ -163,7 +163,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	
 
 
-	private void setButton(){ 
+	private void setButton(){
 		buttonHb = new HBox();
 		myOkayButton = new Button("OKAY");
 		buttonHb.setAlignment(Pos.CENTER);

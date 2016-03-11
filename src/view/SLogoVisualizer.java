@@ -48,6 +48,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private String myCanvasColor;
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
+	private double COORDINATE_SHIFT = PANE_SIZE / 2;
+	private double LINE_SHIFT = myTurtleSize / 2;
+	private int DIRECTION_FLIP = -1;
+
 	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
 		myWidth = width;
@@ -94,15 +98,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myStage.setScene(myScene);
 		myStage.setTitle("SLogo");
 		show();
-
-
-
-		//		CommandView myCommandView = new CommandView();
-		//		myCommandView.show();
-	}
-
-	public void updateStates() {
-
 	}
 
 	public void show() {
@@ -114,31 +109,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
-	public void setBackgroundColor() {
-
-	}
-
 	@Override
 	public void update(Observable observable, Object arg1) {
 		updateDisplayData();
 	}
 
-	public void setImage (ImageView image) {
-
-
-	}
-
-
 	public void updateMenuButton (ObservableList<MenuItem> items) {
 		getGUIController().updateMenuButton(items);
-	}
-
-	public void setPenColor (Color color) {
-
-	}
-
-	public void rotate (SLogoDisplayData displaydata) {
-
 	}
 
 	/**
@@ -149,10 +126,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public Line createLine(SLogoPosition position) {
 		Line newLine = new Line();
-		newLine.setStartX(position.xPrevious());
-		newLine.setStartY(position.yPrevious());
-		newLine.setEndX(position.xCurrent());
-		newLine.setEndY(position.yCurrent());
+		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setEndX(position.getX() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT + LINE_SHIFT);
 		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
@@ -166,18 +143,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public Line createLine(SLogoDisplayData turtledata) {
 		Line newLine = createLine(turtledata.getPosition());
-		Color myColor = turtledata.getPenColor();
-		setPenColor(myColor);
+		Color myColor = turtledata.getPen().getColor();
 		newLine.setFill(myColor);
-		if(turtledata.isPenDown())
-			newLine.setStrokeWidth(turtledata.getPenSize());
+		if(turtledata.getPen().getDown())
+			newLine.setStrokeWidth(turtledata.getPen().getSize());
 		else
 			newLine.setStrokeWidth(0);
 		return newLine;
-	}
-
-	public void clearScreen(){
-		getGUIController().getCanvas().getChildren().clear();
 	}
 
 	/**
@@ -186,11 +158,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void updateDisplayData () {		
 		//Clear entire Pane
-		clearScreen();
-		
-		//Set Pane Color
-//		getGUIController().getCanvas().setStyle("-fx-background-color: "
-//				+ getCanvasColor());
+		getGUIController().getCanvas().getChildren().clear();
 
 		getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
@@ -205,9 +173,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
-			
-			//update turtle lines?????
-			
+
+			getGUIController().getCanvas().setStyle("-fx-background-color: "
+					+ turtledata.getBGColor());
+
 		}
 
 	}
@@ -224,8 +193,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
 			turtle.setFitWidth(120);
-			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
-			turtle.setLayoutY(displaydata.getPosition().yCurrent() - 120 / 2);
+			turtle.setLayoutX(displaydata.getX() - 120 / 2);
+			turtle.setLayoutY(displaydata.getY() - 120 / 2);
 			turtle.setRotate(90);
 		});
 
@@ -235,13 +204,16 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setSmooth(true);
 		turtle.setCache(true);
 
+		//place turtle using Position and center at the coordinates (x,y)
+		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT);
+		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT);
+
 		System.out.println("To rotate: " + displaydata.getDirection());
 		//turtle rotate
+		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
 		turtle.setRotate(displaydata.getDirection());
 
-		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getPosition().xCurrent() - myTurtleSize / 2);
-		turtle.setLayoutY(displaydata.getPosition().yCurrent() - myTurtleSize / 2);
+
 
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);

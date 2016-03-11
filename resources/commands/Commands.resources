@@ -93,3 +93,5 @@ setpc:SetPenColor
 shape:Shape
 id=ID
 turtleid=ID
+clearscreen:Clearscreen
+cs:Clearscreen

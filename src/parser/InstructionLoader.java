@@ -2,11 +2,11 @@ package parser;
 
 import exception.SLogoException;
 
-public class CommandInstructionLoader extends CommandLoader{
+public class InstructionLoader extends CommandLoader{
 	
 	private static final String commandExtension = "Instructions.resources";
 
-	public CommandInstructionLoader() throws SLogoException{
+	public InstructionLoader() throws SLogoException{
 		setExtension(commandExtension);
 		super.load();
 	}

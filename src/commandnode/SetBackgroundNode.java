@@ -3,12 +3,11 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class SetPenColorNode extends UnaryNode{
-	
+public class SetBackgroundNode extends UnaryNode{
+
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		double index = evaluateChild(0, state);
-		state.getPen().setColor((int) index); 
-		return index;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 }

@@ -13,6 +13,6 @@ public class HomeNode extends NullaryNode{
 	}
 
 	private double calculateDistance(double x, double y, SLogoCharacterState state) throws SLogoException {
-		return Math.sqrt(Math.pow(x, 2) - Math.pow(y, 2));
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 }

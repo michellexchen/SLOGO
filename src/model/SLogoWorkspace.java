@@ -46,13 +46,9 @@ public class SLogoWorkspace {
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
 	}
-
-	public void addPen(SLogoPen pen) {
-		myPropertiesData.addPen(pen);
-	}
 	
 	public void initialize() throws SLogoException {
-		turtleFactory.createTurtle(turtleFactory.getDefaultID(), turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
+		turtleFactory.create(turtleFactory.getDefaultID(), turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
 	}
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 

@@ -3,7 +3,7 @@ package commandnode;
 import java.util.Optional;
 
 import exception.SLogoException;
-import parser.CommandInstructionLoader;
+import parser.InstructionLoader;
 
 public class RGBColor {
 
@@ -37,7 +37,7 @@ public class RGBColor {
 	}
 
 	public boolean boundsCheck(int red, int green, int blue) throws SLogoException{
-		CommandInstructionLoader instructLoader = new CommandInstructionLoader();
+		InstructionLoader instructLoader = new InstructionLoader();
 		if((red < 0 || green < 0 || blue < 0 || red > 255 || green > 255 || blue > 255)){
 			SLogoException e = new SLogoException(instructLoader.getString("RGBColor"), 3);
 			Optional<String> myNewInput = e.getNewInput();

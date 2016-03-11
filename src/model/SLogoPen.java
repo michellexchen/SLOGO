@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
  *
  */
 
-public class SLogoPen implements Observer {
+public class SLogoPen{
 	
 	private Color myColor;
 	private double myThickness;
@@ -49,19 +49,19 @@ public class SLogoPen implements Observer {
 		myColor = colorLoader.getColor(penIndex);
 	}
 	
-	public void setThickness(double thickness) {
+	public void setSize(double thickness) {
 		this.myThickness = thickness;
 	}
 	
-	public double getThickness(){
+	public double getSize(){
 		return myThickness;
 	}
 	
-	public Color getPenColor() {
+	public Color getColor() {
 		return myColor;
 	}
 	
-	public void setPenColor(Color myColor){
+	public void setColor(Color myColor){
 		this.myColor = myColor;
 	}
 	
@@ -79,18 +79,12 @@ public class SLogoPen implements Observer {
 	/**
 	 * @param myStrokeStyle the myStrokeStyle to set
 	 */
-	public void setPenStrokeStyle(String myStrokeStyle) {
+	public void setStrokeStyle(String myStrokeStyle) {
 		this.myStrokeStyle = myStrokeStyle;
 	}
 
-	public boolean isPenDown() {
+	public boolean getDown() {
 		return isDown;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

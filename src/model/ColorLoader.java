@@ -55,7 +55,7 @@ public class ColorLoader extends FileLoader{
 		myRGBMap.put(color.getIndex(), rgb);
 	}
 	
-	public double convertRGB(int value){
+	private double convertRGB(int value){
 		return value/255;
 	}
 

@@ -1,6 +1,7 @@
 package model;
 
 import exception.SLogoException;
+import javafx.scene.paint.Color;
 
 /**
  * SLogo's highest State in hierarchy, to support multiple types of character
@@ -18,6 +19,8 @@ public abstract class SLogoCharacterState {
 	private String myImage;
 	private int myID;
 	private int myShapeIndex;
+	private int myBGColorIndex;
+	private Color myBGColor;
 
 	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
 					      boolean isHidden, int shapeIndex) throws SLogoException {
@@ -28,6 +31,7 @@ public abstract class SLogoCharacterState {
 		this.isHidden = isHidden;
 		this.myShapeIndex = shapeIndex;
 		setImage(myShapeIndex);
+		setBackgroundColor(myBGColorIndex);
 	}
 	
 	public SLogoPen getPen() {
@@ -70,6 +74,19 @@ public abstract class SLogoCharacterState {
 		return myImage;
 	}
 
+	public void setBackgroundColor(int myBGColorIndex) throws SLogoException {
+		ColorLoader colorLoader = new ColorLoader();
+		String colorString = colorLoader.getString(myBGColorIndex+"");
+		if(colorString == null)
+			throw new SLogoException("Invalid color index");
+		else
+			this.myBGColor = colorLoader.getColor(myBGColorIndex);
+	}
+	
+	public Color getBGColor(){
+		return myBGColor;
+	}
+	
 	public void setImage(int myShapeIndex) throws SLogoException {
 		TurtleImageLoader imageLoader = new TurtleImageLoader();
 		String indexImage = imageLoader.getString(myShapeIndex+"");
