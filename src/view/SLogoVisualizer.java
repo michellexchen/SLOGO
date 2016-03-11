@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import model.Model;
 import model.SLogoPosition;
 import model.SLogoDisplayData;
+import model.SLogoPen;
 
 /**
  * 
@@ -144,13 +145,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * @param position
 	 * @return Line
 	 */
-	public Line createLine(SLogoPosition position) {
+	public Line createLine(SLogoPosition position, double penSize) {
 		Line newLine = new Line();
 		newLine.setStartX(position.xPrevious());
 		newLine.setStartY(position.yPrevious());
 		newLine.setEndX(position.xCurrent());
 		newLine.setEndY(position.yCurrent());
-		newLine.setStrokeWidth(1.0f);
+		newLine.setStrokeWidth(penSize);
 		return newLine;
 	}
 
@@ -162,7 +163,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * @return Line
 	 */
 	public Line createLine(SLogoDisplayData turtledata) {
-		Line newLine = createLine(turtledata.getPosition());
+		Line newLine = createLine(turtledata.getPosition(), turtledata.getPenSize());
 		Color myColor = turtledata.getPenColor();
 		setPenColor(myColor);
 		newLine.setFill(myColor);

@@ -45,7 +45,7 @@ public class SLogoWorkspace {
 	}
 	
 	public void initialize() throws SLogoException {
-		turtleFactory.createTurtle(turtleFactory.getDefaultID(), turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
+		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
 	}
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
@@ -157,6 +157,7 @@ public class SLogoWorkspace {
 	private void testerVariableList(){
 		myObservableVariableList.add(new SLogoVariable("hi", 2));
 	}
+	
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
 	}
