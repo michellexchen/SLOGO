@@ -3,6 +3,9 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of SetBackground, Setbg commands, Display commands
+ */
 public class SetBackgroundNode extends UnaryNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {

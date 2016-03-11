@@ -3,6 +3,9 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of Product, a Math command
+ */
 public class ProductNode extends BinaryNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {

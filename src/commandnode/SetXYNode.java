@@ -3,6 +3,9 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of SetXY, a Turtle Command
+ */
 public class SetXYNode extends BinaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {

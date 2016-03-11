@@ -3,6 +3,9 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of Tan, Tangent commands
+ */
 public class TanNode extends UnaryNode{
 
 	/**

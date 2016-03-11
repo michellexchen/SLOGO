@@ -5,7 +5,7 @@ import model.SLogoCharacterState;
 
 /**
  * SLogo's highest level in Node hierarchy
- * 
+ * Includes CommandNodes and NumericNode
  *
  */
 
