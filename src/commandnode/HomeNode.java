@@ -9,6 +9,7 @@ public class HomeNode extends NullaryNode{
 		double distance = calculateDistance(state.getXCoor(), state.getYCoor(), state);
 		state.setXCoor(0);
 		state.setYCoor(0);
+		state.setDirection(0);
 		return distance;
 	}
 

@@ -25,6 +25,7 @@ public class SLogoDisplayData extends Observable{
 	private Color bgColor;
 	private SLogoPen myPen;
 	private double prevDirection;
+	private boolean isCleared;
 
 	/**
 	 * Constructor that sets initial values
@@ -63,6 +64,9 @@ public class SLogoDisplayData extends Observable{
 		turtleHidden = state.getHidden();
 		ID = state.getID();
 		bgColor = state.getBGColor();
+		isCleared = state.isCleared();
+		if(isCleared)
+			myLines = new ArrayList<Line>();
 		applyChanges();
 	}
 
@@ -137,6 +141,10 @@ public class SLogoDisplayData extends Observable{
 
 	public double getPrevDirection() {
 		return prevDirection;
+	}
+	
+	public boolean isCleared(){
+		return isCleared;
 	}
 
 }

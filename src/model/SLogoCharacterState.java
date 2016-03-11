@@ -21,6 +21,7 @@ public abstract class SLogoCharacterState {
 	private int myShapeIndex;
 	private int myBGColorIndex;
 	private Color myBGColor;
+	private boolean isCleared;
 
 	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
 					      boolean isHidden, int shapeIndex) throws SLogoException {
@@ -115,6 +116,14 @@ public abstract class SLogoCharacterState {
 		} catch (SLogoException e) {
 			
 		}
+	}
+	
+	public boolean isCleared(){
+		return isCleared;
+	}
+	
+	public void setCleared(){
+		isCleared = true;
 	}
 	
 }

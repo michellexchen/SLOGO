@@ -145,9 +145,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 		Line newLine = createLine(turtledata.getPosition());
 		Color myColor = turtledata.getPen().getColor();
 		newLine.setFill(myColor);
-		if(turtledata.getPen().getDown())
-			newLine.setStrokeWidth(turtledata.getPen().getSize());
-		else
+		newLine.setStrokeWidth(turtledata.getPen().getSize());
+		if(!turtledata.getPen().getDown() || turtledata.isCleared())
 			newLine.setStrokeWidth(0);
 		return newLine;
 	}
@@ -224,7 +223,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public void updateCommandHistory () {
 
 	}
-	
+
 	/**
 	 * Converts Color object into its hex String representation
 	 * 
