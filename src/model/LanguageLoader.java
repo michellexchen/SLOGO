@@ -1,11 +1,9 @@
 package model;
 
-import java.io.IOException;
-
 import exception.SLogoException;
 
 /**
- * SLogo's Languages reader class that extends FileDriver abstract class
+ * SLogo's Languages loader class to lookup language translations for supported languages
  * 
  * @author Adam Tache
  *
@@ -23,12 +21,7 @@ public class LanguageLoader extends FileLoader {
 		langExtension = myLang + langExtension;
 		setDirectory(langDirectory);
 		setExtension(langExtension);
-		try {
-			super.load();
-		} catch (IOException e) {
-			throw new SLogoException("Encountered an error loading the language file");
-			// System.out.println(e.getMessage());
-		}
+		super.load();
 	}
 
 	public String getLanguage() {

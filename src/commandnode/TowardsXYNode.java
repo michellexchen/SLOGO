@@ -3,11 +3,14 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of TowardsXY, a Turtle Command
+ */
 public class TowardsXYNode extends TurnNode {
 	
 	private int NUM_CHILDREN = 2;
 	
-	public TowardsXYNode() {
+	public TowardsXYNode() throws SLogoException{
 		setNumChildren(NUM_CHILDREN);
 	}
 

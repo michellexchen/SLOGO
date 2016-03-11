@@ -13,6 +13,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -49,7 +51,7 @@ import model.SLogoDisplayData;
  * UI.fxml file
  *
  */
-public class SLogoGUIController implements Initializable {
+public class SLogoGUIController implements Initializable, Observer {
 	
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
 						+ "compsci308/spring16/assign/03_slogo/commands.php";
@@ -68,7 +70,7 @@ public class SLogoGUIController implements Initializable {
     private HBox myColorHBox;
     
     private SLogoCustomizerBuilder myCustomizer;
-
+    private SLogoPropertiesData myPropertiesData;
 	
 	private Model myModel;
 	private View myView;
@@ -93,13 +95,12 @@ public class SLogoGUIController implements Initializable {
     
     //Drop-down menuButton - Choose Project
     @FXML
-    private MenuButton myMenu;
+    private MenuButton myMenuButton;
    
 
     
     //MenuButton's MenuItem list
     private List<MenuItem> myMenuItems;
-
     
     
     
@@ -123,8 +124,11 @@ public class SLogoGUIController implements Initializable {
     @FXML
     private Button myCustomizeButton;
     
+    
+    //History
     @FXML
     private List<String> myHistory;
+  
     
 //    @FXML
 //    private List<String> myProperties;
@@ -133,6 +137,21 @@ public class SLogoGUIController implements Initializable {
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+    	//initialize MenuButton
+//    	myMenuButton = new MenuButton("Select Workspace");
+//    	MenuItem B1 = new MenuItem("B1");
+//    	B1.setOnAction(new EventHandler<ActionEvent>()
+//    			{
+//    		
+//    		@Override public void handle(ActionEvent e)
+//    		{
+//    			System.out.println("You have selected: Ferrari");
+//    		}
+//    			});
+//    	myMenuButton.getItems().addAll(B1);
+    	
+    	
+    	
     	//initializes properties
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
 
@@ -255,9 +274,9 @@ public class SLogoGUIController implements Initializable {
     			("Direction: " + Double.toString(displayData.getDirection())),
     			("X position: " + displayData.getX()),
     			("Y position: " + displayData.getY()),
-    			("Pen Down: " + displayData.isPenDown()),
-    			("Pen Color: " + displayData.getPenColor().toString()),
-    			("Pen Size: " + displayData.getPenSize())
+    			("Pen Down: " + displayData.getPen().getDown()),
+    			("Pen Color: " + displayData.getPen().getColorIndex()),
+    			("Pen Size: " + displayData.getPen().getSize())
     			);
     	
     	myPropertiesPaneView.setPrefSize(200, 150);
@@ -267,7 +286,8 @@ public class SLogoGUIController implements Initializable {
     
     private void customize(){
     	myCustomizeButton.setOnMouseClicked(e -> {
-    		myCustomizer.show();
+    		myCustomizer.setPropertiesData(myPropertiesData);
+    		myCustomizer.show();    		
 //    		System.out.println("new pane color:");
 //    		System.out.println(myCustomizer.getMyPaneColor());
 //    		System.out.println("new font color:");
@@ -280,6 +300,13 @@ public class SLogoGUIController implements Initializable {
 //        	customize.showAndWait();
 		});
     }
+    
+	public String toRGBCode (Color color) {
+		return String.format( "#%02X%02X%02X",
+				(int)( color.getRed() * 255 ),
+				(int)( color.getGreen() * 255 ),
+				(int)( color.getBlue() * 255 ) );
+	}
     
     public SLogoCustomizerBuilder getCustomizer() {
     	return myCustomizer;
@@ -329,6 +356,11 @@ public class SLogoGUIController implements Initializable {
 		this.myCanvas = myCanvas;
 	}
 
+    public void setPropertiesData(SLogoPropertiesData propertiesData) {
+        this.myPropertiesData = propertiesData;
+        myPropertiesData.addObserver(this);
+    }
+
 	/**
 	 * @return the myModel
 	 */
@@ -346,23 +378,59 @@ public class SLogoGUIController implements Initializable {
 	public void updateMenuButton(ObservableList<MenuItem> items) {
 		// TODO Auto-generated method stub
 		
-		getMenu().getItems().clear();
-		getMenu().getItems().addAll(items);
 		
-//		for (MenuItem item : items) {
-//			getMenu().getItems().add(item);
-//			System.out.println("Happening");
-//		}
+		System.out.println("This is menubutton: " + getMenuButton());
+		System.out.println("This is items: " + items);
+
+		getMenuButton().getItems().clear();
+		getMenuButton().getItems().addAll(items);
+	    getMenuButton().showingProperty().addListener(new ChangeListener<Boolean>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+	            if(newValue) {
+	                getMenuButton().getItems().add(new MenuItem("new city item"));
+	            }
+	        }
+	    });
+		
+		System.out.println("This is menubuttons added: " + getMenuButton().getItems());
+		
+//		System.out.println("Is tghis happening");
+		for (MenuItem item : getMenuButton().getItems()) {
+//			
+//			System.out.println(item);
+//			System.out.println(item.toString());
+//			
+		}
 		
 	}
 
-	public MenuButton getMenu() {
-		return myMenu;
+	/**
+	 * @return the myMenuButton
+	 */
+	public MenuButton getMenuButton() {
+		return myMenuButton;
 	}
 
-	public void setMenu(MenuButton myMenu) {
-		this.myMenu = myMenu;
+	/**
+	 * @param myMenuButton the myMenuButton to set
+	 */
+	public void setMenuButton(MenuButton myMenuButton) {
+		this.myMenuButton = myMenuButton;
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		getCanvas().setStyle("-fx-background-color: " + toRGBCode(myPropertiesData.getPaneColor()));
+		System.out.println(myPropertiesData.getPaneColor());
+	}
+//	public MenuButton getMenuButton() {
+//		return myMenuButton;
+//	}
+//
+//	public void setMenu(MenuButton myMenu) {
+//		this.myMenuB = myMenu;
+//	}
 
 //	@Override
 //	public void update(Observable arg0, Object arg1) {

@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import model.Model;
 import model.SLogoPosition;
 import model.SLogoDisplayData;
-import model.SLogoPen;
 
 /**
  * 
@@ -47,6 +46,11 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private Stage myStage;
 	private Model myModel;
 	private String myCanvasColor;
+	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
+
+	private double COORDINATE_SHIFT = PANE_SIZE / 2;
+	private double LINE_SHIFT = myTurtleSize / 2;
+	private int DIRECTION_FLIP = -1;
 
 	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
@@ -64,9 +68,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
+
 	public void initialize() throws SLogoException, IOException {
 
-		myPromptBuilder = new SLogoPromptBuilder();
+		myPromptBuilder = new SLogoPromptBuilder(myProperties);
 		// data = myPromptBuilder.getPropertiesData();
 		// observe the data
 		// because i am observing data, when data changes and data calls notify observers, i will call my update
@@ -87,20 +92,12 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
 		myGUIController.getCustomizer().addObserver(this); //subscribe to changes in customizer
+		myGUIController.setPropertiesData(myProperties);
 		myScene = new Scene(root);
 		myStage = new Stage();
 		myStage.setScene(myScene);
 		myStage.setTitle("SLogo");
 		show();
-
-
-
-		//		CommandView myCommandView = new CommandView();
-		//		myCommandView.show();
-	}
-
-	public void updateStates() {
-
 	}
 
 	public void show() {
@@ -112,31 +109,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
-	public void setBackgroundColor() {
-
-	}
-
 	@Override
 	public void update(Observable observable, Object arg1) {
 		updateDisplayData();
 	}
 
-	public void setImage (ImageView image) {
-
-
-	}
-
-
 	public void updateMenuButton (ObservableList<MenuItem> items) {
 		getGUIController().updateMenuButton(items);
-	}
-
-	public void setPenColor (Color color) {
-
-	}
-
-	public void rotate (SLogoDisplayData displaydata) {
-
 	}
 
 	/**
@@ -145,13 +124,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * @param position
 	 * @return Line
 	 */
-	public Line createLine(SLogoPosition position, double penSize) {
+	public Line createLine(SLogoPosition position) {
 		Line newLine = new Line();
-		newLine.setStartX(position.xPrevious());
-		newLine.setStartY(position.yPrevious());
-		newLine.setEndX(position.xCurrent());
-		newLine.setEndY(position.yCurrent());
-		newLine.setStrokeWidth(penSize);
+		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setEndX(position.getX() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
 
@@ -163,32 +142,25 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 * @return Line
 	 */
 	public Line createLine(SLogoDisplayData turtledata) {
-		Line newLine = createLine(turtledata.getPosition(), turtledata.getPenSize());
-		Color myColor = turtledata.getPenColor();
-		setPenColor(myColor);
+		Line newLine = createLine(turtledata.getPosition());
+		Color myColor = turtledata.getPen().getColor();
 		newLine.setFill(myColor);
-		if(turtledata.isPenDown())
-			newLine.setStrokeWidth(turtledata.getPenSize());
-		else
+		newLine.setStrokeWidth(turtledata.getPen().getSize());
+		if(!turtledata.getPen().getDown() || turtledata.isCleared()){
 			newLine.setStrokeWidth(0);
+			if(turtledata.isCleared())
+				turtledata.setCleared(false);
+		}
 		return newLine;
-	}
-
-	public void clearScreen(){
-		getGUIController().getCanvas().getChildren().clear();
 	}
 
 	/**
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {		
+	public void updateDisplayData () {	
 		//Clear entire Pane
-		clearScreen();
-
-		//Set Pane Color
-		getGUIController().getCanvas().setStyle("-fx-background-color: "
-				+ getCanvasColor());
+		getGUIController().getCanvas().getChildren().clear();
 
 		getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
@@ -203,6 +175,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
+			myProperties.setPaneColor(turtledata.getBGColor());
+			myGUIController.setPropertiesData(myProperties);
 		}
 
 	}
@@ -219,8 +193,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
 			turtle.setFitWidth(120);
-			turtle.setLayoutX(displaydata.getPosition().xCurrent() - 120 / 2);
-			turtle.setLayoutY(displaydata.getPosition().yCurrent() - 120 / 2);
+			turtle.setLayoutX(displaydata.getX() - 120 / 2);
+			turtle.setLayoutY(displaydata.getY() - 120 / 2);
 			turtle.setRotate(90);
 		});
 
@@ -230,13 +204,15 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setSmooth(true);
 		turtle.setCache(true);
 
-		System.out.println("To rotate: " + displaydata.getDirection());
+		//place turtle using Position and center at the coordinates (x,y)
+		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT);
+		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT);
+
 		//turtle rotate
+		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
 		turtle.setRotate(displaydata.getDirection());
 
-		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getPosition().xCurrent() - myTurtleSize / 2);
-		turtle.setLayoutY(displaydata.getPosition().yCurrent() - myTurtleSize / 2);
+
 
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
@@ -248,6 +224,19 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void updateCommandHistory () {
 
+	}
+
+	/**
+	 * Converts Color object into its hex String representation
+	 * 
+	 * @param color
+	 * @return String
+	 */
+	public String toRGBCode (Color color) {
+		return String.format( "#%02X%02X%02X",
+				(int)( color.getRed() * 255 ),
+				(int)( color.getGreen() * 255 ),
+				(int)( color.getBlue() * 255 ) );
 	}
 
 	//////////////////////////
@@ -374,19 +363,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void setCanvasColor(String myCanvasColor) {
 		this.myCanvasColor = myCanvasColor;
-	}
-
-	/**
-	 * Converts Color object into its hex String representation
-	 * 
-	 * @param color
-	 * @return String
-	 */
-	public String toRGBCode (Color color) {
-		return String.format( "#%02X%02X%02X",
-				(int)( color.getRed() * 255 ),
-				(int)( color.getGreen() * 255 ),
-				(int)( color.getBlue() * 255 ) );
 	}
 
 	/**
@@ -562,5 +538,9 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void setMyTurtleSize(int myTurtleSize) {
 		this.myTurtleSize = myTurtleSize;
+	}
+
+	public SLogoPropertiesData getPropertiesData() {
+		return myProperties;
 	}
 }

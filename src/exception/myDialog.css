@@ -30,7 +30,7 @@
 }*/
 
 .myDialog{
-    -fx-background-color: #d6e0f6; //middle part
+    -fx-background-color: #d6e0f6;
 }
 
 .myDialog > *.button-bar > *.container{
@@ -42,7 +42,6 @@
     -fx-font-weight: bold;
 }
 .myDialog:header *.header-panel{
-    -fx-background-color: #d6e0f6; //top part
-    -fx-font-family: "Andale Mono";  
-    
+    -fx-background-color: #d6e0f6;
+    -fx-font-family: "Andale Mono";
 }

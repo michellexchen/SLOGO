@@ -8,7 +8,6 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.MenuItem;
 import parser.SLogoParser;
 import view.View;
 
@@ -29,10 +28,6 @@ public class SLogoModel implements Model {
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
-	}
-
-	public SLogoModel(View view) {
-		myView = view;
 	}
 
 	@Override
@@ -171,6 +166,5 @@ public class SLogoModel implements Model {
 	public void setMyLanguageDriver(LanguageLoader myLanguageDriver) {
 		this.myLanguageDriver = myLanguageDriver;
 	}
-
 
 }

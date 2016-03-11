@@ -54,9 +54,9 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private ColorPicker colorPicker;
 	private SLogoPropertiesData myPropertiesData;
 	
-	public SLogoPromptBuilder() {
+	public SLogoPromptBuilder(SLogoPropertiesData propertiesData) {
 		myColor = Color.WHITE;
-		myPropertiesData = new SLogoPropertiesData();
+		myPropertiesData = propertiesData;
 	}
 
 	public void promptScreen () {

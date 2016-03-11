@@ -45,12 +45,20 @@ public class SLogoCustomizerBuilder extends Observable {
 	private Color myFontColor;
 	private HBox fontColorHb;
 	
+	private Button myOkayButton;
+	private HBox buttonHb;
+	private ComboBox comboBox;
+	private Label penStyleLabel;
+	private HBox penStyleHb;
+	private String myLineStyle;
+	private Slider thicknessSlider;
+	private Label thicknessSliderLabel;
+	private HBox thicknessSliderHb;
+	private double myLineThickness;
+	private SLogoPropertiesData myPropertiesData;
 	
 	public SLogoCustomizerBuilder() {
-
 		setup();
-		myPaneColor = Color.WHITE;
-		myFontColor = Color.BLACK;
 		myCustomizerStage = new Stage();
 		myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
 		myCustomizerStage.setScene(myCustomizerScene);
@@ -82,12 +90,16 @@ public class SLogoCustomizerBuilder extends Observable {
 	public void show(){
 		myCustomizerStage.show();
 	}
+	
+	public void setPropertiesData(SLogoPropertiesData propertiesData) {
+		myPropertiesData = propertiesData;
+	}
 
 	private void setColorPicker(){
 		colorLabel = new Label("Set background color: ");
 		colorLabel.setPrefWidth(COLORLABELSIZE);
 		//TODO get current pane color, set colorPicker/myPaneColor to that color 
-		colorPicker = new ColorPicker(Color.WHITE);
+		colorPicker = new ColorPicker(Color.BLUE);
         colorPicker.setOnAction(e -> {
         	myPaneColor = colorPicker.getValue();
         });
@@ -117,8 +129,7 @@ public class SLogoCustomizerBuilder extends Observable {
 				FXCollections.observableArrayList(
 						"SOLID",
 						"DASHED",
-						"DOTTED"
-						
+						"DOTTED"						
 				);
 		comboBox = new ComboBox(options);
 		comboBox.setValue("SOLID");
@@ -147,18 +158,9 @@ public class SLogoCustomizerBuilder extends Observable {
 
 	}
 	
-	private Button myOkayButton;
-	private HBox buttonHb;
-	private ComboBox comboBox;
-	private Label penStyleLabel;
-	private HBox penStyleHb;
-	private String myLineStyle;
-	private Slider thicknessSlider;
-	private Label thicknessSliderLabel;
-	private HBox thicknessSliderHb;
-	private double myLineThickness;
 
-	private void setButton(){ 
+
+	private void setButton(){
 		buttonHb = new HBox();
 		myOkayButton = new Button("OKAY");
 		buttonHb.setAlignment(Pos.CENTER);
@@ -167,6 +169,7 @@ public class SLogoCustomizerBuilder extends Observable {
 		myOkayButton.setOnMouseClicked(e -> {
 			System.out.println("new pane color: ");
 			System.out.println(myPaneColor);
+			myPropertiesData.setPaneColor(myPaneColor);
 			System.out.println("new font color: ");
 			System.out.println(myFontColor);
 			myLineStyle = comboBox.getSelectionModel().getSelectedItem().toString();
@@ -174,12 +177,13 @@ public class SLogoCustomizerBuilder extends Observable {
 			System.out.println(myLineStyle);
 			System.out.println("my new line thickness: ");
 			System.out.println(myLineThickness);
+			myPropertiesData.notifyObservers();
 			myCustomizerStage.hide();
 		});
 	}
 	
 	public void update(Observable observable, Object arg1) {
-
+		
 	}
 		
 	/**

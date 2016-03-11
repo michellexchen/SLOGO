@@ -5,15 +5,24 @@ import java.util.Observable;
 import javafx.scene.paint.Color;
 
 public class SLogoPropertiesData extends Observable {
-	private Color myColor; 
+
+	//keeps all properties for view, updates using observable
 	
-	public SLogoPropertiesData() {
-		
+	private Color myPaneColor; 
+
+	/**
+	 * @return the myPaneColor
+	 */
+	public Color getPaneColor() {
+		return myPaneColor;
 	}
-	
-	public Color getColor() {
-		return myColor;
+
+	/**
+	 * @param myPaneColor the myPaneColor to set
+	 */
+	public void setPaneColor(Color myPaneColor) {
+		this.myPaneColor = myPaneColor;
+		setChanged();
 	}
-	
 
 }

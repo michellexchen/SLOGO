@@ -3,6 +3,9 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of SetXY, a Turtle Command
+ */
 public class SetXYNode extends BinaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
@@ -14,7 +17,7 @@ public class SetXYNode extends BinaryNode {
 
 	private double calculateDistance(double x, double y, SLogoCharacterState state) throws SLogoException {
 		return Math.sqrt(Math.pow(evaluateChild(0, state) - x, 2)
-				- Math.pow(evaluateChild(1, state) - y, 2));
+				+ Math.pow(evaluateChild(1, state) - y, 2));
 	}
 	
 }

@@ -1,5 +1,4 @@
 package commandnode;
-import java.util.HashMap;
 
 import model.SLogoCharacterState;
 import model.SLogoVariable;
@@ -8,7 +7,6 @@ import model.SLogoWorkspace;
 public class VariableNode extends NullaryNode{
 
 	private String varName;
-	private double myValue;
 	private SLogoWorkspace myWorkspace;
 
 	public VariableNode(String varName){
@@ -21,10 +19,6 @@ public class VariableNode extends NullaryNode{
 
 	public String getVarName(){
 		return varName;
-	}
-
-	public void setValue(double value){
-		myValue = value;
 	}
 
 	public double evaluate(SLogoCharacterState state){

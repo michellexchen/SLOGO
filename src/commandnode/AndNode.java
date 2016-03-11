@@ -3,6 +3,9 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
+/**
+ * Node representation of And command
+ */
 public class AndNode extends BinaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {

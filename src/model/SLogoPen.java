@@ -11,10 +11,10 @@ import javafx.scene.paint.Color;
  *
  */
 
-public class SLogoPen {
+public class SLogoPen{
 	
 	private Color myColor;
-	private double myThickness;
+	private double mySize;
 	private boolean isDown;
 	private String myStrokeStyle;
 	private int colorIndex;
@@ -23,7 +23,7 @@ public class SLogoPen {
 	private PenStrokeLoader strokeLoader;
 	
 	private int DEFAULT_PEN_INDEX = 0;
-	private int DEFAULT_THICKNESS = 2;
+	private int DEFAULT_SIZE = 1;
 	private boolean DEFAULT_PEN_DOWN = true;
 	private int DEFAULT_STROKE_STYLE = 0;
 	
@@ -33,7 +33,7 @@ public class SLogoPen {
 		myColor = colorLoader.getColor(colorIndex);
 		strokeLoader = new PenStrokeLoader();
 		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
-		myThickness = DEFAULT_THICKNESS;
+		mySize = DEFAULT_SIZE;
 		isDown = DEFAULT_PEN_DOWN;
 	}
 	
@@ -46,19 +46,19 @@ public class SLogoPen {
 		myColor = colorLoader.getColor(penIndex);
 	}
 	
-	public void setThickness(double thickness) {
-		this.myThickness = thickness;
+	public void setSize(double size) {
+		this.mySize = size;
 	}
 	
-	public double getThickness(){
-		return myThickness;
+	public double getSize(){
+		return mySize;
 	}
 	
-	public Color getPenColor() {
+	public Color getColor() {
 		return myColor;
 	}
 	
-	public void setPenColor(Color myColor){
+	public void setColor(Color myColor){
 		this.myColor = myColor;
 	}
 	
@@ -76,11 +76,11 @@ public class SLogoPen {
 	/**
 	 * @param myStrokeStyle the myStrokeStyle to set
 	 */
-	public void setPenStrokeStyle(String myStrokeStyle) {
+	public void setStrokeStyle(String myStrokeStyle) {
 		this.myStrokeStyle = myStrokeStyle;
 	}
 
-	public boolean isPenDown() {
+	public boolean getDown() {
 		return isDown;
 	}
 	

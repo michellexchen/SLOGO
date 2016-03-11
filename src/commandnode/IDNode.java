@@ -4,12 +4,16 @@ import exception.SLogoException;
 import model.SLogoCharacterState;
 
 /**
- * Node representation of Random, a Math command
+ * Node representation of Turtle ID command
  */
-public class RandomNode extends UnaryNode{
-	
+public class IDNode extends NullaryNode{
+
+	/**
+	 * @param state
+	 * @return ID of active turtle
+	 */
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.random()*evaluateChild(0, state);
+		return state.getID();
 	}
-	
+
 }
