@@ -114,14 +114,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		updateDisplayData();
 	}
 
-	public void updateComboBox (ObservableList<String> items) {
-		getGUIController().updateComboBox(items);
-	}
-	
-	public void updateMenuButton (ObservableList<MenuItem> items) {
-		getGUIController().updateMenuButton(items);
-	}
-
 	/**
 	 * Creates a Line object with default color black
 	 * 

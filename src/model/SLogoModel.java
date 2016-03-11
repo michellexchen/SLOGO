@@ -18,7 +18,10 @@ import view.View;
  *
  */
 public class SLogoModel implements Model {
+	//private static final int NUM_WORKSPACES = 5;
 
+	
+	
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageLoader myLanguageDriver;
@@ -97,31 +100,8 @@ public class SLogoModel implements Model {
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
-		
-		//Also add a MenuItem
-		
-		//getView().createComboBoxEntry();
-//		getView().createMenuItem();
 	}
 
-//	private void createEntry () {
-//		int = getView().getMenuItems()
-//		
-//	}
-	
-	
-//	private void createMenuItem () {
-//		//int  = getView().getMenuItem().size();
-//		
-//		//Name the menuitem
-//		MenuItem myMenuItem = new MenuItem("Workspace " + 
-//										getView().getMenuItems().size());
-//		//Add it to List<MenuItem>
-//		getView().getMenuItems().add(myMenuItem);
-//		
-//		
-//		
-//	}
 	
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {
@@ -173,6 +153,13 @@ public class SLogoModel implements Model {
 	 */
 	public void setMyLanguageDriver(LanguageLoader myLanguageDriver) {
 		this.myLanguageDriver = myLanguageDriver;
+	}
+
+	@Override
+	public void switchWorkspace(int index) {
+		// TODO Auto-generated method stub
+		setCurrentWorkspace(getObservableWorkspaces().get(index));
+		getView().switchVisualizer(index);
 	}
 
 }

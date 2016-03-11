@@ -107,6 +107,8 @@ public class SLogoGUIController implements Initializable, Observer {
     private ComboBox<String> myComboBox;
     
     
+    private List<MenuItem> myMenuItems;
+    
     //MenuButton's MenuItem list
     @FXML
     private MenuItem myProject1;
@@ -154,22 +156,7 @@ public class SLogoGUIController implements Initializable, Observer {
     
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	//initialize MenuButton
-//    	myMenuButton = new MenuButton("Select Workspace");
-//    	MenuItem B1 = new MenuItem("B1");
-//    	B1.setOnAction(new EventHandler<ActionEvent>()
-//    			{
-//    		
-//    		@Override public void handle(ActionEvent e)
-//    		{
-//    			System.out.println("You have selected: Ferrari");
-//    		}
-//    			});
-//    	myMenuButton.getItems().addAll(B1);
-    	
-    	//myComboEntries = getComboBox().getItems();
-    	
-    	
+    	assignMenuAction();
     	
     	//initializes properties
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
@@ -216,10 +203,37 @@ public class SLogoGUIController implements Initializable, Observer {
 				//GET RID OF THIS
 			}
         });
+
         
         
     }
         
+    private void assignMenuAction () {
+    	myProject1.setOnAction(e -> {
+    		getModel().switchWorkspace(0);
+    	});
+    	
+    	myProject2.setOnAction(e -> {
+    		getModel().switchWorkspace(1);
+
+    	});
+    	
+    	myProject3.setOnAction(e -> {
+    		getModel().switchWorkspace(2);
+
+    	});
+    	myProject4.setOnAction(e -> {
+    		getModel().switchWorkspace(3);
+
+    	});
+    	myProject5.setOnAction(e -> {
+    		getModel().switchWorkspace(4);
+
+    	});
+    	
+    }
+    
+    
     private void run(String command){
         setCommand(myCommand);
           	/*

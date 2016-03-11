@@ -63,58 +63,7 @@ public class SLogoView implements View {
 	public void initialize() throws SLogoException, IOException {
 		myCurrentVisualizer.initialize();
 		myVisualizers.add(myCurrentVisualizer);
-		
-		
-		
-		//Add listener for Combobox 
-		myObservableEntries.addListener((ListChangeListener) change -> {
-		    //for all visualizers, make GUIController add MenuItems to Menubutton
-			for (SLogoVisualizer visualizer : myVisualizers) {
-				visualizer.updateComboBox(myObservableEntries);
-			}
-//			
-//			System.out.println("CALLED");
-		});
-		
-		
-		//Add listener 
-		myObservableMenuItems.addListener((ListChangeListener) change -> {
-		    //for all visualizers, make GUIController add MenuItems to Menubutton
-			for (SLogoVisualizer visualizer : myVisualizers) {
-				visualizer.updateMenuButton(myObservableMenuItems);
-			}
-//			
-//			System.out.println("CALLED");
-		});
 	}
-	
-//	@Override
-//	public void createComboBoxEntry () {
-//		//int = getView().getMenuItems();
-//		
-////		String newWorkspace = "Workspace " + getObservableEntries().size();
-//		String newWorkspace = String.valueOf(getObservableEntries().size());
-//		getObservableEntries().add(newWorkspace);
-//	
-//	}
-	
-//    @Override
-//	public void createMenuItem () {
-//		//int  = getView().getMenuItem().size();
-//		
-//		//Name the menuitem
-//		MenuItem myMenuItem = new MenuItem("Workspace " + 
-//										getMenuItems().size());
-//		myMenuItem.setId("Workspace " + 
-//										getMenuItems().size());
-//		System.out.println("MenuItem creation check: " + myMenuItem.getId());
-//		//Add it to List<MenuItem>
-//		getMenuItems().add(myMenuItem);
-//		
-//		System.out.println(getMenuItems().size());
-//		
-//	}
-//	
 	
 	public void showError(SLogoException e) {
 		Alert alert = new Alert(AlertType.ERROR);

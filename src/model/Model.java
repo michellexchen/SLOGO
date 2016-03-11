@@ -25,5 +25,8 @@ public interface Model {
 	public ObservableList<SLogoDisplayData> getObservableDataList();
 
 	public void loadLanguage();
+	
+	public void switchWorkspace(int index);
+	
 
 }
