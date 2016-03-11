@@ -8,5 +8,4 @@ public class SetHeadingNode extends TurnNode{
 	public double calculateDir(SLogoCharacterState state) throws SLogoException {
 		return evaluateChild(0, state);
 	}
-
 }
