@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -65,7 +66,7 @@ public class SLogoGUIController implements Initializable, Observer {
 	private ListView<String> myPropertiesPaneView = new ListView<String>();
     private ObservableList<String> myProperties;
     
-    
+    private Stage myCurrentStage;
     private Color myCanvasColor;
     private ColorPicker myColorPicker;
     private HBox myColorHBox;
@@ -76,6 +77,9 @@ public class SLogoGUIController implements Initializable, Observer {
 	private Model myModel;
 	private View myView;
 	private String myCommand;
+	
+	private ObservableList<String> myComboEntries;
+	
 	
 	//Help button
     @FXML
@@ -100,11 +104,20 @@ public class SLogoGUIController implements Initializable, Observer {
    
 
     @FXML
-    private ComboBox myComboBox;
+    private ComboBox<String> myComboBox;
     
     
     //MenuButton's MenuItem list
-    private List<MenuItem> myMenuItems;
+    @FXML
+    private MenuItem myProject1;
+    @FXML
+    private MenuItem myProject2;
+    @FXML
+    private MenuItem myProject3;
+    @FXML
+    private MenuItem myProject4;
+    @FXML
+    private MenuItem myProject5;
     
     
     
@@ -154,6 +167,8 @@ public class SLogoGUIController implements Initializable, Observer {
 //    			});
 //    	myMenuButton.getItems().addAll(B1);
     	
+    	//myComboEntries = getComboBox().getItems();
+    	
     	
     	
     	//initializes properties
@@ -189,8 +204,8 @@ public class SLogoGUIController implements Initializable, Observer {
         myAddWorkspaceButton.setOnAction(e -> {
         	
         	//Hide current stage
-        	Stage currentStage = (Stage)myAddWorkspaceButton.getScene().getWindow();
-        	currentStage.hide();
+        	myCurrentStage = (Stage)myAddWorkspaceButton.getScene().getWindow();
+        	myCurrentStage.hide();
         	
         	//Get Model to create a new workspace and switch into it
         	try {
@@ -201,6 +216,8 @@ public class SLogoGUIController implements Initializable, Observer {
 				//GET RID OF THIS
 			}
         });
+        
+        
     }
         
     private void run(String command){
@@ -379,6 +396,21 @@ public class SLogoGUIController implements Initializable, Observer {
 		this.myModel = myModel;
 	}
 
+	
+	public void updateComboBox (ObservableList<String> items) {
+		//getComboBox().getItems().clear();
+		//getComboBox().getItems().addAll(items);
+		getComboBox().getItems().add("HAHA");
+		//getComboBox().setItems(items);
+
+		for (String a : items) {
+			System.out.println(a);
+		}
+		
+		
+		
+	}
+	
 	public void updateMenuButton(ObservableList<MenuItem> items) {
 		// TODO Auto-generated method stub
 		
@@ -435,6 +467,20 @@ public class SLogoGUIController implements Initializable, Observer {
 //	public void setMenu(MenuButton myMenu) {
 //		this.myMenuB = myMenu;
 //	}
+
+	/**
+	 * @return the myComboBox
+	 */
+	public ComboBox getComboBox() {
+		return myComboBox;
+	}
+
+	/**
+	 * @param myComboBox the myComboBox to set
+	 */
+	public void setComboBox(ComboBox myComboBox) {
+		this.myComboBox = myComboBox;
+	}
 
 //	@Override
 //	public void update(Observable arg0, Object arg1) {

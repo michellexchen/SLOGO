@@ -43,10 +43,12 @@ public interface View<E> {
 	
 	public String getLanguage();
 	
-	//List<E>
-	public ObservableList<MenuItem> getMenuItems();
+//	//List<E>
+//	public ObservableList<MenuItem> getMenuItems();
+//	
+//	public void createMenuItem ();
 	
-	public void createMenuItem ();
+//	public void createComboBoxEntry();
 
 }
 	

@@ -99,9 +99,17 @@ public class SLogoModel implements Model {
 		setCurrentWorkspace(myWorkspace);
 		
 		//Also add a MenuItem
-		getView().createMenuItem();
+		
+		//getView().createComboBoxEntry();
+//		getView().createMenuItem();
 	}
 
+//	private void createEntry () {
+//		int = getView().getMenuItems()
+//		
+//	}
+	
+	
 //	private void createMenuItem () {
 //		//int  = getView().getMenuItem().size();
 //		
