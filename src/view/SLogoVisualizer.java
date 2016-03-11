@@ -173,10 +173,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
-
-			getGUIController().getCanvas().setStyle("-fx-background-color: "
-					+ turtledata.getBGColor());
-
+			myProperties.setPaneColor(turtledata.getBGColor());
+			myGUIController.setPropertiesData(myProperties);
 		}
 
 	}
@@ -225,6 +223,19 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void updateCommandHistory () {
 
+	}
+	
+	/**
+	 * Converts Color object into its hex String representation
+	 * 
+	 * @param color
+	 * @return String
+	 */
+	public String toRGBCode (Color color) {
+		return String.format( "#%02X%02X%02X",
+				(int)( color.getRed() * 255 ),
+				(int)( color.getGreen() * 255 ),
+				(int)( color.getBlue() * 255 ) );
 	}
 
 	//////////////////////////
@@ -351,19 +362,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void setCanvasColor(String myCanvasColor) {
 		this.myCanvasColor = myCanvasColor;
-	}
-
-	/**
-	 * Converts Color object into its hex String representation
-	 * 
-	 * @param color
-	 * @return String
-	 */
-	public String toRGBCode (Color color) {
-		return String.format( "#%02X%02X%02X",
-				(int)( color.getRed() * 255 ),
-				(int)( color.getGreen() * 255 ),
-				(int)( color.getBlue() * 255 ) );
 	}
 
 	/**

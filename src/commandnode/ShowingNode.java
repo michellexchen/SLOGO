@@ -1,11 +1,12 @@
 package commandnode;
+
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class ForNode extends QuinaryNode {
+public class ShowingNode extends NullaryNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return 0; // TEMP
+		return state.getHidden() ? 0 : 1;
 	}
 
 }

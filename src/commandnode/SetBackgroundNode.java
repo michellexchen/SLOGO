@@ -6,8 +6,9 @@ import model.SLogoCharacterState;
 public class SetBackgroundNode extends UnaryNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
-		return 0;
+		double index = evaluateChild(0, state);
+		state.setBackgroundColor((int) index); 
+		return index;
 	}
 
 }

@@ -58,10 +58,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	private SLogoPropertiesData myPropertiesData;
 	
 	public SLogoCustomizerBuilder() {
-
 		setup();
-		myPaneColor = Color.WHITE;
-		myFontColor = Color.BLACK;
 		myCustomizerStage = new Stage();
 		myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
 		myCustomizerStage.setScene(myCustomizerScene);
@@ -102,7 +99,7 @@ public class SLogoCustomizerBuilder extends Observable {
 		colorLabel = new Label("Set background color: ");
 		colorLabel.setPrefWidth(COLORLABELSIZE);
 		//TODO get current pane color, set colorPicker/myPaneColor to that color 
-		colorPicker = new ColorPicker(Color.WHITE);
+		colorPicker = new ColorPicker(Color.BLUE);
         colorPicker.setOnAction(e -> {
         	myPaneColor = colorPicker.getValue();
         });
