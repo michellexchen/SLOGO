@@ -91,3 +91,5 @@ pc:PenColor
 setpencolor:SetPenColor
 setpc:SetPenColor
 shape:Shape
+id=ID
+turtleid=ID
