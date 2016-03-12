@@ -149,7 +149,11 @@ public class SLogoGUIController implements Initializable, Observer {
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
     	myHistory = new ArrayList<String>();
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
-		myCustomizer = new SLogoCustomizerBuilder();
+		try {
+			myCustomizer = new SLogoCustomizerBuilder(this);
+		} catch (SLogoException e) {
+			new SLogoException("CHECK GUI CONTROLLER CLASS");
+		}
 		myCustomizer.hide();
 		
     	assignMenuAction();
@@ -237,7 +241,7 @@ public class SLogoGUIController implements Initializable, Observer {
      * 
      * @param command
      */
-    private void run(String command){
+    public void run(String command){
         setCommand(myCommand);
           	/*
           	 * TODO: Call Model's readCommand that calls
@@ -253,6 +257,7 @@ public class SLogoGUIController implements Initializable, Observer {
           	myHistory.add(command);
           	displayHistory();
           	displayProperties();
+          	myPropertiesData.notifyObservers();
     }
     
     /**
@@ -391,8 +396,8 @@ public class SLogoGUIController implements Initializable, Observer {
     	return myCanvasColor;
     }
     
-    public void setPaneColor(){
-    	this.myCanvasColor = new SLogoCustomizerBuilder().getMyPaneColor();
+    public void setPaneColor() throws SLogoException{
+    	this.myCanvasColor = new SLogoCustomizerBuilder(this).getMyPaneColor();
     }
     
 	public void setCommand(String myCommand) {
