@@ -9,6 +9,13 @@ import model.SLogoTurtle;
 
 public class TellNode extends TurtleCommand {
 
+	/**
+	 * 
+	 * Interacts with the super class in order to extend functionality for turtle commands that need access to the worspace
+	 * Creates the list of active turtles that our commands must interact with
+	 * 
+	 */
+	
 	private static final int PROGRAMMINGINDEXING = 1;
 
 	@Override
