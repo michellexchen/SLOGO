@@ -96,5 +96,6 @@ id=ID
 tell=Tell
 ask=Ask
 turtleid=ID
+TURTLES=Turtles
 clearscreen:Clearscreen
 cs:Clearscreen

@@ -41,7 +41,7 @@ public class TellNode extends BinaryNode {
 	public SLogoWorkspace getWorkspace(){
 		return myWorkspace;
 	}
-
+	
 	public void setWorkspace(SLogoWorkspace ws){
 		myWorkspace = ws;
 	}
