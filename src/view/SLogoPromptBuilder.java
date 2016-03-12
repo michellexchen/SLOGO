@@ -130,7 +130,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		});
 	}
 	
-	public String sendMyLanguage(){ //for back end
+	public String getWorkspaceLanguage(){
 		return myLanguage;
 	}
 

@@ -50,7 +50,6 @@ public class SLogoCustomizerBuilder extends Observable {
 	private Stage myCustomizerStage;
 	private Scene myCustomizerScene;
 	private VBox vbox;
-	private ColorPicker colorPicker;
 	private Label colorLabel;
 	private Color myPaneColor;
 	private HBox colorHb;
@@ -91,9 +90,10 @@ public class SLogoCustomizerBuilder extends Observable {
 
 	/**
 	 * Initialize the Customizer button
+	 * @throws SLogoException 
 	 * 
 	 */
-	private void setup(){
+	private void setup() throws SLogoException{
 		myPaneColor = Color.WHITE;
 		myPenColor = Color.BLACK;
 		myPenWidth = 1;
@@ -123,11 +123,11 @@ public class SLogoCustomizerBuilder extends Observable {
 	/**
 	 * Hide method for closing customization popup
 	 */
-	
+
 	public void hide(){
 		myCustomizerStage.hide();
 	}
-	
+
 	/**
 	 * Show method for opening customization popup
 	 */
@@ -163,14 +163,14 @@ public class SLogoCustomizerBuilder extends Observable {
 	}
 
 	ObservableList<Color> data = FXCollections.observableArrayList(
-		     Color.WHITE, Color.BLACK, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE);
-		
+			Color.WHITE, Color.BLACK, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE);
+
 	/**
 	 * To select color for background
 	 * 
 	 * @return
 	 */
-	 private ComboBox setColorDropdown(){
+	private ComboBox setColorDropdown(){
 
 		ComboBox<Color> cb = new ComboBox<Color>();
 
@@ -315,7 +315,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	 * Set button that applies changes to the current working environment
 	 * 
 	 */
-	private void setButton(){
+	private void setButton() throws SLogoException{
 		buttonHb = new HBox();
 		myOkayButton = new Button("OKAY");
 		buttonHb.setAlignment(Pos.CENTER);
@@ -325,18 +325,24 @@ public class SLogoCustomizerBuilder extends Observable {
 
 			myStrokeStyle = comboBox.getSelectionModel().getSelectedItem().toString();
 
-			//change pen width
-			myGUI.run(myCommandNameLoader.getString("setbg") + " "+ data.indexOf(myPaneColor));
-			myGUI.run(myCommandNameLoader.getString("setpc") + " "+ data.indexOf(myPenColor));
-			
-			
-			myGUI.run(myCommandNameLoader.getString("setpensize") + " " + myPenWidth);
+			try {
+				myGUI.run(new CommandNameLoader().getString("setbg") + " "+ data.indexOf(myPaneColor));
+			} catch (Exception e1) { e1.printStackTrace(); }
+			try {
+				myGUI.run(myCommandNameLoader.getString("setpc") + " "+ data.indexOf(myPenColor));
+			} catch (Exception e1) { e1.printStackTrace(); }
+			try {
+				myGUI.run(myCommandNameLoader.getString("setpensize") + " " + myPenWidth);
+			} catch (Exception e1) { e1.printStackTrace(); }
 			if (switchButton.isDown()) {
-				myGUI.run(myCommandNameLoader.getString("pd"));
+				try {
+					myGUI.run(myCommandNameLoader.getString("pd"));
+				} catch (Exception e1) { e1.printStackTrace(); }
 			} else {
-				myGUI.run(myCommandNameLoader.getString("pu"));
+				try {
+					myGUI.run(myCommandNameLoader.getString("pu"));
+				} catch (Exception e1) { e1.printStackTrace(); }
 			}
-
 			myCustomizerStage.hide();
 		});
 	}

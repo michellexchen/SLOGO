@@ -47,9 +47,10 @@ public abstract class FileLoader {
 	
 	/**
 	 * Creates a hashmap from properties with key and value swapped
+	 * @throws SLogoException 
 	 */
 	
-	public void createSplitBackMap() {
+	public void createSplitBackMap() throws SLogoException {
 		myBackMap = new HashMap<String, String>();
 		Set<Object> keySet = myProperties.keySet();
 		for (Object o: keySet) {
@@ -90,7 +91,7 @@ public abstract class FileLoader {
 		return fileName;
 	}
 
-	public String getString(String key) {
+	public String getString(String key) throws SLogoException {
 		return myProperties.getProperty(key);
 	}
 

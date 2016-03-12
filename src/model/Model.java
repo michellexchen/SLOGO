@@ -21,8 +21,6 @@ public interface Model {
 	public SLogoWorkspace getCurrentWorkspace();
 
 	public ObservableList<SLogoDisplayData> getObservableDataList();
-
-	public void loadLanguage();
 	
 	public void switchWorkspace(int index) throws SLogoException;
 

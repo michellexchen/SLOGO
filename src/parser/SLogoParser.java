@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import commandnode.Node;
 import exception.SLogoException;
+import model.ResourceLoader;
 import model.SLogoWorkspace;
 
 /**
@@ -31,9 +32,8 @@ public class SLogoParser {
 	 */
 	public List<Node> readCommand(String command) throws SLogoException {
 		if (invalidInputCheck(command)) {
-			throw new SLogoException("Nothing was entered! Try again!");
+			throw new SLogoException(new ResourceLoader().getString("NoCommandEntered"));
 		}
-		System.out.println("Reading command: " + command);
 		List<String> commandParts = formatCommandParts(command);
 		List<Node> myRoots = myTreeFactory.createNodes(commandParts);
 		return myRoots;

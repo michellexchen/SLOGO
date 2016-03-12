@@ -9,11 +9,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import parser.RootEvaluator;
 import parser.SLogoParser;
-import view.SLogoView;
 import view.View;
 
 /**
@@ -26,27 +22,15 @@ public class SLogoModel implements Model {
 	//private static final int NUM_WORKSPACES = 5;
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
-	private LanguageLoader myLanguageDriver;
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
-	//private RootEvaluator myRootEvaluator;
 
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
 		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
 	}
 
-	@Override
-	public void loadLanguage () {
-		myLanguageDriver = new LanguageLoader();
-		try {
-			myLanguageDriver.load(getView().getLanguage());
-		} catch (SLogoException e) {
-			//TODO: Display error
-		}
-	}
-
-	public void initialize() throws SLogoException {	
+	public void initialize() throws SLogoException {
 		createNewWorkspace();
 	}
 
@@ -91,8 +75,7 @@ public class SLogoModel implements Model {
 	@Override
 	public void switchWorkspace(int index) throws SLogoException {
 		if (index >= getObservableWorkspaces().size()) {
-			throw new SLogoException
-			("This project doesn't exist!\nPlease click + button first!");
+			throw new SLogoException(new ResourceLoader().getString("InvalidWorkspace"));
 		}
 		setCurrentWorkspace(getObservableWorkspaces().get(index));
 		getView().switchVisualizer(index);
@@ -105,7 +88,6 @@ public class SLogoModel implements Model {
 		return myView;
 	}
 
-	@Override
 	public ObservableList<SLogoDisplayData> getObservableDataList() {
 		return myCurrentWorkspace.getObservableDataList();
 	}
@@ -114,7 +96,6 @@ public class SLogoModel implements Model {
 	 * Create a new workspace and set it as current workspace
 	 * @throws SLogoException 
 	 */
-	//	@Override
 	public void createNewWorkspace() throws SLogoException {
 		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
 		myWorkspace.initialize();
@@ -138,7 +119,6 @@ public class SLogoModel implements Model {
 	/**
 	 * @return the myCurrentWorkspace
 	 */
-	@Override
 	public SLogoWorkspace getCurrentWorkspace() {
 		return myCurrentWorkspace;
 	}
@@ -165,23 +145,10 @@ public class SLogoModel implements Model {
 	}
 
 	/**
-	 * @return the myLanguageDriver
-	 */
-	public LanguageLoader getMyLanguageDriver() {
-		return myLanguageDriver;
-	}
-
-	/**
-	 * @param myLanguageDriver the myLanguageDriver to set
-	 */
-	public void setMyLanguageDriver(LanguageLoader myLanguageDriver) {
-		this.myLanguageDriver = myLanguageDriver;
-	}
-
-	/**
 	 * @param myView the myView to set
 	 */
 	public void setView(View myView) {
 		this.myView = myView;
 	}
+	
 }

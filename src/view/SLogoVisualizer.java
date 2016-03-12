@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Model;
+import model.ResourceLoader;
 import model.SLogoPosition;
 import model.SLogoVariable;
 import model.SLogoDisplayData;
@@ -34,11 +35,7 @@ public class SLogoVisualizer implements Observer {
 	private static final int TURTLE_SIZE = 40;
 	private static final int PADDING = TURTLE_SIZE / 2;
 
-
 	private ObservableList<SLogoDisplayData> myObservableDataList;
-
-	private int myWidth;
-	private int myHeight;
 
 	private FXMLLoader myLoader;
 	private SLogoGUIController myGUIController;
@@ -51,44 +48,24 @@ public class SLogoVisualizer implements Observer {
 	private String myCanvasColor;
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
-
-
-	public SLogoVisualizer(Model model, int width, int height) {
-		myModel = model;
-		myWidth = width;
-		myHeight = height;
-	}
-
 	public SLogoVisualizer(Model model) {
-		myWidth = 331;
-		myHeight = 331;
 		myModel = model;
 	}
-
+	
 	public void initialize() throws SLogoException, IOException {
-
 		myPromptBuilder = new SLogoPromptBuilder(myProperties);
-		// data = myPromptBuilder.getPropertiesData();
-		// observe the data
-		// because i am observing data, when data changes and data calls notify observers, i will call my update
-		// and in updatel, i will set all properties to what is in the current properties data
 		myPromptBuilder.promptScreen();
-		// get your properties data 
-		// data = myPromptBuilder.getData();
 		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
-		getModel().loadLanguage();
-
-		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
 		root = (Parent) myLoader.load();
 		myGUIController = (SLogoGUIController) myLoader.getController();
 		myGUIController.setModel(myModel);
-		myGUIController.getCustomizer().addObserver(this); //subscribe to changes in customizer
+		myGUIController.getCustomizer().addObserver(this);
 		myGUIController.setPropertiesData(myProperties);
 		myScene = new Scene(root);
 		myStage = new Stage();
 		myStage.setScene(myScene);
-		myStage.setTitle("SLogo");
+		myStage.setTitle(new ResourceLoader().getString("Title"));
 		show();
 	}
 
@@ -151,25 +128,14 @@ public class SLogoVisualizer implements Observer {
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
-		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
-
-		//getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getModel().getObservableDataList()) {
-			//Place the turtle
 			placeTurtle(turtledata);
-
-			//Create a line
 			turtledata.addLine(createLine(turtledata));
-
-			//Add lines to Pane
 			getGUIController().addToCanvas(turtledata.getLines());
-
-			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
 			myProperties.setPaneColor(turtledata.getBGColor());
 		}
-
 	}
 
 	/**
@@ -179,14 +145,10 @@ public class SLogoVisualizer implements Observer {
 	 */
 	public void placeTurtle(SLogoDisplayData displaydata) {
 		Image image = new Image(IMAGE_PATH + displaydata.getImage());
-
 		ImageView turtle = new ImageView();
-
 		turtle.setImage(image);
 		turtle.setVisible(!displaydata.getTurtleHidden());
 
-		//assign click action - change the action to change attributes
-		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
 			//Show Properties
 		});
@@ -269,14 +231,6 @@ public class SLogoVisualizer implements Observer {
 				(int) (color.getBlue() * RGB_CONST));
 	}
 
-	//////////////////////////
-	// getters and setters //
-	//////////////////////////
-
-	public String getLanguage() {
-		return myPromptBuilder.sendMyLanguage();
-	}
-
 	/**
 	 * @return the myGUIController
 	 */
@@ -330,6 +284,9 @@ public class SLogoVisualizer implements Observer {
 	public SLogoPropertiesData getPropertiesData() {
 		return myProperties;
 	}
-
 	
+	public String getLanguage(){
+		return myPromptBuilder.getWorkspaceLanguage();
+	}
+
 }

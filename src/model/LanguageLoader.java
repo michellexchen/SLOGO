@@ -17,20 +17,12 @@ public class LanguageLoader extends FileLoader {
 	/**
 	 * @param language: user-selected language as String
 	 * Loads appropriate language file and creates swapped map
+	 * @throws SLogoException 
 	 */
 	
 	public void load(String language) throws SLogoException {
 		super.load(LANG_PATH, format(language) + LANG_DIRECTORY);
 		createSplitBackMap();
-	}
-	
-	/**
-	 * @param language: user-selected language as String
-	 * Formats input language string with first letter capitalized
-	 * @return formatted language to match language resource file
-	 */
-	public String format(String language) {
-		return Character.toString(language.charAt(0)).toUpperCase() + language.substring(1).toLowerCase();
 	}
 	
 	/**
@@ -44,4 +36,14 @@ public class LanguageLoader extends FileLoader {
 		}
 		return foreignWord;
 	}
+	
+	/**
+	 * @param language: user-selected language as String
+	 * Formats input language string with first letter capitalized
+	 * @return formatted language to match language resource file
+	 */
+	private String format(String language) {
+		return Character.toString(language.charAt(0)).toUpperCase() + language.substring(1).toLowerCase();
+	}
+	
 }

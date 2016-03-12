@@ -1,14 +1,9 @@
 package view;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
 import java.util.Observer;
-
 import exception.SLogoException;
 import javafx.collections.ObservableList;
-import javafx.scene.control.MenuItem;
-import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 /**
@@ -22,8 +17,6 @@ import model.SLogoWorkspace;
  *
  */
 public interface View<T> {
-	
-	public String getCommand();
 
 	public SLogoVisualizer getCurrentVisualizer();
 	
@@ -44,5 +37,5 @@ public interface View<T> {
 	public String getLanguage();
 
 	public void updateVariable (ObservableList<T> variables);
-}
 	
+}

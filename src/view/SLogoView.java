@@ -6,14 +6,8 @@ import java.util.List;
 import java.util.Observer;
 
 import exception.SLogoException;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.MenuItem;
 import model.Model;
-import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 /**
@@ -26,19 +20,18 @@ public class SLogoView implements View {
 	private static final int WIDTH = 440;
 	private static final int HEIGHT = 440;
 
-	private String myCommand;
 	private Model myModel;
 	private List<SLogoVisualizer> myVisualizers;
 	private SLogoVisualizer myCurrentVisualizer;
 	
 	public SLogoView() throws SLogoException {
-		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
+		myCurrentVisualizer = new SLogoVisualizer(getModel());
 	}
 
 	public SLogoView(Model model) throws SLogoException {
-		myModel = model;
 		myVisualizers = new ArrayList<SLogoVisualizer>();
-		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
+		myModel = model;
+		myCurrentVisualizer = new SLogoVisualizer(getModel());
 	}
 	
 	/**
@@ -58,7 +51,7 @@ public class SLogoView implements View {
 	 */
 	@Override
 	public void addVisualizer() throws SLogoException, IOException {
-		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
+		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel());
 		getVisualizers().add(myNewVisualizer);
 
 		myNewVisualizer.initialize();
@@ -78,8 +71,6 @@ public class SLogoView implements View {
 		getCurrentVisualizer().show();
 	}
 	
-	
-	
 	/**
 	 * @return the myModel
 	 */
@@ -96,66 +87,27 @@ public class SLogoView implements View {
 	}
 
 	@Override
-	/**
-	 * @return the myCommand
-	 */
-	public String getCommand() {
-		return myCommand;
-	}
-
-	/**
-	 * @param myCommand
-	 *            the myCommand to set
-	 */
-	public void setCommand(String myCommand) {
-		this.myCommand = myCommand;
-	}
-
-	@Override
 	public SLogoVisualizer getCurrentVisualizer() {
-		
 		return myCurrentVisualizer;
 	}
 
-	@Override
 	public void updateDisplayData() {
 		getCurrentVisualizer().updateDisplayData();
 	}
 
-	@Override
 	public void updateCommandHistory() {
 		getCurrentVisualizer().updateCommandHistory();
 	}
 
-	@Override
 	public void updateWorkspaces() {
-		// TODO Auto-generated method stub
-		
 	}
 	
-
-	@Override
 	public void updateVariable(ObservableList variables) {
-		// TODO Auto-generated method stub {
 		getCurrentVisualizer().updateVariables(variables);
-		System.out.println("Happening");
-	}
-	
-	
-	@Override
-	public void setCurrentWorkspace(SLogoWorkspace workspace) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public Observer getObserver() {
 		return getCurrentVisualizer();
-	}
-
-	@Override
-	public String getLanguage() {
-		return myCurrentVisualizer.getLanguage();
 	}
 	
 	/**
@@ -179,5 +131,11 @@ public class SLogoView implements View {
 		this.myCurrentVisualizer = myCurrentVisualizer;
 	}
 
+	public void setCurrentWorkspace(SLogoWorkspace workspace) {
+	}
+
+	public String getLanguage() {
+		return myCurrentVisualizer.getLanguage();
+	}
 
 }

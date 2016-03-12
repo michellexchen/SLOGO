@@ -13,8 +13,9 @@ public class InstructionLoader extends CommandLoader{
 	
 	private static final String COMMAND_EXTENSION = "instructions.resources";
 
-	public InstructionLoader() throws SLogoException{
+	public String getString(String key) throws SLogoException{
 		super.load(super.getPath(), COMMAND_EXTENSION);
+		return super.getString(key);
 	}
 
 }

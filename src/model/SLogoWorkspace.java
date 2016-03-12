@@ -51,14 +51,12 @@ public class SLogoWorkspace {
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
 		myColorLoader = new ColorLoader();
-		System.out.println(myColorLoader.getMap());
 	}
 
 	public void initialize() throws SLogoException {
 		myRootEvaluator = new RootEvaluator(this);
 		resetActiveTurtles();
 		myActiveTurtles.add(turtleFactory.createDefaultTurtle());
-		//turtleFactory.createTurtle(30, 30);
 	}
 
 	/**
