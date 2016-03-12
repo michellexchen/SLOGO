@@ -219,10 +219,6 @@ public class SLogoWorkspace {
 		return lookupVariable(varName);
 	}
 
-//	public List<SLogoVariable> getVarList() {
-//		return myObservableVariableList;
-//	}
-
 	public ObservableList<SLogoVariable> getObservableVariableList() {
 		return myObservableVariableList;
 	}
