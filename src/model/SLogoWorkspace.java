@@ -18,10 +18,11 @@ import view.View;
 
 public class SLogoWorkspace {
 
+	
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
-
+	
 	// Lists declared for Observable List initialization
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;

@@ -23,7 +23,7 @@ import model.SLogoDisplayData;
  * on the screen to show the user
  *
  */
-public class SLogoVisualizer extends Observable implements Observer {
+public class SLogoVisualizer implements Observer {
 
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
@@ -153,7 +153,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 
-		getModel().getObservableDataList();
+		//getModel().getObservableDataList();
 		for (SLogoDisplayData turtledata : getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
