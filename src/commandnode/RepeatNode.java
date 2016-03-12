@@ -31,11 +31,5 @@ public class RepeatNode extends BinaryVariableCommand {
 		}
 		return evaluation;
 	}
-	
-	private List<String> listCopy(List<String> list){
-		List<String> copy = new ArrayList<String>();
-		copy.addAll(list);
-		return copy;
-	}
 
 }
