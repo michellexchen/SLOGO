@@ -1,7 +1,6 @@
 package model;
 
 import exception.SLogoException;
-import view.SLogoPropertiesData;
 
 /**
  * SLogo's Turtle Factory class to create turtles
@@ -29,11 +28,8 @@ public class SLogoTurtleFactory {
 		SLogoTurtle myTurtle = new SLogoTurtle(LAST_ID++, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_SHAPE_INDEX);
 		myWorkspace.getCharacterList().add(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
-
-		// Add Observer (Visualizer)
 		turtleData.addObserver(myWorkspace.getView().getObserver());
 		myWorkspace.getObservableDataList().add(turtleData);
-//		myWorkspace.addPen(myPen);
 	}
 	
 	public void createDefaultTurtle() throws SLogoException{

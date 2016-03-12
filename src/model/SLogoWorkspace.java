@@ -44,14 +44,14 @@ public class SLogoWorkspace {
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
 	}
-	
+
 	public void initialize() throws SLogoException {
 		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
 	}
 
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
-									   List<String> commandhistory,
-									   List<SLogoVariable> variableList) {
+			List<String> commandhistory,
+			List<SLogoVariable> variableList) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
 		myObservableVariableList =  FXCollections.observableArrayList(variableList);
@@ -100,9 +100,9 @@ public class SLogoWorkspace {
 
 	public void addToVarMap(SLogoVariable variable){
 		myObservableVariableList.add(variable);
-//		for(String each: myObservableVariableMap.keySet()){
-//			System.out.println(each + " " + myObservableVariableMap.get(each));
-//		}
+		//		for(String each: myObservableVariableMap.keySet()){
+		//			System.out.println(each + " " + myObservableVariableMap.get(each));
+		//		}
 	}
 
 	/**
@@ -149,16 +149,41 @@ public class SLogoWorkspace {
 	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
 		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
-	
+
 	public List<SLogoVariable> getMyVarList(){
 		return myVariableList;
 	}
 
+	public double getVarValueByName(String varName){
+		for(SLogoVariable var : myVariableList){
+			if(var.getName().equals(varName))
+				return var.getValue();
+		}
+		return 0;
+	}
 
-	
-//	private void testerVariableList(){
-//		myObservableVariableList.add(new SLogoVariable("hi", 2));
-//	}
+	public SLogoVariable lookupVariable(String varName){
+		for(SLogoVariable var : myVariableList){
+			if(var.getName().equals(varName)){
+				return var;
+			}
+		}
+		return null;
+	}
+
+	public SLogoVariable createVariable(String varName, double varValue){
+		boolean created = false;
+		for(SLogoVariable var : myVariableList){
+			if(var.getName().equals(varName)){
+				var.setValue(varValue);
+				created = true;
+			}
+		}
+		if(!created)
+			myVariableList.add(new SLogoVariable(varName, varValue));
+		return lookupVariable(varName);
+	}
+
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
 	}
