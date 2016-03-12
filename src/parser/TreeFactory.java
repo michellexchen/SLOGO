@@ -9,6 +9,7 @@ import commandnode.NumericNode;
 import commandnode.TellNode;
 import commandnode.VariableCommand;
 import exception.SLogoException;
+import model.LanguageLoader;
 import model.ResourceLoader;
 import model.SLogoWorkspace;
 import commandnode.VariableNode;
@@ -23,12 +24,12 @@ import commandnode.VariableNode;
  */
 
 public class TreeFactory {
-	
+
 	/*
 	 * resources used by tree factory class
 	 */
-	private CommandNameLoader myCommandNodeLoader;
 	private ResourceLoader myResourcesLoader;
+	private LanguageLoader myLanguageLoader;
 	private SLogoWorkspace myWorkspace;
 	
 	/*
@@ -39,9 +40,10 @@ public class TreeFactory {
 	private static final String TURTLESID = "TURTLES";
 
 	public TreeFactory(SLogoWorkspace ws) throws SLogoException {
-		myCommandNodeLoader = new CommandNameLoader();
 		myResourcesLoader = new ResourceLoader();
 		myWorkspace = ws;
+		myLanguageLoader = new LanguageLoader();
+		myLanguageLoader.load(myWorkspace.getView().getLanguage());
 	}
 
 	/**
@@ -133,9 +135,9 @@ public class TreeFactory {
 	 */
 	private Node createNode(String strNode) throws SLogoException {
 		Node node = null;
+		String commandName = myLanguageLoader.getTranslation(strNode.toLowerCase());
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		String commandName = myCommandNodeLoader.getString(strNode);
 		if(isCreateTurtle(commandName)) {
 			TellNode myChild = new TellNode();
 			myChild.setWorkspace(myWorkspace);

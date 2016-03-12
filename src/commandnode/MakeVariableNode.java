@@ -7,7 +7,7 @@ import commandnode.VariableNode;
 /**
  * Node representation of Make command, to create SLogoVariables
  */
-public class MakeNode extends BinaryVariableCommand {
+public class MakeVariableNode extends BinaryVariableCommand {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		VariableNode varNode = ((VariableNode) getChildren().get(0));

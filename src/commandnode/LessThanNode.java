@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Less? and LessP commands, Boolean commands
  */
-public class LessNode extends BinaryNode{
+public class LessThanNode extends BinaryNode{
 	
 	/**
 	 * @param state

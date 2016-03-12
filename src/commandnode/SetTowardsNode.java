@@ -6,11 +6,11 @@ import model.SLogoCharacterState;
 /**
  * Node representation of TowardsXY, a Turtle Command
  */
-public class TowardsXYNode extends TurnNode {
+public class SetTowardsNode extends TurnNode {
 	
 	private int NUM_CHILDREN = 2;
 	
-	public TowardsXYNode() throws SLogoException{
+	public SetTowardsNode() throws SLogoException{
 		setNumChildren(NUM_CHILDREN);
 	}
 

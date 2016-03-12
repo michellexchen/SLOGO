@@ -3,7 +3,7 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class SinNode extends UnaryNode{
+public class SineNode extends UnaryNode{
 
 	/**
 	 * @return sine evaluation of radians converted from degrees

@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of ArcTan, Atan commands
  */
-public class ArctanNode extends UnaryNode {
+public class ArcTangentNode extends UnaryNode {
 
 	/**
 	 * @return ArcTangent evaluation of radians converted from degrees

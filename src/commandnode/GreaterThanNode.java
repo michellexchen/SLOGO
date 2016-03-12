@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Greater? and GreaterP commands
  */
-public class GreaterNode extends BinaryNode {
+public class GreaterThanNode extends BinaryNode {
 
 	/**
 	 * @param state

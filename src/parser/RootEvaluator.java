@@ -7,6 +7,11 @@ import exception.SLogoException;
 import model.SLogoCharacter;
 import model.SLogoWorkspace;
 
+/**
+ * RootEvaluator evaluates a list of nodes and applies the effects
+ * to Character states by altering ObservableDataList
+ *
+ */
 public class RootEvaluator {
 	
 	private SLogoWorkspace myWorkspace;

@@ -15,7 +15,6 @@ import model.SLogoWorkspace;
  * @author Adam Tache
  *
  */
-
 public class SLogoParser {
 
 	private TreeFactory myTreeFactory;
@@ -26,8 +25,12 @@ public class SLogoParser {
 		myTreeFactory = new TreeFactory(myWorkspace);
 	}
 	
+	/**
+	 * Reads a command and feeds it into TreeFactory and gets a tree built
+	 * 
+	 */
 	public List<Node> readCommand(String command) throws SLogoException {
-		if (command.isEmpty()) {
+		if (invalidInputCheck(command)) {
 			throw new SLogoException("Nothing was entered! Try again!");
 		}
 		System.out.println("Reading command: " + command);
@@ -36,9 +39,20 @@ public class SLogoParser {
 		return myRoots;
 	}
 
+	/**
+	 * Using RegEx, parses string
+	 * 
+	 */
 	private List<String> formatCommandParts(String text) throws SLogoException {
 		return Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
+	/**
+	 * Checks for invalid input
+	 * 
+	 */
+	private boolean invalidInputCheck (String command) {
+		return command.isEmpty() || command == null;
+	}
 }
