@@ -70,7 +70,8 @@ public class SLogoCustomizerBuilder extends Observable {
 		myCustomizerStage = new Stage();
 		myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
 		myCustomizerStage.setScene(myCustomizerScene);
-		myCustomizerStage.setTitle("CUSTOMIZER");
+		myCustomizerStage.setTitle("Customizer");
+		//myCustomizerStage.setTitle(getResources().);
 	}
 	
 	/**
@@ -175,17 +176,17 @@ public class SLogoCustomizerBuilder extends Observable {
 	private void setLineThickness(){
 		thicknessSliderLabel = new Label("Set line width: ");
 		thicknessSliderLabel.setPrefWidth(COLORLABELSIZE);
-			thicknessSlider = new Slider(0, 10, 1);
-			thicknessSlider.setShowTickLabels(true);
-			thicknessSlider.setMajorTickUnit(0.25f);
-			thicknessSlider.setBlockIncrement(0.1f);
-			
-			thicknessSlider.valueProperty().addListener(new ChangeListener<Number>() {
-		            public void changed(ObservableValue<? extends Number> ov,
-		                Number old_val, Number new_val) {
-		            	myPenWidth = (double) new_val;
-		            }
-		        });
+		thicknessSlider = new Slider(0, 10, 1);
+		thicknessSlider.setShowTickLabels(true);
+		thicknessSlider.setMajorTickUnit(0.25f);
+		thicknessSlider.setBlockIncrement(0.1f);
+
+		thicknessSlider.valueProperty().addListener(new ChangeListener<Number>() {
+			public void changed(ObservableValue<? extends Number> ov,
+					Number old_val, Number new_val) {
+				myPenWidth = (double) new_val;
+			}
+		});
 		thicknessSliderHb = new HBox();
 		thicknessSliderHb.getChildren().addAll(thicknessSliderLabel, thicknessSlider);
 		thicknessSliderHb.setPrefSize(PREFSIZE, PREFSIZE);
@@ -199,7 +200,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	 */
 	private void setPenDown(){
 		switchHb = new HBox();
-		switchLabel = new Label("Pen position?: ");
+		switchLabel = new Label("Choose Pen position: ");
 		switchButton = new ToggleSwitch();
 		switchHb.setAlignment(Pos.CENTER);
 		switchHb.getChildren().addAll(switchLabel, switchButton);
@@ -217,6 +218,8 @@ public class SLogoCustomizerBuilder extends Observable {
 		buttonHb.getChildren().add(myOkayButton);
 		buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
 		myOkayButton.setOnMouseClicked(e -> {
+			//These print statements to be removed
+			
 			System.out.println("new pane color: ");
 			System.out.println(myPaneColor);
 			myPropertiesData.setPaneColor(myPaneColor);
