@@ -9,6 +9,10 @@ package model;
 
 public class SLogoPosition {
 	
+	private static final int PANE_SIZE = 440;
+	private static final int TURTLE_SIZE = 40;
+	private static final int PADDING = TURTLE_SIZE / 2;
+	
 	private double myPrevX;
 	private double myPrevY;
 	private double myX;
@@ -37,19 +41,21 @@ public class SLogoPosition {
 	public void setXY (double x, double y) {		
 		myPrevX = myX;
 		myPrevY = myY;
-		myX = x;
-		myY = y;
+//		myX = x;
+//		myY = y;
+		myX = boundCoordinate(x);
+		myY = boundCoordinate(y);
 		
 	}
 
 	public void setX (double x) {
 		myPrevX = myX;
-		myX = x;
+		myX = boundCoordinate(x);
 	}
 	
 	public void setY (double y) {
 		myPrevY = myY;
-		myY = y;
+		myY = boundCoordinate(y);
 	}
 	
 	public double getPrevX() {
@@ -66,4 +72,26 @@ public class SLogoPosition {
 	public double getY() {
 		return myY;
 	}
+	
+	
+	/**
+	 * Bounds coordinates when they go out of the visible range of coordinates
+	 * 
+	 * @param displaydata
+	 */
+	private double boundCoordinate (double coor) {
+		if (coor > PANE_SIZE / 2 - PADDING) {
+			return (PANE_SIZE / 2 - PADDING);
+		}
+		if (coor < -PANE_SIZE / 2 + PADDING) {
+			return (-PANE_SIZE / 2 + PADDING); 
+		}
+		return coor;
+	}
+//		if (coor > PANE_SIZE/2) {
+//			return PANE_SIZE / 2;
+//		}
+//		if (coor < -PANE_SIZE/2) {
+//			return -PANE_SIZE/2;
+//		}
 }
