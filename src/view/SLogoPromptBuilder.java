@@ -16,6 +16,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.ResourceLoader;
 
 /**
  * Subclass of SLogoBuilder that generates a prompt screen
@@ -34,8 +35,9 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int PREFSIZE = 75;
     private static final int COLORLABELSIZE = 202;
     private static final String FONT = "Georgia";
+    private static final String CSS_PATH = "view/splashstyle.css";
 
-
+    private ResourceLoader myResourceLoader;
     private String myLanguage;
     private Stage prompt;
     private Scene promptScene;
@@ -51,23 +53,42 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private Color myColor;
     private SLogoPropertiesData myPropertiesData;
 
+    /**
+     * Constructor that takes in a propertiesData object
+     * 
+     * @param propertiesData
+     */
     public SLogoPromptBuilder(SLogoPropertiesData propertiesData) {
+        myResourceLoader = new ResourceLoader("default.properties");
         myColor = Color.WHITE;
         myPropertiesData = propertiesData;
     }
 
+    /**
+     * Prompts a screen to the user asking the user to select language
+     * 
+     */
     public void promptScreen () {
         prompt = new Stage();
         setup();
         setScene(promptScene);		
     }
 
+    /**
+     * Basic initialization primitives
+     * 
+     */
     private void setup(){
         setWelcome();
         setLanguage();
         setButton();
     }
 
+    /**
+     * Sets the scene to the stage
+     * 
+     * @param promptScene
+     */
     private void setScene(Scene promptScene) {
         vbox = setVBox();
         promptScene = new Scene(vbox, XPROMPTSIZE, YPROMPTSIZE);
@@ -75,17 +96,26 @@ public class SLogoPromptBuilder extends SLogoBuilder {
         prompt.showAndWait();
     }
 
+    /**
+     * Uses a VBox pattern to align elements in a vertical order
+     * 
+     * @return
+     */
     private VBox setVBox(){
         vbox = new VBox();
         vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
         vbox.setPadding(new Insets(PADDING));
         vbox.getChildren().addAll(labelHb, langHb, buttonHb);
-        vbox.getStylesheets().add("view/splashstyle.css");
+        vbox.getStylesheets().add(CSS_PATH);
         return vbox;
     }
 
+    /**
+     * Creates a welcome message for the user at startup
+     * 
+     */
     private void setWelcome(){ 
-        label = new Label("WELCOME TO SLOGO!");
+        label = new Label(getResourceLoader().getString("WelcomeLabel"));
         label.setTextFill(Color.DARKBLUE);
         label.setFont(Font.font(FONT, FontWeight.BOLD, LABEL_FONTSIZE));
         labelHb = new HBox();
@@ -94,8 +124,12 @@ public class SLogoPromptBuilder extends SLogoBuilder {
         labelHb.setPrefSize(PREFSIZE, PREFSIZE);
     }
 
+    /**
+     * Sets the language for SLogo
+     * 
+     */
     private void setLanguage(){ 
-        lang = new Label("Select language:  ");
+        lang = new Label(getResourceLoader().getString("LangLabel"));
         ObservableList<String> options = 
                 FXCollections.observableArrayList(
                                                   "English",
@@ -108,7 +142,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
                                                   "Spanish"
                         );
         comboBox = new ComboBox(options);
-        comboBox.setValue("English");
+        comboBox.setValue(getResourceLoader().getString("DefaultLang"));
         langHb = new HBox();
         langHb.setAlignment(Pos.CENTER);
         langHb.getChildren().addAll(lang, comboBox);
@@ -116,12 +150,14 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 
     }
 
-
-
-
+    /**
+     * Creates the OkayButton that the user can click to 
+     * move on to the next screen
+     * 
+     */
     private void setButton(){ 
         buttonHb = new HBox();
-        myOkayButton = new Button("OKAY");
+        myOkayButton = new Button(getResourceLoader().getString("OkayButton"));
         buttonHb.setAlignment(Pos.CENTER);
         buttonHb.getChildren().add(myOkayButton);
         buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
@@ -151,6 +187,20 @@ public class SLogoPromptBuilder extends SLogoBuilder {
      */
     public void setPrompt(Stage prompt) {
         this.prompt = prompt;
+    }
+
+    /**
+     * @return the myResourceLoader
+     */
+    public ResourceLoader getResourceLoader () {
+        return myResourceLoader;
+    }
+
+    /**
+     * @param myResourceLoader the myResourceLoader to set
+     */
+    public void setResourceLoader (ResourceLoader myResourceLoader) {
+        this.myResourceLoader = myResourceLoader;
     }
 
 }
