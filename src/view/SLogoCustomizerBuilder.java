@@ -71,6 +71,10 @@ public class SLogoCustomizerBuilder extends Observable {
 		myCustomizerStage.setTitle("CUSTOMIZER");
 	}
 	
+	/**
+	 * General initializer method
+	 * 
+	 */
 	private void setup(){
 		myPaneColor = Color.WHITE;
 		setColorPicker();
@@ -81,6 +85,11 @@ public class SLogoCustomizerBuilder extends Observable {
 		setButton();
 	}
 	
+	/**
+	 * Adopts a VBox style to line elements up vertically
+	 * 
+	 * @return VBox
+	 */
 	private VBox setVBox(){
 		vbox = new VBox();
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
@@ -182,7 +191,10 @@ public class SLogoCustomizerBuilder extends Observable {
 	}
 	
 
-	
+	/**
+	 * Change penDown settings
+	 * 
+	 */
 	private void setPenDown(){
 		switchHb = new HBox();
 		switchLabel = new Label("Pen position?: ");

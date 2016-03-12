@@ -25,16 +25,10 @@ import commandnode.VariableNode;
 
 public class TreeFactory {
 
-	/*
-	 * resources used by tree factory class
-	 */
 	private ResourceLoader myResourcesLoader;
 	private LanguageLoader myLanguageLoader;
 	private SLogoWorkspace myWorkspace;
 	
-	/*
-	 *  constants used to determine active turtles
-	 */
 	private static final String TURTLECREATE = "tell";
 	private static final String TURTLECREATE2 = "ask";
 	private static final String TURTLESID = "TURTLES";
@@ -47,9 +41,11 @@ public class TreeFactory {
 	}
 
 	/**
-	 * Create our tree structure and necessary nodes with the list of parsed and formatted user input
+	 * Create our tree structure and necessary nodes 
+	 * with the list of parsed and formatted user input
 	 * 
-	 * @param List<String> commandParts - a list of formated input parsed and ready to be used for creation of Nodes
+	 * @param List<String> commandParts - 
+	 * a list of formated input parsed and ready to be used for creation of Nodes
 	 */
 	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
 		List<Node> myRoots = new ArrayList<Node>();
@@ -67,7 +63,8 @@ public class TreeFactory {
 	/**
 	 * Create children of an already process Node
 	 * 
-	 * @param List<String> commandParts - a list of formated input parsed and ready to be used for creation of Nodes
+	 * @param List<String> commandParts - a list of formated
+	 * input parsed and ready to be used for creation of Nodes
 	 */
 	private Node createChild(List<String> commandParts) throws SLogoException {
 		if(commandParts.isEmpty()) return null;
