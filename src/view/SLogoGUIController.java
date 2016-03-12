@@ -322,11 +322,9 @@ public class SLogoGUIController implements Initializable, Observer {
 		/*
 		 * Being worked on
 		 */
-		System.out.println("DisplayVAriable called");
 		ObservableList<String> list = FXCollections
 					.observableArrayList(new ArrayList<String>());
-		variables.forEach(n -> list.add(n.getName()));
-		
+		variables.forEach(n -> list.add(n.getName() + "  :  " + n.getValue()));
 		getVariableView().setItems((ObservableList<String>) list);
 		myVariablePane.setContent(getVariableView());
 	}

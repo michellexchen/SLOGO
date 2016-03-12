@@ -25,8 +25,19 @@ public class SLogoPosition {
 		myPrevY = myY;
 		myX = x;
 		myY = y;
+		
 	}
 
+	public void setX (double x) {
+		myPrevX = myX;
+		myX = x;
+	}
+	
+	public void setY (double y) {
+		myPrevY = myY;
+		myY = y;
+	}
+	
 	public double getPrevX() {
 		return myPrevX;
 	}
