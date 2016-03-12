@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * 
  */
 public abstract class SLogoBuilder {
-    protected static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+    protected static final String DEFAULT_RESOURCE_PACKAGE = "resources/resources/";
     protected static final String DEFAULT_LANG_PACKAGE = "resources.languages/";
 
     private ResourceBundle myResources;
@@ -20,6 +20,7 @@ public abstract class SLogoBuilder {
 	 * Abstract class extended by different view builders
 	 */
 	public SLogoBuilder () {
+		//myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "default");
 	}
 	
     protected ResourceBundle getResources () {

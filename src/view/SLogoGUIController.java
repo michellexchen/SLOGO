@@ -59,9 +59,14 @@ public class SLogoGUIController implements Initializable, Observer {
 
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
 			+ "compsci308/spring16/assign/03_slogo/commands.php";
+	private static final String CSS_PATH = "view/splashstyle.css";
 	private static final int POPUP_WIDTH = 900;
 	private static final int POPUP_HEIGHT = 550;
+	private static final int PANE_WIDTH = 200;
+	private static final int PANE_HEIGHT = 150;
 	private static final int RGB_CONST = 255;
+	private static final int ERROR_INDEX = 7;
+	private static final String ERROR = "ERROR";
 
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
@@ -303,9 +308,8 @@ public class SLogoGUIController implements Initializable, Observer {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, 
 					String oldValue, String newValue) {
-				if(newValue.contains("ERROR")) {
-					//TODO: Do something about this magic number '7'
-					myCommand = newValue.substring(7);
+				if(newValue.contains(ERROR)) {
+					myCommand = newValue.substring(ERROR_INDEX);
 				} else {
 					myCommand = newValue;
 				}
@@ -315,10 +319,12 @@ public class SLogoGUIController implements Initializable, Observer {
 	}    
 
 	public void displayVariable (ObservableList<SLogoVariable> variables) {
-		
-		
-		
-		ObservableList<String> list = (ObservableList<String>) new ArrayList<String>();
+		/*
+		 * Being worked on
+		 */
+		System.out.println("DisplayVAriable called");
+		ObservableList<String> list = FXCollections
+					.observableArrayList(new ArrayList<String>());
 		variables.forEach(n -> list.add(n.getName()));
 		
 		getVariableView().setItems((ObservableList<String>) list);
@@ -332,7 +338,7 @@ public class SLogoGUIController implements Initializable, Observer {
 	 */
 	public void displayProperties(){
 		myPropertiesPaneView.setItems(myProperties);
-		myPropertiesPaneView.setPrefSize(200, 150);
+		myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
 	}
 
 	/**
@@ -351,7 +357,7 @@ public class SLogoGUIController implements Initializable, Observer {
 				("Pen Size: " + displayData.getPen().getSize())
 				);
 
-		myPropertiesPaneView.setPrefSize(200, 150);
+		myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
 		myPropertiesPaneView.setItems(myProperties);
 	}
 
@@ -402,7 +408,7 @@ public class SLogoGUIController implements Initializable, Observer {
 		});
 
 		myColorHBox = new HBox();
-		myColorHBox.getStylesheets().add("view/splashstyle.css");
+		myColorHBox.getStylesheets().add(CSS_PATH);
 		myColorHBox.getChildren().addAll(colorLabel, myColorPicker);
 
 		return myColorHBox;
@@ -476,7 +482,8 @@ public class SLogoGUIController implements Initializable, Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		getCanvas().setStyle("-fx-background-color: " + toRGBCode(myPropertiesData.getPaneColor()));
+		getCanvas().setStyle("-fx-background-color: " 
+									+ toRGBCode(myPropertiesData.getPaneColor()));
 	}
 
 	/**

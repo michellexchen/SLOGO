@@ -7,6 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import commandnode.TellNode;
+import commandnode.TurtleCommand;
 import commandnode.VariableCommand;
 import exception.SLogoException;
 import model.LanguageLoader;
@@ -79,7 +80,7 @@ public class TreeFactory {
 			ListNode listNode;
 			if(isOpenParenthesis(currCommand)){
 				listNode = new ListNode(innerCommands.toArray(
-												new String[innerCommands.size()]));
+						new String[innerCommands.size()]));
 			}
 			else{
 				listNode = new ListNode(createNodes(innerCommands));
@@ -89,6 +90,7 @@ public class TreeFactory {
 		}
 		if(isVariable(currCommand)) {
 			VariableNode myVar = new VariableNode(currCommand);
+			System.out.println("Workspace " + myWorkspace);
 			myVar.setWorkspace(myWorkspace);
 			return myVar;
 		} else{
@@ -109,7 +111,7 @@ public class TreeFactory {
 	 * and ready to be used for creation of Nodes
 	 */
 	private List<String> createCommandList(List<String> commandParts) 
-														throws SLogoException {
+			throws SLogoException {
 		//3/11 @ 945 checking it's legitimacy 
 		//		if(commandParts.isEmpty()){
 		//			System.out.println("let me know");
@@ -139,27 +141,25 @@ public class TreeFactory {
 		String commandName = myLanguageLoader.getTranslation(strNode.toLowerCase());
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		if(isCreateTurtle(commandName)) {
-			TellNode myChild = new TellNode();
-			myChild.setWorkspace(myWorkspace);
-			return myChild;
-		}
 		if (commandName == null)
 			throw new SLogoException(
 					myResourcesLoader.getString("TheCommand") + strNode 
-										+ myResourcesLoader.getString("Illegal"));
+					+ myResourcesLoader.getString("Illegal"));
 		else
 			try {
 				node = (Node) Class.forName(
 						myResourcesLoader.getString("CommandNode") + commandName 
-								+ myResourcesLoader.getString("Node")).newInstance();
+						+ myResourcesLoader.getString("Node")).newInstance();
 			} catch (ClassNotFoundException | InstantiationException 
-														| IllegalAccessException e) {
+					| IllegalAccessException e) {
 				throw new SLogoException(myResourcesLoader.getString("Command") 
 						+ commandName + myResourcesLoader.getString("Implemented"));
 			}
 		if(node instanceof VariableCommand){
 			((VariableCommand)node).setWorkspace(myWorkspace);
+		}
+		if(node instanceof TurtleCommand){
+			((TurtleCommand)node).setWorkspace(myWorkspace);
 		}
 		return node;
 	}
@@ -216,17 +216,6 @@ public class TreeFactory {
 	 */
 	private boolean isClosedParenthesis(String currCommand) {
 		return currCommand.equals(")");
-	}
-
-	/**
-	 * Determine if the string inputed is used to create a turtle command
-	 * 
-	 * @param String str - string to be compared
-	 */
-	private boolean isCreateTurtle(String str) {
-		return str.toLowerCase().matches(TURTLECREATE2) 
-				|| str.toLowerCase().matches(TURTLECREATE) 
-				|| str.toUpperCase().matches(TURTLESID);
 	}
 
 }

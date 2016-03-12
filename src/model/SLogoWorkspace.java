@@ -29,6 +29,7 @@ public class SLogoWorkspace {
 	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
 
+	
 	private List<SLogoCharacter> myCharacters;
 	private List<SLogoCharacter> myActiveTurtles;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
@@ -56,7 +57,7 @@ public class SLogoWorkspace {
 	public void initialize() throws SLogoException {
 		myRootEvaluator = new RootEvaluator(this);
 		resetActiveTurtles();
-		myActiveTurtles.add(turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY()));
+		myActiveTurtles.add(turtleFactory.createDefaultTurtle());
 		//turtleFactory.createTurtle(30, 30);
 	}
 
@@ -207,14 +208,14 @@ public class SLogoWorkspace {
 
 	public SLogoVariable createVariable(String varName, double varValue){
 		boolean created = false;
-		for(SLogoVariable var : myVariableList){
+		for(SLogoVariable var : getObservableVariableList()){
 			if(var.getName().equals(varName)){
 				var.setValue(varValue);
 				created = true;
 			}
 		}
 		if(!created)
-			myVariableList.add(new SLogoVariable(varName, varValue));
+			getObservableVariableList().add(new SLogoVariable(varName, varValue));
 		return lookupVariable(varName);
 	}
 

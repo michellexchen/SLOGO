@@ -9,46 +9,22 @@ import model.SLogoTurtle;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
-public class TellNode extends BinaryNode {
+public class TellNode extends TurtleCommand {
 	
-	private SLogoWorkspace myWorkspace;
-	private SLogoTurtleFactory turtleFactory;
-
-	public TellNode() {
-		
-	}
-
+	private static final int PROGRAMMINGINDEXING = 1;
+	
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		super.getWorkspace().resetActiveTurtles();
 		List<Node> commands = ((ListNode) getChildren().get(0)).getCommands();
-//		for(Node each: apples) System.out.println(each.getClass());
-		List<SLogoCharacter> allTurtles = myWorkspace.getCharacterList();
-		List<SLogoCharacter> activeTurtles = myWorkspace.getActiveTurtlesList();
-		//check to make sure all necessary turtles are created and inside the characterList
-		Node num = commands.get(commands.size()-1);
-		System.out.println(((NumericNode)num).getNumericValue());
-		System.out.println(allTurtles.size());
-		while(((NumericNode)num).getNumericValue() > allTurtles.size()){ 
-			//can also check by seeing what turtelfactory's last created id is
-			SLogoCharacter newActiveTurtle = turtleFactory.createDefaultTurtle();
+		List<SLogoCharacter> activeTurtles = super.getWorkspace().getActiveTurtlesList();
+		for(Node command: commands){
+			double turtleToGrab = ((NumericNode)command).getNumericValue();
 			//creating the turtle from factory automatically adds our turtle to our list of created turtles
-			myWorkspace.addActiveTurtle(newActiveTurtle);
+			SLogoCharacter newActiveTurtle = super.grabTurtle((int)turtleToGrab-PROGRAMMINGINDEXING);
+			super.getWorkspace().addActiveTurtle(newActiveTurtle);
 		}
-		//now must add the execution of commands for active list 
-		//this is the second way that Tell can be used --> tell [ no. turtles ] [ executable commands ]
-		
 		//return the id of the last created active turtle
-		return ((SLogoTurtle)activeTurtles.get(activeTurtles.size()-1)).getCurrTurtlesID();
+		return ((SLogoTurtle)activeTurtles.get(activeTurtles.size()-PROGRAMMINGINDEXING)).getCurrTurtlesID();
 	}
-	
-	public SLogoWorkspace getWorkspace(){
-		return myWorkspace;
-	}
-	
-	public void setWorkspace(SLogoWorkspace ws){
-		myWorkspace = ws;
-		turtleFactory = ws.getCurrentTurtleFactory();
-	}
-
-	
 }

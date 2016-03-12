@@ -3,7 +3,16 @@ import exception.SLogoException;
 import model.ColorLoader;
 import model.SLogoCharacterState;
 
+/**
+ * Adds a new color (r, g, b) to list of colors
+ */
+
 public class SetPaletteNode extends QuaternionNode{
+	
+	/**
+	 * @param state
+	 * @return index of new color
+	 */
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		int index = (int) evaluateChild(0, state);
