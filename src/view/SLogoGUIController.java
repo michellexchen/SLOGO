@@ -76,11 +76,8 @@ public class SLogoGUIController implements Initializable, Observer {
     private SLogoPropertiesData myPropertiesData;
 	
 	private Model myModel;
-	private View myView;
 	private String myCommand;
-	
-	private ObservableList<String> myComboEntries;
-	
+		
 	
 	//Help button
     @FXML
@@ -103,13 +100,7 @@ public class SLogoGUIController implements Initializable, Observer {
     @FXML
     private MenuButton myMenuButton;
    
-
-    @FXML
-    private ComboBox<String> myComboBox;
-    
-    
-    private List<MenuItem> myMenuItems;
-    
+        
     //MenuButton's MenuItem list
     @FXML
     private MenuItem myProject1;
@@ -156,58 +147,54 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-    	assignMenuAction();
-    	
-    	//initializes properties
+    	myHistory = new ArrayList<String>();
     	myPropertyPane.getChildren().add(myPropertiesPaneView);
-
-    	//initialize myCustomizer
 		myCustomizer = new SLogoCustomizerBuilder();
 		myCustomizer.hide();
 		
-    	//TODO: Separate the operations below into different methods
-    	
-    	myHistory = new ArrayList<String>();
-    	
-    	//Help button - assign action
-        myHelpButton.setOnAction(e -> {
-        	popup(HELP_URL);
-        });
-                   
-        //Run button - return user input and stores it in myCommand
-        //This will be refactored to a separate mmethod
+    	assignMenuAction();
+    	assignHelpAction();
+        assignRunAction();
+        customize();
+        assignAddWorkspaceAction();
+    }
+        
+    /**
+     * Assigns an action to Run button
+     * 
+     */
+    private void assignRunAction () {
         myRunButton.setOnAction(e -> {
         	myCommand = myTextField.getText();
             myTextField.clear();
             run(myCommand);
         });  
-        
-        //customize button
-        customize();
-              
-        
-        //AddWorkspace Button. Causes Model to create a new workspace
-        //This will be refactored out to a separate method
-        myAddWorkspaceButton.setOnAction(e -> {
-        	
-        	//Hide current stage
-        	myCurrentStage = (Stage)myAddWorkspaceButton.getScene().getWindow();
-        	myCurrentStage.hide();
-        	
-        	//Get Model to create a new workspace and switch into it
-        	try {
-				getModel().addWorkspace();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace(); 
-				//GET RID OF THIS
-			}
-        });
-
-        
-        
     }
-        
+    
+    /**
+     * Assigns an action to addWorkspace Button
+     * Dependency is the model interface
+     * 
+     */
+    private void assignAddWorkspaceAction () {
+    	myAddWorkspaceButton.setOnAction(e -> {
+    		myCurrentStage = (Stage) myAddWorkspaceButton.getScene().getWindow();
+    		myCurrentStage.hide();
+    		try {
+    			getModel().addWorkspace();
+    		} catch (Exception e1) {}
+    	});
+    }
+    
+    /**
+     * Assigns an action to the HELP Button
+     */
+    private void assignHelpAction () {
+        myHelpButton.setOnAction(e -> {
+        	popup(HELP_URL);
+        });
+    }
+    
     /**
      * Manually assigns an action to each MenuItem
      * 
@@ -318,7 +305,10 @@ public class SLogoGUIController implements Initializable, Observer {
     	});
     }    
     
-    
+    /**
+     * Displays properties
+     * 
+     */
     public void displayProperties(){
     	myPropertiesPaneView.setItems(myProperties);
     	myPropertiesPaneView.setPrefSize(200, 150);
@@ -367,11 +357,21 @@ public class SLogoGUIController implements Initializable, Observer {
     			(int) (color.getGreen() * RGB_CONST),
     			(int) (color.getBlue() * RGB_CONST));
     }
-
+    
+    /**
+     * Getter for Customizer Button
+     * 
+     * @return
+     */
     public SLogoCustomizerBuilder getCustomizer() {
     	return myCustomizer;
     }
 
+    /**
+     * Colorpicker method for Customize button
+     * 
+     * @return
+     */
     private HBox chooseColor(){	//for selecting color   		
 		Label colorLabel = new Label("Select background color: ");
 		

@@ -131,9 +131,6 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		myOkayButton.setOnMouseClicked(e -> {
 			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
 			getPrompt().hide();
-			//testing
-//			System.out.println(myLanguage);
-//			System.out.println(myColor.toString());
 		});
 	}
 	

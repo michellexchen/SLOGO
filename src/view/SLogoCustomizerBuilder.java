@@ -63,7 +63,6 @@ public class SLogoCustomizerBuilder extends Observable {
 		myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
 		myCustomizerStage.setScene(myCustomizerScene);
 		myCustomizerStage.setTitle("CUSTOMIZER");
-		//myCustomizerStage.showAndWait();
 	}
 	
 	private void setup(){
@@ -78,7 +77,8 @@ public class SLogoCustomizerBuilder extends Observable {
 		vbox = new VBox();
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
 		vbox.setPadding(new Insets(PADDING));
-		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, thicknessSliderHb, buttonHb);
+		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, 
+										thicknessSliderHb, buttonHb);
 		vbox.getStylesheets().add("view/splashstyle.css");
 		return vbox;
 	}
@@ -95,10 +95,13 @@ public class SLogoCustomizerBuilder extends Observable {
 		myPropertiesData = propertiesData;
 	}
 
+	/**
+	 * Creates an instance of colorpicker to use
+	 * 
+	 */
 	private void setColorPicker(){
 		colorLabel = new Label("Set background color: ");
 		colorLabel.setPrefWidth(COLORLABELSIZE);
-		//TODO get current pane color, set colorPicker/myPaneColor to that color 
 		colorPicker = new ColorPicker(Color.BLUE);
         colorPicker.setOnAction(e -> {
         	myPaneColor = colorPicker.getValue();
@@ -108,6 +111,10 @@ public class SLogoCustomizerBuilder extends Observable {
 		colorHb.setPrefSize(PREFSIZE, PREFSIZE);
 	}
 	
+	/**
+	 * Sets a new font color
+	 * 
+	 */
 	private void setFontColor(){
 		fontColorLabel = new Label("Set font color: ");
 		fontColorLabel.setPrefWidth(COLORLABELSIZE);
@@ -121,6 +128,10 @@ public class SLogoCustomizerBuilder extends Observable {
         fontColorHb.setPrefSize(PREFSIZE, PREFSIZE);
 	}
 	
+	/**
+	 * Sets line style
+	 * 
+	 */
 	private void setLine(){
 		penStyleLabel = new Label("Set pen properties: ");
 		penStyleLabel.setPrefWidth(COLORLABELSIZE);
@@ -138,6 +149,10 @@ public class SLogoCustomizerBuilder extends Observable {
         penStyleHb.setPrefSize(PREFSIZE, PREFSIZE);
 	}
 	
+	/**
+	 * Sets new line thickness
+	 * 
+	 */
 	private void setLineThickness(){
 		thicknessSliderLabel = new Label("Set line width: ");
 		thicknessSliderLabel.setPrefWidth(COLORLABELSIZE);
@@ -158,8 +173,10 @@ public class SLogoCustomizerBuilder extends Observable {
 
 	}
 	
-
-
+	/**
+	 * Set button that applies changes to the current working environment
+	 * 
+	 */
 	private void setButton(){
 		buttonHb = new HBox();
 		myOkayButton = new Button("OKAY");
@@ -198,29 +215,5 @@ public class SLogoCustomizerBuilder extends Observable {
 	 */
 	public void setMyPaneColor(Color myColor) {
 		this.myPaneColor = myColor;
-	}
-	
-	public Color getMyFontColor(){
-		return myFontColor;
-	}
-	
-	public void setMyFontColor(Color myColor) {
-		this.myFontColor = myColor;
-	}
-	
-	public String getMyLineStyle(){
-		return myLineStyle;
-	}
-	
-	public void setMyLineStyle(String myStyle) {
-		this.myLineStyle = myStyle;
-	}
-	
-	public double getMyLineThickness(){
-		return myLineThickness;
-	}
-	
-	public void setMyLineThickness(double lineThickness){
-		this.myLineThickness = lineThickness;
 	}
 }
