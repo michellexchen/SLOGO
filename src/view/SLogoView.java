@@ -121,7 +121,7 @@ public class SLogoView implements View<Object> {
     public Observer getObserver() {
         return getCurrentVisualizer();
     }
-
+    
     /**
      * @return the myVisualizers
      */

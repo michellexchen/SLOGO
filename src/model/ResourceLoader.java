@@ -4,10 +4,9 @@ import exception.SLogoException;
 /**
  * SLogo's Resource loader class to load access resources
  * 
- * @author Adam Tache
+ * @author Adam Tache, Hunter Lee
  *
  */
-
 public class ResourceLoader extends FileLoader{
 
     private static final String RESOURCE_PATH = "resources/resources";
@@ -40,7 +39,7 @@ public class ResourceLoader extends FileLoader{
             e.showErrorDialog("Non-match exists in resource file");
         }
     }
-    
+
     /**
      * Custom getString method to get the matching string value
      * 

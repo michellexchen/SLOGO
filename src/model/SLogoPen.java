@@ -2,15 +2,12 @@ package model;
 import exception.SLogoException;
 import javafx.scene.paint.Color;
 
-
 /**
- * 
  * Container for pen-related info
  * Only used in DisplayData--Character still has private fields that
  * keep relevant information
  *
  */
-
 public class SLogoPen{
 	
 	private Color myColor;
@@ -27,6 +24,11 @@ public class SLogoPen{
 	private boolean DEFAULT_PEN_DOWN = true;
 	private int DEFAULT_STROKE_STYLE = 0;
 	
+	/**
+	 * Default constructor that initializes ColorLoader
+	 * 
+	 * @throws SLogoException
+	 */
 	public SLogoPen() throws SLogoException{
 		colorLoader = new ColorLoader();
 		colorIndex = DEFAULT_PEN_INDEX;
@@ -85,8 +87,6 @@ public class SLogoPen{
 	}
 
 	public String getPenStyle() {
-		// TODO Auto-generated method stub
 		return myStrokeStyle;
 	}
-	
 }

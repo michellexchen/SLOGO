@@ -8,146 +8,145 @@ import javafx.scene.paint.Color;
  * states
  *
  */
-
 public abstract class SLogoCharacterState {
-	
-	private SLogoPosition myPosition;
-	private double myDirection;
-	private boolean isHidden;
-	private SLogoPen myPen;
-	private String myImage;
-	private int myID;
-	private int myShapeIndex;
-	private int myBGColorIndex;
-	private Color myBGColor;
-	private boolean toClear;
-	private ResourceLoader resourceLoader = new ResourceLoader();
 
-	
-	/**
-	 * Default constructor that takes in essential turtle variable fields
-	 * such as Pen, Coordinates, direction, and boolean predicates
-	 * 
-	 * @param myPen
-	 * @param xCoor
-	 * @param yCoor
-	 * @param direction
-	 * @param isHidden
-	 * @param shapeIndex
-	 * @throws SLogoException
-	 */
-	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
-			boolean isHidden, int shapeIndex) throws SLogoException {
-		
-		this.myPen = myPen;
-		this.myPosition = new SLogoPosition(xCoor, yCoor);
-		this.myDirection = direction;
-		this.isHidden = isHidden;
-		this.myShapeIndex = shapeIndex;
-		setImage(myShapeIndex);
-		setBackground(myBGColorIndex);
-		
-	}
+    private SLogoPosition myPosition;
+    private double myDirection;
+    private boolean isHidden;
+    private SLogoPen myPen;
+    private String myImage;
+    private int myID;
+    private int myShapeIndex;
+    private int myBGColorIndex;
+    private Color myBGColor;
+    private boolean toClear;
+    private ResourceLoader resourceLoader = new ResourceLoader();
 
-	public SLogoPen getPen() {
-		return myPen;
-	}
 
-	public void setHidden(boolean hide) {
-		this.isHidden = hide;
-	}
+    /**
+     * Default constructor that takes in essential turtle variable fields
+     * such as Pen, Coordinates, direction, and boolean predicates
+     * 
+     * @param myPen
+     * @param xCoor
+     * @param yCoor
+     * @param direction
+     * @param isHidden
+     * @param shapeIndex
+     * @throws SLogoException
+     */
+    public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
+                               boolean isHidden, int shapeIndex) throws SLogoException {
 
-	public boolean getHidden() {
-		return isHidden;
-	}
+        this.myPen = myPen;
+        this.myPosition = new SLogoPosition(xCoor, yCoor);
+        this.myDirection = direction;
+        this.isHidden = isHidden;
+        this.myShapeIndex = shapeIndex;
+        setImage(myShapeIndex);
+        setBackground(myBGColorIndex);
 
-	public void setXCoor(double xCoor) {
-		this.myPosition.setX(xCoor);
-	}
+    }
 
-	public void setYCoor(double yCoor) {
-		this.myPosition.setY(yCoor);
-	}
+    public SLogoPen getPen() {
+        return myPen;
+    }
 
-	public double getXCoor() {
-		return this.myPosition.getX();
-	}
+    public void setHidden(boolean hide) {
+        this.isHidden = hide;
+    }
 
-	public double getYCoor() {
-		return this.myPosition.getY();
-	}
+    public boolean getHidden() {
+        return isHidden;
+    }
 
-	public double getDirection() {
-		return myDirection;
-	}
+    public void setXCoor(double xCoor) {
+        this.myPosition.setX(xCoor);
+    }
 
-	public void setDirection(double direction) {
-		this.myDirection = direction;
-	}
+    public void setYCoor(double yCoor) {
+        this.myPosition.setY(yCoor);
+    }
 
-	public String getImage() {
-		return myImage;
-	}
+    public double getXCoor() {
+        return this.myPosition.getX();
+    }
 
-	/**
-	 * @param myBGColorIndex: index of new background color
-	 * Sets background color 
-	 */
+    public double getYCoor() {
+        return this.myPosition.getY();
+    }
 
-	public void setBackground(int myBGColorIndex) throws SLogoException {
-		ColorLoader colorLoader = new ColorLoader();
-		String colorString = colorLoader.getString(myBGColorIndex+"");
-		if(colorString == null)
-			throw new SLogoException(resourceLoader.getString("ColorIndex"));
-		else
-			this.myBGColor = colorLoader.getColor(myBGColorIndex);
-	}
+    public double getDirection() {
+        return myDirection;
+    }
 
-	public Color getBGColor(){
-		return myBGColor;
-	}
+    public void setDirection(double direction) {
+        this.myDirection = direction;
+    }
 
-	/**
-	 * @param myShapeIndex: index of new shape
-	 * Updates representation of turtle in GUI
-	 */
+    public String getImage() {
+        return myImage;
+    }
 
-	public void setImage(int myShapeIndex) throws SLogoException {
-		TurtleImageLoader imageLoader = new TurtleImageLoader();
-		String indexImage = imageLoader.getString(myShapeIndex+"");
-		if(indexImage == null)
-			throw new SLogoException(resourceLoader.getString("ShapeIndex"));
-		else
-			this.myImage = indexImage;
-	}
+    /**
+     * @param myBGColorIndex: index of new background color
+     * Sets background color 
+     */
 
-	public int getID(){
-		return myID;
-	}
+    public void setBackground(int myBGColorIndex) throws SLogoException {
+        ColorLoader colorLoader = new ColorLoader();
+        String colorString = colorLoader.getString(myBGColorIndex+"");
+        if(colorString == null)
+            throw new SLogoException(resourceLoader.getString("ColorIndex"));
+        else
+            this.myBGColor = colorLoader.getColor(myBGColorIndex);
+    }
 
-	public void setID(int myID){
-		this.myID = myID;
-	}
+    public Color getBGColor(){
+        return myBGColor;
+    }
 
-	public int getShapeIndex(){
-		return myShapeIndex;
-	}
+    /**
+     * @param myShapeIndex: index of new shape
+     * Updates representation of turtle in GUI
+     */
 
-	public void setShapeIndex(int myShapeIndex) throws SLogoException{
-		this.myShapeIndex = myShapeIndex;
-		setImage(myShapeIndex);
-	}
+    public void setImage(int myShapeIndex) throws SLogoException {
+        TurtleImageLoader imageLoader = new TurtleImageLoader();
+        String indexImage = imageLoader.getString(myShapeIndex+"");
+        if(indexImage == null)
+            throw new SLogoException(resourceLoader.getString("ShapeIndex"));
+        else
+            this.myImage = indexImage;
+    }
 
-	public boolean getCleared(){
-		return toClear;
-	}
+    public int getID(){
+        return myID;
+    }
 
-	public String getPenStyle() {
-		return myPen.getPenStrokeStyle();
-	}
+    public void setID(int myID){
+        this.myID = myID;
+    }
 
-	public void queueClearing(boolean toClear) {
-		this.toClear = toClear;
-	}
+    public int getShapeIndex(){
+        return myShapeIndex;
+    }
+
+    public void setShapeIndex(int myShapeIndex) throws SLogoException{
+        this.myShapeIndex = myShapeIndex;
+        setImage(myShapeIndex);
+    }
+
+    public boolean getCleared(){
+        return toClear;
+    }
+
+    public String getPenStyle() {
+        return myPen.getPenStrokeStyle();
+    }
+
+    public void queueClearing(boolean toClear) {
+        this.toClear = toClear;
+    }
 
 }

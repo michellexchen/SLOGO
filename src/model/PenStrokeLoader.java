@@ -11,17 +11,15 @@ import java.util.HashMap;
 
 public class PenStrokeLoader extends FileLoader{
 
-	private static final String STROKE_PATH = "resources/resources";
-	private static final String STROKE_EXTENSION = "penstrokes.properties";
-	
-	public HashMap<Integer, String> getStrokeMap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private static final String STROKE_PATH = "resources/resources";
+    private static final String STROKE_EXTENSION = "penstrokes.properties";
 
-	public String getStroke(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public HashMap<Integer, String> getStrokeMap() {
+        return null;
+    }
+
+    public String getStroke(int index) {
+        return null;
+    }
 
 }

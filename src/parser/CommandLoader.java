@@ -7,13 +7,12 @@ import model.FileLoader;
  * @author Adam Tache
  *
  */
-
 public class CommandLoader extends FileLoader {
 
-	private static final String COMMAND_PATH = "resources/commands";
+    private static final String COMMAND_PATH = "resources/commands";
 
-	public String getPath(){
-		return COMMAND_PATH;
-	}
+    public String getPath(){
+        return COMMAND_PATH;
+    }
 
 }

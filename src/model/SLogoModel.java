@@ -13,133 +13,142 @@ import parser.SLogoParser;
 import view.View;
 
 /**
- * 
  * Model class that houses workspaces and saves metadata
  * for SLogo IDE
  *
  */
 public class SLogoModel implements Model {
-	private View myView;
-	private SLogoWorkspace myCurrentWorkspace;
-	private List<SLogoWorkspace> myWorkspaces;
-	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
+    private View myView;
+    private SLogoWorkspace myCurrentWorkspace;
+    private List<SLogoWorkspace> myWorkspaces;
+    private ObservableList<SLogoWorkspace> myObservableWorkspaces;
 
-	public SLogoModel() throws SLogoException {
-		myWorkspaces = new ArrayList<SLogoWorkspace>();
-		myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
-	}
+    /**
+     * Default constructor
+     * 
+     * @throws SLogoException
+     */
+    public SLogoModel() throws SLogoException {
+        myWorkspaces = new ArrayList<SLogoWorkspace>();
+        myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
+    }
 
-	public void initialize() throws SLogoException {
-		createNewWorkspace();
-	}
+    /**
+     * Initializes by creating the first workspace
+     * 
+     * @throws SLogoException
+     */
+    public void initialize() throws SLogoException {
+        createNewWorkspace();
+    }
 
-	/**
-	 * Adds Listeners to all the Observable lists that are present
-	 * in model
-	 * 
-	 * Called at initialization
-	 * 
-	 */
-	public void addListeners () {
-		myCurrentWorkspace.addListeners();
-		getView().updateDisplayData();
-	}
-	
-	/**
-	 * Creates a parser instance and feeds the command to the parser
-	 * called by View through interface
-	 * @return 
-	 * 
-	 */
-	@Override
-	public void readCommand(String command) throws SLogoException {
-		SLogoParser parser = new SLogoParser(myCurrentWorkspace);
-		List<Node> myCommandRoots = parser.readCommand(command);
-		myCurrentWorkspace.getRootEvaluator().evaluateRoots(myCommandRoots);
-	}
+    /**
+     * Adds Listeners to all the Observable lists that are present
+     * in model
+     * 
+     * Called at initialization
+     * 
+     */
+    public void addListeners () {
+        myCurrentWorkspace.addListeners();
+        getView().updateDisplayData();
+    }
 
-	/**
-	 * Switches workspaces given the index
-	 * Used in conjunction with switchVisualizer
-	 * 
-	 */
-	@Override
-	public void switchWorkspace(int index) throws SLogoException {
-		if (index >= getObservableWorkspaces().size()) {
-			throw new SLogoException(new ResourceLoader().getString("InvalidWorkspace"));
-		}
-		setCurrentWorkspace(getObservableWorkspaces().get(index));
-		getView().switchVisualizer(index);
-	}
+    /**
+     * Creates a parser instance and feeds the command to the parser
+     * called by View through interface
+     * @return 
+     * 
+     */
+    @Override
+    public void readCommand(String command) throws SLogoException {
+        SLogoParser parser = new SLogoParser(myCurrentWorkspace);
+        List<Node> myCommandRoots = parser.readCommand(command);
+        myCurrentWorkspace.getRootEvaluator().evaluateRoots(myCommandRoots);
+    }
 
-	/**
-	 * @return the myView
-	 */
-	public View<?> getView() {
-		return myView;
-	}
+    /**
+     * Switches workspaces given the index
+     * Used in conjunction with switchVisualizer
+     * 
+     */
+    @Override
+    public void switchWorkspace(int index) throws SLogoException {
+        if (index >= getObservableWorkspaces().size()) {
+            throw new SLogoException(new ResourceLoader().getString("InvalidWorkspace"));
+        }
+        setCurrentWorkspace(getObservableWorkspaces().get(index));
+        getView().switchVisualizer(index);
+    }
 
-	public ObservableList<SLogoDisplayData> getObservableDataList() {
-		return myCurrentWorkspace.getObservableDataList();
-	}
+    /**
+     * @return the myView
+     */
+    public View<?> getView() {
+        return myView;
+    }
 
-	/**
-	 * Create a new workspace and set it as current workspace
-	 * @throws SLogoException 
-	 */
-	public void createNewWorkspace() throws SLogoException {
-		SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
-		myWorkspace.initialize();
-		getObservableWorkspaces().add(myWorkspace);
-		setCurrentWorkspace(myWorkspace);
-	}
+    public ObservableList<SLogoDisplayData> getObservableDataList() {
+        return myCurrentWorkspace.getObservableDataList();
+    }
 
-	/**
-	 * Adds a new workspace and initializes it
-	 * Also calls addVisualizer that adds a visualizer in the frontend
-	 * 
-	 */
-	@Override
-	public void addWorkspace() throws SLogoException, IOException {
-		getView().addVisualizer();
-		createNewWorkspace();
-		getCurrentWorkspace().addListeners();
-		getView().updateDisplayData();
-	}
+    /**
+     * Create a new workspace and set it as current workspace
+     * @throws SLogoException 
+     */
+    public void createNewWorkspace() throws SLogoException {
+        SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
+        myWorkspace.initialize();
+        getObservableWorkspaces().add(myWorkspace);
+        setCurrentWorkspace(myWorkspace);
+    }
 
-	/**
-	 * @return the myCurrentWorkspace
-	 */
-	public SLogoWorkspace getCurrentWorkspace() {
-		return myCurrentWorkspace;
-	}
+    /**
+     * Adds a new workspace and initializes it
+     * Also calls addVisualizer that adds a visualizer in the frontend
+     * 
+     */
+    @Override
+    public void addWorkspace() throws SLogoException, IOException {
+        getView().addVisualizer();
+        createNewWorkspace();
+        getCurrentWorkspace().addListeners();
+        getView().updateDisplayData();
+    }
 
-	/**
-	 * @param myCurrentWorkspace the myCurrentWorkspace to set
-	 */
-	public void setCurrentWorkspace(SLogoWorkspace myCurrentWorkspace) {
-		this.myCurrentWorkspace = myCurrentWorkspace;
-	}
+    /**
+     * @return the myCurrentWorkspace
+     */
+    public SLogoWorkspace getCurrentWorkspace() {
+        return myCurrentWorkspace;
+    }
 
-	/**
-	 * @return the myObservableWorkspaces
-	 */
-	public ObservableList<SLogoWorkspace> getObservableWorkspaces() {
-		return myObservableWorkspaces;
-	}
+    /**
+     * @param myCurrentWorkspace the myCurrentWorkspace to set
+     */
+    public void setCurrentWorkspace(SLogoWorkspace myCurrentWorkspace) {
+        this.myCurrentWorkspace = myCurrentWorkspace;
+    }
 
-	/**
-	 * @param myObservableWorkspaces the myObservableWorkspaces to set
-	 */
-	public void setObservableWorkspaces(ObservableList<SLogoWorkspace> myObservableWorkspaces) {
-		this.myObservableWorkspaces = myObservableWorkspaces;
-	}
+    /**
+     * @return the myObservableWorkspaces
+     */
+    public ObservableList<SLogoWorkspace> getObservableWorkspaces() {
+        return myObservableWorkspaces;
+    }
 
-	/**
-	 * @param myView the myView to set
-	 */
-	public void setView(View myView) {
-		this.myView = myView;
-	}
-	
+    /**
+     * @param myObservableWorkspaces the myObservableWorkspaces to set
+     */
+    public void setObservableWorkspaces(ObservableList<SLogoWorkspace> myObservableWorkspaces) {
+        this.myObservableWorkspaces = myObservableWorkspaces;
+    }
+
+    /**
+     * @param myView the myView to set
+     */
+    public void setView(View myView) {
+        this.myView = myView;
+    }
+
 }

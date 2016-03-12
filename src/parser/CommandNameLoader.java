@@ -8,14 +8,13 @@ import exception.SLogoException;
  * @author Adam Tache
  *
  */
-
 public class CommandNameLoader extends CommandLoader{
 
-	private static final String COMMAND_EXTENSION = "commands.resources";
-	
-	public String getString(String key) throws SLogoException{
-		super.load(super.getPath(), COMMAND_EXTENSION);
-		return super.getString(key);
-	}
+    private static final String COMMAND_EXTENSION = "commands.resources";
+
+    public String getString(String key) throws SLogoException{
+        super.load(super.getPath(), COMMAND_EXTENSION);
+        return super.getString(key);
+    }
 
 }

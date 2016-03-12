@@ -23,7 +23,7 @@ public interface View<T> {
     public void switchVisualizer(int index);
 
     public Observer getObserver();
-
+    
     public String getLanguage();
 
     public void updateVariable (ObservableList<T> variables);
