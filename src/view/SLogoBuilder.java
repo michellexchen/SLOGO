@@ -20,7 +20,7 @@ public abstract class SLogoBuilder {
 	 * Abstract class extended by different view builders
 	 */
 	public SLogoBuilder () {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "default");
+		//myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "default");
 	}
 	
     protected ResourceBundle getResources () {
