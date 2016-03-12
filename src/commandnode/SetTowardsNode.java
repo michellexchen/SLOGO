@@ -13,7 +13,13 @@ public class SetTowardsNode extends TurnNode {
 	public SetTowardsNode() throws SLogoException{
 		setNumChildren(NUM_CHILDREN);
 	}
-
+	
+	/**
+	 * @param state
+	 * Points turtle in the direction of point (x, y)
+	 * @return new direction (degrees)
+	 */
+	
 	public double calculateDir(SLogoCharacterState state) throws SLogoException {
 		double diffX = evaluateChild(0, state) - state.getXCoor();
 		double diffY = evaluateChild(1, state) - state.getYCoor();
