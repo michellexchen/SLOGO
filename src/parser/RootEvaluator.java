@@ -31,7 +31,7 @@ public class RootEvaluator {
 //			for(SLogoCharacter character : myWorkspace.getCharacterList()) { //have not debugged so don't iterate through active turtles
 				evaluation = myRoot.evaluate(character.getState());
 				myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
-						.updateData(character.getState());
+						.updateData();
 			}
 			System.out.println("Evaluation: " + evaluation);
 		}

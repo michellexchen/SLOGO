@@ -165,7 +165,6 @@ public class SLogoVisualizer implements Observer {
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
 			myProperties.setPaneColor(turtledata.getBGColor());
-			myGUIController.setPropertiesData(myProperties);
 		}
 
 	}
