@@ -11,9 +11,9 @@ Estimated Hours: 150 hours
 
 Frontend: Michelle Chen, Hunter Lee
 
-Resources Used: Class materials provided with project
-
 Backend: Aaron Newman, Mario Oliver, Adam Tache
+
+Resources Used: Class materials provided with project
 
 Starting Class: Main.java (Controller package)
 
