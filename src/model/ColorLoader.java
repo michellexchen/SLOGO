@@ -14,15 +14,10 @@ import javafx.scene.paint.Color;
 
 public class ColorLoader extends FileLoader{
 
-<<<<<<< HEAD
 	private final String colorDirectory = "resources/resources";
 	private final String colorExtension = "Colors.resources";
 	private HashMap<Integer, Color> myRGBMap;
-=======
-	private static final String COLOR_PATH = "resources/resources";
-	private static final String COLOR_EXTENSION = "colors.resources";
-	private HashMap<Integer, double[]> myRGBMap;
->>>>>>> 0605fc6b90c9b105bf03131006547856230815c1
+
 	private double DEFAULT_OPACITY = 1.0;
 
 	public ColorLoader() throws SLogoException{
@@ -32,8 +27,8 @@ public class ColorLoader extends FileLoader{
 	}
 
 	public void load() throws SLogoException {
-		setDirectory(COLOR_PATH);
-		setExtension(COLOR_EXTENSION);
+		setDirectory(colorDirectory);
+		setExtension(colorExtension);
 		super.load();
 	}
 
