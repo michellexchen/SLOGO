@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Power command, a Math command
  */
-public class PowNode extends BinaryNode{
+public class PowerNode extends BinaryNode{
 	
 	/**
 	 * Raises base (child 0) to exponent (child 1)

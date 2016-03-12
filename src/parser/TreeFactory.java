@@ -8,6 +8,7 @@ import commandnode.Node;
 import commandnode.NumericNode;
 import commandnode.VariableCommand;
 import exception.SLogoException;
+import model.LanguageLoader;
 import model.ResourceLoader;
 import model.SLogoWorkspace;
 import commandnode.VariableNode;
@@ -23,14 +24,15 @@ import commandnode.VariableNode;
 
 public class TreeFactory {
 
-	private CommandNameLoader myCommandNodeLoader;
 	private ResourceLoader myResourcesLoader;
 	private SLogoWorkspace myWorkspace;
+	private LanguageLoader myLanguageLoader;
 
 	public TreeFactory(SLogoWorkspace ws) throws SLogoException {
-		myCommandNodeLoader = new CommandNameLoader();
 		myResourcesLoader = new ResourceLoader();
 		myWorkspace = ws;
+		myLanguageLoader = new LanguageLoader();
+		myLanguageLoader.load(myWorkspace.getView().getLanguage());
 	}
 
 	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
@@ -98,12 +100,9 @@ public class TreeFactory {
 
 	private Node createNode(String strNode) throws SLogoException {
 		Node node = null;
+		String commandName = myLanguageLoader.getTranslation(strNode.toLowerCase());
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		String commandName = myCommandNodeLoader.getString(strNode);
-		if (commandName == null)
-			throw new SLogoException(
-					myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));
 		else
 			try {
 				node = (Node) Class.forName(

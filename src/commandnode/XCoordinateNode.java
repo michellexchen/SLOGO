@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of XCor command
  */
-public class XcorNode extends NullaryNode{
+public class XCoordinateNode extends NullaryNode{
 	
 	/**
 	 * @param state
