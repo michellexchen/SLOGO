@@ -7,7 +7,7 @@ import model.SLogoCharacterState;
  * @author Adam Tache
  * Node representation of ClearScreen command
  */
-public class ClearscreenNode extends NullaryNode{
+public class ClearScreenNode extends NullaryNode{
 
 	/**
 	 * @return distance to home

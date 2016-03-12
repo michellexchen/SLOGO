@@ -11,10 +11,10 @@ import exception.SLogoException;
 
 public class CommandNameLoader extends CommandLoader{
 
-	private static final String commandExtension = "Commands.resources";
+	private static final String COMMAND_EXTENSION = "commands.resources";
 
 	public CommandNameLoader() throws SLogoException{
-		setExtension(commandExtension);
+		setExtension(COMMAND_EXTENSION);
 		super.load();
 	}
 

@@ -5,7 +5,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of PenColor command, a Display command
  */
-public class PenColorNode extends NullaryNode {
+public class GetPenColorNode extends NullaryNode {
 	
 	/**
 	 * @return current turtle's pen color index

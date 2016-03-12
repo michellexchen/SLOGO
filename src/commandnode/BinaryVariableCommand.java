@@ -1,5 +1,10 @@
 package commandnode;
 
+/**
+ * Abstract class that serves as a superclass for nodes
+ * requiring two children
+ *
+ */
 public abstract class BinaryVariableCommand extends VariableCommand{
 
 	private int NUM_CHILDREN = 2;

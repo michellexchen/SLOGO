@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
@@ -46,6 +47,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Model;
 import model.SLogoDisplayData;
+import model.SLogoVariable;
 
 /**
  * 
@@ -54,9 +56,9 @@ import model.SLogoDisplayData;
  *
  */
 public class SLogoGUIController implements Initializable, Observer {
-	
+
 	private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
-						+ "compsci308/spring16/assign/03_slogo/commands.php";
+			+ "compsci308/spring16/assign/03_slogo/commands.php";
 	private static final int POPUP_WIDTH = 900;
 	private static final int POPUP_HEIGHT = 550;
 	private static final int RGB_CONST = 255;
@@ -65,29 +67,31 @@ public class SLogoGUIController implements Initializable, Observer {
 	private WebEngine myWebEngine;
 	private ListView<String> myHistoryPaneView;
 	private ListView<String> myPropertiesPaneView = new ListView<String>();
-    private ObservableList<String> myProperties;
-    
-    private Stage myCurrentStage;
-    private Color myCanvasColor;
-    private ColorPicker myColorPicker;
-    private HBox myColorHBox;
-    
-    private SLogoCustomizerBuilder myCustomizer;
-    private SLogoPropertiesData myPropertiesData;
+	private ObservableList<String> myProperties;
+
+	private ListView<String> myVariableView;
 	
+	private Stage myCurrentStage;
+	private Color myCanvasColor;
+	private ColorPicker myColorPicker;
+	private HBox myColorHBox;
+
+	private SLogoCustomizerBuilder myCustomizer;
+	private SLogoPropertiesData myPropertiesData;
+
 	private Model myModel;
 	private String myCommand;
-		
-	
+
+
 	//Help button
-    @FXML
-    private Button myHelpButton;
-	
-    //Textfield
-    @FXML
-    private TextField myTextField;
-    
-    //Run button
+	@FXML
+	private Button myHelpButton;
+
+	//Textfield
+	@FXML
+	private TextField myTextField;
+
+	//Run button
 	@FXML
 	private Button myRunButton;
     
@@ -155,81 +159,82 @@ public class SLogoGUIController implements Initializable, Observer {
 			new SLogoException("CHECK GUI CONTROLLER CLASS");
 		}
 		myCustomizer.hide();
-		
-    	assignMenuAction();
-    	assignHelpAction();
-        assignRunAction();
-        customize();
-        assignAddWorkspaceAction();
-    }
-        
-    /**
-     * Assigns an action to Run button
-     * 
-     */
-    private void assignRunAction () {
-        myRunButton.setOnAction(e -> {
-        	myCommand = myTextField.getText();
-            myTextField.clear();
-            run(myCommand);
-        });  
-    }
-    
-    /**
-     * Assigns an action to addWorkspace Button
-     * Dependency is the model interface
-     * 
-     */
-    private void assignAddWorkspaceAction () {
-    	myAddWorkspaceButton.setOnAction(e -> {
-    		myCurrentStage = (Stage) myAddWorkspaceButton.getScene().getWindow();
-    		myCurrentStage.hide();
-    		try {
-    			getModel().addWorkspace();
-    		} catch (Exception e1) {}
-    	});
-    }
-    
-    /**
-     * Assigns an action to the HELP Button
-     */
-    private void assignHelpAction () {
-        myHelpButton.setOnAction(e -> {
-        	popup(HELP_URL);
-        });
-    }
-    
-    /**
-     * Manually assigns an action to each MenuItem
-     * 
-     * This is not the optimal design, but it was done this way
-     * because FXML (created by SceneBuilder) does not support
-     * dynamic addition of MenuItems to MenuButton
-     * 
-     */
-    private void assignMenuAction () {
-    	myProject1.setOnAction(e -> {
-    		try {
+		myVariableView = new ListView<String>();
+
+		assignMenuAction();
+		assignHelpAction();
+		assignRunAction();
+		customize();
+		assignAddWorkspaceAction();
+	}
+
+	/**
+	 * Assigns an action to Run button
+	 * 
+	 */
+	private void assignRunAction () {
+		myRunButton.setOnAction(e -> {
+			myCommand = myTextField.getText();
+			myTextField.clear();
+			run(myCommand);
+		});  
+	}
+
+	/**
+	 * Assigns an action to addWorkspace Button
+	 * Dependency is the model interface
+	 * 
+	 */
+	private void assignAddWorkspaceAction () {
+		myAddWorkspaceButton.setOnAction(e -> {
+			myCurrentStage = (Stage) myAddWorkspaceButton.getScene().getWindow();
+			myCurrentStage.hide();
+			try {
+				getModel().addWorkspace();
+			} catch (Exception e1) {}
+		});
+	}
+
+	/**
+	 * Assigns an action to the HELP Button
+	 */
+	private void assignHelpAction () {
+		myHelpButton.setOnAction(e -> {
+			popup(HELP_URL);
+		});
+	}
+
+	/**
+	 * Manually assigns an action to each MenuItem
+	 * 
+	 * This is not the optimal design, but it was done this way
+	 * because FXML (created by SceneBuilder) does not support
+	 * dynamic addition of MenuItems to MenuButton
+	 * 
+	 */
+	private void assignMenuAction () {
+		myProject1.setOnAction(e -> {
+			try {
 				getModel().switchWorkspace(0);
 			} catch (Exception e1) {}
-    	});
-    	myProject2.setOnAction(e -> {
-    		try {
+		});
+		myProject2.setOnAction(e -> {
+			try {
 				getModel().switchWorkspace(1);
 			} catch (Exception e1) {}
-    	});
-    	myProject3.setOnAction(e -> {
-    		try {
+		});
+		myProject3.setOnAction(e -> {
+			try {
 				getModel().switchWorkspace(2);
 			} catch (Exception e1) {}
-    	});
-    	myProject4.setOnAction(e -> {
-    		try {
+		});
+		myProject4.setOnAction(e -> {
+			try {
 				getModel().switchWorkspace(3);
 			} catch (Exception e1) {}
-    	});
-    	myProject5.setOnAction(e -> {
-    		try {
+		});
+		myProject5.setOnAction(e -> {
+			try {
 				getModel().switchWorkspace(4);
 			} catch (Exception e1) {}
     	});
@@ -269,122 +274,133 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     private void popup(String link){
 		myBrowser = new WebView();
-        myWebEngine = myBrowser.getEngine();
-        myWebEngine.load(link);
-    	VBox vbox = new VBox();
-        Scene scene = new Scene(vbox);
-        Stage stage = new Stage();        
-        vbox.getChildren().addAll(myBrowser);
-        VBox.setVgrow(myBrowser, Priority.ALWAYS);
-        stage.setTitle("SLOGO Basic Commands");
-        stage.setWidth(POPUP_WIDTH);
-        stage.setHeight(POPUP_HEIGHT);
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    /**
-     * Lists commands in the commandhistory pane
-     * 
-     */
-    private void displayHistory(){
-       	myHistoryPaneView = new ListView<String>();
-    	ObservableList<String> items =FXCollections.observableArrayList (
-    			myHistory);
-    	myHistoryPaneView.setItems(items);
-    	myCommandHistoryPane.setContent(myHistoryPaneView);
+		myWebEngine = myBrowser.getEngine();
+		myWebEngine.load(link);
+		VBox vbox = new VBox();
+		Scene scene = new Scene(vbox);
+		Stage stage = new Stage();        
+		vbox.getChildren().addAll(myBrowser);
+		VBox.setVgrow(myBrowser, Priority.ALWAYS);
+		stage.setTitle("SLOGO Basic Commands");
+		stage.setWidth(POPUP_WIDTH);
+		stage.setHeight(POPUP_HEIGHT);
+		stage.setScene(scene);
+		stage.show();
+	}
 
-    	myHistoryPaneView.getSelectionModel().selectedItemProperty().addListener
-    												(new ChangeListener<String>() {
-    	    @Override
-    	    public void changed(ObservableValue<? extends String> observable, 
-    	    									String oldValue, String newValue) {
-    	    	if(newValue.contains("ERROR")) {
-    	    		//TODO: Do something about this magic number '7'
-    	    		myCommand = newValue.substring(7);
-    	    	} else {
-    	    		myCommand = newValue;
-    	    	}
-    	        run(myCommand);
-    	    }
-    	});
-    }    
-    
-    /**
-     * Displays properties
-     * 
-     */
-    public void displayProperties(){
-    	myPropertiesPaneView.setItems(myProperties);
-    	myPropertiesPaneView.setPrefSize(200, 150);
-    }
-    
-    /**
-     * Updates property info on the bottom left side of the screen
-     * 
-     * @param displayData
-     */
-    public void updateProperties(SLogoDisplayData displayData){
-    	
-    	myProperties =FXCollections.observableArrayList (
-    			("Direction: " + Double.toString(displayData.getDirection())),
-    			("X position: " + displayData.getX()),
-    			("Y position: " + displayData.getY()),
-    			("Pen Down: " + displayData.getPen().getDown()),
-    			("Pen Color: " + displayData.getPen().getColorIndex()),
-    			("Pen Size: " + displayData.getPen().getSize())
-    			);
-    	
-    	myPropertiesPaneView.setPrefSize(200, 150);
-    	myPropertiesPaneView.setItems(myProperties);
-    }
-    
-    /**
-     * Assigns an action to the customize button
-     * 
-     */
-    private void customize(){
-    	myCustomizeButton.setOnMouseClicked(e -> {
-    		myCustomizer.setPropertiesData(myPropertiesData);
-    		myCustomizer.show();    		
+	/**
+	 * Lists commands in the commandhistory pane
+	 * 
+	 */
+	private void displayHistory(){
+		myHistoryPaneView = new ListView<String>();
+		ObservableList<String> items =FXCollections.observableArrayList(myHistory);
+		myHistoryPaneView.setItems(items);
+		myCommandHistoryPane.setContent(myHistoryPaneView);
+
+		myHistoryPaneView.getSelectionModel().selectedItemProperty().addListener
+		(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, 
+					String oldValue, String newValue) {
+				if(newValue.contains("ERROR")) {
+					//TODO: Do something about this magic number '7'
+					myCommand = newValue.substring(7);
+				} else {
+					myCommand = newValue;
+				}
+				run(myCommand);
+			}
 		});
-    }
+	}    
 
-    /**
-     * Converts Color object to its hex string
-     * 
-     * @param color
-     * @return
-     */
-    public String toRGBCode (Color color) {
-    	return String.format( "#%02X%02X%02X",
-    			(int) (color.getRed() * RGB_CONST),
-    			(int) (color.getGreen() * RGB_CONST),
-    			(int) (color.getBlue() * RGB_CONST));
-    }
-    
-    /**
-     * Getter for Customizer Button
-     * 
-     * @return
-     */
-    public SLogoCustomizerBuilder getCustomizer() {
-    	return myCustomizer;
-    }
+	public void displayVariable (ObservableList<SLogoVariable> variables) {
+		
+		
+		
+		ObservableList<String> list = (ObservableList<String>) new ArrayList<String>();
+		variables.forEach(n -> list.add(n.getName()));
+		
+		getVariableView().setItems((ObservableList<String>) list);
+		myVariablePane.setContent(getVariableView());
+	}
+	
+	
+	/**
+	 * Displays properties
+	 * 
+	 */
+	public void displayProperties(){
+		myPropertiesPaneView.setItems(myProperties);
+		myPropertiesPaneView.setPrefSize(200, 150);
+	}
 
-    /**
-     * Colorpicker method for Customize button
-     * 
-     * @return
-     */
-    private HBox chooseColor(){	//for selecting color   		
+	/**
+	 * Updates property info on the bottom left side of the screen
+	 * 
+	 * @param displayData
+	 */
+	public void updateProperties(SLogoDisplayData displayData){
+
+		myProperties =FXCollections.observableArrayList (
+				("Direction: " + Double.toString(displayData.getDirection())),
+				("X position: " + displayData.getX()),
+				("Y position: " + displayData.getY()),
+				("Pen Down: " + displayData.getPen().getDown()),
+				("Pen Color: " + displayData.getPen().getColorIndex()),
+				("Pen Size: " + displayData.getPen().getSize())
+				);
+
+		myPropertiesPaneView.setPrefSize(200, 150);
+		myPropertiesPaneView.setItems(myProperties);
+	}
+
+	/**
+	 * Assigns an action to the customize button
+	 * 
+	 */
+	private void customize(){
+		myCustomizeButton.setOnMouseClicked(e -> {
+			myCustomizer.setPropertiesData(myPropertiesData);
+			myCustomizer.show();    		
+		});
+	}
+
+	/**
+	 * Converts Color object to its hex string
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public String toRGBCode (Color color) {
+		return String.format( "#%02X%02X%02X",
+				(int) (color.getRed() * RGB_CONST),
+				(int) (color.getGreen() * RGB_CONST),
+				(int) (color.getBlue() * RGB_CONST));
+	}
+
+	/**
+	 * Getter for Customizer Button
+	 * 
+	 * @return
+	 */
+	public SLogoCustomizerBuilder getCustomizer() {
+		return myCustomizer;
+	}
+
+	/**
+	 * Colorpicker method for Customize button
+	 * 
+	 * @return
+	 */
+	private HBox chooseColor(){	//for selecting color   		
 		Label colorLabel = new Label("Select background color: ");
-		
+
 		myColorPicker = new ColorPicker();
-        myColorPicker.setOnAction(e -> {
-        	myCanvasColor = myColorPicker.getValue();
-        });
-		
+		myColorPicker.setOnAction(e -> {
+			myCanvasColor = myColorPicker.getValue();
+		});
+
 		myColorHBox = new HBox();
 		myColorHBox.getStylesheets().add("view/splashstyle.css");
 		myColorHBox.getChildren().addAll(colorLabel, myColorPicker);
@@ -400,6 +416,7 @@ public class SLogoGUIController implements Initializable, Observer {
     	this.myCanvasColor = new SLogoCustomizerBuilder(this).getMyPaneColor();
     }
     
+
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
 	}
@@ -411,7 +428,7 @@ public class SLogoGUIController implements Initializable, Observer {
 	public void addToCanvas(Node list) {
 		getCanvas().getChildren().add(list);
 	}
-	
+
 	public void addToCanvas(List<Line> nodelist) {
 		getCanvas().getChildren().addAll(nodelist);
 	}
@@ -421,10 +438,10 @@ public class SLogoGUIController implements Initializable, Observer {
 		this.myCanvas = myCanvas;
 	}
 
-    public void setPropertiesData(SLogoPropertiesData propertiesData) {
-        this.myPropertiesData = propertiesData;
-        myPropertiesData.addObserver(this);
-    }
+	public void setPropertiesData(SLogoPropertiesData propertiesData) {
+		this.myPropertiesData = propertiesData;
+		myPropertiesData.addObserver(this);
+	}
 
 	/**
 	 * @return the myModel
@@ -467,6 +484,20 @@ public class SLogoGUIController implements Initializable, Observer {
 	 */
 	public String getCommand() {
 		return myCommand;
+	}
+
+	/**
+	 * @return the myVariableView
+	 */
+	public ListView<String> getVariableView() {
+		return myVariableView;
+	}
+
+	/**
+	 * @param myVariableView the myVariableView to set
+	 */
+	public void setVariableView(ListView<String> myVariableView) {
+		this.myVariableView = myVariableView;
 	}
 
 }

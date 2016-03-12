@@ -128,8 +128,8 @@ public class SLogoModel implements Model {
 	 */
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {
-		createNewWorkspace();
 		getView().addVisualizer();
+		createNewWorkspace();
 		getCurrentWorkspace().addListeners();
 		getView().updateDisplayData();
 	}

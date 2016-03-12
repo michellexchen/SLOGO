@@ -7,6 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 
+/**
+ * ToggleSwitch GUI module used in GUI's Customizer button
+ *
+ */
+
+
 public class SLogoCustomizerToggleSwitch extends HBox {
 	
 	private final Label label = new Label();

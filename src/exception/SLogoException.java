@@ -1,6 +1,3 @@
-/**
- * 
- */
 package exception;
 
 import java.util.Optional;
@@ -22,6 +19,8 @@ public class SLogoException extends Exception {
 	private Optional<String> unresolvedException;
 
 	/**
+	 * SLogoException inherits from its superclass Exception
+	 * 
 	 * @param arg0
 	 */
 	public SLogoException(String arg0) {

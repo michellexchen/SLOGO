@@ -11,8 +11,8 @@ import java.util.HashMap;
 
 public class PenStrokeLoader extends FileLoader{
 
-	private final String strokeDirectory = "resources/resources";
-	private final String strokeExtension = "PenStrokes.properties";
+	private static final String STROKE_PATH = "resources/resources";
+	private static final String STROKE_EXTENSION = "penstrokes.properties";
 	
 	public HashMap<Integer, String> getStrokeMap() {
 		// TODO Auto-generated method stub

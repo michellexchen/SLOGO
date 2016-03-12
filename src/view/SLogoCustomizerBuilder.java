@@ -38,12 +38,14 @@ import parser.CommandNameLoader;
 public class SLogoCustomizerBuilder extends Observable {
 	//TODO shapes
 	
-    private final int XPROMPTSIZE = 500;
-    private final int YPROMPTSIZE = 300; 
-    private final int PADDING = 55;
-	private final int SPLASHSIZE = 400;
-    private final int COLORLABELSIZE = 202;
-    private final int PREFSIZE = 40;
+	private static final String CSS_PATH = "view/splashstyle.css";
+	
+    private static final int XPROMPTSIZE = 500;
+    private static final int YPROMPTSIZE = 300; 
+    private static final int PADDING = 55;
+	private static final int SPLASHSIZE = 400;
+    private static final int COLORLABELSIZE = 202;
+    private static final int PREFSIZE = 40;
 	
 	private Stage myCustomizerStage;
 	private Scene myCustomizerScene;
@@ -87,6 +89,10 @@ public class SLogoCustomizerBuilder extends Observable {
 		myCommandNameLoader = new CommandNameLoader();
 	}
 	
+	/**
+	 * General initializer method
+	 * 
+	 */
 	private void setup(){
 		myPaneColor = Color.WHITE;
 		//myPenColor = Color.BLACK;
@@ -98,13 +104,18 @@ public class SLogoCustomizerBuilder extends Observable {
 		setButton();
 	}
 	
+	/**
+	 * Adopts a VBox style to line elements up vertically
+	 * 
+	 * @return VBox
+	 */
 	private VBox setVBox(){
 		vbox = new VBox();
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
 		vbox.setPadding(new Insets(PADDING));
 		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, 
 										thicknessSliderHb, switchHb, buttonHb);
-		vbox.getStylesheets().add("view/splashstyle.css");
+		vbox.getStylesheets().add(CSS_PATH);
 		return vbox;
 	}
 	
@@ -260,7 +271,10 @@ public class SLogoCustomizerBuilder extends Observable {
 	}
 	
 
-	
+	/**
+	 * Change penDown settings
+	 * 
+	 */
 	private void setPenDown(){
 		switchHb = new HBox();
 		switchLabel = new Label("Pen position?: ");

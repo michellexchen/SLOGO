@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
@@ -26,13 +27,27 @@ public abstract class FileLoader {
 	private String extension;
 	private String fileName;
 	
+	private String[] splitSpecial(String str) {
+		ArrayList<String> resultList = new ArrayList<String>();
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == '|') {
+				resultList.add(str.substring(0, i));
+				resultList.add(str.substring(i + 1));
+				break;
+			}
+		}
+		String[] resultArray = new String[resultList.size()];
+		return resultList.toArray(resultArray);
+
+	}
+	
 	public void createSplitBackMap() {
 		myBackMap = new HashMap<String, String>();
 		Set<Object> keySet = myProperties.keySet();
 		for (Object o: keySet) {
-			String currentProperty = myProperties.getProperty((String) o);
+			String currentProperty = getString((String) o);
 			if (currentProperty.contains("|")) {
-				String[] splitProperty = currentProperty.split("|");
+				String[] splitProperty = splitSpecial(currentProperty);
 				for (String s: splitProperty) {
 					myBackMap.put(s, (String) o);
 				}

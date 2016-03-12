@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Cosine, Cos commands
  */
-public class CosNode extends UnaryNode{
+public class CosineNode extends UnaryNode{
 
 	/**
 	 * @return Cosine evaluation of radians converted from degrees

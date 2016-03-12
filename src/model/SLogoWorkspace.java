@@ -19,16 +19,18 @@ import view.View;
 
 public class SLogoWorkspace {
 
+	
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
-
-	// Lists declared for Observable List initialization
+	
+	// Lists declared for Observable List initialization, not to be used
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
 
 	private List<SLogoCharacter> myCharacters;
+	private List<SLogoCharacter> myActiveTurtles;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<SLogoVariable> myObservableVariableList;
@@ -53,8 +55,9 @@ public class SLogoWorkspace {
 
 	public void initialize() throws SLogoException {
 		myRootEvaluator = new RootEvaluator(this);
-		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
-
+		resetActiveTurtles();
+		myActiveTurtles.add(turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY()));
+		//turtleFactory.createTurtle(30, 30);
 	}
 
 	/**
@@ -85,7 +88,7 @@ public class SLogoWorkspace {
 				change -> getView().updateCommandHistory());
 
 		getObservableVariableList().addListener((ListChangeListener) 
-				change -> getView().updateVariables());
+				change -> getView().updateVariable(getObservableVariableList()));
 	}
 
 	public List<SLogoDisplayData> getDataList() {
@@ -99,9 +102,25 @@ public class SLogoWorkspace {
 	public List<SLogoCharacter> getCharacterList() {
 		return myCharacters;
 	}
+	
+	public SLogoTurtleFactory getCurrentTurtleFactory() {
+		return turtleFactory;
+	}
 
 	public void addNewCharacter(SLogoCharacter character) {
 		myCharacters.add(character);
+	}
+	
+	public List<SLogoCharacter> getActiveTurtlesList() {
+		return myActiveTurtles;
+	}
+	
+	public void addActiveTurtle(SLogoCharacter turtle){
+		myActiveTurtles.add(turtle);
+	}
+	
+	public void resetActiveTurtles(){
+		myActiveTurtles = new ArrayList<SLogoCharacter>();
 	}
 
 	public void removeCharacter(SLogoCharacter character) {
@@ -199,9 +218,9 @@ public class SLogoWorkspace {
 		return lookupVariable(varName);
 	}
 
-	public List<SLogoVariable> getVarList() {
-		return myObservableVariableList;
-	}
+//	public List<SLogoVariable> getVarList() {
+//		return myObservableVariableList;
+//	}
 
 	public ObservableList<SLogoVariable> getObservableVariableList() {
 		return myObservableVariableList;

@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Log command, a Math command
  */
-public class LogarithmNode extends UnaryNode{
+public class NaturalLogNode extends UnaryNode{
 	
 	/**
 	 * @return Logarithm evaluation

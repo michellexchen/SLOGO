@@ -4,9 +4,15 @@ import java.util.Observable;
 
 import javafx.scene.paint.Color;
 
+/**
+ * A container class that is referenced by view 
+ * Keeps track of screen information that could be dynamically
+ * altered mid-simulation by the user through GUI interaction
+ * 
+ * Users Observable interface
+ *
+ */
 public class SLogoPropertiesData extends Observable {
-
-	//keeps all properties for view, updates using observable
 	
 	private Color myPaneColor; 
 

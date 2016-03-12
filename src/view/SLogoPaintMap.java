@@ -8,14 +8,17 @@ import javafx.scene.paint.Color;
  * The purpose of this class is to create a map that maps the names of Colors to their 
  * JavaFx color object and vice versa.
  * 
+ * This is a Singleton class that is used throughout the program
+ * and only one instance is allowed
+ * 
  */
-public class PaintMap {
+public class SLogoPaintMap {
 	
-	private static PaintMap instance;
+	private static SLogoPaintMap instance;
 	private Map<String, Color> stringToColor;
 	private Map<Color, String> colorToString;
 
-	private PaintMap() {
+	private SLogoPaintMap() {
 		colorToString = new HashMap<Color, String>();
 		stringToColor = new HashMap<String, Color>();
 		initStringToColorMap();
@@ -26,9 +29,9 @@ public class PaintMap {
 	 * 
 	 * @return paintmap instance
 	 */
-	public static synchronized PaintMap getInstance() {
+	public static synchronized SLogoPaintMap getInstance() {
 		if (instance == null) {
-			instance = new PaintMap();
+			instance = new SLogoPaintMap();
 		}
 		return instance;
 	}

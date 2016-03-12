@@ -15,6 +15,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Model;
 import model.SLogoPosition;
+import model.SLogoVariable;
 import model.SLogoDisplayData;
 
 /**
@@ -23,7 +24,7 @@ import model.SLogoDisplayData;
  * on the screen to show the user
  *
  */
-public class SLogoVisualizer extends Observable implements Observer {
+public class SLogoVisualizer implements Observer {
 
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
@@ -73,9 +74,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		// data = myPromptBuilder.getData();
 		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
 		getModel().loadLanguage();
-
-		//Get the ObservableDataList
-		setObservableDataList(getModel().getObservableDataList());
 
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -153,8 +151,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 
-		getModel().getObservableDataList();
-		for (SLogoDisplayData turtledata : getObservableDataList()) {
+		//getModel().getObservableDataList();
+		for (SLogoDisplayData turtledata : getModel().getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
 
@@ -215,6 +213,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void updateCommandHistory () {
 
+	}
+
+	public void updateVariables (ObservableList<SLogoVariable> variables) {
+		getGUIController().displayVariable(variables);
 	}
 
 	/**
@@ -291,5 +293,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	public SLogoPropertiesData getPropertiesData() {
 		return myProperties;
 	}
+
 	
 }
