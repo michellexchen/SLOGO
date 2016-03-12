@@ -197,7 +197,7 @@ public class SLogoVisualizer implements Observer {
 		turtle.setSmooth(true);
 		turtle.setCache(true);
 
-		boundCoordinates(displaydata);
+		//boundCoordinates(displaydata);
 		
 		//place turtle using Position and center at the coordinates (x,y)
 		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);

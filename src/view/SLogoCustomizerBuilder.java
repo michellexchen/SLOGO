@@ -310,9 +310,11 @@ public class SLogoCustomizerBuilder extends Observable {
 //			System.out.println(isDown);
 
 			//change pen width
-			myGUI.run(myCommandNameLoader.getString("setpensize") + " " + myPenWidth);
 			myGUI.run(myCommandNameLoader.getString("setbg") + " "+ data.indexOf(myPaneColor));
 			myGUI.run(myCommandNameLoader.getString("setpc") + " "+ data.indexOf(myPenColor));
+			
+			
+			myGUI.run(myCommandNameLoader.getString("setpensize") + " " + myPenWidth);
 			if (switchButton.isDown()) {
 				myGUI.run(myCommandNameLoader.getString("pd"));
 			} else {
