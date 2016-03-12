@@ -26,6 +26,8 @@ import javafx.stage.Stage;
  */
 public class SLogoCustomizerBuilder extends Observable {
 	
+	private static final String CSS_PATH = "view/splashstyle.css";
+	
     private static final int XPROMPTSIZE = 500;
     private static final int YPROMPTSIZE = 300; 
     private static final int PADDING = 45;
@@ -96,7 +98,7 @@ public class SLogoCustomizerBuilder extends Observable {
 		vbox.setPadding(new Insets(PADDING));
 		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, 
 										thicknessSliderHb, switchHb, buttonHb);
-		vbox.getStylesheets().add("view/splashstyle.css");
+		vbox.getStylesheets().add(CSS_PATH);
 		return vbox;
 	}
 	

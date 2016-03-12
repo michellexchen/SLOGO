@@ -14,8 +14,8 @@ import javafx.scene.paint.Color;
 
 public class ColorLoader extends FileLoader{
 
-	private final String colorDirectory = "resources/resources";
-	private final String colorExtension = "Colors.resources";
+	private static final String COLOR_PATH = "resources/resources";
+	private static final String COLOR_EXTENSION = "colors.resources";
 	private HashMap<Integer, double[]> myRGBMap;
 	private double DEFAULT_OPACITY = 1.0;
 
@@ -26,8 +26,8 @@ public class ColorLoader extends FileLoader{
 	}
 
 	public void load() throws SLogoException {
-		setDirectory(colorDirectory);
-		setExtension(colorExtension);
+		setDirectory(COLOR_PATH);
+		setExtension(COLOR_EXTENSION);
 		super.load();
 	}
 

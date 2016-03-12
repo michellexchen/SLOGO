@@ -23,7 +23,9 @@ public class RootEvaluator {
 	public double evaluateRoots(List<Node> myRoots) throws SLogoException {
 		double evaluation = 0;
 		System.out.println(myWorkspace);
-		List<SLogoCharacter> myCharacters = myWorkspace.getActiveTurtlesList(); //iterate only through the list of active turtles
+		
+		//iterate only through the list of active turtles
+		List<SLogoCharacter> myCharacters = myWorkspace.getActiveTurtlesList(); 
 		for (Node myRoot : myRoots) {
 			for (SLogoCharacter character : myCharacters) {
 //			for(SLogoCharacter character : myWorkspace.getCharacterList()) { //have not debugged so don't iterate through active turtles

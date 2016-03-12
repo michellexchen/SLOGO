@@ -11,10 +11,10 @@ import exception.SLogoException;
 
 public class InstructionLoader extends CommandLoader{
 	
-	private static final String commandExtension = "Instructions.resources";
+	private static final String COMMAND_EXTENSION = "instructions.resources";
 
 	public InstructionLoader() throws SLogoException{
-		setExtension(commandExtension);
+		setExtension(COMMAND_EXTENSION);
 		super.load();
 	}
 
