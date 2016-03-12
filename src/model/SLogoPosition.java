@@ -18,6 +18,10 @@ public class SLogoPosition {
 	private double myX;
 	private double myY;
 
+	/**
+	 * Default constructor that sets coordinates to 0
+	 * 
+	 */
 	public SLogoPosition () {
 		myPrevX = 0;
 		myPrevY = 0;
@@ -34,6 +38,7 @@ public class SLogoPosition {
 	
 	/**
 	 * Sets new XY coordinates and automatically updates previous X,Y values
+	 * Coordinates are bounded
 	 * 
 	 * @param x
 	 * @param y
@@ -41,18 +46,25 @@ public class SLogoPosition {
 	public void setXY (double x, double y) {		
 		myPrevX = myX;
 		myPrevY = myY;
-//		myX = x;
-//		myY = y;
 		myX = boundCoordinate(x);
 		myY = boundCoordinate(y);
-		
 	}
 
+	/**
+	 * Sets new X coordinate after bounding and updates previous value
+	 * 
+	 * @param x
+	 */
 	public void setX (double x) {
 		myPrevX = myX;
 		myX = boundCoordinate(x);
 	}
 	
+	/**
+	 * Sets new Y coordinate after bounding and updates previous value
+	 * 
+	 * @param x
+	 */
 	public void setY (double y) {
 		myPrevY = myY;
 		myY = boundCoordinate(y);
@@ -73,7 +85,6 @@ public class SLogoPosition {
 		return myY;
 	}
 	
-	
 	/**
 	 * Bounds coordinates when they go out of the visible range of coordinates
 	 * 
@@ -88,10 +99,4 @@ public class SLogoPosition {
 		}
 		return coor;
 	}
-//		if (coor > PANE_SIZE/2) {
-//			return PANE_SIZE / 2;
-//		}
-//		if (coor < -PANE_SIZE/2) {
-//			return -PANE_SIZE/2;
-//		}
 }

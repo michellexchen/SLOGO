@@ -10,9 +10,8 @@ import javafx.scene.paint.Color;
  */
 
 public abstract class SLogoCharacterState {
+	
 	private SLogoPosition myPosition;
-	//	private double myXCoordinate;
-	//	private double myYCoordinate;
 	private double myDirection;
 	private boolean isHidden;
 	private SLogoPen myPen;
@@ -24,17 +23,30 @@ public abstract class SLogoCharacterState {
 	private boolean toClear;
 	private ResourceLoader resourceLoader = new ResourceLoader();
 
+	
+	/**
+	 * Default constructor that takes in essential turtle variable fields
+	 * such as Pen, Coordinates, direction, and boolean predicates
+	 * 
+	 * @param myPen
+	 * @param xCoor
+	 * @param yCoor
+	 * @param direction
+	 * @param isHidden
+	 * @param shapeIndex
+	 * @throws SLogoException
+	 */
 	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
 			boolean isHidden, int shapeIndex) throws SLogoException {
+		
 		this.myPen = myPen;
-		//		this.myXCoordinate = xCoor;
-		//		this.myYCoordinate = yCoor;
 		this.myPosition = new SLogoPosition(xCoor, yCoor);
 		this.myDirection = direction;
 		this.isHidden = isHidden;
 		this.myShapeIndex = shapeIndex;
 		setImage(myShapeIndex);
 		setBackground(myBGColorIndex);
+		
 	}
 
 	public SLogoPen getPen() {
@@ -50,22 +62,18 @@ public abstract class SLogoCharacterState {
 	}
 
 	public void setXCoor(double xCoor) {
-		//		this.myXCoordinate = xCoor;
 		this.myPosition.setX(xCoor);
 	}
 
 	public void setYCoor(double yCoor) {
-		//		this.myYCoordinate = yCoor;
 		this.myPosition.setY(yCoor);
 	}
 
 	public double getXCoor() {
-		//		return myXCoordinate;
 		return this.myPosition.getX();
 	}
 
 	public double getYCoor() {
-		//		return myYCoordinate;
 		return this.myPosition.getY();
 	}
 

@@ -60,6 +60,7 @@ public class SLogoDisplayData extends Observable{
 	 * @param state
 	 */
 	public void updateData() {
+		
 		myPen = myState.getPen();
 		prevDirection = myDirection;
 		myDirection = myState.getDirection();

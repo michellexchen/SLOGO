@@ -158,8 +158,6 @@ public class SLogoVisualizer implements Observer {
 		turtle.setPreserveRatio(true);
 		turtle.setSmooth(true);
 		turtle.setCache(true);
-
-//		boundCoordinates(displaydata);
 		
 		//place turtle using Position and center at the coordinates (x,y)
 		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
@@ -172,39 +170,6 @@ public class SLogoVisualizer implements Observer {
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
 	}
-
-	/**
-	 * Bounds coordinates when they go out of the visible range of coordinates
-	 * 
-	 * @param displaydata
-	 */
-	private void boundCoordinates (SLogoDisplayData displaydata) {
-		if (displaydata.getX() > PANE_SIZE/2) {
-			displaydata.setX(PANE_SIZE/2);
-		}
-		if (displaydata.getX() < -PANE_SIZE/2) {
-			displaydata.setX(-PANE_SIZE/2); 
-		}
-		if (displaydata.getY() > PANE_SIZE/2) {
-			displaydata.setY(PANE_SIZE/2);
-		}
-		if (displaydata.getY() < -PANE_SIZE/2) {
-			displaydata.setY(-PANE_SIZE/2);
-		}
-//		if (displaydata.getX() > PANE_SIZE - PADDING) {
-//			displaydata.setX(PANE_SIZE - PADDING);
-//		}
-//		if (displaydata.getX() < PADDING) {
-//			displaydata.setX(PADDING); 
-//		}
-//		if (displaydata.getY() > PANE_SIZE - PADDING) {
-//			displaydata.setY(PANE_SIZE - PADDING);
-//		}
-//		if (displaydata.getY() < PADDING) {
-//			displaydata.setY(PADDING);
-//		}
-	}
-	
 	
 	/**
 	 * This method updates command history display in GUI.
