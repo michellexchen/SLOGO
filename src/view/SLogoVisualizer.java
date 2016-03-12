@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -101,6 +100,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
+	/**
+	 * Implements Observable interface's update
+	 * 
+	 */
 	@Override
 	public void update(Observable observable, Object arg1) {
 		updateDisplayData();
@@ -169,6 +172,11 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
+	/**
+	 * Places a turtle on canvas
+	 * 
+	 * @param displaydata
+	 */
 	public void placeTurtle(SLogoDisplayData displaydata) {
 		Image image = new Image(IMAGE_PATH + displaydata.getImage());
 

@@ -20,12 +20,11 @@ public class SLogoWorkspace {
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
 
-	// NEVER USE THESE: BUG ALERT!
+	// Lists declared for Observable List initialization
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
 
-	// BELOW ARE TO BE USED
 	private List<SLogoCharacter> myCharacters;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
@@ -49,6 +48,13 @@ public class SLogoWorkspace {
 		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
 	}
 
+	/**
+	 * Observable lists initialized using currently-existing ArrayLists
+	 * 
+	 * @param datalist
+	 * @param commandhistory
+	 * @param variableList
+	 */
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
 			List<String> commandhistory,
 			List<SLogoVariable> variableList) {
@@ -57,6 +63,10 @@ public class SLogoWorkspace {
 		myObservableVariableList =  FXCollections.observableArrayList(variableList);
 	}
 
+	/**
+	 * Listeners added at initialization
+	 * 
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
 		getObservableDataList().addListener((ListChangeListener) 
@@ -65,7 +75,6 @@ public class SLogoWorkspace {
 		getObservableCommandHistory().addListener((ListChangeListener) 
 				change -> getView().updateCommandHistory());
 
-		//Wrong! changed to variablelist
 		getObservableVariableList().addListener((ListChangeListener) 
 				change -> getView().updateVariables());
 	}
@@ -100,9 +109,6 @@ public class SLogoWorkspace {
 
 	public void addToVarMap(SLogoVariable variable){
 		myObservableVariableList.add(variable);
-		//		for(String each: myObservableVariableMap.keySet()){
-		//			System.out.println(each + " " + myObservableVariableMap.get(each));
-		//		}
 	}
 
 	/**
