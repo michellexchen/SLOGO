@@ -28,6 +28,7 @@ public class SLogoVisualizer implements Observer {
 
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
+	private static final int RGB_CONST = 255;
 
 	private int myTurtleSize = 40;
 
@@ -227,9 +228,9 @@ public class SLogoVisualizer implements Observer {
 	 */
 	public String toRGBCode (Color color) {
 		return String.format( "#%02X%02X%02X",
-				(int)( color.getRed() * 255 ),
-				(int)( color.getGreen() * 255 ),
-				(int)( color.getBlue() * 255 ) );
+				(int) (color.getRed() * RGB_CONST),
+				(int) (color.getGreen() * RGB_CONST),
+				(int) (color.getBlue() * RGB_CONST));
 	}
 
 	//////////////////////////
