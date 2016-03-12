@@ -2,8 +2,6 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,28 +12,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -410,35 +398,65 @@ public class SLogoGUIController implements Initializable, Observer {
         return myColorHBox;
     }
 
+    /**
+     * Returns current pane color
+     * 
+     * @return
+     */
     public Color getPaneColor(){
         return myCanvasColor;
     }
 
+    /**
+     * Sets new pane color
+     * 
+     * @throws SLogoException
+     */
     public void setPaneColor() throws SLogoException{
         this.myCanvasColor = new SLogoCustomizerBuilder(this).getMyPaneColor();
     }
 
+    /**
+     * Sets myCommand
+     * 
+     * @param myCommand
+     */
     public void setCommand(String myCommand) {
         this.myCommand = myCommand;
     }
 
+    /**
+     * Returns current canvas
+     * 
+     * @return
+     */
     public Pane getCanvas() {
         return myCanvas;
     }
 
+    /**
+     * Adds a node to canvas
+     * 
+     * @param list
+     */
     public void addToCanvas(Node list) {
         getCanvas().getChildren().add(list);
     }
 
+    /**
+     * Adds a list of nodes to canvas
+     * 
+     * @param nodelist
+     */
     public void addToCanvas(List<Line> nodelist) {
         getCanvas().getChildren().addAll(nodelist);
     }
 
-
-    public void setCanvas(Pane myCanvas) {
-        this.myCanvas = myCanvas;
-    }
-
+    /**
+     * Sets a new PropertiesData
+     * 
+     * @param propertiesData
+     */
     public void setPropertiesData(SLogoPropertiesData propertiesData) {
         this.myPropertiesData = propertiesData;
         myPropertiesData.addObserver(this);

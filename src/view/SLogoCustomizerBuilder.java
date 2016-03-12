@@ -78,6 +78,13 @@ public class SLogoCustomizerBuilder extends Observable {
     private CommandNameLoader myCommandNameLoader;
     private ResourceLoader myResourceLoader;
 
+    /**
+     * Default constructor that initializes ResourceLoader
+     * Stage and Scene set
+     * 
+     * @param myGUI
+     * @throws SLogoException
+     */
     public SLogoCustomizerBuilder(SLogoGUIController myGUI) throws SLogoException {
         this.myGUI = myGUI;
         myResourceLoader = new ResourceLoader("default.properties");

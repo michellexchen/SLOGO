@@ -87,16 +87,29 @@ public class SLogoView implements View<Object> {
         this.myModel = myModel;
     }
 
+    /**
+     * Retrieves the current visualizer that is showing
+     * 
+     */
     @Override
     public SLogoVisualizer getCurrentVisualizer() {
         return myCurrentVisualizer;
     }
-
+    
+    /**
+     * Applies the updated display information gathered from
+     * newly updated DisplayData objects
+     * 
+     */
+    @Override
+    public void updateDisplayData () {
+        getCurrentVisualizer().updateDisplayData();
+    }
+    
     /**
      * Notifies Visualizer to update variables
      * 
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     public void updateVariable(ObservableList variables) {
         getCurrentVisualizer().updateVariables(variables);
     }
@@ -130,7 +143,12 @@ public class SLogoView implements View<Object> {
         this.myCurrentVisualizer = myCurrentVisualizer;
     }
 
+    /**
+     * Returns current language
+     * 
+     */
     public String getLanguage() {
         return myCurrentVisualizer.getLanguage();
     }
+
 }

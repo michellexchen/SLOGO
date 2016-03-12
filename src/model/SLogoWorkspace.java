@@ -22,14 +22,12 @@ public class SLogoWorkspace {
 	
 	// Lists declared for Observable List initialization, not to be used
 	private List<SLogoDisplayData> myDataList;
-	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
 
 	
 	private List<SLogoCharacter> myCharacters;
 	private List<SLogoCharacter> myActiveTurtles;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
-	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<SLogoVariable> myObservableVariableList;
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
@@ -41,9 +39,8 @@ public class SLogoWorkspace {
 		myView = view;
 		turtleFactory = new SLogoTurtleFactory(this);
 		myDataList = new ArrayList<SLogoDisplayData>();
-		myCommandHistory = new ArrayList<String>();
 		myVariableList = new ArrayList<SLogoVariable>();
-		createObservableLists(myDataList, myCommandHistory, myVariableList);
+		createObservableLists(myDataList, myVariableList);
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
 		myColorLoader = new ColorLoader();
@@ -59,14 +56,10 @@ public class SLogoWorkspace {
 	 * Observable lists initialized using currently-existing ArrayLists
 	 * 
 	 * @param datalist
-	 * @param commandhistory
 	 * @param variableList
 	 */
-	private void createObservableLists(List<SLogoDisplayData> datalist, 
-			List<String> commandhistory,
-			List<SLogoVariable> variableList) {
+	private void createObservableLists(List<SLogoDisplayData> datalist, List<SLogoVariable> variableList) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
-		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
 		myObservableVariableList =  FXCollections.observableArrayList(variableList);
 	}
 
@@ -79,9 +72,6 @@ public class SLogoWorkspace {
 		getObservableDataList().addListener((ListChangeListener) 
 				change -> getView().updateDisplayData());
 
-		getObservableCommandHistory().addListener((ListChangeListener) 
-				change -> getView().updateCommandHistory());
-
 		getObservableVariableList().addListener((ListChangeListener) 
 				change -> getView().updateVariable(getObservableVariableList()));
 	}
@@ -90,9 +80,6 @@ public class SLogoWorkspace {
 		return myDataList;
 	}
 
-	public List<String> getCommandHistory() {
-		return myCommandHistory;
-	}
 
 	public List<SLogoCharacter> getCharacterList() {
 		return myCharacters;
@@ -120,10 +107,6 @@ public class SLogoWorkspace {
 
 	public void removeCharacter(SLogoCharacter character) {
 		myCharacters.remove(character);
-	}
-
-	public void addNewHistoryCommand(String command) {
-		myCommandHistory.add(command);
 	}
 
 	public void addDisplayData(SLogoDisplayData displayData) {
@@ -162,21 +145,6 @@ public class SLogoWorkspace {
 	 */
 	public void setObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
 		this.myObservableDataList = myObservableDataList;
-	}
-
-	/**
-	 * @return the myObservableCommandHistory
-	 */
-	public ObservableList<String> getObservableCommandHistory() {
-		return myObservableCommandHistory;
-	}
-
-	/**
-	 * @param myObservableCommandHistory
-	 *            the myObservableCommandHistory to set
-	 */
-	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
-		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
 
 	public List<SLogoVariable> getMyVarList(){
@@ -235,5 +203,4 @@ public class SLogoWorkspace {
 	public void setRootEvaluator(RootEvaluator myRootEvaluator) {
 		this.myRootEvaluator = myRootEvaluator;
 	}
-
 }

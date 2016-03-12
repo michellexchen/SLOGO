@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -33,7 +32,6 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int SPLASHSIZE = 400;
     private static final int LABEL_FONTSIZE = 32;
     private static final int PREFSIZE = 75;
-    private static final int COLORLABELSIZE = 202;
     private static final String FONT = "Georgia";
     private static final String CSS_PATH = "view/splashstyle.css";
 
@@ -43,7 +41,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private Scene promptScene;
     private VBox vbox;
     private Label label;
-    private ComboBox comboBox;
+    private ComboBox<Object> comboBox;
     private HBox labelHb;
     private HBox langHb;
     private HBox buttonHb;

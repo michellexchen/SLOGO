@@ -40,17 +40,9 @@ public class SLogoModel implements Model {
 	 * Called at initialization
 	 * 
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners () {
-		myObservableWorkspaces.addListener((ListChangeListener) c -> {
-			getView().updateWorkspaces();
-			getView().setCurrentWorkspace(getCurrentWorkspace());
-		});
 		myCurrentWorkspace.addListeners();
-
 		getView().updateDisplayData();
-		getView().updateCommandHistory();
-		getView().updateWorkspaces();
 	}
 	
 	/**

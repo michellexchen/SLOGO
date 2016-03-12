@@ -13,6 +13,7 @@ import model.ResourceLoader;
  * 
  */
 public abstract class SLogoBuilder {
+    
     protected static final String DEFAULT_RESOURCE_PACKAGE = "file:resources/resources/";
     protected static final String DEFAULT_LANG_PACKAGE = "resources.languages/";
 

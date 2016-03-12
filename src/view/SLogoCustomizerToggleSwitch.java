@@ -14,6 +14,7 @@ import model.ResourceLoader;
 public class SLogoCustomizerToggleSwitch extends HBox {
 
     private static final int WIDTH = 80;
+    private static final int BIND_FACTOR = 2;
     private final Label label = new Label();
     private final Button button = new Button();
     private ResourceLoader myResourceLoader;
@@ -23,6 +24,10 @@ public class SLogoCustomizerToggleSwitch extends HBox {
         return switchedOn; 
     }
 
+    /**
+     * Default constructor that initializes ResourceLoader
+     * 
+     */
     public SLogoCustomizerToggleSwitch() {
         myResourceLoader = new ResourceLoader("default.properties");
         initialize();
@@ -38,6 +43,10 @@ public class SLogoCustomizerToggleSwitch extends HBox {
         });
     }
     
+    /**
+     * Initialize that assigns actions to buttons
+     * 
+     */
     private void initialize() {
         label.setText(getResourceLoader().getString("Down"));
 
@@ -52,19 +61,32 @@ public class SLogoCustomizerToggleSwitch extends HBox {
         bindProperties();
     }
 
+    /**
+     * Defines a style to use for the customizer screen
+     * 
+     */
     private void setStyle() {
         setWidth(WIDTH);
         label.setAlignment(Pos.CENTER);
         setStyle(getResourceLoader().getString("Style"));
     }
 
+    /**
+     * Bind properties
+     * 
+     */
     private void bindProperties() {
-        label.prefWidthProperty().bind(widthProperty().divide(2));
+        label.prefWidthProperty().bind(widthProperty().divide(BIND_FACTOR));
         label.prefHeightProperty().bind(heightProperty());
-        button.prefWidthProperty().bind(widthProperty().divide(2));
+        button.prefWidthProperty().bind(widthProperty().divide(BIND_FACTOR));
         button.prefHeightProperty().bind(heightProperty());
     }
 
+    /**
+     * Returns whether the penDown is true/false
+     * 
+     * @return
+     */
     public boolean isDown(){
         return label.getText().equals(getResourceLoader().getString("Down"));
     }
