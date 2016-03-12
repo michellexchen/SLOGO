@@ -60,6 +60,12 @@ public class TreeFactory {
 		}
 		return myRoots;
 	}
+	
+	private List<String> listCopy(List<String> list){
+		List<String> copy = new ArrayList<String>();
+		copy.addAll(list);
+		return copy;
+	}
 
 	/**
 	 * Create children of an already process Node
@@ -72,6 +78,7 @@ public class TreeFactory {
 		String currCommand = commandParts.remove(0);
 		if(isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
 			List<String> innerCommands = createCommandList(commandParts);
+			List<String> innerCommandsCopy = listCopy(innerCommands);
 			ListNode listNode;
 			if(isOpenParenthesis(currCommand)){
 				listNode = new ListNode(innerCommands.toArray(
@@ -79,8 +86,7 @@ public class TreeFactory {
 			}
 			else{
 				listNode = new ListNode(createNodes(innerCommands));
-				listNode.setInnerCommands(innerCommands);
-				List<String> innerCommandsClone = listNode.getInnerCommandsClone();
+				listNode.setInnerCommands(innerCommandsCopy);
 				return listNode;
 			}
 		}

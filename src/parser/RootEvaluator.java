@@ -23,9 +23,7 @@ public class RootEvaluator {
 
 	public double evaluateRoot(Node myRoot, SLogoCharacter character) throws SLogoException {
 		double evaluation = 0;
-		//		System.out.println(myWorkspace);
 		evaluation = myRoot.evaluate(character.getState());
-		// copy tree structure so that each active character can execute a tree -- (num of characters determines if we evaluate the tree copy)			evaluation = myRoot.evaluate(character.getState());
 		myWorkspace.getObservableDataList().get(myWorkspace.getCharacterList().indexOf(character))
 		.updateData();
 		System.out.println("Evaluation: " + evaluation);
