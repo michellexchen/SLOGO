@@ -11,6 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 /**
+ * DisplayData object is a container for each turtle's data
+ * that is necessary for view to visualize
+ * 
+ * This Observable class exists to separate view and model and to ensure that
+ * view does not have access to model's turtle objects
+ * 
+ * 
  * @author Hunter
  *
  */
@@ -39,6 +46,15 @@ public class SLogoDisplayData extends Observable{
 		myLines = new ArrayList<Line>();
 	}
 
+	/**
+	 * Called by command nodes to update the relevant display data
+	 * Fields that get updated include PenData, directioin, coordinates
+	 * image, hidden (boolean), ID, clearing of trails, etc.
+	 * 
+	 * applyChanges method is called in the end to notify Observers
+	 * 
+	 * @param state
+	 */
 	public void updateData(SLogoCharacterState state) {
 		myPen = state.getPen();
 		prevDirection = myDirection;

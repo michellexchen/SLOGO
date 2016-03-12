@@ -51,6 +51,13 @@ public class SLogoModel implements Model {
 		myRootEvaluator = new RootEvaluator(myCurrentWorkspace);
 	}
 
+	/**
+	 * Adds Listeners to all the Observable lists that are present
+	 * in model
+	 * 
+	 * Called at initialization
+	 * 
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners () {
 		myObservableWorkspaces.addListener((ListChangeListener) c -> {
