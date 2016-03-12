@@ -16,8 +16,6 @@ public interface Model {
 
 	public void readCommand(String command) throws SLogoException;
 
-	public void createBackend();
-
 	public void addWorkspace() throws SLogoException, IOException;
 
 	public SLogoWorkspace getCurrentWorkspace();
@@ -27,6 +25,4 @@ public interface Model {
 	public void loadLanguage();
 	
 	public void switchWorkspace(int index) throws SLogoException;
-	
-
 }

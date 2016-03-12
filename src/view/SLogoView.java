@@ -30,12 +30,6 @@ public class SLogoView implements View {
 	private List<SLogoVisualizer> myVisualizers;
 	private SLogoVisualizer myCurrentVisualizer;
 	
-	//List that keeps track of MenuItems that represent different workspaces
-	//in MenuButton
-	//private List<MenuItem> myMenuItems;
-	private ObservableList<MenuItem> myObservableMenuItems;
-	private ObservableList<String> myObservableEntries;
-
 	public SLogoView() throws SLogoException {
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 	}
@@ -44,15 +38,6 @@ public class SLogoView implements View {
 		myModel = model;
 		myVisualizers = new ArrayList<SLogoVisualizer>();
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
-		
-		//Initialize the list of MenuItems (workspaces)
-		//No longer needed?
-		myObservableMenuItems = FXCollections
-							.observableArrayList(new ArrayList<MenuItem>());
-		//Using combobox
-		myObservableEntries = FXCollections
-				.observableArrayList(new ArrayList<String>());
-		
 	}
 	
 	/**
@@ -65,16 +50,6 @@ public class SLogoView implements View {
 		myVisualizers.add(myCurrentVisualizer);
 	}
 	
-	public void showError(SLogoException e) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error Dialog");
-		alert.setHeaderText("Error Occurred");
-		alert.setContentText("Ooops, there was an error!");
-
-		alert.showAndWait();
-		// Or restart the simulation
-	}
-
 	//////////////////////////
 	// getters and setters //
 	//////////////////////////
@@ -155,6 +130,12 @@ public class SLogoView implements View {
 		return myCurrentVisualizer.getLanguage();
 	}
 	
+	/**
+	 * 
+	 * Method that switches GUI to the Visualizer with the given index
+	 * Used in conjunction with switchWorkspace
+	 * 
+	 */
 	@Override
 	public void switchVisualizer (int index) {
 		getCurrentVisualizer().hide();
@@ -162,11 +143,15 @@ public class SLogoView implements View {
 		getCurrentVisualizer().show();
 	}
 
+	/**
+	 * Adds a new Visualizer that contains and instantiates
+	 * a new GUIController to enable multiple workspaces
+	 */
 	@Override
 	public void addVisualizer() throws SLogoException, IOException {
 		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 		getVisualizers().add(myNewVisualizer);
-		
+
 		myNewVisualizer.initialize();
 		setCurrentVisualizer(myNewVisualizer);
 	}
@@ -190,33 +175,5 @@ public class SLogoView implements View {
 	 */
 	public void setCurrentVisualizer(SLogoVisualizer myCurrentVisualizer) {
 		this.myCurrentVisualizer = myCurrentVisualizer;
-	}
-
-//	@Override
-//	public List<MenuItem> getMenuItemList() {
-//		// TODO Auto-generated method stub
-//		return getMenuItems();
-//	}
-
-	public ObservableList<MenuItem> getMenuItems() {
-		return myObservableMenuItems;
-	}
-
-	public void setMenuItems(ObservableList<MenuItem> myMenuItems) {
-		this.myObservableMenuItems = myMenuItems;
-	}
-
-	/**
-	 * @return the myObservableEntries
-	 */
-	public ObservableList<String> getObservableEntries() {
-		return myObservableEntries;
-	}
-
-	/**
-	 * @param myObservableEntries the myObservableEntries to set
-	 */
-	public void setObservableEntries(ObservableList<String> myObservableEntries) {
-		this.myObservableEntries = myObservableEntries;
 	}
 }
