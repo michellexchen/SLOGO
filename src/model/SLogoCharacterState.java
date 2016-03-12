@@ -133,4 +133,9 @@ public abstract class SLogoCharacterState {
 		this.cleared = cleared;
 	}
 
+	public String getPenStyle() {
+		// TODO Auto-generated method stub
+		return myPen.getPenStrokeStyle();
+	}
+
 }
