@@ -29,7 +29,7 @@ public class SLogoModel implements Model {
 	private LanguageLoader myLanguageDriver;
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
-	private RootEvaluator myRootEvaluator;
+	//private RootEvaluator myRootEvaluator;
 
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
@@ -48,7 +48,6 @@ public class SLogoModel implements Model {
 
 	public void initialize() throws SLogoException {	
 		createNewWorkspace();
-		myRootEvaluator = new RootEvaluator(myCurrentWorkspace);
 	}
 
 	/**
@@ -80,7 +79,7 @@ public class SLogoModel implements Model {
 	public void readCommand(String command) throws SLogoException {
 		SLogoParser parser = new SLogoParser(myCurrentWorkspace);
 		List<Node> myRoots = parser.readCommand(command);
-		myRootEvaluator.evaluateRoots(myRoots);
+		getCurrentWorkspace().getRootEvaluator().evaluateRoots(myRoots);
 	}
 
 	/**
@@ -97,8 +96,6 @@ public class SLogoModel implements Model {
 		setCurrentWorkspace(getObservableWorkspaces().get(index));
 		getView().switchVisualizer(index);
 	}
-	
-	
 	
 	/**
 	 * @return the myView
