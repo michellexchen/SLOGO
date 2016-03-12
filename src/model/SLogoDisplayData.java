@@ -168,5 +168,4 @@ public class SLogoDisplayData extends Observable{
 	public void queueClearing(boolean cleared){
 		myState.queueClearing(cleared);
 	}
-
 }

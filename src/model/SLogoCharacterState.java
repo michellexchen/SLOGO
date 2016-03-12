@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
 
 public abstract class SLogoCharacterState {
 	private SLogoPosition myPosition;
-	private double myXCoordinate;
-	private double myYCoordinate;
+	//	private double myXCoordinate;
+	//	private double myYCoordinate;
 	private double myDirection;
 	private boolean isHidden;
 	private SLogoPen myPen;
@@ -27,8 +27,8 @@ public abstract class SLogoCharacterState {
 	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
 			boolean isHidden, int shapeIndex) throws SLogoException {
 		this.myPen = myPen;
-		this.myXCoordinate = xCoor;
-		this.myYCoordinate = yCoor;
+		//		this.myXCoordinate = xCoor;
+		//		this.myYCoordinate = yCoor;
 		this.myPosition = new SLogoPosition(xCoor, yCoor);
 		this.myDirection = direction;
 		this.isHidden = isHidden;
@@ -50,19 +50,23 @@ public abstract class SLogoCharacterState {
 	}
 
 	public void setXCoor(double xCoor) {
-		this.myXCoordinate = xCoor;
+		//		this.myXCoordinate = xCoor;
+		this.myPosition.setX(xCoor);
 	}
 
 	public void setYCoor(double yCoor) {
-		this.myYCoordinate = yCoor;
+		//		this.myYCoordinate = yCoor;
+		this.myPosition.setY(yCoor);
 	}
 
 	public double getXCoor() {
-		return myXCoordinate;
+		//		return myXCoordinate;
+		return this.myPosition.getX();
 	}
 
 	public double getYCoor() {
-		return myYCoordinate;
+		//		return myYCoordinate;
+		return this.myPosition.getY();
 	}
 
 	public double getDirection() {
@@ -76,7 +80,7 @@ public abstract class SLogoCharacterState {
 	public String getImage() {
 		return myImage;
 	}
-	
+
 	/**
 	 * @param myBGColorIndex: index of new background color
 	 * Sets background color 
@@ -94,7 +98,7 @@ public abstract class SLogoCharacterState {
 	public Color getBGColor(){
 		return myBGColor;
 	}
-	
+
 	/**
 	 * @param myShapeIndex: index of new shape
 	 * Updates representation of turtle in GUI
