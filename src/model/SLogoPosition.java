@@ -15,7 +15,7 @@ public class SLogoPosition {
 	private double myY;
 
 	/**
-	 * Sets new XY coordinates
+	 * Sets new XY coordinates and automatically updates previous X,Y values
 	 * 
 	 * @param x
 	 * @param y

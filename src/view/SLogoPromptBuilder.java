@@ -45,13 +45,9 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private HBox langHb;
 	private HBox buttonHb;
 	private Label lang;
-	private HBox colorHb;
-	private Label colorLabel;
 	private Text myActionStatus;
 	private Button myOkayButton;
-	private ComboBox colorCb;
 	private Color myColor;
-	private ColorPicker colorPicker;
 	private SLogoPropertiesData myPropertiesData;
 	
 	public SLogoPromptBuilder(SLogoPropertiesData propertiesData) {
@@ -131,9 +127,6 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		myOkayButton.setOnMouseClicked(e -> {
 			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
 			getPrompt().hide();
-			//testing
-//			System.out.println(myLanguage);
-//			System.out.println(myColor.toString());
 		});
 	}
 	

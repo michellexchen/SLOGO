@@ -1,6 +1,3 @@
-/**
- * 
- */
 package exception;
 
 import java.util.Optional;

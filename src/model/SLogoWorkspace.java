@@ -6,6 +6,8 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import view.SLogoPenData;
+import parser.RootEvaluator;
 import view.SLogoPropertiesData;
 import view.View;
 
@@ -17,22 +19,25 @@ import view.View;
 
 public class SLogoWorkspace {
 
+	
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
-
-	// NEVER USE THESE: BUG ALERT!
+	private RootEvaluator myRootEvaluator;
+	
+	// Lists declared for Observable List initialization, not to be used
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
 
-	// BELOW ARE TO BE USED
 	private List<SLogoCharacter> myCharacters;
+	private List<SLogoCharacter> myActiveTurtles;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<SLogoVariable> myObservableVariableList;
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
 	private SLogoPropertiesData myPropertiesData;
+	private SLogoPenData myPenData;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
@@ -46,9 +51,19 @@ public class SLogoWorkspace {
 	}
 
 	public void initialize() throws SLogoException {
-		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
+		myRootEvaluator = new RootEvaluator(this);
+		resetActiveTurtles();
+		myActiveTurtles.add(turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY()));
+		//turtleFactory.createTurtle(30, 30);
 	}
 
+	/**
+	 * Observable lists initialized using currently-existing ArrayLists
+	 * 
+	 * @param datalist
+	 * @param commandhistory
+	 * @param variableList
+	 */
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
 			List<String> commandhistory,
 			List<SLogoVariable> variableList) {
@@ -57,15 +72,22 @@ public class SLogoWorkspace {
 		myObservableVariableList =  FXCollections.observableArrayList(variableList);
 	}
 
+	/**
+	 * Listeners added at initialization
+	 * 
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
 		getObservableDataList().addListener((ListChangeListener) 
-				change -> getView().updateDisplayData());
+				change -> {
+					getView().updateDisplayData();
+					//System.out.println("ObservableDatalist change");
+					
+				});
 
 		getObservableCommandHistory().addListener((ListChangeListener) 
 				change -> getView().updateCommandHistory());
 
-		//Wrong! changed to variablelist
 		getObservableVariableList().addListener((ListChangeListener) 
 				change -> getView().updateVariables());
 	}
@@ -85,6 +107,18 @@ public class SLogoWorkspace {
 	public void addNewCharacter(SLogoCharacter character) {
 		myCharacters.add(character);
 	}
+	
+	public List<SLogoCharacter> getActiveTurtlesList() {
+		return myActiveTurtles;
+	}
+	
+	public void addActiveTurtle(SLogoCharacter turtle){
+		myActiveTurtles.add(turtle);
+	}
+	
+	public void resetActiveTurtles(){
+		myActiveTurtles = new ArrayList<SLogoCharacter>();
+	}
 
 	public void removeCharacter(SLogoCharacter character) {
 		myCharacters.remove(character);
@@ -100,9 +134,6 @@ public class SLogoWorkspace {
 
 	public void addToVarMap(SLogoVariable variable){
 		myObservableVariableList.add(variable);
-		//		for(String each: myObservableVariableMap.keySet()){
-		//			System.out.println(each + " " + myObservableVariableMap.get(each));
-		//		}
 	}
 
 	/**
@@ -194,6 +225,20 @@ public class SLogoWorkspace {
 
 	public void setObservableVariableList(ObservableList<SLogoVariable> myObservableVariableList) {
 		this.myObservableVariableList = myObservableVariableList;
+	}
+
+	/**
+	 * @return the myRootEvaluator
+	 */
+	public RootEvaluator getRootEvaluator() {
+		return myRootEvaluator;
+	}
+
+	/**
+	 * @param myRootEvaluator the myRootEvaluator to set
+	 */
+	public void setRootEvaluator(RootEvaluator myRootEvaluator) {
+		this.myRootEvaluator = myRootEvaluator;
 	}
 
 }

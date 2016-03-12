@@ -22,8 +22,8 @@ import model.SLogoWorkspace;
  */
 public class SLogoView implements View {
 
-	private final int WIDTH = 440;
-	private final int HEIGHT = 440;
+	private static final int WIDTH = 440;
+	private static final int HEIGHT = 440;
 
 	private String myCommand;
 	private Model myModel;
@@ -50,10 +50,35 @@ public class SLogoView implements View {
 		myVisualizers.add(myCurrentVisualizer);
 	}
 	
-	//////////////////////////
-	// getters and setters //
-	//////////////////////////
 
+	/**
+	 * Adds a new Visualizer that contains and instantiates
+	 * a new GUIController to enable multiple workspaces
+	 */
+	@Override
+	public void addVisualizer() throws SLogoException, IOException {
+		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
+		getVisualizers().add(myNewVisualizer);
+
+		myNewVisualizer.initialize();
+		setCurrentVisualizer(myNewVisualizer);
+	}
+
+	/**
+	 * 
+	 * Method that switches GUI to the Visualizer with the given index
+	 * Used in conjunction with switchWorkspace
+	 * 
+	 */
+	@Override
+	public void switchVisualizer (int index) {
+		getCurrentVisualizer().hide();
+		setCurrentVisualizer(getVisualizers().get(index));
+		getCurrentVisualizer().show();
+	}
+	
+	
+	
 	/**
 	 * @return the myModel
 	 */
@@ -121,7 +146,6 @@ public class SLogoView implements View {
 
 	@Override
 	public Observer getObserver() {
-		// TODO Auto-generated method stub
 		return getCurrentVisualizer();
 	}
 
@@ -130,32 +154,6 @@ public class SLogoView implements View {
 		return myCurrentVisualizer.getLanguage();
 	}
 	
-	/**
-	 * 
-	 * Method that switches GUI to the Visualizer with the given index
-	 * Used in conjunction with switchWorkspace
-	 * 
-	 */
-	@Override
-	public void switchVisualizer (int index) {
-		getCurrentVisualizer().hide();
-		setCurrentVisualizer(getVisualizers().get(index));
-		getCurrentVisualizer().show();
-	}
-
-	/**
-	 * Adds a new Visualizer that contains and instantiates
-	 * a new GUIController to enable multiple workspaces
-	 */
-	@Override
-	public void addVisualizer() throws SLogoException, IOException {
-		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
-		getVisualizers().add(myNewVisualizer);
-
-		myNewVisualizer.initialize();
-		setCurrentVisualizer(myNewVisualizer);
-	}
-
 	/**
 	 * @return the myVisualizers
 	 */
