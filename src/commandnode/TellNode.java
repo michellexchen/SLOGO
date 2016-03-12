@@ -13,7 +13,7 @@ public class TellNode extends TurtleCommand {
 
 	/**
 	 * 
-	 * Interacts with the super class in order to extend functionality for turtle commands that need access to the worspace
+	 * Interacts with the super class in order to extend functionality for turtle commands that need access to the workspace
 	 * Creates the list of active turtles that our commands must interact with
 	 * 
 	 */

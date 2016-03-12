@@ -26,7 +26,8 @@ public class SLogoTurtleFactory {
 	 * @param myX
 	 * @param myY
 	 * @param requestedID
-	 * Initializes a turtle with given ID. Makes it available to frontend.
+	 * Initializes a turtle with given ID. Makes it available to frontend. If turtle already initialized and is currently contained in the workspace
+	 * then that turtle instance is grabbed and added to the active turtles list
 	 * @return myTurtle: created turtle
 	 */
 	
@@ -44,7 +45,6 @@ public class SLogoTurtleFactory {
 	/**
 	 * Checks whether ID is available
 	 */
-	
 	private boolean hasTurtleBeenCreated(int requestedID){
 		return (requestedID < LAST_ID);
 	}
