@@ -2,18 +2,29 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
+import model.SLogoWorkspace;
 
 public class TellNode extends BinaryNode {
+	
+	private SLogoWorkspace myWorkspace;
 
 	public TellNode() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
 		
 		return 0;
 	}
+	
+	public SLogoWorkspace getWorkspace(){
+		return myWorkspace;
+	}
+
+	public void setWorkspace(SLogoWorkspace ws){
+		myWorkspace = ws;
+	}
+
 	
 }

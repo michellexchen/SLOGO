@@ -6,6 +6,7 @@ import java.util.List;
 import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
+import commandnode.TellNode;
 import exception.SLogoException;
 import model.ResourceLoader;
 import model.SLogoWorkspace;
@@ -25,6 +26,8 @@ public class SLogoTreeFactory {
 	private CommandNameLoader myCommandNodeLoader;
 	private ResourceLoader myResourcesLoader;
 	private SLogoWorkspace myWorkspace;
+	private static final String TURTLECREATE = "tell";
+	private static final String TURTLECREATE2 = "ask";
 
 	public SLogoTreeFactory(SLogoWorkspace ws) throws SLogoException {
 		myCommandNodeLoader = new CommandNameLoader();
@@ -46,6 +49,7 @@ public class SLogoTreeFactory {
 	}
 
 	private Node createChild(List<String> commandParts) throws SLogoException {
+		if(commandParts.isEmpty()) return null;
 		String currCommand = commandParts.remove(0);
 		if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
 			List<String> innerCommands = createCommandList(commandParts);
@@ -58,7 +62,8 @@ public class SLogoTreeFactory {
 			VariableNode myVar = new VariableNode(currCommand);
 			myVar.setWorkspace(myWorkspace);
 			return myVar;
-		} else {
+		} 
+		 else {
 			Node myChild = createNode(currCommand);
 			while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
 				myChild.addChild(createChild(commandParts));
@@ -68,6 +73,9 @@ public class SLogoTreeFactory {
 	}
 
 	private List<String> createCommandList(List<String> commandParts) throws SLogoException {
+		if(commandParts.isEmpty()){
+			System.out.println("let me know");
+		}
 		List<String> innerCommands = new ArrayList<String>();
 		int openBrackets = 1;
 		int closedBrackets = 0;
@@ -89,6 +97,11 @@ public class SLogoTreeFactory {
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
 		String commandName = myCommandNodeLoader.getString(strNode);
+		if(isCreateTurtle(commandName)) {
+			TellNode myChild = new TellNode();
+			myChild.setWorkspace(myWorkspace);
+			return myChild;
+		}
 		if (commandName == null)
 			throw new SLogoException(
 					myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));
@@ -126,6 +139,10 @@ public class SLogoTreeFactory {
 
 	private boolean isClosedParenthesis(String currCommand) {
 		return currCommand.equals(")");
+	}
+	
+	private boolean isCreateTurtle(String str) {
+		return str.toLowerCase().matches(TURTLECREATE2) || str.toLowerCase().matches(TURTLECREATE);
 	}
 
 }
