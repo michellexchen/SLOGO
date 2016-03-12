@@ -114,24 +114,42 @@ public class SLogoCustomizerBuilder extends Observable {
 		vbox = new VBox();
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
 		vbox.setPadding(new Insets(PADDING));
-		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, 
+		vbox.getChildren().addAll(colorHb, fontColorHb, 
 				thicknessSliderHb, switchHb, buttonHb);
 		vbox.getStylesheets().add(CSS_PATH);
 		return vbox;
 	}
 
+	/**
+	 * Hide method for closing customization popup
+	 */
+	
 	public void hide(){
 		myCustomizerStage.hide();
 	}
+	
+	/**
+	 * Show method for opening customization popup
+	 */
 
 	public void show(){
 		myCustomizerStage.show();
 	}
 
+	/**
+	 * For observable/observer to interact with propertiesData
+	 * @param propertiesData
+	 */
 	public void setPropertiesData(SLogoPropertiesData propertiesData) {
 		myPropertiesData = propertiesData;
 	}
 
+	/**
+	 * Front end color chooser dropdown colored rectangles
+	 * 
+	 * @author Michelle
+	 *
+	 */
 	static class ColorRectCell extends ListCell<Color> {
 		@Override
 		public void updateItem(Color color, boolean empty) {
@@ -147,6 +165,11 @@ public class SLogoCustomizerBuilder extends Observable {
 	ObservableList<Color> data = FXCollections.observableArrayList(
 		     Color.WHITE, Color.BLACK, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE);
 		
+	/**
+	 * To select color for background
+	 * 
+	 * @return
+	 */
 	 private ComboBox setColorDropdown(){
 
 		ComboBox<Color> cb = new ComboBox<Color>();
@@ -301,13 +324,6 @@ public class SLogoCustomizerBuilder extends Observable {
 		myOkayButton.setOnMouseClicked(e -> {
 
 			myStrokeStyle = comboBox.getSelectionModel().getSelectedItem().toString();
-//			System.out.println("new pen style: ");
-//			System.out.println(myStrokeStyle);
-//			System.out.println("my new line thickness: ");
-//			System.out.println(myPenWidth);
-
-//			System.out.println("my new pen position: ");
-//			System.out.println(isDown);
 
 			//change pen width
 			myGUI.run(myCommandNameLoader.getString("setbg") + " "+ data.indexOf(myPaneColor));
@@ -320,7 +336,7 @@ public class SLogoCustomizerBuilder extends Observable {
 			} else {
 				myGUI.run(myCommandNameLoader.getString("pu"));
 			}
-			//myPropertiesData.notifyObservers();
+
 			myCustomizerStage.hide();
 		});
 	}
