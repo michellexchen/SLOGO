@@ -22,6 +22,14 @@ public class SLogoTurtleFactory {
 		this.myWorkspace = myWorkspace;
 	}
 	
+	/**
+	 * @param myX
+	 * @param myY
+	 * @param requestedID
+	 * Initializes a turtle with given ID. Makes it available to frontend.
+	 * @return myTurtle: created turtle
+	 */
+	
 	public SLogoCharacter createTurtle(int myX, int myY, int requestedID) throws SLogoException{
 		if(hasTurtleBeenCreated(requestedID)) return myWorkspace.getCharacterList().get(requestedID);
 		SLogoPen myPen = new SLogoPen();
@@ -33,9 +41,17 @@ public class SLogoTurtleFactory {
 		return myTurtle;
 	}
 	
+	/**
+	 * Checks whether ID is available
+	 */
+	
 	private boolean hasTurtleBeenCreated(int requestedID){
 		return (requestedID < LAST_ID);
 	}
+	
+	/**
+	 * Creates a turtle with default parameters
+	 */
 	
 	public SLogoCharacter createDefaultTurtle() throws SLogoException{
 		return createTurtle(DEFAULT_X, DEFAULT_Y, LAST_ID);
