@@ -197,7 +197,7 @@ public class SLogoVisualizer implements Observer {
 		turtle.setSmooth(true);
 		turtle.setCache(true);
 
-		//boundCoordinates(displaydata);
+		boundCoordinates(displaydata);
 		
 		//place turtle using Position and center at the coordinates (x,y)
 		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
@@ -217,19 +217,30 @@ public class SLogoVisualizer implements Observer {
 	 * @param displaydata
 	 */
 	private void boundCoordinates (SLogoDisplayData displaydata) {
-		
-		if (displaydata.getX() > PANE_SIZE - PADDING + COORDINATE_SHIFT) {
-			displaydata.setX(PANE_SIZE - PADDING);
+		if (displaydata.getX() > PANE_SIZE/2) {
+			displaydata.setX(PANE_SIZE/2);
 		}
-		if (displaydata.getX() < PADDING) {
-			displaydata.setX(PADDING); 
+		if (displaydata.getX() < -PANE_SIZE/2) {
+			displaydata.setX(-PANE_SIZE/2); 
 		}
-		if (displaydata.getY() > PANE_SIZE - PADDING) {
-			displaydata.setY(PANE_SIZE - PADDING);
+		if (displaydata.getY() > PANE_SIZE/2) {
+			displaydata.setY(PANE_SIZE/2);
 		}
-		if (displaydata.getY() < PADDING) {
-			displaydata.setY(PADDING);
+		if (displaydata.getY() < -PANE_SIZE/2) {
+			displaydata.setY(-PANE_SIZE/2);
 		}
+//		if (displaydata.getX() > PANE_SIZE - PADDING) {
+//			displaydata.setX(PANE_SIZE - PADDING);
+//		}
+//		if (displaydata.getX() < PADDING) {
+//			displaydata.setX(PADDING); 
+//		}
+//		if (displaydata.getY() > PANE_SIZE - PADDING) {
+//			displaydata.setY(PANE_SIZE - PADDING);
+//		}
+//		if (displaydata.getY() < PADDING) {
+//			displaydata.setY(PADDING);
+//		}
 	}
 	
 	
