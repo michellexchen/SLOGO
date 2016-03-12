@@ -16,7 +16,7 @@ public class SLogoPen{
 	private Color myColor;
 	private double mySize;
 	private boolean isDown;
-	private String myStrokeStyle;
+	private String myStrokeStyle = "SOLID";
 	private int colorIndex;
 	
 	private ColorLoader colorLoader;
@@ -82,6 +82,11 @@ public class SLogoPen{
 
 	public boolean getDown() {
 		return isDown;
+	}
+
+	public String getPenStyle() {
+		// TODO Auto-generated method stub
+		return myStrokeStyle;
 	}
 	
 }
