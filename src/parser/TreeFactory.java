@@ -60,7 +60,7 @@ public class TreeFactory {
 		}
 		return myRoots;
 	}
-	
+
 	private List<String> listCopy(List<String> list){
 		List<String> copy = new ArrayList<String>();
 		copy.addAll(list);
@@ -114,10 +114,6 @@ public class TreeFactory {
 	 */
 	private List<String> createCommandList(List<String> commandParts) 
 			throws SLogoException {
-		//3/11 @ 945 checking it's legitimacy 
-		//		if(commandParts.isEmpty()){
-		//			System.out.println("let me know");
-		//		}
 		List<String> innerCommands = new ArrayList<String>();
 		int openBrackets = 1;
 		int closedBrackets = 0;
@@ -143,10 +139,9 @@ public class TreeFactory {
 		String commandName = myLanguageLoader.getTranslation(strNode.toLowerCase());
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		if (commandName == null)
-			throw new SLogoException(
-					myResourcesLoader.getString("TheCommand") + strNode 
-					+ myResourcesLoader.getString("Illegal"));
+		if(isVariable(commandName)){
+			return new NumericNode(0);
+		}
 		else
 			try {
 				node = (Node) Class.forName(

@@ -1,6 +1,5 @@
 package commandnode;
 
-import java.util.ArrayList;
 import java.util.List;
 import exception.SLogoException;
 import model.SLogoCharacterState;
@@ -25,17 +24,10 @@ public class RepeatNode extends BinaryVariableCommand {
 		System.out.println("Repcount: " + repcount + " Command Parts: " + innerCommands);
 		for(int x=1; x<=repcount; x++){
 			List<Node> myRoots = getTreeFactory().createNodes(listCopy(innerCommands));
-			repcountVar.setValue(repcountVar.getValue()+1);
 			getRootEvaluator().evaluateRoots(myRoots);
 			repcountVar.setValue(x);
 		}
 		return evaluation;
-	}
-	
-	private List<String> listCopy(List<String> list){
-		List<String> copy = new ArrayList<String>();
-		copy.addAll(list);
-		return copy;
 	}
 
 }

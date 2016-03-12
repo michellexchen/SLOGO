@@ -1,12 +1,15 @@
 package commandnode;
 
+import java.util.List;
+
 import exception.SLogoException;
 import model.SLogoCharacterState;
+import model.SLogoVariable;
 
 /**
  * Node representation of DoTimes command, a Control Structure command using variable
  */
-public class DoTimesNode extends BinaryNode {
+public class DoTimesNode extends BinaryVariableCommand {
 
 	/**
 	 * Children are two ListNode children
@@ -16,10 +19,16 @@ public class DoTimesNode extends BinaryNode {
 	 * TODO use :variable in iteration
 	 */
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		int repcount = (int) evaluateChild(0, state);
+		ListNode controlList = ((ListNode) (getChildren().get(0)));
+		SLogoVariable var = getWorkspace().createVariable(controlList.getInnerCommands().get(0), 1);
+		double limit = Double.parseDouble(controlList.getInnerCommands().get(1));
+		ListNode commandList = ((ListNode) (getChildren().get(1)));
+		List<String> innerCommands = commandList.getInnerCommands();
 		double evaluation = 0;
-		for(int x=1; x<=repcount; x++){
-			evaluation += evaluateChild(1, state);
+		for(int x=0; x<limit; x++){
+			List<Node> myRoots = getTreeFactory().createNodes(listCopy(innerCommands));
+			getRootEvaluator().evaluateRoots(myRoots);
+			var.setValue(x);
 		}
 		return evaluation;
 	}
