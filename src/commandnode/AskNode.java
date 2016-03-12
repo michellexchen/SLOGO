@@ -3,10 +3,10 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class AskNode extends TurtleCommand {
+public class AskNode extends TellNode {
 
 	public AskNode() {
-	
+		super();
 	}
 
 	@Override
