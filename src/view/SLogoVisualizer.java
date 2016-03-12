@@ -51,22 +51,26 @@ public class SLogoVisualizer implements Observer {
 	public SLogoVisualizer(Model model) {
 		myModel = model;
 	}
-	
-	public void initialize() throws SLogoException, IOException {
-		myPromptBuilder = new SLogoPromptBuilder(myProperties);
-		myPromptBuilder.promptScreen();
-		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
-		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
-		root = (Parent) myLoader.load();
-		myGUIController = (SLogoGUIController) myLoader.getController();
-		myGUIController.setModel(myModel);
-		myGUIController.getCustomizer().addObserver(this);
-		myGUIController.setPropertiesData(myProperties);
-		myScene = new Scene(root);
-		myStage = new Stage();
-		myStage.setScene(myScene);
-		myStage.setTitle(new ResourceLoader().getString("Title"));
-		show();
+
+	public void initialize() throws SLogoException {
+	    myPromptBuilder = new SLogoPromptBuilder(myProperties);
+	    myPromptBuilder.promptScreen();
+	    setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
+	    myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
+	    try {
+	        root = (Parent) myLoader.load();
+	    }
+	    catch (IOException e) {
+	    }
+	    myGUIController = (SLogoGUIController) myLoader.getController();
+	    myGUIController.setModel(myModel);
+	    myGUIController.getCustomizer().addObserver(this);
+	    myGUIController.setPropertiesData(myProperties);
+	    myScene = new Scene(root);
+	    myStage = new Stage();
+	    myStage.setScene(myScene);
+	    myStage.setTitle(new ResourceLoader().getString("Title"));
+	    show();
 	}
 
 	public void show() {

@@ -46,19 +46,20 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Model;
+import model.ResourceLoader;
 import model.SLogoDisplayData;
 import model.SLogoVariable;
 
 /**
- * 
  * A controller class used in conjunction with SceneBuilder's
  * UI.fxml file
  *
+ * @author Hunter, Michelle
  */
 public class SLogoGUIController implements Initializable, Observer {
 
     private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
-            + "compsci308/spring16/assign/03_slogo/commands.php";
+                            + "compsci308/spring16/assign/03_slogo/commands.php";
     private static final String CSS_PATH = "view/splashstyle.css";
     private static final int POPUP_WIDTH = 900;
     private static final int POPUP_HEIGHT = 550;
@@ -68,26 +69,27 @@ public class SLogoGUIController implements Initializable, Observer {
     private static final int ERROR_INDEX = 7;
     private static final String ERROR = "ERROR";
 
+    private ResourceLoader myResourceLoader;
+    private ResourceLoader myErrorLoader;
     private WebView	myBrowser;
     private WebEngine myWebEngine;
     private ListView<String> myHistoryPaneView;
     private ListView<String> myPropertiesPaneView = new ListView<String>();
-    private ObservableList<String> myProperties;
-
     private ListView<String> myVariableView;
-
+    private ObservableList<String> myProperties;
     private Stage myCurrentStage;
     private Color myCanvasColor;
     private ColorPicker myColorPicker;
     private HBox myColorHBox;
-
     private SLogoCustomizerBuilder myCustomizer;
     private SLogoPropertiesData myPropertiesData;
-
     private Model myModel;
     private String myCommand;
 
-
+    /**
+     * The following are FXML-JavaFX component links
+     * 
+     */
     //Help button
     @FXML
     private Button myHelpButton;
@@ -104,11 +106,9 @@ public class SLogoGUIController implements Initializable, Observer {
     @FXML
     private Pane myCanvas;
 
-
     //Drop-down menuButton - Choose Project
     @FXML
     private MenuButton myMenuButton;
-
 
     //MenuButton's MenuItem list
     @FXML
@@ -121,8 +121,6 @@ public class SLogoGUIController implements Initializable, Observer {
     private MenuItem myProject4;
     @FXML
     private MenuItem myProject5;
-
-
 
     //Command History Pane where ObservableList<CommandNode> will go
     @FXML
@@ -144,7 +142,6 @@ public class SLogoGUIController implements Initializable, Observer {
     @FXML
     private Button myCustomizeButton;
 
-
     //History
     @FXML
     private List<String> myHistory;
@@ -156,12 +153,15 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        myResourceLoader = new ResourceLoader("default.properties");
+        myErrorLoader = new ResourceLoader("error.properties");
+
         myHistory = new ArrayList<String>();
         myPropertyPane.getChildren().add(myPropertiesPaneView);
         try {
             myCustomizer = new SLogoCustomizerBuilder(this);
         } catch (SLogoException e) {
-            new SLogoException("CHECK GUI CONTROLLER CLASS");
+            e.showErrorDialog(getErrorLoader().getString("CustomizerError"));
         }
         myCustomizer.hide();
         myVariableView = new ListView<String>();
@@ -286,7 +286,7 @@ public class SLogoGUIController implements Initializable, Observer {
         Stage stage = new Stage();        
         vbox.getChildren().addAll(myBrowser);
         VBox.setVgrow(myBrowser, Priority.ALWAYS);
-        stage.setTitle("SLOGO Basic Commands");
+        stage.setTitle(getResourceLoader().getString("PopupTitle"));
         stage.setWidth(POPUP_WIDTH);
         stage.setHeight(POPUP_HEIGHT);
         stage.setScene(scene);
@@ -324,11 +324,11 @@ public class SLogoGUIController implements Initializable, Observer {
          */
         ObservableList<String> list = FXCollections
                 .observableArrayList(new ArrayList<String>());
+        // Using lambda expression
         variables.forEach(n -> list.add(n.getName() + "  :  " + n.getValue()));
         getVariableView().setItems((ObservableList<String>) list);
         myVariablePane.setContent(getVariableView());
     }
-
 
     /**
      * Displays properties
@@ -345,16 +345,14 @@ public class SLogoGUIController implements Initializable, Observer {
      * @param displayData
      */
     public void updateProperties(SLogoDisplayData displayData){
-
-        myProperties =FXCollections.observableArrayList (
-                                                         ("Direction: " + Double.toString(displayData.getDirection())),
-                                                         ("X position: " + displayData.getX()),
-                                                         ("Y position: " + displayData.getY()),
-                                                         ("Pen Down: " + displayData.getPen().getDown()),
-                                                         ("Pen Color: " + displayData.getPen().getColorIndex()),
-                                                         ("Pen Size: " + displayData.getPen().getSize())
-                );
-
+        myProperties = FXCollections.observableArrayList (
+                ("Direction: " + Double.toString(displayData.getDirection())),
+                ("X position: " + displayData.getX()),
+                ("Y position: " + displayData.getY()),
+                ("Pen Down: " + displayData.getPen().getDown()),
+                ("Pen Color: " + displayData.getPen().getColorIndex()),
+                ("Pen Size: " + displayData.getPen().getSize())
+        );
         myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
         myPropertiesPaneView.setItems(myProperties);
     }
@@ -397,8 +395,8 @@ public class SLogoGUIController implements Initializable, Observer {
      * 
      * @return
      */
-    private HBox chooseColor(){	//for selecting color   		
-        Label colorLabel = new Label("Select background color: ");
+    private HBox chooseColor(){		
+        Label colorLabel = new Label(getResourceLoader().getString("ColorLabel"));
 
         myColorPicker = new ColorPicker();
         myColorPicker.setOnAction(e -> {
@@ -419,7 +417,6 @@ public class SLogoGUIController implements Initializable, Observer {
     public void setPaneColor() throws SLogoException{
         this.myCanvasColor = new SLogoCustomizerBuilder(this).getMyPaneColor();
     }
-
 
     public void setCommand(String myCommand) {
         this.myCommand = myCommand;
@@ -505,4 +502,31 @@ public class SLogoGUIController implements Initializable, Observer {
         this.myVariableView = myVariableView;
     }
 
+    /**
+     * @return the myResourceLoader
+     */
+    public ResourceLoader getResourceLoader () {
+        return myResourceLoader;
+    }
+
+    /**
+     * @param myResourceLoader the myResourceLoader to set
+     */
+    public void setResourceLoader (ResourceLoader myResourceLoader) {
+        this.myResourceLoader = myResourceLoader;
+    }
+
+    /**
+     * @return the myErrorLoader
+     */
+    public ResourceLoader getErrorLoader () {
+        return myErrorLoader;
+    }
+
+    /**
+     * @param myErrorLoader the myErrorLoader to set
+     */
+    public void setErrorLoader (ResourceLoader myErrorLoader) {
+        this.myErrorLoader = myErrorLoader;
+    }
 }

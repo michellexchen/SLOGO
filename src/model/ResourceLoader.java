@@ -17,8 +17,13 @@ public class ResourceLoader extends FileLoader{
      * Default constructor
      * 
      */
-    public ResourceLoader () throws SLogoException {
-        super.load(RESOURCE_PATH, RESOURCE_EXTENSION);
+    public ResourceLoader ()  {
+        try {
+            super.load(RESOURCE_PATH, RESOURCE_EXTENSION);
+        }
+        catch (SLogoException e) {
+            e.showErrorDialog("Non-match exists in resource file");
+        }
     }
 
     /**
@@ -27,8 +32,13 @@ public class ResourceLoader extends FileLoader{
      * @param filename
      * @throws SLogoException
      */
-    public ResourceLoader (String filename) throws SLogoException {
-        super.load(RESOURCE_PATH, filename);
+    public ResourceLoader (String filename) {
+        try {
+            super.load(RESOURCE_PATH, filename);
+        }
+        catch (SLogoException e) {
+            e.showErrorDialog("Non-match exists in resource file");
+        }
     }
     
     /**
@@ -44,5 +54,4 @@ public class ResourceLoader extends FileLoader{
             return "";
         }
     }
-
 }

@@ -125,7 +125,6 @@ public class SLogoCustomizerBuilder extends Observable {
     /**
      * Hide method for closing customization popup
      */
-
     public void hide(){
         myCustomizerStage.hide();
     }
@@ -133,7 +132,6 @@ public class SLogoCustomizerBuilder extends Observable {
     /**
      * Show method for opening customization popup
      */
-
     public void show(){
         myCustomizerStage.show();
     }
@@ -300,9 +298,7 @@ public class SLogoCustomizerBuilder extends Observable {
         thicknessSliderHb = new HBox();
         thicknessSliderHb.getChildren().addAll(thicknessSliderLabel, thicknessSlider);
         thicknessSliderHb.setPrefSize(PREFSIZE, PREFSIZE);
-
     }
-
 
     /**
      * Updates penDown boolean value

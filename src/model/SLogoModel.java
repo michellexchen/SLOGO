@@ -19,7 +19,6 @@ import view.View;
  *
  */
 public class SLogoModel implements Model {
-	//private static final int NUM_WORKSPACES = 5;
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private List<SLogoWorkspace> myWorkspaces;

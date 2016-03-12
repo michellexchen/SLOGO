@@ -24,12 +24,7 @@ public abstract class SLogoBuilder {
      * @throws SLogoException 
      */
     public SLogoBuilder () {
-        try {
-            myResourceLoader = new ResourceLoader("default.properties");
-        }
-        catch (SLogoException e) {
-            e.showErrorDialog("Critical Error: Resource load failed");
-        }
+        myResourceLoader = new ResourceLoader("default.properties");
     }
 
     /**

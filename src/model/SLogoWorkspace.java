@@ -12,14 +12,10 @@ import view.SLogoPropertiesData;
 import view.View;
 
 /**
- * 
  * Workspace class that serves as a container for data objects
  *
  */
-
 public class SLogoWorkspace {
-
-	
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
