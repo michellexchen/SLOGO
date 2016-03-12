@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  */
 
 public abstract class SLogoCharacterState {
-
+	private SLogoPosition myPosition;
 	private double myXCoordinate;
 	private double myYCoordinate;
 	private double myDirection;
@@ -29,6 +29,7 @@ public abstract class SLogoCharacterState {
 		this.myPen = myPen;
 		this.myXCoordinate = xCoor;
 		this.myYCoordinate = yCoor;
+		this.myPosition = new SLogoPosition(xCoor, yCoor);
 		this.myDirection = direction;
 		this.isHidden = isHidden;
 		this.myShapeIndex = shapeIndex;

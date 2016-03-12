@@ -14,6 +14,20 @@ public class SLogoPosition {
 	private double myX;
 	private double myY;
 
+	public SLogoPosition () {
+		myPrevX = 0;
+		myPrevY = 0;
+		myX = 0;
+		myY = 0;
+	}
+	
+	public SLogoPosition (double x, double y) {
+		myPrevX = 0;
+		myPrevY = 0;
+		myX = x;
+		myY = y;
+	}
+	
 	/**
 	 * Sets new XY coordinates and automatically updates previous X,Y values
 	 * 
