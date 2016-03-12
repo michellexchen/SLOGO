@@ -38,7 +38,8 @@ public class SLogoWorkspace {
 	private ObservableList<String> myObservableShapeList;
 	private SLogoPropertiesData myPropertiesData;
 	private SLogoPenData myPenData;
-
+	private ColorLoader myColorLoader;
+	
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
 		turtleFactory = new SLogoTurtleFactory(this);
@@ -48,6 +49,8 @@ public class SLogoWorkspace {
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
+		myColorLoader = new ColorLoader();
+		System.out.println(myColorLoader.getMap());
 	}
 
 	public void initialize() throws SLogoException {

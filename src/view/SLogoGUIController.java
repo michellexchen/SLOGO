@@ -99,66 +99,70 @@ public class SLogoGUIController implements Initializable, Observer {
 	//Run button
 	@FXML
 	private Button myRunButton;
+    
+    //Main Pane
+    @FXML
+    private Pane myCanvas;
+    
+    
+    //Drop-down menuButton - Choose Project
+    @FXML
+    private MenuButton myMenuButton;
+   
+        
+    //MenuButton's MenuItem list
+    @FXML
+    private MenuItem myProject1;
+    @FXML
+    private MenuItem myProject2;
+    @FXML
+    private MenuItem myProject3;
+    @FXML
+    private MenuItem myProject4;
+    @FXML
+    private MenuItem myProject5;
+    
+    
+    
+    //Command History Pane where ObservableList<CommandNode> will go
+    @FXML
+    private ScrollPane myCommandHistoryPane;
+ 
+    //myVariablePane where ObservableList<Variable> will go
+    @FXML
+    private ScrollPane myVariablePane;
+    
+    //Displays the properties of a turtle
+    @FXML
+    private Pane myPropertyPane;
+    
+    //This adds workspace
+    @FXML
+    private Button myAddWorkspaceButton;
+    
+    //Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
+    @FXML
+    private Button myCustomizeButton;
+    
+    
+    //History
+    @FXML
+    private List<String> myHistory;
 
-	//Main Pane
-	@FXML
-	private Pane myCanvas;
-
-
-	//Drop-down menuButton - Choose Project
-	@FXML
-	private MenuButton myMenuButton;
-
-
-	//MenuButton's MenuItem list
-	@FXML
-	private MenuItem myProject1;
-	@FXML
-	private MenuItem myProject2;
-	@FXML
-	private MenuItem myProject3;
-	@FXML
-	private MenuItem myProject4;
-	@FXML
-	private MenuItem myProject5;
-
-
-
-	//Command History Pane where ObservableList<CommandNode> will go
-	@FXML
-	private ScrollPane myCommandHistoryPane;
-
-	//myVariablePane where ObservableList<Variable> will go
-	@FXML
-	private ScrollPane myVariablePane;
-
-	//Displays the properties of a turtle
-	@FXML
-	private Pane myPropertyPane;
-
-	//This adds workspace
-	@FXML
-	private Button myAddWorkspaceButton;
-
-	//Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
-	@FXML
-	private Button myCustomizeButton;
-
-
-	//History
-	@FXML
-	private List<String> myHistory;
-
-	/**
-	 * All GUI elements are initialized in this method
-	 * and FXML settings are read
-	 * 
-	 */
-	@Override 
-	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		myHistory = new ArrayList<String>();
-		myPropertyPane.getChildren().add(myPropertiesPaneView);
-		myCustomizer = new SLogoCustomizerBuilder();
+    /**
+     * All GUI elements are initialized in this method
+     * and FXML settings are read
+     * 
+     */
+    @Override 
+    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+    	myHistory = new ArrayList<String>();
+    	myPropertyPane.getChildren().add(myPropertiesPaneView);
+		try {
+			myCustomizer = new SLogoCustomizerBuilder(this);
+		} catch (SLogoException e) {
+			new SLogoException("CHECK GUI CONTROLLER CLASS");
+		}
 		myCustomizer.hide();
 		myVariableView = new ListView<String>();
 
@@ -238,41 +242,42 @@ public class SLogoGUIController implements Initializable, Observer {
 			try {
 				getModel().switchWorkspace(4);
 			} catch (Exception e1) {}
-		});
-	}
+    	});
+    }
 
-	/**
-	 * Defines and assigns an action to Run button
-	 * Notifies Model that there is a command to be processed
-	 * 
-	 * @param command
-	 */
-	private void run(String command){
-		setCommand(myCommand);
-		/*
-		 * TODO: Call Model's readCommand that calls
-		 * View's getCommand
-		 * and passes the command to the parser
-		 */
-		try {
-			getModel().readCommand(command);
-		} catch (SLogoException e1) {
-			command = "ERROR: " + command;
-		}
-
-		myHistory.add(command);
-		displayHistory();
-		displayProperties();
-	}
-
-	/**
-	 * Lets the user view the commands
-	 * 
-	 * NEEDS TO BE REVISED!!!
-	 * 
-	 * @param link
-	 */
-	private void popup(String link){
+    /**
+     * Defines and assigns an action to Run button
+     * Notifies Model that there is a command to be processed
+     * 
+     * @param command
+     */
+    public void run(String command){
+        setCommand(myCommand);
+          	/*
+          	 * TODO: Call Model's readCommand that calls
+          	 * View's getCommand
+          	 * and passes the command to the parser
+          	 */
+          	try {
+  				getModel().readCommand(command);
+  			} catch (SLogoException e1) {
+  				command = "ERROR: " + command;
+  			}
+          	
+          	myHistory.add(command);
+          	displayHistory();
+          	displayProperties();
+          	myPropertiesData.notifyObservers();
+    }
+    
+    /**
+     * Lets the user view the commands
+     * 
+     * NEEDS TO BE REVISED!!!
+     * 
+     * @param link
+     */
+    private void popup(String link){
 		myBrowser = new WebView();
 		myWebEngine = myBrowser.getEngine();
 		myWebEngine.load(link);
@@ -407,15 +412,16 @@ public class SLogoGUIController implements Initializable, Observer {
 		myColorHBox.getChildren().addAll(colorLabel, myColorPicker);
 
 		return myColorHBox;
-	}
-
-	public Color getPaneColor(){
-		return myCanvasColor;
-	}
-
-	public void setPaneColor(){
-		this.myCanvasColor = new SLogoCustomizerBuilder().getMyPaneColor();
-	}
+    }
+    
+    public Color getPaneColor(){
+    	return myCanvasColor;
+    }
+    
+    public void setPaneColor() throws SLogoException{
+    	this.myCanvasColor = new SLogoCustomizerBuilder(this).getMyPaneColor();
+    }
+    
 
 	public void setCommand(String myCommand) {
 		this.myCommand = myCommand;
