@@ -6,6 +6,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import parser.RootEvaluator;
 import view.SLogoPropertiesData;
 import view.View;
 
@@ -19,6 +20,7 @@ public class SLogoWorkspace {
 
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
+	private RootEvaluator myRootEvaluator;
 
 	// Lists declared for Observable List initialization
 	private List<SLogoDisplayData> myDataList;
@@ -45,6 +47,7 @@ public class SLogoWorkspace {
 	}
 
 	public void initialize() throws SLogoException {
+		myRootEvaluator = new RootEvaluator(this);
 		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
 	}
 
@@ -200,6 +203,20 @@ public class SLogoWorkspace {
 
 	public void setObservableVariableList(ObservableList<SLogoVariable> myObservableVariableList) {
 		this.myObservableVariableList = myObservableVariableList;
+	}
+
+	/**
+	 * @return the myRootEvaluator
+	 */
+	public RootEvaluator getRootEvaluator() {
+		return myRootEvaluator;
+	}
+
+	/**
+	 * @param myRootEvaluator the myRootEvaluator to set
+	 */
+	public void setRootEvaluator(RootEvaluator myRootEvaluator) {
+		this.myRootEvaluator = myRootEvaluator;
 	}
 
 }
