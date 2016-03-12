@@ -98,8 +98,6 @@ public class SLogoModel implements Model {
 		getView().switchVisualizer(index);
 	}
 	
-	
-	
 	/**
 	 * @return the myView
 	 */
