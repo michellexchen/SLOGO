@@ -11,8 +11,6 @@ import javafx.scene.layout.HBox;
  * ToggleSwitch GUI module used in GUI's Customizer button
  *
  */
-
-
 public class SLogoCustomizerToggleSwitch extends HBox {
 	
 	private final Label label = new Label();
@@ -37,11 +35,9 @@ public class SLogoCustomizerToggleSwitch extends HBox {
 	}
 	
 	private void setStyle() {
-		//Default Width
 		setWidth(80);
 		label.setAlignment(Pos.CENTER);
 		setStyle("-fx-background-color: grey; -fx-text-fill:black; -fx-background-radius: 4;");
-		//setAlignment(Pos.CENTER_LEFT);
 	}
 	
 	private void bindProperties() {

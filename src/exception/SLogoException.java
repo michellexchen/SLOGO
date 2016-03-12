@@ -26,17 +26,7 @@ public class SLogoException extends Exception {
 	 */
 	public SLogoException(String arg0) {
 		super(arg0);
-		@SuppressWarnings("rawtypes")
-		Dialog alert = new Dialog();
-		alert.setTitle("SLOGO EXCEPTION");
-		alert.setHeaderText("ERROR: " + arg0);
-		ButtonType buttonTypeOk = new ButtonType("Okay");
-		alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
-
-		DialogPane dialogPane = alert.getDialogPane();
-		dialogPane.getStylesheets().add(getClass().getResource("myDialog.css").toExternalForm());
-		dialogPane.getStyleClass().add("myDialog");
-		alert.showAndWait();
+		showErrorDialog(arg0);
 	}
 
 	/**
@@ -56,4 +46,22 @@ public class SLogoException extends Exception {
 		return unresolvedException;
 	}
 	
+	/**
+	 * Shows the user an error message
+	 * 
+	 * @param message
+	 */
+	public void showErrorDialog (String message) {
+	    Dialog alert = new Dialog();
+	    alert.setTitle("SLOGO EXCEPTION");
+	    alert.setHeaderText("ERROR: " + message);
+	    ButtonType buttonTypeOk = new ButtonType("Okay");
+	    alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+	    DialogPane dialogPane = alert.getDialogPane();
+	    dialogPane.getStylesheets().add(getClass().getResource("myDialog.css").toExternalForm());
+	    dialogPane.getStyleClass().add("myDialog");
+	    alert.showAndWait();
+	}
+
 }

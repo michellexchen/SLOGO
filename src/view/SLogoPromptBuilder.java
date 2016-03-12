@@ -18,17 +18,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * 
  * Subclass of SLogoBuilder that generates a prompt screen
  * that greets the user and takes in necessary information 
  * such as language and pane color
+ * 
+ * @author Hunter
  * 
  */
 public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int XPROMPTSIZE = 500;
     private static final int YPROMPTSIZE = 275; 
     private static final int PADDING = 55;
-	private static final int SPLASHSIZE = 400;
+    private static final int SPLASHSIZE = 400;
     private static final int LABEL_FONTSIZE = 32;
     private static final int PREFSIZE = 75;
     private static final int COLORLABELSIZE = 202;
@@ -37,119 +38,119 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 
     private String myLanguage;
     private Stage prompt;
-	private Scene promptScene;
-	private VBox vbox;
-	private Label label;
-	private ComboBox comboBox;
-	private HBox labelHb;
-	private HBox langHb;
-	private HBox buttonHb;
-	private Label lang;
-	private Text myActionStatus;
-	private Button myOkayButton;
-	private Color myColor;
-	private SLogoPropertiesData myPropertiesData;
-	
-	public SLogoPromptBuilder(SLogoPropertiesData propertiesData) {
-		myColor = Color.WHITE;
-		myPropertiesData = propertiesData;
-	}
+    private Scene promptScene;
+    private VBox vbox;
+    private Label label;
+    private ComboBox comboBox;
+    private HBox labelHb;
+    private HBox langHb;
+    private HBox buttonHb;
+    private Label lang;
+    private Text myActionStatus;
+    private Button myOkayButton;
+    private Color myColor;
+    private SLogoPropertiesData myPropertiesData;
 
-	public void promptScreen () {
-		prompt = new Stage();
-		setup();
-		setScene(promptScene);		
-	}
-	
-	private void setup(){
-		setWelcome();
-		setLanguage();
-		setButton();
-	}
-	
-	private void setScene(Scene promptScene) {
-		vbox = setVBox();
-		promptScene = new Scene(vbox, XPROMPTSIZE, YPROMPTSIZE);
-		prompt.setScene(promptScene);
-		prompt.showAndWait();
-	}
-	
-	private VBox setVBox(){
-		vbox = new VBox();
-		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
-		vbox.setPadding(new Insets(PADDING));
-		vbox.getChildren().addAll(labelHb, langHb, buttonHb);
-		vbox.getStylesheets().add("View/splashstyle.css");
-		return vbox;
-	}
-	
-	private void setWelcome(){ 
-		label = new Label("WELCOME TO SLOGO!");
-		label.setTextFill(Color.DARKBLUE);
-		label.setFont(Font.font(FONT, FontWeight.BOLD, LABEL_FONTSIZE));
-		labelHb = new HBox();
-		labelHb.setAlignment(Pos.CENTER);
-		labelHb.getChildren().add(label);
-		labelHb.setPrefSize(PREFSIZE, PREFSIZE);
-	}
-	
-	private void setLanguage(){ 
-		lang = new Label("Select language:  ");
-		ObservableList<String> options = 
-				FXCollections.observableArrayList(
-						"English",
-						"French",
-						"Chinese",
-						"German",
-						"Italian",
-						"Portuguese",
-						"Russian",
-						"Spanish"
-				);
-		comboBox = new ComboBox(options);
-		comboBox.setValue("English");
-		langHb = new HBox();
-		langHb.setAlignment(Pos.CENTER);
-		langHb.getChildren().addAll(lang, comboBox);
-		langHb.setPrefSize(PREFSIZE, PREFSIZE);
+    public SLogoPromptBuilder(SLogoPropertiesData propertiesData) {
+        myColor = Color.WHITE;
+        myPropertiesData = propertiesData;
+    }
 
-	}
-	
+    public void promptScreen () {
+        prompt = new Stage();
+        setup();
+        setScene(promptScene);		
+    }
 
-		
-	
-	private void setButton(){ 
-		buttonHb = new HBox();
-		myOkayButton = new Button("OKAY");
-		buttonHb.setAlignment(Pos.CENTER);
-		buttonHb.getChildren().add(myOkayButton);
-		buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
-		myOkayButton.setOnMouseClicked(e -> {
-			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
-			getPrompt().hide();
-		});
-	}
-	
-	public String getWorkspaceLanguage(){
-		return myLanguage;
-	}
+    private void setup(){
+        setWelcome();
+        setLanguage();
+        setButton();
+    }
 
-	public Color sendMyColor(){ 
-		return myColor;
-	}
-	
-	/**
-	 * @return the prompt
-	 */
-	public Stage getPrompt() {
-		return prompt;
-	}
+    private void setScene(Scene promptScene) {
+        vbox = setVBox();
+        promptScene = new Scene(vbox, XPROMPTSIZE, YPROMPTSIZE);
+        prompt.setScene(promptScene);
+        prompt.showAndWait();
+    }
 
-	/**
-	 * @param prompt the prompt to set
-	 */
-	public void setPrompt(Stage prompt) {
-		this.prompt = prompt;
-	}
-	
+    private VBox setVBox(){
+        vbox = new VBox();
+        vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
+        vbox.setPadding(new Insets(PADDING));
+        vbox.getChildren().addAll(labelHb, langHb, buttonHb);
+        vbox.getStylesheets().add("view/splashstyle.css");
+        return vbox;
+    }
+
+    private void setWelcome(){ 
+        label = new Label("WELCOME TO SLOGO!");
+        label.setTextFill(Color.DARKBLUE);
+        label.setFont(Font.font(FONT, FontWeight.BOLD, LABEL_FONTSIZE));
+        labelHb = new HBox();
+        labelHb.setAlignment(Pos.CENTER);
+        labelHb.getChildren().add(label);
+        labelHb.setPrefSize(PREFSIZE, PREFSIZE);
+    }
+
+    private void setLanguage(){ 
+        lang = new Label("Select language:  ");
+        ObservableList<String> options = 
+                FXCollections.observableArrayList(
+                                                  "English",
+                                                  "French",
+                                                  "Chinese",
+                                                  "German",
+                                                  "Italian",
+                                                  "Portuguese",
+                                                  "Russian",
+                                                  "Spanish"
+                        );
+        comboBox = new ComboBox(options);
+        comboBox.setValue("English");
+        langHb = new HBox();
+        langHb.setAlignment(Pos.CENTER);
+        langHb.getChildren().addAll(lang, comboBox);
+        langHb.setPrefSize(PREFSIZE, PREFSIZE);
+
+    }
+
+
+
+
+    private void setButton(){ 
+        buttonHb = new HBox();
+        myOkayButton = new Button("OKAY");
+        buttonHb.setAlignment(Pos.CENTER);
+        buttonHb.getChildren().add(myOkayButton);
+        buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
+        myOkayButton.setOnMouseClicked(e -> {
+            myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
+            getPrompt().hide();
+        });
+    }
+
+    public String getWorkspaceLanguage(){
+        return myLanguage;
+    }
+
+    public Color sendMyColor(){ 
+        return myColor;
+    }
+
+    /**
+     * @return the prompt
+     */
+    public Stage getPrompt() {
+        return prompt;
+    }
+
+    /**
+     * @param prompt the prompt to set
+     */
+    public void setPrompt(Stage prompt) {
+        this.prompt = prompt;
+    }
+
 }

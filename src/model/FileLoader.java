@@ -18,8 +18,8 @@ import exception.SLogoException;
  * @author Adam Tache
  *
  */
-
 public abstract class FileLoader {
+    
 	Properties myProperties;
 	HashMap<String, String> myBackMap;
 	private BufferedReader myFileReader;
@@ -96,11 +96,11 @@ public abstract class FileLoader {
 	}
 
 	/**
-	 * @param filename
 	 * Counts number of lines in file
+	 * 
+	 * @param filename
 	 * @return numLines: number of lines in file
 	 */
-	
 	@SuppressWarnings("resource")
 	public int countLines(String filename) throws SLogoException{
 		LineNumberReader reader;
