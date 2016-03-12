@@ -6,8 +6,6 @@ import exception.SLogoException;
 import model.SLogoCharacter;
 import model.SLogoCharacterState;
 import model.SLogoTurtle;
-import model.SLogoTurtleFactory;
-import model.SLogoWorkspace;
 
 public class TellNode extends TurtleCommand {
 

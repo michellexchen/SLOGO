@@ -14,8 +14,7 @@ public class CommandNameLoader extends CommandLoader{
 	private static final String COMMAND_EXTENSION = "commands.resources";
 
 	public CommandNameLoader() throws SLogoException{
-		setExtension(COMMAND_EXTENSION);
-		super.load();
+		super.load(super.getPath(), COMMAND_EXTENSION);
 	}
 
 }

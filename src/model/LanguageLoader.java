@@ -13,7 +13,6 @@ public class LanguageLoader extends FileLoader {
 
 	private static final String LANG_PATH = "resources/languages";
 	private static final String LANG_DIRECTORY = ".properties";
-	private String myLanguage;
 	
 	/**
 	 * @param language: user-selected language as String
@@ -21,24 +20,15 @@ public class LanguageLoader extends FileLoader {
 	 */
 	
 	public void load(String language) throws SLogoException {
-		myLanguage = format(language);
-		setDirectory(LANG_PATH);
-		setExtension(myLanguage + LANG_DIRECTORY);
-		super.load();
+		super.load(LANG_PATH, format(language) + LANG_DIRECTORY);
 		createSplitBackMap();
-		
-	}
-
-	public String getLanguage() {
-		return myLanguage;
 	}
 	
 	/**
 	 * @param language: user-selected language as String
 	 * Formats input language string with first letter capitalized
-	 * @return formatted language
+	 * @return formatted language to match language resource file
 	 */
-
 	public String format(String language) {
 		return Character.toString(language.charAt(0)).toUpperCase() + language.substring(1).toLowerCase();
 	}
@@ -48,7 +38,6 @@ public class LanguageLoader extends FileLoader {
 	 * Node representation of Repeat command, a Control Structure command using variable
 	 * @return translation or input string (if not specified in language file - e.g. number)
 	 */
-
 	public String getTranslation(String foreignWord) {
 		if (myBackMap.containsKey(foreignWord)) {
 			return myBackMap.get(foreignWord);

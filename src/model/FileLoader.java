@@ -23,8 +23,6 @@ public abstract class FileLoader {
 	Properties myProperties;
 	HashMap<String, String> myBackMap;
 	private BufferedReader myFileReader;
-	private String directory;
-	private String extension;
 	private String fileName;
 	
 	/**
@@ -70,10 +68,10 @@ public abstract class FileLoader {
 	
 	/**
 	 * Loads language property file into property object
+	 * @throws SLogoException 
 	 */
-
-	public void load() throws SLogoException  {
-		fileName = directory + "/" + extension;
+	public void load(String path, String extension) throws SLogoException{
+		fileName = path + "/" + extension;
 		myFileReader = null;
 		try {
 			myFileReader = new BufferedReader(new FileReader(fileName));
@@ -92,14 +90,6 @@ public abstract class FileLoader {
 		return fileName;
 	}
 
-	public void setDirectory(String directory) {
-		this.directory = directory;
-	}
-
-	public void setExtension(String extension) {
-		this.extension = extension;
-	}
-
 	public String getString(String key) {
 		return myProperties.getProperty(key);
 	}
@@ -116,7 +106,7 @@ public abstract class FileLoader {
 		try {
 			reader = new LineNumberReader(new FileReader(filename));
 		} catch (FileNotFoundException e) {
-			throw new SLogoException("SLogo resources file not found");
+			throw new SLogoException("File not found");
 		}
 		int numLines = 0;
 		@SuppressWarnings("unused")
@@ -124,7 +114,7 @@ public abstract class FileLoader {
 		try {
 			while ((nextLine = reader.readLine()) != null) {}
 		} catch (IOException e) {
-			throw new SLogoException("SLogo resources file not found");
+			throw new SLogoException("File not found");
 		}
 		numLines = reader.getLineNumber(); 
 		return numLines;

@@ -165,8 +165,8 @@ public class SLogoDisplayData extends Observable{
 		return cleared;
 	}
 
-	public void setCleared(boolean cleared){
-		myState.setCleared(cleared);
+	public void queueClearing(boolean cleared){
+		myState.queueClearing(cleared);
 	}
 
 }

@@ -1,6 +1,5 @@
 package commandnode;
 import exception.SLogoException;
-import model.ColorLoader;
 import model.SLogoCharacterState;
 
 /**

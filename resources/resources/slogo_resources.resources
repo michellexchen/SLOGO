@@ -11,3 +11,5 @@ ShapeIndex:Invalid shape index.
 ColorIndex:Invalid color index.
 TreeFactory:Tree Factory couldn't be created.
 Repcount::Repcount
+InstructionsLoader:Instruction Loader couldn't be created.
+InvalidCommandParts:Invalid command! Not enough command parts supplied.

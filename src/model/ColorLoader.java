@@ -17,7 +17,7 @@ public class ColorLoader extends FileLoader{
 	private final String colorExtension = "Colors.resources";
 	private HashMap<Integer, Color> myRGBMap;
 
-	private double DEFAULT_OPACITY = 1.0;
+	private static final double DEFAULT_OPACITY = 1.0;
 
 	public ColorLoader() throws SLogoException{
 		myRGBMap = new HashMap<Integer, Color>();
@@ -28,17 +28,13 @@ public class ColorLoader extends FileLoader{
 	/**
 	 * loads color resource file
 	 */
-	
 	public void load() throws SLogoException {
-		setDirectory(colorDirectory);
-		setExtension(colorExtension);
-		super.load();
+		super.load(colorDirectory, colorExtension);
 	}
-	
+
 	/**
 	 * Add default colors to color map with index
 	 */
-
 	private void loadDefaultColors() throws SLogoException{
 		int numDefaultColors = countLines(getFileName());
 		for(int x=0; x<numDefaultColors; x++){
@@ -52,7 +48,7 @@ public class ColorLoader extends FileLoader{
 	public Color getColor(int index) throws SLogoException{
 		return myRGBMap.get(index);
 	}
-	
+
 	public Color createColor(int r, int g, int b){
 		return new Color(convertRGB(r), convertRGB(g), convertRGB(b), DEFAULT_OPACITY);
 	}
@@ -66,11 +62,11 @@ public class ColorLoader extends FileLoader{
 	 * Node representation of Repeat command, a Control Structure command using variable
 	 * @return Normalized RGB value (0:1)
 	 */
-	
+
 	private double convertRGB(int value){
 		return value/255.0;
 	}
-	
+
 	public HashMap<Integer, Color> getMap(){
 		return myRGBMap;
 	}

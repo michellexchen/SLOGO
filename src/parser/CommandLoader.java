@@ -1,9 +1,8 @@
 package parser;
-import exception.SLogoException;
 import model.FileLoader;
 
 /**
- * CommandLoader initiates file loading from commands resources files
+ * CommandLoader initiates file loading from commands resources folder
  * 
  * @author Adam Tache
  *
@@ -12,10 +11,9 @@ import model.FileLoader;
 public class CommandLoader extends FileLoader {
 
 	private static final String COMMAND_PATH = "resources/commands";
-	
-	public void load() throws SLogoException {
-		setDirectory(COMMAND_PATH);
-		super.load();
+
+	public String getPath(){
+		return COMMAND_PATH;
 	}
 
 }

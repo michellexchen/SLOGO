@@ -21,7 +21,7 @@ public abstract class SLogoCharacterState {
 	private int myShapeIndex;
 	private int myBGColorIndex;
 	private Color myBGColor;
-	private boolean cleared;
+	private boolean toClear;
 	private ResourceLoader resourceLoader = new ResourceLoader();
 
 	public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
@@ -126,16 +126,15 @@ public abstract class SLogoCharacterState {
 	}
 
 	public boolean getCleared(){
-		return cleared;
-	}
-
-	public void setCleared(boolean cleared){
-		this.cleared = cleared;
+		return toClear;
 	}
 
 	public String getPenStyle() {
-		// TODO Auto-generated method stub
 		return myPen.getPenStrokeStyle();
+	}
+
+	public void queueClearing(boolean toClear) {
+		this.toClear = toClear;
 	}
 
 }

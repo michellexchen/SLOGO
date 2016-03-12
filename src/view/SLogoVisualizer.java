@@ -141,7 +141,7 @@ public class SLogoVisualizer implements Observer {
 		if(!turtledata.getPen().getDown() || turtledata.isCleared()){
 			newLine.setStrokeWidth(0);
 			if(turtledata.isCleared())
-				turtledata.setCleared(false);
+				turtledata.queueClearing(false);
 		}
 		return newLine;
 	}

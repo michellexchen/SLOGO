@@ -6,7 +6,6 @@ import java.util.List;
 import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
-import commandnode.TellNode;
 import commandnode.TurtleCommand;
 import commandnode.VariableCommand;
 import exception.SLogoException;
@@ -29,10 +28,6 @@ public class TreeFactory {
 	private ResourceLoader myResourcesLoader;
 	private LanguageLoader myLanguageLoader;
 	private SLogoWorkspace myWorkspace;
-
-	private static final String TURTLECREATE = "tell";
-	private static final String TURTLECREATE2 = "ask";
-	private static final String TURTLESID = "TURTLES";
 
 	public TreeFactory(SLogoWorkspace ws) throws SLogoException {
 		myResourcesLoader = new ResourceLoader();
