@@ -59,6 +59,7 @@ public class SLogoGUIController implements Initializable, Observer {
 						+ "compsci308/spring16/assign/03_slogo/commands.php";
 	private static final int POPUP_WIDTH = 900;
 	private static final int POPUP_HEIGHT = 550;
+	private static final int RGB_CONST = 255;
 
 	private WebView	myBrowser;
 	private WebEngine myWebEngine;
@@ -147,13 +148,12 @@ public class SLogoGUIController implements Initializable, Observer {
     //History
     @FXML
     private List<String> myHistory;
-  
-    
-//    @FXML
-//    private List<String> myProperties;
 
-    
-    
+    /**
+     * All GUI elements are initialized in this method
+     * and FXML settings are read
+     * 
+     */
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
     	assignMenuAction();
@@ -208,6 +208,14 @@ public class SLogoGUIController implements Initializable, Observer {
         
     }
         
+    /**
+     * Manually assigns an action to each MenuItem
+     * 
+     * This is not the optimal design, but it was done this way
+     * because FXML (created by SceneBuilder) does not support
+     * dynamic addition of MenuItems to MenuButton
+     * 
+     */
     private void assignMenuAction () {
     	myProject1.setOnAction(e -> {
     		try {
@@ -235,8 +243,13 @@ public class SLogoGUIController implements Initializable, Observer {
 			} catch (Exception e1) {}
     	});
     }
-    
-    
+
+    /**
+     * Defines and assigns an action to Run button
+     * Notifies Model that there is a command to be processed
+     * 
+     * @param command
+     */
     private void run(String command){
         setCommand(myCommand);
           	/*
@@ -255,6 +268,13 @@ public class SLogoGUIController implements Initializable, Observer {
           	displayProperties();
     }
     
+    /**
+     * Lets the user view the commands
+     * 
+     * NEEDS TO BE REVISED!!!
+     * 
+     * @param link
+     */
     private void popup(String link){
 		myBrowser = new WebView();
         myWebEngine = myBrowser.getEngine();
@@ -271,19 +291,17 @@ public class SLogoGUIController implements Initializable, Observer {
         stage.show();
     }
     
-    
+    /**
+     * Lists commands in the commandhistory pane
+     * 
+     */
     private void displayHistory(){
-    	myHistoryPaneView = new ListView<String>();
+       	myHistoryPaneView = new ListView<String>();
     	ObservableList<String> items =FXCollections.observableArrayList (
     			myHistory);
     	myHistoryPaneView.setItems(items);
     	myCommandHistoryPane.setContent(myHistoryPaneView);
-//    	myHistoryPaneView.setOnMouseClicked(e-> {
-//    		System.out.println("*");
-//    		System.out.println(e.toString());
-//    		run(myCommand);
-//    	});
-    	
+
     	myHistoryPaneView.getSelectionModel().selectedItemProperty().addListener
     												(new ChangeListener<String>() {
     	    @Override
@@ -306,6 +324,11 @@ public class SLogoGUIController implements Initializable, Observer {
     	myPropertiesPaneView.setPrefSize(200, 150);
     }
     
+    /**
+     * Updates property info on the bottom left side of the screen
+     * 
+     * @param displayData
+     */
     public void updateProperties(SLogoDisplayData displayData){
     	
     	myProperties =FXCollections.observableArrayList (
@@ -321,31 +344,30 @@ public class SLogoGUIController implements Initializable, Observer {
     	myPropertiesPaneView.setItems(myProperties);
     }
     
-    
+    /**
+     * Assigns an action to the customize button
+     * 
+     */
     private void customize(){
     	myCustomizeButton.setOnMouseClicked(e -> {
     		myCustomizer.setPropertiesData(myPropertiesData);
     		myCustomizer.show();    		
-//    		System.out.println("new pane color:");
-//    		System.out.println(myCustomizer.getMyPaneColor());
-//    		System.out.println("new font color:");
-//    		System.out.println(myCustomizer.getMyFontColor());
-//        	Dialog customize = new Dialog();
-//        	customize.getDialogPane().setPrefSize(500, 500);
-//        	customize.setTitle("CUSTOMIZE");
-//        	customize.setGraphic(chooseColor());
-//        	customize.getDialogPane().getButtonTypes().add(new ButtonType("DONE", ButtonData.CANCEL_CLOSE));
-//        	customize.showAndWait();
 		});
     }
-    
-	public String toRGBCode (Color color) {
-		return String.format( "#%02X%02X%02X",
-				(int)( color.getRed() * 255 ),
-				(int)( color.getGreen() * 255 ),
-				(int)( color.getBlue() * 255 ) );
-	}
-    
+
+    /**
+     * Converts Color object to its hex string
+     * 
+     * @param color
+     * @return
+     */
+    public String toRGBCode (Color color) {
+    	return String.format( "#%02X%02X%02X",
+    			(int) (color.getRed() * RGB_CONST),
+    			(int) (color.getGreen() * RGB_CONST),
+    			(int) (color.getBlue() * RGB_CONST));
+    }
+
     public SLogoCustomizerBuilder getCustomizer() {
     	return myCustomizer;
     }
@@ -413,51 +435,6 @@ public class SLogoGUIController implements Initializable, Observer {
 		this.myModel = myModel;
 	}
 
-	
-	public void updateComboBox (ObservableList<String> items) {
-		//getComboBox().getItems().clear();
-		//getComboBox().getItems().addAll(items);
-		getComboBox().getItems().add("HAHA");
-		//getComboBox().setItems(items);
-
-		for (String a : items) {
-			System.out.println(a);
-		}
-		
-		
-		
-	}
-	
-	public void updateMenuButton(ObservableList<MenuItem> items) {
-		// TODO Auto-generated method stub
-		
-		
-		System.out.println("This is menubutton: " + getMenuButton());
-		System.out.println("This is items: " + items);
-
-		getMenuButton().getItems().clear();
-		getMenuButton().getItems().addAll(items);
-	    getMenuButton().showingProperty().addListener(new ChangeListener<Boolean>() {
-	        @Override
-	        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-	            if(newValue) {
-	                getMenuButton().getItems().add(new MenuItem("new city item"));
-	            }
-	        }
-	    });
-		
-		System.out.println("This is menubuttons added: " + getMenuButton().getItems());
-		
-//		System.out.println("Is tghis happening");
-		for (MenuItem item : getMenuButton().getItems()) {
-//			
-//			System.out.println(item);
-//			System.out.println(item.toString());
-//			
-		}
-		
-	}
-
 	/**
 	 * @return the myMenuButton
 	 */
@@ -472,37 +449,19 @@ public class SLogoGUIController implements Initializable, Observer {
 		this.myMenuButton = myMenuButton;
 	}
 
+	/**
+	 * updates canvas color
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		getCanvas().setStyle("-fx-background-color: " + toRGBCode(myPropertiesData.getPaneColor()));
-		System.out.println(myPropertiesData.getPaneColor());
-	}
-//	public MenuButton getMenuButton() {
-//		return myMenuButton;
-//	}
-//
-//	public void setMenu(MenuButton myMenu) {
-//		this.myMenuB = myMenu;
-//	}
-
-	/**
-	 * @return the myComboBox
-	 */
-	public ComboBox getComboBox() {
-		return myComboBox;
 	}
 
 	/**
-	 * @param myComboBox the myComboBox to set
+	 * @return the myCommand
 	 */
-	public void setComboBox(ComboBox myComboBox) {
-		this.myComboBox = myComboBox;
+	public String getCommand() {
+		return myCommand;
 	}
 
-//	@Override
-//	public void update(Observable arg0, Object arg1) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-	
 }

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import parser.SLogoParser;
+import view.SLogoView;
 import view.View;
 
 /**
@@ -62,29 +63,39 @@ public class SLogoModel implements Model {
 		getView().updateWorkspaces();
 	}
 
+	/**
+	 * Creates a parser instance and feeds the command to the parser
+	 * called by View through interface
+	 * 
+	 */
+	@Override
 	public void readCommand(String command) throws SLogoException {
 		SLogoParser parser = new SLogoParser(myCurrentWorkspace);
 		parser.readCommand(command);
 	}
 
 	/**
+	 * Switches workspaces given the index
+	 * Used in conjunction with switchVisualizer
+	 * 
+	 */
+	@Override
+	public void switchWorkspace(int index) throws SLogoException {
+		if (index >= getObservableWorkspaces().size()) {
+			throw new SLogoException
+				("This project doesn't exist!\nPlease click + button first!");
+		}
+		setCurrentWorkspace(getObservableWorkspaces().get(index));
+		getView().switchVisualizer(index);
+	}
+	
+	
+	
+	/**
 	 * @return the myView
 	 */
 	public View<?> getView() {
 		return myView;
-	}
-
-	/**
-	 * @param myView
-	 *            the View to set
-	 */
-	public void setView(View myView) {
-		this.myView = myView;
-	}
-
-	@Override
-	public void createBackend() {
-
 	}
 
 	@Override
@@ -104,10 +115,13 @@ public class SLogoModel implements Model {
 		setCurrentWorkspace(myWorkspace);
 	}
 
-	
+	/**
+	 * Adds a new workspace and initializes it
+	 * Also calls addVisualizer that adds a visualizer in the frontend
+	 * 
+	 */
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {
-		//Need to get View to create a new Visualizer for this workspace
 		createNewWorkspace();
 		getView().addVisualizer();
 		getCurrentWorkspace().addListeners();
@@ -157,27 +171,10 @@ public class SLogoModel implements Model {
 		this.myLanguageDriver = myLanguageDriver;
 	}
 
-	@Override
-	public void switchWorkspace(int index) throws SLogoException {
-		// TODO Auto-generated method stub
-		if (index >= getObservableWorkspaces().size()) {
-			throw new SLogoException
-				("This project doesn't exist!\nPlease click + button first!");
-		}
-		
-		setCurrentWorkspace(getObservableWorkspaces().get(index));
-		getView().switchVisualizer(index);
-		
+	/**
+	 * @param myView the myView to set
+	 */
+	public void setView(View myView) {
+		this.myView = myView;
 	}
-	
-	public void showError(SLogoException e) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error Dialog");
-		alert.setHeaderText("Error Occurred");
-		alert.setContentText("Ooops, there was an error!");
-
-		alert.showAndWait();
-		// Or restart the simulation
-	}
-
 }

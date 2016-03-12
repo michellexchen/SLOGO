@@ -41,7 +41,6 @@ public class SLogoDisplayData extends Observable{
 
 	public void updateData(SLogoCharacterState state) {
 		myPen = state.getPen();
-		// TODO: Configure stroke
 		prevDirection = myDirection;
 		myDirection = state.getDirection();
 		myPosition.setXY(state.getXCoor(), state.getYCoor());
@@ -50,8 +49,9 @@ public class SLogoDisplayData extends Observable{
 		ID = state.getID();
 		bgColor = state.getBGColor();
 		cleared = state.getCleared();
-		if(cleared)
-			myLines = new ArrayList<Line>();
+		if (cleared) {
+			myLines.clear();
+		}
 		applyChanges();
 	}
 

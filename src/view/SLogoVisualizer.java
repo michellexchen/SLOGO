@@ -41,7 +41,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private SLogoPromptBuilder myPromptBuilder;
 	private Parent root;
 
-	// Visualization Primitives
 	private Scene myScene;
 	private Stage myStage;
 	private Model myModel;
@@ -64,11 +63,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myModel = model;
 	}
 
-	public SLogoVisualizer(){
-
-	}
-
-
 	public void initialize() throws SLogoException, IOException {
 
 		myPromptBuilder = new SLogoPromptBuilder(myProperties);
@@ -84,7 +78,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
-
 
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -188,10 +181,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//assign click action - change the action to change attributes
 		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
-			turtle.setFitWidth(120);
-			turtle.setLayoutX(displaydata.getX() - 120 / 2);
-			turtle.setLayoutY(displaydata.getY() - 120 / 2);
-			turtle.setRotate(90);
+			//Show Properties
 		});
 
 		//turtle resize
@@ -207,8 +197,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//turtle rotate
 		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
 		turtle.setRotate(displaydata.getDirection());
-
-
 
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
