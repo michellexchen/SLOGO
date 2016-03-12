@@ -24,7 +24,7 @@ public class SLogoWorkspace {
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
 	
-	// Lists declared for Observable List initialization
+	// Lists declared for Observable List initialization, not to be used
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
@@ -76,7 +76,11 @@ public class SLogoWorkspace {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
 		getObservableDataList().addListener((ListChangeListener) 
-				change -> getView().updateDisplayData());
+				change -> {
+					getView().updateDisplayData();
+					//System.out.println("ObservableDatalist change");
+					
+				});
 
 		getObservableCommandHistory().addListener((ListChangeListener) 
 				change -> getView().updateCommandHistory());

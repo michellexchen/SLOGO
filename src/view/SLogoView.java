@@ -146,7 +146,6 @@ public class SLogoView implements View {
 
 	@Override
 	public Observer getObserver() {
-		// TODO Auto-generated method stub
 		return getCurrentVisualizer();
 	}
 

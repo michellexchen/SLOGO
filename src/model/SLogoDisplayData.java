@@ -48,7 +48,7 @@ public class SLogoDisplayData extends Observable{
 
 	/**
 	 * Called by command nodes to update the relevant display data
-	 * Fields that get updated include PenData, directioin, coordinates
+	 * Fields that get updated include PenData, direction, coordinates
 	 * image, hidden (boolean), ID, clearing of trails, etc.
 	 * 
 	 * applyChanges method is called in the end to notify Observers

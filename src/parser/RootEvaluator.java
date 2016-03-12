@@ -18,11 +18,7 @@ public class RootEvaluator {
 	public double evaluateRoots(List<Node> myRoots) throws SLogoException {
 		double evaluation = 0;
 		System.out.println(myWorkspace);
-		
-
-		
-			
-			
+	
 		List<SLogoCharacter> myCharacters = myWorkspace.getCharacterList();
 		for (Node myRoot : myRoots) {
 			for (SLogoCharacter character : myCharacters) {

@@ -74,8 +74,8 @@ public class SLogoVisualizer implements Observer {
 		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
 		getModel().loadLanguage();
 
-		//Get the ObservableDataList
-		setObservableDataList(getModel().getObservableDataList());
+//		//Get the ObservableDataList
+//		setObservableDataList(getModel().getObservableDataList());
 
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -107,6 +107,8 @@ public class SLogoVisualizer implements Observer {
 	@Override
 	public void update(Observable observable, Object arg1) {
 		updateDisplayData();
+		System.out.println("Is this getting called?");
+		System.out.println(this);
 	}
 
 	/**
@@ -154,7 +156,7 @@ public class SLogoVisualizer implements Observer {
 		getGUIController().getCanvas().getChildren().clear();
 
 		//getModel().getObservableDataList();
-		for (SLogoDisplayData turtledata : getObservableDataList()) {
+		for (SLogoDisplayData turtledata : getModel().getObservableDataList()) {
 			//Place the turtle
 			placeTurtle(turtledata);
 
