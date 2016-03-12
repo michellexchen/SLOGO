@@ -7,7 +7,7 @@ import model.SLogoCharacter;
 import model.SLogoCharacterState;
 import model.SLogoTurtle;
 
-public class TurtlesNode extends TellNode{
+public class TurtlesNode extends TurtleCommand {
 
 	public TurtlesNode() {
 		// TODO Auto-generated constructor stub
@@ -16,11 +16,10 @@ public class TurtlesNode extends TellNode{
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// TODO Auto-generated method stub
-//		return super.evaluate(state);
+		// return super.evaluate(state);
 		List<SLogoCharacter> activeTurtles = getWorkspace().getActiveTurtlesList();
-		return ((SLogoTurtle) activeTurtles.get(activeTurtles.size()-1)).getState().getID();
+//		return ((SLogoTurtle) activeTurtles.get(activeTurtles.size() - 1)).getState().getID();
+		return super.getWorkspace().getCharacterList().size();
 	}
-	
-	
 
 }

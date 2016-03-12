@@ -3,7 +3,7 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class AskNode extends BinaryNode {
+public class AskNode extends TurtleCommand {
 
 	public AskNode() {
 	
