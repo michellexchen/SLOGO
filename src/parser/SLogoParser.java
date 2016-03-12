@@ -27,6 +27,9 @@ public class SLogoParser {
 	}
 	
 	public List<Node> readCommand(String command) throws SLogoException {
+		if (command.isEmpty()) {
+			throw new SLogoException("Nothing was entered! Try again!");
+		}
 		System.out.println("Reading command: " + command);
 		List<String> commandParts = formatCommandParts(command);
 		List<Node> myRoots = myTreeFactory.createNodes(commandParts);
