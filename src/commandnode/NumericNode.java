@@ -19,5 +19,9 @@ public class NumericNode extends NullaryNode {
 	public double evaluate(SLogoCharacterState state) {
 		return myValue;
 	}
+	
+	public double getNumericValue(){
+		return myValue;
+	}
 
 }

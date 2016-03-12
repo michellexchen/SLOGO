@@ -99,6 +99,10 @@ public class SLogoWorkspace {
 	public List<SLogoCharacter> getCharacterList() {
 		return myCharacters;
 	}
+	
+	public SLogoTurtleFactory getCurrentTurtleFactory() {
+		return turtleFactory;
+	}
 
 	public void addNewCharacter(SLogoCharacter character) {
 		myCharacters.add(character);

@@ -3,7 +3,7 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class ToNode extends TernaryNode {
+public class MakeUserInstructionNode extends TernaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		// List<Node> myVariables = ((ListNode)

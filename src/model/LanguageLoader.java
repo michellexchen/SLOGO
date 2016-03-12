@@ -22,6 +22,7 @@ public class LanguageLoader extends FileLoader {
 		setExtension(langExtension);
 		super.load();
 		createSplitBackMap();
+		
 	}
 
 	public String getLanguage() {
@@ -33,6 +34,9 @@ public class LanguageLoader extends FileLoader {
 	}
 
 	public String getTranslation(String foreignWord) {
-		return myBackMap.get(foreignWord);
+		if (myBackMap.containsKey(foreignWord)) {
+			return myBackMap.get(foreignWord);
+		}
+		return foreignWord;
 	}
 }

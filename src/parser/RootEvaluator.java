@@ -25,8 +25,8 @@ public class RootEvaluator {
 		System.out.println(myWorkspace);
 		List<SLogoCharacter> myCharacters = myWorkspace.getActiveTurtlesList(); //iterate only through the list of active turtles
 		for (Node myRoot : myRoots) {
-			//for (SLogoCharacter character : myCharacters) {
-			for(SLogoCharacter character : myWorkspace.getCharacterList()) { //have not debugged so don't iterate through active turtles
+			for (SLogoCharacter character : myCharacters) {
+//			for(SLogoCharacter character : myWorkspace.getCharacterList()) { //have not debugged so don't iterate through active turtles
 				evaluation = myRoot.evaluate(character.getState());
 				myWorkspace.getObservableDataList().get(myCharacters.indexOf(character))
 						.updateData(character.getState());

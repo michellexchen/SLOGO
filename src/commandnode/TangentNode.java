@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Tan, Tangent commands
  */
-public class TanNode extends UnaryNode{
+public class TangentNode extends UnaryNode{
 
 	/**
 	 * @return tangent evaluation of radians converted from degrees

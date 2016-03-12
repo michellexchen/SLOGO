@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of YCor command
  */
-public class YcorNode extends NullaryNode{
+public class YCoordinateNode extends NullaryNode{
 	
 	/**
 	 * @param state

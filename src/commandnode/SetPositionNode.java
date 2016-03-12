@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of SetXY, a Turtle Command
  */
-public class SetXYNode extends BinaryNode {
+public class SetPositionNode extends BinaryNode {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double distance = calculateDistance(state.getXCoor(), state.getYCoor(), state);

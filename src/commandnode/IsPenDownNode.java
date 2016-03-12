@@ -5,7 +5,7 @@ import model.SLogoCharacterState;
 /**
  * Node representation of PenDown command, Turtle Command
  */
-public class PenDownNode extends NullaryNode{
+public class IsPenDownNode extends NullaryNode{
 
 	/**
 	 * Sets Turtle pen down, leaving trails
