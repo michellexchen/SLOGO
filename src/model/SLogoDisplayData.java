@@ -33,12 +33,15 @@ public class SLogoDisplayData extends Observable{
 	private SLogoPen myPen;
 	private double prevDirection;
 	private boolean cleared;
+	private String myLineStyle = "SOLID";
 	private SLogoCharacterState myState;
 
 	public SLogoDisplayData(SLogoCharacterState state) throws SLogoException {
 		myPosition = new SLogoPosition();
 		myState = state;
 		myPen = state.getPen();
+		myLineStyle = "SOLID";
+
 		initialize();
 		updateData();
 	}
@@ -66,6 +69,7 @@ public class SLogoDisplayData extends Observable{
 		ID = myState.getID();
 		bgColor = myState.getBGColor();
 		cleared = myState.getCleared();
+
 		if (cleared) {
 			myLines.clear();
 		}
@@ -85,6 +89,10 @@ public class SLogoDisplayData extends Observable{
 
 	public void addLine(Line newline) {
 		myLines.add(newline);
+	}
+	
+	public String getPenStyle(){
+		return myLineStyle;
 	}
 
 	public double getX() {
