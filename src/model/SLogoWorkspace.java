@@ -6,6 +6,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import view.SLogoPenData;
 import view.SLogoPropertiesData;
 import view.View;
 
@@ -32,6 +33,7 @@ public class SLogoWorkspace {
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
 	private SLogoPropertiesData myPropertiesData;
+	private SLogoPenData myPenData;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;

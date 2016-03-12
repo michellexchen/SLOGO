@@ -27,11 +27,11 @@ import javafx.stage.Stage;
 public class SLogoCustomizerBuilder extends Observable {
 	
     private static final int XPROMPTSIZE = 500;
-    private static final int YPROMPTSIZE = 275; 
-    private static final int PADDING = 55;
+    private static final int YPROMPTSIZE = 300; 
+    private static final int PADDING = 45;
 	private static final int SPLASHSIZE = 400;
     private static final int COLORLABELSIZE = 202;
-    private static final int PREFSIZE = 35;
+    private static final int PREFSIZE = 40;
 	
 	private Stage myCustomizerStage;
 	private Scene myCustomizerScene;
@@ -42,20 +42,26 @@ public class SLogoCustomizerBuilder extends Observable {
 	private HBox colorHb;
 	private ColorPicker fontColorPicker;
 	private Label fontColorLabel;
-	private Color myFontColor;
 	private HBox fontColorHb;
-	
 	private Button myOkayButton;
 	private HBox buttonHb;
 	private ComboBox comboBox;
 	private Label penStyleLabel;
 	private HBox penStyleHb;
-	private String myLineStyle;
 	private Slider thicknessSlider;
 	private Label thicknessSliderLabel;
 	private HBox thicknessSliderHb;
-	private double myLineThickness;
 	private SLogoPropertiesData myPropertiesData;
+	private ToggleSwitch switchButton;
+	private HBox switchHb;
+	private Label switchLabel;
+	
+	private Color myPenColor;
+	private double myPenWidth;
+	private String myStrokeStyle;
+	private boolean isDown;
+
+
 	
 	public SLogoCustomizerBuilder() {
 		setup();
@@ -66,10 +72,12 @@ public class SLogoCustomizerBuilder extends Observable {
 	}
 	
 	private void setup(){
+		myPaneColor = Color.WHITE;
 		setColorPicker();
 		setFontColor();
 		setLine();
 		setLineThickness();
+		setPenDown();
 		setButton();
 	}
 	
@@ -78,7 +86,7 @@ public class SLogoCustomizerBuilder extends Observable {
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
 		vbox.setPadding(new Insets(PADDING));
 		vbox.getChildren().addAll(colorHb, fontColorHb, penStyleHb, 
-										thicknessSliderHb, buttonHb);
+										thicknessSliderHb, switchHb, buttonHb);
 		vbox.getStylesheets().add("view/splashstyle.css");
 		return vbox;
 	}
@@ -102,7 +110,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	private void setColorPicker(){
 		colorLabel = new Label("Set background color: ");
 		colorLabel.setPrefWidth(COLORLABELSIZE);
-		colorPicker = new ColorPicker(Color.BLUE);
+		colorPicker = new ColorPicker();
         colorPicker.setOnAction(e -> {
         	myPaneColor = colorPicker.getValue();
         });
@@ -118,10 +126,10 @@ public class SLogoCustomizerBuilder extends Observable {
 	private void setFontColor(){
 		fontColorLabel = new Label("Set font color: ");
 		fontColorLabel.setPrefWidth(COLORLABELSIZE);
-		//TODO get current font color, set fontColorPicker/myFontColor to that color 
+		//TODO get current font color, set fontColorPicker/myPenColor to that color 
 		fontColorPicker = new ColorPicker(Color.BLACK);
 		fontColorPicker.setOnAction(e -> {
-			myFontColor = fontColorPicker.getValue();
+			myPenColor = fontColorPicker.getValue();
         });
         fontColorHb = new HBox();
         fontColorHb.getChildren().addAll(fontColorLabel, fontColorPicker);
@@ -164,13 +172,24 @@ public class SLogoCustomizerBuilder extends Observable {
 			thicknessSlider.valueProperty().addListener(new ChangeListener<Number>() {
 		            public void changed(ObservableValue<? extends Number> ov,
 		                Number old_val, Number new_val) {
-		            		myLineThickness = (double) new_val;
+		            	myPenWidth = (double) new_val;
 		            }
 		        });
 		thicknessSliderHb = new HBox();
 		thicknessSliderHb.getChildren().addAll(thicknessSliderLabel, thicknessSlider);
 		thicknessSliderHb.setPrefSize(PREFSIZE, PREFSIZE);
 
+	}
+	
+
+	
+	private void setPenDown(){
+		switchHb = new HBox();
+		switchLabel = new Label("Pen position?: ");
+		switchButton = new ToggleSwitch();
+		switchHb.setAlignment(Pos.CENTER);
+		switchHb.getChildren().addAll(switchLabel, switchButton);
+		switchHb.setPrefSize(PREFSIZE, PREFSIZE);
 	}
 	
 	/**
@@ -188,12 +207,15 @@ public class SLogoCustomizerBuilder extends Observable {
 			System.out.println(myPaneColor);
 			myPropertiesData.setPaneColor(myPaneColor);
 			System.out.println("new font color: ");
-			System.out.println(myFontColor);
-			myLineStyle = comboBox.getSelectionModel().getSelectedItem().toString();
+			System.out.println(myPenColor);
+			myStrokeStyle = comboBox.getSelectionModel().getSelectedItem().toString();
 			System.out.println("new pen style: ");
-			System.out.println(myLineStyle);
+			System.out.println(myStrokeStyle);
 			System.out.println("my new line thickness: ");
-			System.out.println(myLineThickness);
+			System.out.println(myPenWidth);
+			isDown = switchButton.isDown();
+			System.out.println("my new pen position: ");
+			System.out.println(isDown);
 			myPropertiesData.notifyObservers();
 			myCustomizerStage.hide();
 		});
