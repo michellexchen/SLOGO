@@ -68,7 +68,6 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 	private void setup(){
 		setWelcome();
 		setLanguage();
-		setColor();
 		setButton();
 	}
 	
@@ -83,7 +82,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		vbox = new VBox();
 		vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
 		vbox.setPadding(new Insets(PADDING));
-		vbox.getChildren().addAll(labelHb, langHb, colorHb, buttonHb);
+		vbox.getChildren().addAll(labelHb, langHb, buttonHb);
 		vbox.getStylesheets().add("View/splashstyle.css");
 		return vbox;
 	}
@@ -120,18 +119,7 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 
 	}
 	
-	private void setColor(){
-		colorLabel = new Label("Select background color: ");
-		colorLabel.setPrefWidth(COLORLABELSIZE);
-		colorPicker = new ColorPicker();
-        colorPicker.setOnAction(e -> {
-			myColor = colorPicker.getValue();
-        });
-		colorHb = new HBox();
-		colorHb.getChildren().addAll(colorLabel, colorPicker);
-		colorHb.setPrefSize(PREFSIZE, PREFSIZE);
-		//myPropertiesData.setColor(myColor);
-	}
+
 		
 	
 	private void setButton(){ 
@@ -143,9 +131,6 @@ public class SLogoPromptBuilder extends SLogoBuilder {
 		myOkayButton.setOnMouseClicked(e -> {
 			myLanguage = comboBox.getSelectionModel().getSelectedItem().toString();
 			getPrompt().hide();
-			//testing
-//			System.out.println(myLanguage);
-//			System.out.println(myColor.toString());
 		});
 	}
 	

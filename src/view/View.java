@@ -42,11 +42,5 @@ public interface View<E> {
 	public Observer getObserver();
 	
 	public String getLanguage();
-	
-	//List<E>
-	public ObservableList<MenuItem> getMenuItems();
-	
-	public void createMenuItem ();
-
 }
 	

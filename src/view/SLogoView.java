@@ -22,19 +22,14 @@ import model.SLogoWorkspace;
  */
 public class SLogoView implements View {
 
-	private final int WIDTH = 440;
-	private final int HEIGHT = 440;
+	private static final int WIDTH = 440;
+	private static final int HEIGHT = 440;
 
 	private String myCommand;
 	private Model myModel;
 	private List<SLogoVisualizer> myVisualizers;
 	private SLogoVisualizer myCurrentVisualizer;
 	
-	//List that keeps track of MenuItems that represent different workspaces
-	//in MenuButton
-	//private List<MenuItem> myMenuItems;
-	private ObservableList<MenuItem> myObservableMenuItems;
-
 	public SLogoView() throws SLogoException {
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
 	}
@@ -43,11 +38,6 @@ public class SLogoView implements View {
 		myModel = model;
 		myVisualizers = new ArrayList<SLogoVisualizer>();
 		myCurrentVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
-		
-		//Initialize the list of MenuItems (workspaces)
-		myObservableMenuItems = FXCollections
-							.observableArrayList(new ArrayList<MenuItem>());
-
 	}
 	
 	/**
@@ -58,52 +48,37 @@ public class SLogoView implements View {
 	public void initialize() throws SLogoException, IOException {
 		myCurrentVisualizer.initialize();
 		myVisualizers.add(myCurrentVisualizer);
-		
-		//Add listener 
-		myObservableMenuItems.addListener((ListChangeListener) change -> {
-		    //for all visualizers, make GUIController add MenuItems to Menubutton
-			for (SLogoVisualizer visualizer : myVisualizers) {
-				visualizer.updateMenuButton(myObservableMenuItems);
-			}
-//			
-//			System.out.println("CALLED");
-		});
 	}
 	
-	
-	
+
+	/**
+	 * Adds a new Visualizer that contains and instantiates
+	 * a new GUIController to enable multiple workspaces
+	 */
 	@Override
-	public void createMenuItem () {
-		//int  = getView().getMenuItem().size();
-		
-		//Name the menuitem
-		MenuItem myMenuItem = new MenuItem("Workspace " + 
-										getMenuItems().size());
-		myMenuItem.setId("Workspace " + 
-										getMenuItems().size());
-		System.out.println("MenuItem creation check: " + myMenuItem.getId());
-		//Add it to List<MenuItem>
-		getMenuItems().add(myMenuItem);
-		
-		System.out.println(getMenuItems().size());
-		
+	public void addVisualizer() throws SLogoException, IOException {
+		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
+		getVisualizers().add(myNewVisualizer);
+
+		myNewVisualizer.initialize();
+		setCurrentVisualizer(myNewVisualizer);
+	}
+
+	/**
+	 * 
+	 * Method that switches GUI to the Visualizer with the given index
+	 * Used in conjunction with switchWorkspace
+	 * 
+	 */
+	@Override
+	public void switchVisualizer (int index) {
+		getCurrentVisualizer().hide();
+		setCurrentVisualizer(getVisualizers().get(index));
+		getCurrentVisualizer().show();
 	}
 	
 	
-	public void showError(SLogoException e) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error Dialog");
-		alert.setHeaderText("Error Occurred");
-		alert.setContentText("Ooops, there was an error!");
-
-		alert.showAndWait();
-		// Or restart the simulation
-	}
-
-	//////////////////////////
-	// getters and setters //
-	//////////////////////////
-
+	
 	/**
 	 * @return the myModel
 	 */
@@ -180,22 +155,6 @@ public class SLogoView implements View {
 		return myCurrentVisualizer.getLanguage();
 	}
 	
-	@Override
-	public void switchVisualizer (int index) {
-		getCurrentVisualizer().hide();
-		setCurrentVisualizer(getVisualizers().get(index));
-		getCurrentVisualizer().show();
-	}
-
-	@Override
-	public void addVisualizer() throws SLogoException, IOException {
-		SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel(), WIDTH, HEIGHT);
-		getVisualizers().add(myNewVisualizer);
-		
-		myNewVisualizer.initialize();
-		setCurrentVisualizer(myNewVisualizer);
-	}
-
 	/**
 	 * @return the myVisualizers
 	 */
@@ -215,19 +174,5 @@ public class SLogoView implements View {
 	 */
 	public void setCurrentVisualizer(SLogoVisualizer myCurrentVisualizer) {
 		this.myCurrentVisualizer = myCurrentVisualizer;
-	}
-
-//	@Override
-//	public List<MenuItem> getMenuItemList() {
-//		// TODO Auto-generated method stub
-//		return getMenuItems();
-//	}
-
-	public ObservableList<MenuItem> getMenuItems() {
-		return myObservableMenuItems;
-	}
-
-	public void setMenuItems(ObservableList<MenuItem> myMenuItems) {
-		this.myObservableMenuItems = myMenuItems;
 	}
 }

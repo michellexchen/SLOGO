@@ -2,24 +2,18 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
-import model.SLogoVariable;
-import model.SLogoWorkspace;
 import commandnode.VariableNode;
 
 /**
  * Node representation of Make command, to create SLogoVariables
  */
-public class MakeNode extends BinaryNode {
+public class MakeNode extends BinaryVariableCommand {
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		VariableNode varNode = ((VariableNode) getChildren().get(0));
-		String varName = varNode.getVarName();
+		String varName = varNode.getName();
 		double varValue = evaluateChild(1, state);
-		SLogoWorkspace ws = varNode.getWorkspace();
-		SLogoVariable var = new SLogoVariable();
-		var.setName(varName);
-		var.setValue(varValue);
-		ws.getMyVarList().add(var);
+		getWorkspace().createVariable(varName, varValue);
 		return varValue;
 	}
 

@@ -7,6 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import commandnode.TellNode;
+import commandnode.VariableCommand;
 import exception.SLogoException;
 import model.ResourceLoader;
 import model.SLogoWorkspace;
@@ -21,7 +22,7 @@ import commandnode.VariableNode;
  *
  */
 
-public class SLogoTreeFactory {
+public class TreeFactory {
 
 	private CommandNameLoader myCommandNodeLoader;
 	private ResourceLoader myResourcesLoader;
@@ -29,7 +30,7 @@ public class SLogoTreeFactory {
 	private static final String TURTLECREATE = "tell";
 	private static final String TURTLECREATE2 = "ask";
 
-	public SLogoTreeFactory(SLogoWorkspace ws) throws SLogoException {
+	public TreeFactory(SLogoWorkspace ws) throws SLogoException {
 		myCommandNodeLoader = new CommandNameLoader();
 		myResourcesLoader = new ResourceLoader();
 		myWorkspace = ws;
@@ -51,19 +52,28 @@ public class SLogoTreeFactory {
 	private Node createChild(List<String> commandParts) throws SLogoException {
 		if(commandParts.isEmpty()) return null;
 		String currCommand = commandParts.remove(0);
-		if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
+		if(isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
+			System.out.println("AT BRACKET, Command Parts: " + commandParts);
 			List<String> innerCommands = createCommandList(commandParts);
+			List<String> innerCommandsClone = new ArrayList<String>();
+			for(String command : innerCommands){
+				innerCommandsClone.add(command);
+			}
 			ListNode listNode;
-			if(isOpenParenthesis(currCommand)) listNode = new ListNode(innerCommands.toArray(new String[innerCommands.size()]));
-			else listNode = new ListNode(createNodes(innerCommands));
-			return listNode;
+			if(isOpenParenthesis(currCommand)){
+				listNode = new ListNode(innerCommands.toArray(new String[innerCommands.size()]));
+			}
+			else{
+				listNode = new ListNode(createNodes(innerCommands));
+				listNode.setInnerCommands(innerCommandsClone);
+				return listNode;
+			}
 		}
-		if (isVariable(currCommand)) {
+		if(isVariable(currCommand)) {
 			VariableNode myVar = new VariableNode(currCommand);
 			myVar.setWorkspace(myWorkspace);
 			return myVar;
-		} 
-		 else {
+		} else{
 			Node myChild = createNode(currCommand);
 			while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
 				myChild.addChild(createChild(commandParts));
@@ -84,7 +94,7 @@ public class SLogoTreeFactory {
 			currCommand = commandParts.remove(0);
 			if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand))
 				openBrackets++;
-			if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand))
+			else if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand))
 				closedBrackets++;
 			else
 				innerCommands.add(currCommand);
@@ -114,6 +124,9 @@ public class SLogoTreeFactory {
 				throw new SLogoException(myResourcesLoader.getString("Command") + commandName
 						+ myResourcesLoader.getString("Implemented"));
 			}
+		if(node instanceof VariableCommand){
+			((VariableCommand)node).setWorkspace(myWorkspace);
+		}
 		return node;
 	}
 

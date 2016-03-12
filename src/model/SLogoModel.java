@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandnode.Node;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import parser.RootEvaluator;
 import parser.SLogoParser;
+import view.SLogoView;
 import view.View;
 
 /**
@@ -18,12 +23,13 @@ import view.View;
  *
  */
 public class SLogoModel implements Model {
-
+	//private static final int NUM_WORKSPACES = 5;
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageLoader myLanguageDriver;
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
+	//private RootEvaluator myRootEvaluator;
 
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
@@ -44,6 +50,13 @@ public class SLogoModel implements Model {
 		createNewWorkspace();
 	}
 
+	/**
+	 * Adds Listeners to all the Observable lists that are present
+	 * in model
+	 * 
+	 * Called at initialization
+	 * 
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners () {
 		myObservableWorkspaces.addListener((ListChangeListener) c -> {
@@ -57,29 +70,38 @@ public class SLogoModel implements Model {
 		getView().updateWorkspaces();
 	}
 
+	/**
+	 * Creates a parser instance and feeds the command to the parser
+	 * called by View through interface
+	 * 
+	 */
+	@Override
 	public void readCommand(String command) throws SLogoException {
 		SLogoParser parser = new SLogoParser(myCurrentWorkspace);
-		parser.readCommand(command);
+		List<Node> myRoots = parser.readCommand(command);
+		getCurrentWorkspace().getRootEvaluator().evaluateRoots(myRoots);
 	}
 
+	/**
+	 * Switches workspaces given the index
+	 * Used in conjunction with switchVisualizer
+	 * 
+	 */
+	@Override
+	public void switchWorkspace(int index) throws SLogoException {
+		if (index >= getObservableWorkspaces().size()) {
+			throw new SLogoException
+				("This project doesn't exist!\nPlease click + button first!");
+		}
+		setCurrentWorkspace(getObservableWorkspaces().get(index));
+		getView().switchVisualizer(index);
+	}
+	
 	/**
 	 * @return the myView
 	 */
 	public View<?> getView() {
 		return myView;
-	}
-
-	/**
-	 * @param myView
-	 *            the View to set
-	 */
-	public void setView(View myView) {
-		this.myView = myView;
-	}
-
-	@Override
-	public void createBackend() {
-
 	}
 
 	@Override
@@ -97,27 +119,15 @@ public class SLogoModel implements Model {
 		myWorkspace.initialize();
 		getObservableWorkspaces().add(myWorkspace);
 		setCurrentWorkspace(myWorkspace);
-		
-		//Also add a MenuItem
-		getView().createMenuItem();
 	}
 
-//	private void createMenuItem () {
-//		//int  = getView().getMenuItem().size();
-//		
-//		//Name the menuitem
-//		MenuItem myMenuItem = new MenuItem("Workspace " + 
-//										getView().getMenuItems().size());
-//		//Add it to List<MenuItem>
-//		getView().getMenuItems().add(myMenuItem);
-//		
-//		
-//		
-//	}
-	
+	/**
+	 * Adds a new workspace and initializes it
+	 * Also calls addVisualizer that adds a visualizer in the frontend
+	 * 
+	 */
 	@Override
 	public void addWorkspace() throws SLogoException, IOException {
-		//Need to get View to create a new Visualizer for this workspace
 		createNewWorkspace();
 		getView().addVisualizer();
 		getCurrentWorkspace().addListeners();
@@ -167,4 +177,10 @@ public class SLogoModel implements Model {
 		this.myLanguageDriver = myLanguageDriver;
 	}
 
+	/**
+	 * @param myView the myView to set
+	 */
+	public void setView(View myView) {
+		this.myView = myView;
+	}
 }

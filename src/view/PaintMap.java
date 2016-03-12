@@ -1,27 +1,16 @@
 package view;
 
-/**
-
-* Class that maps Color objects to the string of their names and vice versa.
-*  Used by graphics and XMLReader classes.
-*  
-*  RENAME THIS CLASS
- */
-
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.paint.Color;
 
-/*
+/**
  * The purpose of this class is to create a map that maps the names of Colors to their 
  * JavaFx color object and vice versa.
+ * 
  */
-
 public class PaintMap {
 	
-	/**
-	 * Using my**** for private variable names
-	 */
 	private static PaintMap instance;
 	private Map<String, Color> stringToColor;
 	private Map<Color, String> colorToString;
@@ -34,6 +23,7 @@ public class PaintMap {
 	}
 	/**
 	 * returns instance of paintmap
+	 * 
 	 * @return paintmap instance
 	 */
 	public static synchronized PaintMap getInstance() {
@@ -42,6 +32,7 @@ public class PaintMap {
 		}
 		return instance;
 	}
+	
 	/**
 	 * adds colors to STring to Color Map
 	 */
@@ -59,6 +50,7 @@ public class PaintMap {
 		stringToColor.put("pink", Color.PINK);
 		stringToColor.put("cyan", Color.CYAN);
 	}
+	
 	/**
 	 * adds string and colors to the color to string map
 	 */
@@ -75,8 +67,8 @@ public class PaintMap {
 		colorToString.put(Color.ORANGE, "orange");
 		colorToString.put(Color.PINK, "pink");
 		colorToString.put(Color.CYAN, "cyan");
-
 	}
+	
 	/**
 	 * returns color name given color object
 	 * @param color color object
@@ -85,6 +77,7 @@ public class PaintMap {
 	public String getColorString(Color color) {
 		return colorToString.get(color);
 	}
+	
 	/**
 	 * returns color given color name
 	 * @param colorName string of color name

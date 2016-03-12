@@ -94,6 +94,7 @@ setpc:SetPenColor
 shape:Shape
 id=ID
 tell=Tell
+ask=Ask
 turtleid=ID
 clearscreen:Clearscreen
 cs:Clearscreen

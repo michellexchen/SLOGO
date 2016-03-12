@@ -26,14 +26,6 @@
             <URL value="@style.css" />
           </stylesheets>
         </Button>
-        <MenuButton fx:id="myMenuButton" layoutX="5.0" layoutY="13.0" mnemonicParsing="false" prefHeight="21.625" prefWidth="176.0" style="" text="Select Workspace" textFill="BLACK" wrapText="false">
-          <font>
-            <Font size="11.0" />
-          </font>
-          <stylesheets>
-            <URL value="@style.css" />
-          </stylesheets>
-        </MenuButton>
         <TextField fx:id="myTextField" layoutX="220.0" layoutY="461.0" prefHeight="33.0" prefWidth="380.0" promptText="Enter command here...">
           <stylesheets>
             <URL value="@style.css" />
@@ -54,6 +46,19 @@
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
+               <content>
+                  <MenuButton fx:id="myMenu1" mnemonicParsing="false" prefHeight="21.625" prefWidth="176.0" style="" text="Choose Workspace" textFill="BLACK" wrapText="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Project1" />
+                     </items>
+                     <stylesheets>
+                        <URL value="@style.css" />
+                     </stylesheets>
+                  </MenuButton>
+               </content>
         </ScrollPane>
         <Label alignment="CENTER" layoutX="40.0" layoutY="50.0" prefWidth="128.0" text="Command History">
           <stylesheets>
@@ -86,6 +91,21 @@
             <URL value="@style.css" />
           </stylesheets>
         </Pane>
+            <MenuButton fx:id="myMenuButton" layoutY="11.0" mnemonicParsing="false" prefHeight="21.625" prefWidth="176.0" style="" text="Select Project" textFill="BLACK" wrapText="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <items>
+                  <MenuItem fx:id="myProject1" mnemonicParsing="false" text="Project 1" />
+                  <MenuItem fx:id="myProject2" mnemonicParsing="false" text="Project 2" />
+                  <MenuItem fx:id="myProject3" mnemonicParsing="false" text="Project 3" />
+                  <MenuItem fx:id="myProject4" mnemonicParsing="false" text="Project 4" />
+                  <MenuItem fx:id="myProject5" mnemonicParsing="false" text="Project 5" />
+               </items>
+               <stylesheets>
+                  <URL value="@style.css" />
+               </stylesheets>
+            </MenuButton>
       </children>
       <stylesheets>
         <URL value="@style.css" />

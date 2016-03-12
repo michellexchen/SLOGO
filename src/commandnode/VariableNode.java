@@ -1,42 +1,31 @@
 package commandnode;
 
 import model.SLogoCharacterState;
-import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 public class VariableNode extends NullaryNode{
 
-	private String varName;
+	private String myName;
 	private SLogoWorkspace myWorkspace;
 
-	public VariableNode(String varName){
-		setVarName(varName);
+	public VariableNode(String myName){
+		this.myName = myName;
 	}
 
-	public void setVarName(String varName){
-		this.varName = varName;
-	}
-
-	public String getVarName(){
-		return varName;
+	public String getName(){
+		return myName;
 	}
 
 	public double evaluate(SLogoCharacterState state){
-		return findVariable();
+		return myWorkspace.getVarValueByName(myName);
 	}
 	
-	private double findVariable(){
-		for(SLogoVariable variable: myWorkspace.getMyVarList()){
-			if(variable.getName().equals(varName)) return variable.getValue();
-		}
-		return 0;
-	}
-
 	public SLogoWorkspace getWorkspace(){
 		return myWorkspace;
 	}
 
-	public void setWorkspace(SLogoWorkspace ws){
-		myWorkspace = ws;
+	public void setWorkspace(SLogoWorkspace myWorkspace){
+		this.myWorkspace = myWorkspace;
 	}
+	
 }

@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -41,7 +40,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private SLogoPromptBuilder myPromptBuilder;
 	private Parent root;
 
-	// Visualization Primitives
 	private Scene myScene;
 	private Stage myStage;
 	private Model myModel;
@@ -49,7 +47,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
 	private double COORDINATE_SHIFT = PANE_SIZE / 2;
-	private double LINE_SHIFT = myTurtleSize / 2;
 	private int DIRECTION_FLIP = -1;
 
 	public SLogoVisualizer(Model model, int width, int height) {
@@ -63,11 +60,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myHeight = 331;
 		myModel = model;
 	}
-
-	public SLogoVisualizer(){
-
-	}
-
 
 	public void initialize() throws SLogoException, IOException {
 
@@ -84,7 +76,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
-
 
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -109,13 +100,13 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
+	/**
+	 * Implements Observable interface's update
+	 * 
+	 */
 	@Override
 	public void update(Observable observable, Object arg1) {
 		updateDisplayData();
-	}
-
-	public void updateMenuButton (ObservableList<MenuItem> items) {
-		getGUIController().updateMenuButton(items);
 	}
 
 	/**
@@ -126,10 +117,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public Line createLine(SLogoPosition position) {
 		Line newLine = new Line();
-		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT + LINE_SHIFT);
-		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT + LINE_SHIFT);
-		newLine.setEndX(position.getX() + COORDINATE_SHIFT + LINE_SHIFT);
-		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT);
+		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT);
+		newLine.setEndX(position.getX() + COORDINATE_SHIFT);
+		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
 		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
@@ -181,6 +172,11 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 	}
 
+	/**
+	 * Places a turtle on canvas
+	 * 
+	 * @param displaydata
+	 */
 	public void placeTurtle(SLogoDisplayData displaydata) {
 		Image image = new Image(IMAGE_PATH + displaydata.getImage());
 
@@ -192,10 +188,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//assign click action - change the action to change attributes
 		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
-			turtle.setFitWidth(120);
-			turtle.setLayoutX(displaydata.getX() - 120 / 2);
-			turtle.setLayoutY(displaydata.getY() - 120 / 2);
-			turtle.setRotate(90);
+			//Show Properties
 		});
 
 		//turtle resize
@@ -205,14 +198,12 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setCache(true);
 
 		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT);
-		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT);
+		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - myTurtleSize/2);
+		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT - myTurtleSize/2);
 
 		//turtle rotate
 		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
 		turtle.setRotate(displaydata.getDirection());
-
-
 
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
@@ -247,50 +238,11 @@ public class SLogoVisualizer extends Observable implements Observer {
 		return myPromptBuilder.sendMyLanguage();
 	}
 
-	public int getWidth() {
-		return myWidth;
-	}
-
-	public void setWidth(int width) {
-		this.myWidth = width;
-	}
-
-	public int getHeight() {
-		return myHeight;
-	}
-
-	public void setHeight(int height) {
-		this.myHeight = height;
-	}
-
-	/**
-	 * @return the myLoader
-	 */
-	public FXMLLoader getLoader() {
-		return myLoader;
-	}
-
-	/**
-	 * @param myLoader
-	 *            the myLoader to set
-	 */
-	public void setLoader(FXMLLoader myLoader) {
-		this.myLoader = myLoader;
-	}
-
 	/**
 	 * @return the myGUIController
 	 */
 	public SLogoGUIController getGUIController() {
 		return myGUIController;
-	}
-
-	/**
-	 * @param myGUIController
-	 *            the myGUIController to set
-	 */
-	public void setGUIController(SLogoGUIController myGUIController) {
-		this.myGUIController = myGUIController;
 	}
 
 	/**
@@ -301,39 +253,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	}
 
 	/**
-	 * @param myModel
-	 *            the myModel to set
-	 */
-	public void setModel(Model myModel) {
-		this.myModel = myModel;
-	}
-
-	/**
-	 * @return the myScene
-	 */
-	public Scene getScene() {
-		return myScene;
-	}
-
-	/**
-	 * @param myScene the myScene to set
-	 */
-	public void setScene(Scene myScene) {
-		this.myScene = myScene;
-	}
-
-	/**
 	 * @return the myStage
 	 */
 	public Stage getStage() {
 		return myStage;
-	}
-
-	/**
-	 * @param myStage the myStage to set
-	 */
-	public void setStage(Stage myStage) {
-		this.myStage = myStage;
 	}
 
 	/**
@@ -363,181 +286,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public void setCanvasColor(String myCanvasColor) {
 		this.myCanvasColor = myCanvasColor;
-	}
-
-	/**
-	 * @return the myObservableDataList
-	 */
-	public ObservableList<SLogoDisplayData> getMyObservableDataList() {
-		return myObservableDataList;
-	}
-
-	/**
-	 * @param myObservableDataList the myObservableDataList to set
-	 */
-	public void setMyObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
-		this.myObservableDataList = myObservableDataList;
-	}
-
-	/**
-	 * @return the myWidth
-	 */
-	public int getMyWidth() {
-		return myWidth;
-	}
-
-	/**
-	 * @param myWidth the myWidth to set
-	 */
-	public void setMyWidth(int myWidth) {
-		this.myWidth = myWidth;
-	}
-
-	/**
-	 * @return the myHeight
-	 */
-	public int getMyHeight() {
-		return myHeight;
-	}
-
-	/**
-	 * @param myHeight the myHeight to set
-	 */
-	public void setMyHeight(int myHeight) {
-		this.myHeight = myHeight;
-	}
-
-	/**
-	 * @return the myLoader
-	 */
-	public FXMLLoader getMyLoader() {
-		return myLoader;
-	}
-
-	/**
-	 * @param myLoader the myLoader to set
-	 */
-	public void setMyLoader(FXMLLoader myLoader) {
-		this.myLoader = myLoader;
-	}
-
-	/**
-	 * @return the myGUIController
-	 */
-	public SLogoGUIController getMyGUIController() {
-		return myGUIController;
-	}
-
-	/**
-	 * @param myGUIController the myGUIController to set
-	 */
-	public void setMyGUIController(SLogoGUIController myGUIController) {
-		this.myGUIController = myGUIController;
-	}
-
-	/**
-	 * @return the root
-	 */
-	public Parent getRoot() {
-		return root;
-	}
-
-	/**
-	 * @param root the root to set
-	 */
-	public void setRoot(Parent root) {
-		this.root = root;
-	}
-
-	/**
-	 * @return the myScene
-	 */
-	public Scene getMyScene() {
-		return myScene;
-	}
-
-	/**
-	 * @param myScene the myScene to set
-	 */
-	public void setMyScene(Scene myScene) {
-		this.myScene = myScene;
-	}
-
-	/**
-	 * @return the myStage
-	 */
-	public Stage getMyStage() {
-		return myStage;
-	}
-
-	/**
-	 * @param myStage the myStage to set
-	 */
-	public void setMyStage(Stage myStage) {
-		this.myStage = myStage;
-	}
-
-	/**
-	 * @return the myModel
-	 */
-	public Model getMyModel() {
-		return myModel;
-	}
-
-	/**
-	 * @param myModel the myModel to set
-	 */
-	public void setMyModel(Model myModel) {
-		this.myModel = myModel;
-	}
-
-	/**
-	 * @return the myCanvasColor
-	 */
-	public String getMyCanvasColor() {
-		return myCanvasColor;
-	}
-
-	/**
-	 * @param myCanvasColor the myCanvasColor to set
-	 */
-	public void setMyCanvasColor(String myCanvasColor) {
-		this.myCanvasColor = myCanvasColor;
-	}
-
-	/**
-	 * @return the myTurtleSize
-	 */
-	public int getmyTurtleSize() {
-		return myTurtleSize;
-	}
-
-	/**
-	 * @return the myPromptBuilder
-	 */
-	public SLogoPromptBuilder getMyPromptBuilder() {
-		return myPromptBuilder;
-	}
-
-	/**
-	 * @param myPromptBuilder the myPromptBuilder to set
-	 */
-	public void setMyPromptBuilder(SLogoPromptBuilder myPromptBuilder) {
-		this.myPromptBuilder = myPromptBuilder;
-	}
-
-	/**
-	 * @return the myTurtleSize
-	 */
-	public int getMyTurtleSize() {
-		return myTurtleSize;
-	}
-
-	/**
-	 * @param myTurtleSize the myTurtleSize to set
-	 */
-	public void setMyTurtleSize(int myTurtleSize) {
-		this.myTurtleSize = myTurtleSize;
 	}
 
 	public SLogoPropertiesData getPropertiesData() {

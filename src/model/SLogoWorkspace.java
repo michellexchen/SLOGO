@@ -6,6 +6,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import parser.RootEvaluator;
 import view.SLogoPropertiesData;
 import view.View;
 
@@ -19,14 +20,15 @@ public class SLogoWorkspace {
 
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
+	private RootEvaluator myRootEvaluator;
 
-	// NEVER USE THESE: BUG ALERT!
+	// Lists declared for Observable List initialization
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
 	private List<SLogoVariable> myVariableList;
 
-	// BELOW ARE TO BE USED
 	private List<SLogoCharacter> myCharacters;
+	private List<SLogoCharacter> myActiveTurtles;
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 	private ObservableList<String> myObservableCommandHistory;
 	private ObservableList<SLogoVariable> myObservableVariableList;
@@ -44,19 +46,33 @@ public class SLogoWorkspace {
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
 	}
-	
+
 	public void initialize() throws SLogoException {
-		turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY());
+		myRootEvaluator = new RootEvaluator(this);
+		resetActiveTurtles();
+		myActiveTurtles.add(turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY()));
+		//turtleFactory.createTurtle(30, 30);
 	}
 
+	/**
+	 * Observable lists initialized using currently-existing ArrayLists
+	 * 
+	 * @param datalist
+	 * @param commandhistory
+	 * @param variableList
+	 */
 	private void createObservableLists(List<SLogoDisplayData> datalist, 
-									   List<String> commandhistory,
-									   List<SLogoVariable> variableList) {
+			List<String> commandhistory,
+			List<SLogoVariable> variableList) {
 		myObservableDataList = FXCollections.observableArrayList(datalist);
 		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
 		myObservableVariableList =  FXCollections.observableArrayList(variableList);
 	}
 
+	/**
+	 * Listeners added at initialization
+	 * 
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
 		getObservableDataList().addListener((ListChangeListener) 
@@ -65,7 +81,6 @@ public class SLogoWorkspace {
 		getObservableCommandHistory().addListener((ListChangeListener) 
 				change -> getView().updateCommandHistory());
 
-		//Wrong! changed to variablelist
 		getObservableVariableList().addListener((ListChangeListener) 
 				change -> getView().updateVariables());
 	}
@@ -85,6 +100,18 @@ public class SLogoWorkspace {
 	public void addNewCharacter(SLogoCharacter character) {
 		myCharacters.add(character);
 	}
+	
+	public List<SLogoCharacter> getActiveTurtlesList() {
+		return myActiveTurtles;
+	}
+	
+	public void addActiveTurtle(SLogoCharacter turtle){
+		myActiveTurtles.add(turtle);
+	}
+	
+	public void resetActiveTurtles(){
+		myActiveTurtles = new ArrayList<SLogoCharacter>();
+	}
 
 	public void removeCharacter(SLogoCharacter character) {
 		myCharacters.remove(character);
@@ -100,9 +127,6 @@ public class SLogoWorkspace {
 
 	public void addToVarMap(SLogoVariable variable){
 		myObservableVariableList.add(variable);
-//		for(String each: myObservableVariableMap.keySet()){
-//			System.out.println(each + " " + myObservableVariableMap.get(each));
-//		}
 	}
 
 	/**
@@ -149,16 +173,41 @@ public class SLogoWorkspace {
 	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
 		this.myObservableCommandHistory = myObservableCommandHistory;
 	}
-	
+
 	public List<SLogoVariable> getMyVarList(){
 		return myVariableList;
 	}
 
+	public double getVarValueByName(String varName){
+		for(SLogoVariable var : myVariableList){
+			if(var.getName().equals(varName))
+				return var.getValue();
+		}
+		return 0;
+	}
 
-	
-//	private void testerVariableList(){
-//		myObservableVariableList.add(new SLogoVariable("hi", 2));
-//	}
+	public SLogoVariable lookupVariable(String varName){
+		for(SLogoVariable var : myVariableList){
+			if(var.getName().equals(varName)){
+				return var;
+			}
+		}
+		return null;
+	}
+
+	public SLogoVariable createVariable(String varName, double varValue){
+		boolean created = false;
+		for(SLogoVariable var : myVariableList){
+			if(var.getName().equals(varName)){
+				var.setValue(varValue);
+				created = true;
+			}
+		}
+		if(!created)
+			myVariableList.add(new SLogoVariable(varName, varValue));
+		return lookupVariable(varName);
+	}
+
 	public List<SLogoVariable> getVarList() {
 		return myObservableVariableList;
 	}
@@ -169,6 +218,20 @@ public class SLogoWorkspace {
 
 	public void setObservableVariableList(ObservableList<SLogoVariable> myObservableVariableList) {
 		this.myObservableVariableList = myObservableVariableList;
+	}
+
+	/**
+	 * @return the myRootEvaluator
+	 */
+	public RootEvaluator getRootEvaluator() {
+		return myRootEvaluator;
+	}
+
+	/**
+	 * @param myRootEvaluator the myRootEvaluator to set
+	 */
+	public void setRootEvaluator(RootEvaluator myRootEvaluator) {
+		this.myRootEvaluator = myRootEvaluator;
 	}
 
 }
