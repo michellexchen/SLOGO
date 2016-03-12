@@ -33,7 +33,6 @@ public class RootEvaluator {
 		evaluation = myRoot.evaluate(character.getState());
 		myWorkspace.getObservableDataList().get(myWorkspace.getCharacterList().indexOf(character))
 		.updateData();
-		System.out.println("Evaluation: " + evaluation);
 		return evaluation;
 	}
 

@@ -75,19 +75,12 @@ public class TreeFactory {
 			List<String> innerCommands = createCommandList(commandParts);
 			List<String> innerCommandsCopy = listCopy(innerCommands);
 			ListNode listNode;
-			if(isOpenParenthesis(currCommand)){
-				listNode = new ListNode(innerCommands.toArray(
-						new String[innerCommands.size()]));
-			}
-			else{
-				listNode = new ListNode(createNodes(innerCommands));
-				listNode.setInnerCommands(innerCommandsCopy);
-				return listNode;
-			}
+			listNode = new ListNode(createNodes(innerCommands));
+			listNode.setInnerCommands(innerCommandsCopy);
+			return listNode;
 		}
 		if(isVariable(currCommand)) {
 			VariableNode myVar = new VariableNode(currCommand);
-			System.out.println("Workspace " + myWorkspace);
 			myVar.setWorkspace(myWorkspace);
 			return myVar;
 		} else{
@@ -119,7 +112,7 @@ public class TreeFactory {
 				openBrackets++;
 			else if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand))
 				closedBrackets++;
-			else
+			if(openBrackets != closedBrackets)
 				innerCommands.add(currCommand);
 		}
 		return innerCommands;

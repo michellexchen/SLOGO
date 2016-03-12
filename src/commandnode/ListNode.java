@@ -22,10 +22,6 @@ public class ListNode extends CommandNode{
 	public ListNode(List<Node> myCommands){
 		this.myCommands = myCommands;
 	}
-	
-	public ListNode(String[] array) {
-		// TODO: Temp
-	}
 
 	/**
 	 * @return Evaluation of last command
@@ -42,7 +38,7 @@ public class ListNode extends CommandNode{
 		return myCommands;
 	}
 
-	public void setInnerCommands(List<String> myInnerCommands) {
+	public void setInnerCommands(List<String> myInnerCommands){
 		this.myInnerCommands = myInnerCommands;
 	}
 	
