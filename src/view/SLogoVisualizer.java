@@ -40,7 +40,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private SLogoPromptBuilder myPromptBuilder;
 	private Parent root;
 
-	// Visualization Primitives
 	private Scene myScene;
 	private Stage myStage;
 	private Model myModel;
@@ -48,7 +47,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
 	private double COORDINATE_SHIFT = PANE_SIZE / 2;
-	private double LINE_SHIFT = myTurtleSize / 2;
 	private int DIRECTION_FLIP = -1;
 
 	public SLogoVisualizer(Model model, int width, int height) {
@@ -62,11 +60,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		myHeight = 331;
 		myModel = model;
 	}
-
-	public SLogoVisualizer(){
-
-	}
-
 
 	public void initialize() throws SLogoException, IOException {
 
@@ -83,7 +76,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 
 		//Get the ObservableDataList
 		setObservableDataList(getModel().getObservableDataList());
-
 
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -121,10 +113,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public Line createLine(SLogoPosition position) {
 		Line newLine = new Line();
-		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT + LINE_SHIFT  - myTurtleSize/2);
-		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT + LINE_SHIFT - myTurtleSize/2);
-		newLine.setEndX(position.getX() + COORDINATE_SHIFT + LINE_SHIFT - myTurtleSize/2);
-		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT + LINE_SHIFT - myTurtleSize/2);
+		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT);
+		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT);
+		newLine.setEndX(position.getX() + COORDINATE_SHIFT);
+		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
 		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
@@ -187,10 +179,7 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//assign click action - change the action to change attributes
 		//temporary method to demonstrate use
 		turtle.setOnMouseClicked(e -> {
-			turtle.setFitWidth(120);
-			turtle.setLayoutX(displaydata.getX() - 120 / 2);
-			turtle.setLayoutY(displaydata.getY() - 120 / 2);
-			turtle.setRotate(90);
+			//Show Properties
 		});
 
 		//turtle resize
@@ -206,8 +195,6 @@ public class SLogoVisualizer extends Observable implements Observer {
 		//turtle rotate
 		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
 		turtle.setRotate(displaydata.getDirection());
-
-
 
 		//Put it in the Pane
 		getGUIController().addToCanvas(turtle);
