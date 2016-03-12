@@ -9,10 +9,11 @@ import model.SLogoTurtle;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
-public class TellNode extends TurtleCommandNode {
+public class TellNode extends TurtleCommand {
 	
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		super.getWorkspace().resetActiveTurtles();
 		List<Node> commands = ((ListNode) getChildren().get(0)).getCommands();
 //		for(Node each: apples) System.out.println(each.getClass());
 		List<SLogoCharacter> allTurtles = super.getWorkspace().getCharacterList();
@@ -21,9 +22,10 @@ public class TellNode extends TurtleCommandNode {
 		Node num = commands.get(commands.size()-1);
 		System.out.println(((NumericNode)num).getNumericValue());
 		System.out.println(allTurtles.size());
-		while(((NumericNode)num).getNumericValue() > allTurtles.size()){ 
+		for(Node command: commands){
+			double turtleToGrab = ((NumericNode)command).getNumericValue();
 			//can also check by seeing what turtelfactory's last created id is
-			SLogoCharacter newActiveTurtle = super.getTurtleFactory().createDefaultTurtle();
+			SLogoCharacter newActiveTurtle = super.grabTurtle((int)turtleToGrab);
 			//creating the turtle from factory automatically adds our turtle to our list of created turtles
 			super.getWorkspace().addActiveTurtle(newActiveTurtle);
 		}
