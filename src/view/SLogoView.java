@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import model.Model;
+import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 /**
@@ -132,12 +133,15 @@ public class SLogoView implements View {
 		
 	}
 	
-	@Override
-	public void updateVariables() {
-		// TODO Auto-generated method stub
-		
-	}
 
+	@Override
+	public void updateVariable(ObservableList variables) {
+		// TODO Auto-generated method stub {
+		getCurrentVisualizer().updateVariables(variables);
+		System.out.println("Happening");
+	}
+	
+	
 	@Override
 	public void setCurrentWorkspace(SLogoWorkspace workspace) {
 		// TODO Auto-generated method stub
@@ -174,4 +178,6 @@ public class SLogoView implements View {
 	public void setCurrentVisualizer(SLogoVisualizer myCurrentVisualizer) {
 		this.myCurrentVisualizer = myCurrentVisualizer;
 	}
+
+
 }

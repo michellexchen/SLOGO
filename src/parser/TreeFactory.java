@@ -26,16 +26,10 @@ import commandnode.VariableNode;
 
 public class TreeFactory {
 
-	/*
-	 * resources used by tree factory class
-	 */
 	private ResourceLoader myResourcesLoader;
 	private LanguageLoader myLanguageLoader;
 	private SLogoWorkspace myWorkspace;
-	
-	/*
-	 *  constants used to determine active turtles
-	 */
+
 	private static final String TURTLECREATE = "tell";
 	private static final String TURTLECREATE2 = "ask";
 	private static final String TURTLESID = "TURTLES";
@@ -48,9 +42,11 @@ public class TreeFactory {
 	}
 
 	/**
-	 * Create our tree structure and necessary nodes with the list of parsed and formatted user input
+	 * Create our tree structure and necessary nodes 
+	 * with the list of parsed and formatted user input
 	 * 
-	 * @param List<String> commandParts - a list of formated input parsed and ready to be used for creation of Nodes
+	 * @param List<String> commandParts - 
+	 * a list of formated input parsed and ready to be used for creation of Nodes
 	 */
 	public List<Node> createNodes(List<String> commandParts) throws SLogoException {
 		List<Node> myRoots = new ArrayList<Node>();
@@ -68,7 +64,8 @@ public class TreeFactory {
 	/**
 	 * Create children of an already process Node
 	 * 
-	 * @param List<String> commandParts - a list of formated input parsed and ready to be used for creation of Nodes
+	 * @param List<String> commandParts - a list of formated
+	 * input parsed and ready to be used for creation of Nodes
 	 */
 	private Node createChild(List<String> commandParts) throws SLogoException {
 		if(commandParts.isEmpty()) return null;
@@ -82,7 +79,8 @@ public class TreeFactory {
 			}
 			ListNode listNode;
 			if(isOpenParenthesis(currCommand)){
-				listNode = new ListNode(innerCommands.toArray(new String[innerCommands.size()]));
+				listNode = new ListNode(innerCommands.toArray(
+												new String[innerCommands.size()]));
 			}
 			else{
 				listNode = new ListNode(createNodes(innerCommands));
@@ -103,17 +101,20 @@ public class TreeFactory {
 		}
 	}
 
-	
+
 	/**
-	 * Create necessary tree processing when user inputs a list contained within brackets
+	 * Create necessary tree processing when user inputs a list contained 
+	 * within brackets
 	 * 
-	 * @param List<String> commandParts - a list of formated input parsed and ready to be used for creation of Nodes
+	 * @param List<String> commandParts - a list of formated input parsed 
+	 * and ready to be used for creation of Nodes
 	 */
-	private List<String> createCommandList(List<String> commandParts) throws SLogoException {
+	private List<String> createCommandList(List<String> commandParts) 
+														throws SLogoException {
 		//3/11 @ 945 checking it's legitimacy 
-//		if(commandParts.isEmpty()){
-//			System.out.println("let me know");
-//		}
+		//		if(commandParts.isEmpty()){
+		//			System.out.println("let me know");
+		//		}
 		List<String> innerCommands = new ArrayList<String>();
 		int openBrackets = 1;
 		int closedBrackets = 0;
@@ -146,15 +147,17 @@ public class TreeFactory {
 		}
 		if (commandName == null)
 			throw new SLogoException(
-					myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));
+					myResourcesLoader.getString("TheCommand") + strNode 
+										+ myResourcesLoader.getString("Illegal"));
 		else
 			try {
 				node = (Node) Class.forName(
-						myResourcesLoader.getString("CommandNode") + commandName + myResourcesLoader.getString("Node"))
-						.newInstance();
-			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				throw new SLogoException(myResourcesLoader.getString("Command") + commandName
-						+ myResourcesLoader.getString("Implemented"));
+						myResourcesLoader.getString("CommandNode") + commandName 
+								+ myResourcesLoader.getString("Node")).newInstance();
+			} catch (ClassNotFoundException | InstantiationException 
+														| IllegalAccessException e) {
+				throw new SLogoException(myResourcesLoader.getString("Command") 
+						+ commandName + myResourcesLoader.getString("Implemented"));
 			}
 		if(node instanceof VariableCommand){
 			((VariableCommand)node).setWorkspace(myWorkspace);
@@ -215,14 +218,16 @@ public class TreeFactory {
 	private boolean isClosedParenthesis(String currCommand) {
 		return currCommand.equals(")");
 	}
-	
+
 	/**
 	 * Determine if the string inputed is used to create a turtle command
 	 * 
 	 * @param String str - string to be compared
 	 */
 	private boolean isCreateTurtle(String str) {
-		return str.toLowerCase().matches(TURTLECREATE2) || str.toLowerCase().matches(TURTLECREATE) || str.toUpperCase().matches(TURTLESID);
+		return str.toLowerCase().matches(TURTLECREATE2) 
+				|| str.toLowerCase().matches(TURTLECREATE) 
+				|| str.toUpperCase().matches(TURTLESID);
 	}
 
 }

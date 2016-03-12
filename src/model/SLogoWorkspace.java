@@ -38,7 +38,8 @@ public class SLogoWorkspace {
 	private ObservableList<String> myObservableShapeList;
 	private SLogoPropertiesData myPropertiesData;
 	private SLogoPenData myPenData;
-
+	private ColorLoader myColorLoader;
+	
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
 		turtleFactory = new SLogoTurtleFactory(this);
@@ -48,6 +49,8 @@ public class SLogoWorkspace {
 		createObservableLists(myDataList, myCommandHistory, myVariableList);
 		myCharacters = new ArrayList<SLogoCharacter>();
 		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
+		myColorLoader = new ColorLoader();
+		System.out.println(myColorLoader.getMap());
 	}
 
 	public void initialize() throws SLogoException {
@@ -79,17 +82,13 @@ public class SLogoWorkspace {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addListeners() {
 		getObservableDataList().addListener((ListChangeListener) 
-				change -> {
-					getView().updateDisplayData();
-					//System.out.println("ObservableDatalist change");
-					
-				});
+				change -> getView().updateDisplayData());
 
 		getObservableCommandHistory().addListener((ListChangeListener) 
 				change -> getView().updateCommandHistory());
 
 		getObservableVariableList().addListener((ListChangeListener) 
-				change -> getView().updateVariables());
+				change -> getView().updateVariable(getObservableVariableList()));
 	}
 
 	public List<SLogoDisplayData> getDataList() {
@@ -219,9 +218,9 @@ public class SLogoWorkspace {
 		return lookupVariable(varName);
 	}
 
-	public List<SLogoVariable> getVarList() {
-		return myObservableVariableList;
-	}
+//	public List<SLogoVariable> getVarList() {
+//		return myObservableVariableList;
+//	}
 
 	public ObservableList<SLogoVariable> getObservableVariableList() {
 		return myObservableVariableList;

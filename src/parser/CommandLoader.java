@@ -11,10 +11,10 @@ import model.FileLoader;
 
 public class CommandLoader extends FileLoader {
 
-	private static final String commandDirectory = "resources/commands";
+	private static final String COMMAND_PATH = "resources/commands";
 	
 	public void load() throws SLogoException {
-		setDirectory(commandDirectory);
+		setDirectory(COMMAND_PATH);
 		super.load();
 	}
 

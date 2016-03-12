@@ -11,12 +11,6 @@ import model.SLogoWorkspace;
 
 public class TellNode extends TurtleCommandNode {
 	
-
-
-	public TellNode() {
-		
-	}
-
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		List<Node> commands = ((ListNode) getChildren().get(0)).getCommands();

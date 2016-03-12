@@ -30,10 +30,10 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private static final int PADDING = 55;
 	private static final int SPLASHSIZE = 400;
     private static final int LABEL_FONTSIZE = 32;
-//    private static final int TEXT_FONTSIZE = 20;
-    private static final String FONT = "Georgia";
     private static final int PREFSIZE = 75;
     private static final int COLORLABELSIZE = 202;
+    private static final String FONT = "Georgia";
+
 
     private String myLanguage;
     private Stage prompt;
