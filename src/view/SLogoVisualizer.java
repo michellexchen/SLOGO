@@ -291,4 +291,5 @@ public class SLogoVisualizer implements Observer {
 	public SLogoPropertiesData getPropertiesData() {
 		return myProperties;
 	}
+	
 }
