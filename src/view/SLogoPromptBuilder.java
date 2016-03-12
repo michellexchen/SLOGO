@@ -23,7 +23,7 @@ import model.ResourceLoader;
  * that greets the user and takes in necessary information 
  * such as language and pane color
  * 
- * @author Hunter
+ * @author Hunter, Michelle
  * 
  */
 public class SLogoPromptBuilder extends SLogoBuilder {
