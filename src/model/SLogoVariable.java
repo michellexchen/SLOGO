@@ -13,6 +13,11 @@ public class SLogoVariable extends Observable {
 	private String myName;
 	private double myValue;
 
+	public SLogoVariable(String myName, double myValue) {
+		this.myName = myName;
+		this.myValue = myValue;
+	}
+
 	public void addListeners() {
 
 	}

@@ -122,10 +122,10 @@ public class SLogoVisualizer extends Observable implements Observer {
 	 */
 	public Line createLine(SLogoPosition position) {
 		Line newLine = new Line();
-		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT + LINE_SHIFT);
-		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT + LINE_SHIFT);
-		newLine.setEndX(position.getX() + COORDINATE_SHIFT + LINE_SHIFT);
-		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT + LINE_SHIFT);
+		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT + LINE_SHIFT  - myTurtleSize/2);
+		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT + LINE_SHIFT - myTurtleSize/2);
+		newLine.setEndX(position.getX() + COORDINATE_SHIFT + LINE_SHIFT - myTurtleSize/2);
+		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT + LINE_SHIFT - myTurtleSize/2);
 		newLine.setStrokeWidth(1.0f);
 		return newLine;
 	}
@@ -201,8 +201,8 @@ public class SLogoVisualizer extends Observable implements Observer {
 		turtle.setCache(true);
 
 		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT);
-		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT);
+		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - myTurtleSize/2);
+		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT - myTurtleSize/2);
 
 		//turtle rotate
 		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());

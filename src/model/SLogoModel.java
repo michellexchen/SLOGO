@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandnode.Node;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import parser.RootEvaluator;
 import parser.SLogoParser;
 import view.View;
 
@@ -21,14 +23,12 @@ import view.View;
  */
 public class SLogoModel implements Model {
 	//private static final int NUM_WORKSPACES = 5;
-
-	
-	
 	private View myView;
 	private SLogoWorkspace myCurrentWorkspace;
 	private LanguageLoader myLanguageDriver;
 	private List<SLogoWorkspace> myWorkspaces;
 	private ObservableList<SLogoWorkspace> myObservableWorkspaces;
+	private RootEvaluator myRootEvaluator;
 
 	public SLogoModel() throws SLogoException {
 		myWorkspaces = new ArrayList<SLogoWorkspace>();
@@ -47,6 +47,7 @@ public class SLogoModel implements Model {
 
 	public void initialize() throws SLogoException {	
 		createNewWorkspace();
+		myRootEvaluator = new RootEvaluator(myCurrentWorkspace);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -64,7 +65,8 @@ public class SLogoModel implements Model {
 
 	public void readCommand(String command) throws SLogoException {
 		SLogoParser parser = new SLogoParser(myCurrentWorkspace);
-		parser.readCommand(command);
+		List<Node> myRoots = parser.readCommand(command);
+		myRootEvaluator.evaluateRoots(myRoots);
 	}
 
 	/**

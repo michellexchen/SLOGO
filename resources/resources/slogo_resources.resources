@@ -6,6 +6,8 @@ Command:Command\u0020
 Implemented:\u0020is not yet implemented
 Variable: variable must include more characters
 Make:make
-FileError:Error loading file
-ShapeIndex:Invalid shape index
-ColorIndex:Invalid color index
+FileError:Error loading file.
+ShapeIndex:Invalid shape index.
+ColorIndex:Invalid color index.
+TreeFactory:Tree Factory couldn't be created.
+Repcount::Repcount

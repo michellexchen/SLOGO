@@ -13,6 +13,7 @@ import model.SLogoCharacterState;
 public class ListNode extends CommandNode{
 
 	private List<Node> myCommands;
+	private List<String> myInnerCommands;
 	
 	/**
 	 * @param myCommands, roots of individual commands to be placed inside the ListNode
@@ -38,6 +39,14 @@ public class ListNode extends CommandNode{
 	
 	public List<Node> getCommands(){
 		return myCommands;
+	}
+
+	public void setInnerCommands(List<String> myInnerCommands) {
+		this.myInnerCommands = myInnerCommands;
+	}
+	
+	public List<String> getInnerCommands(){
+		return myInnerCommands;
 	}
 
 }

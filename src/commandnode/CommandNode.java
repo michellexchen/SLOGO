@@ -3,6 +3,7 @@ package commandnode;
 import java.util.ArrayList;
 
 import exception.SLogoException;
+import model.ResourceLoader;
 import model.SLogoCharacterState;
 import parser.InstructionLoader;
 
@@ -17,12 +18,18 @@ public abstract class CommandNode implements Node {
 	private ArrayList<Node> children;
 	private int NUM_CHILDREN;
 	private InstructionLoader instructionsLoader;
+	private ResourceLoader resourcesLoader;
 	
 	public CommandNode(){
 		try {
 			instructionsLoader = new InstructionLoader();
 		} catch (SLogoException e) {
 			new SLogoException("Instruction loader not loading.");
+		}
+		try {
+			resourcesLoader = new ResourceLoader();
+		} catch (SLogoException e) {
+			new SLogoException("Resource loader not loading.");
 		}
 		children = new ArrayList<Node>();
 	}
@@ -71,8 +78,16 @@ public abstract class CommandNode implements Node {
 	 * @param instruction, key for instructions resources file lookup
 	 * @return instruction from resources file
 	 */
-	public String getInstruction(String instruction){
-		return instructionsLoader.getString(instruction);
+	public String getInstruction(String key){
+		return instructionsLoader.getString(key);
+	}
+	
+	/**
+	 * @param instruction, key for instructions resources file lookup
+	 * @return instruction from resources file
+	 */
+	public String getResource(String key){
+		return resourcesLoader.getString(key);
 	}
 	
 }
