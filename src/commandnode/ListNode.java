@@ -1,5 +1,6 @@
 package commandnode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import exception.SLogoException;
@@ -47,6 +48,14 @@ public class ListNode extends CommandNode{
 	
 	public List<String> getInnerCommands(){
 		return myInnerCommands;
+	}
+	
+	public List<String> getInnerCommandsClone(){
+		List<String> innerCommandsClone = new ArrayList<String>();
+		for(String command : myInnerCommands){
+			innerCommandsClone.add(command);
+		}
+		return innerCommandsClone;
 	}
 
 }

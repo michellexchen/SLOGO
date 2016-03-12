@@ -69,36 +69,18 @@ public class SLogoModel implements Model {
 		getView().updateCommandHistory();
 		getView().updateWorkspaces();
 	}
-
-	private List<Integer> getTurtleIDs(List<SLogoCharacter> activeTurtles){
-		List<Integer> activeIDs = new ArrayList<Integer>();
-		for(SLogoCharacter turtle : activeTurtles){
-			activeIDs.add(turtle.getState().getID());
-		}
-		return activeIDs;
-	}
-
+	
 	/**
 	 * Creates a parser instance and feeds the command to the parser
 	 * called by View through interface
+	 * @return 
 	 * 
 	 */
 	@Override
 	public void readCommand(String command) throws SLogoException {
 		SLogoParser parser = new SLogoParser(myCurrentWorkspace);
-		List<SLogoCharacter> activeTurtles = myCurrentWorkspace.getActiveTurtlesList();
-		List<Integer> activeIDs = getTurtleIDs(activeTurtles);
-		List<Node> myRoots = parser.readCommand(command);
-		for(Node myRoot: myRoots){
-			for(SLogoCharacter character: activeTurtles){
-				getCurrentWorkspace().getRootEvaluator().evaluateRoot(myRoot, character);
-				List<SLogoCharacter> newActiveTurtles = myCurrentWorkspace.getActiveTurtlesList();
-				List<Integer> newActiveIDs = getTurtleIDs(newActiveTurtles);
-				if(!newActiveIDs.equals(activeIDs)){
-					break;
-				}
-			}
-		}
+		List<Node> myCommandRoots = parser.readCommand(command);
+		myCurrentWorkspace.getRootEvaluator().evaluateRoots(myCommandRoots);
 	}
 
 	/**

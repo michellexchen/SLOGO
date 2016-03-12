@@ -148,7 +148,7 @@ public class SLogoVisualizer implements Observer {
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {	
+	public void updateDisplayData () {
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 

@@ -19,13 +19,18 @@ public class RepeatNode extends BinaryVariableCommand {
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		int repcount = (int) evaluateChild(0, state);
 		SLogoVariable repcountVar = getWorkspace().createVariable(getResource("Repcount"), 1);
-		List<String> innerCommands = ((ListNode) (getChildren().get(1))).getInnerCommands();
+		ListNode listNode = ((ListNode) (getChildren().get(1)));
+		List<String> innerCommands = listNode.getInnerCommands();
 		double evaluation = 0;
 		System.out.println("Repcount: " + repcount + " Command Parts: " + innerCommands);
-		for(int x=0; x<repcount; x++){
+		for(int x=1; x<=repcount; x++){
 			List<Node> myRoots = getTreeFactory().createNodes(innerCommands);
 			repcountVar.setValue(repcountVar.getValue()+1);
-			//evaluation = getRootEvaluator().evaluateRoot(myRoots);
+//			for()
+//				evaluation = getRootEvaluator().evaluateRoot(myRoots);
+//			}
+//			System.out.println("My roots: " + myRoots);
+//			repcountVar.setValue(x);
 		}
 		return evaluation;
 	}
