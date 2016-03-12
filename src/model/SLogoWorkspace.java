@@ -6,6 +6,7 @@ import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import view.SLogoPenData;
 import parser.RootEvaluator;
 import view.SLogoPropertiesData;
 import view.View;
@@ -18,10 +19,11 @@ import view.View;
 
 public class SLogoWorkspace {
 
+	
 	private View myView;
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
-
+	
 	// Lists declared for Observable List initialization
 	private List<SLogoDisplayData> myDataList;
 	private List<String> myCommandHistory;
@@ -35,6 +37,7 @@ public class SLogoWorkspace {
 	private ObservableList<int[]> myObservableColorList;
 	private ObservableList<String> myObservableShapeList;
 	private SLogoPropertiesData myPropertiesData;
+	private SLogoPenData myPenData;
 
 	public SLogoWorkspace(View view) throws SLogoException {
 		myView = view;
