@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
  * Class for loading default colors from resources file for commands
  * 
  * @author Adam Tache
- *
  */
 
 public class ColorLoader extends FileLoader{
@@ -26,11 +25,19 @@ public class ColorLoader extends FileLoader{
 		loadDefaultColors();
 	}
 
+	/**
+	 * loads color resource file
+	 */
+	
 	public void load() throws SLogoException {
 		setDirectory(colorDirectory);
 		setExtension(colorExtension);
 		super.load();
 	}
+	
+	/**
+	 * Add default colors to color map with index
+	 */
 
 	private void loadDefaultColors() throws SLogoException{
 		int numDefaultColors = countLines(getFileName());
@@ -54,11 +61,17 @@ public class ColorLoader extends FileLoader{
 		myRGBMap.put(color.getIndex(), createColor(color.getR(), color.getG(), color.getB()));
 	}
 
+	/**
+	 * @param value: RGB value (0:255)
+	 * Node representation of Repeat command, a Control Structure command using variable
+	 * @return Normalized RGB value (0:1)
+	 */
+	
 	private double convertRGB(int value){
 		return value/255.0;
 	}
 	
-	public HashMap getMap(){
+	public HashMap<Integer, Color> getMap(){
 		return myRGBMap;
 	}
 
