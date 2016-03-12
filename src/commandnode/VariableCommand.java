@@ -9,22 +9,15 @@ public abstract class VariableCommand extends CommandNode{
 	private SLogoWorkspace myWorkspace;
 	private TreeFactory myTreeFactory;
 	private RootEvaluator myRootEvaluator;
-	
-	public VariableCommand(){
-		try {
-			myTreeFactory = new TreeFactory(getWorkspace());
-		} catch (SLogoException e) {
-			new SLogoException(getResource("TreeFactory"));
-		}
-		myRootEvaluator = new RootEvaluator(getWorkspace());
-	}
 
 	public SLogoWorkspace getWorkspace(){
 		return myWorkspace;
 	}
 
-	public void setWorkspace(SLogoWorkspace ws){
+	public void setWorkspace(SLogoWorkspace ws) throws SLogoException{
 		myWorkspace = ws;
+		myTreeFactory = new TreeFactory(getWorkspace());
+		myRootEvaluator = new RootEvaluator(getWorkspace());
 	}
 	
 	public TreeFactory getTreeFactory(){

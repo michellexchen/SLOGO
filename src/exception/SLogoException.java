@@ -22,6 +22,7 @@ public class SLogoException extends Exception {
 	 * SLogoException inherits from its superclass Exception
 	 * 
 	 * @param arg0
+	 * Alerts user to error with pop-up window
 	 */
 	public SLogoException(String arg0) {
 		super(arg0);
