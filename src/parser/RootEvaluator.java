@@ -1,5 +1,6 @@
 package parser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import commandnode.Node;
@@ -22,13 +23,34 @@ public class RootEvaluator {
 
 	public double evaluateRoot(Node myRoot, SLogoCharacter character) throws SLogoException {
 		double evaluation = 0;
-//		System.out.println(myWorkspace);
 		evaluation = myRoot.evaluate(character.getState());
-		// copy tree structure so that each active character can execute a tree -- (num of characters determines if we evaluate the tree copy)			evaluation = myRoot.evaluate(character.getState());
 		myWorkspace.getObservableDataList().get(myWorkspace.getCharacterList().indexOf(character))
 		.updateData();
 		System.out.println("Evaluation: " + evaluation);
 		return evaluation;
+	}
+
+	public void evaluateRoots(List<Node> myRoots) throws SLogoException{
+		List<SLogoCharacter> activeTurtles = myWorkspace.getActiveTurtlesList();
+		List<Integer> activeIDs = getTurtleIDs(activeTurtles);
+		for(Node myRoot: myRoots){
+			for(SLogoCharacter character: activeTurtles){
+				evaluateRoot(myRoot, character);
+				List<SLogoCharacter> newActiveTurtles = myWorkspace.getActiveTurtlesList();
+				List<Integer> newActiveIDs = getTurtleIDs(newActiveTurtles);
+				if(!newActiveIDs.equals(activeIDs)){
+					break;
+				}
+			}
+		}
+	}
+	
+	private List<Integer> getTurtleIDs(List<SLogoCharacter> activeTurtles){
+		List<Integer> activeIDs = new ArrayList<Integer>();
+		for(SLogoCharacter turtle : activeTurtles){
+			activeIDs.add(turtle.getState().getID());
+		}
+		return activeIDs;
 	}
 
 }

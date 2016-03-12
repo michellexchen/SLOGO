@@ -29,8 +29,11 @@ public class SLogoVisualizer implements Observer {
 	private static final String IMAGE_PATH = "file:resources/turtle_images/";
 	private static final int PANE_SIZE = 440;
 	private static final int RGB_CONST = 255;
+	private static final double COORDINATE_SHIFT = PANE_SIZE / 2;
+	private static final int DIRECTION_FLIP = -1;
+	private static final int TURTLE_SIZE = 40;
+	private static final int PADDING = TURTLE_SIZE / 2;
 
-	private int myTurtleSize = 40;
 
 	private ObservableList<SLogoDisplayData> myObservableDataList;
 
@@ -48,8 +51,7 @@ public class SLogoVisualizer implements Observer {
 	private String myCanvasColor;
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
-	private double COORDINATE_SHIFT = PANE_SIZE / 2;
-	private int DIRECTION_FLIP = -1;
+
 
 	public SLogoVisualizer(Model model, int width, int height) {
 		myModel = model;
@@ -148,7 +150,7 @@ public class SLogoVisualizer implements Observer {
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {	
+	public void updateDisplayData () {
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 
@@ -190,14 +192,16 @@ public class SLogoVisualizer implements Observer {
 		});
 
 		//turtle resize
-		turtle.setFitWidth(myTurtleSize);
+		turtle.setFitWidth(TURTLE_SIZE);
 		turtle.setPreserveRatio(true);
 		turtle.setSmooth(true);
 		turtle.setCache(true);
 
+		//boundCoordinates(displaydata);
+		
 		//place turtle using Position and center at the coordinates (x,y)
-		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - myTurtleSize/2);
-		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT - myTurtleSize/2);
+		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
+		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + COORDINATE_SHIFT - PADDING);
 
 		//turtle rotate
 		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
@@ -207,6 +211,28 @@ public class SLogoVisualizer implements Observer {
 		getGUIController().addToCanvas(turtle);
 	}
 
+	/**
+	 * Bounds coordinates when they go out of the visible range of coordinates
+	 * 
+	 * @param displaydata
+	 */
+	private void boundCoordinates (SLogoDisplayData displaydata) {
+		
+		if (displaydata.getX() > PANE_SIZE - PADDING + COORDINATE_SHIFT) {
+			displaydata.setX(PANE_SIZE - PADDING);
+		}
+		if (displaydata.getX() < PADDING) {
+			displaydata.setX(PADDING); 
+		}
+		if (displaydata.getY() > PANE_SIZE - PADDING) {
+			displaydata.setY(PANE_SIZE - PADDING);
+		}
+		if (displaydata.getY() < PADDING) {
+			displaydata.setY(PADDING);
+		}
+	}
+	
+	
 	/**
 	 * This method updates command history display in GUI.
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)

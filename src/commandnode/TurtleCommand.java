@@ -6,7 +6,7 @@ import model.SLogoCharacterState;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
-public class TurtleCommand extends BinaryNode {
+public class TurtleCommand extends UnaryNode {
 
 	private SLogoWorkspace myWorkspace;
 	private SLogoTurtleFactory turtleFactory;

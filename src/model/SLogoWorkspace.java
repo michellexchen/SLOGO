@@ -190,7 +190,7 @@ public class SLogoWorkspace {
 	}
 
 	public double getVarValueByName(String varName){
-		for(SLogoVariable var : myVariableList){
+		for(SLogoVariable var : myObservableVariableList){
 			if(var.getName().equals(varName))
 				return var.getValue();
 		}
@@ -198,7 +198,7 @@ public class SLogoWorkspace {
 	}
 
 	public SLogoVariable lookupVariable(String varName){
-		for(SLogoVariable var : myVariableList){
+		for(SLogoVariable var : myObservableVariableList){
 			if(var.getName().equals(varName)){
 				return var;
 			}
@@ -208,20 +208,17 @@ public class SLogoWorkspace {
 
 	public SLogoVariable createVariable(String varName, double varValue){
 		boolean created = false;
-		for(SLogoVariable var : getObservableVariableList()){
+		for(SLogoVariable var : myObservableVariableList){
 			if(var.getName().equals(varName)){
 				var.setValue(varValue);
 				created = true;
 			}
 		}
-		if(!created)
+		if(!created){
 			getObservableVariableList().add(new SLogoVariable(varName, varValue));
+		}
 		return lookupVariable(varName);
 	}
-
-//	public List<SLogoVariable> getVarList() {
-//		return myObservableVariableList;
-//	}
 
 	public ObservableList<SLogoVariable> getObservableVariableList() {
 		return myObservableVariableList;

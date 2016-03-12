@@ -26,6 +26,9 @@ public class SetTowardsNode extends TurnNode {
 		if (diffY < 0) {
 			return Math.toDegrees(Math.atan(diffX/diffY)) - 180;
 		}
+		if (diffX == 0 && diffY == 0) {
+			return state.getDirection();
+		}
 		return Math.toDegrees(Math.atan(diffX/diffY));
 	}
 	
