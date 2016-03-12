@@ -94,6 +94,14 @@ public class SLogoDisplayData extends Observable{
 	public double getY() {
 		return myPosition.getY();
 	}
+	
+	public void setX(double x) {
+		myPosition.setX(x);
+	}
+
+	public void setY(double y) {
+		myPosition.setY(y);
+	}
 
 	public double getDirection() {
 		return myDirection;
