@@ -18,7 +18,7 @@ public class SLogoCustomizerToggleSwitch extends HBox {
 	private final Label label = new Label();
 	private final Button button = new Button();
 	
-	private SimpleBooleanProperty switchedOn = new SimpleBooleanProperty(false);
+	private SimpleBooleanProperty switchedOn = new SimpleBooleanProperty(true);
 	public SimpleBooleanProperty switchOnProperty() { return switchedOn; }
 	
 	private void init() {
@@ -66,6 +66,7 @@ public class SLogoCustomizerToggleSwitch extends HBox {
 	}
 	
 	public boolean isDown(){
+		System.out.println("YO");
 		return label.getText().equals("DOWN");
 	}
 }

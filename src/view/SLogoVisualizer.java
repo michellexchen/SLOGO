@@ -150,7 +150,7 @@ public class SLogoVisualizer implements Observer {
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updateDisplayData () {	
+	public void updateDisplayData () {
 		//Clear entire Pane
 		getGUIController().getCanvas().getChildren().clear();
 
@@ -168,7 +168,6 @@ public class SLogoVisualizer implements Observer {
 			//Update the properties pane after turtle has moved
 			getGUIController().updateProperties(turtledata);
 			myProperties.setPaneColor(turtledata.getBGColor());
-			myGUIController.setPropertiesData(myProperties);
 		}
 
 	}

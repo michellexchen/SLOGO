@@ -27,6 +27,12 @@ public abstract class FileLoader {
 	private String extension;
 	private String fileName;
 	
+	/**
+	 * @param str: compound property
+	 * Splits property (foreign language) using "|" as a delimiter. split("|") caused errors
+	 * @return string array of split properties
+	 */
+	
 	private String[] splitSpecial(String str) {
 		ArrayList<String> resultList = new ArrayList<String>();
 		for (int i = 0; i < str.length(); i++) {
@@ -40,6 +46,10 @@ public abstract class FileLoader {
 		return resultList.toArray(resultArray);
 
 	}
+	
+	/**
+	 * Creates a hashmap from properties with key and value swapped
+	 */
 	
 	public void createSplitBackMap() {
 		myBackMap = new HashMap<String, String>();
@@ -57,6 +67,10 @@ public abstract class FileLoader {
 			}
 		}
 	}
+	
+	/**
+	 * Loads language property file into property object
+	 */
 
 	public void load() throws SLogoException  {
 		fileName = directory + "/" + extension;
@@ -90,6 +104,12 @@ public abstract class FileLoader {
 		return myProperties.getProperty(key);
 	}
 
+	/**
+	 * @param filename
+	 * Counts number of lines in file
+	 * @return numLines: number of lines in file
+	 */
+	
 	@SuppressWarnings("resource")
 	public int countLines(String filename) throws SLogoException{
 		LineNumberReader reader;
