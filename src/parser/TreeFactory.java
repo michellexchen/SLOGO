@@ -71,12 +71,7 @@ public class TreeFactory {
 		if(commandParts.isEmpty()) return null;
 		String currCommand = commandParts.remove(0);
 		if(isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
-			System.out.println("AT BRACKET, Command Parts: " + commandParts);
 			List<String> innerCommands = createCommandList(commandParts);
-			List<String> innerCommandsClone = new ArrayList<String>();
-			for(String command : innerCommands){
-				innerCommandsClone.add(command);
-			}
 			ListNode listNode;
 			if(isOpenParenthesis(currCommand)){
 				listNode = new ListNode(innerCommands.toArray(
@@ -84,7 +79,8 @@ public class TreeFactory {
 			}
 			else{
 				listNode = new ListNode(createNodes(innerCommands));
-				listNode.setInnerCommands(innerCommandsClone);
+				listNode.setInnerCommands(innerCommands);
+				List<String> innerCommandsClone = listNode.getInnerCommandsClone();
 				return listNode;
 			}
 		}

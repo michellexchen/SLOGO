@@ -38,8 +38,9 @@ public class SLogoDisplayData extends Observable{
 	public SLogoDisplayData(SLogoCharacterState state) throws SLogoException {
 		myPosition = new SLogoPosition();
 		myState = state;
-		updateData(state);
+		myPen = state.getPen();
 		initialize();
+		updateData();
 	}
 
 	public void initialize() throws SLogoException {
@@ -55,16 +56,16 @@ public class SLogoDisplayData extends Observable{
 	 * 
 	 * @param state
 	 */
-	public void updateData(SLogoCharacterState state) {
-		myPen = state.getPen();
+	public void updateData() {
+		myPen = myState.getPen();
 		prevDirection = myDirection;
-		myDirection = state.getDirection();
-		myPosition.setXY(state.getXCoor(), state.getYCoor());
-		myImage = state.getImage();
-		turtleHidden = state.getHidden();
-		ID = state.getID();
-		bgColor = state.getBGColor();
-		cleared = state.getCleared();
+		myDirection = myState.getDirection();
+		myPosition.setXY(myState.getXCoor(), myState.getYCoor());
+		myImage = myState.getImage();
+		turtleHidden = myState.getHidden();
+		ID = myState.getID();
+		bgColor = myState.getBGColor();
+		cleared = myState.getCleared();
 		if (cleared) {
 			myLines.clear();
 		}

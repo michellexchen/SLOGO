@@ -18,6 +18,11 @@ public class SLogoTurtle implements SLogoCharacter{
 		this.ID = ID;
 	}
 
+	/**
+	 * @param myState: next state of turtle
+	 * Updates the state of the turtle
+	 */
+	
 	public void setState(SLogoCharacterState myState) {
 		this.myState = (SLogoTurtleState) myState;
 		System.out.println("tutle " + myState.getXCoor() + " current state is: location xCoor " + myState.getXCoor());

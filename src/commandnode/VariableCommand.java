@@ -6,6 +6,7 @@ import parser.RootEvaluator;
 import parser.TreeFactory;
 
 public abstract class VariableCommand extends CommandNode{
+	
 	private SLogoWorkspace myWorkspace;
 	private TreeFactory myTreeFactory;
 	private RootEvaluator myRootEvaluator;

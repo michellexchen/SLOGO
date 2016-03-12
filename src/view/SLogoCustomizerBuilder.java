@@ -95,7 +95,8 @@ public class SLogoCustomizerBuilder extends Observable {
 	 */
 	private void setup(){
 		myPaneColor = Color.WHITE;
-		//myPenColor = Color.BLACK;
+		myPenColor = Color.BLACK;
+		myPenWidth = 1;
 		setColorPicker();
 		setFontColor();
 		setLine();
@@ -144,9 +145,10 @@ public class SLogoCustomizerBuilder extends Observable {
 	}
 
 	ObservableList<Color> data = FXCollections.observableArrayList(
-			Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE);
+		     Color.WHITE, Color.BLACK, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE);
+		
+	 private ComboBox setColorDropdown(){
 
-	private ComboBox setColorDropdown(){
 		ComboBox<Color> cb = new ComboBox<Color>();
 
 		cb.setItems(data);
@@ -169,6 +171,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	 */
 	private void setColorPicker(){
 		ComboBox myCB = setColorDropdown();
+		myCB.getSelectionModel().select(0);
 		StackPane root = new StackPane();
 		root.getChildren().add(myCB);
 
@@ -201,6 +204,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	private void setFontColor(){
 
 		ComboBox myCB2 = setColorDropdown();
+		myCB2.getSelectionModel().select(1); //default value
 		StackPane root = new StackPane();
 		root.getChildren().add(myCB2);
 
@@ -217,7 +221,7 @@ public class SLogoCustomizerBuilder extends Observable {
 					}
 				});	    
 
-		fontColorLabel = new Label("Set font color: ");
+		fontColorLabel = new Label("Set pen color: ");
 		fontColorLabel.setPrefWidth(COLORLABELSIZE);
 
 		fontColorHb = new HBox();
@@ -251,7 +255,7 @@ public class SLogoCustomizerBuilder extends Observable {
 	 * 
 	 */
 	private void setLineThickness(){
-		thicknessSliderLabel = new Label("Set line width: ");
+		thicknessSliderLabel = new Label("Set pen width: ");
 		thicknessSliderLabel.setPrefWidth(COLORLABELSIZE);
 		thicknessSlider = new Slider(0, 10, 1);
 		thicknessSlider.setShowTickLabels(true);
@@ -295,25 +299,26 @@ public class SLogoCustomizerBuilder extends Observable {
 		buttonHb.getChildren().add(myOkayButton);
 		buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
 		myOkayButton.setOnMouseClicked(e -> {
-			//			System.out.println("new pane color: ");
-			//			System.out.println(myPaneColor);
-			myPropertiesData.setPaneColor(myPaneColor);
-			//			System.out.println("new font color: ");
-			//			System.out.println(myPenColor);
+
 			myStrokeStyle = comboBox.getSelectionModel().getSelectedItem().toString();
-			//			System.out.println("new pen style: ");
-			//			System.out.println(myStrokeStyle);
-			//			System.out.println("my new line thickness: ");
-			//			System.out.println(myPenWidth);
-			isDown = switchButton.isDown();
-			//			System.out.println("my new pen position: ");
-			//			System.out.println(isDown);
+//			System.out.println("new pen style: ");
+//			System.out.println(myStrokeStyle);
+//			System.out.println("my new line thickness: ");
+//			System.out.println(myPenWidth);
+
+//			System.out.println("my new pen position: ");
+//			System.out.println(isDown);
+
 			//change pen width
 			myGUI.run(myCommandNameLoader.getString("setpensize") + " " + myPenWidth);
 			myGUI.run(myCommandNameLoader.getString("setbg") + " "+ data.indexOf(myPaneColor));
 			myGUI.run(myCommandNameLoader.getString("setpc") + " "+ data.indexOf(myPenColor));
-
-			myPropertiesData.notifyObservers();
+			if (switchButton.isDown()) {
+				myGUI.run(myCommandNameLoader.getString("pd"));
+			} else {
+				myGUI.run(myCommandNameLoader.getString("pu"));
+			}
+			//myPropertiesData.notifyObservers();
 			myCustomizerStage.hide();
 		});
 	}

@@ -75,6 +75,11 @@ public abstract class SLogoCharacterState {
 	public String getImage() {
 		return myImage;
 	}
+	
+	/**
+	 * @param myBGColorIndex: index of new background color
+	 * Sets background color 
+	 */
 
 	public void setBackground(int myBGColorIndex) throws SLogoException {
 		ColorLoader colorLoader = new ColorLoader();
@@ -88,6 +93,11 @@ public abstract class SLogoCharacterState {
 	public Color getBGColor(){
 		return myBGColor;
 	}
+	
+	/**
+	 * @param myShapeIndex: index of new shape
+	 * Updates representation of turtle in GUI
+	 */
 
 	public void setImage(int myShapeIndex) throws SLogoException {
 		TurtleImageLoader imageLoader = new TurtleImageLoader();
