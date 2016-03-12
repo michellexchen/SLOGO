@@ -57,7 +57,7 @@ public class SLogoWorkspace {
 	public void initialize() throws SLogoException {
 		myRootEvaluator = new RootEvaluator(this);
 		resetActiveTurtles();
-		myActiveTurtles.add(turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY()));
+		myActiveTurtles.add(turtleFactory.createDefaultTurtle());
 		//turtleFactory.createTurtle(30, 30);
 	}
 

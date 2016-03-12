@@ -22,7 +22,8 @@ public class SLogoTurtleFactory {
 		this.myWorkspace = myWorkspace;
 	}
 	
-	public SLogoCharacter createTurtle(int myX, int myY) throws SLogoException{
+	public SLogoCharacter createTurtle(int myX, int myY, int requestedID) throws SLogoException{
+		if(hasTurtleBeenCreated(requestedID)) return myWorkspace.getCharacterList().get(requestedID);
 		SLogoPen myPen = new SLogoPen();
 		SLogoTurtle myTurtle = new SLogoTurtle(LAST_ID++, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_SHAPE_INDEX);
 		myWorkspace.getCharacterList().add(myTurtle);
@@ -32,8 +33,12 @@ public class SLogoTurtleFactory {
 		return myTurtle;
 	}
 	
+	private boolean hasTurtleBeenCreated(int requestedID){
+		return (requestedID < LAST_ID);
+	}
+	
 	public SLogoCharacter createDefaultTurtle() throws SLogoException{
-		return createTurtle(DEFAULT_X, DEFAULT_Y);
+		return createTurtle(DEFAULT_X, DEFAULT_Y, LAST_ID);
 	}
 		
 	public int getDefaultX(){

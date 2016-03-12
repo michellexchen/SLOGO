@@ -1,11 +1,12 @@
 package commandnode;
 
 import exception.SLogoException;
+import model.SLogoCharacter;
 import model.SLogoCharacterState;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
-public class TurtleCommandNode extends BinaryNode {
+public class TurtleCommand extends BinaryNode {
 
 	private SLogoWorkspace myWorkspace;
 	private SLogoTurtleFactory turtleFactory;
@@ -27,6 +28,10 @@ public class TurtleCommandNode extends BinaryNode {
 	
 	public SLogoWorkspace getWorkspace(){
 		return myWorkspace;
+	}
+	
+	protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException{
+		return turtleFactory.createTurtle(turtleFactory.getDefaultX(), turtleFactory.getDefaultY(), turtleIndexToGrab);
 	}
 
 }

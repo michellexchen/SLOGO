@@ -7,7 +7,7 @@ import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
 import commandnode.TellNode;
-import commandnode.TurtleCommandNode;
+import commandnode.TurtleCommand;
 import commandnode.VariableCommand;
 import exception.SLogoException;
 import model.LanguageLoader;
@@ -141,16 +141,6 @@ public class TreeFactory {
 		String commandName = myLanguageLoader.getTranslation(strNode.toLowerCase());
 		if (isNumeric(strNode))
 			return new NumericNode(Double.parseDouble(strNode));
-		if (commandName == null){
-			if(!isVariable(commandName)){
-				throw new SLogoException(myResourcesLoader.getString("TheCommand") + strNode + myResourcesLoader.getString("Illegal"));
-			}
-		}
-		if(isCreateTurtle(commandName)) {
-			TellNode myChild = new TellNode();
-			myChild.setWorkspace(myWorkspace);
-			return myChild;
-		}
 		if (commandName == null)
 			throw new SLogoException(
 					myResourcesLoader.getString("TheCommand") + strNode 
@@ -167,6 +157,9 @@ public class TreeFactory {
 			}
 		if(node instanceof VariableCommand){
 			((VariableCommand)node).setWorkspace(myWorkspace);
+		}
+		if(node instanceof TurtleCommand){
+			((TurtleCommand)node).setWorkspace(myWorkspace);
 		}
 		return node;
 	}
@@ -223,17 +216,6 @@ public class TreeFactory {
 	 */
 	private boolean isClosedParenthesis(String currCommand) {
 		return currCommand.equals(")");
-	}
-
-	/**
-	 * Determine if the string inputed is used to create a turtle command
-	 * 
-	 * @param String str - string to be compared
-	 */
-	private boolean isCreateTurtle(String str) {
-		return str.toLowerCase().matches(TURTLECREATE2) 
-				|| str.toLowerCase().matches(TURTLECREATE) 
-				|| str.toUpperCase().matches(TURTLESID);
 	}
 
 }
