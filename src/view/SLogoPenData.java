@@ -5,71 +5,65 @@ import java.util.Observable;
 import javafx.scene.paint.Color;
 
 public class SLogoPenData extends Observable{
-	
-	private Color myPenColor;
-	private double myPenWidth;
-	private boolean isDown;
-	private String myStrokeStyle;
-	
-	public SLogoPenData() {
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * @return the myPenColor
-	 */
-	public Color getMyPenColor() {
-		return myPenColor;
-	}
+    private Color myPenColor;
+    private double myPenWidth;
+    private boolean isDown;
+    private String myStrokeStyle;
 
-	/**
-	 * @param myPenColor the myPenColor to set
-	 */
-	public void setMyPenColor(Color myPenColor) {
-		this.myPenColor = myPenColor;
-	}
+    /**
+     * @return the myPenColor
+     */
+    public Color getMyPenColor() {
+        return myPenColor;
+    }
 
-	/**
-	 * @return the myPenWidth
-	 */
-	public double getMyPenWidth() {
-		return myPenWidth;
-	}
+    /**
+     * @param myPenColor the myPenColor to set
+     */
+    public void setMyPenColor(Color myPenColor) {
+        this.myPenColor = myPenColor;
+    }
 
-	/**
-	 * @param myPenWidth the myPenWidth to set
-	 */
-	public void setMyPenWidth(double myPenWidth) {
-		this.myPenWidth = myPenWidth;
-	}
+    /**
+     * @return the myPenWidth
+     */
+    public double getMyPenWidth() {
+        return myPenWidth;
+    }
 
-	/**
-	 * @return the isDown
-	 */
-	public boolean isDown() {
-		return isDown;
-	}
+    /**
+     * @param myPenWidth the myPenWidth to set
+     */
+    public void setMyPenWidth(double myPenWidth) {
+        this.myPenWidth = myPenWidth;
+    }
 
-	/**
-	 * @param isDown the isDown to set
-	 */
-	public void setDown(boolean isDown) {
-		this.isDown = isDown;
-	}
+    /**
+     * @return the isDown
+     */
+    public boolean isDown() {
+        return isDown;
+    }
 
-	/**
-	 * @return the myStrokeStyle
-	 */
-	public String getMyStrokeStyle() {
-		return myStrokeStyle;
-	}
+    /**
+     * @param isDown the isDown to set
+     */
+    public void setDown(boolean isDown) {
+        this.isDown = isDown;
+    }
 
-	/**
-	 * @param myStrokeStyle the myStrokeStyle to set
-	 */
-	public void setMyStrokeStyle(String myStrokeStyle) {
-		this.myStrokeStyle = myStrokeStyle;
-	}
+    /**
+     * @return the myStrokeStyle
+     */
+    public String getMyStrokeStyle() {
+        return myStrokeStyle;
+    }
 
-	
+    /**
+     * @param myStrokeStyle the myStrokeStyle to set
+     */
+    public void setMyStrokeStyle(String myStrokeStyle) {
+        this.myStrokeStyle = myStrokeStyle;
+    }
 }

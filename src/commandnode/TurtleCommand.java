@@ -2,11 +2,10 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacter;
-import model.SLogoCharacterState;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
-public class TurtleCommand extends UnaryNode {
+public abstract class TurtleCommand extends UnaryNode {
 
 	/**
 	 * Super class that is extended by all turtle command classes. A concise and abstract way of extending functionality for
@@ -16,12 +15,6 @@ public class TurtleCommand extends UnaryNode {
 	private SLogoWorkspace myWorkspace;
 	private SLogoTurtleFactory turtleFactory;
 	
-	@Override
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	/**
 	 * set the workspace
 	 * 

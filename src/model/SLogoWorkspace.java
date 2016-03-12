@@ -12,234 +12,283 @@ import view.SLogoPropertiesData;
 import view.View;
 
 /**
- * 
  * Workspace class that serves as a container for data objects
  *
  */
-
 public class SLogoWorkspace {
+    
+    private View myView;
+    private SLogoTurtleFactory turtleFactory;
+    private RootEvaluator myRootEvaluator;
+    private List<SLogoCharacter> myCharacters;
+    private List<SLogoCharacter> myActiveTurtles;
+    private ObservableList<SLogoDisplayData> myObservableDataList;
+    private ObservableList<SLogoVariable> myObservableVariableList;
+    private ObservableList<int[]> myObservableColorList;
+    private ObservableList<String> myObservableShapeList;
+    private SLogoPropertiesData myPropertiesData;
+    private SLogoPenData myPenData;
+    private ColorLoader myColorLoader;
 
-	
-	private View myView;
-	private SLogoTurtleFactory turtleFactory;
-	private RootEvaluator myRootEvaluator;
-	
-	// Lists declared for Observable List initialization, not to be used
-	private List<SLogoDisplayData> myDataList;
-	private List<String> myCommandHistory;
-	private List<SLogoVariable> myVariableList;
+    /**
+     * Default constructor that initializes lists
+     * 
+     * @param view
+     * @throws SLogoException
+     */
+    public SLogoWorkspace(View view) throws SLogoException {
+        myView = view;
+        createObservableLists();
+        turtleFactory = new SLogoTurtleFactory(this);
+        myCharacters = new ArrayList<SLogoCharacter>();
+        myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
+        myColorLoader = new ColorLoader();
+    }
 
-	
-	private List<SLogoCharacter> myCharacters;
-	private List<SLogoCharacter> myActiveTurtles;
-	private ObservableList<SLogoDisplayData> myObservableDataList;
-	private ObservableList<String> myObservableCommandHistory;
-	private ObservableList<SLogoVariable> myObservableVariableList;
-	private ObservableList<int[]> myObservableColorList;
-	private ObservableList<String> myObservableShapeList;
-	private SLogoPropertiesData myPropertiesData;
-	private SLogoPenData myPenData;
-	private ColorLoader myColorLoader;
-	
-	public SLogoWorkspace(View view) throws SLogoException {
-		myView = view;
-		turtleFactory = new SLogoTurtleFactory(this);
-		myDataList = new ArrayList<SLogoDisplayData>();
-		myCommandHistory = new ArrayList<String>();
-		myVariableList = new ArrayList<SLogoVariable>();
-		createObservableLists(myDataList, myCommandHistory, myVariableList);
-		myCharacters = new ArrayList<SLogoCharacter>();
-		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
-		myColorLoader = new ColorLoader();
-		System.out.println(myColorLoader.getMap());
-	}
+    /**
+     * Initializes RootEvaluator and ActiveTurtles
+     * 
+     * @throws SLogoException
+     */
+    public void initialize() throws SLogoException {
+        myRootEvaluator = new RootEvaluator(this);
+        myActiveTurtles = new ArrayList<SLogoCharacter>();
+        resetActiveTurtles();
+        myActiveTurtles.add(turtleFactory.createDefaultTurtle());
+    }
 
-	public void initialize() throws SLogoException {
-		myRootEvaluator = new RootEvaluator(this);
-		resetActiveTurtles();
-		myActiveTurtles.add(turtleFactory.createDefaultTurtle());
-		//turtleFactory.createTurtle(30, 30);
-	}
+    /**
+     * Observable lists initialized using ArrayLists
+     * 
+     */
+    private void createObservableLists() {
+        myObservableDataList = FXCollections.
+                observableArrayList(new ArrayList<SLogoDisplayData>());
+        myObservableVariableList =  FXCollections.
+                observableArrayList(new ArrayList<SLogoVariable>());
+    }
 
-	/**
-	 * Observable lists initialized using currently-existing ArrayLists
-	 * 
-	 * @param datalist
-	 * @param commandhistory
-	 * @param variableList
-	 */
-	private void createObservableLists(List<SLogoDisplayData> datalist, 
-			List<String> commandhistory,
-			List<SLogoVariable> variableList) {
-		myObservableDataList = FXCollections.observableArrayList(datalist);
-		myObservableCommandHistory = FXCollections.observableArrayList(commandhistory);
-		myObservableVariableList =  FXCollections.observableArrayList(variableList);
-	}
+    /**
+     * Listeners added at initialization
+     * 
+     */
+    public void addListeners() {
+        getObservableDataList().addListener((ListChangeListener) 
+                   change -> getView().updateDisplayData());
 
-	/**
-	 * Listeners added at initialization
-	 * 
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void addListeners() {
-		getObservableDataList().addListener((ListChangeListener) 
-				change -> getView().updateDisplayData());
+        getObservableVariableList().addListener((ListChangeListener) 
+                   change -> getView().updateVariable(getObservableVariableList()));
+    }
 
-		getObservableCommandHistory().addListener((ListChangeListener) 
-				change -> getView().updateCommandHistory());
+    /**
+     * Returns a list of characters
+     * 
+     * @return
+     */
+    public List<SLogoCharacter> getCharacterList() {
+        return myCharacters;
+    }
 
-		getObservableVariableList().addListener((ListChangeListener) 
-				change -> getView().updateVariable(getObservableVariableList()));
-	}
+    /**
+     * Returns turtleFactory currently being used
+     * 
+     * @return
+     */
+    public SLogoTurtleFactory getCurrentTurtleFactory() {
+        return turtleFactory;
+    }
 
-	public List<SLogoDisplayData> getDataList() {
-		return myDataList;
-	}
+    /**
+     * Adds a character to list
+     * 
+     * @param character
+     */
+    public void addNewCharacter(SLogoCharacter character) {
+        myCharacters.add(character);
+    }
 
-	public List<String> getCommandHistory() {
-		return myCommandHistory;
-	}
+    /**
+     * Returns the ActiveTurtle List
+     * 
+     * @return
+     */
+    public List<SLogoCharacter> getActiveTurtlesList() {
+        return myActiveTurtles;
+    }
 
-	public List<SLogoCharacter> getCharacterList() {
-		return myCharacters;
-	}
-	
-	public SLogoTurtleFactory getCurrentTurtleFactory() {
-		return turtleFactory;
-	}
+    /**
+     * Adds an active turtle to the list
+     * 
+     * @param turtle
+     */
+    public void addActiveTurtle(SLogoCharacter turtle){
+        myActiveTurtles.add(turtle);
+    }
 
-	public void addNewCharacter(SLogoCharacter character) {
-		myCharacters.add(character);
-	}
-	
-	public List<SLogoCharacter> getActiveTurtlesList() {
-		return myActiveTurtles;
-	}
-	
-	public void addActiveTurtle(SLogoCharacter turtle){
-		myActiveTurtles.add(turtle);
-	}
-	
-	public void resetActiveTurtles(){
-		myActiveTurtles = new ArrayList<SLogoCharacter>();
-	}
+    /**
+     * Clears the list
+     * 
+     */
+    public void resetActiveTurtles(){
+        myActiveTurtles.clear();
+    }
 
-	public void removeCharacter(SLogoCharacter character) {
-		myCharacters.remove(character);
-	}
+    /**
+     * Removes a character from list
+     * 
+     * @param character
+     */
+    public void removeCharacter(SLogoCharacter character) {
+        myCharacters.remove(character);
+    }
 
-	public void addNewHistoryCommand(String command) {
-		myCommandHistory.add(command);
-	}
+    /**
+     * Adds a Variable to the observablelist
+     * 
+     * @param variable
+     */
+    public void addToVarMap(SLogoVariable variable){
+        myObservableVariableList.add(variable);
+    }
 
-	public void addDisplayData(SLogoDisplayData displayData) {
-		myDataList.add(displayData);
-	}
+    /**
+     * @return the myView
+     */
+    public View getView() {
+        return myView;
+    }
 
-	public void addToVarMap(SLogoVariable variable){
-		myObservableVariableList.add(variable);
-	}
+    /**
+     * @param myView
+     *            the myView to set
+     */
+    public void setView(View myView) {
+        this.myView = myView;
+    }
 
-	/**
-	 * @return the myView
-	 */
-	public View getView() {
-		return myView;
-	}
+    /**
+     * @return the myObservableDataList
+     */
+    public ObservableList<SLogoDisplayData> getObservableDataList() {
+        return myObservableDataList;
+    }
 
-	/**
-	 * @param myView
-	 *            the myView to set
-	 */
-	public void setView(View myView) {
-		this.myView = myView;
-	}
+    /**
+     * @param myObservableDataList
+     *            the myObservableDataList to set
+     */
+    public void setObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
+        this.myObservableDataList = myObservableDataList;
+    }
 
-	/**
-	 * @return the myObservableDataList
-	 */
-	public ObservableList<SLogoDisplayData> getObservableDataList() {
-		return myObservableDataList;
-	}
+    /**
+     * Variable lookup by name
+     * 
+     * @param varName
+     * @return
+     */
+    public double getVarValueByName(String varName){
+        for(SLogoVariable var : myObservableVariableList){
+            if(var.getName().equals(varName)) {
+                return var.getValue();
+            }
+        }
+        return 0;
+    }
 
-	/**
-	 * @param myObservableDataList
-	 *            the myObservableDataList to set
-	 */
-	public void setObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
-		this.myObservableDataList = myObservableDataList;
-	}
+    /**
+     * See if a Variable is currently in the list and returns if it's present
+     * 
+     * @param varName
+     * @return
+     */
+    public SLogoVariable lookupVariable(String varName){
+        for(SLogoVariable var : myObservableVariableList){
+            if(var.getName().equals(varName)) {
+                return var;
+            }
+        }
+        return null;
+    }
 
-	/**
-	 * @return the myObservableCommandHistory
-	 */
-	public ObservableList<String> getObservableCommandHistory() {
-		return myObservableCommandHistory;
-	}
+    /**
+     * Creates a new variable and modifies the variable if needed
+     * 
+     * @param varName
+     * @param varValue
+     * @return
+     */
+    public SLogoVariable createVariable(String varName, double varValue){
+        boolean created = false;
+        SLogoVariable varModified = new SLogoVariable(varName, varValue);
+        for(SLogoVariable var : myObservableVariableList){
+            if(var.getName().equals(varName)) {
+                varModified = var;
+                created = true;
+            }
+        }
+        if(created) {
+            getObservableVariableList().remove(varModified);
+        }
+        getObservableVariableList().add(new SLogoVariable(varName, varValue));
+        return lookupVariable(varName);
+    }
 
-	/**
-	 * @param myObservableCommandHistory
-	 *            the myObservableCommandHistory to set
-	 */
-	public void setObservableCommandHistory(ObservableList<String> myObservableCommandHistory) {
-		this.myObservableCommandHistory = myObservableCommandHistory;
-	}
+    /**
+     * Returns ObservableVariableList
+     * 
+     * @return
+     */
+    public ObservableList<SLogoVariable> getObservableVariableList() {
+        return myObservableVariableList;
+    }
 
-	public List<SLogoVariable> getMyVarList(){
-		return myVariableList;
-	}
+    /**
+     * @return the myRootEvaluator
+     */
+    public RootEvaluator getRootEvaluator() {
+        return myRootEvaluator;
+    }
 
-	public double getVarValueByName(String varName){
-		for(SLogoVariable var : myObservableVariableList){
-			if(var.getName().equals(varName))
-				return var.getValue();
-		}
-		return 0;
-	}
+    /**
+     * @param myRootEvaluator the myRootEvaluator to set
+     */
+    public void setRootEvaluator(RootEvaluator myRootEvaluator) {
+        this.myRootEvaluator = myRootEvaluator;
+    }
 
-	public SLogoVariable lookupVariable(String varName){
-		for(SLogoVariable var : myObservableVariableList){
-			if(var.getName().equals(varName)){
-				return var;
-			}
-		}
-		return null;
-	}
+    /**
+     * @return the myObservableColorList
+     */
+    public ObservableList<int[]> getMyObservableColorList () {
+        return myObservableColorList;
+    }
 
-	public SLogoVariable createVariable(String varName, double varValue){
-		boolean created = false;
-		for(SLogoVariable var : myObservableVariableList){
-			if(var.getName().equals(varName)){
-				var.setValue(varValue);
-				created = true;
-			}
-		}
-		if(!created){
-			getObservableVariableList().add(new SLogoVariable(varName, varValue));
-		}
-		return lookupVariable(varName);
-	}
+    /**
+     * @return the myObservableShapeList
+     */
+    public ObservableList<String> getMyObservableShapeList () {
+        return myObservableShapeList;
+    }
 
-	public ObservableList<SLogoVariable> getObservableVariableList() {
-		return myObservableVariableList;
-	}
+    /**
+     * @return the myPropertiesData
+     */
+    public SLogoPropertiesData getMyPropertiesData () {
+        return myPropertiesData;
+    }
 
-	public void setObservableVariableList(ObservableList<SLogoVariable> myObservableVariableList) {
-		this.myObservableVariableList = myObservableVariableList;
-	}
+    /**
+     * @return the myPenData
+     */
+    public SLogoPenData getMyPenData () {
+        return myPenData;
+    }
 
-	/**
-	 * @return the myRootEvaluator
-	 */
-	public RootEvaluator getRootEvaluator() {
-		return myRootEvaluator;
-	}
-
-	/**
-	 * @param myRootEvaluator the myRootEvaluator to set
-	 */
-	public void setRootEvaluator(RootEvaluator myRootEvaluator) {
-		this.myRootEvaluator = myRootEvaluator;
-	}
-
+    /**
+     * @return the myColorLoader
+     */
+    public ColorLoader getMyColorLoader () {
+        return myColorLoader;
+    }
 }

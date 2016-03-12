@@ -5,41 +5,27 @@ import java.util.ArrayList;
 import exception.SLogoException;
 import model.ResourceLoader;
 import model.SLogoCharacterState;
-import parser.InstructionLoader;
 
 /**
  * SLogo's CommandNode, an abstract class representing any command (Turtle,
  * Query, Math, etc.) with any number of children
  *
  */
-
 public abstract class CommandNode implements Node {
 	
-	private ArrayList<Node> children;
+	private ArrayList<Node> myChildren;
 	private int NUM_CHILDREN;
-	private InstructionLoader instructionsLoader;
-	private ResourceLoader resourcesLoader;
 	
 	public CommandNode(){
-		try {
-			instructionsLoader = new InstructionLoader();
-		} catch (SLogoException e) {
-			new SLogoException("Instruction loader not loading.");
-		}
-		try {
-			resourcesLoader = new ResourceLoader();
-		} catch (SLogoException e) {
-			new SLogoException("Resource loader not loading.");
-		}
-		children = new ArrayList<Node>();
+		myChildren = new ArrayList<Node>();
 	}
 
 	public ArrayList<Node> getChildren() {
-		return children;
+		return myChildren;
 	}
 
 	public void addChild(Node child) {
-		children.add(child);
+		myChildren.add(child);
 	}
 	
 	/**
@@ -53,15 +39,11 @@ public abstract class CommandNode implements Node {
 	 * @return Number of children currently added to command
 	 */
 	public int numCurrentChildren(){
-		return children.size();
+		return myChildren.size();
 	}
 	
 	public void setNumChildren(int num){
 		NUM_CHILDREN = num;
-	}
-	
-	public Node getChild(int child){
-		return children.get(child);
 	}
 	
 	/**
@@ -71,23 +53,10 @@ public abstract class CommandNode implements Node {
 	 * @throws SLogoException in subclasses if invalid command parameters
 	 */
 	public double evaluateChild(int child, SLogoCharacterState state) throws SLogoException{
-		return children.get(child).evaluate(state);
-	}
-	
-	/**
-	 * @param instruction, key for instructions resources file lookup
-	 * @return instruction from resources file
-	 */
-	public String getInstruction(String key){
-		return instructionsLoader.getString(key);
-	}
-	
-	/**
-	 * @param instruction, key for instructions resources file lookup
-	 * @return instruction from resources file
-	 */
-	public String getResource(String key){
-		return resourcesLoader.getString(key);
+		if(myChildren.size() <= child){
+			throw new SLogoException(new ResourceLoader().getString("InvalidCommandParts"));
+		}
+		return myChildren.get(child).evaluate(state);
 	}
 	
 }

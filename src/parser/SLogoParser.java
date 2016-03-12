@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import commandnode.Node;
 import exception.SLogoException;
+import model.ResourceLoader;
 import model.SLogoWorkspace;
 
 /**
@@ -17,42 +18,41 @@ import model.SLogoWorkspace;
  */
 public class SLogoParser {
 
-	private TreeFactory myTreeFactory;
-	private SLogoWorkspace myWorkspace;
+    private TreeFactory myTreeFactory;
+    private SLogoWorkspace myWorkspace;
 
-	public SLogoParser(SLogoWorkspace workspace) throws SLogoException {
-		myWorkspace = workspace;
-		myTreeFactory = new TreeFactory(myWorkspace);
-	}
-	
-	/**
-	 * Reads a command and feeds it into TreeFactory and gets a tree built
-	 * 
-	 */
-	public List<Node> readCommand(String command) throws SLogoException {
-		if (invalidInputCheck(command)) {
-			throw new SLogoException("Nothing was entered! Try again!");
-		}
-		System.out.println("Reading command: " + command);
-		List<String> commandParts = formatCommandParts(command);
-		List<Node> myRoots = myTreeFactory.createNodes(commandParts);
-		return myRoots;
-	}
+    public SLogoParser(SLogoWorkspace workspace) throws SLogoException {
+        myWorkspace = workspace;
+        myTreeFactory = new TreeFactory(myWorkspace);
+    }
 
-	/**
-	 * Using RegEx, parses string
-	 * 
-	 */
-	private List<String> formatCommandParts(String text) throws SLogoException {
-		return Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
-				.collect(Collectors.toCollection(ArrayList::new));
-	}
+    /**
+     * Reads a command and feeds it into TreeFactory and gets a tree built
+     * 
+     */
+    public List<Node> readCommand(String command) throws SLogoException {
+        if (invalidInputCheck(command)) {
+            throw new SLogoException(new ResourceLoader().getString("NoCommandEntered"));
+        }
+        List<String> commandParts = formatCommandParts(command);
+        List<Node> myRoots = myTreeFactory.createNodes(commandParts);
+        return myRoots;
+    }
 
-	/**
-	 * Checks for invalid input
-	 * 
-	 */
-	private boolean invalidInputCheck (String command) {
-		return command.isEmpty() || command == null;
-	}
+    /**
+     * Using RegEx, parses string
+     * 
+     */
+    private List<String> formatCommandParts(String text) throws SLogoException {
+        return Arrays.stream(text.split("\\s+")).map(String::toLowerCase)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Checks for invalid input
+     * 
+     */
+    private boolean invalidInputCheck (String command) {
+        return command.isEmpty() || command == null;
+    }
 }

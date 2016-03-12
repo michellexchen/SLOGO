@@ -14,16 +14,14 @@ import javafx.collections.ObservableList;
  */
 public interface Model {
 
-	public void readCommand(String command) throws SLogoException;
+    public void readCommand(String command) throws SLogoException;
 
-	public void addWorkspace() throws SLogoException, IOException;
+    public void addWorkspace() throws SLogoException, IOException;
 
-	public SLogoWorkspace getCurrentWorkspace();
+    public SLogoWorkspace getCurrentWorkspace();
 
-	public ObservableList<SLogoDisplayData> getObservableDataList();
+    public ObservableList<SLogoDisplayData> getObservableDataList();
 
-	public void loadLanguage();
-	
-	public void switchWorkspace(int index) throws SLogoException;
+    public void switchWorkspace(int index) throws SLogoException;
 
 }

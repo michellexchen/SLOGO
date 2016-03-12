@@ -10,4 +10,9 @@ FileError:Error loading file.
 ShapeIndex:Invalid shape index.
 ColorIndex:Invalid color index.
 TreeFactory:Tree Factory couldn't be created.
-Repcount::Repcount
+Repcount::repcount
+InstructionsLoader:Instruction Loader couldn't be created.
+InvalidCommandParts:Invalid command! Not enough command parts supplied.
+NoCommandEntered:Nothing was entered! Try again!
+Title:SLogo
+InvalidWorkspace:This project doesn't exist yet. Please click + button to create.

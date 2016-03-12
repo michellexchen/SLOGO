@@ -13,22 +13,22 @@ import javafx.scene.paint.Color;
  *
  */
 public class SLogoPropertiesData extends Observable {
-	
-	private Color myPaneColor; 
 
-	/**
-	 * @return the myPaneColor
-	 */
-	public Color getPaneColor() {
-		return myPaneColor;
-	}
+    private Color myPaneColor; 
 
-	/**
-	 * @param myPaneColor the myPaneColor to set
-	 */
-	public void setPaneColor(Color myPaneColor) {
-		this.myPaneColor = myPaneColor;
-		setChanged();
-	}
+    /**
+     * @return the myPaneColor
+     */
+    public Color getPaneColor() {
+        return myPaneColor;
+    }
+
+    /**
+     * @param myPaneColor the myPaneColor to set
+     */
+    public void setPaneColor(Color myPaneColor) {
+        this.myPaneColor = myPaneColor;
+        setChanged();
+    }
 
 }

@@ -13,11 +13,11 @@ public class BackwardNode extends StraightCommand {
 	/**
 	 * @return pixel distance moved backward based on current direction
 	 */
-	public double evaluate(SLogoCharacterState currentState) throws SLogoException {
-		double[] newCoor = calculateLoc(currentState.getDirection(), currentState);
-		currentState.setXCoor(currentState.getXCoor() + -1 * newCoor[0]);
-		currentState.setYCoor(currentState.getYCoor() + -1 * newCoor[1]);
-		return getChildren().get(0).evaluate(currentState);
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		double[] newCoor = calculateLoc(state.getDirection(), state);
+		state.setXCoor(state.getXCoor() + -1 * newCoor[0]);
+		state.setYCoor(state.getYCoor() + -1 * newCoor[1]);
+		return evaluateChild(0, state);
 	}
 
 }
