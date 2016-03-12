@@ -8,6 +8,7 @@ import java.util.Observer;
 import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.scene.control.MenuItem;
+import model.SLogoVariable;
 import model.SLogoWorkspace;
 
 /**
@@ -17,9 +18,10 @@ import model.SLogoWorkspace;
  * 
  * @author Hunter
  * @param <E>
+ * @param <T>
  *
  */
-public interface View<E> {
+public interface View<T> {
 	
 	public String getCommand();
 
@@ -34,13 +36,13 @@ public interface View<E> {
 	public void updateCommandHistory();
 	
 	public void updateWorkspaces();
-
-	public void updateVariables();
 	
 	public void setCurrentWorkspace(SLogoWorkspace workspace);
 	
 	public Observer getObserver();
 	
 	public String getLanguage();
+
+	public void updateVariable (ObservableList<T> variables);
 }
 	

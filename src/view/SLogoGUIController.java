@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
@@ -46,6 +47,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Model;
 import model.SLogoDisplayData;
+import model.SLogoVariable;
 
 /**
  * 
@@ -67,6 +69,8 @@ public class SLogoGUIController implements Initializable, Observer {
 	private ListView<String> myPropertiesPaneView = new ListView<String>();
 	private ObservableList<String> myProperties;
 
+	private ListView<String> myVariableView;
+	
 	private Stage myCurrentStage;
 	private Color myCanvasColor;
 	private ColorPicker myColorPicker;
@@ -151,6 +155,7 @@ public class SLogoGUIController implements Initializable, Observer {
 		myPropertyPane.getChildren().add(myPropertiesPaneView);
 		myCustomizer = new SLogoCustomizerBuilder();
 		myCustomizer.hide();
+		myVariableView = new ListView<String>();
 
 		assignMenuAction();
 		assignHelpAction();
@@ -284,8 +289,7 @@ public class SLogoGUIController implements Initializable, Observer {
 	 */
 	private void displayHistory(){
 		myHistoryPaneView = new ListView<String>();
-		ObservableList<String> items =FXCollections.observableArrayList (
-				myHistory);
+		ObservableList<String> items =FXCollections.observableArrayList(myHistory);
 		myHistoryPaneView.setItems(items);
 		myCommandHistoryPane.setContent(myHistoryPaneView);
 
@@ -305,6 +309,18 @@ public class SLogoGUIController implements Initializable, Observer {
 		});
 	}    
 
+	public void displayVariable (ObservableList<SLogoVariable> variables) {
+		
+		
+		
+		ObservableList<String> list = (ObservableList<String>) new ArrayList<String>();
+		variables.forEach(n -> list.add(n.getName()));
+		
+		getVariableView().setItems((ObservableList<String>) list);
+		myVariablePane.setContent(getVariableView());
+	}
+	
+	
 	/**
 	 * Displays properties
 	 * 
@@ -462,6 +478,20 @@ public class SLogoGUIController implements Initializable, Observer {
 	 */
 	public String getCommand() {
 		return myCommand;
+	}
+
+	/**
+	 * @return the myVariableView
+	 */
+	public ListView<String> getVariableView() {
+		return myVariableView;
+	}
+
+	/**
+	 * @param myVariableView the myVariableView to set
+	 */
+	public void setVariableView(ListView<String> myVariableView) {
+		this.myVariableView = myVariableView;
 	}
 
 }

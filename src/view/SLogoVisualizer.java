@@ -15,6 +15,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Model;
 import model.SLogoPosition;
+import model.SLogoVariable;
 import model.SLogoDisplayData;
 
 /**
@@ -73,9 +74,6 @@ public class SLogoVisualizer implements Observer {
 		// data = myPromptBuilder.getData();
 		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
 		getModel().loadLanguage();
-
-//		//Get the ObservableDataList
-//		setObservableDataList(getModel().getObservableDataList());
 
 		// GUI Initialization
 		myLoader = new FXMLLoader(getClass().getResource("UI.fxml"));
@@ -219,6 +217,10 @@ public class SLogoVisualizer implements Observer {
 
 	}
 
+	public void updateVariables (ObservableList<SLogoVariable> variables) {
+		getGUIController().displayVariable(variables);
+	}
+
 	/**
 	 * Converts Color object into its hex String representation
 	 * 
@@ -293,5 +295,6 @@ public class SLogoVisualizer implements Observer {
 	public SLogoPropertiesData getPropertiesData() {
 		return myProperties;
 	}
+
 	
 }

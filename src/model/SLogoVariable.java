@@ -3,7 +3,6 @@ package model;
 import java.util.Observable;
 
 /**
- * 
  * SLogo Variable class that represents variable objects
  *
  */
@@ -51,15 +50,4 @@ public class SLogoVariable extends Observable {
 		this.myValue = myValue;
 	}
 
-	// @Override
-	// public void addListener(InvalidationListener arg0) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	//
-	// @Override
-	// public void removeListener(InvalidationListener arg0) {
-	// // TODO Auto-generated method stub
-	//
-	// }
 }
