@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.HashMap;
 import java.util.Properties;
+import java.util.Set;
 
 import exception.SLogoException;
 
@@ -18,10 +20,28 @@ import exception.SLogoException;
 
 public abstract class FileLoader {
 	Properties myProperties;
+	HashMap<String, String> myBackMap;
 	private BufferedReader myFileReader;
 	private String directory;
 	private String extension;
 	private String fileName;
+	
+	public void createSplitBackMap() {
+		myBackMap = new HashMap<String, String>();
+		Set<Object> keySet = myProperties.keySet();
+		for (Object o: keySet) {
+			String currentProperty = myProperties.getProperty((String) o);
+			if (currentProperty.contains("|")) {
+				String[] splitProperty = currentProperty.split("|");
+				for (String s: splitProperty) {
+					myBackMap.put(s, (String) o);
+				}
+			}
+			else {
+				myBackMap.put(currentProperty, (String) o);
+			}
+		}
+	}
 
 	public void load() throws SLogoException  {
 		fileName = directory + "/" + extension;
