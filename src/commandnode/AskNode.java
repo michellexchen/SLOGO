@@ -1,10 +1,18 @@
 package commandnode;
 
-public class AskNode extends TellNode{
+import exception.SLogoException;
+import model.SLogoCharacterState;
+
+public class AskNode extends BinaryNode {
 
 	public AskNode() {
-		// TODO Auto-generated constructor stub
-		super();
+	
+	}
+
+	@Override
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
