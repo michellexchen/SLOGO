@@ -211,7 +211,8 @@ public class SLogoGUIController implements Initializable, Observer {
     }
 
     /**
-     * Assigns an action to the READ FILE button
+     * Assigns an action to the READ FILE button and provides the user
+     * a function getSelectedFile to enable reading in the name of the file
      * 
      */
     private void assignReadAction () {

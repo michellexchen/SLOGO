@@ -31,7 +31,7 @@ public class SLogoFileChooserBuilder extends SLogoBuilder {
     private static final String FONT = "Georgia";
 
     private String mySelectedFile;
-    
+
     public SLogoFileChooserBuilder () {
         super();
     }
@@ -74,7 +74,7 @@ public class SLogoFileChooserBuilder extends SLogoBuilder {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             myActionStatus.setText(getResourceLoader().getString("Selected") 
-                                                   + selectedFile.getName());
+                                   + selectedFile.getName());
             setSelectedFile(selectedFile.getName());
             prompt.hide();
         }
