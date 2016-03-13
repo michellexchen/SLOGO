@@ -34,7 +34,7 @@ public class ForNode extends BinaryVariableNode {
 		List<String> innerCommands = commandList.getInnerCommands();
 		double evaluation = 0;
 		for(int x=start; x<=end; x+=increment){
-			List<Node> myRoots = getTreeFactory().createNodes(clone(innerCommands));
+			List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
 			getRootEvaluator().evaluateRoots(myRoots);
 			var.setValue(x);
 		}
