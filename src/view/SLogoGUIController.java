@@ -71,6 +71,7 @@ public class SLogoGUIController implements Initializable, Observer {
     private Color myCanvasColor;
     private ColorPicker myColorPicker;
     private HBox myColorHBox;
+    private SLogoFileChooserBuilder myFileChooser;
     private SLogoCustomizerBuilder myCustomizer;
     private SLogoPropertiesData myPropertiesData;
     private Model myModel;
@@ -149,10 +150,12 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        myFileChooser = new SLogoFileChooserBuilder();
         myResourceLoader = new ResourceLoader("default.properties");
         myErrorLoader = new ResourceLoader("error.properties");
-
         myHistory = new ArrayList<String>();
+        myVariableView = new ListView<String>();
+        myCustomCommandView = new ListView<String>();
         myPropertyPane.getChildren().add(myPropertiesPaneView);
         try {
             myCustomizer = new SLogoCustomizerBuilder(this);
@@ -160,11 +163,11 @@ public class SLogoGUIController implements Initializable, Observer {
             e.showErrorDialog(getErrorLoader().getString("CustomizerError"));
         }
         myCustomizer.hide();
-        myVariableView = new ListView<String>();
-        myCustomCommandView = new ListView<String>();
 
+        // Assigns actions to buttons and other components
         assignMenuAction();
         assignHelpAction();
+        assignReadAction();
         assignRunAction();
         customize();
         assignAddWorkspaceAction();
@@ -212,7 +215,11 @@ public class SLogoGUIController implements Initializable, Observer {
      * 
      */
     private void assignReadAction () {
-//        myReadButton.setOnAction(value);
+        myReadButton.setOnAction(e -> {
+            getFileChooser().promptUser();
+            //To get the string for the name of the file chosen
+            //getFileChooser().getSelectedFile();
+        });  
     }
     
     /**
@@ -592,5 +599,12 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     public ScrollPane getCustomPane () {
         return myCustomPane;
+    }
+
+    /**
+     * @return the myFileChooser
+     */
+    public SLogoFileChooserBuilder getFileChooser () {
+        return myFileChooser;
     }
 }

@@ -92,7 +92,7 @@ public class SLogoCustomizerBuilder extends Observable {
         myCustomizerStage = new Stage();
         myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
         myCustomizerStage.setScene(myCustomizerScene);
-        myCustomizerStage.setTitle(myResourceLoader.getString("Title"));
+        myCustomizerStage.setTitle(myResourceLoader.getString("CustomizerTitle"));
         myCommandNameLoader = new CommandNameLoader();
 
     }
