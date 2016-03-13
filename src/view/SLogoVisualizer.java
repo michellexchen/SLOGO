@@ -149,32 +149,41 @@ public class SLogoVisualizer implements Observer {
      * @param displaydata
      */
     public void placeTurtle(SLogoDisplayData displaydata) {
-        Image image = new Image(IMAGE_PATH + displaydata.getImage());
         ImageView turtle = new ImageView();
-        turtle.setImage(image);
+        turtle.setImage(new Image(IMAGE_PATH + displaydata.getImage()));
         turtle.setVisible(!displaydata.getTurtleHidden());
+        assignTurtleAction(turtle);
+        turtleResize(turtle);
+        turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
+        turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() 
+                          + COORDINATE_SHIFT - PADDING);
+        turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
+        turtle.setRotate(displaydata.getDirection());
+        getGUIController().addToCanvas(turtle);
+    }
 
+    /**
+     * Assigns an click action to the turtle ImageView
+     * 
+     * @param turtle
+     */
+    private void assignTurtleAction(ImageView turtle) {
         turtle.setOnMouseClicked(e -> {
             //Show Properties
+            getGUIController().displayProperties();
         });
-
-        //turtle resize
+    }
+    
+    /**
+     * Takes an ImageView and resizes it
+     * 
+     * @param turtle
+     */
+    private void turtleResize(ImageView turtle) {
         turtle.setFitWidth(TURTLE_SIZE);
         turtle.setPreserveRatio(true);
         turtle.setSmooth(true);
         turtle.setCache(true);
-
-        //place turtle using Position and center at the coordinates (x,y)
-        turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
-        turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + 
-                          COORDINATE_SHIFT - PADDING);
-
-        //turtle rotate
-        turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
-        turtle.setRotate(displaydata.getDirection());
-
-        //Put it in the Pane
-        getGUIController().addToCanvas(turtle);
     }
 
     /**

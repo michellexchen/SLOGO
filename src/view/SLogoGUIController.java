@@ -271,9 +271,7 @@ public class SLogoGUIController implements Initializable, Observer {
     }
 
     /**
-     * Lets the user view the commands
-     * 
-     * NEEDS TO BE REVISED!!!
+     * Takes the user to the customized help page
      * 
      * @param link
      */
