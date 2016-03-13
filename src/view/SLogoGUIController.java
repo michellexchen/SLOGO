@@ -33,6 +33,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import model.LogoFileLoader;
 import model.Model;
 import model.ResourceLoader;
 import model.SLogoCustomCommand;
@@ -220,7 +221,23 @@ public class SLogoGUIController implements Initializable, Observer {
             getFileChooser().promptUser();
             //To get the string for the name of the file chosen
             //getFileChooser().getSelectedFile();
-        });  
+            LogoFileLoader loader = 
+                    new LogoFileLoader(getFileChooser().getSelectedFile());
+            //System.out.println(getFileChooser().getSelectedFile());
+            try {
+                loader.getAllCommands().forEach(c -> {
+                    try {
+                        getModel().readCommand(c);
+                        System.out.println(c);
+                    }
+                    catch (SLogoException e1) {
+                        e1.showErrorDialog(getErrorLoader().getString("LoadError"));
+                        System.out.println("ASDFSDaf");
+                    }
+                });
+            }
+            catch (Exception e1) {}
+        });
     }
     
     /**

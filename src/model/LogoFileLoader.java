@@ -119,6 +119,20 @@ public class LogoFileLoader extends FileLoader {
     public List<String> getCustomCommands () {
         return myCustomCommands;
     }
+    
+    /**
+     * Returns a list of commands consisting of custom commands and
+     * the entire String appended at the end
+     * 
+     * @return
+     * @throws IOException 
+     * @throws FileNotFoundException 
+     */
+    public List<String> getAllCommands () throws FileNotFoundException, IOException {
+        myCustomCommands = registerCustomCommands();
+        getCustomCommands().add(createString());
+        return getCustomCommands();
+    }
 
     /**
      * For unit testing only

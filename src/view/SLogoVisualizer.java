@@ -21,10 +21,11 @@ import model.SLogoVariable;
 import model.SLogoDisplayData;
 
 /**
- * 
  * Visualizer class that contains methods that renders turtles 
  * on the screen to show the user
- *
+ * Also exists to support multiple workspaces
+ * 
+ * @author Hunter
  */
 public class SLogoVisualizer implements Observer {
 
@@ -34,6 +35,7 @@ public class SLogoVisualizer implements Observer {
     private static final double COORDINATE_SHIFT = PANE_SIZE / 2;
     private static final int DIRECTION_FLIP = -1;
     private static final int TURTLE_SIZE = 40;
+    private static final int TURTLE_CLICKED_SIZE = 55;
     private static final int PADDING = TURTLE_SIZE / 2;
 
     private ObservableList<SLogoDisplayData> myObservableDataList;
@@ -152,7 +154,7 @@ public class SLogoVisualizer implements Observer {
         ImageView turtle = new ImageView();
         turtle.setImage(new Image(IMAGE_PATH + displaydata.getImage()));
         turtle.setVisible(!displaydata.getTurtleHidden());
-        assignTurtleAction(turtle);
+        assignTurtleAction(turtle, displaydata.getPosition());
         turtleResize(turtle);
         turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
         turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() 
@@ -167,9 +169,14 @@ public class SLogoVisualizer implements Observer {
      * 
      * @param turtle
      */
-    private void assignTurtleAction(ImageView turtle) {
+    private void assignTurtleAction(ImageView turtle, SLogoPosition position) {
         turtle.setOnMouseClicked(e -> {
-            //Show Properties
+            turtle.setFitWidth(TURTLE_CLICKED_SIZE);
+            turtle.setLayoutX(turtle.getLayoutX() - 
+                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / 2);
+            turtle.setLayoutY(turtle.getLayoutY() - 
+                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / 2);
+            // Show Properties
             getGUIController().displayProperties();
         });
     }

@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 /**
@@ -70,11 +71,14 @@ public class SLogoFileChooserBuilder extends SLogoBuilder {
      */
     private void showSingleFileChooser (Stage prompt, Text myActionStatus) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new ExtensionFilter("Logo Files", "*.logo"));
+
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             myActionStatus.setText(getResourceLoader().getString("Selected") 
                                    + selectedFile.getName());
-            setSelectedFile(selectedFile.getName());
+            setSelectedFile(getRelativePath(selectedFile.getPath()));
             prompt.hide();
         }
         else {
@@ -82,6 +86,16 @@ public class SLogoFileChooserBuilder extends SLogoBuilder {
         }
     }
 
+    /**
+     * Provides a workable path for LogoFileLoader
+     * 
+     * @param path
+     * @return
+     */
+    private String getRelativePath (String path) {
+        return path.substring(path.indexOf("examples"));
+    }
+    
     /**
      * @return the selectedFile
      */
