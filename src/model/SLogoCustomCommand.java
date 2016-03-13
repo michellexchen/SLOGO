@@ -4,12 +4,24 @@ import java.util.List;
 
 import commandnode.ListNode;
 
+/**
+ * CustomCommand class that represents each user-defined custom command
+ * Also contains variables and commands
+ *
+ */
 public class SLogoCustomCommand{
 
     private String myName;
     private ListNode myVariables;
     private ListNode myCommands;
 
+    /**
+     * Default constructor that takes in name, variables, and commands
+     * 
+     * @param myName
+     * @param myVariables
+     * @param myCommands
+     */
     public SLogoCustomCommand(String myName, ListNode myVariables, ListNode myCommands){
         this.myName = myName;
         this.myVariables = myVariables;
@@ -32,6 +44,11 @@ public class SLogoCustomCommand{
         this.myVariables = myVariables;
     }
 
+    /**
+     * Returns a list of variables used for this particular custom command
+     * 
+     * @return
+     */
     public List<String> getVariableNames(){
         List<String> varNames = new ArrayList<String>();
         myVariables.getInnerCommands().stream()
@@ -47,6 +64,11 @@ public class SLogoCustomCommand{
         this.myName = myName;
     }
 
+    /**
+     * Runs the custom command, and if successful, return 0
+     * 
+     * @return
+     */
     public double run() {
         return 0;
     }
