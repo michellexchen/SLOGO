@@ -74,13 +74,15 @@ public class LogoFileLoader extends FileLoader {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public List<String> registerCustomCommands () throws FileNotFoundException, IOException {
+    public List<String> registerCustomCommands () 
+                                throws FileNotFoundException, IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(myLogoFile))) {
             StringBuilder sb = new StringBuilder();
             int count = 0;
             String line = br.readLine();
             while (line != null) {
-                List<String> words = new ArrayList<String>(Arrays.asList(line.split("\\s+")));
+                List<String> words = new ArrayList<String>(
+                                                Arrays.asList(line.split("\\s+")));
                 for (String word : words) {
                     if (word.equals("to")) {
                         sb.append(word + " ");

@@ -3,7 +3,6 @@
  */
 package view;
 
-import java.util.ResourceBundle;
 import exception.SLogoException;
 import model.ResourceLoader;
 

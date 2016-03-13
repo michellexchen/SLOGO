@@ -16,6 +16,10 @@ import model.ResourceLoader;
  */
 public class SLogoException extends Exception {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private ResourceLoader myErrorLoader;
     private Optional<String> unresolvedException;
 
@@ -54,7 +58,7 @@ public class SLogoException extends Exception {
      * @param message
      */
     public void showErrorDialog (String message) {
-        Dialog alert = new Dialog();
+        Dialog<Object> alert = new Dialog<Object>();
         alert.setTitle(getErrorLoader().getString("AlertTitle"));
         alert.setHeaderText("ERROR: " + message);
         ButtonType buttonTypeOk = new ButtonType(getErrorLoader().getString("OkayButton"));

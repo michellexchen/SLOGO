@@ -2,7 +2,6 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
-import model.SLogoCustomCommand;
 import model.SLogoWorkspace;
 
 public class CustomCommandNode extends CommandNode{

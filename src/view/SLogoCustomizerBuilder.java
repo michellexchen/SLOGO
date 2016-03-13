@@ -11,15 +11,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -27,7 +24,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.ResourceLoader;
-import model.SLogoWorkspace;
 import parser.CommandNameLoader;
 
 /**
@@ -56,7 +52,6 @@ public class SLogoCustomizerBuilder extends Observable {
     private Label colorLabel;
     private Color myPaneColor;
     private HBox colorHb;
-    private ColorPicker fontColorPicker;
     private Label fontColorLabel;
     private HBox fontColorHb;
     private Button myOkayButton;

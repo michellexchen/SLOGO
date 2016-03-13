@@ -46,7 +46,6 @@ public class SLogoPromptBuilder extends SLogoBuilder {
     private HBox langHb;
     private HBox buttonHb;
     private Label lang;
-    private Text myActionStatus;
     private Button myOkayButton;
     private Color myColor;
     private SLogoPropertiesData myPropertiesData;

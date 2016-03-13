@@ -11,12 +11,24 @@ public class SLogoTurtle implements SLogoCharacter{
     private SLogoTurtleState myState;
     private int ID;
 
+    /**
+     * Default constructor that sets fields that define a turtle
+     * 
+     * @param ID
+     * @param myPen
+     * @param xCoor
+     * @param yCoor
+     * @param penDown
+     * @param direction
+     * @param isHidden
+     * @param shapeIndex
+     * @throws SLogoException
+     */
     public SLogoTurtle(int ID, SLogoPen myPen, double xCoor, double yCoor, 
                        boolean penDown, double direction, boolean isHidden, 
                        int shapeIndex) throws SLogoException {
         myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, 
                                        isHidden, penDown, shapeIndex);
-        System.out.println("tutle " + myState.getID() + " current state is: location xCoor " + xCoor);
         this.ID = ID;
     }
 
@@ -26,7 +38,6 @@ public class SLogoTurtle implements SLogoCharacter{
      */
     public void setState(SLogoCharacterState myState) {
         this.myState = (SLogoTurtleState) myState;
-        System.out.println("tutle " + myState.getXCoor() + " current state is: location xCoor " + myState.getXCoor());
     }
 
     public SLogoCharacterState getState() {
