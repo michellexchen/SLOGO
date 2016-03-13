@@ -219,35 +219,12 @@ public class SLogoGUIController implements Initializable, Observer {
     private void assignReadAction () {
         myReadButton.setOnAction(e -> {
             getFileChooser().promptUser();
-            //To get the string for the name of the file chosen
-            //getFileChooser().getSelectedFile();
             LogoFileLoader loader = 
                     new LogoFileLoader(getFileChooser().getSelectedFile());
             try {
                 loader.getAllCommands().forEach(c -> run(c));
             }
-            catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-//            try {
-//                System.out.println("Working1");
-//                loader.getAllCommands().forEach(c -> {
-//                    System.out.println("Working2");
-//
-//                    try {
-//                        System.out.println("Working3");
-//                        System.out.println(c);
-//
-//                        getModel().readCommand(c);
-//                    }
-//                    catch (SLogoException e1) {
-//                        e1.showErrorDialog(getErrorLoader().getString("LoadError"));
-//                        System.out.println("ASDFSDaf");
-//                    }
-//                });
-//            }
-//            catch (Exception e1) {}
+            catch (Exception e1) {}
         });
     }
     
