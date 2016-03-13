@@ -17,9 +17,7 @@ import model.SLogoWorkspace;
 import commandnode.VariableNode;
 
 /**
- * SLogo's Tree Factory that creates abstract syntax tree of Nodes Creates
- * Nodes, that can either be CommandNodes (if command) or NumericNode (if
- * numerical)
+ * SLogo's Tree Factory creates abstract syntax trees of Nodes for evaluation of commands
  * 
  * @author Adam Tache
  *
@@ -38,25 +36,25 @@ public class TreeFactory {
     }
 
     /**
-     * Create our tree structure and necessary nodes 
-     * with the list of parsed and formatted user input
+     * Creates tree structures as List<Node> of roots for evaluation
+     * Uses createRoot helper method to create correct type of root
      * 
      * @param List<String> commandParts - 
      * a list of formated input parsed and ready to be used for creation of Nodes
      */
-    public List<Node> createNodes(List<String> commandParts) throws SLogoException {
+    public List<Node> createRoots(List<String> commandParts) throws SLogoException {
         List<Node> myRoots = new ArrayList<Node>();
         while (!commandParts.isEmpty()) {
-            String currCommand = commandParts.remove(0);
-            Node myNode = createNode(currCommand);
-            if (isToCommand(currCommand)) {
+            String myRootToken = commandParts.remove(0);
+            Node myRoot = createRoot(myRootToken);
+            if (isToCommand(myRootToken)) {
             	String customName = commandParts.remove(0);
-            	myNode.addChild(new CustomCommandNode(customName, myWorkspace));
+            	myRoot.addChild(new CustomCommandNode(customName, myWorkspace));
             }
-            while (myNode.numCurrentChildren() != myNode.numRequiredChildren()) {
-                myNode.addChild(createChild(commandParts));
+            while (myRoot.numCurrentChildren() != myRoot.numRequiredChildren()) {
+            	myRoot.addChild(createChild(commandParts));
             }
-            myRoots.add(myNode);
+            myRoots.add(myRoot);
         }
         return myRoots;
     }
@@ -75,21 +73,21 @@ public class TreeFactory {
      */
     private Node createChild(List<String> commandParts) throws SLogoException {
         if(commandParts.isEmpty()) return null;
-        String currCommand = commandParts.remove(0);
-        if(isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
+        String myChildToken = commandParts.remove(0);
+        if(isOpenBracket(myChildToken) || isOpenParenthesis(myChildToken)) {
             List<String> innerCommands = createCommandList(commandParts);
             List<String> innerCommandsCopy = listCopy(innerCommands);
             ListNode listNode;
-            listNode = new ListNode(createNodes(innerCommands));
+            listNode = new ListNode(createRoots(innerCommands));
             listNode.setInnerCommands(innerCommandsCopy);
             return listNode;
         }
-        if(isVariable(currCommand)) {
-            VariableNode myVar = new VariableNode(currCommand);
+        if(isVariable(myChildToken)) {
+            VariableNode myVar = new VariableNode(myChildToken);
             myVar.setWorkspace(myWorkspace);
             return myVar;
         } else{
-            Node myChild = createNode(currCommand);
+            Node myChild = createRoot(myChildToken);
             while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
                 myChild.addChild(createChild(commandParts));
             }
@@ -126,33 +124,33 @@ public class TreeFactory {
         return innerCommands;
     }
     /**
-     * Create node
+     * Creates root by looking at 
      * 
      * @param String strNode - create the necessary node from the string passed
      */
-    private Node createNode(String myNode) throws SLogoException {
+    private Node createRoot(String rootToken) throws SLogoException {
         Node node = null;
-        String commandName = myLanguageLoader.getTranslation(myNode.toLowerCase());
-        if (isNumeric(myNode)) {
-            return new NumericNode(Double.parseDouble(myNode));
+        String rootName = myLanguageLoader.getTranslation(rootToken.toLowerCase());
+        if (isNumeric(rootToken)) {
+            return new NumericNode(Double.parseDouble(rootToken));
         }
-        else if(isVariable(commandName)) {
+        else if(isVariable(rootName)) {
             return new NumericNode(0);
         }
-        else if(isCustom(myNode)){
-        	CustomFunctionNode function = new CustomFunctionNode((myWorkspace.lookupCustomCommand(myNode)));
+        else if(isCustom(rootToken)){
+        	CustomFunctionNode function = new CustomFunctionNode((myWorkspace.lookupCustomCommand(rootName)));
         	function.setWorkspace(myWorkspace);
             return function;
         }
         else
             try {
                 node = (Node) Class.forName(getResourceLoader().getString("CommandNode")
-                                            + commandName + getResourceLoader()
+                                            + rootName + getResourceLoader()
                                             .getString("Node")).newInstance();
             } catch (ClassNotFoundException | InstantiationException 
                     | IllegalAccessException e) {
                 throw new SLogoException(getResourceLoader().getString("Command") 
-                                         + commandName + getResourceLoader()
+                                         + rootName + getResourceLoader()
                                          .getString("Implemented"));
             }
         if(node instanceof VariableCommand){

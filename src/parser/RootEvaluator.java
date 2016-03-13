@@ -38,8 +38,10 @@ public class RootEvaluator {
     }
 
     /**
-     * iterate through the list of commands and the list of turtles evaluating 
-     * each command and updating the turtle in turn
+     * Evaluates roots of command trees one command at a time for all turtles
+     * If multiple turtle command such as tell is evaluated, active turtle list may change
+     * Uses helper method getTurtleIDs to check for multiple turtle command
+     * If this is the case, breaks out of current loop of now inactive turtles to evaluate next command for new turtles
      * 
      * @param List<Node> myRoot - set of commands in the form of their parse trees that will be evaluated for each turtle
      */
@@ -60,7 +62,7 @@ public class RootEvaluator {
     }
 
     /**
-     * this turtle returns a list of id's of the specified turtles
+     * Helper method for checking Turtle IDs to see if multiple turtle command affected current turtle list
      * 
      * @param List<SLogoCharacter> activeTurtles - the list of active turtles
      * @return List<Integer> list of ID's of turtles

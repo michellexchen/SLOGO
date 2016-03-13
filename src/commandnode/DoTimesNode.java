@@ -20,12 +20,12 @@ public class DoTimesNode extends BinaryVariableNode {
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		ListNode controlList = ((ListNode) (getChildren().get(0)));
 		SLogoVariable var = getWorkspace().createVariable(controlList.getInnerCommands().get(0), 1);
-		double limit = controlList.getCommands().get(1).evaluate(state);
+		double limit = Double.parseDouble(controlList.getInnerCommands().get(1));
 		ListNode commandList = ((ListNode) (getChildren().get(1)));
 		List<String> innerCommands = commandList.getInnerCommands();
 		double evaluation = 0;
 		for(int x=0; x<limit; x++){
-			List<Node> myRoots = getTreeFactory().createNodes(clone(innerCommands));
+			List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
 			getRootEvaluator().evaluateRoots(myRoots);
 			var.setValue(x);
 		}

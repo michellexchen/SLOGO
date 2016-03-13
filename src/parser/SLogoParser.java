@@ -35,7 +35,7 @@ public class SLogoParser {
             throw new SLogoException(new ResourceLoader().getString("NoCommandEntered"));
         }
         List<String> commandParts = formatCommandParts(command);
-        List<Node> myRoots = myTreeFactory.createNodes(commandParts);
+        List<Node> myRoots = myTreeFactory.createRoots(commandParts);
         return myRoots;
     }
 
