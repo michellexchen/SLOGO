@@ -259,11 +259,6 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     public void run(String command){
         setCommand(myCommand);
-        /*
-         * TODO: Call Model's readCommand that calls
-         * View's getCommand
-         * and passes the command to the parser
-         */
         try {
             getModel().readCommand(command);
         } catch (SLogoException e1) {
