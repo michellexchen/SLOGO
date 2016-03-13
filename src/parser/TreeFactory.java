@@ -26,12 +26,12 @@ import commandnode.VariableNode;
  */
 public class TreeFactory {
 
-    private ResourceLoader myResourcesLoader;
+    private ResourceLoader myResourceLoader;
     private LanguageLoader myLanguageLoader;
     private SLogoWorkspace myWorkspace;
 
-    public TreeFactory(SLogoWorkspace ws) throws SLogoException {
-        myResourcesLoader = new ResourceLoader();
+    public TreeFactory (SLogoWorkspace ws) throws SLogoException {
+        myResourceLoader = new ResourceLoader();
         myWorkspace = ws;
         myLanguageLoader = new LanguageLoader();
         myLanguageLoader.load(myWorkspace.getView().getLanguage());
@@ -49,7 +49,7 @@ public class TreeFactory {
         while (!commandParts.isEmpty()) {
             String currCommand = commandParts.remove(0);
             Node myNode = createNode(currCommand);
-            if(isToCommand(currCommand)){
+            if (isToCommand(currCommand)) {
             	String customName = commandParts.remove(0);
             	myNode.addChild(new CustomCommandNode(customName, myWorkspace));
             }
@@ -61,7 +61,7 @@ public class TreeFactory {
         return myRoots;
     }
 
-    private List<String> listCopy(List<String> list){
+    private List<String> listCopy(List<String> list) {
         List<String> copy = new ArrayList<String>();
         copy.addAll(list);
         return copy;
@@ -113,12 +113,15 @@ public class TreeFactory {
         String currCommand = "";
         while (openBrackets != closedBrackets) {
             currCommand = commandParts.remove(0);
-            if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand))
+            if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
                 openBrackets++;
-            else if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand))
+            }
+            else if (isClosedBracket(currCommand) || isClosedParenthesis(currCommand)) {
                 closedBrackets++;
-            if(openBrackets != closedBrackets)
+            }
+            if(openBrackets != closedBrackets) {
                 innerCommands.add(currCommand);
+            }
         }
         return innerCommands;
     }
@@ -130,23 +133,25 @@ public class TreeFactory {
     private Node createNode(String myNode) throws SLogoException {
         Node node = null;
         String commandName = myLanguageLoader.getTranslation(myNode.toLowerCase());
-        if (isNumeric(myNode))
+        if (isNumeric(myNode)) {
             return new NumericNode(Double.parseDouble(myNode));
-        else if(isVariable(commandName)){
+        }
+        else if(isVariable(commandName)) {
             return new NumericNode(0);
         }
         else if(isCustom(myNode)){
-        	return new CustomFunctionNode(myWorkspace.lookupCustomCommand(myNode));
+            return new CustomFunctionNode(myWorkspace.lookupCustomCommand(myNode));
         }
         else
             try {
-                node = (Node) Class.forName(
-                                            myResourcesLoader.getString("CommandNode") + commandName 
-                                            + myResourcesLoader.getString("Node")).newInstance();
+                node = (Node) Class.forName(getResourceLoader().getString("CommandNode")
+                                            + commandName + getResourceLoader()
+                                            .getString("Node")).newInstance();
             } catch (ClassNotFoundException | InstantiationException 
                     | IllegalAccessException e) {
-                throw new SLogoException(myResourcesLoader.getString("Command") 
-                                         + commandName + myResourcesLoader.getString("Implemented"));
+                throw new SLogoException(getResourceLoader().getString("Command") 
+                                         + commandName + getResourceLoader()
+                                         .getString("Implemented"));
             }
         if(node instanceof VariableCommand){
             ((VariableCommand)node).setWorkspace(myWorkspace);
@@ -222,6 +227,13 @@ public class TreeFactory {
     
     private boolean isToCommand(String command){
     	return myLanguageLoader.getTranslation(command.toLowerCase()).equals(new ResourceLoader().getString("MakeUserInstruction"));
+    }
+
+    /**
+     * @return the myResourceLoader
+     */
+    public ResourceLoader getResourceLoader () {
+        return myResourceLoader;
     }
 
 }

@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
  * 
  * @author Adam Tache
  */
-
 public class ColorLoader extends FileLoader{
 
     private final String colorDirectory = "resources/resources";
