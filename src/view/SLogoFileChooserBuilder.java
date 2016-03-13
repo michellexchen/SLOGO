@@ -79,7 +79,7 @@ public class SLogoFileChooserBuilder extends SLogoBuilder {
             myActionStatus.setText(getResourceLoader().getString("Selected") 
                                    + selectedFile.getName());
             setSelectedFile(getRelativePath(selectedFile.getPath()));
-            prompt.hide();
+            prompt.close();
         }
         else {
             myActionStatus.setText(getResourceLoader().getString("Cancelled"));

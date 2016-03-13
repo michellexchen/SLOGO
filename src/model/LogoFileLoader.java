@@ -18,7 +18,7 @@ import java.util.List;
  *
  */
 public class LogoFileLoader extends FileLoader {
-    private static final int BRACKET_COUNT = 2;
+    private static final int BRACKET_COUNT = 1;
     
     private String myLogoFile;
     private List<String> myCustomCommands;
@@ -78,30 +78,54 @@ public class LogoFileLoader extends FileLoader {
                                 throws FileNotFoundException, IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(myLogoFile))) {
             StringBuilder sb = new StringBuilder();
-            int count = 0;
+            int count = BRACKET_COUNT;
+            boolean sawTo = false;
+            List<String> toCommands = new ArrayList<String>();
             String line = br.readLine();
             while (line != null) {
                 List<String> words = new ArrayList<String>(
                                                 Arrays.asList(line.split("\\s+")));
+                
                 for (String word : words) {
-                    if (word.equals("to")) {
+                    if (sawTo) {
                         sb.append(word + " ");
-                        count = BRACKET_COUNT;
+                        toCommands.add(word);
+                        sawTo = false;
                     }
-                    else if (count > 0) {
+
+                    else if (toCommands.contains(word)) {
+                        continue;
+                    }
+                    else if (word.equals("to")) {
                         sb.append(word + " ");
-                        if (word.equals("]")) {
-                            count--;
-                            if (count == 0) {
-                                myCustomCommands.add(sb.toString());
-                                // Clear the StringBuilder
-                                sb.setLength(0);
-                            }
-                        }
+                        sawTo = true;
+                    }
+                    else {
+                        sb.append(word + " ");
                     }
                 }
+                
+//                for (String word : words) {
+//                    if (word.equals("to")) {
+//                        sb.append(word + " ");
+//                        count = BRACKET_COUNT;
+//                    }
+//                    else if (count > 0) {
+//                        sb.append(word + " ");
+//                        if (word.equals("]")) {
+//                            count--;
+//                            if (count == 0) {
+//                                myCustomCommands.add(sb.toString());
+//                                // Clear the StringBuilder
+//                                sb.setLength(0);
+//                            }
+//                        }
+//                    }
+//                }
                 line = br.readLine();
             }
+                myCustomCommands.add(sb.toString());
+                myCustomCommands.addAll(toCommands);
             return myCustomCommands;
         }
     }
@@ -130,7 +154,7 @@ public class LogoFileLoader extends FileLoader {
      */
     public List<String> getAllCommands () throws FileNotFoundException, IOException {
         myCustomCommands = registerCustomCommands();
-        getCustomCommands().add(createString());
+        //getCustomCommands().add(createString());
         return getCustomCommands();
     }
 
@@ -143,7 +167,7 @@ public class LogoFileLoader extends FileLoader {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
         
-        LogoFileLoader l = new LogoFileLoader("examples/procedures/doubledash.logo");
+        LogoFileLoader l = new LogoFileLoader("examples/procedures/dash.logo");
         for (String s : l.registerCustomCommands()) {
             System.out.println(s);
         }
