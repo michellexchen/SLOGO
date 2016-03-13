@@ -84,6 +84,10 @@ public class SLogoGUIController implements Initializable, Observer {
     //Help button
     @FXML
     private Button myHelpButton;
+    
+    //Read file prompt button
+    @FXML
+    private Button myReadButton;
 
     //Textfield
     @FXML
@@ -129,10 +133,11 @@ public class SLogoGUIController implements Initializable, Observer {
     @FXML
     private Pane myPropertyPane;
 
-    //This adds workspace
+    //addWorkspace button
     @FXML
     private Button myAddWorkspaceButton;
 
+    //Customize button
     @FXML
     private Button myCustomizeButton;
 
@@ -194,6 +199,7 @@ public class SLogoGUIController implements Initializable, Observer {
 
     /**
      * Assigns an action to the HELP Button
+     * 
      */
     private void assignHelpAction () {
         myHelpButton.setOnAction(e -> {
@@ -201,6 +207,14 @@ public class SLogoGUIController implements Initializable, Observer {
         });
     }
 
+    /**
+     * Assigns an action to the READ FILE button
+     * 
+     */
+    private void assignReadAction () {
+//        myReadButton.setOnAction(value);
+    }
+    
     /**
      * Manually assigns an action to each MenuItem
      * 
