@@ -140,7 +140,9 @@ public class TreeFactory {
             return new NumericNode(0);
         }
         else if(isCustom(myNode)){
-            return new CustomFunctionNode(myWorkspace.lookupCustomCommand(myNode));
+        	CustomFunctionNode function = new CustomFunctionNode((myWorkspace.lookupCustomCommand(myNode)));
+        	function.setWorkspace(myWorkspace);
+            return function;
         }
         else
             try {
