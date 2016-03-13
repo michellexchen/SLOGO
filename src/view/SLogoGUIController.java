@@ -75,6 +75,7 @@ public class SLogoGUIController implements Initializable, Observer {
     private SLogoPropertiesData myPropertiesData;
     private Model myModel;
     private String myCommand;
+    private List<String> myHistory;
 
     /**
      * The following are FXML-JavaFX component links
@@ -135,9 +136,6 @@ public class SLogoGUIController implements Initializable, Observer {
     @FXML
     private Button myCustomizeButton;
 
-    //History
-    @FXML
-    private List<String> myHistory;
 
     /**
      * All GUI elements are initialized in this method
@@ -322,7 +320,7 @@ public class SLogoGUIController implements Initializable, Observer {
                 .observableArrayList(new ArrayList<String>());
         variables.stream().forEach(n -> list.add(n.getName() + "  :  " + n.getValue()));
         getVariableView().setItems((ObservableList<String>) list);
-        myVariablePane.setContent(getVariableView());
+        getVariablePane().setContent(getVariableView());
     }
 
     /**
@@ -333,11 +331,9 @@ public class SLogoGUIController implements Initializable, Observer {
     public void displayCustomCommands (ObservableList<SLogoCustomCommand> customs) {
         ObservableList<String> list = FXCollections
                 .observableArrayList(new ArrayList<String>());
-        customs.stream().forEach(n -> list.add(n.getName() + "  :  " 
-                + ((SLogoCustomCommand)n).getVariableNames()));
+        customs.stream().forEach(n -> list.add(n.getName()));
         getCustomCommandView().setItems((ObservableList<String>) list);
-        //myCustomPane.setContent(getCustomCommandView());
-        System.out.println("CUSTOM COMMAND CREATED");
+        getCustomPane().setContent(getCustomCommandView());
     }
 
     /**
@@ -409,7 +405,7 @@ public class SLogoGUIController implements Initializable, Observer {
     }
 
     /**
-     * Colorpicker method for Customize button
+     * Color picker method for Customize button
      * 
      * @return
      */
@@ -576,5 +572,19 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     public void setErrorLoader (ResourceLoader myErrorLoader) {
         this.myErrorLoader = myErrorLoader;
+    }
+
+    /**
+     * @return the myVariablePane
+     */
+    public ScrollPane getVariablePane () {
+        return myVariablePane;
+    }
+
+    /**
+     * @return the myCustomPane
+     */
+    public ScrollPane getCustomPane () {
+        return myCustomPane;
     }
 }

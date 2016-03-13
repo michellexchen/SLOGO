@@ -75,7 +75,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Label>
-        <ScrollPane content="$null" layoutX="667.0" layoutY="261.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
+        <ScrollPane fx:id="myCustomPane" content="$null" layoutX="667.0" layoutY="261.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
         <Button id="myCustomizeButton" fx:id="myAddWorkspaceButton" alignment="TOP_CENTER" layoutX="169.0" layoutY="13.0" minHeight="22.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="41.0" style="" text="+">
           <stylesheets>
             <URL value="@style.css" />

@@ -272,20 +272,24 @@ public class SLogoWorkspace {
      * @params commandName varList, commandList
      * @return created custom command
      */
-    public SLogoCustomCommand createCustomCommand(String commandName, ListNode varList, ListNode commandList){
-		boolean created = false;
-		SLogoCustomCommand varModified = new SLogoCustomCommand(commandName, varList, commandList);
-        for(SLogoCustomCommand custom : myObservableCustomList){
-			if(custom.getName().equals(commandName)){
-				((SLogoCustomCommand) custom).setMyCommands(commandList);
-				((SLogoCustomCommand) custom).setMyVariables(varList);
-				created = true;
-			}
-		}
+    public SLogoCustomCommand createCustomCommand(String commandName, 
+                                                  ListNode varList, 
+                                                  ListNode commandList){
+        boolean created = false;
+        SLogoCustomCommand varModified = 
+                new SLogoCustomCommand(commandName, varList, commandList);
+        for (SLogoCustomCommand custom : myObservableCustomList) {
+            if (custom.getName().equals(commandName)) {
+                ((SLogoCustomCommand) custom).setMyCommands(commandList);
+                ((SLogoCustomCommand) custom).setMyVariables(varList);
+                created = true;
+            }
+        }
         if(created) {
             getObservableCustomList().remove(varModified);
         }
-        getObservableCustomList().add(new SLogoCustomCommand(commandName, varList, commandList));
+        getObservableCustomList().add(
+                           new SLogoCustomCommand(commandName, varList, commandList));
         return lookupCustomCommand(commandName);
 	}
     

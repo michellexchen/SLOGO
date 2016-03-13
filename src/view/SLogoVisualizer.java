@@ -178,18 +178,19 @@ public class SLogoVisualizer implements Observer {
     }
 
     /**
-     * This method updates command history display in GUI.
-     * Caller is Workspace (MyCurrentWorkspace in MainModel)
+     * Updates the list of custom commands shown in GUI
+     * 
+     * @param customs
      */
-    public void updateCommandHistory () {
-
-    }
-
     public void updateCustomCommands (ObservableList<SLogoCustomCommand> customs) {
         getGUIController().displayCustomCommands(customs);
     }
     
-    
+    /**
+     * Updates the list of variables shown in GUI
+     * 
+     * @param variables
+     */
     public void updateVariables (ObservableList<SLogoVariable> variables) {
         getGUIController().displayVariables(variables);
     }
