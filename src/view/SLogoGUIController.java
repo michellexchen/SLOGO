@@ -47,11 +47,11 @@ import model.SLogoVariable;
  */
 public class SLogoGUIController implements Initializable, Observer {
 
-    private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
-            + "compsci308/spring16/assign/03_slogo/commands.php";
+    private static final String HELP_URL = "http://htmlpreview.github.io/?https://" +
+            "github.com/narendly/narendly.github.io/blob/master/slogo_help.html";
     private static final String CSS_PATH = "view/splashstyle.css";
-    private static final int POPUP_WIDTH = 900;
-    private static final int POPUP_HEIGHT = 550;
+    private static final int POPUP_WIDTH = 1024;
+    private static final int POPUP_HEIGHT = 768;
     private static final int PANE_WIDTH = 200;
     private static final int PANE_HEIGHT = 150;
     private static final int RGB_CONST = 255;
@@ -264,7 +264,6 @@ public class SLogoGUIController implements Initializable, Observer {
         } catch (SLogoException e1) {
             command = "ERROR: " + command;
         }
-
         myHistory.add(command);
         displayHistory();
         displayProperties();
