@@ -7,20 +7,22 @@ import model.SLogoCharacterState;
  */
 
 public class SetPaletteNode extends QuaternionNode{
-	
-	/**
-	 * @param state
-	 * @return index of new color
-	 */
-	
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		int index = (int) evaluateChild(0, state);
-		int red = (int) evaluateChild(1, state);
-		int green = (int) evaluateChild(2, state);
-		int blue = (int) evaluateChild(3, state);
-		RGBColor colorNode = new RGBColor(red, green, blue, index);
-		//myColorLoader.addRGB(colorNode);
-		return index;
-	}
-	
+
+    private static final int RED = 1;
+    private static final int GREEN = 2;
+    private static final int BLUE = 3;
+    
+    /**
+     * @param state
+     * @return index of new color
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        int index = (int) evaluateChild(0, state);
+        int red = (int) evaluateChild(RED, state);
+        int green = (int) evaluateChild(GREEN, state);
+        int blue = (int) evaluateChild(BLUE, state);
+        RGBColor colorNode = new RGBColor(red, green, blue, index);
+        return index;
+    }
+
 }

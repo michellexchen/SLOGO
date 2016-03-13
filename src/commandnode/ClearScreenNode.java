@@ -9,14 +9,14 @@ import model.SLogoCharacterState;
  */
 public class ClearScreenNode extends NullaryNode{
 
-	/**
-	 * @return distance to home
-	 * Sets state to be cleared on next display update
-	 * Creates and evaluates HomeNode to send turtle to (0,0)
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		state.queueClearing(true);
-		return new HomeNode().evaluate(state);
-	}
+    /**
+     * @return distance to home
+     * Sets state to be cleared on next display update
+     * Creates and evaluates HomeNode to send turtle to (0,0)
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        state.queueClearing(true);
+        return new HomeNode().evaluate(state);
+    }
 
 }

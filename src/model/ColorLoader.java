@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 public class ColorLoader extends FileLoader{
 
     private final String colorDirectory = "resources/resources";
-    private final String colorExtension = "Colors.resources";
+    private final String colorExtension = "colors.resources";
     private HashMap<Integer, Color> myRGBMap;
 
     private static final double DEFAULT_OPACITY = 1.0;

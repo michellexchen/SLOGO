@@ -8,9 +8,10 @@ import model.SLogoCharacterState;
  */
 public class MinusNode extends UnaryNode {
 
-	private int SIGN_FLIP = -1;
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return SIGN_FLIP * evaluateChild(0, state);
-	}
-	
+    private static final int SIGN_FLIP = -1;
+    
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return SIGN_FLIP * evaluateChild(0, state);
+    }
+
 }

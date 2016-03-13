@@ -1,9 +1,13 @@
 package commandnode;
 
+/**
+ * To be implemented
+ *
+ */
 public class AskWithNode {
 
-	public AskWithNode() {
-		// TODO Auto-generated constructor stub
-	}
+    public AskWithNode() {
+
+    }
 
 }

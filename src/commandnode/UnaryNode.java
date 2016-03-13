@@ -5,11 +5,11 @@ package commandnode;
  * Node representation of command with one child
  */
 public abstract class UnaryNode extends CommandNode{
-	
-	private int NUM_CHILDREN = 1;
 
-	public UnaryNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
-	
+    private int NUM_CHILDREN = 1;
+
+    public UnaryNode(){
+        setNumChildren(NUM_CHILDREN);
+    }
+
 }

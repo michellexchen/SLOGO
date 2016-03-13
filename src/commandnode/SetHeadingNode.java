@@ -8,12 +8,12 @@ import model.SLogoCharacterState;
  */
 
 public class SetHeadingNode extends TurnNode{
-	
-	/**
-	 * @return new direction
-	 */
-	
-	public double calculateDir(SLogoCharacterState state) throws SLogoException {
-		return evaluateChild(0, state);
-	}
+
+    /**
+     * @return new direction
+     */
+
+    public double calculateDir(SLogoCharacterState state) throws SLogoException {
+        return evaluateChild(0, state);
+    }
 }

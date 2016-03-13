@@ -11,25 +11,27 @@ import model.SLogoVariable;
  */
 public class DoTimesNode extends BinaryVariableNode {
 
-	/**
-	 * Children are two ListNode children
-	 * Child one is a ListNode with two values, a variable and a limit
-	 * Child two is a ListNode with commands run for each value in limit using variable
-	 * @return value of final command in list executed
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		ListNode controlList = ((ListNode) (getChildren().get(0)));
-		SLogoVariable var = getWorkspace().createVariable(controlList.getInnerCommands().get(0), 1);
-		double limit = Double.parseDouble(controlList.getInnerCommands().get(1));
-		ListNode commandList = ((ListNode) (getChildren().get(1)));
-		List<String> innerCommands = commandList.getInnerCommands();
-		double evaluation = 0;
-		for(int x=0; x<limit; x++){
-			List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
-			getRootEvaluator().evaluateRoots(myRoots);
-			var.setValue(x);
-		}
-		return evaluation;
-	}
+    /**
+     * Children are two ListNode children
+     * Child one is a ListNode with two values, a variable and a limit
+     * Child two is a ListNode with commands run for each value in limit using variable
+     * @return value of final command in list executed
+     * 
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        ListNode controlList = ((ListNode) (getChildren().get(0)));
+        SLogoVariable var = getWorkspace().createVariable(controlList
+                                          .getInnerCommands().get(0), 1);
+        double limit = Double.parseDouble(controlList.getInnerCommands().get(1));
+        ListNode commandList = ((ListNode) (getChildren().get(1)));
+        List<String> innerCommands = commandList.getInnerCommands();
+        double evaluation = 0;
+        for (int x = 0; x < limit; x++){
+            List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
+            getRootEvaluator().evaluateRoots(myRoots);
+            var.setValue(x);
+        }
+        return evaluation;
+    }
 
 }

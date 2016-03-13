@@ -7,10 +7,10 @@ package commandnode;
  */
 public abstract class TernaryVariableNode extends VariableCommand{
 
-	private static final int NUM_CHILDREN = 3;
+    private static final int NUM_CHILDREN = 3;
 
-	public TernaryVariableNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
+    public TernaryVariableNode(){
+        setNumChildren(NUM_CHILDREN);
+    }
 
 }

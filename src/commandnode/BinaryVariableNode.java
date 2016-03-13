@@ -7,10 +7,10 @@ package commandnode;
  */
 public abstract class BinaryVariableNode extends VariableCommand{
 
-	private static final int NUM_CHILDREN = 2;
+    private static final int NUM_CHILDREN = 2;
 
-	public BinaryVariableNode(){
-		setNumChildren(NUM_CHILDREN);
-	}
+    public BinaryVariableNode(){
+        setNumChildren(NUM_CHILDREN);
+    }
 
 }

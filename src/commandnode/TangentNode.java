@@ -8,11 +8,11 @@ import model.SLogoCharacterState;
  */
 public class TangentNode extends UnaryNode{
 
-	/**
-	 * @return tangent evaluation of radians converted from degrees
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.tan(Math.toRadians(evaluateChild(0, state)));
-	}
+    /**
+     * @return tangent evaluation of radians converted from degrees
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return Math.tan(Math.toRadians(evaluateChild(0, state)));
+    }
 
 }

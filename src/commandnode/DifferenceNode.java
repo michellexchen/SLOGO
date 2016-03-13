@@ -8,7 +8,7 @@ import model.SLogoCharacterState;
  */
 public class DifferenceNode extends BinaryNode {
 
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return evaluateChild(0, state) - evaluateChild(1, state);
-	}
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return evaluateChild(0, state) - evaluateChild(1, state);
+    }
 }

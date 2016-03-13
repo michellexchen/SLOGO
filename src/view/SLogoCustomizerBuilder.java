@@ -36,8 +36,6 @@ import parser.CommandNameLoader;
  * 
  */
 public class SLogoCustomizerBuilder extends Observable {
-    //TODO shapes
-
     private static final String CSS_PATH = "view/splashstyle.css";
 
     private static final int XPROMPTSIZE = 500;
@@ -46,7 +44,12 @@ public class SLogoCustomizerBuilder extends Observable {
     private static final int SPLASHSIZE = 400;
     private static final int COLORLABELSIZE = 202;
     private static final int PREFSIZE = 40;
-
+    private static final int RECT_WIDTH = 100;
+    private static final int RECT_HEIGHT = 20;
+    private static final int SLIDER = 10;
+    private static final float TICK_UNIT = 0.25f;
+    private static final float BLOCK_INCREMENT = 0.1f;
+    
     private Stage myCustomizerStage;
     private Scene myCustomizerScene;
     private VBox vbox;
@@ -78,6 +81,10 @@ public class SLogoCustomizerBuilder extends Observable {
     private CommandNameLoader myCommandNameLoader;
     private ResourceLoader myResourceLoader;
 
+    private ObservableList<Color> data = FXCollections.observableArrayList(
+                                            Color.WHITE, Color.BLACK, Color.RED, 
+                                            Color.ORANGE, Color.YELLOW, Color.GREEN, 
+                                            Color.BLUE, Color.PURPLE);
     /**
      * Default constructor that initializes ResourceLoader
      * Stage and Scene set
@@ -152,27 +159,22 @@ public class SLogoCustomizerBuilder extends Observable {
     }
 
     /**
-     * Front end color chooser dropdown colored rectangles
+     * Front end color chooser drop down colored rectangles
      * 
      * @author Michelle
      *
      */
-    static class ColorRectCell extends ListCell<Color> {
+    public class ColorRectCell extends ListCell<Color> {
         @Override
         public void updateItem(Color color, boolean empty) {
             super.updateItem(color, empty);
-            Rectangle rect = new Rectangle(100, 20);
+            Rectangle rect = new Rectangle(RECT_WIDTH, RECT_HEIGHT);
             if (color != null) {
                 rect.setFill(color);
                 setGraphic(rect);
             }
         }
     }
-
-    ObservableList<Color> data = FXCollections.observableArrayList(
-                                 Color.WHITE, Color.BLACK, Color.RED, 
-                                 Color.ORANGE, Color.YELLOW, Color.GREEN, 
-                                 Color.BLUE, Color.PURPLE);
 
     /**
      * To select color for background
@@ -185,7 +187,8 @@ public class SLogoCustomizerBuilder extends Observable {
 
         cb.setItems(data);
 
-        Callback<ListView<Color>, ListCell<Color>> factory = new Callback<ListView<Color>, ListCell<Color>>() {
+        Callback<ListView<Color>, ListCell<Color>> factory = 
+                                  new Callback<ListView<Color>, ListCell<Color>>() {
             @Override
             public ListCell<Color> call(ListView<Color> list) {
                 return new ColorRectCell();
@@ -212,13 +215,8 @@ public class SLogoCustomizerBuilder extends Observable {
             @Override
             public void changed(ObservableValue<? extends Color> observable, 
                                 Color oldValue, Color newValue) {
-                System.out.println("CHANGED");
                 myPaneColor = newValue;
-                System.out.println(myPaneColor);
-
-                System.out.println("I'M HERE");
-                System.out.println(data.indexOf(myPaneColor));
-            }
+           }
         });	    
 
         colorLabel = new Label(getResourceLoader().getString("ColorPickerLabel"));
@@ -227,7 +225,6 @@ public class SLogoCustomizerBuilder extends Observable {
         colorHb = new HBox();
         colorHb.getChildren().addAll(colorLabel, root);
         colorHb.setPrefSize(PREFSIZE, PREFSIZE);
-
     }
 
     /**
@@ -235,9 +232,9 @@ public class SLogoCustomizerBuilder extends Observable {
      * 
      */
     private void setFontColor(){
-
         ComboBox myCB2 = setColorDropdown();
-        myCB2.getSelectionModel().select(1); //default value
+        // Default value
+        myCB2.getSelectionModel().select(1);
         StackPane root = new StackPane();
         root.getChildren().add(myCB2);
 
@@ -246,11 +243,7 @@ public class SLogoCustomizerBuilder extends Observable {
             @Override
             public void changed(ObservableValue<? extends Color> observable, 
                                 Color oldValue, Color newValue) {
-                System.out.println("CHANGED");
                 myPenColor = newValue;
-                System.out.println(myPenColor);
-
-                System.out.println("ME TOO");
                 System.out.println(data.indexOf(myPenColor));
             }
         });	    
@@ -291,10 +284,10 @@ public class SLogoCustomizerBuilder extends Observable {
     private void setLineThickness(){
         thicknessSliderLabel = new Label(getResourceLoader().getString("SliderLabel"));
         thicknessSliderLabel.setPrefWidth(COLORLABELSIZE);
-        thicknessSlider = new Slider(0, 10, 1);
+        thicknessSlider = new Slider(0, SLIDER, 1);
         thicknessSlider.setShowTickLabels(true);
-        thicknessSlider.setMajorTickUnit(0.25f);
-        thicknessSlider.setBlockIncrement(0.1f);
+        thicknessSlider.setMajorTickUnit(TICK_UNIT);
+        thicknessSlider.setBlockIncrement(BLOCK_INCREMENT);
 
         thicknessSlider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
@@ -331,9 +324,7 @@ public class SLogoCustomizerBuilder extends Observable {
         buttonHb.getChildren().add(myOkayButton);
         buttonHb.setPrefSize(PREFSIZE, PREFSIZE);
         myOkayButton.setOnMouseClicked(e -> {
-
             myStrokeStyle = comboBox.getSelectionModel().getSelectedItem().toString();
-
             try {
                 myGUI.run(new CommandNameLoader().getString("setbg") + " " 
                                                         + data.indexOf(myPaneColor));

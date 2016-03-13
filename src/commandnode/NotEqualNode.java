@@ -8,13 +8,13 @@ import model.SLogoCharacterState;
  */
 public class NotEqualNode extends EqualityNode {
 
-	/**
-	 * @param state
-	 * @return true if children evaluations not equal
-	 * isEqual(state) evaluated from EqualityNode superclass
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return isEqual(state) ? 0 : 1;
-	}
-	
+    /**
+     * @param state
+     * @return true if children evaluations not equal
+     * isEqual(state) evaluated from EqualityNode superclass
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return isEqual(state) ? 0 : 1;
+    }
+
 }

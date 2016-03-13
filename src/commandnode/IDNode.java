@@ -8,18 +8,17 @@ import model.SLogoCharacterState;
  */
 public class IDNode extends NullaryNode{
 
-	/**
-	 * @param state
-	 * @return ID of active turtle
-	 */
-	
-	public IDNode() {
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @param state
+     * @return ID of active turtle
+     */
 
-	@Override
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return state.getID();
-	}
+    public IDNode() {
+    }
+
+    @Override
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return state.getID();
+    }
 
 }
