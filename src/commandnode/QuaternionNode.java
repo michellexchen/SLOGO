@@ -6,7 +6,7 @@ package commandnode;
  */
 public abstract class QuaternionNode extends CommandNode{
 	
-	private int NUM_CHILDREN = 4;
+	private static final int NUM_CHILDREN = 4;
 
 	public QuaternionNode() {
 		setNumChildren(NUM_CHILDREN);

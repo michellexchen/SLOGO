@@ -3,6 +3,8 @@ package parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandnode.CustomCommandNode;
+import commandnode.CustomFunctionNode;
 import commandnode.ListNode;
 import commandnode.Node;
 import commandnode.NumericNode;
@@ -47,6 +49,10 @@ public class TreeFactory {
         while (!commandParts.isEmpty()) {
             String currCommand = commandParts.remove(0);
             Node myNode = createNode(currCommand);
+            if(isToCommand(currCommand)){
+            	String customName = commandParts.remove(0);
+            	myNode.addChild(new CustomCommandNode(customName, myWorkspace));
+            }
             while (myNode.numCurrentChildren() != myNode.numRequiredChildren()) {
                 myNode.addChild(createChild(commandParts));
             }
@@ -121,13 +127,16 @@ public class TreeFactory {
      * 
      * @param String strNode - create the necessary node from the string passed
      */
-    private Node createNode(String strNode) throws SLogoException {
+    private Node createNode(String myNode) throws SLogoException {
         Node node = null;
-        String commandName = myLanguageLoader.getTranslation(strNode.toLowerCase());
-        if (isNumeric(strNode))
-            return new NumericNode(Double.parseDouble(strNode));
-        if(isVariable(commandName)){
+        String commandName = myLanguageLoader.getTranslation(myNode.toLowerCase());
+        if (isNumeric(myNode))
+            return new NumericNode(Double.parseDouble(myNode));
+        else if(isVariable(commandName)){
             return new NumericNode(0);
+        }
+        else if(isCustom(myNode)){
+        	return new CustomFunctionNode(myWorkspace.lookupCustomCommand(myNode));
         }
         else
             try {
@@ -200,6 +209,19 @@ public class TreeFactory {
      */
     private boolean isClosedParenthesis(String currCommand) {
         return currCommand.equals(")");
+    }
+    
+    /**
+     * Determine if the string inputed is a custom command in current workspace
+     * 
+     * @param String str - string to be compared
+     */
+    private boolean isCustom(String str){
+    	return myWorkspace.lookupCustomCommand(str) != null;
+    }
+    
+    private boolean isToCommand(String command){
+    	return myLanguageLoader.getTranslation(command.toLowerCase()).equals(new ResourceLoader().getString("MakeUserInstruction"));
     }
 
 }

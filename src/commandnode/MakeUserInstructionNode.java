@@ -3,23 +3,13 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class MakeUserInstructionNode extends TernaryNode {
+public class MakeUserInstructionNode extends TernaryVariableNode{
 
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// List<Node> myVariables = ((ListNode)
-		// (getChildren().get(0))).getCommands();
-		// List<Node> myCommands = ((ListNode)
-		// (getChildren().get(1))).getCommands();
-		// if(myVariables.size() != myCommands.size()){
-		// return 0;
-		// }
-		// SLogoWorkspace ws =
-		// ((VariableNode)myVariables.get(0)).getWorkspace();
-		// for(int x=0; x<myCommands.size(); x++){
-		// ws.getMyVarMap().put(((VariableNode)
-		// (myVariables.get(x))).getVarName(),
-		// (Double)myCommands.get(x).evaluate(state));
-		// }
+		String commandName = (((CustomCommandNode) getChildren().get(0)).getName());
+		ListNode varNodeList = ((ListNode) getChildren().get(1));
+		ListNode commandList = ((ListNode) getChildren().get(2));
+		getWorkspace().createCustomCommand(commandName, varNodeList, commandList);
 		return 1;
 	}
 

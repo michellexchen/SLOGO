@@ -26,7 +26,9 @@ public interface View<T> {
     
     public String getLanguage();
 
-    public void updateVariable (ObservableList<T> variables);
+    public void updateCustoms (ObservableList<T> customs);
+    
+    public void updateVariables (ObservableList<T> variables);
 
     public void updateDisplayData ();
     

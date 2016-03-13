@@ -10,7 +10,6 @@ public class SetPenColorNode extends UnaryNode{
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
 		double index = evaluateChild(0, state);
-		System.out.println("PEN COLOR " + index);
 		state.getPen().setColor((int) index);
 		return index;
 	}

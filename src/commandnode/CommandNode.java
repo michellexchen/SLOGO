@@ -17,7 +17,7 @@ public abstract class CommandNode implements Node {
 	private int NUM_CHILDREN;
 	
 	public CommandNode(){
-		myChildren = new ArrayList<Node>();
+		myChildren = new ArrayList<>();
 	}
 
 	public ArrayList<Node> getChildren() {

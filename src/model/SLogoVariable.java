@@ -6,9 +6,9 @@ package model;
  * @author Hunter
  */
 
-public class SLogoVariable {
+public class SLogoVariable{
 
-    private String myName;
+	private String myName;
     private double myValue;
 
     /**
@@ -18,23 +18,8 @@ public class SLogoVariable {
      * @param myValue
      */
     public SLogoVariable(String myName, double myValue) {
-        this.myName = myName;
+    	this.myName = myName;
         this.myValue = myValue;
-    }
-
-    /**
-     * @return the myName
-     */
-    public String getName() {
-        return myName;
-    }
-
-    /**
-     * @param myName
-     *            the myName to set
-     */
-    public void setName(String myName) {
-        this.myName = myName;
     }
 
     /**
@@ -49,5 +34,13 @@ public class SLogoVariable {
      */
     public void setValue(double myValue) {
         this.myValue = myValue;
+    }
+    
+    public String getName(){
+    	return myName;
+    }
+    
+    public void setName(String myName){
+    	this.myName = myName;
     }
 }

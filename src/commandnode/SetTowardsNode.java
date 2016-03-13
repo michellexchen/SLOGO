@@ -8,7 +8,9 @@ import model.SLogoCharacterState;
  */
 public class SetTowardsNode extends TurnNode {
 	
-	private int NUM_CHILDREN = 2;
+	private static final int NUM_CHILDREN = 2;
+	private static double MAX_DEGREES = 180;
+	private static double MIN_DEGREES = 0;
 	
 	public SetTowardsNode() throws SLogoException{
 		setNumChildren(NUM_CHILDREN);
@@ -23,10 +25,10 @@ public class SetTowardsNode extends TurnNode {
 	public double calculateDir(SLogoCharacterState state) throws SLogoException {
 		double diffX = evaluateChild(0, state) - state.getXCoor();
 		double diffY = evaluateChild(1, state) - state.getYCoor();
-		if (diffY < 0) {
-			return Math.toDegrees(Math.atan(diffX/diffY)) - 180;
+		if (diffY < MIN_DEGREES) {
+			return Math.toDegrees(Math.atan(diffX/diffY)) - MAX_DEGREES;
 		}
-		if (diffX == 0 && diffY == 0) {
+		if (diffX == MIN_DEGREES && diffY == MIN_DEGREES) {
 			return state.getDirection();
 		}
 		return Math.toDegrees(Math.atan(diffX/diffY));

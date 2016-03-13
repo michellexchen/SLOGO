@@ -9,6 +9,7 @@ import model.SLogoCharacterState;
 
 public abstract class StraightCommand extends UnaryNode{
 	
+	private static final double PRECISION_DIGITS = 100000d;
 	/**
 	 * @param direction: turtle's current direction
 	 * Calculates new turtle position
@@ -29,7 +30,7 @@ public abstract class StraightCommand extends UnaryNode{
 	 */
 
 	private double precisionFix(double value){
-		return (double)Math.round(value * 100000d) / 100000d;
+		return (double)Math.round(value * PRECISION_DIGITS) / PRECISION_DIGITS;
 	}
 
 }

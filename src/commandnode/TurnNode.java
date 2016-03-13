@@ -7,6 +7,8 @@ import model.SLogoCharacterState;
  */
 
 public abstract class TurnNode extends UnaryNode {
+	private static final double MAX_DEGREE = 360;
+	private static final double MIN_DEGREE = 0;
 	
 	/**
 	 * @param state
@@ -29,11 +31,11 @@ public abstract class TurnNode extends UnaryNode {
 	
 	public double convertDir(double direction) {
 		double result;
-		if (direction > 360) {
-			result = direction % 360;
+		if (direction > MAX_DEGREE) {
+			result = direction % MAX_DEGREE;
 		}
-		else if(direction < 0) {
-			result = 360 - (Math.abs(direction) % 360);
+		else if(direction < MIN_DEGREE) {
+			result = MAX_DEGREE - (Math.abs(direction) % MAX_DEGREE);
 		}
 		else {
 			result = direction;

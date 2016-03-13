@@ -16,3 +16,4 @@ InvalidCommandParts:Invalid command! Not enough command parts supplied.
 NoCommandEntered:Nothing was entered! Try again!
 Title:SLogo
 InvalidWorkspace:This project doesn't exist yet. Please click + button to create.
+MakeUserInstruction:MakeUserInstruction

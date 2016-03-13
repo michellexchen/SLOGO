@@ -15,6 +15,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Model;
 import model.ResourceLoader;
+import model.SLogoCustomCommand;
 import model.SLogoPosition;
 import model.SLogoVariable;
 import model.SLogoDisplayData;
@@ -184,8 +185,13 @@ public class SLogoVisualizer implements Observer {
 
     }
 
+    public void updateCustomCommands (ObservableList<SLogoCustomCommand> customs) {
+        getGUIController().displayCustomCommands(customs);
+    }
+    
+    
     public void updateVariables (ObservableList<SLogoVariable> variables) {
-        getGUIController().displayVariable(variables);
+        getGUIController().displayVariables(variables);
     }
 
     /**

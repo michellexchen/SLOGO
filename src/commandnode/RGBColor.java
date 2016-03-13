@@ -14,6 +14,7 @@ public class RGBColor {
 	private int green;
 	private int blue;
 	private int colorIndex;
+	private static int NUM_ARGUMENTS = 3;
 
 	/**
 	 * @param red
@@ -57,7 +58,7 @@ public class RGBColor {
 	public boolean boundsCheck(int red, int green, int blue) throws SLogoException{
 		InstructionLoader instructLoader = new InstructionLoader();
 		if((red < 0 || green < 0 || blue < 0 || red > 255 || green > 255 || blue > 255)){
-			SLogoException e = new SLogoException(instructLoader.getString("RGBColor"), 3);
+			SLogoException e = new SLogoException(instructLoader.getString("RGBColor"), NUM_ARGUMENTS);
 			Optional<String> myNewInput = e.getNewInput();
 			checkInput(myNewInput);
 		}
@@ -70,8 +71,7 @@ public class RGBColor {
 	 */
 	public int[] grabRGB(String input){
 		String[] rgbStr = input.split(" ");
-		int[] rgb = { Integer.parseInt(rgbStr[0]), Integer.parseInt(rgbStr[1]), Integer.parseInt(rgbStr[2])};
-		return rgb;
+		return new int[] { Integer.parseInt(rgbStr[0]), Integer.parseInt(rgbStr[1]), Integer.parseInt(rgbStr[2])};
 	}
 
 	/**

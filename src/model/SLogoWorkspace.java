@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import commandnode.ListNode;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -24,6 +26,7 @@ public class SLogoWorkspace {
     private List<SLogoCharacter> myActiveTurtles;
     private ObservableList<SLogoDisplayData> myObservableDataList;
     private ObservableList<SLogoVariable> myObservableVariableList;
+    private ObservableList<SLogoCustomCommand> myObservableCustomList;
     private ObservableList<int[]> myObservableColorList;
     private ObservableList<String> myObservableShapeList;
     private SLogoPropertiesData myPropertiesData;
@@ -66,6 +69,8 @@ public class SLogoWorkspace {
                 observableArrayList(new ArrayList<SLogoDisplayData>());
         myObservableVariableList =  FXCollections.
                 observableArrayList(new ArrayList<SLogoVariable>());
+        myObservableCustomList =  FXCollections.
+                observableArrayList(new ArrayList<SLogoCustomCommand>());
     }
 
     /**
@@ -77,7 +82,10 @@ public class SLogoWorkspace {
                    change -> getView().updateDisplayData());
 
         getObservableVariableList().addListener((ListChangeListener) 
-                   change -> getView().updateVariable(getObservableVariableList()));
+                change -> getView().updateVariables(getObservableVariableList()));
+        
+        getObservableCustomList().addListener((ListChangeListener) 
+                   change -> getView().updateCustoms(getObservableCustomList()));
     }
 
     /**
@@ -143,12 +151,22 @@ public class SLogoWorkspace {
     }
 
     /**
+     * 
      * Adds a Variable to the observablelist
      * 
      * @param variable
      */
-    public void addToVarMap(SLogoVariable variable){
-        myObservableVariableList.add(variable);
+    public void addVariable(SLogoVariable variable){
+    	myObservableVariableList.add(variable);
+    }
+    
+    /**
+     * Adds a custom command to the observablelist
+     * 
+     * @param variable
+     */
+    public void addCustomCommand(SLogoCustomCommand custom){
+    	myObservableCustomList.add(custom);
     }
 
     /**
@@ -182,65 +200,21 @@ public class SLogoWorkspace {
     }
 
     /**
-     * Variable lookup by name
-     * 
-     * @param varName
-     * @return
-     */
-    public double getVarValueByName(String varName){
-        for(SLogoVariable var : myObservableVariableList){
-            if(var.getName().equals(varName)) {
-                return var.getValue();
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * See if a Variable is currently in the list and returns if it's present
-     * 
-     * @param varName
-     * @return
-     */
-    public SLogoVariable lookupVariable(String varName){
-        for(SLogoVariable var : myObservableVariableList){
-            if(var.getName().equals(varName)) {
-                return var;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Creates a new variable and modifies the variable if needed
-     * 
-     * @param varName
-     * @param varValue
-     * @return
-     */
-    public SLogoVariable createVariable(String varName, double varValue){
-        boolean created = false;
-        SLogoVariable varModified = new SLogoVariable(varName, varValue);
-        for(SLogoVariable var : myObservableVariableList){
-            if(var.getName().equals(varName)) {
-                varModified = var;
-                created = true;
-            }
-        }
-        if(created) {
-            getObservableVariableList().remove(varModified);
-        }
-        getObservableVariableList().add(new SLogoVariable(varName, varValue));
-        return lookupVariable(varName);
-    }
-
-    /**
      * Returns ObservableVariableList
      * 
      * @return
      */
     public ObservableList<SLogoVariable> getObservableVariableList() {
         return myObservableVariableList;
+    }
+    
+    /**
+     * Returns ObservableCustomList
+     * 
+     * @return
+     */
+    public ObservableList<SLogoCustomCommand> getObservableCustomList() {
+        return myObservableCustomList;
     }
 
     /**
@@ -290,5 +264,96 @@ public class SLogoWorkspace {
      */
     public ColorLoader getMyColorLoader () {
         return myColorLoader;
+    }
+    
+    /**
+     * Creates a new custom command and modifies the old custom command if needed
+     * 
+     * @params commandName varList, commandList
+     * @return created custom command
+     */
+    public SLogoCustomCommand createCustomCommand(String commandName, ListNode varList, ListNode commandList){
+		boolean created = false;
+		SLogoCustomCommand varModified = new SLogoCustomCommand(commandName, varList, commandList);
+        for(SLogoCustomCommand custom : myObservableCustomList){
+			if(custom.getName().equals(commandName)){
+				((SLogoCustomCommand) custom).setMyCommands(commandList);
+				((SLogoCustomCommand) custom).setMyVariables(varList);
+				created = true;
+			}
+		}
+        if(created) {
+            getObservableCustomList().remove(varModified);
+        }
+        getObservableCustomList().add(new SLogoCustomCommand(commandName, varList, commandList));
+        return lookupCustomCommand(commandName);
+	}
+    
+    /**
+     * Variable lookup by name
+     * 
+     * @param varName
+     * @return created custom variable
+     */
+    public double getVarValueByName(String varName){
+        for(SLogoVariable var : myObservableVariableList){
+            if(var.getName().equals(varName)) {
+                return var.getValue();
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * See if a Variable is currently in the list and returns if it's present
+     * 
+     * @param varName
+     * @return
+     */
+    public SLogoVariable lookupVariable(String varName){
+        for(SLogoVariable var : myObservableVariableList){
+            if(var.getName().equals(varName)) {
+                return var;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * See if a Variable is currently in the list and returns if it's present
+     * 
+     * @param varName
+     * @return
+     */
+    public SLogoCustomCommand lookupCustomCommand(String varName){
+        for(SLogoCustomCommand custom : myObservableCustomList){
+            if(custom.getName().equals(varName)) {
+                return custom;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Creates a new variable and modifies the variable if needed
+     * 
+     * @param varName
+     * @param varValue
+     * @return
+     */
+    public SLogoVariable createVariable(String varName, double varValue){
+        boolean created = false;
+        SLogoVariable varModified = new SLogoVariable(varName, varValue);
+        for(SLogoVariable var : myObservableVariableList){
+            if(var.getName().equals(varName)) {
+                varModified = (SLogoVariable) var;
+                created = true;
+            }
+        }
+        if(created) {
+        	getObservableVariableList().remove(varModified);
+        }
+        getObservableVariableList().add(new SLogoVariable(varName, varValue));
+        return lookupVariable(varName);
     }
 }

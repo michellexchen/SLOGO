@@ -13,4 +13,5 @@ public class SetPenSizeNode extends UnaryNode{
 		state.getPen().setSize(pixels);
 		return pixels;
 	}
+	
 }
