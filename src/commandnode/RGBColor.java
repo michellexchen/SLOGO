@@ -14,7 +14,7 @@ public class RGBColor {
     private int green;
     private int blue;
     private int colorIndex;
-    private static int NUM_ARGUMENTS = 3;
+    private static final int NUM_ARGUMENTS = 3;
 
     /**
      * @param red

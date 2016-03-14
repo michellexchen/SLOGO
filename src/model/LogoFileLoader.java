@@ -29,7 +29,7 @@ public class LogoFileLoader extends FileLoader {
      */
     public LogoFileLoader (String filename) {
         myLogoFile = filename;
-        myCustomCommands = new ArrayList<String>();
+        myCustomCommands = new ArrayList<>();
     }
     
     /**
@@ -40,7 +40,7 @@ public class LogoFileLoader extends FileLoader {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public String createString () throws FileNotFoundException, IOException {
+    public String createString () throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(myLogoFile))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -48,8 +48,7 @@ public class LogoFileLoader extends FileLoader {
                 stringAdder(sb, line);
                 line = br.readLine();
             }
-            String everything = sb.toString();
-            return everything;
+            return sb.toString();
         }
     }
     
@@ -61,7 +60,7 @@ public class LogoFileLoader extends FileLoader {
      * @param line
      */
     private void stringAdder (StringBuilder sb, String line) {
-        List<String> words = new ArrayList<String>(Arrays.asList(line.split("\\s+")));
+        List<String> words = new ArrayList<>(Arrays.asList(line.split("\\s+")));
         words.forEach(word -> sb.append(word + " "));        
     }
     
@@ -73,30 +72,25 @@ public class LogoFileLoader extends FileLoader {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public List<String> registerCustomCommands () 
-                                throws FileNotFoundException, IOException {
+    public List<String> registerCustomCommands () throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(myLogoFile))) {
             StringBuilder sb = new StringBuilder();
             boolean sawTo = false;
-            List<String> toCommands = new ArrayList<String>();
+            List<String> toCommands = new ArrayList<>();
             String line = br.readLine();
             while (line != null) {
-                List<String> words = new ArrayList<String>(
-                                                Arrays.asList(line.split("\\s+")));
+                List<String> words = new ArrayList<>(Arrays.asList(line.split("\\s+")));
                 for (String word : words) {
                     if (sawTo) {
                         sb.append(word + " ");
                         toCommands.add(word);
                         sawTo = false;
-                    }
-                    else if (toCommands.contains(word)) {
+                    } else if (toCommands.contains(word)) {
                         continue;
-                    }
-                    else if (word.equals("to")) {
+                    } else if (word.equals("to")) {
                         sb.append(word + " ");
                         sawTo = true;
-                    }
-                    else {
+                    } else {
                         sb.append(word + " ");
                     }
                 }
@@ -130,7 +124,7 @@ public class LogoFileLoader extends FileLoader {
      * @throws IOException 
      * @throws FileNotFoundException 
      */
-    public List<String> getAllCommands () throws FileNotFoundException, IOException {
+    public List<String> getAllCommands () throws IOException {
         myCustomCommands = registerCustomCommands();
         return getCustomCommands();
     }
@@ -142,7 +136,7 @@ public class LogoFileLoader extends FileLoader {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws IOException {
         
         LogoFileLoader l = new LogoFileLoader("examples/procedures/dash.logo");
         for (String s : l.registerCustomCommands()) {

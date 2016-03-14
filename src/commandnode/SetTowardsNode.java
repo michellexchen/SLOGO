@@ -9,8 +9,8 @@ import model.SLogoCharacterState;
 public class SetTowardsNode extends TurnNode {
 
     private static final int NUM_CHILDREN = 2;
-    private static double MAX_DEGREES = 180;
-    private static double MIN_DEGREES = 0;
+    private static final int MAX_DEGREES = 180;
+    private static final int MIN_DEGREES = 0;
 
     public SetTowardsNode() throws SLogoException{
         setNumChildren(NUM_CHILDREN);

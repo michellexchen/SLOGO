@@ -43,7 +43,7 @@ public class SLogoWorkspace {
         myView = view;
         createObservableLists();
         turtleFactory = new SLogoTurtleFactory(this);
-        myCharacters = new ArrayList<SLogoCharacter>();
+        myCharacters = new ArrayList<>();
         myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
         myColorLoader = new ColorLoader();
     }
@@ -55,7 +55,7 @@ public class SLogoWorkspace {
      */
     public void initialize() throws SLogoException {
         myRootEvaluator = new RootEvaluator(this);
-        myActiveTurtles = new ArrayList<SLogoCharacter>();
+        myActiveTurtles = new ArrayList<>();
         resetActiveTurtles();
         myActiveTurtles.add(turtleFactory.createDefaultTurtle());
     }

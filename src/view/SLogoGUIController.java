@@ -58,13 +58,18 @@ public class SLogoGUIController implements Initializable, Observer {
     private static final int RGB_CONST = 255;
     private static final int ERROR_INDEX = 7;
     private static final String ERROR = "ERROR";
+    private static final int WORKSPACE_ONE = 1;
+    private static final int WORKSPACE_TWO = 2;
+    private static final int WORKSPACE_THREE = 3;
+    private static final int WORKSPACE_FOUR = 4;
+    private static final int WORKSPACE_FIVE = 5;
 
     private ResourceLoader myResourceLoader;
     private ResourceLoader myErrorLoader;
     private WebView	myBrowser;
     private WebEngine myWebEngine;
     private ListView<String> myHistoryPaneView;
-    private ListView<String> myPropertiesPaneView = new ListView<String>();
+    private ListView<String> myPropertiesPaneView = new ListView<>();
     private ListView<String> myVariableView;
     private ListView<String> myCustomCommandView;
     private ObservableList<String> myProperties;
@@ -154,9 +159,9 @@ public class SLogoGUIController implements Initializable, Observer {
         myFileChooser = new SLogoFileChooserBuilder();
         myResourceLoader = new ResourceLoader("default.properties");
         myErrorLoader = new ResourceLoader("error.properties");
-        myHistory = new ArrayList<String>();
-        myVariableView = new ListView<String>();
-        myCustomCommandView = new ListView<String>();
+        myHistory = new ArrayList<>();
+        myVariableView = new ListView<>();
+        myCustomCommandView = new ListView<>();
         myPropertyPane.getChildren().add(myPropertiesPaneView);
         try {
             myCustomizer = new SLogoCustomizerBuilder(this);
@@ -239,27 +244,27 @@ public class SLogoGUIController implements Initializable, Observer {
     private void assignMenuAction () {
         myProject1.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(0);
+                getModel().switchWorkspace(WORKSPACE_ONE);
             } catch (Exception e1) {}
         });
         myProject2.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(1);
+                getModel().switchWorkspace(WORKSPACE_TWO);
             } catch (Exception e1) {}
         });
         myProject3.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(2);
+                getModel().switchWorkspace(WORKSPACE_THREE);
             } catch (Exception e1) {}
         });
         myProject4.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(3);
+                getModel().switchWorkspace(WORKSPACE_FOUR);
             } catch (Exception e1) {}
         });
         myProject5.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(4);
+                getModel().switchWorkspace(WORKSPACE_FIVE);
             } catch (Exception e1) {}
         });
     }
@@ -309,7 +314,7 @@ public class SLogoGUIController implements Initializable, Observer {
      * 
      */
     private void displayHistory(){
-        myHistoryPaneView = new ListView<String>();
+        myHistoryPaneView = new ListView<>();
         ObservableList<String> items =FXCollections.observableArrayList(myHistory);
         myHistoryPaneView.setItems(items);
         myCommandHistoryPane.setContent(myHistoryPaneView);

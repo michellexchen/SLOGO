@@ -30,7 +30,7 @@ public class RootEvaluator {
      * @return double evaluation value for the command with the given turtle state
      */
     private double evaluateRoot(Node myRoot, SLogoCharacter character) throws SLogoException {
-        double evaluation = 0;
+        double evaluation;
         evaluation = myRoot.evaluate(character.getState());
         myWorkspace.getObservableDataList().get(myWorkspace.getCharacterList().indexOf(character))
         .updateData();
@@ -68,7 +68,7 @@ public class RootEvaluator {
      * @return List<Integer> list of ID's of turtles
      */
     private List<Integer> getTurtleIDs(List<SLogoCharacter> activeTurtles){
-        List<Integer> activeIDs = new ArrayList<Integer>();
+        List<Integer> activeIDs = new ArrayList<>();
         for(SLogoCharacter turtle : activeTurtles){
             activeIDs.add(turtle.getState().getID());
         }

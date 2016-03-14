@@ -32,11 +32,12 @@ public class SLogoVisualizer implements Observer {
     private static final String IMAGE_PATH = "file:resources/turtle_images/";
     private static final int PANE_SIZE = 440;
     private static final int RGB_CONST = 255;
-    private static final double COORDINATE_SHIFT = PANE_SIZE / 2;
+    private static final double COORDINATE_SHIFT = (double) PANE_SIZE / 2;
     private static final int DIRECTION_FLIP = -1;
     private static final int TURTLE_SIZE = 40;
     private static final int TURTLE_CLICKED_SIZE = 55;
     private static final int PADDING = TURTLE_SIZE / 2;
+    private static final int HALF_FACTOR = 2;
 
     private ObservableList<SLogoDisplayData> myObservableDataList;
 
@@ -154,7 +155,7 @@ public class SLogoVisualizer implements Observer {
         ImageView turtle = new ImageView();
         turtle.setImage(new Image(IMAGE_PATH + displaydata.getImage()));
         turtle.setVisible(!displaydata.getTurtleHidden());
-        assignTurtleAction(turtle, displaydata.getPosition());
+        assignTurtleAction(turtle);
         turtleResize(turtle);
         turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
         turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() 
@@ -169,13 +170,13 @@ public class SLogoVisualizer implements Observer {
      * 
      * @param turtle
      */
-    private void assignTurtleAction(ImageView turtle, SLogoPosition position) {
+    private void assignTurtleAction(ImageView turtle) {
         turtle.setOnMouseClicked(e -> {
             turtle.setFitWidth(TURTLE_CLICKED_SIZE);
             turtle.setLayoutX(turtle.getLayoutX() - 
-                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / 2);
+                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / HALF_FACTOR);
             turtle.setLayoutY(turtle.getLayoutY() - 
-                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / 2);
+                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / HALF_FACTOR);
             // Show Properties
             getGUIController().displayProperties();
         });

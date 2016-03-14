@@ -75,6 +75,7 @@ public class SLogoCustomizerBuilder extends Observable {
     private SLogoGUIController myGUI;
     private CommandNameLoader myCommandNameLoader;
     private ResourceLoader myResourceLoader;
+    private ResourceLoader myErrorLoader;
 
     private ObservableList<Color> data = FXCollections.observableArrayList(
                                             Color.WHITE, Color.BLACK, Color.RED, 
@@ -90,6 +91,7 @@ public class SLogoCustomizerBuilder extends Observable {
     public SLogoCustomizerBuilder(SLogoGUIController myGUI) throws SLogoException {
         this.myGUI = myGUI;
         myResourceLoader = new ResourceLoader("default.properties");
+        myErrorLoader = new ResourceLoader("error.properties");
         setup();
         myCustomizerStage = new Stage();
         myCustomizerScene = new Scene(setVBox(), XPROMPTSIZE, YPROMPTSIZE);
@@ -178,7 +180,7 @@ public class SLogoCustomizerBuilder extends Observable {
      */
     private ComboBox setColorDropdown(){
 
-        ComboBox<Color> cb = new ComboBox<Color>();
+        ComboBox<Color> cb = new ComboBox<>();
 
         cb.setItems(data);
 
@@ -239,7 +241,6 @@ public class SLogoCustomizerBuilder extends Observable {
             public void changed(ObservableValue<? extends Color> observable, 
                                 Color oldValue, Color newValue) {
                 myPenColor = newValue;
-                System.out.println(data.indexOf(myPenColor));
             }
         });	    
 
@@ -322,24 +323,16 @@ public class SLogoCustomizerBuilder extends Observable {
             myStrokeStyle = comboBox.getSelectionModel().getSelectedItem().toString();
             try {
                 myGUI.run(new CommandNameLoader().getString("setbg") + " " 
-                                                        + data.indexOf(myPaneColor));
-            } catch (Exception e1) { e1.printStackTrace(); }
-            try {
+                        + data.indexOf(myPaneColor));
                 myGUI.run(myCommandNameLoader.getString("setpc") + " " 
-                                                        + data.indexOf(myPenColor));
-            } catch (Exception e1) { e1.printStackTrace(); }
-            try {
+                        + data.indexOf(myPenColor));
                 myGUI.run(myCommandNameLoader.getString("setpensize") + " " 
-                                                        + myPenWidth);
-            } catch (Exception e1) { e1.printStackTrace(); }
-            if (switchButton.isDown()) {
-                try {
-                    myGUI.run(myCommandNameLoader.getString("pd"));
-                } catch (Exception e1) { e1.printStackTrace(); }
-            } else {
-                try {
-                    myGUI.run(myCommandNameLoader.getString("pu"));
-                } catch (Exception e1) { e1.printStackTrace(); }
+                        + myPenWidth);
+                myGUI.run(myCommandNameLoader.getString("pd"));
+                myGUI.run(myCommandNameLoader.getString("pu"));
+            }
+            catch (SLogoException e1) {
+                e1.showErrorDialog(getErrorLoader().getString("ButtonError"));
             }
             myCustomizerStage.hide();
         });
@@ -430,5 +423,12 @@ public class SLogoCustomizerBuilder extends Observable {
      */
     public void setResourceLoader (ResourceLoader myResourceLoader) {
         this.myResourceLoader = myResourceLoader;
+    }
+
+    /**
+     * @return the myErrorLoader
+     */
+    public ResourceLoader getErrorLoader () {
+        return myErrorLoader;
     }
 }

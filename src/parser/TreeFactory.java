@@ -43,7 +43,7 @@ public class TreeFactory {
      * a list of formated input parsed and ready to be used for creation of Nodes
      */
     public List<Node> createRoots(List<String> commandParts) throws SLogoException {
-        List<Node> myRoots = new ArrayList<Node>();
+        List<Node> myRoots = new ArrayList<>();
         while (!commandParts.isEmpty()) {
             String myRootToken = commandParts.remove(0);
             Node myRoot = createRoot(myRootToken);
@@ -60,7 +60,7 @@ public class TreeFactory {
     }
 
     private List<String> listCopy(List<String> list) {
-        List<String> copy = new ArrayList<String>();
+        List<String> copy = new ArrayList<>();
         copy.addAll(list);
         return copy;
     }
@@ -72,9 +72,11 @@ public class TreeFactory {
      * input parsed and ready to be used for creation of Nodes
      */
     private Node createChild(List<String> commandParts) throws SLogoException {
-        if(commandParts.isEmpty()) return null;
+        if (commandParts.isEmpty()) {
+            return null;
+        }
         String myChildToken = commandParts.remove(0);
-        if(isOpenBracket(myChildToken) || isOpenParenthesis(myChildToken)) {
+        if (isOpenBracket(myChildToken) || isOpenParenthesis(myChildToken)) {
             List<String> innerCommands = createCommandList(commandParts);
             List<String> innerCommandsCopy = listCopy(innerCommands);
             ListNode listNode;
@@ -82,11 +84,11 @@ public class TreeFactory {
             listNode.setInnerCommands(innerCommandsCopy);
             return listNode;
         }
-        if(isVariable(myChildToken)) {
+        if (isVariable(myChildToken)) {
             VariableNode myVar = new VariableNode(myChildToken);
             myVar.setWorkspace(myWorkspace);
             return myVar;
-        } else{
+        } else {
             Node myChild = createRoot(myChildToken);
             while (myChild.numCurrentChildren() != myChild.numRequiredChildren()) {
                 myChild.addChild(createChild(commandParts));
@@ -105,10 +107,10 @@ public class TreeFactory {
      */
     private List<String> createCommandList(List<String> commandParts) 
             throws SLogoException {
-        List<String> innerCommands = new ArrayList<String>();
+        List<String> innerCommands = new ArrayList<>();
         int openBrackets = 1;
         int closedBrackets = 0;
-        String currCommand = "";
+        String currCommand;
         while (openBrackets != closedBrackets) {
             currCommand = commandParts.remove(0);
             if (isOpenBracket(currCommand) || isOpenParenthesis(currCommand)) {
@@ -129,34 +131,29 @@ public class TreeFactory {
      * @param String strNode - create the necessary node from the string passed
      */
     private Node createRoot(String rootToken) throws SLogoException {
-        Node node = null;
+        Node node;
         String rootName = myLanguageLoader.getTranslation(rootToken.toLowerCase());
         if (isNumeric(rootToken)) {
             return new NumericNode(Double.parseDouble(rootToken));
-        }
-        else if(isVariable(rootName)) {
+        } else if (isVariable(rootName)) {
             return new NumericNode(0);
-        }
-        else if(isCustom(rootToken)){
-        	CustomFunctionNode function = new CustomFunctionNode((myWorkspace.lookupCustomCommand(rootName)));
-        	function.setWorkspace(myWorkspace);
+        } else if (isCustom(rootToken)) {
+            CustomFunctionNode function = new CustomFunctionNode((myWorkspace.lookupCustomCommand(rootName)));
+            function.setWorkspace(myWorkspace);
             return function;
-        }
-        else
+        } else {
             try {
-                node = (Node) Class.forName(getResourceLoader().getString("CommandNode")
-                                            + rootName + getResourceLoader()
-                                            .getString("Node")).newInstance();
-            } catch (ClassNotFoundException | InstantiationException 
-                    | IllegalAccessException e) {
+                node = (Node) Class.forName(getResourceLoader().getString("CommandNode") 
+                      + rootName + getResourceLoader().getString("Node")).newInstance();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                 throw new SLogoException(getResourceLoader().getString("Command") 
-                                         + rootName + getResourceLoader()
-                                         .getString("Implemented"));
+                      + rootName + getResourceLoader().getString("Implemented"));
             }
-        if(node instanceof VariableCommand){
+        }
+        if (node instanceof VariableCommand) {
             ((VariableCommand)node).setWorkspace(myWorkspace);
         }
-        if(node instanceof TurtleCommand){
+        if (node instanceof TurtleCommand) {
             ((TurtleCommand)node).setWorkspace(myWorkspace);
         }
         return node;

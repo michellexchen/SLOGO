@@ -58,7 +58,7 @@ public class SLogoException extends Exception {
      * @param message
      */
     public void showErrorDialog (String message) {
-        Dialog<Object> alert = new Dialog<Object>();
+        Dialog<Object> alert = new Dialog<>();
         alert.setTitle(getErrorLoader().getString("AlertTitle"));
         alert.setHeaderText("ERROR: " + message);
         ButtonType buttonTypeOk = new ButtonType(getErrorLoader().getString("OkayButton"));

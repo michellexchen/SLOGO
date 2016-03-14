@@ -13,19 +13,19 @@ import exception.SLogoException;
  */
 public class TurtleImageLoader extends FileLoader{
 
-    private final String turtleDirectory = "resources/resources";
-    private final String turtleExtension = "TurtleImages.resources";
-    private final String IMAGE_PATH = "resources/turtle_images/";
+    private static final String TURTLE_PATH = "resources/resources";
+    private static final String TURTLE_EXTENSION = "TurtleImages.resources";
+    private static final String IMAGE_PATH = "resources/turtle_images/";
     private HashMap<Integer, String> myTurtleMap;
 
     public TurtleImageLoader() throws SLogoException{
-        myTurtleMap = new HashMap<Integer, String>();
+        myTurtleMap = new HashMap<>();
         load();
         loadDefaultTurtles();
     }
 
     public void load() throws SLogoException {
-        super.load(turtleDirectory, turtleExtension);
+        super.load(TURTLE_PATH, TURTLE_EXTENSION);
     }
 
     private void loadDefaultTurtles() throws SLogoException{
@@ -39,9 +39,10 @@ public class TurtleImageLoader extends FileLoader{
     private int countDefaultImages(){
         File turtle_images = new File(IMAGE_PATH);
         int numDefaultTurtles = 0;
-        for(File file: turtle_images.listFiles()){
-            if(file.isFile())
+        for (File file: turtle_images.listFiles()) {
+            if(file.isFile()) {
                 numDefaultTurtles++;
+            }
         }
         return numDefaultTurtles;
     }

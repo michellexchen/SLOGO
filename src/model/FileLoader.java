@@ -19,7 +19,9 @@ import exception.SLogoException;
  *
  */
 public abstract class FileLoader {
-
+    
+    private static final String FILE_NOT_FOUND = "Fild not found";
+    
     Properties myProperties;
     HashMap<String, String> myBackMap;
     private BufferedReader myFileReader;
@@ -31,7 +33,7 @@ public abstract class FileLoader {
      * @return string array of split properties
      */
     private String[] splitSpecial(String str) {
-        ArrayList<String> resultList = new ArrayList<String>();
+        ArrayList<String> resultList = new ArrayList<>();
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '|') {
                 resultList.add(str.substring(0, i));
@@ -49,7 +51,7 @@ public abstract class FileLoader {
      * @throws SLogoException 
      */
     public void createSplitBackMap() throws SLogoException {
-        myBackMap = new HashMap<String, String>();
+        myBackMap = new HashMap<>();
         Set<Object> keySet = myProperties.keySet();
         for (Object o: keySet) {
             String currentProperty = getString((String) o);
@@ -81,7 +83,7 @@ public abstract class FileLoader {
         try {
             myProperties.load(myFileReader);
         } catch (IOException e) {
-            throw new SLogoException("File Reader not found.");
+            throw new SLogoException(FILE_NOT_FOUND);
         }
     }
 
@@ -99,20 +101,19 @@ public abstract class FileLoader {
      * @param filename
      * @return numLines: number of lines in file
      */
-    public int countLines(String filename) throws SLogoException{
+    public int countLines(String filename) throws SLogoException {
         LineNumberReader reader;
         try {
             reader = new LineNumberReader(new FileReader(filename));
         } catch (FileNotFoundException e) {
-            throw new SLogoException("File not found");
+            throw new SLogoException(FILE_NOT_FOUND);
         }
         int numLines = 0;
-        @SuppressWarnings("unused")
-        String nextLine = "";
+
         try {
-            while ((nextLine = reader.readLine()) != null) {}
+            while (reader.readLine() != null) {}
         } catch (IOException e) {
-            throw new SLogoException("File not found");
+            throw new SLogoException(FILE_NOT_FOUND);
         }
         numLines = reader.getLineNumber(); 
         return numLines;

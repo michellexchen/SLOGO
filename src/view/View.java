@@ -16,20 +16,20 @@ import javafx.collections.ObservableList;
  */
 public interface View<T> {
 
-    public SLogoVisualizer getCurrentVisualizer();
+    SLogoVisualizer getCurrentVisualizer();
 
-    public void addVisualizer() throws SLogoException, IOException;
+    void addVisualizer() throws SLogoException, IOException;
 
-    public void switchVisualizer(int index);
+    void switchVisualizer(int index);
 
-    public Observer getObserver();
+    Observer getObserver();
     
-    public String getLanguage();
+    String getLanguage();
 
-    public void updateCustoms (ObservableList<T> customs);
+    void updateCustoms (ObservableList<T> customs);
     
-    public void updateVariables (ObservableList<T> variables);
+    void updateVariables (ObservableList<T> variables);
 
-    public void updateDisplayData ();
+    void updateDisplayData ();
     
 }

@@ -9,6 +9,9 @@ import model.SLogoCharacterState;
  */
 public class IfElseNode extends TernaryNode {
 
+    private static final int FIRST = 1;
+    private static final int SECOND = 2;
+    
     /**
      * @param state
      * Checks evaluation of 0th child (NumericNode) for 0
@@ -17,8 +20,8 @@ public class IfElseNode extends TernaryNode {
      * @return value of final command executed or 0 if none executed
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        return evaluateChild(0, state) != 0 ? evaluateChild(1, state) : 
-                                                    evaluateChild(2, state);
+        return evaluateChild(0, state) != 0 ? evaluateChild(FIRST, state) : 
+                                                    evaluateChild(SECOND, state);
     }
 
 }
