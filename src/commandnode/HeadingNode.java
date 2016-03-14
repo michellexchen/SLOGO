@@ -8,11 +8,11 @@ import model.SLogoCharacterState;
  */
 public class HeadingNode extends NullaryNode {
 
-	/**
-	 * @param state
-	 * @return degrees turtle is heading
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return state.getDirection();
-	}
+    /**
+     * @param state
+     * @return degrees turtle is heading
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return state.getDirection();
+    }
 }

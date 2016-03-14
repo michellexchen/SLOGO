@@ -7,7 +7,6 @@ import java.util.List;
 import commandnode.Node;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import parser.SLogoParser;
 import view.View;

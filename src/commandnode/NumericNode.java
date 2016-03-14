@@ -10,18 +10,18 @@ import model.SLogoCharacterState;
 
 public class NumericNode extends NullaryNode {
 
-	private double myValue;
+    private double myValue;
 
-	public NumericNode(double value) {
-		myValue = value;
-	}
+    public NumericNode(double value) {
+        myValue = value;
+    }
 
-	public double evaluate(SLogoCharacterState state) {
-		return myValue;
-	}
-	
-	public double getNumericValue(){
-		return myValue;
-	}
+    public double evaluate(SLogoCharacterState state) {
+        return myValue;
+    }
+
+    public double getNumericValue(){
+        return myValue;
+    }
 
 }

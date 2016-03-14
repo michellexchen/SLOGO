@@ -8,11 +8,11 @@ import model.SLogoCharacterState;
  */
 public class CosineNode extends UnaryNode{
 
-	/**
-	 * @return Cosine evaluation of radians converted from degrees
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.cos(Math.toRadians(evaluateChild(0, state)));
-	}
+    /**
+     * @return Cosine evaluation of radians converted from degrees
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return Math.cos(Math.toRadians(evaluateChild(0, state)));
+    }
 
 }

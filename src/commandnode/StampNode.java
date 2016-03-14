@@ -5,9 +5,12 @@ import model.SLogoCharacterState;
 
 public class StampNode extends NullaryNode{
 
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    /**
+     * To be implemented
+     * 
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return 0;
+    }
 
 }

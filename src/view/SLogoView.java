@@ -107,10 +107,18 @@ public class SLogoView implements View<Object> {
     }
     
     /**
-     * Notifies Visualizer to update variables
+     * Notifies Visualizer to update custom commands
      * 
      */
-    public void updateVariable(ObservableList variables) {
+    public void updateCustoms(ObservableList customs) {
+        getCurrentVisualizer().updateCustomCommands(customs);
+    }
+    
+    /**
+     * Notifies Visualizer to update customs (variables and custom commands)
+     * 
+     */
+    public void updateVariables(ObservableList variables) {
         getCurrentVisualizer().updateVariables(variables);
     }
 

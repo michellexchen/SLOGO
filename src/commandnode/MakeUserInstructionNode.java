@@ -3,24 +3,18 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class MakeUserInstructionNode extends TernaryNode {
+public class MakeUserInstructionNode extends TernaryVariableNode{
 
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		// List<Node> myVariables = ((ListNode)
-		// (getChildren().get(0))).getCommands();
-		// List<Node> myCommands = ((ListNode)
-		// (getChildren().get(1))).getCommands();
-		// if(myVariables.size() != myCommands.size()){
-		// return 0;
-		// }
-		// SLogoWorkspace ws =
-		// ((VariableNode)myVariables.get(0)).getWorkspace();
-		// for(int x=0; x<myCommands.size(); x++){
-		// ws.getMyVarMap().put(((VariableNode)
-		// (myVariables.get(x))).getVarName(),
-		// (Double)myCommands.get(x).evaluate(state));
-		// }
-		return 1;
-	}
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_ONE = 1;
+    private static final int INDEX_TWO = 2;
+    
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        String commandName = (((CustomCommandNode) getChildren().get(INDEX_ZERO)).getName());
+        ListNode varNodeList = ((ListNode) getChildren().get(INDEX_ONE));
+        ListNode commandList = ((ListNode) getChildren().get(INDEX_TWO));
+        getWorkspace().createCustomCommand(commandName, varNodeList, commandList);
+        return 1;
+    }
 
 }

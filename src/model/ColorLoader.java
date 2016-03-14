@@ -10,17 +10,20 @@ import javafx.scene.paint.Color;
  * 
  * @author Adam Tache
  */
-
 public class ColorLoader extends FileLoader{
 
-    private final String colorDirectory = "resources/resources";
-    private final String colorExtension = "Colors.resources";
+    private static final String COLOR_PATH = "resources/resources";
+    private static final String COLOR_EXTENSION = "colors.resources";
+    private static final double DEFAULT_OPACITY = 1.0;
+    private static final double RGB_CONST = 255.0;
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_ONE = 1;
+    private static final int INDEX_TWO = 2;
+
     private HashMap<Integer, Color> myRGBMap;
 
-    private static final double DEFAULT_OPACITY = 1.0;
-
-    public ColorLoader() throws SLogoException{
-        myRGBMap = new HashMap<Integer, Color>();
+    public ColorLoader() throws SLogoException {
+        myRGBMap = new HashMap<>();
         load();
         loadDefaultColors();
     }
@@ -29,31 +32,34 @@ public class ColorLoader extends FileLoader{
      * loads color resource file
      */
     public void load() throws SLogoException {
-        super.load(colorDirectory, colorExtension);
+        super.load(COLOR_PATH, COLOR_EXTENSION);
     }
 
     /**
      * Add default colors to color map with index
      */
-    private void loadDefaultColors() throws SLogoException{
+    private void loadDefaultColors() throws SLogoException {
         int numDefaultColors = countLines(getFileName());
-        for(int x=0; x<numDefaultColors; x++){
+        for (int x = 0; x < numDefaultColors; x++) {
             String rgbString = getString(x+"");
             String[] rgbStrs = rgbString.split(",");
-            double[] rgb = {convertRGB(Integer.parseInt(rgbStrs[0])), convertRGB(Integer.parseInt(rgbStrs[1])), convertRGB(Integer.parseInt(rgbStrs[2]))};
-            myRGBMap.put(x, new Color(rgb[0], rgb[1], rgb[2], DEFAULT_OPACITY));
+            double[] rgb = {convertRGB(Integer.parseInt(rgbStrs[INDEX_ZERO])), 
+                            convertRGB(Integer.parseInt(rgbStrs[INDEX_ONE])), 
+                            convertRGB(Integer.parseInt(rgbStrs[INDEX_TWO]))};
+            myRGBMap.put(x, new Color(rgb[INDEX_ZERO], rgb[INDEX_ONE], 
+                                      rgb[INDEX_TWO], DEFAULT_OPACITY));
         }
     }
 
-    public Color getColor(int index) throws SLogoException{
+    public Color getColor(int index) throws SLogoException {
         return myRGBMap.get(index);
     }
 
-    public Color createColor(int r, int g, int b){
+    public Color createColor(int r, int g, int b) {
         return new Color(convertRGB(r), convertRGB(g), convertRGB(b), DEFAULT_OPACITY);
     }
 
-    public void addRGB(RGBColor color) throws SLogoException{
+    public void addRGB(RGBColor color) throws SLogoException {
         myRGBMap.put(color.getIndex(), createColor(color.getR(), color.getG(), color.getB()));
     }
 
@@ -63,11 +69,11 @@ public class ColorLoader extends FileLoader{
      * @return Normalized RGB value (0:1)
      */
 
-    private double convertRGB(int value){
-        return value/255.0;
+    private double convertRGB(int value) {
+        return value / RGB_CONST;
     }
 
-    public HashMap<Integer, Color> getMap(){
+    public HashMap<Integer, Color> getMap() {
         return myRGBMap;
     }
 

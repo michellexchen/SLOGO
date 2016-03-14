@@ -11,6 +11,7 @@ public class ResourceLoader extends FileLoader{
 
     private static final String RESOURCE_PATH = "resources/resources";
     private static final String RESOURCE_EXTENSION = "slogo_resources.resources";
+    private static final String NON_MATCH_MESSAGE = "Non-match exists in resource file";
 
     /**
      * Default constructor
@@ -21,7 +22,7 @@ public class ResourceLoader extends FileLoader{
             super.load(RESOURCE_PATH, RESOURCE_EXTENSION);
         }
         catch (SLogoException e) {
-            e.showErrorDialog("Non-match exists in resource file");
+            e.showErrorDialog(NON_MATCH_MESSAGE);
         }
     }
 
@@ -36,7 +37,7 @@ public class ResourceLoader extends FileLoader{
             super.load(RESOURCE_PATH, filename);
         }
         catch (SLogoException e) {
-            e.showErrorDialog("Non-match exists in resource file");
+            e.showErrorDialog(NON_MATCH_MESSAGE);
         }
     }
 
@@ -49,7 +50,7 @@ public class ResourceLoader extends FileLoader{
             return super.getString(key);
         }
         catch (SLogoException e) {
-            e.showErrorDialog("Non-match exists in resource file");
+            e.showErrorDialog(NON_MATCH_MESSAGE);
             return "";
         }
     }

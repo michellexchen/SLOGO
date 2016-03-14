@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SLogoGUIController">
   <children>
-    <AnchorPane id="AnchorPane" layoutX="0.0" layoutY="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" styleClass="window">
+    <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="830.0" styleClass="window">
       <children>
         <Pane fx:id="myCanvas" layoutX="220.0" layoutY="14.0" prefHeight="440.0" prefWidth="440.0" style="" styleClass="screen">
           <children>
@@ -21,7 +21,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Pane>
-        <Button fx:id="myHelpButton" layoutX="76.0" layoutY="461.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" style="" text="HELP">
+        <Button fx:id="myHelpButton" layoutX="24.0" layoutY="461.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" style="" text="HELP">
           <stylesheets>
             <URL value="@style.css" />
           </stylesheets>
@@ -75,7 +75,7 @@
             <URL value="@style.css" />
           </stylesheets>
         </Label>
-        <ScrollPane content="$null" layoutX="667.0" layoutY="261.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
+        <ScrollPane fx:id="myCustomPane" content="$null" layoutX="667.0" layoutY="261.0" prefHeight="193.0" prefWidth="157.0" vbarPolicy="ALWAYS" />
         <Button id="myCustomizeButton" fx:id="myAddWorkspaceButton" alignment="TOP_CENTER" layoutX="169.0" layoutY="13.0" minHeight="22.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="41.0" style="" text="+">
           <stylesheets>
             <URL value="@style.css" />
@@ -106,6 +106,11 @@
                   <URL value="@style.css" />
                </stylesheets>
             </MenuButton>
+            <Button fx:id="myReadButton" layoutX="122.0" layoutY="461.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" style="" text="READ FILE">
+               <stylesheets>
+                  <URL value="@style.css" />
+               </stylesheets>
+            </Button>
       </children>
       <stylesheets>
         <URL value="@style.css" />

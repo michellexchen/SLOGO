@@ -10,10 +10,10 @@ import model.SLogoCharacterState;
  */
 
 public interface Node {
-	public abstract double evaluate(SLogoCharacterState state) throws SLogoException;
-	public abstract int numRequiredChildren();
-	public abstract int numCurrentChildren();
-	public abstract String toString();
-	public abstract void addChild(Node child);
-	
+    double evaluate(SLogoCharacterState state) throws SLogoException;
+    int numRequiredChildren();
+    int numCurrentChildren();
+    String toString();
+    void addChild(Node child);
+
 }

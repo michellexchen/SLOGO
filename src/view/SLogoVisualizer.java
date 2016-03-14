@@ -15,25 +15,29 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import model.Model;
 import model.ResourceLoader;
+import model.SLogoCustomCommand;
 import model.SLogoPosition;
 import model.SLogoVariable;
 import model.SLogoDisplayData;
 
 /**
- * 
  * Visualizer class that contains methods that renders turtles 
  * on the screen to show the user
- *
+ * Also exists to support multiple workspaces
+ * 
+ * @author Hunter
  */
 public class SLogoVisualizer implements Observer {
 
     private static final String IMAGE_PATH = "file:resources/turtle_images/";
     private static final int PANE_SIZE = 440;
     private static final int RGB_CONST = 255;
-    private static final double COORDINATE_SHIFT = PANE_SIZE / 2;
+    private static final double COORDINATE_SHIFT = (double) PANE_SIZE / 2;
     private static final int DIRECTION_FLIP = -1;
     private static final int TURTLE_SIZE = 40;
+    private static final int TURTLE_CLICKED_SIZE = 55;
     private static final int PADDING = TURTLE_SIZE / 2;
+    private static final int HALF_FACTOR = 2;
 
     private ObservableList<SLogoDisplayData> myObservableDataList;
 
@@ -116,13 +120,13 @@ public class SLogoVisualizer implements Observer {
      */
     public Line createLine(SLogoDisplayData turtledata) {
         Line newLine = createLine(turtledata.getPosition());
-        Color myColor = turtledata.getPen().getColor();
-        newLine.setFill(myColor);
+        newLine.setFill(turtledata.getPen().getColor());
         newLine.setStrokeWidth(turtledata.getPen().getSize());
         if(!turtledata.getPen().getDown() || turtledata.isCleared()){
             newLine.setStrokeWidth(0);
-            if(turtledata.isCleared())
+            if(turtledata.isCleared()) {
                 turtledata.queueClearing(false);
+            }
         }
         return newLine;
     }
@@ -148,44 +152,64 @@ public class SLogoVisualizer implements Observer {
      * @param displaydata
      */
     public void placeTurtle(SLogoDisplayData displaydata) {
-        Image image = new Image(IMAGE_PATH + displaydata.getImage());
         ImageView turtle = new ImageView();
-        turtle.setImage(image);
+        turtle.setImage(new Image(IMAGE_PATH + displaydata.getImage()));
         turtle.setVisible(!displaydata.getTurtleHidden());
-
-        turtle.setOnMouseClicked(e -> {
-            //Show Properties
-        });
-
-        //turtle resize
-        turtle.setFitWidth(TURTLE_SIZE);
-        turtle.setPreserveRatio(true);
-        turtle.setSmooth(true);
-        turtle.setCache(true);
-
-        //place turtle using Position and center at the coordinates (x,y)
+        assignTurtleAction(turtle);
+        turtleResize(turtle);
         turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
-        turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() + 
-                          COORDINATE_SHIFT - PADDING);
-
-        //turtle rotate
+        turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() 
+                          + COORDINATE_SHIFT - PADDING);
         turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
         turtle.setRotate(displaydata.getDirection());
-
-        //Put it in the Pane
         getGUIController().addToCanvas(turtle);
     }
 
     /**
-     * This method updates command history display in GUI.
-     * Caller is Workspace (MyCurrentWorkspace in MainModel)
+     * Assigns an click action to the turtle ImageView
+     * 
+     * @param turtle
      */
-    public void updateCommandHistory () {
-
+    private void assignTurtleAction(ImageView turtle) {
+        turtle.setOnMouseClicked(e -> {
+            turtle.setFitWidth(TURTLE_CLICKED_SIZE);
+            turtle.setLayoutX(turtle.getLayoutX() - 
+                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / HALF_FACTOR);
+            turtle.setLayoutY(turtle.getLayoutY() - 
+                              (TURTLE_CLICKED_SIZE - TURTLE_SIZE) / HALF_FACTOR);
+            // Show Properties
+            getGUIController().displayProperties();
+        });
+    }
+    
+    /**
+     * Takes an ImageView and resizes it
+     * 
+     * @param turtle
+     */
+    private void turtleResize(ImageView turtle) {
+        turtle.setFitWidth(TURTLE_SIZE);
+        turtle.setPreserveRatio(true);
+        turtle.setSmooth(true);
+        turtle.setCache(true);
     }
 
+    /**
+     * Updates the list of custom commands shown in GUI
+     * 
+     * @param customs
+     */
+    public void updateCustomCommands (ObservableList<SLogoCustomCommand> customs) {
+        getGUIController().displayCustomCommands(customs);
+    }
+    
+    /**
+     * Updates the list of variables shown in GUI
+     * 
+     * @param variables
+     */
     public void updateVariables (ObservableList<SLogoVariable> variables) {
-        getGUIController().displayVariable(variables);
+        getGUIController().displayVariables(variables);
     }
 
     /**

@@ -8,8 +8,8 @@ import model.SLogoCharacterState;
  */
 public class AndNode extends BinaryNode {
 
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return evaluateChild(0, state) != 0 && evaluateChild(1, state) != 0 ? 1 : 0;
-	}
-	
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return evaluateChild(0, state) != 0 && evaluateChild(1, state) != 0 ? 1 : 0;
+    }
+
 }

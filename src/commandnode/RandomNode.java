@@ -8,13 +8,13 @@ import model.SLogoCharacterState;
  */
 
 public class RandomNode extends UnaryNode{
-	
-	/**
-	 * @return random number between 0 and input
-	 */
-	
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return Math.random()*evaluateChild(0, state);
-	}
-	
+
+    /**
+     * @return random number between 0 and input
+     */
+
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return Math.random()*evaluateChild(0, state);
+    }
+
 }

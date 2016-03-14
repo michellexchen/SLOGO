@@ -5,11 +5,11 @@ package commandnode;
  * Node representation of command with four children
  */
 public abstract class QuaternionNode extends CommandNode{
-	
-	private int NUM_CHILDREN = 4;
 
-	public QuaternionNode() {
-		setNumChildren(NUM_CHILDREN);
-	}
-	
+    private static final int NUM_CHILDREN = 4;
+
+    public QuaternionNode() {
+        setNumChildren(NUM_CHILDREN);
+    }
+
 }

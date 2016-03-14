@@ -33,8 +33,10 @@ import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import model.LogoFileLoader;
 import model.Model;
 import model.ResourceLoader;
+import model.SLogoCustomCommand;
 import model.SLogoDisplayData;
 import model.SLogoVariable;
 
@@ -46,33 +48,41 @@ import model.SLogoVariable;
  */
 public class SLogoGUIController implements Initializable, Observer {
 
-    private static final String HELP_URL = "http://www.cs.duke.edu/courses/"
-                            + "compsci308/spring16/assign/03_slogo/commands.php";
+    private static final String HELP_URL = "http://htmlpreview.github.io/?https://" +
+            "github.com/narendly/narendly.github.io/blob/master/slogo_help.html";
     private static final String CSS_PATH = "view/splashstyle.css";
-    private static final int POPUP_WIDTH = 900;
-    private static final int POPUP_HEIGHT = 550;
+    private static final int POPUP_WIDTH = 1024;
+    private static final int POPUP_HEIGHT = 768;
     private static final int PANE_WIDTH = 200;
     private static final int PANE_HEIGHT = 150;
     private static final int RGB_CONST = 255;
     private static final int ERROR_INDEX = 7;
     private static final String ERROR = "ERROR";
+    private static final int WORKSPACE_ONE = 1;
+    private static final int WORKSPACE_TWO = 2;
+    private static final int WORKSPACE_THREE = 3;
+    private static final int WORKSPACE_FOUR = 4;
+    private static final int WORKSPACE_FIVE = 5;
 
     private ResourceLoader myResourceLoader;
     private ResourceLoader myErrorLoader;
     private WebView	myBrowser;
     private WebEngine myWebEngine;
     private ListView<String> myHistoryPaneView;
-    private ListView<String> myPropertiesPaneView = new ListView<String>();
+    private ListView<String> myPropertiesPaneView = new ListView<>();
     private ListView<String> myVariableView;
+    private ListView<String> myCustomCommandView;
     private ObservableList<String> myProperties;
     private Stage myCurrentStage;
     private Color myCanvasColor;
     private ColorPicker myColorPicker;
     private HBox myColorHBox;
+    private SLogoFileChooserBuilder myFileChooser;
     private SLogoCustomizerBuilder myCustomizer;
     private SLogoPropertiesData myPropertiesData;
     private Model myModel;
     private String myCommand;
+    private List<String> myHistory;
 
     /**
      * The following are FXML-JavaFX component links
@@ -81,6 +91,10 @@ public class SLogoGUIController implements Initializable, Observer {
     //Help button
     @FXML
     private Button myHelpButton;
+    
+    //Read file prompt button
+    @FXML
+    private Button myReadButton;
 
     //Textfield
     @FXML
@@ -117,22 +131,23 @@ public class SLogoGUIController implements Initializable, Observer {
     //myVariablePane where ObservableList<Variable> will go
     @FXML
     private ScrollPane myVariablePane;
+    
+    //CustomCommands Pane where ObservableList<SLogoCustomCommand> will go
+    @FXML
+    private ScrollPane myCustomPane;
 
     //Displays the properties of a turtle
     @FXML
     private Pane myPropertyPane;
 
-    //This adds workspace
+    //addWorkspace button
     @FXML
     private Button myAddWorkspaceButton;
 
-    //Customize button - WHAT IS THIS FOR? FOR CHOOSING COLOR?
+    //Customize button
     @FXML
     private Button myCustomizeButton;
 
-    //History
-    @FXML
-    private List<String> myHistory;
 
     /**
      * All GUI elements are initialized in this method
@@ -141,10 +156,12 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     @Override 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        myFileChooser = new SLogoFileChooserBuilder();
         myResourceLoader = new ResourceLoader("default.properties");
         myErrorLoader = new ResourceLoader("error.properties");
-
-        myHistory = new ArrayList<String>();
+        myHistory = new ArrayList<>();
+        myVariableView = new ListView<>();
+        myCustomCommandView = new ListView<>();
         myPropertyPane.getChildren().add(myPropertiesPaneView);
         try {
             myCustomizer = new SLogoCustomizerBuilder(this);
@@ -152,10 +169,11 @@ public class SLogoGUIController implements Initializable, Observer {
             e.showErrorDialog(getErrorLoader().getString("CustomizerError"));
         }
         myCustomizer.hide();
-        myVariableView = new ListView<String>();
 
+        // Assigns actions to buttons and other components
         assignMenuAction();
         assignHelpAction();
+        assignReadAction();
         assignRunAction();
         customize();
         assignAddWorkspaceAction();
@@ -190,6 +208,7 @@ public class SLogoGUIController implements Initializable, Observer {
 
     /**
      * Assigns an action to the HELP Button
+     * 
      */
     private void assignHelpAction () {
         myHelpButton.setOnAction(e -> {
@@ -197,6 +216,23 @@ public class SLogoGUIController implements Initializable, Observer {
         });
     }
 
+    /**
+     * Assigns an action to the READ FILE button and provides the user
+     * a function getSelectedFile to enable reading in the name of the file
+     * 
+     */
+    private void assignReadAction () {
+        myReadButton.setOnAction(e -> {
+            getFileChooser().promptUser();
+            LogoFileLoader loader = 
+                    new LogoFileLoader(getFileChooser().getSelectedFile());
+            try {
+                loader.getAllCommands().forEach(c -> run(c));
+            }
+            catch (Exception e1) {}
+        });
+    }
+    
     /**
      * Manually assigns an action to each MenuItem
      * 
@@ -208,27 +244,27 @@ public class SLogoGUIController implements Initializable, Observer {
     private void assignMenuAction () {
         myProject1.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(0);
+                getModel().switchWorkspace(WORKSPACE_ONE);
             } catch (Exception e1) {}
         });
         myProject2.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(1);
+                getModel().switchWorkspace(WORKSPACE_TWO);
             } catch (Exception e1) {}
         });
         myProject3.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(2);
+                getModel().switchWorkspace(WORKSPACE_THREE);
             } catch (Exception e1) {}
         });
         myProject4.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(3);
+                getModel().switchWorkspace(WORKSPACE_FOUR);
             } catch (Exception e1) {}
         });
         myProject5.setOnAction(e -> {
             try {
-                getModel().switchWorkspace(4);
+                getModel().switchWorkspace(WORKSPACE_FIVE);
             } catch (Exception e1) {}
         });
     }
@@ -241,17 +277,11 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     public void run(String command){
         setCommand(myCommand);
-        /*
-         * TODO: Call Model's readCommand that calls
-         * View's getCommand
-         * and passes the command to the parser
-         */
         try {
             getModel().readCommand(command);
         } catch (SLogoException e1) {
             command = "ERROR: " + command;
         }
-
         myHistory.add(command);
         displayHistory();
         displayProperties();
@@ -259,9 +289,7 @@ public class SLogoGUIController implements Initializable, Observer {
     }
 
     /**
-     * Lets the user view the commands
-     * 
-     * NEEDS TO BE REVISED!!!
+     * Takes the user to the customized help page
      * 
      * @param link
      */
@@ -282,11 +310,11 @@ public class SLogoGUIController implements Initializable, Observer {
     }
 
     /**
-     * Lists commands in the commandhistory pane
+     * Lists commands in the command history pane
      * 
      */
     private void displayHistory(){
-        myHistoryPaneView = new ListView<String>();
+        myHistoryPaneView = new ListView<>();
         ObservableList<String> items =FXCollections.observableArrayList(myHistory);
         myHistoryPaneView.setItems(items);
         myCommandHistoryPane.setContent(myHistoryPaneView);
@@ -304,18 +332,41 @@ public class SLogoGUIController implements Initializable, Observer {
                 run(myCommand);
             }
         });
-    }    
+    }   
 
-    public void displayVariable (ObservableList<SLogoVariable> variables) {
-        /*
-         * Being worked on
-         */
+    /**
+     * Displays user-created variables in the scroll pane
+     * 
+     * @param variables
+     */
+    public void displayVariables (ObservableList<SLogoVariable> variables) {
         ObservableList<String> list = FXCollections
                 .observableArrayList(new ArrayList<String>());
-        // Using lambda expression
-        variables.forEach(n -> list.add(n.getName() + "  :  " + n.getValue()));
+        variables.stream().forEach(n -> list.add(n.getName() + "  :  " + n.getValue()));
         getVariableView().setItems((ObservableList<String>) list);
-        myVariablePane.setContent(getVariableView());
+        getVariablePane().setContent(getVariableView());
+    }
+
+    /**
+     * Displays user-created commands in the scroll pane
+     * 
+     * @param customs
+     */
+    public void displayCustomCommands (ObservableList<SLogoCustomCommand> customs) {
+        ObservableList<String> list = FXCollections
+                .observableArrayList(new ArrayList<String>());
+        customs.stream().forEach(n -> list.add(n.getName()));
+        getCustomCommandView().setItems((ObservableList<String>) list);
+        getCustomPane().setContent(getCustomCommandView());
+    }
+
+    /**
+     * Returns ListView of custom commands
+     * 
+     * @return
+     */
+    private ListView<String> getCustomCommandView() {
+        return myCustomCommandView;
     }
 
     /**
@@ -334,13 +385,12 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     public void updateProperties(SLogoDisplayData displayData){
         myProperties = FXCollections.observableArrayList (
-                ("Direction: " + Double.toString(displayData.getDirection())),
-                ("X position: " + displayData.getX()),
-                ("Y position: " + displayData.getY()),
-                ("Pen Down: " + displayData.getPen().getDown()),
-                ("Pen Color: " + displayData.getPen().getColorIndex()),
-                ("Pen Size: " + displayData.getPen().getSize())
-        );
+                        ("Direction: " + Double.toString(displayData.getDirection())),
+                        ("X position: " + displayData.getX()),
+                        ("Y position: " + displayData.getY()),
+                        ("Pen Down: " + displayData.getPen().getDown()),
+                        ("Pen Color: " + displayData.getPen().getColorIndex()),
+                        ("Pen Size: " + displayData.getPen().getSize()));
         myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
         myPropertiesPaneView.setItems(myProperties);
     }
@@ -379,7 +429,7 @@ public class SLogoGUIController implements Initializable, Observer {
     }
 
     /**
-     * Colorpicker method for Customize button
+     * Color picker method for Customize button
      * 
      * @return
      */
@@ -546,5 +596,26 @@ public class SLogoGUIController implements Initializable, Observer {
      */
     public void setErrorLoader (ResourceLoader myErrorLoader) {
         this.myErrorLoader = myErrorLoader;
+    }
+
+    /**
+     * @return the myVariablePane
+     */
+    public ScrollPane getVariablePane () {
+        return myVariablePane;
+    }
+
+    /**
+     * @return the myCustomPane
+     */
+    public ScrollPane getCustomPane () {
+        return myCustomPane;
+    }
+
+    /**
+     * @return the myFileChooser
+     */
+    public SLogoFileChooserBuilder getFileChooser () {
+        return myFileChooser;
     }
 }

@@ -33,7 +33,7 @@ public class SLogoDisplayData extends Observable{
     private SLogoPen myPen;
     private double prevDirection;
     private boolean cleared;
-    private String myLineStyle = "SOLID";
+    private String myLineStyle;
     private SLogoCharacterState myState;
 
     /**
@@ -46,19 +46,9 @@ public class SLogoDisplayData extends Observable{
         myPosition = new SLogoPosition();
         myState = state;
         myPen = state.getPen();
+        myLines = new ArrayList<>();
         myLineStyle = "SOLID";
-
-        initialize();
         updateData();
-    }
-
-    /**
-     * Initializes Line list
-     * 
-     * @throws SLogoException
-     */
-    public void initialize() throws SLogoException {
-        myLines = new ArrayList<Line>();
     }
 
     /**
@@ -144,13 +134,6 @@ public class SLogoDisplayData extends Observable{
      */
     public List<Line> getLines() {
         return myLines;
-    }
-
-    /**
-     * @param myLines the myLines to set
-     */
-    public void setLines(List<Line> myLines) {
-        this.myLines = myLines;
     }
 
     public String getTurtleImage() {

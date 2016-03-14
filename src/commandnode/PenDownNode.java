@@ -7,12 +7,12 @@ import model.SLogoCharacterState;
  */
 public class PenDownNode extends NullaryNode{
 
-	/**
-	 * Sets Turtle pen down, leaving trails
-	 * @return 1 representing pen on
-	 */
-	public double evaluate(SLogoCharacterState state) {
-		state.getPen().setPenDown(true);
-		return 1;
-	}
+    /**
+     * Sets Turtle pen down, leaving trails
+     * @return 1 representing pen on
+     */
+    public double evaluate(SLogoCharacterState state) {
+        state.getPen().setPenDown(true);
+        return 1;
+    }
 }

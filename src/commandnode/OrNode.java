@@ -8,11 +8,11 @@ import model.SLogoCharacterState;
  */
 public class OrNode extends BinaryNode {
 
-	/**
-	 * @param state
-	 * @return 1 if children are non-zero, otherwise 0
-	 */
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		return evaluateChild(0, state) != 0 || evaluateChild(1, state) != 0 ? 1 : 0;
-	}
+    /**
+     * @param state
+     * @return 1 if children are non-zero, otherwise 0
+     */
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return evaluateChild(0, state) != 0 || evaluateChild(1, state) != 0 ? 1 : 0;
+    }
 }

@@ -1,17 +1,16 @@
 package commandnode;
 
+import exception.SLogoException;
 import model.SLogoCharacterState;
 import model.SLogoWorkspace;
 
-/**
- * Node representation of Variable command
- */
-public class VariableNode extends NullaryNode{
+public class CustomCommandNode extends CommandNode{
 
     private String myName;
     private SLogoWorkspace myWorkspace;
 
-    public VariableNode(String myName){
+    public CustomCommandNode(String myName, SLogoWorkspace myWorkspace){
+        this.myWorkspace = myWorkspace;
         this.myName = myName;
     }
 
@@ -21,9 +20,10 @@ public class VariableNode extends NullaryNode{
 
     /**
      * return current value of variable in current workspace
+     * @throws SLogoException 
      */
-    public double evaluate(SLogoCharacterState state){
-        return myWorkspace.getVarValueByName(myName);
+    public double evaluate(SLogoCharacterState state) throws SLogoException{
+        return myWorkspace.lookupCustomCommand(myName) == null ? 0 : 1; 
     }
 
     public SLogoWorkspace getWorkspace(){

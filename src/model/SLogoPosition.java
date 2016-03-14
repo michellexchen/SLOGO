@@ -11,6 +11,7 @@ public class SLogoPosition {
     private static final int PANE_SIZE = 440;
     private static final int TURTLE_SIZE = 40;
     private static final int PADDING = TURTLE_SIZE / 2;
+    private static final int HALF_FACTOR = 2;
 
     private double myPrevX;
     private double myPrevY;
@@ -90,11 +91,11 @@ public class SLogoPosition {
      * @param displaydata
      */
     private double boundCoordinate (double coor) {
-        if (coor > PANE_SIZE / 2 - PADDING) {
-            return (PANE_SIZE / 2 - PADDING);
+        if (coor > PANE_SIZE / HALF_FACTOR - PADDING) {
+            return (PANE_SIZE / HALF_FACTOR - PADDING);
         }
-        if (coor < -PANE_SIZE / 2 + PADDING) {
-            return (-PANE_SIZE / 2 + PADDING); 
+        if (coor < -PANE_SIZE / HALF_FACTOR + PADDING) {
+            return (-PANE_SIZE / HALF_FACTOR + PADDING); 
         }
         return coor;
     }

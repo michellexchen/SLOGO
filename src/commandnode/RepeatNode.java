@@ -21,10 +21,9 @@ public class RepeatNode extends BinaryVariableNode {
 		SLogoVariable repcountVar = getWorkspace().createVariable(new ResourceLoader().getString("Repcount"), 1);
 		ListNode listNode = ((ListNode) (getChildren().get(1)));
 		List<String> innerCommands = listNode.getInnerCommands();
-		System.out.println("Inner commands: " + innerCommands);
 		double evaluation = 0;
 		for(int x=1; x<=repcount; x++){
-			List<Node> myRoots = getTreeFactory().createNodes(clone(innerCommands));
+			List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
 			getRootEvaluator().evaluateRoots(myRoots);
 			repcountVar.setValue(x);
 		}

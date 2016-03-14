@@ -95,11 +95,13 @@ public abstract class SLogoCharacterState {
 
     public void setBackground(int myBGColorIndex) throws SLogoException {
         ColorLoader colorLoader = new ColorLoader();
-        String colorString = colorLoader.getString(myBGColorIndex+"");
-        if(colorString == null)
+        String colorString = colorLoader.getString(myBGColorIndex + "");
+        if(colorString == null) {
             throw new SLogoException(resourceLoader.getString("ColorIndex"));
-        else
+        }
+        else {
             this.myBGColor = colorLoader.getColor(myBGColorIndex);
+        }
     }
 
     public Color getBGColor(){
@@ -113,11 +115,13 @@ public abstract class SLogoCharacterState {
 
     public void setImage(int myShapeIndex) throws SLogoException {
         TurtleImageLoader imageLoader = new TurtleImageLoader();
-        String indexImage = imageLoader.getString(myShapeIndex+"");
-        if(indexImage == null)
+        String indexImage = imageLoader.getString(myShapeIndex + "");
+        if (indexImage == null) {
             throw new SLogoException(resourceLoader.getString("ShapeIndex"));
-        else
+        }
+        else {
             this.myImage = indexImage;
+        }
     }
 
     public int getID(){

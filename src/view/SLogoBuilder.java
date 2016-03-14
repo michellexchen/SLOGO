@@ -3,12 +3,12 @@
  */
 package view;
 
-import java.util.ResourceBundle;
 import exception.SLogoException;
 import model.ResourceLoader;
 
 /**
  * Abstract builder class that are extended by other builders in View
+ * 
  * @author Hunter
  * 
  */
