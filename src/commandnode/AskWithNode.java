@@ -1,9 +1,23 @@
 package commandnode;
 
-public class AskWithNode {
+import exception.SLogoException;
+import model.SLogoCharacter;
+import model.SLogoCharacterState;
+
+public class AskWithNode extends TurtleCommand {
 
 	public AskWithNode() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
+	@Override
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		for(SLogoCharacter turtle: super.getWorkspace().getCharacterList()){
+			return evaluateChild(0, state) != 0 ? evaluateChild(1, state) : 0;
+		}
+		return 0;
+	}
+
+	
+	
 }
