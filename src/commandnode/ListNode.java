@@ -25,12 +25,16 @@ public class ListNode extends CommandNode{
     	myTreeFactory = new TreeFactory(ws);
     	myRootEvaluator = new RootEvaluator(ws);
     }
+    
+    public List<Node> getInnerRoots() throws SLogoException{
+    	return myTreeFactory.createRoots(clone(myInnerCommands));
+    }
 
     /**
      * @return Evaluation of last command
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        List<Node> myRoots = myTreeFactory.createRoots(clone(myInnerCommands));
+        List<Node> myRoots = getInnerRoots();
         return myRootEvaluator.evaluateRoots(myRoots);
     }
 
