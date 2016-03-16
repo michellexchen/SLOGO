@@ -8,6 +8,8 @@ import model.SLogoCharacterState;
  */
 public class IfNode extends BinaryNode {
 
+	private final static int COMMAND_LIST_INDEX= 1;
+	
     /**
      * @param state
      * Checks evaluation of 0th child (NumericNode) for 0
@@ -15,7 +17,8 @@ public class IfNode extends BinaryNode {
      * @return value of final command executed or 0 if none executed
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        return evaluateChild(0, state) != 0 ? evaluateChild(1, state) : 0;
+    	childListCheck(COMMAND_LIST_INDEX);
+    	return evaluateChild(0, state) != 0 ? evaluateChild(COMMAND_LIST_INDEX, state) : 0;
     }
 
 }

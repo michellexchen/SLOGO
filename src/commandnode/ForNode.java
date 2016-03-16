@@ -25,7 +25,9 @@ public class ForNode extends BinaryVariableNode {
      * Loop runs from start to end inclusive using increment between each run
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        ListNode controlList = ((ListNode) (getChildren().get(CONTROL_LIST_INDEX)));
+    	childListCheck(CONTROL_LIST_INDEX);
+    	childListCheck(COMMAND_LIST_INDEX);
+    	ListNode controlList = ((ListNode) (getChildren().get(CONTROL_LIST_INDEX)));
         int start = Integer.parseInt(controlList.getInnerCommands().get(START_INDEX));
         int end = Integer.parseInt(controlList.getInnerCommands().get(END_INDEX));
         int increment = Integer.parseInt(controlList.getInnerCommands().get(INCREMENT_INDEX));

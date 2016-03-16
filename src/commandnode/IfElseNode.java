@@ -9,8 +9,8 @@ import model.SLogoCharacterState;
  */
 public class IfElseNode extends TernaryNode {
 
-    private static final int FIRST = 1;
-    private static final int SECOND = 2;
+    private static final int TRUE_COMMANDS = 1;
+    private static final int FALSE_COMMANDS = 2;
     
     /**
      * @param state
@@ -20,8 +20,10 @@ public class IfElseNode extends TernaryNode {
      * @return value of final command executed or 0 if none executed
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        return evaluateChild(0, state) != 0 ? evaluateChild(FIRST, state) : 
-                                                    evaluateChild(SECOND, state);
+    	childListCheck(TRUE_COMMANDS);
+    	childListCheck(FALSE_COMMANDS);
+    	return evaluateChild(0, state) != 0 ? evaluateChild(TRUE_COMMANDS, state) : 
+                                                    evaluateChild(FALSE_COMMANDS, state);
     }
 
 }

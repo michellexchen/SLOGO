@@ -1,7 +1,6 @@
 package commandnode;
 
 import java.util.List;
-
 import exception.SLogoException;
 import model.SLogoCharacterState;
 import model.SLogoVariable;
@@ -11,6 +10,9 @@ import model.SLogoVariable;
  */
 public class DoTimesNode extends BinaryVariableNode {
 
+	private final static int CONTROL_LIST_INDEX = 0;
+    private final static int COMMAND_LIST_INDEX= 1;
+    
     /**
      * Children are two ListNode children
      * Child one is a ListNode with two values, a variable and a limit
@@ -19,11 +21,13 @@ public class DoTimesNode extends BinaryVariableNode {
      * 
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        ListNode controlList = ((ListNode) (getChildren().get(0)));
+    	childListCheck(CONTROL_LIST_INDEX);
+    	childListCheck(COMMAND_LIST_INDEX);
+    	ListNode controlList = ((ListNode) (getChildren().get(CONTROL_LIST_INDEX)));
         SLogoVariable var = getWorkspace().createVariable(controlList
                                           .getInnerCommands().get(0), 1);
         double limit = Double.parseDouble(controlList.getInnerCommands().get(1));
-        ListNode commandList = ((ListNode) (getChildren().get(1)));
+        ListNode commandList = ((ListNode) (getChildren().get(COMMAND_LIST_INDEX)));
         List<String> innerCommands = commandList.getInnerCommands();
         double evaluation = 0;
         for (int x = 0; x < limit; x++){

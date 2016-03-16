@@ -53,13 +53,21 @@ public abstract class CommandNode implements Node {
      * @throws SLogoException in subclasses if invalid command parameters
      */
     public double evaluateChild(int child, SLogoCharacterState state) throws SLogoException{
-        if(myChildren.size() <= child){
+        if(myChildren.size() <= child || myChildren.get(child) == null){
             throw new SLogoException(new ResourceLoader().getString("InvalidCommandTokens"));
         }
-        if(myChildren.get(child) == null){
-        	throw new SLogoException(new ResourceLoader().getString("InvalidCommandTokens"));
-        }
         return myChildren.get(child).evaluate(state);
+    }
+    
+    public Node getChild(int childNum){
+    	return myChildren.get(childNum);
+    }
+    
+    public void childListCheck(int childNum) throws SLogoException{
+    	Node child = getChild(childNum);
+		if(!(child instanceof ListNode)){
+			throw new SLogoException(new ResourceLoader().getString("ListError")+" at token " + childNum);
+		}
     }
 
 }
