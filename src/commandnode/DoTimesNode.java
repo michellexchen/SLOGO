@@ -30,9 +30,9 @@ public class DoTimesNode extends BinaryVariableNode {
         ListNode commandList = ((ListNode) (getChildren().get(COMMAND_LIST_INDEX)));
         List<String> innerCommands = commandList.getInnerCommands();
         double evaluation = 0;
-        for (int x = 0; x < limit; x++){
+        for (int x = 1; x <= limit; x++){
             List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
-            getRootEvaluator().evaluateRoots(myRoots);
+            evaluation = getRootEvaluator().evaluateRoots(myRoots);
             var.setValue(x);
         }
         return evaluation;

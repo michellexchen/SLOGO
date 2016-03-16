@@ -27,7 +27,7 @@ public class RepeatNode extends BinaryVariableNode {
 		double evaluation = 0;
 		for(int x=1; x<=repcount; x++){
 			List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
-			getRootEvaluator().evaluateRoots(myRoots);
+			evaluation = getRootEvaluator().evaluateRoots(myRoots);
 			repcountVar.setValue(x);
 		}
 		return evaluation;

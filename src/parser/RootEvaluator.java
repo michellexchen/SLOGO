@@ -44,13 +44,15 @@ public class RootEvaluator {
      * If this is the case, breaks out of current loop of now inactive turtles to evaluate next command for new turtles
      * 
      * @param List<Node> myRoot - set of commands in the form of their parse trees that will be evaluated for each turtle
+     * @return 
      */
-    public void evaluateRoots(List<Node> myRoots) throws SLogoException{
+    public double evaluateRoots(List<Node> myRoots) throws SLogoException{
         List<SLogoCharacter> activeTurtles = myWorkspace.getActiveTurtlesList();
         List<Integer> activeIDs = getTurtleIDs(activeTurtles);
+        double evaluation = 0;
         for(Node myRoot: myRoots){
             for(SLogoCharacter character: activeTurtles){
-                evaluateRoot(myRoot, character);
+                evaluation = evaluateRoot(myRoot, character);
                 List<SLogoCharacter> newActiveTurtles = 
                                         myWorkspace.getActiveTurtlesList();
                 List<Integer> newActiveIDs = getTurtleIDs(newActiveTurtles);
@@ -59,6 +61,7 @@ public class RootEvaluator {
                 }
             }
         }
+        return evaluation;
     }
 
     /**
