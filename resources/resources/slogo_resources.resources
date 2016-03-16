@@ -12,8 +12,9 @@ ColorIndex:Invalid color index.
 TreeFactory:Tree Factory couldn't be created.
 Repcount::repcount
 InstructionsLoader:Instruction Loader couldn't be created.
-InvalidCommandParts:Invalid command! Not enough command parts supplied.
+InvalidCommandTokens:Invalid command! Not enough command token parts supplied.
 NoCommandEntered:Nothing was entered! Try again!
 Title:SLogo
 InvalidWorkspace:This project doesn't exist yet. Please click + button to create.
 MakeUserInstruction:MakeUserInstruction
+LeadingNumber:Useless command entered! Command shouldn't begin with a number.

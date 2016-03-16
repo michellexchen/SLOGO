@@ -51,8 +51,15 @@ public class TreeFactory {
             	String customName = commandParts.remove(0);
             	myRoot.addChild(new CustomCommandNode(customName, myWorkspace));
             }
+            if(isNumeric(myRootToken)){
+            	throw new SLogoException(getResourceLoader().getString("LeadingNumber"));
+            }
             while (myRoot.numCurrentChildren() != myRoot.numRequiredChildren()) {
-            	myRoot.addChild(createChild(commandParts));
+            	Node nextChild = createChild(commandParts);
+            	if(nextChild == null){
+            		throw new SLogoException(getResourceLoader().getString("InvalidCommandTokens"));
+            	}
+            	myRoot.addChild(nextChild);
             }
             myRoots.add(myRoot);
         }

@@ -54,7 +54,10 @@ public abstract class CommandNode implements Node {
      */
     public double evaluateChild(int child, SLogoCharacterState state) throws SLogoException{
         if(myChildren.size() <= child){
-            throw new SLogoException(new ResourceLoader().getString("InvalidCommandParts"));
+            throw new SLogoException(new ResourceLoader().getString("InvalidCommandTokens"));
+        }
+        if(myChildren.get(child) == null){
+        	throw new SLogoException(new ResourceLoader().getString("InvalidCommandTokens"));
         }
         return myChildren.get(child).evaluate(state);
     }
