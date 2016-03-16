@@ -1,6 +1,4 @@
 package commandnode;
-
-import java.util.List;
 import exception.SLogoException;
 import model.ResourceLoader;
 import model.SLogoCharacterState;
@@ -11,7 +9,7 @@ import model.SLogoVariable;
  */
 public class RepeatNode extends BinaryVariableNode {
 
-	private final static int COMMAND_LIST_INDEX= 0;
+	private final static int COMMAND_LIST_INDEX= 1;
 	
 	/**
 	 * Repeats commands in list expr number of times where expr is evaluation of child 0
@@ -23,11 +21,9 @@ public class RepeatNode extends BinaryVariableNode {
 		int repcount = (int) evaluateChild(0, state);
 		SLogoVariable repcountVar = getWorkspace().createVariable(new ResourceLoader().getString("Repcount"), 1);
 		ListNode listNode = ((ListNode) (getChildren().get(COMMAND_LIST_INDEX)));
-		List<String> innerCommands = listNode.getInnerCommands();
 		double evaluation = 0;
 		for(int x=1; x<=repcount; x++){
-			List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
-			evaluation = getRootEvaluator().evaluateRoots(myRoots);
+			evaluation = listNode.evaluate(state);
 			repcountVar.setValue(x);
 		}
 		return evaluation;

@@ -1,6 +1,5 @@
 package commandnode;
 
-import java.util.List;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 import model.SLogoVariable;
@@ -28,11 +27,9 @@ public class DoTimesNode extends BinaryVariableNode {
                                           .getInnerCommands().get(0), 1);
         double limit = Double.parseDouble(controlList.getInnerCommands().get(1));
         ListNode commandList = ((ListNode) (getChildren().get(COMMAND_LIST_INDEX)));
-        List<String> innerCommands = commandList.getInnerCommands();
         double evaluation = 0;
         for (int x = 1; x <= limit; x++){
-            List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
-            evaluation = getRootEvaluator().evaluateRoots(myRoots);
+        	evaluation = commandList.evaluate(state);
             var.setValue(x);
         }
         return evaluation;

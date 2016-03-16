@@ -1,5 +1,4 @@
 package commandnode;
-import java.util.List;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
@@ -33,11 +32,9 @@ public class ForNode extends BinaryVariableNode {
         int increment = Integer.parseInt(controlList.getInnerCommands().get(INCREMENT_INDEX));
         SLogoVariable var = getWorkspace().createVariable(controlList.getInnerCommands().get(VARIABLE_INDEX), start);
         ListNode commandList = ((ListNode) (getChildren().get(COMMAND_LIST_INDEX)));
-        List<String> innerCommands = commandList.getInnerCommands();
         double evaluation = 0;
         for(int x = start; x <= end; x += increment){
-            List<Node> myRoots = getTreeFactory().createRoots(clone(innerCommands));
-            evaluation = getRootEvaluator().evaluateRoots(myRoots);
+        	evaluation = commandList.evaluate(state);
             var.setValue(x);
         }
         return evaluation;

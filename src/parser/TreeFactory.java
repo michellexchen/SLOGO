@@ -66,12 +66,6 @@ public class TreeFactory {
         return myRoots;
     }
 
-    private List<String> listCopy(List<String> list) {
-        List<String> copy = new ArrayList<>();
-        copy.addAll(list);
-        return copy;
-    }
-
     /**
      * Create children of an already process Node
      * 
@@ -85,10 +79,8 @@ public class TreeFactory {
         String myChildToken = commandParts.remove(0);
         if (isOpenBracket(myChildToken) || isOpenParenthesis(myChildToken)) {
             List<String> innerCommands = createCommandList(commandParts);
-            List<String> innerCommandsCopy = listCopy(innerCommands);
-            ListNode listNode;
-            listNode = new ListNode(createRoots(innerCommands));
-            listNode.setInnerCommands(innerCommandsCopy);
+            ListNode listNode = new ListNode(myWorkspace);
+            listNode.setInnerCommands(innerCommands);
             return listNode;
         }
         if (isVariable(myChildToken)) {
