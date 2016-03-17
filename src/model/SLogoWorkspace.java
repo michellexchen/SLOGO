@@ -2,13 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import commandnode.ListNode;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import view.SLogoPenData;
 import parser.RootEvaluator;
 import view.SLogoPropertiesData;
 import view.View;
@@ -27,10 +25,7 @@ public class SLogoWorkspace {
     private ObservableList<SLogoDisplayData> myObservableDataList;
     private ObservableList<SLogoVariable> myObservableVariableList;
     private ObservableList<SLogoCustomCommand> myObservableCustomList;
-    private ObservableList<int[]> myObservableColorList;
-    private ObservableList<String> myObservableShapeList;
     private SLogoPropertiesData myPropertiesData;
-    private SLogoPenData myPenData;
     private ColorLoader myColorLoader;
 
     /**
@@ -78,192 +73,14 @@ public class SLogoWorkspace {
      * 
      */
     public void addListeners() {
-        getObservableDataList().addListener((ListChangeListener) 
+        myObservableDataList.addListener((ListChangeListener) 
                    change -> getView().updateDisplayData());
 
-        getObservableVariableList().addListener((ListChangeListener) 
-                change -> getView().updateVariables(getObservableVariableList()));
+        myObservableVariableList.addListener((ListChangeListener) 
+                change -> getView().updateVariables(myObservableVariableList));
         
-        getObservableCustomList().addListener((ListChangeListener) 
-                   change -> getView().updateCustoms(getObservableCustomList()));
-    }
-
-    /**
-     * Returns a list of characters
-     * 
-     * @return
-     */
-    public List<SLogoCharacter> getCharacterList() {
-        return myCharacters;
-    }
-
-    /**
-     * Returns turtleFactory currently being used
-     * 
-     * @return
-     */
-    public SLogoTurtleFactory getCurrentTurtleFactory() {
-        return turtleFactory;
-    }
-
-    /**
-     * Adds a character to list
-     * 
-     * @param character
-     */
-    public void addNewCharacter(SLogoCharacter character) {
-        myCharacters.add(character);
-    }
-
-    /**
-     * Returns the ActiveTurtle List
-     * 
-     * @return
-     */
-    public List<SLogoCharacter> getActiveTurtlesList() {
-        return myActiveTurtles;
-    }
-
-    /**
-     * Adds an active turtle to the list
-     * 
-     * @param turtle
-     */
-    public void addActiveTurtle(SLogoCharacter turtle){
-        myActiveTurtles.add(turtle);
-    }
-
-    /**
-     * Clears the list
-     * 
-     */
-    public void resetActiveTurtles(){
-        myActiveTurtles.clear();
-    }
-
-    /**
-     * Removes a character from list
-     * 
-     * @param character
-     */
-    public void removeCharacter(SLogoCharacter character) {
-        myCharacters.remove(character);
-    }
-
-    /**
-     * 
-     * Adds a Variable to the observablelist
-     * 
-     * @param variable
-     */
-    public void addVariable(SLogoVariable variable){
-    	myObservableVariableList.add(variable);
-    }
-    
-    /**
-     * Adds a custom command to the observablelist
-     * 
-     * @param variable
-     */
-    public void addCustomCommand(SLogoCustomCommand custom){
-    	myObservableCustomList.add(custom);
-    }
-
-    /**
-     * @return the myView
-     */
-    public View getView() {
-        return myView;
-    }
-
-    /**
-     * @param myView
-     *            the myView to set
-     */
-    public void setView(View myView) {
-        this.myView = myView;
-    }
-
-    /**
-     * @return the myObservableDataList
-     */
-    public ObservableList<SLogoDisplayData> getObservableDataList() {
-        return myObservableDataList;
-    }
-
-    /**
-     * @param myObservableDataList
-     *            the myObservableDataList to set
-     */
-    public void setObservableDataList(ObservableList<SLogoDisplayData> myObservableDataList) {
-        this.myObservableDataList = myObservableDataList;
-    }
-
-    /**
-     * Returns ObservableVariableList
-     * 
-     * @return
-     */
-    public ObservableList<SLogoVariable> getObservableVariableList() {
-        return myObservableVariableList;
-    }
-    
-    /**
-     * Returns ObservableCustomList
-     * 
-     * @return
-     */
-    public ObservableList<SLogoCustomCommand> getObservableCustomList() {
-        return myObservableCustomList;
-    }
-
-    /**
-     * @return the myRootEvaluator
-     */
-    public RootEvaluator getRootEvaluator() {
-        return myRootEvaluator;
-    }
-
-    /**
-     * @param myRootEvaluator the myRootEvaluator to set
-     */
-    public void setRootEvaluator(RootEvaluator myRootEvaluator) {
-        this.myRootEvaluator = myRootEvaluator;
-    }
-
-    /**
-     * @return the myObservableColorList
-     */
-    public ObservableList<int[]> getMyObservableColorList () {
-        return myObservableColorList;
-    }
-
-    /**
-     * @return the myObservableShapeList
-     */
-    public ObservableList<String> getMyObservableShapeList () {
-        return myObservableShapeList;
-    }
-
-    /**
-     * @return the myPropertiesData
-     */
-    public SLogoPropertiesData getMyPropertiesData () {
-        return myPropertiesData;
-    }
-
-    /**
-     * @return the myPenData
-     */
-    public SLogoPenData getMyPenData () {
-        return myPenData;
-    }
-
-    /**
-     * @return the myColorLoader
-     */
-    public ColorLoader getMyColorLoader () {
-        return myColorLoader;
+        myObservableCustomList.addListener((ListChangeListener) 
+                   change -> getView().updateCustoms(myObservableCustomList));
     }
     
     /**
@@ -286,9 +103,9 @@ public class SLogoWorkspace {
             }
         }
         if(created) {
-            getObservableCustomList().remove(varModified);
+            myObservableCustomList.remove(varModified);
         }
-        getObservableCustomList().add(
+        myObservableCustomList.add(
                            new SLogoCustomCommand(commandName, varList, commandList));
         return lookupCustomCommand(commandName);
 	}
@@ -355,9 +172,82 @@ public class SLogoWorkspace {
             }
         }
         if(created) {
-        	getObservableVariableList().remove(varModified);
+        	myObservableVariableList.remove(varModified);
         }
-        getObservableVariableList().add(new SLogoVariable(varName, varValue));
+        myObservableVariableList.add(new SLogoVariable(varName, varValue));
         return lookupVariable(varName);
     }
+    
+    /**
+     * Returns a list of characters
+     * 
+     * @return
+     */
+    public List<SLogoCharacter> getCharacterList() {
+        return myCharacters;
+    }
+
+    /**
+     * Returns turtleFactory currently being used
+     * 
+     * @return
+     */
+    public SLogoTurtleFactory getCurrentTurtleFactory() {
+        return turtleFactory;
+    }
+
+    /**
+     * Returns the ActiveTurtle List
+     * 
+     * @return
+     */
+    public List<SLogoCharacter> getActiveTurtlesList() {
+        return myActiveTurtles;
+    }
+
+    /**
+     * Adds an active turtle to the list
+     * 
+     * @param turtle
+     */
+    public void addActiveTurtle(SLogoCharacter turtle){
+        myActiveTurtles.add(turtle);
+    }
+
+    /**
+     * Clears the list
+     * 
+     */
+    public void resetActiveTurtles(){
+        myActiveTurtles.clear();
+    }
+
+    /**
+     * @return the myView
+     */
+    public View getView() {
+        return myView;
+    }
+
+    /**
+     * @return the myObservableDataList
+     */
+    public ObservableList<SLogoDisplayData> getObservableDataList() {
+        return myObservableDataList;
+    }
+
+    /**
+     * @return the myRootEvaluator
+     */
+    public RootEvaluator getRootEvaluator() {
+        return myRootEvaluator;
+    }
+    
+    /**
+     * @return the myPropertiesData
+     */
+    public SLogoPropertiesData getMyPropertiesData () {
+        return myPropertiesData;
+    }
+    
 }

@@ -20,12 +20,12 @@ public class CustomFunctionNode extends VariableCommand{
     public double evaluate(SLogoCharacterState state) throws SLogoException{
         List<Node> myChildren = getChildren();
         List<String> customVariables = myCommand.getVariableNames();
-        List<SLogoVariable> myVariables = new ArrayList<SLogoVariable>();
+        List<SLogoVariable> myVariables = new ArrayList<>();
         for(int x=0; x<myChildren.size(); x++){
             SLogoVariable myVar = getWorkspace().createVariable(customVariables.get(x), myChildren.get(x).evaluate(state));
             myVariables.add(myVar);
         }
-        List<Node> myCustomVariables = new ArrayList<Node>();
+        List<Node> myCustomVariables = new ArrayList<>();
         for(String var : customVariables){
             myCustomVariables.add(new VariableNode(var));
         }

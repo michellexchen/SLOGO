@@ -10,7 +10,6 @@ public class SLogoTurtleFactory {
 
 	private SLogoWorkspace myWorkspace;
 	private int LAST_ID = 0;
-	private boolean DEFAULT_PEN_DOWN = true;
 	private double DEFAULT_DIRECTION = 0; 
 	private boolean DEFAULT_HIDDEN = false;
 	private int DEFAULT_X = 0;
@@ -32,9 +31,11 @@ public class SLogoTurtleFactory {
 	 */
 	
 	public SLogoCharacter createTurtle(int myX, int myY, int requestedID) throws SLogoException{
-		if(hasTurtleBeenCreated(requestedID)) return myWorkspace.getCharacterList().get(requestedID);
+		if(hasTurtleBeenCreated(requestedID)){
+			return myWorkspace.getCharacterList().get(requestedID);
+		}
 		SLogoPen myPen = new SLogoPen();
-		SLogoTurtle myTurtle = new SLogoTurtle(LAST_ID++, myPen, myX, myY, DEFAULT_PEN_DOWN, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_SHAPE_INDEX);
+		SLogoTurtle myTurtle = new SLogoTurtle(LAST_ID++, myPen, myX, myY, DEFAULT_DIRECTION, DEFAULT_HIDDEN, DEFAULT_SHAPE_INDEX);
 		myWorkspace.getCharacterList().add(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 		turtleData.addObserver(myWorkspace.getView().getObserver());

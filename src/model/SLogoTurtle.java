@@ -24,11 +24,10 @@ public class SLogoTurtle implements SLogoCharacter{
      * @param shapeIndex
      * @throws SLogoException
      */
-    public SLogoTurtle (int ID, SLogoPen myPen, double xCoor, double yCoor, 
-                        boolean penDown, double direction, boolean isHidden, 
+    public SLogoTurtle (int ID, SLogoPen myPen, double xCoor, double yCoor, double direction, boolean isHidden, 
                         int shapeIndex) throws SLogoException {
         myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, 
-                                       isHidden, penDown, shapeIndex);
+                                       isHidden, shapeIndex);
         this.ID = ID;
     }
 
