@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Reads pre-defined .logo files
+ * Currently only able to read in files with one "to" custom commands
  * 
  * @author Hunter
  *
