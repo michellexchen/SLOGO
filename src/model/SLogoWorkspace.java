@@ -16,7 +16,7 @@ import view.View;
  *
  */
 public class SLogoWorkspace {
-    
+
     private View myView;
     private SLogoTurtleFactory turtleFactory;
     private RootEvaluator myRootEvaluator;
@@ -74,15 +74,15 @@ public class SLogoWorkspace {
      */
     public void addListeners() {
         myObservableDataList.addListener((ListChangeListener) 
-                   change -> getView().updateDisplayData());
+                    change -> getView().updateDisplayData());
 
         myObservableVariableList.addListener((ListChangeListener) 
-                change -> getView().updateVariables(myObservableVariableList));
-        
+                    change -> getView().updateVariables(myObservableVariableList));
+
         myObservableCustomList.addListener((ListChangeListener) 
-                   change -> getView().updateCustoms(myObservableCustomList));
+                    change -> getView().updateCustoms(myObservableCustomList));
     }
-    
+
     /**
      * Creates a new custom command and modifies the old custom command if needed
      * 
@@ -106,10 +106,10 @@ public class SLogoWorkspace {
             myObservableCustomList.remove(varModified);
         }
         myObservableCustomList.add(
-                           new SLogoCustomCommand(commandName, varList, commandList));
+                      new SLogoCustomCommand(commandName, varList, commandList));
         return lookupCustomCommand(commandName);
-	}
-    
+    }
+
     /**
      * Variable lookup by name
      * 
@@ -139,7 +139,7 @@ public class SLogoWorkspace {
         }
         return null;
     }
-    
+
     /**
      * See if a Variable is currently in the list and returns if it's present
      * 
@@ -172,12 +172,12 @@ public class SLogoWorkspace {
             }
         }
         if(created) {
-        	myObservableVariableList.remove(varModified);
+            myObservableVariableList.remove(varModified);
         }
         myObservableVariableList.add(new SLogoVariable(varName, varValue));
         return lookupVariable(varName);
     }
-    
+
     /**
      * Returns a list of characters
      * 
@@ -210,7 +210,7 @@ public class SLogoWorkspace {
      * 
      * @param turtle
      */
-    public void addActiveTurtle(SLogoCharacter turtle){
+    public void addActiveTurtle(SLogoCharacter turtle) {
         myActiveTurtles.add(turtle);
     }
 
@@ -218,7 +218,7 @@ public class SLogoWorkspace {
      * Clears the list
      * 
      */
-    public void resetActiveTurtles(){
+    public void resetActiveTurtles() {
         myActiveTurtles.clear();
     }
 
@@ -242,12 +242,12 @@ public class SLogoWorkspace {
     public RootEvaluator getRootEvaluator() {
         return myRootEvaluator;
     }
-    
+
     /**
      * @return the myPropertiesData
      */
     public SLogoPropertiesData getMyPropertiesData () {
         return myPropertiesData;
     }
-    
+
 }

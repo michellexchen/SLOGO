@@ -60,9 +60,10 @@ public class RGBColor {
      * @throws SLogoException for correcting values by user
      * Uses myNewInput, user input grabbed from SLogoException typed by user in text popup
      */
-    public boolean boundsCheck(int red, int green, int blue) throws SLogoException{
+    public boolean boundsCheck(int red, int green, int blue) throws SLogoException {
         InstructionLoader instructLoader = new InstructionLoader();
-        if ((red < MIN_VAL || green < MIN_VAL || blue < MIN_VAL || red > MAX_VAL || green > MAX_VAL || blue > MAX_VAL)) {
+        if ((red < MIN_VAL || green < MIN_VAL || blue < MIN_VAL || red > MAX_VAL 
+                || green > MAX_VAL || blue > MAX_VAL)) {
             SLogoException e = new SLogoException(instructLoader
                                              .getString("RGBColor"), NUM_ARGUMENTS);
             Optional<String> myNewInput = e.getNewInput();
@@ -75,10 +76,11 @@ public class RGBColor {
      * @param Unparsed user input (in form "R G B")
      * @return integer array {R, G, B}
      */
-    public int[] grabRGB(String input){
+    public int[] grabRGB(String input) {
         String[] rgbStr = input.split(" ");
         return new int[] { Integer.parseInt(rgbStr[RED_INDEX]), 
-                           Integer.parseInt(rgbStr[GREEN_INDEX]), Integer.parseInt(rgbStr[BLUE_INDEX])};
+                           Integer.parseInt(rgbStr[GREEN_INDEX]), 
+                           Integer.parseInt(rgbStr[BLUE_INDEX])};
     }
 
     /**
@@ -86,7 +88,7 @@ public class RGBColor {
      * Calls boundsCheck to ensure proper user input
      * @throws SLogoException
      */
-    public void checkInput(Optional<String> myNewInput) throws SLogoException{
+    public void checkInput(Optional<String> myNewInput) throws SLogoException {
         int[] rgb = grabRGB(myNewInput.get());
         boundsCheck(rgb[RED_INDEX], rgb[GREEN_INDEX], rgb[BLUE_INDEX]);
     }

@@ -79,19 +79,21 @@ public class LogoFileLoader extends FileLoader {
             List<String> toCommands = new ArrayList<>();
             String line = br.readLine();
             while (line != null) {
-                List<String> words = new ArrayList<>(Arrays.asList(line.split("\\s+")));
-                for (String word : words) {
-                    if (sawTo) {
-                        sb.append(word + " ");
-                        toCommands.add(word);
-                        sawTo = false;
-                    } else if (toCommands.contains(word)) {
-                        continue;
-                    } else if (word.equals("to")) {
-                        sb.append(word + " ");
-                        sawTo = true;
-                    } else {
-                        sb.append(word + " ");
+                if (!line.startsWith("#")) {
+                    List<String> words = new ArrayList<>(Arrays.asList(line.split("\\s+")));
+                    for (String word : words) {
+                        if (sawTo) {
+                            sb.append(word + " ");
+                            toCommands.add(word);
+                            sawTo = false;
+                        } else if (toCommands.contains(word)) {
+                            continue;
+                        } else if (word.equals("to")) {
+                            sb.append(word + " ");
+                            sawTo = true;
+                        } else {
+                            sb.append(word + " ");
+                        }
                     }
                 }
                 line = br.readLine();
@@ -138,7 +140,7 @@ public class LogoFileLoader extends FileLoader {
      */
     public static void main(String[] args) throws IOException {
         
-        LogoFileLoader l = new LogoFileLoader("examples/procedures/dash.logo");
+        LogoFileLoader l = new LogoFileLoader("examples/simple/forward.logo");
         for (String s : l.registerCustomCommands()) {
             System.out.println(s);
         }
