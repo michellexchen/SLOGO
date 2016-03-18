@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -34,12 +35,12 @@ import parser.CommandNameLoader;
 public class SLogoCustomizerBuilder extends Observable {
     private static final String CSS_PATH = "view/splashstyle.css";
 
-    private static final int XPROMPTSIZE = 500;
-    private static final int YPROMPTSIZE = 300; 
-    private static final int PADDING = 55;
+    private static final int XPROMPTSIZE = 550;
+    private static final int YPROMPTSIZE = 350; 
+    private static final int PADDING = 74;
     private static final int SPLASHSIZE = 400;
     private static final int COLORLABELSIZE = 202;
-    private static final int PREFSIZE = 40;
+    private static final int PREFSIZE = 50;
     private static final int RECT_WIDTH = 100;
     private static final int RECT_HEIGHT = 20;
     private static final int SLIDER = 10;
@@ -128,7 +129,7 @@ public class SLogoCustomizerBuilder extends Observable {
         vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
         vbox.setPadding(new Insets(PADDING));
         vbox.getChildren().addAll(colorHb, fontColorHb, 
-                                  thicknessSliderHb, switchHb, buttonHb);
+                                  thicknessSliderHb, penStyleHb, switchHb, buttonHb);
         vbox.getStylesheets().add(CSS_PATH);
         return vbox;
     }
@@ -332,7 +333,7 @@ public class SLogoCustomizerBuilder extends Observable {
                 	myGUI.run(myCommandNameLoader.getString("pd"));
                 } else {
                 	myGUI.run(myCommandNameLoader.getString("pu"));
-                }                     
+                }                               
         }
             catch (SLogoException e1) {
                 e1.showErrorDialog(getErrorLoader().getString("ButtonError"));
@@ -343,6 +344,16 @@ public class SLogoCustomizerBuilder extends Observable {
 
     public void update(Observable observable, Object arg1) {
 
+    }
+    
+    public void changeStroke(Line myLine){
+    	if (comboBox.getValue().toString().equals("DOTTED")) {
+            myLine.getStrokeDashArray().addAll(2d);
+    	} else if (comboBox.getValue().toString().equals("DASHED")) {
+    		myLine.getStrokeDashArray().addAll(10d, 5d);
+    	} else {
+    		myLine.getStrokeDashArray().addAll(1d);
+    	}
     }
 
     /**

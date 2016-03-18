@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import exception.SLogoException;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Model;
 import model.ResourceLoader;
 import model.SLogoCustomCommand;
@@ -109,6 +112,9 @@ public class SLogoVisualizer implements Observer {
         newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
         newLine.setStrokeWidth(1.0f);
         newLine.setStroke(myGUIController.getCustomizer().getMyPenColor());
+        //SET DASH HERE
+        myGUIController.getCustomizer().changeStroke(newLine);
+  
         return newLine;
     }
 
