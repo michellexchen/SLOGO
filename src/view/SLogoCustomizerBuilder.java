@@ -32,7 +32,7 @@ import parser.CommandNameLoader;
  * Customize button is clicked
  * 
  */
-public class SLogoCustomizerBuilder extends Observable {
+public class SLogoCustomizerBuilder {
     private static final String CSS_PATH = "view/splashstyle.css";
 
     private static final int XPROMPTSIZE = 550;
@@ -46,6 +46,10 @@ public class SLogoCustomizerBuilder extends Observable {
     private static final int SLIDER = 10;
     private static final float TICK_UNIT = 0.25f;
     private static final float BLOCK_INCREMENT = 0.1f;
+    private static final double DOTTED_LINE = 2.0;
+    private static final double DASHED_LINE = 10.0;
+    private static final double DASHED_SPACE = 5.0;
+    private static final double SOLID_LINE = 1.0;
     
     private Stage myCustomizerStage;
     private Scene myCustomizerScene;
@@ -110,6 +114,7 @@ public class SLogoCustomizerBuilder extends Observable {
     private void setup() throws SLogoException{
         myPaneColor = Color.WHITE;
         myPenColor = Color.BLACK;
+        myStrokeStyle = "SOLID";
         myPenWidth = 1;
         setColorPicker();
         setFontColor();
@@ -253,6 +258,8 @@ public class SLogoCustomizerBuilder extends Observable {
         fontColorHb.setPrefSize(PREFSIZE, PREFSIZE);
     }
 
+    private int myPenStyle;
+
     /**
      * Sets line style
      * 
@@ -272,6 +279,11 @@ public class SLogoCustomizerBuilder extends Observable {
         penStyleHb = new HBox();
         penStyleHb.getChildren().addAll(penStyleLabel, comboBox);
         penStyleHb.setPrefSize(PREFSIZE, PREFSIZE);
+        
+        myPenStyle = options.indexOf(getResourceLoader().getString("PenDefault"));
+        System.out.println("OVERHERE");
+        System.out.println(getResourceLoader().getString("PenDefault"));
+        System.out.println(myPenStyle);
     }
 
     /**
@@ -333,7 +345,7 @@ public class SLogoCustomizerBuilder extends Observable {
                 	myGUI.run(myCommandNameLoader.getString("pd"));
                 } else {
                 	myGUI.run(myCommandNameLoader.getString("pu"));
-                }                               
+                }                
         }
             catch (SLogoException e1) {
                 e1.showErrorDialog(getErrorLoader().getString("ButtonError"));
@@ -346,13 +358,16 @@ public class SLogoCustomizerBuilder extends Observable {
 
     }
     
+    
+    
+    
     public void changeStroke(Line myLine){
     	if (comboBox.getValue().toString().equals("DOTTED")) {
-            myLine.getStrokeDashArray().addAll(2d);
+            myLine.getStrokeDashArray().addAll(DOTTED_LINE);
     	} else if (comboBox.getValue().toString().equals("DASHED")) {
-    		myLine.getStrokeDashArray().addAll(10d, 5d);
+    		myLine.getStrokeDashArray().addAll(DASHED_LINE, DASHED_SPACE);
     	} else {
-    		myLine.getStrokeDashArray().addAll(1d);
+    		myLine.getStrokeDashArray().addAll(SOLID_LINE);
     	}
     }
 
