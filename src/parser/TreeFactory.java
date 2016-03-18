@@ -51,18 +51,19 @@ public class TreeFactory {
             	String customName = commandParts.remove(0);
             	myRoot.addChild(new CustomCommandNode(customName, myWorkspace));
             }
+            if(isNumeric(myRootToken)){
+            	throw new SLogoException(getResourceLoader().getString("LeadingNumber"));
+            }
             while (myRoot.numCurrentChildren() != myRoot.numRequiredChildren()) {
-            	myRoot.addChild(createChild(commandParts));
+            	Node nextChild = createChild(commandParts);
+            	if(nextChild == null){
+            		throw new SLogoException(getResourceLoader().getString("InvalidCommandTokens"));
+            	}
+            	myRoot.addChild(nextChild);
             }
             myRoots.add(myRoot);
         }
         return myRoots;
-    }
-
-    private List<String> listCopy(List<String> list) {
-        List<String> copy = new ArrayList<>();
-        copy.addAll(list);
-        return copy;
     }
 
     /**
@@ -78,10 +79,8 @@ public class TreeFactory {
         String myChildToken = commandParts.remove(0);
         if (isOpenBracket(myChildToken) || isOpenParenthesis(myChildToken)) {
             List<String> innerCommands = createCommandList(commandParts);
-            List<String> innerCommandsCopy = listCopy(innerCommands);
-            ListNode listNode;
-            listNode = new ListNode(createRoots(innerCommands));
-            listNode.setInnerCommands(innerCommandsCopy);
+            ListNode listNode = new ListNode(myWorkspace);
+            listNode.setInnerCommands(innerCommands);
             return listNode;
         }
         if (isVariable(myChildToken)) {

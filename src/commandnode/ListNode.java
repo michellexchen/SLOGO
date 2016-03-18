@@ -5,6 +5,9 @@ import java.util.List;
 
 import exception.SLogoException;
 import model.SLogoCharacterState;
+import model.SLogoWorkspace;
+import parser.RootEvaluator;
+import parser.TreeFactory;
 
 /**
  * @author Adam
@@ -15,23 +18,24 @@ public class ListNode extends CommandNode{
 
     private List<Node> myCommands;
     private List<String> myInnerCommands;
+    private TreeFactory myTreeFactory;
+    private RootEvaluator myRootEvaluator;
 
-    /**
-     * @param myCommands, roots of individual commands to be placed inside the ListNode
-     */
-    public ListNode(List<Node> myCommands){
-        this.myCommands = myCommands;
+    public ListNode(SLogoWorkspace ws) throws SLogoException{
+    	myTreeFactory = new TreeFactory(ws);
+    	myRootEvaluator = new RootEvaluator(ws);
+    }
+    
+    public List<Node> getInnerRoots() throws SLogoException{
+    	return myTreeFactory.createRoots(clone(myInnerCommands));
     }
 
     /**
      * @return Evaluation of last command
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-        double evaluation = 0;
-        for(Node node : myCommands){
-            evaluation = node.evaluate(state);
-        }
-        return evaluation;
+        List<Node> myRoots = getInnerRoots();
+        return myRootEvaluator.evaluateRoots(myRoots);
     }
 
     public List<Node> getCommands(){
@@ -45,13 +49,11 @@ public class ListNode extends CommandNode{
     public List<String> getInnerCommands(){
         return myInnerCommands;
     }
-
-    public List<String> getInnerCommandsClone(){
-        List<String> innerCommandsClone = new ArrayList<String>();
-        for(String command : myInnerCommands){
-            innerCommandsClone.add(command);
-        }
-        return innerCommandsClone;
+    
+    private List<String> clone(List<String> list){
+        List<String> copy = new ArrayList<>();
+        copy.addAll(list);
+        return copy;
     }
 
 }

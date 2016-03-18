@@ -12,6 +12,8 @@ public class SetPaletteNode extends QuaternionNode{
     private static final int GREEN = 2;
     private static final int BLUE = 3;
     
+    private RGBColor myColorNode;
+    
     /**
      * @param state
      * @return index of new color
@@ -21,8 +23,15 @@ public class SetPaletteNode extends QuaternionNode{
         int red = (int) evaluateChild(RED, state);
         int green = (int) evaluateChild(GREEN, state);
         int blue = (int) evaluateChild(BLUE, state);
-        RGBColor colorNode = new RGBColor(red, green, blue, index);
+        myColorNode = new RGBColor(red, green, blue, index);
         return index;
+    }
+
+    /**
+     * @return the colorNode
+     */
+    public RGBColor getColorNode () {
+        return myColorNode;
     }
 
 }

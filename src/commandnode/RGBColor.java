@@ -15,6 +15,11 @@ public class RGBColor {
     private int blue;
     private int colorIndex;
     private static final int NUM_ARGUMENTS = 3;
+    private int MAX_VAL = 255;
+    private int MIN_VAL = 0;
+    private int RED_INDEX = 0;
+    private int GREEN_INDEX = 1;
+    private int BLUE_INDEX = 2;
 
     /**
      * @param red
@@ -55,9 +60,10 @@ public class RGBColor {
      * @throws SLogoException for correcting values by user
      * Uses myNewInput, user input grabbed from SLogoException typed by user in text popup
      */
-    public boolean boundsCheck(int red, int green, int blue) throws SLogoException{
+    public boolean boundsCheck(int red, int green, int blue) throws SLogoException {
         InstructionLoader instructLoader = new InstructionLoader();
-        if ((red < 0 || green < 0 || blue < 0 || red > 255 || green > 255 || blue > 255)) {
+        if ((red < MIN_VAL || green < MIN_VAL || blue < MIN_VAL || red > MAX_VAL 
+                || green > MAX_VAL || blue > MAX_VAL)) {
             SLogoException e = new SLogoException(instructLoader
                                              .getString("RGBColor"), NUM_ARGUMENTS);
             Optional<String> myNewInput = e.getNewInput();
@@ -70,10 +76,11 @@ public class RGBColor {
      * @param Unparsed user input (in form "R G B")
      * @return integer array {R, G, B}
      */
-    public int[] grabRGB(String input){
+    public int[] grabRGB(String input) {
         String[] rgbStr = input.split(" ");
-        return new int[] { Integer.parseInt(rgbStr[0]), 
-                           Integer.parseInt(rgbStr[1]), Integer.parseInt(rgbStr[2])};
+        return new int[] { Integer.parseInt(rgbStr[RED_INDEX]), 
+                           Integer.parseInt(rgbStr[GREEN_INDEX]), 
+                           Integer.parseInt(rgbStr[BLUE_INDEX])};
     }
 
     /**
@@ -81,9 +88,9 @@ public class RGBColor {
      * Calls boundsCheck to ensure proper user input
      * @throws SLogoException
      */
-    public void checkInput(Optional<String> myNewInput) throws SLogoException{
+    public void checkInput(Optional<String> myNewInput) throws SLogoException {
         int[] rgb = grabRGB(myNewInput.get());
-        boundsCheck(rgb[0], rgb[1], rgb[2]);
+        boundsCheck(rgb[RED_INDEX], rgb[GREEN_INDEX], rgb[BLUE_INDEX]);
     }
 
 }

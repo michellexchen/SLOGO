@@ -8,31 +8,32 @@ import model.SLogoCharacterState;
 import model.SLogoCustomCommand;
 import model.SLogoVariable;
 
-public class CustomFunctionNode extends VariableCommand{
+public class CustomFunctionNode extends VariableCommand {
 
     private SLogoCustomCommand myCommand;
 
-    public CustomFunctionNode(SLogoCustomCommand myCommand){
+    public CustomFunctionNode(SLogoCustomCommand myCommand) {
         this.myCommand = myCommand;
         setNumChildren(myCommand.getVariableNames().size());
     }
 
-    public double evaluate(SLogoCharacterState state) throws SLogoException{
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
         List<Node> myChildren = getChildren();
         List<String> customVariables = myCommand.getVariableNames();
-        List<SLogoVariable> myVariables = new ArrayList<SLogoVariable>();
-        for(int x=0; x<myChildren.size(); x++){
-            SLogoVariable myVar = getWorkspace().createVariable(customVariables.get(x), myChildren.get(x).evaluate(state));
+        List<SLogoVariable> myVariables = new ArrayList<>();
+        for (int x = 0; x < myChildren.size(); x++) {
+            SLogoVariable myVar = getWorkspace().createVariable(
+                          customVariables.get(x), myChildren.get(x).evaluate(state));
             myVariables.add(myVar);
         }
-        List<Node> myCustomVariables = new ArrayList<Node>();
-        for(String var : customVariables){
+        List<Node> myCustomVariables = new ArrayList<>();
+        for (String var : customVariables) {
             myCustomVariables.add(new VariableNode(var));
         }
-        ListNode customVars = new ListNode(myCustomVariables);
+        ListNode customVars = new ListNode(getWorkspace());
         customVars.setInnerCommands(customVariables);
-        getWorkspace().createCustomCommand(myCommand.getName(), customVars, myCommand.getMyCommands());
+        getWorkspace().createCustomCommand(myCommand.getName(), customVars, 
+                                           myCommand.getMyCommands());
         return myCommand.getMyCommands().evaluate(state);
     }
-
 }

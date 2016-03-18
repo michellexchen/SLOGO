@@ -9,7 +9,7 @@ import exception.SLogoException;
 public class SLogoTurtleState extends SLogoCharacterState {
 
     public SLogoTurtleState(SLogoPen myPen, double xCoor, double yCoor, 
-                            double direction, boolean isHidden, boolean penDown, 
+                            double direction, boolean isHidden, 
                             int shapeIndex) throws SLogoException {
         super(myPen, xCoor, yCoor, direction, isHidden, shapeIndex);
     }

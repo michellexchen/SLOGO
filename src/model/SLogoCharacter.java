@@ -8,8 +8,8 @@ package model;
 
 public interface SLogoCharacter {
 
-    public void setState(SLogoCharacterState myState);
+    void setState(SLogoCharacterState myState);
 
-    public SLogoCharacterState getState();
+    SLogoCharacterState getState();
 
 }

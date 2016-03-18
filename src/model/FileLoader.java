@@ -20,8 +20,7 @@ import exception.SLogoException;
  */
 public abstract class FileLoader {
     
-    private static final String FILE_NOT_FOUND = "Fild not found";
-    
+    private static final String FILE_NOT_FOUND = "File not found";
     Properties myProperties;
     HashMap<String, String> myBackMap;
     private BufferedReader myFileReader;
