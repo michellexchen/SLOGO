@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import exception.SLogoException;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.Model;
 import model.ResourceLoader;
 import model.SLogoCustomCommand;
@@ -24,7 +21,7 @@ import model.SLogoVariable;
 import model.SLogoDisplayData;
 
 /**
- * Visualizer class that contains methods that renders turtles 
+ * Visualizer class that contains methods that renders turtles.
  * on the screen to show the user
  * Also exists to support multiple workspaces
  * 
@@ -41,6 +38,7 @@ public class SLogoVisualizer implements Observer {
     private static final int TURTLE_CLICKED_SIZE = 55;
     private static final int PADDING = TURTLE_SIZE / 2;
     private static final int HALF_FACTOR = 2;
+    private static final float DEFAULT_STROKE = 1.0f;
 
     private ObservableList<SLogoDisplayData> myObservableDataList;
 
@@ -55,10 +53,21 @@ public class SLogoVisualizer implements Observer {
     private String myCanvasColor;
     private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
+    /**
+     * Default constructor
+     * 
+     * @param model
+     */
     public SLogoVisualizer(Model model) {
         myModel = model;
     }
 
+    /**
+     * Initialize method that creates a Loader objects and loads FXML file
+     * created by SceneBuilder
+     * 
+     * @throws SLogoException
+     */
     public void initialize() throws SLogoException {
         myPromptBuilder = new SLogoPromptBuilder(myProperties);
         myPromptBuilder.promptScreen();
@@ -80,10 +89,18 @@ public class SLogoVisualizer implements Observer {
         show();
     }
 
+    /**
+     * Shows the current stage
+     * 
+     */
     public void show() {
         getStage().show();
     }
 
+    /**
+     * Hides the current stage
+     * 
+     */
     public void hide () {
         getStage().hide();
 
@@ -105,15 +122,15 @@ public class SLogoVisualizer implements Observer {
      * @return Line
      */
     public Line createLine(SLogoPosition position) {
-        Line newLine = new Line();
-        newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT);
-        newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT);
-        newLine.setEndX(position.getX() + COORDINATE_SHIFT);
-        newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
-        newLine.setStrokeWidth(1.0f);
-        newLine.setStroke(myGUIController.getCustomizer().getMyPenColor());
-        myGUIController.getCustomizer().changeStroke(newLine);
-        return newLine;
+    	Line newLine = new Line();
+    	newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT);
+    	newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT);
+    	newLine.setEndX(position.getX() + COORDINATE_SHIFT);
+    	newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
+    	newLine.setStrokeWidth(DEFAULT_STROKE);
+    	newLine.setStroke(myGUIController.getCustomizer().getMyPenColor());
+    	myGUIController.getCustomizer().changeStroke(newLine);
+    	return newLine;
     }
 
     /**
