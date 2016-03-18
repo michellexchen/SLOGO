@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -31,20 +32,24 @@ import parser.CommandNameLoader;
  * Customize button is clicked
  * 
  */
-public class SLogoCustomizerBuilder extends Observable {
+public class SLogoCustomizerBuilder {
     private static final String CSS_PATH = "view/splashstyle.css";
 
-    private static final int XPROMPTSIZE = 500;
-    private static final int YPROMPTSIZE = 300; 
-    private static final int PADDING = 55;
+    private static final int XPROMPTSIZE = 550;
+    private static final int YPROMPTSIZE = 350; 
+    private static final int PADDING = 74;
     private static final int SPLASHSIZE = 400;
     private static final int COLORLABELSIZE = 202;
-    private static final int PREFSIZE = 40;
+    private static final int PREFSIZE = 50;
     private static final int RECT_WIDTH = 100;
     private static final int RECT_HEIGHT = 20;
     private static final int SLIDER = 10;
     private static final float TICK_UNIT = 0.25f;
     private static final float BLOCK_INCREMENT = 0.1f;
+    private static final double DOTTED_LINE = 2.0;
+    private static final double DASHED_LINE = 10.0;
+    private static final double DASHED_SPACE = 5.0;
+    private static final double SOLID_LINE = 1.0;
     
     private Stage myCustomizerStage;
     private Scene myCustomizerScene;
@@ -109,6 +114,7 @@ public class SLogoCustomizerBuilder extends Observable {
     private void setup() throws SLogoException{
         myPaneColor = Color.WHITE;
         myPenColor = Color.BLACK;
+        myStrokeStyle = "SOLID";
         myPenWidth = 1;
         setColorPicker();
         setFontColor();
@@ -128,7 +134,7 @@ public class SLogoCustomizerBuilder extends Observable {
         vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
         vbox.setPadding(new Insets(PADDING));
         vbox.getChildren().addAll(colorHb, fontColorHb, 
-                                  thicknessSliderHb, switchHb, buttonHb);
+                                  thicknessSliderHb, penStyleHb, switchHb, buttonHb);
         vbox.getStylesheets().add(CSS_PATH);
         return vbox;
     }
@@ -252,6 +258,8 @@ public class SLogoCustomizerBuilder extends Observable {
         fontColorHb.setPrefSize(PREFSIZE, PREFSIZE);
     }
 
+    private int myPenStyle;
+
     /**
      * Sets line style
      * 
@@ -271,6 +279,11 @@ public class SLogoCustomizerBuilder extends Observable {
         penStyleHb = new HBox();
         penStyleHb.getChildren().addAll(penStyleLabel, comboBox);
         penStyleHb.setPrefSize(PREFSIZE, PREFSIZE);
+        
+        myPenStyle = options.indexOf(getResourceLoader().getString("PenDefault"));
+        System.out.println("OVERHERE");
+        System.out.println(getResourceLoader().getString("PenDefault"));
+        System.out.println(myPenStyle);
     }
 
     /**
@@ -328,9 +341,12 @@ public class SLogoCustomizerBuilder extends Observable {
                         + data.indexOf(myPenColor));
                 myGUI.run(myCommandNameLoader.getString("setpensize") + " " 
                         + myPenWidth);
-                myGUI.run(myCommandNameLoader.getString("pd"));
-                myGUI.run(myCommandNameLoader.getString("pu"));
-            }
+                if (switchButton.isDown()) {
+                	myGUI.run(myCommandNameLoader.getString("pd"));
+                } else {
+                	myGUI.run(myCommandNameLoader.getString("pu"));
+                }                
+        }
             catch (SLogoException e1) {
                 e1.showErrorDialog(getErrorLoader().getString("ButtonError"));
             }
@@ -340,6 +356,19 @@ public class SLogoCustomizerBuilder extends Observable {
 
     public void update(Observable observable, Object arg1) {
 
+    }
+    
+    
+    
+    
+    public void changeStroke(Line myLine){
+    	if (comboBox.getValue().toString().equals("DOTTED")) {
+            myLine.getStrokeDashArray().addAll(DOTTED_LINE);
+    	} else if (comboBox.getValue().toString().equals("DASHED")) {
+    		myLine.getStrokeDashArray().addAll(DASHED_LINE, DASHED_SPACE);
+    	} else {
+    		myLine.getStrokeDashArray().addAll(SOLID_LINE);
+    	}
     }
 
     /**

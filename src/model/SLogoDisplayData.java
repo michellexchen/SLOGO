@@ -47,7 +47,7 @@ public class SLogoDisplayData extends Observable{
         myState = state;
         myPen = state.getPen();
         myLines = new ArrayList<>();
-        myLineStyle = "SOLID";
+        //myLineStyle = "SOLID";
         updateData();
     }
 
@@ -71,7 +71,8 @@ public class SLogoDisplayData extends Observable{
         ID = myState.getID();
         bgColor = myState.getBGColor();
         cleared = myState.getCleared();
-
+        //myLineStyle = myState.getPenStyle();
+        
         if (cleared) {
             myLines.clear();
         }

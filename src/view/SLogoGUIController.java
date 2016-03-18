@@ -54,7 +54,7 @@ public class SLogoGUIController implements Initializable, Observer {
     private static final int POPUP_WIDTH = 1024;
     private static final int POPUP_HEIGHT = 768;
     private static final int PANE_WIDTH = 200;
-    private static final int PANE_HEIGHT = 150;
+    private static final int PANE_HEIGHT = 170;
     private static final int RGB_CONST = 255;
     private static final int ERROR_INDEX = 7;
     private static final String ERROR = "ERROR";
@@ -390,7 +390,9 @@ public class SLogoGUIController implements Initializable, Observer {
                         ("Y position: " + displayData.getY()),
                         ("Pen Down: " + displayData.getPen().getDown()),
                         ("Pen Color: " + displayData.getPen().getColorIndex()),
-                        ("Pen Size: " + displayData.getPen().getSize()));
+                        ("Pen Size: " + displayData.getPen().getSize()),
+                        ("Pen Style: " + myCustomizer.getMyStrokeStyle())
+        		);
         myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
         myPropertiesPaneView.setItems(myProperties);
     }

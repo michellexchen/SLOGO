@@ -15,11 +15,12 @@ public class SLogoPen{
 	private boolean isDown;
 	private String myStrokeStyle = "SOLID";
 	private int colorIndex;
+	private int strokeIndex;
 	
 	private ColorLoader colorLoader;
 	private PenStrokeLoader strokeLoader;
 	
-	private int DEFAULT_PEN_INDEX = 0;
+	private int DEFAULT_PEN_INDEX = 1;
 	private int DEFAULT_SIZE = 1;
 	private boolean DEFAULT_PEN_DOWN = true;
 	private int DEFAULT_STROKE_STYLE = 0;
@@ -34,13 +35,18 @@ public class SLogoPen{
 		colorIndex = DEFAULT_PEN_INDEX;
 		myColor = colorLoader.getColor(colorIndex);
 		strokeLoader = new PenStrokeLoader();
-		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
+		strokeIndex = DEFAULT_STROKE_STYLE;
+		myStrokeStyle = strokeLoader.getStroke(strokeIndex);
 		mySize = DEFAULT_SIZE;
 		isDown = DEFAULT_PEN_DOWN;
 	}
 	
 	public int getColorIndex() {
 		return colorIndex;
+	}
+	
+	public int getStrokeIndex(){
+		return strokeIndex;
 	}
 	
 	public void setColor(int penIndex) throws SLogoException {
@@ -56,7 +62,7 @@ public class SLogoPen{
 		return mySize;
 	}
 	
-	public Color getColor() {
+	public Color getColor2() {
 		return myColor;
 	}
 	
@@ -78,8 +84,9 @@ public class SLogoPen{
 	/**
 	 * @param myStrokeStyle the myStrokeStyle to set
 	 */
-	public void setStrokeStyle(String myStrokeStyle) {
-		this.myStrokeStyle = myStrokeStyle;
+	public void setStrokeStyle(int strokeStyle) throws SLogoException {
+		this.strokeIndex = strokeStyle;
+		myStrokeStyle = strokeLoader.getStroke(strokeStyle);
 	}
 
 	public boolean getDown() {
