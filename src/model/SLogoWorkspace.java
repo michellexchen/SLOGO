@@ -22,6 +22,7 @@ public class SLogoWorkspace {
     private RootEvaluator myRootEvaluator;
     private List<SLogoCharacter> myCharacters;
     private List<SLogoCharacter> myActiveTurtles;
+    private List<SLogoCharacter> myStampTurtles;
     private ObservableList<SLogoDisplayData> myObservableDataList;
     private ObservableList<SLogoVariable> myObservableVariableList;
     private ObservableList<SLogoCustomCommand> myObservableCustomList;
@@ -51,6 +52,7 @@ public class SLogoWorkspace {
     public void initialize() throws SLogoException {
         myRootEvaluator = new RootEvaluator(this);
         myActiveTurtles = new ArrayList<>();
+        myStampTurtles = new ArrayList<>();
         resetActiveTurtles();
         myActiveTurtles.add(turtleFactory.createDefaultTurtle());
     }
@@ -185,6 +187,15 @@ public class SLogoWorkspace {
      */
     public List<SLogoCharacter> getCharacterList() {
         return myCharacters;
+    }
+    
+    /**
+     * Returns a list of turtle stamps
+     * 
+     * @return
+     */
+    public List<SLogoCharacter> getStampList() {
+        return myStampTurtles;
     }
 
     /**
