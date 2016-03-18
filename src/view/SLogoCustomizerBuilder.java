@@ -328,9 +328,12 @@ public class SLogoCustomizerBuilder extends Observable {
                         + data.indexOf(myPenColor));
                 myGUI.run(myCommandNameLoader.getString("setpensize") + " " 
                         + myPenWidth);
-                myGUI.run(myCommandNameLoader.getString("pd"));
-                myGUI.run(myCommandNameLoader.getString("pu"));
-            }
+                if (switchButton.isDown()) {
+                	myGUI.run(myCommandNameLoader.getString("pd"));
+                } else {
+                	myGUI.run(myCommandNameLoader.getString("pu"));
+                }                     
+        }
             catch (SLogoException e1) {
                 e1.showErrorDialog(getErrorLoader().getString("ButtonError"));
             }

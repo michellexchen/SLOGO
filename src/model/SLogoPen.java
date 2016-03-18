@@ -30,9 +30,10 @@ public class SLogoPen{
 	 * @throws SLogoException
 	 */
 	public SLogoPen() throws SLogoException{
-		colorLoader = new ColorLoader();
-		colorIndex = DEFAULT_PEN_INDEX;
-		myColor = colorLoader.getColor(colorIndex);
+		//colorLoader = new ColorLoader();
+		//colorIndex = DEFAULT_PEN_INDEX;
+		//myColor = colorLoader.getColor(colorIndex);
+		myColor = Color.RED;
 		strokeLoader = new PenStrokeLoader();
 		myStrokeStyle = strokeLoader.getStroke(DEFAULT_STROKE_STYLE);
 		mySize = DEFAULT_SIZE;
@@ -45,7 +46,8 @@ public class SLogoPen{
 	
 	public void setColor(int penIndex) throws SLogoException {
 		this.colorIndex = penIndex;
-		myColor = colorLoader.getColor(penIndex);
+		//myColor = colorLoader.getColor(penIndex);
+		myColor = Color.RED;
 	}
 	
 	public void setSize(double size) {

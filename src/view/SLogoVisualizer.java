@@ -108,6 +108,7 @@ public class SLogoVisualizer implements Observer {
         newLine.setEndX(position.getX() + COORDINATE_SHIFT);
         newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
         newLine.setStrokeWidth(1.0f);
+        newLine.setStroke(myGUIController.getCustomizer().getMyPenColor());
         return newLine;
     }
 
