@@ -64,5 +64,11 @@ public abstract class TurtleCommand extends UnaryNode {
     protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException{
     	return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), STAMP_ID);
     }
+    
+    protected void clearStampTurtles(){
+    	for(SLogoCharacter turtle: myWorkspace.getActiveTurtlesList()){
+    		if(turtle.getState().getID() == STAMP_ID) myWorkspace.getActiveTurtlesList().remove(turtle);
+    	}
+    }
 
 }
