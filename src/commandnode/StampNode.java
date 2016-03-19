@@ -5,20 +5,17 @@ import model.SLogoCharacterState;
 
 public class StampNode extends TurtleCommand{
 	
-	private static final int STAMP_ID = -1;
-	
 	public StampNode(){
 		setNumChildren(0);
 	}
 
     /**
-     * To be implemented
-     * 
+     * Creates stamp of current turtle state (coordinates, direction, shape)
+     * Returns shape index of stamped turtle
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-    	System.out.println(numRequiredChildren());
     	super.createStampTurtle(state);
-        return 0;
+        return state.getShapeIndex();
     }
 
 }
