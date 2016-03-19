@@ -76,6 +76,7 @@ public class SLogoCustomizerBuilder {
     private double myPenWidth;
     private String myStrokeStyle;
     private boolean isDown;
+    private int myPenStyle;
 
     private SLogoGUIController myGUI;
     private CommandNameLoader myCommandNameLoader;
@@ -86,6 +87,7 @@ public class SLogoCustomizerBuilder {
                                             Color.WHITE, Color.BLACK, Color.RED, 
                                             Color.ORANGE, Color.YELLOW, Color.GREEN, 
                                             Color.BLUE, Color.PURPLE);
+ 
     /**
      * Default constructor that initializes ResourceLoader
      * Stage and Scene set
@@ -203,6 +205,7 @@ public class SLogoCustomizerBuilder {
 
         return cb;
     }
+    
     /**
      * Creates an instance of colorpicker to use
      * 
@@ -257,8 +260,6 @@ public class SLogoCustomizerBuilder {
         fontColorHb.getChildren().addAll(fontColorLabel, root);
         fontColorHb.setPrefSize(PREFSIZE, PREFSIZE);
     }
-
-    private int myPenStyle;
 
     /**
      * Sets line style
@@ -355,13 +356,11 @@ public class SLogoCustomizerBuilder {
         });
     }
 
-    public void update(Observable observable, Object arg1) {
-
-    }
-    
-    
-    
-    
+    /**
+     * Changes stroke type when given an Line object
+     * 
+     * @param myLine
+     */
     public void changeStroke(Line myLine){
     	if (comboBox.getValue().toString().equals("DOTTED")) {
             myLine.getStrokeDashArray().addAll(DOTTED_LINE);
