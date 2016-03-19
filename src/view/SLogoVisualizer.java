@@ -80,7 +80,6 @@ public class SLogoVisualizer implements Observer {
         }
         myGUIController = (SLogoGUIController) myLoader.getController();
         myGUIController.setModel(myModel);
-        //myGUIController.getCustomizer().addObserver(this);
         myGUIController.setPropertiesData(myProperties);
         myScene = new Scene(root);
         myStage = new Stage();
@@ -142,7 +141,7 @@ public class SLogoVisualizer implements Observer {
      */
     public Line createLine(SLogoDisplayData turtledata) {
         Line newLine = createLine(turtledata.getPosition());
-        newLine.setFill(turtledata.getPen().getColor2());
+        newLine.setFill(turtledata.getPen().getColor());
         newLine.setStrokeWidth(turtledata.getPen().getSize());
         if(!turtledata.getPen().getDown() || turtledata.isCleared()){
             newLine.setStrokeWidth(0);
@@ -279,7 +278,7 @@ public class SLogoVisualizer implements Observer {
      * @param myObservableDataList the myObservableDataList to set
      */
     public void setObservableDataList(ObservableList<SLogoDisplayData> 
-    myObservableDataList) {
+    													myObservableDataList) {
         this.myObservableDataList = myObservableDataList;
     }
 
@@ -301,7 +300,7 @@ public class SLogoVisualizer implements Observer {
         return myProperties;
     }
 
-    public String getLanguage(){
+    public String getLanguage() {
         return myPromptBuilder.getWorkspaceLanguage();
     }
 

@@ -137,13 +137,6 @@ public class SLogoModel implements Model {
     }
 
     /**
-     * @param myObservableWorkspaces the myObservableWorkspaces to set
-     */
-    public void setObservableWorkspaces(ObservableList<SLogoWorkspace> myObservableWorkspaces) {
-        this.myObservableWorkspaces = myObservableWorkspaces;
-    }
-
-    /**
      * @param myView the myView to set
      */
     public void setView(View myView) {

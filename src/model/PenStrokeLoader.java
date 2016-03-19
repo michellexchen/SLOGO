@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
  *
  */
 
-public class PenStrokeLoader extends FileLoader{
+public class PenStrokeLoader extends FileLoader {
 
     private static final String STROKE_PATH = "resources/resources";
     private static final String STROKE_EXTENSION = "penstroke.resources";
@@ -43,6 +43,11 @@ public class PenStrokeLoader extends FileLoader{
         }
     }
 
+    /**
+     * Returns a map that maps an index to a color string
+     * 
+     * @return
+     */
     public HashMap<Integer, String> getStrokeMap() {
         return myStrokeMap;
     }

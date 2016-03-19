@@ -1,7 +1,5 @@
 package view;
 
-import java.util.Observable;
-
 import exception.SLogoException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -105,7 +103,6 @@ public class SLogoCustomizerBuilder {
         myCustomizerStage.setScene(myCustomizerScene);
         myCustomizerStage.setTitle(myResourceLoader.getString("CustomizerTitle"));
         myCommandNameLoader = new CommandNameLoader();
-
     }
 
     /**
@@ -113,7 +110,7 @@ public class SLogoCustomizerBuilder {
      * @throws SLogoException 
      * 
      */
-    private void setup() throws SLogoException{
+    private void setup() throws SLogoException {
         myPaneColor = Color.WHITE;
         myPenColor = Color.BLACK;
         myStrokeStyle = "SOLID";
@@ -131,7 +128,7 @@ public class SLogoCustomizerBuilder {
      * 
      * @return
      */
-    private VBox setVBox(){
+    private VBox setVBox() {
         vbox = new VBox();
         vbox.setPrefSize(SPLASHSIZE, SPLASHSIZE);
         vbox.setPadding(new Insets(PADDING));
@@ -144,14 +141,14 @@ public class SLogoCustomizerBuilder {
     /**
      * Hide method for closing customization popup
      */
-    public void hide(){
+    public void hide() {
         myCustomizerStage.hide();
     }
 
     /**
      * Show method for opening customization popup
      */
-    public void show(){
+    public void show() {
         myCustomizerStage.show();
     }
 
@@ -186,12 +183,9 @@ public class SLogoCustomizerBuilder {
      * 
      * @return
      */
-    private ComboBox setColorDropdown(){
-
+    private ComboBox setColorDropdown() {
         ComboBox<Color> cb = new ComboBox<>();
-
         cb.setItems(data);
-
         Callback<ListView<Color>, ListCell<Color>> factory = 
                                   new Callback<ListView<Color>, ListCell<Color>>() {
             @Override
@@ -199,10 +193,8 @@ public class SLogoCustomizerBuilder {
                 return new ColorRectCell();
             }
         };
-
         cb.setCellFactory(factory);
         cb.setButtonCell(factory.call(null));
-
         return cb;
     }
     
@@ -210,7 +202,7 @@ public class SLogoCustomizerBuilder {
      * Creates an instance of colorpicker to use
      * 
      */
-    private void setColorPicker(){
+    private void setColorPicker() {
         ComboBox myCB = setColorDropdown();
         myCB.getSelectionModel().select(0);
         StackPane root = new StackPane();
@@ -224,10 +216,8 @@ public class SLogoCustomizerBuilder {
                 myPaneColor = newValue;
            }
         });	    
-
         colorLabel = new Label(getResourceLoader().getString("ColorPickerLabel"));
         colorLabel.setPrefWidth(COLORLABELSIZE);
-
         colorHb = new HBox();
         colorHb.getChildren().addAll(colorLabel, root);
         colorHb.setPrefSize(PREFSIZE, PREFSIZE);
@@ -237,13 +227,12 @@ public class SLogoCustomizerBuilder {
      * Sets a new font color
      * 
      */
-    private void setFontColor(){
+    private void setFontColor() {
         ComboBox myCB2 = setColorDropdown();
         // Default value
         myCB2.getSelectionModel().select(1);
         StackPane root = new StackPane();
         root.getChildren().add(myCB2);
-
         myCB2.getSelectionModel().selectedItemProperty().addListener(
                                          new ChangeListener<Color>() {
             @Override
@@ -252,10 +241,8 @@ public class SLogoCustomizerBuilder {
                 myPenColor = newValue;
             }
         });	    
-
         fontColorLabel = new Label(getResourceLoader().getString("FontLabel"));
         fontColorLabel.setPrefWidth(COLORLABELSIZE);
-
         fontColorHb = new HBox();
         fontColorHb.getChildren().addAll(fontColorLabel, root);
         fontColorHb.setPrefSize(PREFSIZE, PREFSIZE);
@@ -265,7 +252,7 @@ public class SLogoCustomizerBuilder {
      * Sets line style
      * 
      */
-    private void setLine(){
+    private void setLine() {
         penStyleLabel = new Label(getResourceLoader().getString("PenLabel"));
         penStyleLabel.setPrefWidth(COLORLABELSIZE);
 
@@ -280,25 +267,20 @@ public class SLogoCustomizerBuilder {
         penStyleHb = new HBox();
         penStyleHb.getChildren().addAll(penStyleLabel, comboBox);
         penStyleHb.setPrefSize(PREFSIZE, PREFSIZE);
-        
         myPenStyle = options.indexOf(getResourceLoader().getString("PenDefault"));
-        System.out.println("OVERHERE");
-        System.out.println(getResourceLoader().getString("PenDefault"));
-        System.out.println(myPenStyle);
     }
 
     /**
      * Sets new line thickness
      * 
      */
-    private void setLineThickness(){
+    private void setLineThickness() {
         thicknessSliderLabel = new Label(getResourceLoader().getString("SliderLabel"));
         thicknessSliderLabel.setPrefWidth(COLORLABELSIZE);
         thicknessSlider = new Slider(0, SLIDER, 1);
         thicknessSlider.setShowTickLabels(true);
         thicknessSlider.setMajorTickUnit(TICK_UNIT);
         thicknessSlider.setBlockIncrement(BLOCK_INCREMENT);
-
         thicknessSlider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
                                 Number old_val, Number new_val) {
@@ -314,7 +296,7 @@ public class SLogoCustomizerBuilder {
      * Updates penDown boolean value
      * 
      */
-    private void setPenDown(){
+    private void setPenDown() {
         switchHb = new HBox();
         switchLabel = new Label(getResourceLoader().getString("SwitchLabel"));
         switchButton = new SLogoCustomizerToggleSwitch();
@@ -327,7 +309,7 @@ public class SLogoCustomizerBuilder {
      * Set button that applies changes to the current working environment
      * 
      */
-    private void setButton() throws SLogoException{
+    private void setButton() throws SLogoException {
         buttonHb = new HBox();
         myOkayButton = new Button(getResourceLoader().getString("OkayButton"));
         buttonHb.setAlignment(Pos.CENTER);
@@ -360,7 +342,7 @@ public class SLogoCustomizerBuilder {
      * 
      * @param myLine
      */
-    public void changeStroke(Line myLine){
+    public void changeStroke(Line myLine) {
     	if (comboBox.getValue().toString().equals("DOTTED")) {
             myLine.getStrokeDashArray().addAll(DOTTED_LINE);
     	} else if (comboBox.getValue().toString().equals("DASHED")) {

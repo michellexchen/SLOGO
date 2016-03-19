@@ -17,7 +17,6 @@ import javafx.scene.shape.Line;
  * This Observable class exists to separate view and model and to ensure that
  * view does not have access to model's turtle objects
  * 
- * 
  * @author Hunter
  *
  */
@@ -61,7 +60,6 @@ public class SLogoDisplayData extends Observable{
      * @param state
      */
     public void updateData() {
-
         myPen = myState.getPen();
         prevDirection = myDirection;
         myDirection = myState.getDirection();
@@ -70,9 +68,7 @@ public class SLogoDisplayData extends Observable{
         turtleHidden = myState.getHidden();
         ID = myState.getID();
         bgColor = myState.getBGColor();
-        cleared = myState.getCleared();
-        //myLineStyle = myState.getPenStyle();
-        
+        cleared = myState.getCleared();        
         if (cleared) {
             myLines.clear();
         }
