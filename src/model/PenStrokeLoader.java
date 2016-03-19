@@ -14,8 +14,8 @@ import javafx.scene.paint.Color;
 
 public class PenStrokeLoader extends FileLoader{
 
-    private static final String STROKE_PATH = "resources/resources";
-    private static final String STROKE_EXTENSION = "penstroke.resources";
+    private static final String STROKE_PATH = "resources/languages";
+    private static final String STROKE_EXTENSION = "English.properties";
 
     private HashMap<Integer, String> myStrokeMap;
     

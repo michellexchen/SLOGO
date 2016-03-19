@@ -125,7 +125,7 @@ public class SLogoVisualizer implements Observer {
      */
     public Line createLine(SLogoDisplayData turtledata) {
         Line newLine = createLine(turtledata.getPosition());
-        newLine.setFill(turtledata.getPen().getColor2());
+        newLine.setFill(turtledata.getPen().getColor());
         newLine.setStrokeWidth(turtledata.getPen().getSize());
         if(!turtledata.getPen().getDown() || turtledata.isCleared()){
             newLine.setStrokeWidth(0);

@@ -71,7 +71,6 @@ public class SLogoDisplayData extends Observable{
         ID = myState.getID();
         bgColor = myState.getBGColor();
         cleared = myState.getCleared();
-        //myLineStyle = myState.getPenStyle();
         
         if (cleared) {
             myLines.clear();

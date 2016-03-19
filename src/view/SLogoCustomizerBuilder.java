@@ -346,6 +346,7 @@ public class SLogoCustomizerBuilder {
                 } else {
                 	myGUI.run(myCommandNameLoader.getString("pu"));
                 }                
+                myGUI.run(myCommandNameLoader.getString("setpenstyle") + " " +myPenStyle);
         }
             catch (SLogoException e1) {
                 e1.showErrorDialog(getErrorLoader().getString("ButtonError"));
