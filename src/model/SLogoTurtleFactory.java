@@ -25,12 +25,13 @@ public class SLogoTurtleFactory {
 	/**
 	 * @param myX
 	 * @param myY
+	 * @param myDirection
+	 * @Param myShape
 	 * @param requestedID
 	 * Initializes a turtle with given ID. Makes it available to frontend. If turtle already initialized and is currently contained in the workspace
 	 * then that turtle instance is grabbed and added to the active turtles list
 	 * @return myTurtle: created turtle
 	 */
-
 	public SLogoCharacter createTurtle(int myX, int myY, double myDirection, int myShape, int requestedID) throws SLogoException{
 		if(hasTurtleBeenCreated(requestedID) && requestedID > -1){
 			return myWorkspace.getCharacterList().get(requestedID);
@@ -58,12 +59,15 @@ public class SLogoTurtleFactory {
 	}
 
 	/**
-	 * Creates a turtle with default parameters
+	 * Creates a turtle with default parameters with next ID
 	 */
 	public SLogoCharacter createDefaultTurtle() throws SLogoException{
-		return createTurtle(DEFAULT_X, DEFAULT_Y, DEFAULT_DIRECTION, DEFAULT_SHAPE_INDEX, LAST_ID);
+		return createTurtle(DEFAULT_X, DEFAULT_Y, DEFAULT_DIRECTION, DEFAULT_SHAPE_INDEX, LAST_ID++);
 	}
 
+	/**
+	 * Creates a turtle with default parameters with passed ID
+	 */
 	public SLogoCharacter createDefaultTurtleWithID(int ID) throws SLogoException{
 		return createTurtle(DEFAULT_X, DEFAULT_Y, DEFAULT_DIRECTION, DEFAULT_SHAPE_INDEX, ID);
 	}

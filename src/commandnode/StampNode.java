@@ -5,6 +5,9 @@ import model.SLogoCharacterState;
 
 public class StampNode extends TurtleCommand{
 	
+    /**
+     * Stamp node has zero children
+     */
 	public StampNode(){
 		setNumChildren(0);
 	}
