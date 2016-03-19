@@ -27,7 +27,6 @@ public class SLogoWorkspace {
     private ObservableList<SLogoVariable> myObservableVariableList;
     private ObservableList<SLogoCustomCommand> myObservableCustomList;
     private SLogoPropertiesData myPropertiesData;
-    private ColorLoader myColorLoader;
 
     /**
      * Default constructor that initializes lists
@@ -41,7 +40,6 @@ public class SLogoWorkspace {
         turtleFactory = new SLogoTurtleFactory(this);
         myCharacters = new ArrayList<>();
         myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
-        myColorLoader = new ColorLoader();
     }
 
     /**

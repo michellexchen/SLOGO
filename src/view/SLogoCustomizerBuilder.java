@@ -48,6 +48,10 @@ public class SLogoCustomizerBuilder {
     private static final double DASHED_LINE = 10.0;
     private static final double DASHED_SPACE = 5.0;
     private static final double SOLID_LINE = 1.0;
+    private static final String SOLID = "SOLID";
+    private static final String DASH = "DASHED";
+    private static final String DOT = "DOTTED";
+    private static final String PEN_DEFAULT = "PenDefault";
     
     private Stage myCustomizerStage;
     private Scene myCustomizerScene;
@@ -74,12 +78,12 @@ public class SLogoCustomizerBuilder {
     private double myPenWidth;
     private String myStrokeStyle;
     private boolean isDown;
-    private int myPenStyle;
 
     private SLogoGUIController myGUI;
     private CommandNameLoader myCommandNameLoader;
     private ResourceLoader myResourceLoader;
     private ResourceLoader myErrorLoader;
+    private int myPenStyle;
 
     private ObservableList<Color> data = FXCollections.observableArrayList(
                                             Color.WHITE, Color.BLACK, Color.RED, 
@@ -113,7 +117,7 @@ public class SLogoCustomizerBuilder {
     private void setup() throws SLogoException {
         myPaneColor = Color.WHITE;
         myPenColor = Color.BLACK;
-        myStrokeStyle = "SOLID";
+        myStrokeStyle = SOLID;
         myPenWidth = 1;
         setColorPicker();
         setFontColor();
@@ -263,11 +267,11 @@ public class SLogoCustomizerBuilder {
                                                   "DOTTED"						
                         );
         comboBox = new ComboBox(options);
-        comboBox.setValue(getResourceLoader().getString("PenDefault"));
+        comboBox.setValue(getResourceLoader().getString(PEN_DEFAULT));
         penStyleHb = new HBox();
         penStyleHb.getChildren().addAll(penStyleLabel, comboBox);
         penStyleHb.setPrefSize(PREFSIZE, PREFSIZE);
-        myPenStyle = options.indexOf(getResourceLoader().getString("PenDefault"));
+        myPenStyle = options.indexOf(getResourceLoader().getString(PEN_DEFAULT));
     }
 
     /**
@@ -343,9 +347,9 @@ public class SLogoCustomizerBuilder {
      * @param myLine
      */
     public void changeStroke(Line myLine) {
-    	if (comboBox.getValue().toString().equals("DOTTED")) {
+    	if (comboBox.getValue().toString().equals(DOT)) {
             myLine.getStrokeDashArray().addAll(DOTTED_LINE);
-    	} else if (comboBox.getValue().toString().equals("DASHED")) {
+    	} else if (comboBox.getValue().toString().equals(DASH)) {
     		myLine.getStrokeDashArray().addAll(DASHED_LINE, DASHED_SPACE);
     	} else {
     		myLine.getStrokeDashArray().addAll(SOLID_LINE);

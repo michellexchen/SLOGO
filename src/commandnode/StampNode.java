@@ -5,7 +5,7 @@ import model.SLogoCharacterState;
 
 public class StampNode extends TurtleCommand{
 	
-	private int STAMP_ID = -1;
+	private static final int STAMP_ID = -1;
 	
 	public StampNode(){
 		setNumChildren(0);

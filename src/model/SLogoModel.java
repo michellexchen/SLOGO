@@ -28,7 +28,7 @@ public class SLogoModel implements Model {
      * @throws SLogoException
      */
     public SLogoModel() throws SLogoException {
-        myWorkspaces = new ArrayList<SLogoWorkspace>();
+        myWorkspaces = new ArrayList<>();
         myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
     }
 

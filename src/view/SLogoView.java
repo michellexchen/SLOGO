@@ -30,7 +30,7 @@ public class SLogoView implements View<Object> {
      * @throws SLogoException
      */
     public SLogoView(Model model) throws SLogoException {
-        myVisualizers = new ArrayList<SLogoVisualizer>();
+        myVisualizers = new ArrayList<>();
         myModel = model;
         myCurrentVisualizer = new SLogoVisualizer(getModel());
     }

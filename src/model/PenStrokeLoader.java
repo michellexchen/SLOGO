@@ -3,7 +3,6 @@ package model;
 import java.util.HashMap;
 
 import exception.SLogoException;
-import javafx.scene.paint.Color;
 
 /**
  * SLogo's PenStroke loader class to access default pen stroke styles
