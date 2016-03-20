@@ -46,6 +46,7 @@ public class SLogoDisplayData extends Observable{
         myState = state;
         myPen = state.getPen();
         myLines = new ArrayList<>();
+        turtleHidden = state.getHidden();
         updateData();
     }
 
@@ -152,11 +153,11 @@ public class SLogoDisplayData extends Observable{
         return prevDirection;
     }
 
-    public boolean isCleared(){
+    public boolean areLinesCleared(){
         return cleared;
     }
 
-    public void queueClearing(boolean cleared){
-        myState.queueClearing(cleared);
+    public void queueLineClearing(boolean cleared){
+        myState.queueLineClearing(cleared);
     }
 }

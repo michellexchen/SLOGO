@@ -12,14 +12,14 @@ public class SLogoTurtleFactory {
 	private static final boolean DEFAULT_HIDDEN = false;
 	private static final int DEFAULT_X = 0;
 	private static final int DEFAULT_Y  = 0;
-	private static final int DEFAULT_ID = 0;
 	private static final int DEFAULT_SHAPE_INDEX = 1;
-	private static final int STAMP_ID = -1;
+	private static int STAMP_ID;
 	private SLogoWorkspace myWorkspace;
 	private int myLastID = 0;
 
 	public SLogoTurtleFactory(SLogoWorkspace myWorkspace) {
 		this.myWorkspace = myWorkspace;
+		STAMP_ID = Integer.parseInt(new ResourceLoader().getString("StampID"));
 	}
 
 	/**
@@ -39,22 +39,22 @@ public class SLogoTurtleFactory {
 	 * @param myY
 	 * @param requestedID
 	 */
-
-	public SLogoCharacter createTurtle(int myX, int myY, double myDirection, 
-			int myShape, int requestedID) throws SLogoException {
-		if (hasTurtleBeenCreated(requestedID) && requestedID > -1) {
+	public SLogoCharacter createTurtle(int myX, int myY, double myDirection, int myShape, int requestedID) throws SLogoException{
+		if(hasTurtleBeenCreated(requestedID) && requestedID > STAMP_ID){
 			return myWorkspace.getCharacterList().get(requestedID);
 		}
 		SLogoPen myPen = new SLogoPen();
 		SLogoTurtle myTurtle;
 		if (requestedID == STAMP_ID) {
-			myTurtle = new SLogoTurtle(STAMP_ID, myPen, myX, myY, myDirection, 
+			myTurtle = new SLogoTurtle(requestedID, myPen, myX, myY, myDirection, 
 					DEFAULT_HIDDEN, myShape);
-		} else {
+
+		}
+		else {
 			myTurtle = new SLogoTurtle(myLastID++, myPen, myX, myY, DEFAULT_DIRECTION, 
 					DEFAULT_HIDDEN, DEFAULT_SHAPE_INDEX);
 		}
-		myWorkspace.getCharacterList().add(myTurtle);
+		myWorkspace.addTurtle(myTurtle);
 		SLogoDisplayData turtleData = new SLogoDisplayData(myTurtle.getState());
 		turtleData.addObserver(myWorkspace.getView().getObserver());
 		myWorkspace.getObservableDataList().add(turtleData);
@@ -76,21 +76,10 @@ public class SLogoTurtleFactory {
 		return createTurtle(DEFAULT_X, DEFAULT_Y, DEFAULT_DIRECTION, 
 				DEFAULT_SHAPE_INDEX, myLastID);
 	}
-
+	
 	public SLogoCharacter createDefaultTurtleWithID(int ID) throws SLogoException {
 		return createTurtle(DEFAULT_X, DEFAULT_Y, DEFAULT_DIRECTION, 
 				DEFAULT_SHAPE_INDEX, ID);
 	}
-
-	public int getDefaultX() {
-		return DEFAULT_X;
-	}
-
-	public int getDefaultY() {
-		return DEFAULT_Y;
-	}
-
-	public int getDefaultID() {
-		return DEFAULT_ID;
-	}
+	
 }

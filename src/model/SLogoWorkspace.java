@@ -17,246 +17,243 @@ import view.View;
  */
 public class SLogoWorkspace {
 
-    private View myView;
-    private SLogoTurtleFactory turtleFactory;
-    private RootEvaluator myRootEvaluator;
-    private List<SLogoCharacter> myCharacters;
-    private List<SLogoCharacter> myActiveTurtles;
-    private List<SLogoCharacter> myStampTurtles;
-    private ObservableList<SLogoDisplayData> myObservableDataList;
-    private ObservableList<SLogoVariable> myObservableVariableList;
-    private ObservableList<SLogoCustomCommand> myObservableCustomList;
-    private SLogoPropertiesData myPropertiesData;
+	private View myView;
+	private SLogoTurtleFactory turtleFactory;
+	private RootEvaluator myRootEvaluator;
+	private List<SLogoCharacter> myCharacters;
+	private List<SLogoCharacter> myActiveTurtles;
+	private ObservableList<SLogoDisplayData> myObservableDataList;
+	private ObservableList<SLogoVariable> myObservableVariableList;
+	private ObservableList<SLogoCustomCommand> myObservableCustomList;
+	private SLogoPropertiesData myPropertiesData;
 
-    /**
-     * Default constructor that initializes lists
-     * 
-     * @param view
-     * @throws SLogoException
-     */
-    public SLogoWorkspace(View view) throws SLogoException {
-        myView = view;
-        createObservableLists();
-        turtleFactory = new SLogoTurtleFactory(this);
-        myCharacters = new ArrayList<>();
-        myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
-    }
+	/**
+	 * Default constructor that initializes lists
+	 * 
+	 * @param view
+	 * @throws SLogoException
+	 */
+	public SLogoWorkspace(View view) throws SLogoException {
+		myView = view;
+		createObservableLists();
+		turtleFactory = new SLogoTurtleFactory(this);
+		myCharacters = new ArrayList<>();
+		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
+	}
 
-    /**
-     * Initializes RootEvaluator and ActiveTurtles
-     * 
-     * @throws SLogoException
-     */
-    public void initialize() throws SLogoException {
-        myRootEvaluator = new RootEvaluator(this);
-        myActiveTurtles = new ArrayList<>();
-        myStampTurtles = new ArrayList<>();
-        resetActiveTurtles();
-        myActiveTurtles.add(turtleFactory.createDefaultTurtle());
-    }
+	/**
+	 * Initializes RootEvaluator and ActiveTurtles
+	 * 
+	 * @throws SLogoException
+	 */
+	public void initialize() throws SLogoException {
+		myRootEvaluator = new RootEvaluator(this);
+		myActiveTurtles = new ArrayList<>();
+		resetActiveTurtles();
+		myActiveTurtles.add(turtleFactory.createDefaultTurtle());
+	}
 
-    /**
-     * Observable lists initialized using ArrayLists
-     * 
-     */
-    private void createObservableLists() {
-        myObservableDataList = FXCollections.
-                observableArrayList(new ArrayList<SLogoDisplayData>());
-        myObservableVariableList =  FXCollections.
-                observableArrayList(new ArrayList<SLogoVariable>());
-        myObservableCustomList =  FXCollections.
-                observableArrayList(new ArrayList<SLogoCustomCommand>());
-    }
+	/**
+	 * Observable lists initialized using ArrayLists
+	 * 
+	 */
+	private void createObservableLists() {
+		myObservableDataList = FXCollections.
+				observableArrayList(new ArrayList<SLogoDisplayData>());
+		myObservableVariableList =  FXCollections.
+				observableArrayList(new ArrayList<SLogoVariable>());
+		myObservableCustomList =  FXCollections.
+				observableArrayList(new ArrayList<SLogoCustomCommand>());
+	}
 
-    /**
-     * Listeners added at initialization
-     * 
-     */
-    public void addListeners() {
-        myObservableDataList.addListener((ListChangeListener) 
-                    change -> getView().updateDisplayData());
+	/**
+	 * Listeners added at initialization
+	 * 
+	 */
+	public void addListeners() {
+		myObservableDataList.addListener((ListChangeListener) 
+				change -> getView().updateDisplayData());
 
-        myObservableVariableList.addListener((ListChangeListener) 
-                    change -> getView().updateVariables(myObservableVariableList));
+		myObservableVariableList.addListener((ListChangeListener) 
+				change -> getView().updateVariables(myObservableVariableList));
 
-        myObservableCustomList.addListener((ListChangeListener) 
-                    change -> getView().updateCustoms(myObservableCustomList));
-    }
+		myObservableCustomList.addListener((ListChangeListener) 
+				change -> getView().updateCustoms(myObservableCustomList));
+	}
 
-    /**
-     * Creates a new custom command and modifies the old custom command if needed
-     * 
-     * @params commandName varList, commandList
-     * @return created custom command
-     */
-    public SLogoCustomCommand createCustomCommand(String commandName, 
-                                                  ListNode varList, 
-                                                  ListNode commandList){
-        boolean created = false;
-        SLogoCustomCommand varModified = 
-                new SLogoCustomCommand(commandName, varList, commandList);
-        for (SLogoCustomCommand custom : myObservableCustomList) {
-            if (custom.getName().equals(commandName)) {
-                ((SLogoCustomCommand) custom).setMyCommands(commandList);
-                ((SLogoCustomCommand) custom).setMyVariables(varList);
-                created = true;
-            }
-        }
-        if(created) {
-            myObservableCustomList.remove(varModified);
-        }
-        myObservableCustomList.add(
-                      new SLogoCustomCommand(commandName, varList, commandList));
-        return lookupCustomCommand(commandName);
-    }
+	/**
+	 * Creates a new custom command and modifies the old custom command if needed
+	 * 
+	 * @params commandName varList, commandList
+	 * @return created custom command
+	 */
+	public SLogoCustomCommand createCustomCommand(String commandName, 
+			ListNode varList, 
+			ListNode commandList){
+		boolean created = false;
+		SLogoCustomCommand varModified = 
+				new SLogoCustomCommand(commandName, varList, commandList);
+		for (SLogoCustomCommand custom : myObservableCustomList) {
+			if (custom.getName().equals(commandName)) {
+				((SLogoCustomCommand) custom).setMyCommands(commandList);
+				((SLogoCustomCommand) custom).setMyVariables(varList);
+				created = true;
+			}
+		}
+		if(created) {
+			myObservableCustomList.remove(varModified);
+		}
+		myObservableCustomList.add(
+				new SLogoCustomCommand(commandName, varList, commandList));
+		return lookupCustomCommand(commandName);
+	}
 
-    /**
-     * Variable lookup by name
-     * 
-     * @param varName
-     * @return created custom variable
-     */
-    public double getVarValueByName(String varName){
-        for(SLogoVariable var : myObservableVariableList){
-            if(var.getName().equals(varName)) {
-                return var.getValue();
-            }
-        }
-        return 0;
-    }
+	/**
+	 * Variable lookup by name
+	 * 
+	 * @param varName
+	 * @return created custom variable
+	 */
+	public double getVarValueByName(String varName){
+		for(SLogoVariable var : myObservableVariableList){
+			if(var.getName().equals(varName)) {
+				return var.getValue();
+			}
+		}
+		return 0;
+	}
 
-    /**
-     * See if a Variable is currently in the list and returns if it's present
-     * 
-     * @param varName
-     * @return
-     */
-    public SLogoVariable lookupVariable(String varName){
-        for(SLogoVariable var : myObservableVariableList){
-            if(var.getName().equals(varName)) {
-                return var;
-            }
-        }
-        return null;
-    }
+	/**
+	 * See if a Variable is currently in the list and returns if it's present
+	 * 
+	 * @param varName
+	 * @return
+	 */
+	public SLogoVariable lookupVariable(String varName){
+		for(SLogoVariable var : myObservableVariableList){
+			if(var.getName().equals(varName)) {
+				return var;
+			}
+		}
+		return null;
+	}
 
-    /**
-     * See if a Variable is currently in the list and returns if it's present
-     * 
-     * @param varName
-     * @return
-     */
-    public SLogoCustomCommand lookupCustomCommand(String varName){
-        for(SLogoCustomCommand custom : myObservableCustomList){
-            if(custom.getName().equals(varName)) {
-                return custom;
-            }
-        }
-        return null;
-    }
+	/**
+	 * See if a Variable is currently in the list and returns if it's present
+	 * 
+	 * @param varName
+	 * @return
+	 */
+	public SLogoCustomCommand lookupCustomCommand(String varName){
+		for(SLogoCustomCommand custom : myObservableCustomList){
+			if(custom.getName().equals(varName)) {
+				return custom;
+			}
+		}
+		return null;
+	}
 
-    /**
-     * Creates a new variable and modifies the variable if needed
-     * 
-     * @param varName
-     * @param varValue
-     * @return
-     */
-    public SLogoVariable createVariable(String varName, double varValue){
-        boolean created = false;
-        SLogoVariable varModified = new SLogoVariable(varName, varValue);
-        for(SLogoVariable var : myObservableVariableList){
-            if(var.getName().equals(varName)) {
-                varModified = (SLogoVariable) var;
-                created = true;
-            }
-        }
-        if(created) {
-            myObservableVariableList.remove(varModified);
-        }
-        myObservableVariableList.add(new SLogoVariable(varName, varValue));
-        return lookupVariable(varName);
-    }
+	/**
+	 * Creates a new variable and modifies the variable if needed
+	 * 
+	 * @param varName
+	 * @param varValue
+	 * @return
+	 */
+	public SLogoVariable createVariable(String varName, double varValue){
+		boolean created = false;
+		SLogoVariable varModified = new SLogoVariable(varName, varValue);
+		for(SLogoVariable var : myObservableVariableList){
+			if(var.getName().equals(varName)) {
+				varModified = (SLogoVariable) var;
+				created = true;
+			}
+		}
+		if(created) {
+			myObservableVariableList.remove(varModified);
+		}
+		myObservableVariableList.add(new SLogoVariable(varName, varValue));
+		return lookupVariable(varName);
+	}
 
-    /**
-     * Returns a list of characters
-     * 
-     * @return
-     */
-    public List<SLogoCharacter> getCharacterList() {
-        return myCharacters;
-    }
-    
-    /**
-     * Returns a list of turtle stamps
-     * 
-     * @return
-     */
-    public List<SLogoCharacter> getStampList() {
-        return myStampTurtles;
-    }
+	/**
+	 * Returns a list of characters
+	 * 
+	 * @return
+	 */
+	public List<SLogoCharacter> getCharacterList() {
+		return myCharacters;
+	}
 
-    /**
-     * Returns turtleFactory currently being used
-     * 
-     * @return
-     */
-    public SLogoTurtleFactory getCurrentTurtleFactory() {
-        return turtleFactory;
-    }
+	/**
+	 * Adds a Turtle to myCharacters (List of SLogoTurtle)
+	 * 
+	 */
+	public void addTurtle(SLogoTurtle myTurtle){
+		myCharacters.add(myTurtle);
+	}
 
-    /**
-     * Returns the ActiveTurtle List
-     * 
-     * @return
-     */
-    public List<SLogoCharacter> getActiveTurtlesList() {
-        return myActiveTurtles;
-    }
+	/**
+	 * Returns turtleFactory currently being used
+	 * 
+	 * @return
+	 */
+	public SLogoTurtleFactory getCurrentTurtleFactory() {
+		return turtleFactory;
+	}
 
-    /**
-     * Adds an active turtle to the list
-     * 
-     * @param turtle
-     */
-    public void addActiveTurtle(SLogoCharacter turtle) {
-        myActiveTurtles.add(turtle);
-    }
+	/**
+	 * Returns the ActiveTurtle List
+	 * 
+	 * @return
+	 */
+	public List<SLogoCharacter> getActiveTurtlesList() {
+		return myActiveTurtles;
+	}
 
-    /**
-     * Clears the list
-     * 
-     */
-    public void resetActiveTurtles() {
-        myActiveTurtles.clear();
-    }
+	/**
+	 * Adds an active turtle to the list
+	 * 
+	 * @param turtle
+	 */
+	public void addActiveTurtle(SLogoCharacter turtle) {
+		myActiveTurtles.add(turtle);
+	}
 
-    /**
-     * @return the myView
-     */
-    public View getView() {
-        return myView;
-    }
+	/**
+	 * Clears the list
+	 * 
+	 */
+	public void resetActiveTurtles() {
+		myActiveTurtles.clear();
+	}
 
-    /**
-     * @return the myObservableDataList
-     */
-    public ObservableList<SLogoDisplayData> getObservableDataList() {
-        return myObservableDataList;
-    }
+	/**
+	 * @return the myView
+	 */
+	public View getView() {
+		return myView;
+	}
 
-    /**
-     * @return the myRootEvaluator
-     */
-    public RootEvaluator getRootEvaluator() {
-        return myRootEvaluator;
-    }
+	/**
+	 * @return the myObservableDataList
+	 */
+	public ObservableList<SLogoDisplayData> getObservableDataList() {
+		return myObservableDataList;
+	}
 
-    /**
-     * @return the myPropertiesData
-     */
-    public SLogoPropertiesData getMyPropertiesData () {
-        return myPropertiesData;
-    }
+	/**
+	 * @return the myRootEvaluator
+	 */
+	public RootEvaluator getRootEvaluator() {
+		return myRootEvaluator;
+	}
+
+	/**
+	 * @return the myPropertiesData
+	 */
+	public SLogoPropertiesData getMyPropertiesData () {
+		return myPropertiesData;
+	}
 
 }

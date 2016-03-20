@@ -20,3 +20,4 @@ MakeUserInstruction:MakeUserInstruction
 LeadingNumber:Useless command entered! Command shouldn't begin with a number.
 ListError:Invalid command! List of commands expected
 NumericError:Number expected
+StampID=-1

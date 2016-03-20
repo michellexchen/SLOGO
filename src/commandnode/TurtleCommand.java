@@ -2,7 +2,6 @@ package commandnode;
 
 import exception.SLogoException;
 import model.SLogoCharacter;
-import model.SLogoCharacterState;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
@@ -17,14 +16,9 @@ public abstract class TurtleCommand extends UnaryNode {
 	private SLogoTurtleFactory turtleFactory;
 
 	/**
-	 * Constant that differentiates a normal turtle from a stamped image of a turtle
-	 */
-	private static final int STAMP_ID = -1;
-
-	/**
 	 * set the workspace
 	 * 
-	 * @param SLogoWorkspace sw - current workspace 
+	 * @param SLogoWorkspace ws - current workspace 
 	 */
 	public void setWorkspace(SLogoWorkspace ws) {
 		myWorkspace = ws;
@@ -56,14 +50,9 @@ public abstract class TurtleCommand extends UnaryNode {
 	 * @param int turtleIndexToGrab - index of turtle that we want
 	 * @return SLogoCharacter 
 	 */
-	protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException {
-		return turtleFactory.createDefaultTurtleWithID(turtleIndexToGrab);
-	}
 
-	protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException {
-		return turtleFactory.createTurtle((int)state.getXCoor(), 
-				(int)state.getYCoor(), state.getDirection(), state.getShapeIndex(), 
-				STAMP_ID);
+	public SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException{
+		return turtleFactory.createDefaultTurtleWithID(turtleIndexToGrab);
 	}
 
 }
