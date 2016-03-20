@@ -19,14 +19,14 @@ public abstract class TurtleCommand extends UnaryNode {
 	/**
 	 * Constant that differentiates a normal turtle from a stamped image of a turtle
 	 */
-	private int STAMP_ID = -1;
+	private static final int STAMP_ID = -1;
 
 	/**
 	 * set the workspace
 	 * 
 	 * @param SLogoWorkspace sw - current workspace 
 	 */
-	public void setWorkspace(SLogoWorkspace ws){
+	public void setWorkspace(SLogoWorkspace ws) {
 		myWorkspace = ws;
 		turtleFactory = ws.getCurrentTurtleFactory();
 	}
@@ -45,7 +45,7 @@ public abstract class TurtleCommand extends UnaryNode {
 	 * 
 	 * @return SLogoWorkspace sw - current workspace 
 	 */
-	public SLogoWorkspace getWorkspace(){
+	public SLogoWorkspace getWorkspace() {
 		return myWorkspace;
 	}
 
@@ -56,12 +56,14 @@ public abstract class TurtleCommand extends UnaryNode {
 	 * @param int turtleIndexToGrab - index of turtle that we want
 	 * @return SLogoCharacter 
 	 */
-	protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException{
+	protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException {
 		return turtleFactory.createDefaultTurtleWithID(turtleIndexToGrab);
 	}
 
-	protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException{
-		return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), state.getDirection(), state.getShapeIndex(), STAMP_ID);
+	protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException {
+		return turtleFactory.createTurtle((int)state.getXCoor(), 
+				(int)state.getYCoor(), state.getDirection(), state.getShapeIndex(), 
+				STAMP_ID);
 	}
 
 }
