@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
  * defined in this interface
  * 
  * @author Hunter
- * @param <E>
  * @param <T>
  */
 public interface View<T> {

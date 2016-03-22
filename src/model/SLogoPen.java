@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  * keep relevant information
  *
  */
-public class SLogoPen{
+public class SLogoPen {
 	
 	private Color myColor;
 	private double mySize;
@@ -62,7 +62,7 @@ public class SLogoPen{
 		return mySize;
 	}
 	
-	public Color getColor2() {
+	public Color getColor() {
 		return myColor;
 	}
 	

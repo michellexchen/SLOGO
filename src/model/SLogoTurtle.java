@@ -9,7 +9,6 @@ import exception.SLogoException;
 public class SLogoTurtle implements SLogoCharacter{
 
     private SLogoTurtleState myState;
-    private int ID;
 
     /**
      * Default constructor that sets fields that define a turtle
@@ -28,7 +27,6 @@ public class SLogoTurtle implements SLogoCharacter{
                         int shapeIndex) throws SLogoException {
         myState = new SLogoTurtleState(ID, myPen, xCoor, yCoor, direction, 
                                        isHidden, shapeIndex);
-        this.ID = ID;
     }
 
     /**
@@ -41,10 +39,6 @@ public class SLogoTurtle implements SLogoCharacter{
 
     public SLogoCharacterState getState() {
         return myState;
-    }
-
-    public int getCurrTurtlesID(){
-        return this.ID;
     }
 
 }

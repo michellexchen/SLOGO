@@ -1,6 +1,7 @@
 package commandnode;
 
 import exception.SLogoException;
+import model.ResourceLoader;
 import model.SLogoCharacterState;
 
 public class StampNode extends TurtleCommand{

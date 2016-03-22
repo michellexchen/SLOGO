@@ -33,6 +33,6 @@ public class TellNode extends TurtleCommand {
         }
         // return the id of the last created active turtle
         return ((SLogoTurtle) activeTurtles.get(activeTurtles.size() 
-                                             - PROGRAMMINGINDEXING)).getCurrTurtlesID();
+                                             - PROGRAMMINGINDEXING)).getState().getID();
     }
 }

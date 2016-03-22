@@ -62,7 +62,7 @@ public abstract class TurtleCommand extends UnaryNode {
      */
     protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException{
         return turtleFactory.createTurtle(turtleFactory.getDefaultX(), 
-                                    turtleFactory.getDefaultY(), turtleIndexToGrab, turtleFactory.getDefaultDirection(), turtleFactory.getDefaultHidden(), turtleFactory.getDefaultShape());
+                                    turtleFactory.getDefaultX(), turtleIndexToGrab, turtleFactory.getDefaultDirection(), turtleFactory.getDefaultHidden(), turtleFactory.getDefaultShape());
     }
     
     protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException{

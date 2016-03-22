@@ -102,8 +102,7 @@ public class LogoFileLoader extends FileLoader {
             myCustomCommands.add(sb.toString());
             myCustomCommands.addAll(toCommands);
             return myCustomCommands;
-        }
-    }
+    }}
 
     /**
      * @return the myLogoFile

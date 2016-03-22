@@ -22,7 +22,6 @@ public abstract class SLogoCharacterState {
     private boolean toClear;
     private ResourceLoader resourceLoader = new ResourceLoader();
 
-
     /**
      * Default constructor that takes in essential turtle variable fields
      * such as Pen, Coordinates, direction, and boolean predicates
@@ -45,7 +44,6 @@ public abstract class SLogoCharacterState {
         this.myShapeIndex = shapeIndex;
         setImage(myShapeIndex);
         setBackground(myBGColorIndex);
-
     }
 
     public SLogoPen getPen() {
@@ -149,7 +147,7 @@ public abstract class SLogoCharacterState {
         return myPen.getPenStrokeStyle();
     }
 
-    public void queueClearing(boolean toClear) {
+    public void queueLineClearing(boolean toClear) {
         this.toClear = toClear;
     }
 

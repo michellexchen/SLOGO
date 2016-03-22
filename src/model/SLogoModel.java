@@ -28,7 +28,7 @@ public class SLogoModel implements Model {
      * @throws SLogoException
      */
     public SLogoModel() throws SLogoException {
-        myWorkspaces = new ArrayList<SLogoWorkspace>();
+        myWorkspaces = new ArrayList<>();
         myObservableWorkspaces = FXCollections.observableArrayList(myWorkspaces);
     }
 
@@ -134,13 +134,6 @@ public class SLogoModel implements Model {
      */
     public ObservableList<SLogoWorkspace> getObservableWorkspaces() {
         return myObservableWorkspaces;
-    }
-
-    /**
-     * @param myObservableWorkspaces the myObservableWorkspaces to set
-     */
-    public void setObservableWorkspaces(ObservableList<SLogoWorkspace> myObservableWorkspaces) {
-        this.myObservableWorkspaces = myObservableWorkspaces;
     }
 
     /**
