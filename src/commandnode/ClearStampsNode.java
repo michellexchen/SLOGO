@@ -3,10 +3,10 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class ClearstampsNode extends TurtleCommand{
+public class ClearStampsNode extends TurtleCommand{
 
-	public ClearstampsNode() {
-		// TODO Auto-generated constructor stub
+	public ClearStampsNode() {
+		setNumChildren(0);
 	}
 
 	@Override

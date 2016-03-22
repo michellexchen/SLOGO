@@ -26,7 +26,7 @@ public class SLogoTurtle implements SLogoCharacter{
      */
     public SLogoTurtle (int ID, SLogoPen myPen, double xCoor, double yCoor, double direction, boolean isHidden, 
                         int shapeIndex) throws SLogoException {
-        myState = new SLogoTurtleState(myPen, xCoor, yCoor, direction, 
+        myState = new SLogoTurtleState(ID, myPen, xCoor, yCoor, direction, 
                                        isHidden, shapeIndex);
         this.ID = ID;
     }

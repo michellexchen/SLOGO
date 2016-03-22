@@ -35,9 +35,9 @@ public abstract class SLogoCharacterState {
      * @param shapeIndex
      * @throws SLogoException
      */
-    public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
+    public SLogoCharacterState(int ID, SLogoPen myPen, double xCoor, double yCoor, double direction,
                                boolean isHidden, int shapeIndex) throws SLogoException {
-
+    	this.myID = ID;
         this.myPen = myPen;
         this.myPosition = new SLogoPosition(xCoor, yCoor);
         this.myDirection = direction;

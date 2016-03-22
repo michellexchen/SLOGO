@@ -5,8 +5,6 @@ import model.SLogoCharacterState;
 
 public class StampNode extends TurtleCommand{
 	
-	private int STAMP_ID = -1;
-	
 	public StampNode(){
 		setNumChildren(0);
 	}
@@ -16,7 +14,6 @@ public class StampNode extends TurtleCommand{
      * 
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-    	System.out.println(numRequiredChildren());
     	super.createStampTurtle(state);
         return 0;
     }

@@ -69,5 +69,12 @@ public abstract class CommandNode implements Node {
 			throw new SLogoException(new ResourceLoader().getString("ListError")+" at token " + childNum);
 		}
     }
+    
+    public Node childListCheckWithListReturn(int childNum) throws SLogoException{
+    	Node child = getChild(childNum);
+		if(!(child instanceof ListNode)){
+			throw new SLogoException(new ResourceLoader().getString("ListError")+" at token " + childNum);
+		} else return child;
+    }
 
 }

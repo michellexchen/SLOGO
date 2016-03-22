@@ -1,8 +1,12 @@
 package commandnode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import exception.SLogoException;
 import model.SLogoCharacter;
 import model.SLogoCharacterState;
+import model.SLogoDisplayData;
 import model.SLogoTurtleFactory;
 import model.SLogoWorkspace;
 
@@ -58,16 +62,38 @@ public abstract class TurtleCommand extends UnaryNode {
      */
     protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException{
         return turtleFactory.createTurtle(turtleFactory.getDefaultX(), 
-                                    turtleFactory.getDefaultY(), turtleIndexToGrab);
+                                    turtleFactory.getDefaultY(), turtleIndexToGrab, turtleFactory.getDefaultDirection(), turtleFactory.getDefaultHidden(), turtleFactory.getDefaultShape());
     }
     
     protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException{
-    	return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), STAMP_ID);
+    	return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), STAMP_ID, state.getDirection(), state.getHidden(), state.getShapeIndex());
     }
     
     protected void clearStampTurtles(){
-    	for(SLogoCharacter turtle: myWorkspace.getActiveTurtlesList()){
-    		if(turtle.getState().getID() == STAMP_ID) myWorkspace.getActiveTurtlesList().remove(turtle);
+    	List<SLogoCharacter> stampsTurtleStateToRemove = new ArrayList<SLogoCharacter>();
+    	List<SLogoDisplayData> stampsDisplayDataToRemove = new ArrayList<SLogoDisplayData>();
+    	for(SLogoCharacter turtle: myWorkspace.getCharacterList()){
+    		if(turtle.getState().getID() == STAMP_ID){
+    			stampsTurtleStateToRemove.add(turtle);
+    		}
+    	}
+    	for(SLogoDisplayData stateData : myWorkspace.getObservableDataList()){
+			if(stateData.getID() == STAMP_ID){
+				stampsDisplayDataToRemove.add(stateData);
+			}
+		}
+    	// avoid concurrent modification exceptions by creating new lists we iterate through to remove the turtle's elements
+    	if(!stampsTurtleStateToRemove.isEmpty()){
+    		for(SLogoCharacter turtle: stampsTurtleStateToRemove){
+    			turtle.getState().setHidden(true);
+    			myWorkspace.getCharacterList().remove(myWorkspace.getCharacterList().indexOf(turtle));
+    			
+    		}
+    	}
+    	if(!stampsDisplayDataToRemove.isEmpty()){
+    		for(SLogoDisplayData turtle: stampsDisplayDataToRemove){
+    			myWorkspace.getObservableDataList().remove(myWorkspace.getObservableDataList().indexOf(turtle));
+    		}
     	}
     }
 

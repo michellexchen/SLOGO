@@ -100,3 +100,5 @@ TURTLES=Turtles
 clearscreen:Clearscreen
 cs:Clearscreen
 setpenstyle:SetPenStyle
+clearstamps:Clearstamps
+

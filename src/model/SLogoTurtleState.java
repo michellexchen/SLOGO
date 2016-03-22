@@ -8,10 +8,10 @@ import exception.SLogoException;
  */
 public class SLogoTurtleState extends SLogoCharacterState {
 
-    public SLogoTurtleState(SLogoPen myPen, double xCoor, double yCoor, 
+    public SLogoTurtleState(int ID, SLogoPen myPen, double xCoor, double yCoor, 
                             double direction, boolean isHidden, 
                             int shapeIndex) throws SLogoException {
-        super(myPen, xCoor, yCoor, direction, isHidden, shapeIndex);
+        super(ID, myPen, xCoor, yCoor, direction, isHidden, shapeIndex);
     }
 
 }

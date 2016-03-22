@@ -19,15 +19,15 @@ public class TellNode extends TurtleCommand {
      * 
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {
-    	childListCheck(TURTLE_LIST_INDEX);
-        super.getWorkspace().resetActiveTurtles();
-        List<Node> commands = ((ListNode) getChildren().get(TURTLE_LIST_INDEX)).getCommands();
+//    	childListCheck(TURTLE_LIST_INDEX);
+        List<String> commands = ((ListNode) getChildren().get(TURTLE_LIST_INDEX)).getInnerCommands();
         List<SLogoCharacter> activeTurtles = super.getWorkspace().getActiveTurtlesList();
-        for (Node command : commands) {
-            double turtleToGrab = ((NumericNode) command).getNumericValue();
+        super.getWorkspace().resetActiveTurtles();
+        for (String turtleToGrab : commands) {
+//            double turtleToGrab = ((NumericNode) command).getNumericValue();
             // creating the turtle from factory automatically adds our turtle to
             // our list of created turtles
-            SLogoCharacter newActiveTurtle = super.grabTurtle((int) turtleToGrab 
+            SLogoCharacter newActiveTurtle = super.grabTurtle(Integer.parseInt(turtleToGrab) 
                                                               - PROGRAMMINGINDEXING);
             super.getWorkspace().addActiveTurtle(newActiveTurtle);
         }
