@@ -58,11 +58,11 @@ public class SLogoGUIController implements Initializable, Observer {
     private static final int RGB_CONST = 255;
     private static final int ERROR_INDEX = 7;
     private static final String ERROR = "ERROR";
-    private static final int WORKSPACE_ONE = 1;
-    private static final int WORKSPACE_TWO = 2;
-    private static final int WORKSPACE_THREE = 3;
-    private static final int WORKSPACE_FOUR = 4;
-    private static final int WORKSPACE_FIVE = 5;
+    private static final int WORKSPACE_ONE = 0;
+    private static final int WORKSPACE_TWO = 1;
+    private static final int WORKSPACE_THREE = 2;
+    private static final int WORKSPACE_FOUR = 3;
+    private static final int WORKSPACE_FIVE = 4;
 
     private ResourceLoader myResourceLoader;
     private ResourceLoader myErrorLoader;
@@ -175,8 +175,8 @@ public class SLogoGUIController implements Initializable, Observer {
         assignHelpAction();
         assignReadAction();
         assignRunAction();
-        customize();
         assignAddWorkspaceAction();
+        customize();
     }
 
     /**

@@ -3,7 +3,6 @@ package model;
 import java.util.HashMap;
 
 import exception.SLogoException;
-import javafx.scene.paint.Color;
 
 /**
  * SLogo's PenStroke loader class to access default pen stroke styles
@@ -12,7 +11,7 @@ import javafx.scene.paint.Color;
  *
  */
 
-public class PenStrokeLoader extends FileLoader{
+public class PenStrokeLoader extends FileLoader {
 
     private static final String STROKE_PATH = "resources/languages";
     private static final String STROKE_EXTENSION = "English.properties";
@@ -43,6 +42,11 @@ public class PenStrokeLoader extends FileLoader{
         }
     }
 
+    /**
+     * Returns a map that maps an index to a color string
+     * 
+     * @return
+     */
     public HashMap<Integer, String> getStrokeMap() {
         return myStrokeMap;
     }

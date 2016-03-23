@@ -22,7 +22,6 @@ public abstract class SLogoCharacterState {
     private boolean toClear;
     private ResourceLoader resourceLoader = new ResourceLoader();
 
-
     /**
      * Default constructor that takes in essential turtle variable fields
      * such as Pen, Coordinates, direction, and boolean predicates
@@ -35,9 +34,9 @@ public abstract class SLogoCharacterState {
      * @param shapeIndex
      * @throws SLogoException
      */
-    public SLogoCharacterState(SLogoPen myPen, double xCoor, double yCoor, double direction,
+    public SLogoCharacterState(int ID, SLogoPen myPen, double xCoor, double yCoor, double direction,
                                boolean isHidden, int shapeIndex) throws SLogoException {
-
+    	this.myID = ID;
         this.myPen = myPen;
         this.myPosition = new SLogoPosition(xCoor, yCoor);
         this.myDirection = direction;
@@ -45,7 +44,6 @@ public abstract class SLogoCharacterState {
         this.myShapeIndex = shapeIndex;
         setImage(myShapeIndex);
         setBackground(myBGColorIndex);
-
     }
 
     public SLogoPen getPen() {
@@ -149,7 +147,7 @@ public abstract class SLogoCharacterState {
         return myPen.getPenStrokeStyle();
     }
 
-    public void queueClearing(boolean toClear) {
+    public void queueLineClearing(boolean toClear) {
         this.toClear = toClear;
     }
 

@@ -107,7 +107,7 @@ public abstract class FileLoader {
         } catch (FileNotFoundException e) {
             throw new SLogoException(FILE_NOT_FOUND);
         }
-        int numLines = 0;
+        int numLines;
 
         try {
             while (reader.readLine() != null) {}

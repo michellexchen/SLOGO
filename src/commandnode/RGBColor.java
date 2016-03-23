@@ -10,17 +10,17 @@ import parser.InstructionLoader;
  */
 public class RGBColor {
 
+    private static final int NUM_ARGUMENTS = 3;
+    private static final int MAX_VAL = 255;
+    private static final int MIN_VAL = 0;
+    private static final int RED_INDEX = 0;
+    private static final int GREEN_INDEX = 1;
+    private static final int BLUE_INDEX = 2;
     private int red;
     private int green;
     private int blue;
     private int colorIndex;
-    private static final int NUM_ARGUMENTS = 3;
-    private int MAX_VAL = 255;
-    private int MIN_VAL = 0;
-    private int RED_INDEX = 0;
-    private int GREEN_INDEX = 1;
-    private int BLUE_INDEX = 2;
-
+    
     /**
      * @param red
      * @param green
