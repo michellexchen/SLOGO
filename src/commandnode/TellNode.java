@@ -11,6 +11,7 @@ public class TellNode extends TurtleCommand {
 	
 	private static final int TURTLE_LIST_INDEX = 0;
     private static final int PROGRAMMINGINDEXING = 1;
+    private boolean ask = false;
     
     /**
      * 

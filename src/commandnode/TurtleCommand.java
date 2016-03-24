@@ -65,10 +65,20 @@ public abstract class TurtleCommand extends UnaryNode {
                                     turtleFactory.getDefaultX(), turtleIndexToGrab, turtleFactory.getDefaultDirection(), turtleFactory.getDefaultHidden(), turtleFactory.getDefaultShape());
     }
     
+    /**
+     * closed way of allowing the super class to handle interacting with the specific turtle factory instance in order to 
+     * create and return a turtle stamp
+     * 
+     * @param SLogoCharacterState state - the turtle state that we want to stamp
+     * @return SLogoCharacter 
+     */
     protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException{
     	return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), STAMP_ID, state.getDirection(), state.getHidden(), state.getShapeIndex());
     }
     
+    /**
+     * Clears the stamps that are held in our active turtle list
+     */
     protected void clearStampTurtles(){
     	List<SLogoCharacter> stampsTurtleStateToRemove = new ArrayList<SLogoCharacter>();
     	List<SLogoDisplayData> stampsDisplayDataToRemove = new ArrayList<SLogoDisplayData>();
@@ -83,18 +93,15 @@ public abstract class TurtleCommand extends UnaryNode {
 			}
 		}
     	// avoid concurrent modification exceptions by creating new lists we iterate through to remove the turtle's elements
-    	if(!stampsTurtleStateToRemove.isEmpty()){
+    	if(!stampsTurtleStateToRemove.isEmpty())
     		for(SLogoCharacter turtle: stampsTurtleStateToRemove){
     			turtle.getState().setHidden(true);
     			myWorkspace.getCharacterList().remove(myWorkspace.getCharacterList().indexOf(turtle));
     			
     		}
-    	}
-    	if(!stampsDisplayDataToRemove.isEmpty()){
+    	if(!stampsDisplayDataToRemove.isEmpty())
     		for(SLogoDisplayData turtle: stampsDisplayDataToRemove){
     			myWorkspace.getObservableDataList().remove(myWorkspace.getObservableDataList().indexOf(turtle));
     		}
-    	}
     }
-
 }
