@@ -6,13 +6,12 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Quotient, a Math command
  */
-public class QuotientNode extends BinaryNode{
+public class QuotientNode extends MathNode{
 
-    public double evaluate(SLogoCharacterState state) throws SLogoException {
-        if (evaluateChild(1, state) != 0) {
-            return evaluateChild(0, state) / evaluateChild(1, state);   
-        }
-        return 0;
+private final int OPCODE = 2;
+	
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+    	return super.evaluate(state, OPCODE);
     }
 
 }

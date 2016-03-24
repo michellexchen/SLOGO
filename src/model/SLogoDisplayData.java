@@ -20,19 +20,19 @@ import javafx.scene.shape.Line;
  * @author Hunter
  *
  */
-public class SLogoDisplayData extends Observable{
-
-    private SLogoPosition myPosition;
+public class SLogoDisplayData extends Observable {
+   
+	private int ID;
+    private double prevDirection;
     private double myDirection;
-    private String myImage;
-    private List<Line> myLines;
     private boolean turtleHidden;
-    private int ID;
+    private boolean cleared;
+    private String myImage;
+    private String myLineStyle;
+    private SLogoPosition myPosition;
+    private List<Line> myLines;
     private Color bgColor;
     private SLogoPen myPen;
-    private double prevDirection;
-    private boolean cleared;
-    private String myLineStyle;
     private SLogoCharacterState myState;
 
     /**
@@ -89,7 +89,7 @@ public class SLogoDisplayData extends Observable{
         myLines.add(newline);
     }
 
-    public String getPenStyle(){
+    public String getPenStyle() {
         return myLineStyle;
     }
 
@@ -136,7 +136,7 @@ public class SLogoDisplayData extends Observable{
         return myImage;
     }
 
-    public boolean getTurtleHidden(){
+    public boolean getTurtleHidden() {
         return turtleHidden;
     }
 
@@ -152,11 +152,11 @@ public class SLogoDisplayData extends Observable{
         return prevDirection;
     }
 
-    public boolean areLinesCleared(){
+    public boolean areLinesCleared() {
         return cleared;
     }
 
-    public void queueLineClearing(boolean cleared){
+    public void queueLineClearing(boolean cleared) {
         myState.queueLineClearing(cleared);
     }
 }

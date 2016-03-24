@@ -6,10 +6,12 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Product, a Math command
  */
-public class ProductNode extends BinaryNode{
+public class ProductNode extends MathNode{
 
-    public double evaluate(SLogoCharacterState state) throws SLogoException {
-        return evaluateChild(0, state) * evaluateChild(1, state);
-    }
+	private final int OPCODE = 3;
+
+	public double evaluate(SLogoCharacterState state) throws SLogoException {
+		return super.evaluate(state, OPCODE);
+	}
 
 }
