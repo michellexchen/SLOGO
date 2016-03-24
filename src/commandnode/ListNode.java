@@ -27,7 +27,7 @@ public class ListNode extends CommandNode{
     }
     
     public List<Node> getInnerRoots() throws SLogoException{
-    	return myTreeFactory.createRoots(clone(myInnerCommands));
+    	return myTreeFactory.createRootList(clone(myInnerCommands));
     }
 
     /**

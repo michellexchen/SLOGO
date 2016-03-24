@@ -10,7 +10,7 @@ FileError:Error loading file.
 ShapeIndex:Invalid shape index.
 ColorIndex:Invalid color index.
 TreeFactory:Tree Factory couldn't be created.
-Repcount::repcount
+Repcount:repcount
 InstructionsLoader:Instruction Loader couldn't be created.
 InvalidCommandTokens:Invalid command! Not enough command token parts supplied.
 NoCommandEntered:Nothing was entered! Try again!

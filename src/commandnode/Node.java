@@ -15,5 +15,4 @@ public interface Node {
     int numCurrentChildren();
     String toString();
     void addChild(Node child);
-
 }
