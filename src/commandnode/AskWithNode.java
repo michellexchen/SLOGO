@@ -12,7 +12,7 @@ public class AskWithNode extends TurtleCommand {
 
 	@Override
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
-		for (SLogoCharacter turtle : super.getWorkspace().getCharacterList()){
+		for (SLogoCharacter turtle : super.getWorkspace().getCharacterList()) {
 			return evaluateChild(0, state) != 0 ? evaluateChild(1, state) : 0;
 		}
 		return 0;
