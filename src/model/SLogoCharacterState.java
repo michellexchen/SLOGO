@@ -10,16 +10,16 @@ import javafx.scene.paint.Color;
  */
 public abstract class SLogoCharacterState {
 
-    private SLogoPosition myPosition;
-    private double myDirection;
     private boolean isHidden;
-    private SLogoPen myPen;
-    private String myImage;
+    private boolean toClear;
     private int myID;
     private int myShapeIndex;
     private int myBGColorIndex;
+    private double myDirection;
+    private SLogoPosition myPosition;
+    private SLogoPen myPen;
+    private String myImage;
     private Color myBGColor;
-    private boolean toClear;
     private ResourceLoader resourceLoader = new ResourceLoader();
 
     /**
@@ -94,7 +94,7 @@ public abstract class SLogoCharacterState {
     public void setBackground(int myBGColorIndex) throws SLogoException {
         ColorLoader colorLoader = new ColorLoader();
         String colorString = colorLoader.getString(myBGColorIndex + "");
-        if(colorString == null) {
+        if (colorString == null) {
             throw new SLogoException(resourceLoader.getString("ColorIndex"));
         }
         else {

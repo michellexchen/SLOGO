@@ -23,7 +23,7 @@ public abstract class TurtleCommand extends UnaryNode {
     /**
      * Constant that differentiates a normal turtle from a stamped image of a turtle
      */
-    private int STAMP_ID = -1;
+    private static final int STAMP_ID = -1;
 
     /**
      * set the workspace
@@ -60,39 +60,44 @@ public abstract class TurtleCommand extends UnaryNode {
      * @param int turtleIndexToGrab - index of turtle that we want
      * @return SLogoCharacter 
      */
-    protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException{
+    protected SLogoCharacter grabTurtle(int turtleIndexToGrab) throws SLogoException {
         return turtleFactory.createTurtle(turtleFactory.getDefaultX(), 
-                                    turtleFactory.getDefaultX(), turtleIndexToGrab, turtleFactory.getDefaultDirection(), turtleFactory.getDefaultHidden(), turtleFactory.getDefaultShape());
+               turtleFactory.getDefaultX(), turtleIndexToGrab, 
+               turtleFactory.getDefaultDirection(), turtleFactory.getDefaultHidden(), 
+               turtleFactory.getDefaultShape());
     }
     
-    protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException{
-    	return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), STAMP_ID, state.getDirection(), state.getHidden(), state.getShapeIndex());
+    protected SLogoCharacter createStampTurtle(SLogoCharacterState state) throws SLogoException {
+    	return turtleFactory.createTurtle((int)state.getXCoor(), (int)state.getYCoor(), 
+    			STAMP_ID, state.getDirection(), state.getHidden(), state.getShapeIndex());
     }
     
     protected void clearStampTurtles(){
-    	List<SLogoCharacter> stampsTurtleStateToRemove = new ArrayList<SLogoCharacter>();
-    	List<SLogoDisplayData> stampsDisplayDataToRemove = new ArrayList<SLogoDisplayData>();
-    	for(SLogoCharacter turtle: myWorkspace.getCharacterList()){
-    		if(turtle.getState().getID() == STAMP_ID){
+    	List<SLogoCharacter> stampsTurtleStateToRemove = new ArrayList<>();
+    	List<SLogoDisplayData> stampsDisplayDataToRemove = new ArrayList<>();
+    	for (SLogoCharacter turtle: myWorkspace.getCharacterList()) {
+    		if (turtle.getState().getID() == STAMP_ID) {
     			stampsTurtleStateToRemove.add(turtle);
     		}
     	}
-    	for(SLogoDisplayData stateData : myWorkspace.getObservableDataList()){
-			if(stateData.getID() == STAMP_ID){
+    	for (SLogoDisplayData stateData : myWorkspace.getObservableDataList()) {
+			if (stateData.getID() == STAMP_ID) {
 				stampsDisplayDataToRemove.add(stateData);
 			}
 		}
     	// avoid concurrent modification exceptions by creating new lists we iterate through to remove the turtle's elements
-    	if(!stampsTurtleStateToRemove.isEmpty()){
-    		for(SLogoCharacter turtle: stampsTurtleStateToRemove){
+    	if (!stampsTurtleStateToRemove.isEmpty()) {
+    		for (SLogoCharacter turtle: stampsTurtleStateToRemove) {
     			turtle.getState().setHidden(true);
-    			myWorkspace.getCharacterList().remove(myWorkspace.getCharacterList().indexOf(turtle));
+    			myWorkspace.getCharacterList()
+    							.remove(myWorkspace.getCharacterList().indexOf(turtle));
     			
     		}
     	}
-    	if(!stampsDisplayDataToRemove.isEmpty()){
-    		for(SLogoDisplayData turtle: stampsDisplayDataToRemove){
-    			myWorkspace.getObservableDataList().remove(myWorkspace.getObservableDataList().indexOf(turtle));
+    	if (!stampsDisplayDataToRemove.isEmpty()) {
+    		for (SLogoDisplayData turtle: stampsDisplayDataToRemove) {
+    			myWorkspace.getObservableDataList().remove(myWorkspace.getObservableDataList()
+    					.indexOf(turtle));
     		}
     	}
     }
