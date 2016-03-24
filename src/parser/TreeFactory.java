@@ -143,7 +143,8 @@ public class TreeFactory {
 		} else if (isVariable(rootName)) {
 			return new NumericNode(0);
 		} else if (isCustom(rootToken)) {
-			CustomFunctionNode function = new CustomFunctionNode((myWorkspace.lookupCustomCommand(rootName)));
+			CustomFunctionNode function = new CustomFunctionNode((myWorkspace
+					.lookupCustomCommand(rootName)));
 			function.setWorkspace(myWorkspace);
 			return function;
 		} else {
@@ -223,18 +224,19 @@ public class TreeFactory {
 	 * 
 	 * @param String str - string to be compared
 	 */
-	private boolean isCustom(String str){
+	private boolean isCustom(String str) {
 		return myWorkspace.lookupCustomCommand(str) != null;
 	}
 
-	private boolean isToCommand(String command){
-		return myLanguageLoader.getTranslation(command.toLowerCase()).equals(new ResourceLoader().getString("MakeUserInstruction"));
+	private boolean isToCommand(String command) {
+		return myLanguageLoader.getTranslation(command.toLowerCase())
+				.equals(new ResourceLoader().getString("MakeUserInstruction"));
 	}
 
 	/**
 	 * @return the myResourceLoader
 	 */
-	private ResourceLoader getResourceLoader () {
+	private ResourceLoader getResourceLoader() {
 		return myResourceLoader;
 	}
 

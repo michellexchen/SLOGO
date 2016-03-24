@@ -8,7 +8,7 @@ import model.SLogoCharacterState;
  */
 public class SumNode extends MathNode{
 
-	private final int OPCODE = 0;
+	private static final int OPCODE = 0;
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
     	return super.evaluate(state, OPCODE);

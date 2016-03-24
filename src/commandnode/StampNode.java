@@ -3,13 +3,13 @@ package commandnode;
 import exception.SLogoException;
 import model.SLogoCharacterState;
 
-public class StampNode extends StampingNode{
+public class StampNode extends StampingNode {
 	
     /**
      * Sets number of children to zero
      * 
      */
-	public StampNode(){
+	public StampNode() {
 		setNumChildren(0);
 	}
 

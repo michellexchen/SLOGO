@@ -8,7 +8,7 @@ import model.SLogoCharacterState;
  */
 public class DifferenceNode extends MathNode {
 
-private final int OPCODE = 1;
+	private static final int OPCODE = 1;
 	
 	public double evaluate(SLogoCharacterState state) throws SLogoException {
     	return super.evaluate(state, OPCODE);

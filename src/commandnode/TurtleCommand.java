@@ -18,15 +18,15 @@ public abstract class TurtleCommand extends UnaryNode {
 	 * access to the list of active and all turtles contained within the
 	 * workspace
 	 */
-
-	private SLogoWorkspace myWorkspace;
-	private SLogoTurtleFactory turtleFactory;
+	
 
 	/**
 	 * Constant that differentiates a normal turtle from a stamped image of a
 	 * turtle
 	 */
 	private static final int STAMP_ID = -1;
+	private SLogoWorkspace myWorkspace;
+	private SLogoTurtleFactory turtleFactory;
 
 	/**
 	 * set the workspace
@@ -103,15 +103,19 @@ public abstract class TurtleCommand extends UnaryNode {
 		}
 		// avoid concurrent modification exceptions by creating new lists we
 		// iterate through to remove the turtle's elements
-		if (!stampsTurtleStateToRemove.isEmpty())
+		if (!stampsTurtleStateToRemove.isEmpty()) {
 			for (SLogoCharacter turtle : stampsTurtleStateToRemove) {
 				turtle.getState().setHidden(true);
 				myWorkspace.getCharacterList().remove(myWorkspace.getCharacterList().indexOf(turtle));
 
 			}
-		if (!stampsDisplayDataToRemove.isEmpty())
+		}
+
+		if (!stampsDisplayDataToRemove.isEmpty()) {
 			for (SLogoDisplayData turtle : stampsDisplayDataToRemove) {
 				myWorkspace.getObservableDataList().remove(myWorkspace.getObservableDataList().indexOf(turtle));
 			}
+		}
+
 	}
 }
