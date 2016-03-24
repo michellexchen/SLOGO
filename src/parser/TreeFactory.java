@@ -28,9 +28,9 @@ public class TreeFactory {
     private LanguageLoader myLanguageLoader;
     private SLogoWorkspace myWorkspace;
 
-    public TreeFactory (SLogoWorkspace ws) throws SLogoException {
-        myResourceLoader = new ResourceLoader();
-        myWorkspace = ws;
+    public TreeFactory (SLogoWorkspace myWorkspace) throws SLogoException {
+    	this.myWorkspace = myWorkspace;
+    	myResourceLoader = new ResourceLoader();
         myLanguageLoader = new LanguageLoader();
         myLanguageLoader.load(myWorkspace.getView().getLanguage());
     }
@@ -50,9 +50,6 @@ public class TreeFactory {
             if (isToCommand(myRootToken)) {
             	String customName = commandParts.remove(0);
             	myRoot.addChild(new CustomCommandNode(customName, myWorkspace));
-            }
-            if(isNumeric(myRootToken)){
-            	throw new SLogoException(getResourceLoader().getString("LeadingNumber"));
             }
             while (myRoot.numCurrentChildren() != myRoot.numRequiredChildren()) {
             	Node nextChild = createChild(commandParts);
@@ -228,7 +225,7 @@ public class TreeFactory {
     /**
      * @return the myResourceLoader
      */
-    public ResourceLoader getResourceLoader () {
+    private ResourceLoader getResourceLoader () {
         return myResourceLoader;
     }
 

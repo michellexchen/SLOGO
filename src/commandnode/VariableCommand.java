@@ -20,7 +20,7 @@ public abstract class VariableCommand extends CommandNode{
 
     public void setWorkspace(SLogoWorkspace ws) throws SLogoException{
         myWorkspace = ws;
-        myTreeFactory = new TreeFactory(getWorkspace());
+        myTreeFactory = new TreeFactory(ws);
         myRootEvaluator = new RootEvaluator(getWorkspace());
     }
 
