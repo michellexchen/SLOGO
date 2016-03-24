@@ -14,7 +14,7 @@ import parser.TreeFactory;
  * Node representation of a List of commands inside of a [ ]
  * Extends CommandNode and can have unlimited commands inside
  */
-public class ListNode extends CommandNode{
+public abstract class ListNode extends CommandNode{
 
     private List<Node> myCommands;
     private List<String> myInnerCommands;
@@ -29,7 +29,11 @@ public class ListNode extends CommandNode{
     public List<Node> getInnerRoots() throws SLogoException{
     	return myTreeFactory.createRoots(clone(myInnerCommands));
     }
-
+    
+    public double evaluateInnerChild(int child, SLogoCharacterState state) throws SLogoException{
+    	return getInnerRoots().get(child).evaluate(state);
+    }
+    
     /**
      * @return Evaluation of last command
      */
@@ -48,6 +52,10 @@ public class ListNode extends CommandNode{
 
     public List<String> getInnerCommands(){
         return myInnerCommands;
+    }
+    
+    public RootEvaluator getRootEvaluator(){
+    	return myRootEvaluator;
     }
     
     private List<String> clone(List<String> list){
