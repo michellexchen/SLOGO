@@ -132,6 +132,7 @@ public class SLogoVisualizer implements Observer {
 		return newLine;
 	}
 
+
 	/**
 	 * Creates a Line object with specified color
 	 * 
