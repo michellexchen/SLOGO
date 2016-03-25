@@ -391,13 +391,9 @@ public class SLogoGUIController implements Initializable, Observer {
                         ("Pen Down: " + displayData.getPen().getDown()),
                         ("Pen Color: " + displayData.getPen().getColorIndex()),
                         ("Pen Size: " + displayData.getPen().getSize()),
-<<<<<<< HEAD
                         //("Pen Style: " + displayData.getPen().getPenStrokeStyle())
                         ("Pen Style: " + myCustomizer.getMyStrokeStyle())
-=======
-                        ("Pen Style: " + displayData.getPen().getPenStrokeStyle())
-                        //("Pen Style: " + myCustomizer.getMyStrokeStyle())
->>>>>>> master
+
         		);
         myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
         myPropertiesPaneView.setItems(myProperties);

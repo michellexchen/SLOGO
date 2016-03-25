@@ -1,3 +1,20 @@
+// This entire file is part of my masterpiece.
+// Michelle Chen
+
+/**
+ * The SLogoPropertiesVisualizer class observes SLogoDisplayData to update turtle attributes. It reads in a resource file and updates properties dynamically and also has ties to placing
+ * turtles on canvases and drawing lines. Its method updatePropertiesPane() is called in GUIController in order to dynamically update turtle properties in the properties pane of the UI. 
+ * Though not included in my code masterpiece, in my refactoring I also wrote a line factory class and slogoturtle image class to extract methods from SLogoPropertiesVisualizer which 
+ * makes SLogoPropertiesVisualizer much less cluttered and generalizes it out. It encapsulates and delegates specific jobs to other classes, making it clear which class does what. 
+ * I mention this here because I think these are also important design patterns--the factory pattern, for example, generalizes a functionality out and makes it reusable in more than one
+ * context which not only decreases duplicated code but also gets rid of certain convoluted dependencies.
+ * 
+ * When anything in the SLogoDisplayData class changes, it sends an update to the classes that observe it (in this case, SLogoPropertiesVisualizer). This makes for good design because 
+ * SLogoDisplayData doesn't need to know that SLogoPropertiesVisualizer is observing it; this sort of dependency allows the visualizer to do its job and render turtles/showcase properties 
+ * without having access to the model. As mentioned in the other class, this explicit separation between view and model makes for a clear division--these model objects are thus 
+ * completely self contained and work without reference to the presentation objects.  
+ */
+
 package view;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,7 +25,14 @@ import model.ResourceLoader;
 import model.SLogoPosition;
 import model.SLogoDisplayData;
 
+/**
+ * Properties Visualizer class that contains methods that renders turtles and showcases properties on the screen
+ * 
+ * @author Michelle
+ *
+ */
 public class SLogoPropertiesVisualizer implements Observer {
+	
 	private final String RESOURCE_LOCATION = "resources/visualization";
 	private ResourceBundle infoResource = ResourceBundle.getBundle(RESOURCE_LOCATION);
 	private final int PANE_SIZE = Integer.parseInt(infoResource.getString("PaneSize"));
@@ -22,14 +46,14 @@ public class SLogoPropertiesVisualizer implements Observer {
 		
 	@Override
 	public void update(Observable o, Object arg) {
-		updatePropertiesPane();		
+		updateProperties();		
 	}	
 	
 	/**
 	 * This method updates turtles' attributes and position
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
-	public void updatePropertiesPane () {
+	public void updateProperties () {
 		getGUIController().getCanvas().getChildren().clear();
 		for (SLogoDisplayData turtledata : getModel().getObservableDataList()) {
 			placeTurtle(turtledata);
@@ -41,7 +65,6 @@ public class SLogoPropertiesVisualizer implements Observer {
 			myProperties.setPaneColor(turtledata.getBGColor());
 		}
 	}
-	
 	
 	/**
 	 * Creates a Line object with default color black through the usage of a line factory
@@ -85,17 +108,11 @@ public class SLogoPropertiesVisualizer implements Observer {
 		turtle.initialize();
 		getGUIController().addToCanvas(turtle);
 	}
-	
-	/**
-	 * @return the myGUIController
-	 */
+
 	public SLogoGUIController getGUIController() {
 		return myGUIController;
 	}
 
-	/**
-	 * @return the myModel
-	 */
 	public Model getModel() {
 		return myModel;
 	}
