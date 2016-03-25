@@ -8,31 +8,31 @@ import model.SLogoWorkspace;
 import parser.RootEvaluator;
 import parser.TreeFactory;
 
-public abstract class VariableCommand extends CommandNode{
+public abstract class VariableCommand extends CommandNode {
 
     private SLogoWorkspace myWorkspace;
     private TreeFactory myTreeFactory;
     private RootEvaluator myRootEvaluator;
 
-    public SLogoWorkspace getWorkspace(){
+    public SLogoWorkspace getWorkspace() {
         return myWorkspace;
     }
 
-    public void setWorkspace(SLogoWorkspace ws) throws SLogoException{
+    public void setWorkspace(SLogoWorkspace ws) throws SLogoException {
         myWorkspace = ws;
-        myTreeFactory = new TreeFactory(getWorkspace());
+        myTreeFactory = new TreeFactory(ws);
         myRootEvaluator = new RootEvaluator(getWorkspace());
     }
 
-    public TreeFactory getTreeFactory(){
+    public TreeFactory getTreeFactory() {
         return myTreeFactory;
     }
 
-    public RootEvaluator getRootEvaluator(){
+    public RootEvaluator getRootEvaluator() {
         return myRootEvaluator;
     }
 
-    public List<String> clone(List<String> list){
+    public List<String> clone(List<String> list) {
         List<String> copy = new ArrayList<>();
         copy.addAll(list);
         return copy;
