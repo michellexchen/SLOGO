@@ -17,12 +17,12 @@ import view.View;
  */
 public class SLogoWorkspace {
 
-	private View myView;
+	private View<?> myView;
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
 	private List<SLogoCharacter> myCharacters;
 	private List<SLogoCharacter> myActiveTurtles;
-	private ObservableList<SLogoDisplayData> myObservableDataList;
+	private ObservableList<Object> myObservableDataList;
 	private ObservableList<SLogoVariable> myObservableVariableList;
 	private ObservableList<SLogoCustomCommand> myObservableCustomList;
 	private SLogoPropertiesData myPropertiesData;
@@ -33,7 +33,7 @@ public class SLogoWorkspace {
 	 * @param view
 	 * @throws SLogoException
 	 */
-	public SLogoWorkspace(View view) throws SLogoException {
+	public SLogoWorkspace(View<?> view) throws SLogoException {
 		myView = view;
 		createObservableLists();
 		turtleFactory = new SLogoTurtleFactory(this);
@@ -238,7 +238,7 @@ public class SLogoWorkspace {
 	/**
 	 * @return the myObservableDataList
 	 */
-	public ObservableList<SLogoDisplayData> getObservableDataList() {
+	public ObservableList<Object> getObservableDataList() {
 		return myObservableDataList;
 	}
 

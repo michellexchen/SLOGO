@@ -381,16 +381,16 @@ public class SLogoGUIController implements Initializable, Observer {
     /**
      * Updates property info on the bottom left side of the screen
      * 
-     * @param displayData
+     * @param turtledata
      */
-    public void updateProperties(SLogoDisplayData displayData){
+    public void updateProperties(Object turtledata) {
         myProperties = FXCollections.observableArrayList (
-                        ("Direction: " + Double.toString(displayData.getDirection())),
-                        ("X position: " + displayData.getX()),
-                        ("Y position: " + displayData.getY()),
-                        ("Pen Down: " + displayData.getPen().getDown()),
-                        ("Pen Color: " + displayData.getPen().getColorIndex()),
-                        ("Pen Size: " + displayData.getPen().getSize()),
+                        ("Direction: " + Double.toString(((SLogoDisplayData) turtledata).getDirection())),
+                        ("X position: " + ((Scene) turtledata).getX()),
+                        ("Y position: " + ((Scene) turtledata).getY()),
+                        ("Pen Down: " + ((SLogoDisplayData) turtledata).getPen().getDown()),
+                        ("Pen Color: " + ((SLogoDisplayData) turtledata).getPen().getColorIndex()),
+                        ("Pen Size: " + ((SLogoDisplayData) turtledata).getPen().getSize()),
                         ("Pen Style: " + myCustomizer.getMyStrokeStyle())
         		);
         myPropertiesPaneView.setPrefSize(PANE_WIDTH, PANE_HEIGHT);
@@ -517,14 +517,14 @@ public class SLogoGUIController implements Initializable, Observer {
     /**
      * @return the myModel
      */
-    public Model getModel() {
+    public Model<?> getModel() {
         return myModel;
     }
 
     /**
      * @param myModel the myModel to set
      */
-    public void setModel(Model myModel) {
+    public void setModel(Model<?> myModel) {
         this.myModel = myModel;
     }
 

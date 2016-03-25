@@ -16,7 +16,7 @@ import model.Model;
  */
 public class SLogoView implements View<Object> {
 
-    private Model myModel;
+    private Model<?> myModel;
     private List<SLogoVisualizer> myVisualizers;
     private SLogoVisualizer myCurrentVisualizer;
 
@@ -29,7 +29,7 @@ public class SLogoView implements View<Object> {
      * @param model
      * @throws SLogoException
      */
-    public SLogoView(Model model) throws SLogoException {
+    public SLogoView(Model<?> model) throws SLogoException {
         myVisualizers = new ArrayList<>();
         myModel = model;
         myCurrentVisualizer = new SLogoVisualizer(getModel());
@@ -75,7 +75,7 @@ public class SLogoView implements View<Object> {
     /**
      * @return the myModel
      */
-    public Model getModel() {
+    public Model<?> getModel() {
         return myModel;
     }
 
@@ -83,7 +83,7 @@ public class SLogoView implements View<Object> {
      * @param myModel
      *            the myModel to set
      */
-    public void setModel(Model myModel) {
+    public void setModel(Model<?> myModel) {
         this.myModel = myModel;
     }
 

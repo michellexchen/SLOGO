@@ -49,7 +49,7 @@ public class SLogoVisualizer implements Observer {
 
 	private Scene myScene;
 	private Stage myStage;
-	private Model myModel;
+	private Model<?> myModel;
 	private String myCanvasColor;
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
@@ -58,7 +58,7 @@ public class SLogoVisualizer implements Observer {
 	 * 
 	 * @param model
 	 */
-	public SLogoVisualizer(Model model) {
+	public SLogoVisualizer(Model<?> model) {
 		myModel = model;
 	}
 
@@ -117,15 +117,15 @@ public class SLogoVisualizer implements Observer {
 	/**
 	 * Creates a Line object with default color black
 	 * 
-	 * @param position
+	 * @param turtledata
 	 * @return Line
 	 */
-	public Line createLine(SLogoPosition position) {
+	public Line createLine(Object turtledata) {
 		Line newLine = new Line();
-		newLine.setStartX(position.getPrevX() + COORDINATE_SHIFT);
-		newLine.setStartY(DIRECTION_FLIP * position.getPrevY() + COORDINATE_SHIFT);
-		newLine.setEndX(position.getX() + COORDINATE_SHIFT);
-		newLine.setEndY(DIRECTION_FLIP * position.getY() + COORDINATE_SHIFT);
+		newLine.setStartX(((SLogoPosition) turtledata).getPrevX() + COORDINATE_SHIFT);
+		newLine.setStartY(DIRECTION_FLIP * ((SLogoPosition) turtledata).getPrevY() + COORDINATE_SHIFT);
+		newLine.setEndX(((Scene) turtledata).getX() + COORDINATE_SHIFT);
+		newLine.setEndY(DIRECTION_FLIP * ((Scene) turtledata).getY() + COORDINATE_SHIFT);
 		newLine.setStrokeWidth(DEFAULT_STROKE);
 		newLine.setStroke(myGUIController.getCustomizer().getMyPenColor());
 		myGUIController.getCustomizer().changeStroke(newLine);
@@ -158,33 +158,34 @@ public class SLogoVisualizer implements Observer {
 	 */
 	public void updateDisplayData () {
 		getGUIController().getCanvas().getChildren().clear();
-		for (SLogoDisplayData turtledata : getModel().getObservableDataList()) {
+		for (Object turtledata : getModel().getObservableDataList()) {
+			turtledata = (SLogoDisplayData) turtledata;
 			placeTurtle(turtledata);
-			if(turtledata.getID() != Integer.parseInt(new ResourceLoader().getString("StampID"))){
-				turtledata.addLine(createLine(turtledata));
-				getGUIController().addToCanvas(turtledata.getLines());
+			if(((SLogoDisplayData) turtledata).getID() != Integer.parseInt(new ResourceLoader().getString("StampID"))){
+				((SLogoDisplayData) turtledata).addLine(createLine(turtledata));
+				getGUIController().addToCanvas(((SLogoDisplayData) turtledata).getLines());
 			}
 			getGUIController().updateProperties(turtledata);
-			myProperties.setPaneColor(turtledata.getBGColor());
+			myProperties.setPaneColor(((SLogoDisplayData) turtledata).getBGColor());
 		}
 	}
 
 	/**
 	 * Places a turtle on canvas
 	 * 
-	 * @param displaydata
+	 * @param turtledata
 	 */
-	public void placeTurtle(SLogoDisplayData displaydata) {
+	public void placeTurtle(Object turtledata) {
 		ImageView turtle = new ImageView();
-		turtle.setImage(new Image(IMAGE_PATH + displaydata.getImage()));
-		turtle.setVisible(!displaydata.getTurtleHidden());
+		turtle.setImage(new Image(IMAGE_PATH + ((ImageView) turtledata).getImage()));
+		turtle.setVisible(!((SLogoDisplayData) turtledata).getTurtleHidden());
 		assignTurtleAction(turtle);
 		turtleResize(turtle);
-		turtle.setLayoutX(displaydata.getX() + COORDINATE_SHIFT - PADDING);
-		turtle.setLayoutY(DIRECTION_FLIP * displaydata.getY() 
+		turtle.setLayoutX(((Scene) turtledata).getX() + COORDINATE_SHIFT - PADDING);
+		turtle.setLayoutY(DIRECTION_FLIP * ((Scene) turtledata).getY() 
 				+ COORDINATE_SHIFT - PADDING);
-		turtle.setRotate(DIRECTION_FLIP * displaydata.getPrevDirection());
-		turtle.setRotate(displaydata.getDirection());
+		turtle.setRotate(DIRECTION_FLIP * ((SLogoDisplayData) turtledata).getPrevDirection());
+		turtle.setRotate(((SLogoDisplayData) turtledata).getDirection());
 		getGUIController().addToCanvas(turtle);
 	}
 
@@ -258,7 +259,7 @@ public class SLogoVisualizer implements Observer {
 	/**
 	 * @return the myModel
 	 */
-	public Model getModel() {
+	public Model<?> getModel() {
 		return myModel;
 	}
 

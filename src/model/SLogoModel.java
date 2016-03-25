@@ -16,8 +16,8 @@ import view.View;
  * for SLogo IDE
  *
  */
-public class SLogoModel implements Model {
-    private View myView;
+public class SLogoModel implements Model<Object> {
+    private View<?> myView;
     private SLogoWorkspace myCurrentWorkspace;
     private List<SLogoWorkspace> myWorkspaces;
     private ObservableList<SLogoWorkspace> myObservableWorkspaces;
@@ -87,7 +87,7 @@ public class SLogoModel implements Model {
         return myView;
     }
 
-    public ObservableList<SLogoDisplayData> getObservableDataList() {
+    public ObservableList<Object> getObservableDataList() {
         return myCurrentWorkspace.getObservableDataList();
     }
 
@@ -139,7 +139,7 @@ public class SLogoModel implements Model {
     /**
      * @param myView the myView to set
      */
-    public void setView(View myView) {
+    public void setView(View<?> myView) {
         this.myView = myView;
     }
 
