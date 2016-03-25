@@ -1,20 +1,17 @@
 package commandnode;
 
 import exception.SLogoException;
+import model.ResourceLoader;
 import model.SLogoCharacterState;
 
-public class StampNode extends StampingNode {
+public class StampNode extends TurtleCommand{
 	
-    /**
-     * Sets number of children to zero
-     * 
-     */
-	public StampNode() {
+	public StampNode(){
 		setNumChildren(0);
 	}
 
     /**
-     * Creates a stamp using TurtleCommand's createStampTurtle method, called from StampingNode
+     * To be implemented
      * 
      */
     public double evaluate(SLogoCharacterState state) throws SLogoException {

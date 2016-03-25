@@ -19,9 +19,11 @@ import model.SLogoWorkspace;
 public class SLogoParser {
 
     private TreeFactory myTreeFactory;
+    private SLogoWorkspace myWorkspace;
 
     public SLogoParser(SLogoWorkspace workspace) throws SLogoException {
-        myTreeFactory = new TreeFactory(workspace);
+        myWorkspace = workspace;
+        myTreeFactory = new TreeFactory(myWorkspace);
     }
 
     /**

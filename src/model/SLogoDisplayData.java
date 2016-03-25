@@ -17,22 +17,22 @@ import javafx.scene.shape.Line;
  * This Observable class exists to separate view and model and to ensure that
  * view does not have access to model's turtle objects
  * 
- * @author Hunter
+ * @author Hunter, Michelle
  *
  */
-public class SLogoDisplayData extends Observable {
-   
-	private int ID;
-    private double prevDirection;
-    private double myDirection;
-    private boolean turtleHidden;
-    private boolean cleared;
-    private String myImage;
-    private String myLineStyle;
+public class SLogoDisplayData extends Observable{
+
     private SLogoPosition myPosition;
+    private double myDirection;
+    private String myImage;
     private List<Line> myLines;
-    private Color bgColor;
+    private boolean isTurtleHidden;
+    private int myID;
+    private Color myBGColor;
     private SLogoPen myPen;
+    private double myPrevDirection;
+    private boolean isCleared;
+    private String myLineStyle;
     private SLogoCharacterState myState;
 
     /**
@@ -60,15 +60,15 @@ public class SLogoDisplayData extends Observable {
      */
     public void updateData() {
         myPen = myState.getPen();
-        prevDirection = myDirection;
+        myPrevDirection = myDirection;
         myDirection = myState.getDirection();
         myPosition.setXY(myState.getXCoor(), myState.getYCoor());
         myImage = myState.getImage();
-        turtleHidden = myState.getHidden();
-        ID = myState.getID();
-        bgColor = myState.getBGColor();
-        cleared = myState.getCleared();        
-        if (cleared) {
+        isTurtleHidden = myState.getHidden();
+        myID = myState.getID();
+        myBGColor = myState.getBGColor();
+        isCleared = myState.getCleared();        
+        if (isCleared) {
             myLines.clear();
         }
         applyChanges();
@@ -89,7 +89,7 @@ public class SLogoDisplayData extends Observable {
         myLines.add(newline);
     }
 
-    public String getPenStyle() {
+    public String getPenStyle(){
         return myLineStyle;
     }
 
@@ -125,9 +125,6 @@ public class SLogoDisplayData extends Observable {
         return myPosition;
     }
 
-    /**
-     * @return the myLines
-     */
     public List<Line> getLines() {
         return myLines;
     }
@@ -136,27 +133,27 @@ public class SLogoDisplayData extends Observable {
         return myImage;
     }
 
-    public boolean getTurtleHidden() {
-        return turtleHidden;
+    public boolean getTurtleHidden(){
+        return isTurtleHidden;
     }
 
     public int getID(){
-        return ID;
+        return myID;
     }
 
     public Color getBGColor(){
-        return bgColor;
+        return myBGColor;
     }
 
     public double getPrevDirection() {
-        return prevDirection;
+        return myPrevDirection;
     }
 
-    public boolean areLinesCleared() {
-        return cleared;
+    public boolean areLinesCleared(){
+        return isCleared;
     }
 
-    public void queueLineClearing(boolean cleared) {
+    public void queueLineClearing(boolean cleared){
         myState.queueLineClearing(cleared);
     }
 }

@@ -6,12 +6,10 @@ import model.SLogoCharacterState;
 /**
  * Node representation of Add, Sum, or + commands
  */
-public class SumNode extends MathNode{
+public class SumNode extends BinaryNode{
 
-	private static final int OPCODE = 0;
-	
-	public double evaluate(SLogoCharacterState state) throws SLogoException {
-    	return super.evaluate(state, OPCODE);
+    public double evaluate(SLogoCharacterState state) throws SLogoException {
+        return evaluateChild(0, state) + evaluateChild(1, state);
     }
 
 }
