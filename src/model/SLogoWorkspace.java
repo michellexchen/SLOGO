@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Mario Oliver mao26
+
 package model;
 
 import java.util.ArrayList;
