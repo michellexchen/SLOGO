@@ -1,9 +1,14 @@
+// This entire file is part of my masterpiece.
+// Mario Oliver mao26
+
 package view;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
+
+import controller.Controller;
 import exception.SLogoException;
 import javafx.collections.ObservableList;
 import model.Model;
@@ -16,9 +21,9 @@ import model.Model;
  */
 public class SLogoView implements View<Object> {
 
-    private Model myModel;
     private List<SLogoVisualizer> myVisualizers;
     private SLogoVisualizer myCurrentVisualizer;
+    private Controller controller;
 
     /**
      * Default constructor that receives a Model Interface
@@ -29,10 +34,13 @@ public class SLogoView implements View<Object> {
      * @param model
      * @throws SLogoException
      */
-    public SLogoView(Model model) throws SLogoException {
+    public SLogoView() throws SLogoException {
         myVisualizers = new ArrayList<>();
-        myModel = model;
-        myCurrentVisualizer = new SLogoVisualizer(getModel());
+    }
+    
+    public void setControllerAndVisualizer(Controller controller){
+    	this.controller = controller;
+    	myCurrentVisualizer = controller.getCurrentVisualizer();
     }
 
     /**
@@ -42,7 +50,6 @@ public class SLogoView implements View<Object> {
      * 
      */
     public void initialize() throws SLogoException, IOException {
-        myCurrentVisualizer.initialize();
         myVisualizers.add(myCurrentVisualizer);
     }
 
@@ -53,10 +60,8 @@ public class SLogoView implements View<Object> {
      */
     @Override
     public void addVisualizer() throws SLogoException, IOException {
-        SLogoVisualizer myNewVisualizer = new SLogoVisualizer(getModel());
+        SLogoVisualizer myNewVisualizer = new SLogoVisualizer(controller);
         getVisualizers().add(myNewVisualizer);
-
-        myNewVisualizer.initialize();
         setCurrentVisualizer(myNewVisualizer);
     }
 
@@ -70,21 +75,6 @@ public class SLogoView implements View<Object> {
         getCurrentVisualizer().hide();
         setCurrentVisualizer(getVisualizers().get(index));
         getCurrentVisualizer().show();
-    }
-
-    /**
-     * @return the myModel
-     */
-    public Model getModel() {
-        return myModel;
-    }
-
-    /**
-     * @param myModel
-     *            the myModel to set
-     */
-    public void setModel(Model myModel) {
-        this.myModel = myModel;
     }
 
     /**

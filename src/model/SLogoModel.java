@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Mario Oliver mao26
+
 package model;
 
 import java.io.IOException;
@@ -5,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandnode.Node;
+import controller.Controller;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +21,7 @@ import view.View;
  *
  */
 public class SLogoModel implements Model {
-    private View myView;
+	private Controller controller;
     private SLogoWorkspace myCurrentWorkspace;
     private List<SLogoWorkspace> myWorkspaces;
     private ObservableList<SLogoWorkspace> myObservableWorkspaces;
@@ -37,7 +41,8 @@ public class SLogoModel implements Model {
      * 
      * @throws SLogoException
      */
-    public void initialize() throws SLogoException {
+    public void initialize(Controller controller) throws SLogoException {
+    	this.controller = controller;
         createNewWorkspace();
     }
 
@@ -50,7 +55,7 @@ public class SLogoModel implements Model {
      */
     public void addListeners () {
         myCurrentWorkspace.addListeners();
-        getView().updateDisplayData();
+        controller.getView().updateDisplayData();
     }
 
     /**
@@ -61,9 +66,7 @@ public class SLogoModel implements Model {
      */
     @Override
     public void readCommand(String command) throws SLogoException {
-        SLogoParser parser = new SLogoParser(myCurrentWorkspace);
-        List<Node> myCommandRoots = parser.readCommand(command);
-        myCurrentWorkspace.getRootEvaluator().evaluateRoots(myCommandRoots);
+    	controller.readCommand(command);
     }
 
     /**
@@ -77,14 +80,7 @@ public class SLogoModel implements Model {
             throw new SLogoException(new ResourceLoader().getString("InvalidWorkspace"));
         }
         setCurrentWorkspace(getObservableWorkspaces().get(index));
-        getView().switchVisualizer(index);
-    }
-
-    /**
-     * @return the myView
-     */
-    public View<?> getView() {
-        return myView;
+        controller.getView().switchVisualizer(index);
     }
 
     public ObservableList<SLogoDisplayData> getObservableDataList() {
@@ -96,7 +92,7 @@ public class SLogoModel implements Model {
      * @throws SLogoException 
      */
     public void createNewWorkspace() throws SLogoException {
-        SLogoWorkspace myWorkspace = new SLogoWorkspace(getView());
+        SLogoWorkspace myWorkspace = new SLogoWorkspace(controller);
         myWorkspace.initialize();
         getObservableWorkspaces().add(myWorkspace);
         setCurrentWorkspace(myWorkspace);
@@ -109,10 +105,10 @@ public class SLogoModel implements Model {
      */
     @Override
     public void addWorkspace() throws SLogoException, IOException {
-        getView().addVisualizer();
+        controller.getView().addVisualizer();
         createNewWorkspace();
         getCurrentWorkspace().addListeners();
-        getView().updateDisplayData();
+        controller.getView().updateDisplayData();
     }
 
     /**
@@ -134,13 +130,6 @@ public class SLogoModel implements Model {
      */
     public ObservableList<SLogoWorkspace> getObservableWorkspaces() {
         return myObservableWorkspaces;
-    }
-
-    /**
-     * @param myView the myView to set
-     */
-    public void setView(View myView) {
-        this.myView = myView;
     }
 
 }

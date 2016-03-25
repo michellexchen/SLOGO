@@ -1,3 +1,7 @@
+// This entire file is part of my masterpiece.
+// Mario Oliver mao26
+
+
 package controller;
 
 import javafx.application.Application;
@@ -19,6 +23,7 @@ public class Main extends Application {
 
     private SLogoModel myModel;
     private SLogoView myView;
+    private Controller controller;
     
  
     /**
@@ -44,9 +49,11 @@ public class Main extends Application {
      */
     public void initialize() throws SLogoException, IOException {
         myModel = new SLogoModel();
-        myView = new SLogoView(myModel);
-        myModel.setView(myView);
-        myModel.initialize();
+        myView = new SLogoView();
+        controller = new Controller(myModel, myView);
+        //myModel.setView(myView);
+        myView.setControllerAndVisualizer(controller);
+        myModel.initialize(controller);
         myView.initialize();
         myModel.addListeners();
     }

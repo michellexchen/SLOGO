@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import commandnode.ListNode;
+import controller.Controller;
 import exception.SLogoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -17,7 +18,7 @@ import view.View;
  */
 public class SLogoWorkspace {
 
-	private View myView;
+	private Controller controller;
 	private SLogoTurtleFactory turtleFactory;
 	private RootEvaluator myRootEvaluator;
 	private List<SLogoCharacter> myCharacters;
@@ -33,12 +34,11 @@ public class SLogoWorkspace {
 	 * @param view
 	 * @throws SLogoException
 	 */
-	public SLogoWorkspace(View view) throws SLogoException {
-		myView = view;
+	public SLogoWorkspace(Controller controller) throws SLogoException {
+		this.controller = controller;
 		createObservableLists();
 		turtleFactory = new SLogoTurtleFactory(this);
 		myCharacters = new ArrayList<>();
-		myPropertiesData = myView.getCurrentVisualizer().getPropertiesData();
 	}
 
 	/**
@@ -47,6 +47,7 @@ public class SLogoWorkspace {
 	 * @throws SLogoException
 	 */
 	public void initialize() throws SLogoException {
+//		myPropertiesData = controller.getView().getCurrentVisualizer().getPropertiesData();
 		myRootEvaluator = new RootEvaluator(this);
 		myActiveTurtles = new ArrayList<>();
 		resetActiveTurtles();
@@ -232,7 +233,7 @@ public class SLogoWorkspace {
 	 * @return the myView
 	 */
 	public View getView() {
-		return myView;
+		return controller.getView();
 	}
 
 	/**

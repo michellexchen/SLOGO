@@ -3,6 +3,8 @@ package view;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+
+import controller.Controller;
 import exception.SLogoException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +53,7 @@ public class SLogoVisualizer implements Observer {
 	private Stage myStage;
 	private Model myModel;
 	private String myCanvasColor;
+	private Controller myController;
 	private SLogoPropertiesData myProperties = new SLogoPropertiesData();
 
 	/**
@@ -58,8 +61,9 @@ public class SLogoVisualizer implements Observer {
 	 * 
 	 * @param model
 	 */
-	public SLogoVisualizer(Model model) {
-		myModel = model;
+	public SLogoVisualizer(Controller controller) throws SLogoException{
+		this.myController = controller;
+		initialize();
 	}
 
 	/**
@@ -68,7 +72,8 @@ public class SLogoVisualizer implements Observer {
 	 * 
 	 * @throws SLogoException
 	 */
-	public void initialize() throws SLogoException {
+	private void initialize() {
+		myModel = myController.getModel();
 		myPromptBuilder = new SLogoPromptBuilder(myProperties);
 		myPromptBuilder.promptScreen();
 		setCanvasColor(toRGBCode(myPromptBuilder.sendMyColor()));
@@ -157,16 +162,7 @@ public class SLogoVisualizer implements Observer {
 	 * Caller is Workspace (MyCurrentWorkspace in MainModel)
 	 */
 	public void updateDisplayData () {
-		getGUIController().getCanvas().getChildren().clear();
-		for (SLogoDisplayData turtledata : getModel().getObservableDataList()) {
-			placeTurtle(turtledata);
-			if(turtledata.getID() != Integer.parseInt(new ResourceLoader().getString("StampID"))){
-				turtledata.addLine(createLine(turtledata));
-				getGUIController().addToCanvas(turtledata.getLines());
-			}
-			getGUIController().updateProperties(turtledata);
-			myProperties.setPaneColor(turtledata.getBGColor());
-		}
+		myController.updateDisplayData(this);
 	}
 
 	/**
